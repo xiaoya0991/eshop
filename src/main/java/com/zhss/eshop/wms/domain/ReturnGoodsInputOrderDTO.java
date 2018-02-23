@@ -1,4 +1,4 @@
-package com.zhss.eshop.wms.dto;
+package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
 

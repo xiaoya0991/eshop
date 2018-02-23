@@ -1,4 +1,4 @@
-package com.zhss.eshop.customer.dto;
+package com.zhss.eshop.customer.domain;
 
 import java.util.Date;
 
