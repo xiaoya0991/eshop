@@ -1,13 +1,13 @@
-package com.zhss.eshop.goods.service;
+package com.zhss.eshop.commodity.service;
 
-import com.zhss.eshop.goods.dto.GoodsSkuDTO;
+import com.zhss.eshop.commodity.dto.GoodsSkuDTO;
 
 /**
  * 商品中心对外提供的接口
  * @author zhonghuashishan
  *
  */
-public interface GoodsFacadeService {
+public interface CommodityFacadeService {
 
 	/**
 	 * 根据id查询商品sku

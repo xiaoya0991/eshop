@@ -1,4 +1,4 @@
-package com.zhss.eshop.goods.dto;
+package com.zhss.eshop.commodity.dto;
 
 import java.util.Date;
 
