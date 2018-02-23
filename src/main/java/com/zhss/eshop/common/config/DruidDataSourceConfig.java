@@ -1,4 +1,4 @@
-package com.zhss.eshop.config;
+package com.zhss.eshop.common.config;
 
 import java.sql.SQLException;
 
