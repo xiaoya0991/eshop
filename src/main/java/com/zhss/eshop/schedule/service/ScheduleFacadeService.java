@@ -1,10 +1,10 @@
 package com.zhss.eshop.schedule.service;
 
-import com.zhss.eshop.customer.dto.ReturnGoodsWorksheetDTO;
-import com.zhss.eshop.order.dto.OrderDTO;
-import com.zhss.eshop.purchase.dto.PurchaseOrderDTO;
-import com.zhss.eshop.wms.dto.PurchaseInputOrderDTO;
-import com.zhss.eshop.wms.dto.ReturnGoodsInputOrderDTO;
+import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
+import com.zhss.eshop.order.domain.OrderDTO;
+import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
+import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 
 /**
  * 调度中心对外提供的接口
