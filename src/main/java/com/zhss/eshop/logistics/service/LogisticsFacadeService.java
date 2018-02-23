@@ -1,6 +1,6 @@
 package com.zhss.eshop.logistics.service;
 
-import com.zhss.eshop.goods.dto.GoodsSkuDTO;
+import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
 
 /**
  * 物流中心对外提供的接口
