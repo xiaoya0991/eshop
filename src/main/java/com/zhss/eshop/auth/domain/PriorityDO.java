@@ -1,7 +1,11 @@
 package com.zhss.eshop.auth.domain;
 
-import java.lang.reflect.Method;
 import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.zhss.eshop.common.util.BeanCopierUtils;
 
 /**
  * 权限DO类
@@ -9,6 +13,8 @@ import java.util.Date;
  *
  */
 public class PriorityDO {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PriorityDO.class);
 
 	/**
 	 * id
@@ -98,22 +104,17 @@ public class PriorityDO {
 	 * @return 克隆后的对象
 	 */
 	public <T> T clone(Class<T> clazz) {
-//		T target = null;
-//		try {
-//			target = clazz.newInstance();
-//			
-//			Method setIdMethod = clazz.getMethod("setId", Long.class);
-//			setIdMethod.invoke(target, id);
-//			
-//			Method setCodeMethod = clazz.getMethod("setCode", Long.class);
-//			setCodeMethod.invoke(target, code);
-//			
-//			BeanUtils.copyProperties(this, clazz.newInstance());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return target;
-		return null;
+		T target = null;
+		
+		try {
+			target = clazz.newInstance();
+		} catch (Exception e) {
+			logger.error("error", e);  
+		}
+		
+		BeanCopierUtils.copyProperties(this, target); 
+		
+		return target;
 	}
 	
 }
