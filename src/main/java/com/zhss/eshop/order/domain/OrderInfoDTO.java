@@ -1,13 +1,14 @@
 package com.zhss.eshop.order.domain;
 
 import java.util.Date;
+import java.util.List;
 
 /**
- * 订单DTO
+ * 订单信息DTO
  * @author zhonghuashishan
  *
  */
-public class OrderDTO {
+public class OrderInfoDTO {
 
 	/**
 	 * id
@@ -74,6 +75,14 @@ public class OrderDTO {
 	 */
 	private String orderComment;
 	/**
+	 * 是否发表了评论
+	 */
+	private Integer publishedComment;
+	/**
+	 * 确认收货时间
+	 */
+	private Date confirmReceiptTime;
+	/**
 	 * 销售出库单的创建时间
 	 */
 	private Date gmtCreate;
@@ -81,6 +90,10 @@ public class OrderDTO {
 	 * 销售出库单的修改时间
 	 */
 	private Date gmtModified;
+	/**
+	 * 订单包含的订单条目
+	 */
+	private List<OrderItemDTO> orderItems;
 	
 	public Long getId() {
 		return id;
@@ -178,6 +191,18 @@ public class OrderDTO {
 	public void setOrderComment(String orderComment) {
 		this.orderComment = orderComment;
 	}
+	public Integer getPublishedComment() {
+		return publishedComment;
+	}
+	public void setPublishedComment(Integer publishedComment) {
+		this.publishedComment = publishedComment;
+	}
+	public Date getConfirmReceiptTime() {
+		return confirmReceiptTime;
+	}
+	public void setConfirmReceiptTime(Date confirmReceiptTime) {
+		this.confirmReceiptTime = confirmReceiptTime;
+	}
 	public Date getGmtCreate() {
 		return gmtCreate;
 	}
@@ -189,6 +214,12 @@ public class OrderDTO {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public List<OrderItemDTO> getOrderItems() {
+		return orderItems;
+	}
+	public void setOrderItems(List<OrderItemDTO> orderItems) {
+		this.orderItems = orderItems;
 	}
 	
 }
