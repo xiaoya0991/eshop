@@ -1,9 +1,9 @@
 package com.zhss.eshop.wms.service;
 
-import com.zhss.eshop.order.dto.OrderDTO;
-import com.zhss.eshop.wms.dto.PurchaseInputOrderDTO;
-import com.zhss.eshop.wms.dto.ReturnGoodsInputOrderDTO;
-import com.zhss.eshop.wms.dto.SaleDeliveryOrderDTO;
+import com.zhss.eshop.order.domain.OrderDTO;
+import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
+import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 
 /**
  * WMS中心对外提供的接口
