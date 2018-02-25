@@ -1,8 +1,8 @@
 package com.zhss.eshop.finance.service;
 
-import com.zhss.eshop.wms.dto.PurchaseInputOrderDTO;
-import com.zhss.eshop.wms.dto.ReturnGoodsInputOrderDTO;
-import com.zhss.eshop.wms.dto.SaleDeliveryOrderDTO;
+import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
+import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 
 /**
  * 财务中心对外提供的接口
