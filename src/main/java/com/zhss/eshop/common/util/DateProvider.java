@@ -3,18 +3,22 @@ package com.zhss.eshop.common.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
 /**
- * 时间日期工具类
+ * 日期辅助组件
  * @author zhonghuashishan
  *
  */
-public class DateUtils {
+@Component
+public class DateProvider {
 	
 	/**
-	 * 以线程安全的方式获取DateFormat
-	 * @return
+	 * 获取当前时间
+	 * @return 当前时间
+	 * @throws Exception
 	 */
-	public static Date getCurrentTime() throws Exception {
+	public Date getCurrentTime() throws Exception {
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return dateFormatter.parse(dateFormatter.format(new Date()));  
 	}
