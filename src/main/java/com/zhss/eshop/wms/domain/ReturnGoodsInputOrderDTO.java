@@ -1,6 +1,7 @@
 package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 退货入库单DTO
@@ -97,6 +98,14 @@ public class ReturnGoodsInputOrderDTO {
 	 * 销售出库单的修改时间
 	 */
 	private Date gmtModified;
+	/**
+	 * 退货入库单条目DTO集合
+	 */
+	private List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOs;
+	/**
+	 * 退货入库单商品上架条目DTO集合
+	 */
+	private List<ReturnGoodsInputOrderPutOnItemDTO> returnGoodsInputOrderPutOnItemDTO;
 	
 	public Long getId() {
 		return id;
@@ -229,6 +238,19 @@ public class ReturnGoodsInputOrderDTO {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public List<ReturnGoodsInputOrderItemDTO> getReturnGoodsInputOrderItemDTOs() {
+		return returnGoodsInputOrderItemDTOs;
+	}
+	public void setReturnGoodsInputOrderItemDTOs(List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOs) {
+		this.returnGoodsInputOrderItemDTOs = returnGoodsInputOrderItemDTOs;
+	}
+	public List<ReturnGoodsInputOrderPutOnItemDTO> getReturnGoodsInputOrderPutOnItemDTO() {
+		return returnGoodsInputOrderPutOnItemDTO;
+	}
+	public void setReturnGoodsInputOrderPutOnItemDTO(
+			List<ReturnGoodsInputOrderPutOnItemDTO> returnGoodsInputOrderPutOnItemDTO) {
+		this.returnGoodsInputOrderPutOnItemDTO = returnGoodsInputOrderPutOnItemDTO;
 	}
 	
 }
