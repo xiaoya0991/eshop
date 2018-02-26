@@ -7,7 +7,7 @@ import java.util.Date;
  * @author zhonghuashishan
  *
  */
-public class PurcahseInputOrderItemDTO {
+public class PurchaseInputOrderItemDTO {
 
 	/**
 	 * id
