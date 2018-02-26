@@ -1,9 +1,9 @@
 package com.zhss.eshop.wms.service;
 
-import com.zhss.eshop.order.dto.OrderDTO;
-import com.zhss.eshop.wms.dto.PurchaseInputOrderDTO;
-import com.zhss.eshop.wms.dto.ReturnGoodsInputOrderDTO;
-import com.zhss.eshop.wms.dto.SaleDeliveryOrderDTO;
+import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
+import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 
 /**
  * WMS中心对外提供的接口
@@ -38,20 +38,20 @@ public interface WmsFacadeService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	Boolean informSubmitOrderEvent(OrderDTO orderDTO);
+	Boolean informSubmitOrderEvent(OrderInfoDTO orderDTO);
 	
 	/**
 	 * 通知WMS中心，“支付订单”事件发生了
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	Boolean informPayOrderEvent(OrderDTO orderDTO);
+	Boolean informPayOrderEvent(OrderInfoDTO orderDTO);
 	
 	/**
 	 * 通知WMS中心，“取消订单”事件发生了
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	Boolean informCancelOrderEvent(OrderDTO orderDTO);
+	Boolean informCancelOrderEvent(OrderInfoDTO orderDTO);
 	
 }

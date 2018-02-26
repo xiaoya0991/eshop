@@ -2,7 +2,7 @@ package com.zhss.eshop.promotion.service;
 
 import java.util.List;
 
-import com.zhss.eshop.promotion.dto.PromotionActivityDTO;
+import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
 
 /**
  * 促销中心对外提供的接口
