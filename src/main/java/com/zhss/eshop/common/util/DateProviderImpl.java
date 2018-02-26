@@ -34,4 +34,15 @@ public class DateProviderImpl implements DateProvider {
 		return dateFormatter.format(date);
 	}
 	
+	/**
+	 * 将日期字符串转化为Date对象
+	 * @param datetime 日期字符串
+	 * @return date对象
+	 * @throws Exception
+	 */
+	public Date parseDatetime(String datetime) throws Exception {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return dateFormatter.parse(datetime);
+	}
+	
 }
