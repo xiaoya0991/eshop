@@ -1,6 +1,7 @@
 package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 采购入库单DTO
@@ -57,6 +58,14 @@ public class PurchaseInputOrderDTO {
 	 * 采购入库单的修改时间
 	 */
 	private Date gmtModified;
+	/**
+	 * 采购入库单条目集合
+	 */
+	private List<PurcahseInputOrderItemDTO> purchaseInputOrderItemDTOs;
+	/**
+	 * 采购入库单商品上架条目集合
+	 */
+	private List<PurchaseInputOrderPutOnItemDTO> purchaseInputPutOnItemDTOs;
 	
 	public Long getId() {
 		return id;
@@ -129,6 +138,18 @@ public class PurchaseInputOrderDTO {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public List<PurcahseInputOrderItemDTO> getPurchaseInputOrderItemDTOs() {
+		return purchaseInputOrderItemDTOs;
+	}
+	public void setPurchaseInputOrderItemDTOs(List<PurcahseInputOrderItemDTO> purchaseInputOrderItemDTOs) {
+		this.purchaseInputOrderItemDTOs = purchaseInputOrderItemDTOs;
+	}
+	public List<PurchaseInputOrderPutOnItemDTO> getPurchaseInputPutOnItemDTOs() {
+		return purchaseInputPutOnItemDTOs;
+	}
+	public void setPurchaseInputPutOnItemDTOs(List<PurchaseInputOrderPutOnItemDTO> purchaseInputPutOnItemDTOs) {
+		this.purchaseInputPutOnItemDTOs = purchaseInputPutOnItemDTOs;
 	}
 	
 }
