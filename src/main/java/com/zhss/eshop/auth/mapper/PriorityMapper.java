@@ -120,14 +120,14 @@ public interface PriorityMapper {
 			+ ") "
 			+ "VALUES("
 				+ "#{code}, "
-				+ "#{url), "
+				+ "#{url}, "
 				+ "#{priorityComment}, "
 				+ "#{priorityType}, "
 				+ "#{parentId}, "
 				+ "#{gmtCreate}, "
 				+ "#{gmtModified}"
 			+ ")") 
-	@Options(useGeneratedKeys = true, keyProperty = "id")
+	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true)
 	void savePriority(PriorityDO priorityDO); 
 	
 	/**
@@ -139,8 +139,6 @@ public interface PriorityMapper {
 				+ "url=#{url}, "
 				+ "priority_comment=#{priorityComment}, "
 				+ "priority_type=#{priorityType}, "
-				+ "parent_id=#{parentId}, "
-				+ "gmt_create=#{gmtCreate}, "
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}") 
 	void updatePriority(PriorityDO priorityDO);

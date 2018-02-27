@@ -17,6 +17,7 @@ import com.zhss.eshop.auth.domain.PriorityDTO;
 import com.zhss.eshop.auth.service.PriorityService;
 import com.zhss.eshop.auth.visitor.PriorityNodeRelateCheckVisitor;
 import com.zhss.eshop.auth.visitor.PriorityNodeRemoveVisitor;
+import com.zhss.eshop.common.util.DateProvider;
 
 /**
  * 权限管理模块的service组件
@@ -43,6 +44,11 @@ public class PriorityServiceImpl implements PriorityService {
 	 */
 	@Autowired
 	private AccountPriorityRelationshipDAO accountPriorityRelationshipDAO;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 查询根权限
@@ -116,6 +122,8 @@ public class PriorityServiceImpl implements PriorityService {
 	 */
 	public Boolean savePriority(PriorityDTO priorityDTO) {
 		try {
+			priorityDTO.setGmtCreate(dateProvider.getCurrentTime()); 
+			priorityDTO.setGmtModified(dateProvider.getCurrentTime());  
 			priorityDAO.savePriority(priorityDTO.clone(PriorityDO.class));  
 		} catch (Exception e) {
 			logger.error("error", e);
@@ -130,6 +138,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 */
 	public Boolean updatePriority(PriorityDTO priorityDTO) {
 		try {
+			priorityDTO.setGmtModified(dateProvider.getCurrentTime());  
 			priorityDAO.updatePriority(priorityDTO.clone(PriorityDO.class));
   		} catch (Exception e) {
 			logger.error("error", e);

@@ -1,9 +1,12 @@
 package com.zhss.eshop.auth.dao.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.auth.dao.RolePriorityRelationshipDAO;
+import com.zhss.eshop.auth.domain.RolePriorityRelationshipDO;
 import com.zhss.eshop.auth.mapper.RolePriorityRelationshipMapper;
 
 /**
@@ -13,6 +16,8 @@ import com.zhss.eshop.auth.mapper.RolePriorityRelationshipMapper;
  */
 @Repository
 public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationshipDAO {
+	
+	private static final Logger logger = LoggerFactory.getLogger(RolePriorityRelationshipDAOImpl.class);
 
 	/**
 	 * 角色和权限关系管理模块的mapper组件
@@ -21,13 +26,32 @@ public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationship
 	private RolePriorityRelationshipMapper rolePriorityRelationshipMapper;
 	
 	/**
+	 * 新增账号和权限的关联关系
+	 * @param accountPriorityRelationshipDO
+	 */
+	public Boolean save(RolePriorityRelationshipDO rolePriorityRelationshipDO) {
+		try {
+			rolePriorityRelationshipMapper.save(rolePriorityRelationshipDO); 
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+		return true;
+	}
+	
+	/**
 	 * 根据权限id查询记录数
 	 * @param priorityId 权限id
 	 * @return 记录数
 	 */
 	@Override
-	public Long getCountByPriorityId(Long priorityId) {
-		return rolePriorityRelationshipMapper.getCountByPriorityId(priorityId); 
+	public Long countByPriorityId(Long priorityId) {
+		try {
+			return rolePriorityRelationshipMapper.countByPriorityId(priorityId); 
+		} catch (Exception e) {
+			logger.error("error", e); 
+		}
+		return 0L;
 	}
 
 }

@@ -72,14 +72,14 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * 新增权限
 	 * @param priorityDO 权限DO对象
 	 */
-	public Boolean savePriority(PriorityDO priorityDO) {
+	public Long savePriority(PriorityDO priorityDO) {
 		try {
 			priorityMapper.savePriority(priorityDO); 
 		} catch (Exception e) {
 			logger.error("error", e); 
-			return false;
+			return null;
 		}
-		return true;
+		return priorityDO.getId();
 	}
 	
 	/**

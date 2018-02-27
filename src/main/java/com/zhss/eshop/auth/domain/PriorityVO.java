@@ -1,7 +1,5 @@
 package com.zhss.eshop.auth.domain;
 
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,11 +41,11 @@ public class PriorityVO {
 	/**
 	 * 权限的创建时间
 	 */
-	private Date gmtCreate;
+	private String gmtCreate;
 	/**
 	 * 权限的修改时间
 	 */
-	private Date gmtModified;
+	private String gmtModified;
 	
 	public Long getId() {
 		return id;
@@ -85,16 +83,16 @@ public class PriorityVO {
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
-	public Date getGmtCreate() {
+	public String getGmtCreate() {
 		return gmtCreate;
 	}
-	public void setGmtCreate(Date gmtCreate) {
+	public void setGmtCreate(String gmtCreate) {
 		this.gmtCreate = gmtCreate;
 	}
-	public Date getGmtModified() {
+	public String getGmtModified() {
 		return gmtModified;
 	}
-	public void setGmtModified(Date gmtModified) {
+	public void setGmtModified(String gmtModified) {
 		this.gmtModified = gmtModified;
 	}
 	
