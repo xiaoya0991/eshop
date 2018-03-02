@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.command;
+package com.zhss.eshop.Inventory.updater;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,8 +20,8 @@ import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
  *
  */
 @Component
-public class PurchaseInputStockUpdateCommandFactory<T> 
-		extends AbstractGoodsStockUpdateCommandFactory<T> {
+public class PurchaseInputStockUpdaterFactory<T> 
+		extends AbstractGoodsStockUpdaterFactory<T> {
 	
 	/**
 	 * 构造函数
@@ -29,7 +29,7 @@ public class PurchaseInputStockUpdateCommandFactory<T>
 	 * @param dateProvider 日期辅助组件
 	 */
 	@Autowired
-	public PurchaseInputStockUpdateCommandFactory(
+	public PurchaseInputStockUpdaterFactory(
 			GoodsStockDAO goodsStockDAO, 
 			DateProvider dateProvider) {
 		super(goodsStockDAO, dateProvider);
@@ -66,7 +66,7 @@ public class PurchaseInputStockUpdateCommandFactory<T>
 	 * @throws Exception
 	 */
 	@Override
-	protected GoodsStockUpdateCommand create(
+	protected GoodsStockUpdater create(
 			List<GoodsStockDO> goodsStockDOs,
 			T parameter) throws Exception {
 		PurchaseInputOrderDTO purchaseInputOrderDTO = (PurchaseInputOrderDTO) parameter;
@@ -83,7 +83,7 @@ public class PurchaseInputStockUpdateCommandFactory<T>
 			}
 		}
 		
-		return new PurchaseInputStockUpdateCommand(goodsStockDOs, goodsStockDAO, 
+		return new PurchaseInputStockUpdater(goodsStockDOs, goodsStockDAO, 
 				dateProvider, purchaseInputOrderItemDTOMap); 
 	}
 

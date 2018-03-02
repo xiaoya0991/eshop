@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.command;
+package com.zhss.eshop.Inventory.updater;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,7 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
  * @author zhonghuashishan
  *
  */
-public class ReturnGoodsInputStockUpdateCommand extends AbstractGoodsStockUpdateCommand {
+public class ReturnGoodsInputStockUpdater extends AbstractGoodsStockUpdater {
 
 	/**
 	 * 退货入库单条目DTO集合
@@ -27,7 +27,7 @@ public class ReturnGoodsInputStockUpdateCommand extends AbstractGoodsStockUpdate
 	 * @param dateProvider 日期辅助组件
 	 * @param returnGoodsInputOrderItemDTOMap 退货入库单条目DTO集合
 	 */
-	public ReturnGoodsInputStockUpdateCommand(
+	public ReturnGoodsInputStockUpdater(
 			List<GoodsStockDO> goodsStockDOs, 
 			GoodsStockDAO goodsStockDAO,
 			DateProvider dateProvider,

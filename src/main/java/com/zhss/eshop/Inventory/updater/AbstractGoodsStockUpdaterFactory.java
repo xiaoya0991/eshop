@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.command;
+package com.zhss.eshop.Inventory.updater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,11 @@ import com.zhss.eshop.common.util.DateProvider;
  * @author zhonghuashishan
  *
  */
-public abstract class AbstractGoodsStockUpdateCommandFactory<T> 
-		implements GoodsStockUpdateCommandFactory<T> {
+public abstract class AbstractGoodsStockUpdaterFactory<T> 
+		implements GoodsStockUpdaterFactory<T> {
 	
 	private static final Logger logger = LoggerFactory.getLogger(
-			AbstractGoodsStockUpdateCommandFactory.class);
+			AbstractGoodsStockUpdaterFactory.class);
 
 	/**
 	 * 商品库存管理模块的DAO组件
@@ -37,7 +37,7 @@ public abstract class AbstractGoodsStockUpdateCommandFactory<T>
 	 * @param goodsStockDAO 商品库存管理模块的DAO组件
 	 * @param dateProvider 日期辅助组件
 	 */
-	public AbstractGoodsStockUpdateCommandFactory(
+	public AbstractGoodsStockUpdaterFactory(
 			GoodsStockDAO goodsStockDAO,
 			DateProvider dateProvider) {
 		this.goodsStockDAO = goodsStockDAO;
@@ -47,7 +47,7 @@ public abstract class AbstractGoodsStockUpdateCommandFactory<T>
 	/**
 	 * 创建库存更新命令
 	 */
-	public GoodsStockUpdateCommand create(T parameter) {
+	public GoodsStockUpdater create(T parameter) {
 		try {
 			List<Long> goodsSkuIds = getGoodsSkuIds(parameter);
 			List<GoodsStockDO> goodsStockDOs = createGoodsStockDOs(goodsSkuIds);
@@ -71,7 +71,7 @@ public abstract class AbstractGoodsStockUpdateCommandFactory<T>
 	 * @return 库存更新命令
 	 * @throws Exception
 	 */
-	protected abstract GoodsStockUpdateCommand create(
+	protected abstract GoodsStockUpdater create(
 			List<GoodsStockDO> goodsStockDOs, T parameter) throws Exception;
 	
 	/**

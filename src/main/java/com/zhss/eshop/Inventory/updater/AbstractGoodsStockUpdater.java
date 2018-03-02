@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.command;
+package com.zhss.eshop.Inventory.updater;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ import com.zhss.eshop.common.util.DateProvider;
  * @author zhonghuashishan
  *
  */
-public abstract class AbstractGoodsStockUpdateCommand implements GoodsStockUpdateCommand {
+public abstract class AbstractGoodsStockUpdater implements GoodsStockUpdater {
 
 	private static final Logger logger = LoggerFactory.getLogger(
-			AbstractGoodsStockUpdateCommand.class);
+			AbstractGoodsStockUpdater.class);
 	
 	/**
 	 * 商品库存DO对象
@@ -41,7 +41,7 @@ public abstract class AbstractGoodsStockUpdateCommand implements GoodsStockUpdat
 	 * @param goodsStockDAO 商品库存管理模块的DAO组件
 	 * @param dateProvider 日期辅助组件
 	 */
-	public AbstractGoodsStockUpdateCommand(
+	public AbstractGoodsStockUpdater(
 			List<GoodsStockDO> goodsStockDOs,
 			GoodsStockDAO goodsStockDAO,
 			DateProvider dateProvider) {
