@@ -1,5 +1,7 @@
 package com.zhss.eshop.cart.dao;
 
+import java.util.List;
+
 import com.zhss.eshop.cart.domain.ShoppingCartItemDO;
 
 /**
@@ -29,5 +31,12 @@ public interface ShoppingCartItemDAO {
 	 * @param shoppingCartItemDO 购物车条目DO对象
 	 */
 	Boolean updateShoppingCartItem(ShoppingCartItemDO shoppingCartItemDO);
+	
+	/**
+	 * 查询购物车中的所有条目
+	 * @param shoppingCartId 购物车id
+	 * @return 商品条目
+	 */
+	List<ShoppingCartItemDO> listShoppingCartItemByCartId(Long shoppingCartId);
 	
 }

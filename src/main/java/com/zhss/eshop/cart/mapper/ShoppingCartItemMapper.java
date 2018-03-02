@@ -1,5 +1,7 @@
 package com.zhss.eshop.cart.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -76,5 +78,30 @@ public interface ShoppingCartItemMapper {
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}") 
 	void updateShoppingCartItem(ShoppingCartItemDO shoppingCartItemDO);
+	
+	/**
+	 * 查询购物车中的所有条目
+	 * @param shoppingCartId 购物车id
+	 * @return 商品条目
+	 */
+	@Select("SELECT "
+				+ "id,"
+				+ "shopping_cart_id,"
+				+ "goods_sku_id,"
+				+ "purchase_quantity,"
+				+ "gmt_create,"
+				+ "gmt_modified "
+			+ "FROM shopping_cart_item "
+			+ "WHERE shopping_cart_id=#{shoppingCartId} ") 
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "shopping_cart_id", property = "shoppingCartId"),
+		@Result(column = "goods_sku_id", property = "goodsSkuId"),
+		@Result(column = "purchase_quantity", property = "purchaseQuantity"),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "gmt_modified", property = "gmtModified")
+	})
+	List<ShoppingCartItemDO> listShoppingCartItemByCartId(
+			@Param("shoppingCartId") Long shoppingCartId);
 	
 }

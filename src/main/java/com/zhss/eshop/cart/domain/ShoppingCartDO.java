@@ -2,12 +2,19 @@ package com.zhss.eshop.cart.domain;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.zhss.eshop.common.util.BeanCopierUtils;
+
 /**
  * 购物车DO类
  * @author zhonghuashishan
  *
  */
 public class ShoppingCartDO {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartDO.class);
 
 	/**
 	 * id
@@ -92,6 +99,18 @@ public class ShoppingCartDO {
 		} else if (!userAccountId.equals(other.userAccountId))
 			return false;
 		return true;
+	}
+	
+	public <T> T clone(Class<T> clazz) {
+		T target = null;
+		try {
+			target = clazz.newInstance();
+			BeanCopierUtils.copyProperties(this, target);  
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
+		return target;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.zhss.eshop.cart.service;
 
+import com.zhss.eshop.cart.domain.ShoppingCartDTO;
+
 /**
  * 购物车管理模块的service组件接口
  * @author zhonghuashishan
@@ -14,5 +16,12 @@ public interface ShoppingCartService {
 	 * @return 处理结果
 	 */
 	Boolean addShoppingCartItem(Long userAccountId, Long goodsSkuId);
+	
+	/**
+	 * 查看用户的购物车中的数据
+	 * @param userAccountId 用户账号id
+	 * @return 购物车DTO对象
+	 */
+	ShoppingCartDTO getShoppingCartDTOByUserAccountId(Long userAccountId);
 	
 }

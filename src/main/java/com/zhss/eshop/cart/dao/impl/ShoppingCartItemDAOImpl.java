@@ -1,5 +1,7 @@
 package com.zhss.eshop.cart.dao.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +70,20 @@ public class ShoppingCartItemDAOImpl implements ShoppingCartItemDAO {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * 查询购物车中的所有条目
+	 * @param shoppingCartId 购物车id
+	 * @return 商品条目
+	 */
+	public List<ShoppingCartItemDO> listShoppingCartItemByCartId(Long shoppingCartId) {
+		try {
+			return shoppingCartItemMapper.listShoppingCartItemByCartId(shoppingCartId);
+		} catch (Exception e) {
+			logger.error("error", e); 
+		}
+		return null;
 	}
 	
 }
