@@ -15,10 +15,10 @@ import com.zhss.eshop.common.util.DateProvider;
  * @author zhonghuashishan
  *
  */
-public abstract class AbstractGoodsStockUpdater implements GoodsStockUpdater {
+public abstract class AbstractStockUpdater implements StockUpdater {
 
 	private static final Logger logger = LoggerFactory.getLogger(
-			AbstractGoodsStockUpdater.class);
+			AbstractStockUpdater.class);
 	
 	/**
 	 * 商品库存DO对象
@@ -41,7 +41,7 @@ public abstract class AbstractGoodsStockUpdater implements GoodsStockUpdater {
 	 * @param goodsStockDAO 商品库存管理模块的DAO组件
 	 * @param dateProvider 日期辅助组件
 	 */
-	public AbstractGoodsStockUpdater(
+	public AbstractStockUpdater(
 			List<GoodsStockDO> goodsStockDOs,
 			GoodsStockDAO goodsStockDAO,
 			DateProvider dateProvider) {

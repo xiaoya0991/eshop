@@ -21,7 +21,7 @@ import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
  */
 @Component
 public class PurchaseInputStockUpdaterFactory<T> 
-		extends AbstractGoodsStockUpdaterFactory<T> {
+		extends AbstractStockUpdaterFactory<T> {
 	
 	/**
 	 * 构造函数
@@ -66,7 +66,7 @@ public class PurchaseInputStockUpdaterFactory<T>
 	 * @throws Exception
 	 */
 	@Override
-	protected GoodsStockUpdater create(
+	protected StockUpdater create(
 			List<GoodsStockDO> goodsStockDOs,
 			T parameter) throws Exception {
 		PurchaseInputOrderDTO purchaseInputOrderDTO = (PurchaseInputOrderDTO) parameter;

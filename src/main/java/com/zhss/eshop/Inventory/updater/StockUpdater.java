@@ -5,7 +5,7 @@ package com.zhss.eshop.Inventory.updater;
  * @author zhonghuashishan
  *
  */
-public interface GoodsStockUpdater {
+public interface StockUpdater {
 
 	/**
 	 * 更新商品库存

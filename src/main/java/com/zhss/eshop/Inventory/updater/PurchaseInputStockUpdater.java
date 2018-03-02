@@ -13,7 +13,7 @@ import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
  * @author zhonghuashishan
  *
  */
-public class PurchaseInputStockUpdater extends AbstractGoodsStockUpdater {
+public class PurchaseInputStockUpdater extends AbstractStockUpdater {
 
 	/**
 	 * 采购入库单条目DTO集合

@@ -21,7 +21,7 @@ import com.zhss.eshop.order.domain.OrderItemDTO;
  */
 @Component
 public class CancelOrderStockUpdaterFactory<T> 
-		extends AbstractGoodsStockUpdaterFactory<T> {
+		extends AbstractStockUpdaterFactory<T> {
 
 	/**
 	 * 构造函数
@@ -59,7 +59,7 @@ public class CancelOrderStockUpdaterFactory<T>
 	 * @return 商品库存更新组件
 	 */
 	@Override
-	protected GoodsStockUpdater create(List<GoodsStockDO> goodsStockDOs, 
+	protected StockUpdater create(List<GoodsStockDO> goodsStockDOs, 
 			T parameter) throws Exception {
 		OrderInfoDTO orderInfoDTO = (OrderInfoDTO) parameter;
 		

@@ -13,7 +13,7 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
  * @author zhonghuashishan
  *
  */
-public class ReturnGoodsInputStockUpdater extends AbstractGoodsStockUpdater {
+public class ReturnGoodsInputStockUpdater extends AbstractStockUpdater {
 
 	/**
 	 * 退货入库单条目DTO集合

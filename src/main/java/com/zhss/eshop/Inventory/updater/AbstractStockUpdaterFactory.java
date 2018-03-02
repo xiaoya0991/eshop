@@ -16,11 +16,11 @@ import com.zhss.eshop.common.util.DateProvider;
  * @author zhonghuashishan
  *
  */
-public abstract class AbstractGoodsStockUpdaterFactory<T> 
-		implements GoodsStockUpdaterFactory<T> {
+public abstract class AbstractStockUpdaterFactory<T> 
+		implements StockUpdaterFactory<T> {
 	
 	private static final Logger logger = LoggerFactory.getLogger(
-			AbstractGoodsStockUpdaterFactory.class);
+			AbstractStockUpdaterFactory.class);
 
 	/**
 	 * 商品库存管理模块的DAO组件
@@ -37,7 +37,7 @@ public abstract class AbstractGoodsStockUpdaterFactory<T>
 	 * @param goodsStockDAO 商品库存管理模块的DAO组件
 	 * @param dateProvider 日期辅助组件
 	 */
-	public AbstractGoodsStockUpdaterFactory(
+	public AbstractStockUpdaterFactory(
 			GoodsStockDAO goodsStockDAO,
 			DateProvider dateProvider) {
 		this.goodsStockDAO = goodsStockDAO;
@@ -47,7 +47,7 @@ public abstract class AbstractGoodsStockUpdaterFactory<T>
 	/**
 	 * 创建库存更新命令
 	 */
-	public GoodsStockUpdater create(T parameter) {
+	public StockUpdater create(T parameter) {
 		try {
 			List<Long> goodsSkuIds = getGoodsSkuIds(parameter);
 			List<GoodsStockDO> goodsStockDOs = createGoodsStockDOs(goodsSkuIds);
@@ -71,7 +71,7 @@ public abstract class AbstractGoodsStockUpdaterFactory<T>
 	 * @return 库存更新命令
 	 * @throws Exception
 	 */
-	protected abstract GoodsStockUpdater create(
+	protected abstract StockUpdater create(
 			List<GoodsStockDO> goodsStockDOs, T parameter) throws Exception;
 	
 	/**

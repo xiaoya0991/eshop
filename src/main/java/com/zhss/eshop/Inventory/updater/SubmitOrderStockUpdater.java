@@ -13,7 +13,7 @@ import com.zhss.eshop.order.domain.OrderItemDTO;
  * @author zhonghuashishan
  *
  */
-public class SubmitOrderStockUpdater extends AbstractGoodsStockUpdater {
+public class SubmitOrderStockUpdater extends AbstractStockUpdater {
 
 	/**
 	 * 订单条目DTO对象集合
