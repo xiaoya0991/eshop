@@ -225,4 +225,137 @@ public class CommentInfoDTO {
 		return target;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((commentContent == null) ? 0 : commentContent.hashCode());
+		result = prime * result + ((commentStatus == null) ? 0 : commentStatus.hashCode());
+		result = prime * result + ((commentType == null) ? 0 : commentType.hashCode());
+		result = prime * result + ((customerServiceScore == null) ? 0 : customerServiceScore.hashCode());
+		result = prime * result + ((defaultComment == null) ? 0 : defaultComment.hashCode());
+		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
+		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
+		result = prime * result + ((goodsId == null) ? 0 : goodsId.hashCode());
+		result = prime * result + ((goodsScore == null) ? 0 : goodsScore.hashCode());
+		result = prime * result + ((goodsSkuId == null) ? 0 : goodsSkuId.hashCode());
+		result = prime * result + ((goodsSkuSaleProperties == null) ? 0 : goodsSkuSaleProperties.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((logisticsScore == null) ? 0 : logisticsScore.hashCode());
+		result = prime * result + ((orderInfoId == null) ? 0 : orderInfoId.hashCode());
+		result = prime * result + ((orderItemId == null) ? 0 : orderItemId.hashCode());
+		result = prime * result + ((showPictures == null) ? 0 : showPictures.hashCode());
+		result = prime * result + ((totalScore == null) ? 0 : totalScore.hashCode());
+		result = prime * result + ((userAccountId == null) ? 0 : userAccountId.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CommentInfoDTO other = (CommentInfoDTO) obj;
+		if (commentContent == null) {
+			if (other.commentContent != null)
+				return false;
+		} else if (!commentContent.equals(other.commentContent))
+			return false;
+		if (commentStatus == null) {
+			if (other.commentStatus != null)
+				return false;
+		} else if (!commentStatus.equals(other.commentStatus))
+			return false;
+		if (commentType == null) {
+			if (other.commentType != null)
+				return false;
+		} else if (!commentType.equals(other.commentType))
+			return false;
+		if (customerServiceScore == null) {
+			if (other.customerServiceScore != null)
+				return false;
+		} else if (!customerServiceScore.equals(other.customerServiceScore))
+			return false;
+		if (defaultComment == null) {
+			if (other.defaultComment != null)
+				return false;
+		} else if (!defaultComment.equals(other.defaultComment))
+			return false;
+		if (gmtCreate == null) {
+			if (other.gmtCreate != null)
+				return false;
+		} else if (!gmtCreate.equals(other.gmtCreate))
+			return false;
+		if (gmtModified == null) {
+			if (other.gmtModified != null)
+				return false;
+		} else if (!gmtModified.equals(other.gmtModified))
+			return false;
+		if (goodsId == null) {
+			if (other.goodsId != null)
+				return false;
+		} else if (!goodsId.equals(other.goodsId))
+			return false;
+		if (goodsScore == null) {
+			if (other.goodsScore != null)
+				return false;
+		} else if (!goodsScore.equals(other.goodsScore))
+			return false;
+		if (goodsSkuId == null) {
+			if (other.goodsSkuId != null)
+				return false;
+		} else if (!goodsSkuId.equals(other.goodsSkuId))
+			return false;
+		if (goodsSkuSaleProperties == null) {
+			if (other.goodsSkuSaleProperties != null)
+				return false;
+		} else if (!goodsSkuSaleProperties.equals(other.goodsSkuSaleProperties))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (logisticsScore == null) {
+			if (other.logisticsScore != null)
+				return false;
+		} else if (!logisticsScore.equals(other.logisticsScore))
+			return false;
+		if (orderInfoId == null) {
+			if (other.orderInfoId != null)
+				return false;
+		} else if (!orderInfoId.equals(other.orderInfoId))
+			return false;
+		if (orderItemId == null) {
+			if (other.orderItemId != null)
+				return false;
+		} else if (!orderItemId.equals(other.orderItemId))
+			return false;
+		if (showPictures == null) {
+			if (other.showPictures != null)
+				return false;
+		} else if (!showPictures.equals(other.showPictures))
+			return false;
+		if (totalScore == null) {
+			if (other.totalScore != null)
+				return false;
+		} else if (!totalScore.equals(other.totalScore))
+			return false;
+		if (userAccountId == null) {
+			if (other.userAccountId != null)
+				return false;
+		} else if (!userAccountId.equals(other.userAccountId))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	
 }

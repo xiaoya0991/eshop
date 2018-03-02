@@ -1,5 +1,6 @@
 package com.zhss.eshop.comment.service;
 
+import com.zhss.eshop.comment.domain.CommentAggregateDO;
 import com.zhss.eshop.comment.domain.CommentInfoDTO;
 
 /**
@@ -14,6 +15,6 @@ public interface CommentAggregateService {
 	 * @param commentInfoDTO 评论信息
 	 * @return 处理结果
 	 */
-	Boolean updateCommentAggregate(CommentInfoDTO commentInfoDTO);
+	CommentAggregateDO refreshCommentAggregate(CommentInfoDTO commentInfoDTO);
 	
 }

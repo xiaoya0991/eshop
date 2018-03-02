@@ -13,6 +13,6 @@ public interface CommentInfoDAO {
 	 * 新增评论信息
 	 * @param commentInfoDO 评论信息DO对象
 	 */
-	Boolean saveCommentInfo(CommentInfoDO commentInfoDO);
+	Long saveCommentInfo(CommentInfoDO commentInfoDO);
 	
 }

@@ -8,9 +8,9 @@ package com.zhss.eshop.comment.constant;
 public class CommentInfoScore {
 
 	public static final Integer ONE = 1;
-	public static final Integer TWO = 1;
-	public static final Integer THREE = 1;
-	public static final Integer FOUR = 1;
-	public static final Integer FIVE = 1;
+	public static final Integer TWO = 2;
+	public static final Integer THREE = 3;
+	public static final Integer FOUR = 4;
+	public static final Integer FIVE = 5;
 	
 }

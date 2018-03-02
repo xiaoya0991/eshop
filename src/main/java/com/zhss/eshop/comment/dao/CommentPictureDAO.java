@@ -13,6 +13,6 @@ public interface CommentPictureDAO {
 	 * 新增评论晒图
 	 * @param commentPictureDO 评论晒图DO对象
 	 */
-	Boolean saveCommentPicture(CommentPictureDO commentPictureDO);
+	Long saveCommentPicture(CommentPictureDO commentPictureDO);
 	
 }

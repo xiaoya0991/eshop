@@ -2,6 +2,7 @@ package com.zhss.eshop.comment.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 
 import com.zhss.eshop.comment.domain.CommentPictureDO;
 
@@ -29,6 +30,7 @@ public interface CommentPictureMapper {
 				+ "#{gmtCreate},"
 				+ "#{gmtModified}"
 			+ ")") 
+	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true)
 	void saveCommentPicture(CommentPictureDO commentPictureDO);
 	
 }

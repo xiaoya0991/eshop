@@ -29,14 +29,14 @@ public class CommentInfoDAOImpl implements CommentInfoDAO {
 	 * 新增评论信息
 	 * @param commentInfoDO 评论信息DO对象
 	 */
-	public Boolean saveCommentInfo(CommentInfoDO commentInfoDO) {
+	public Long saveCommentInfo(CommentInfoDO commentInfoDO) {
 		try {
 			commentInfoMapper.saveCommentInfo(commentInfoDO); 
 		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
+			logger.error("error", e);
+			return null;
 		}
-		return true;
+		return commentInfoDO.getId();
 	}
 
 }

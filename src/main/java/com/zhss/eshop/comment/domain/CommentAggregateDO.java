@@ -111,4 +111,83 @@ public class CommentAggregateDO {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((badCommentCount == null) ? 0 : badCommentCount.hashCode());
+		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
+		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
+		result = prime * result + ((goodCommentCount == null) ? 0 : goodCommentCount.hashCode());
+		result = prime * result + ((goodCommentRate == null) ? 0 : goodCommentRate.hashCode());
+		result = prime * result + ((goodsId == null) ? 0 : goodsId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((mediumCommentCount == null) ? 0 : mediumCommentCount.hashCode());
+		result = prime * result + ((showPicturesCommentCount == null) ? 0 : showPicturesCommentCount.hashCode());
+		result = prime * result + ((totalCommentCount == null) ? 0 : totalCommentCount.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CommentAggregateDO other = (CommentAggregateDO) obj;
+		if (badCommentCount == null) {
+			if (other.badCommentCount != null)
+				return false;
+		} else if (!badCommentCount.equals(other.badCommentCount))
+			return false;
+		if (gmtCreate == null) {
+			if (other.gmtCreate != null)
+				return false;
+		} else if (!gmtCreate.equals(other.gmtCreate))
+			return false;
+		if (gmtModified == null) {
+			if (other.gmtModified != null)
+				return false;
+		} else if (!gmtModified.equals(other.gmtModified))
+			return false;
+		if (goodCommentCount == null) {
+			if (other.goodCommentCount != null)
+				return false;
+		} else if (!goodCommentCount.equals(other.goodCommentCount))
+			return false;
+		if (goodCommentRate == null) {
+			if (other.goodCommentRate != null)
+				return false;
+		} else if (!goodCommentRate.equals(other.goodCommentRate))
+			return false;
+		if (goodsId == null) {
+			if (other.goodsId != null)
+				return false;
+		} else if (!goodsId.equals(other.goodsId))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (mediumCommentCount == null) {
+			if (other.mediumCommentCount != null)
+				return false;
+		} else if (!mediumCommentCount.equals(other.mediumCommentCount))
+			return false;
+		if (showPicturesCommentCount == null) {
+			if (other.showPicturesCommentCount != null)
+				return false;
+		} else if (!showPicturesCommentCount.equals(other.showPicturesCommentCount))
+			return false;
+		if (totalCommentCount == null) {
+			if (other.totalCommentCount != null)
+				return false;
+		} else if (!totalCommentCount.equals(other.totalCommentCount))
+			return false;
+		return true;
+	}
+	
 }

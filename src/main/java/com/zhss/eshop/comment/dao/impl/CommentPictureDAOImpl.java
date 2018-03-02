@@ -29,14 +29,14 @@ public class CommentPictureDAOImpl implements CommentPictureDAO {
 	 * 新增评论晒图
 	 * @param commentPictureDO 评论晒图DO对象
 	 */
-	public Boolean saveCommentPicture(CommentPictureDO commentPictureDO) {
+	public Long saveCommentPicture(CommentPictureDO commentPictureDO) {
 		try {
 			commentPictureMapper.saveCommentPicture(commentPictureDO);
 		} catch (Exception e) {
 			logger.error("error", e); 
-			return false;
+			return null;
 		}
-		return true;
+		return commentPictureDO.getId();
 	}
 	
 }

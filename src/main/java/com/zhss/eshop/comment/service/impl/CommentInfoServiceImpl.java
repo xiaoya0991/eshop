@@ -1,7 +1,5 @@
 package com.zhss.eshop.comment.service.impl;
 
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,7 @@ import com.zhss.eshop.comment.dao.CommentInfoDAO;
 import com.zhss.eshop.comment.domain.CommentInfoDO;
 import com.zhss.eshop.comment.domain.CommentInfoDTO;
 import com.zhss.eshop.comment.service.CommentInfoService;
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 
@@ -35,6 +34,11 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 	 */
 	@Autowired
 	private CommentInfoDAO commentInfoDAO;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 新增手动发表的评论信息
@@ -67,8 +71,8 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 			commentInfoDTO.setCommentType(commentType);
 			
 			// 设置创建时间和修改时间
-			commentInfoDTO.setGmtCreate(new Date());  
-			commentInfoDTO.setGmtModified(new Date());  
+			commentInfoDTO.setGmtCreate(dateProvider.getCurrentTime());  
+			commentInfoDTO.setGmtModified(dateProvider.getCurrentTime());   
 			
 			// 将评论信息保存到数据库中去
 			CommentInfoDO commentInfoDO = commentInfoDTO.clone(CommentInfoDO.class);
@@ -92,22 +96,15 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 	public CommentInfoDTO saveAutoPublishedCommentInfo(
 			OrderInfoDTO orderInfoDTO, OrderItemDTO orderItemDTO) {
 		CommentInfoDTO commentInfoDTO = null;
-		
 		try {
-			// 创建评论信息DTO对象
-			commentInfoDTO = createCommentInfoDTO(orderInfoDTO, orderItemDTO);
-			
-			// 将评论信息保存到数据库中去
+			commentInfoDTO = createAutoPublishedCommentInfoDTO(orderInfoDTO, orderItemDTO);
 			CommentInfoDO commentInfoDO = commentInfoDTO.clone(CommentInfoDO.class);
 			commentInfoDAO.saveCommentInfo(commentInfoDO);
-			
-			// 设置评论信息的id
 			commentInfoDTO.setId(commentInfoDO.getId());  
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return null;
 		}
-		
 		return commentInfoDTO;
 	}
 	
@@ -117,8 +114,8 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 	 * @param orderItemDTO 订单条目DTO对象
 	 * @return 评论信息DTO对象
 	 */
-	private CommentInfoDTO createCommentInfoDTO(
-			OrderInfoDTO orderInfoDTO, OrderItemDTO orderItemDTO) {
+	private CommentInfoDTO createAutoPublishedCommentInfoDTO(
+			OrderInfoDTO orderInfoDTO, OrderItemDTO orderItemDTO) throws Exception {
 		CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
 		
 		commentInfoDTO.setUserAccountId(orderInfoDTO.getUserAccountId()); 
@@ -137,8 +134,8 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 		commentInfoDTO.setDefaultComment(DefaultComment.YES);
 		commentInfoDTO.setCommentStatus(CommentStatus.APPROVED);
 		commentInfoDTO.setCommentType(CommentType.GOOD_COMMENT);
-		commentInfoDTO.setGmtCreate(new Date());  
-		commentInfoDTO.setGmtModified(new Date()); 
+		commentInfoDTO.setGmtCreate(dateProvider.getCurrentTime());  
+		commentInfoDTO.setGmtModified(dateProvider.getCurrentTime()); 
 		
 		return commentInfoDTO;
 	}
