@@ -13,6 +13,7 @@ import com.zhss.eshop.commodity.domain.PropertyDO;
 import com.zhss.eshop.commodity.domain.PropertyDTO;
 import com.zhss.eshop.commodity.domain.PropertyQuery;
 import com.zhss.eshop.commodity.service.PropertyService;
+import com.zhss.eshop.common.util.DateProvider;
 
 /**
  * 商品属性管理模块的service组件
@@ -29,6 +30,11 @@ public class PropertyServiceImpl implements PropertyService {
 	 */
 	@Autowired
 	private PropertyDAO propertyDAO;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 
 	/**
 	 * 分页查询商品属性
@@ -57,6 +63,8 @@ public class PropertyServiceImpl implements PropertyService {
 	 */
 	public Boolean saveProperty(PropertyDTO propertyDTO) {
 		try {
+			propertyDTO.setGmtCreate(dateProvider.getCurrentTime()); 
+			propertyDTO.setGmtModified(dateProvider.getCurrentTime());  
 			PropertyDO propertyDO = propertyDTO.clone(PropertyDO.class);
 			propertyDAO.saveProperty(propertyDO);
 		} catch (Exception e) {
@@ -87,6 +95,7 @@ public class PropertyServiceImpl implements PropertyService {
 	 */
 	public Boolean updateProperty(PropertyDTO propertyDTO) {
 		try {
+			propertyDTO.setGmtModified(dateProvider.getCurrentTime()); 
 			PropertyDO propertyDO = propertyDTO.clone(PropertyDO.class);
 			propertyDAO.updateProperty(propertyDO);
 		} catch (Exception e) {
