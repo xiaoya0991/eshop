@@ -6,6 +6,9 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -108,6 +111,42 @@ public class ShoppingCartItemDAOTest {
 		// 断言比较数据是否更新
 		assertEquals(newPurchaseQuantity, resultShoppingCartItemDO.getPurchaseQuantity()); 
 		assertEquals(newGmtModified, resultShoppingCartItemDO.getGmtModified());  
+	}
+	
+	/**
+	 * 测试查询购物车中的所有条目
+	 * @throws Exception
+	 */
+	@Test
+	public void testListShoppingCartItemByCartId() throws Exception {
+		// 构造购物车条目数据
+		Long shoppingCartId = 1L;
+		
+		Map<Long, ShoppingCartItemDO> itemMap = 
+				new HashMap<Long, ShoppingCartItemDO>();
+		
+		ShoppingCartItemDO item = null;
+		
+		item = createShoppingCartItem(shoppingCartId, 1L, 3L);
+		itemMap.put(item.getId(), item);
+		
+		item = createShoppingCartItem(shoppingCartId, 2L, 4L);
+		itemMap.put(item.getId(), item);
+		
+		item = createShoppingCartItem(shoppingCartId, 3L, 1L);
+		itemMap.put(item.getId(), item);
+		
+		// 执行方法
+		List<ShoppingCartItemDO> resultItems = shoppingCartItemDAO
+				.listShoppingCartItemByCartId(shoppingCartId);
+		
+		// 执行断言
+		assertEquals(3, resultItems.size());  
+		
+		for(ShoppingCartItemDO resultItem : resultItems) {
+			ShoppingCartItemDO targetItem = itemMap.get(resultItem.getId());
+			assertEquals(targetItem, resultItem);  
+		}
 	}
 	
 	/**

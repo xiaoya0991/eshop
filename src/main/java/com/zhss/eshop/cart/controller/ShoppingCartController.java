@@ -59,7 +59,7 @@ public class ShoppingCartController {
 	 * @param userAccountId 用户账号id
 	 * @return
 	 */
-	@GetMapping("/view/{userAccountId}")   
+	@GetMapping("/{userAccountId}")   
 	public ShoppingCartVO getShoppingCartVO(
 			@PathVariable("userAccountId") Long userAccountId) {
 		try {

@@ -51,14 +51,17 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	/**
 	 * 商品中心对外接口service组件
 	 */
+	@Autowired
 	private CommodityFacadeService commodityFacadeService;
 	/**
 	 * 库存中心对外接口service组件
 	 */
+	@Autowired
 	private InventoryFacadeService inventoryFacadeService;
 	/**
 	 * 促销中心对外接口service组件
 	 */
+	@Autowired
 	private PromotionFacadeService promotionFacadeService;
 	
 	/**
@@ -124,17 +127,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			// 根据用户账号id查询一下购物车
 			ShoppingCartDO shoppingCartDO = shoppingCartDAO
 					.getShoppingCartByUserAccountId(userAccountId);
-			
 			if(shoppingCartDO == null) {
 				return new ShoppingCartDTO();
 			}
-			
 			ShoppingCartDTO shoppingCartDTO = shoppingCartDO.clone(ShoppingCartDTO.class);
 			
-			// 查询购物车中的条目数据
+			// 查询购物车条目
 			List<ShoppingCartItemDO> shoppingCartItemDOs = shoppingCartItemDAO
 					.listShoppingCartItemByCartId(shoppingCartDTO.getId());
-			
 			if(shoppingCartItemDOs == null || shoppingCartItemDOs.size() == 0) {
 				return shoppingCartDTO;
 			}
@@ -142,35 +142,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			List<ShoppingCartItemDTO> shoppingCartItemDTOs = new ArrayList<ShoppingCartItemDTO>();
 			shoppingCartDTO.setShoppingCartItemDTOs(shoppingCartItemDTOs); 
 			
+			// 为购物车条目填充相关的数据
 			for(ShoppingCartItemDO shoppingCartItemDO : shoppingCartItemDOs) {
-				ShoppingCartItemDTO shoppingCartItemDTO = shoppingCartItemDO.clone(
-						ShoppingCartItemDTO.class);
-				
-				// 给购物车条目填充商品数据
-				GoodsSkuDTO goodsSkuDTO = commodityFacadeService.getGoodsSkuById(
-						shoppingCartItemDTO.getGoodsSkuId());
-				shoppingCartItemDTO.setGoodsId(goodsSkuDTO.getGoodsId());  
-				shoppingCartItemDTO.setGoodsHeight(goodsSkuDTO.getGoodsHeight()); 
-				shoppingCartItemDTO.setGoodsLength(goodsSkuDTO.getGoodsLength()); 
-				shoppingCartItemDTO.setGoodsName(goodsSkuDTO.getGoodsName()); 
-				shoppingCartItemDTO.setGoodsSkuCode(goodsSkuDTO.getGoodsSkuCode()); 
-				shoppingCartItemDTO.setGoodsWidth(goodsSkuDTO.getGoodsWidth()); 
-				shoppingCartItemDTO.setGrossWeight(goodsSkuDTO.getGrossWeight()); 
-				shoppingCartItemDTO.setSalePrice(goodsSkuDTO.getSalePrice()); 
-				shoppingCartItemDTO.setSaleProperties(goodsSkuDTO.getSaleProperties());
-				
-				// 给购物车条目填充库存数据
-				Long saleStockQuantity = inventoryFacadeService.getSaleStockQuantity(
-						shoppingCartItemDTO.getGoodsSkuId());
-				shoppingCartItemDTO.setSaleStockQuantity(saleStockQuantity);
-				
-				// 给购物车条目填充促销数据
-				List<PromotionActivityDTO> promotionActivityDTOs = promotionFacadeService
-						.listPromotionActivitiesByGoodsId(shoppingCartItemDTO.getGoodsId());
-				shoppingCartItemDTO.setPromotionActivityDTOs(promotionActivityDTOs);  
-				
-				// 添加购物车条目DTO对象到集合中
-				shoppingCartItemDTOs.add(shoppingCartItemDTO); 
+				ShoppingCartItemDTO item = shoppingCartItemDO.clone(ShoppingCartItemDTO.class);
+				setGoodsRelatedData(item);
+				setStockRelatedData(item);
+				setPromotionRelatedData(item); 
+				shoppingCartItemDTOs.add(item); 
 			}
 			
 			return shoppingCartDTO;
@@ -178,6 +156,47 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			logger.error("error", e);
 			return new ShoppingCartDTO(); 
  		}
+	}
+	
+	/**
+	 * 给购物车条目设置商品相关的数据
+	 * @throws Exception
+	 */
+	private void setGoodsRelatedData(ShoppingCartItemDTO item) throws Exception {
+		GoodsSkuDTO goodsSkuDTO = commodityFacadeService.getGoodsSkuById(
+				item.getGoodsSkuId());
+		
+		item.setGoodsId(goodsSkuDTO.getGoodsId());  
+		item.setGoodsHeight(goodsSkuDTO.getGoodsHeight()); 
+		item.setGoodsLength(goodsSkuDTO.getGoodsLength()); 
+		item.setGoodsName(goodsSkuDTO.getGoodsName()); 
+		item.setGoodsSkuCode(goodsSkuDTO.getGoodsSkuCode()); 
+		item.setGoodsWidth(goodsSkuDTO.getGoodsWidth()); 
+		item.setGrossWeight(goodsSkuDTO.getGrossWeight()); 
+		item.setSalePrice(goodsSkuDTO.getSalePrice()); 
+		item.setSaleProperties(goodsSkuDTO.getSaleProperties());
+	}
+	
+	/**
+	 * 给购物车条目设置库存相关的数据 
+	 * @param item 购物车条目
+	 * @throws Exception
+	 */
+	private void setStockRelatedData(ShoppingCartItemDTO item) throws Exception {
+		Long saleStockQuantity = inventoryFacadeService.getSaleStockQuantity(
+				item.getGoodsSkuId());
+		item.setSaleStockQuantity(saleStockQuantity);
+	}
+	
+	/**
+	 * 给购物车条目设置促销相关的数据
+	 * @param item 购物车条目
+	 * @throws Exception
+	 */
+	private void setPromotionRelatedData(ShoppingCartItemDTO item) throws Exception {
+		List<PromotionActivityDTO> promotionActivityDTOs = promotionFacadeService
+				.listPromotionActivitiesByGoodsId(item.getGoodsId());
+		item.setPromotionActivityDTOs(promotionActivityDTOs); 
 	}
 	
 }
