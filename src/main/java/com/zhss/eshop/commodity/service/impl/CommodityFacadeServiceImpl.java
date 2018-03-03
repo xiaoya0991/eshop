@@ -30,21 +30,21 @@ public class CommodityFacadeServiceImpl implements CommodityFacadeService {
 			
 			GoodsSkuDTO goodsSkuDTO = new GoodsSkuDTO();
 			
-			goodsSkuDTO.setDiscountPrice(8999.00); 
-			goodsSkuDTO.setGmtCreate(dateFormatter.parse("2018-01-01 10:00:00"));  
-			goodsSkuDTO.setGmtModified(dateFormatter.parse("2018-01-01 10:00:00")); 
-			goodsSkuDTO.setGoodsHeight(59.50); 
-			goodsSkuDTO.setGoodsId(999L); 
-			goodsSkuDTO.setGoodsLength(125.90); 
-			goodsSkuDTO.setGoodsName("iPhonePlus"); 
+			goodsSkuDTO.setId(goodsSkuId); 
 			goodsSkuDTO.setGoodsSkuCode("FDL04300234"); 
+			goodsSkuDTO.setSaleProperties("机身颜色:白色,机身存储:256G"); 
+			goodsSkuDTO.setGoodsId(999L); 
+			goodsSkuDTO.setGoodsName("iPhonePlus"); 
+			goodsSkuDTO.setGoodsLength(125.90); 
 			goodsSkuDTO.setGoodsWidth(29.60); 
+			goodsSkuDTO.setGoodsHeight(59.50); 
 			goodsSkuDTO.setGrossWeight(599.80); 
-			goodsSkuDTO.setId(999L); 
+			goodsSkuDTO.setDiscountPrice(8999.00); 
 			goodsSkuDTO.setPurchasePrice(6856.70);
 			goodsSkuDTO.setSalePrice(9599.50);
-			goodsSkuDTO.setSaleProperties("机身颜色:白色,机身存储:256G"); 
- 			
+			goodsSkuDTO.setGmtCreate(dateFormatter.parse("2018-01-01 10:00:00"));  
+			goodsSkuDTO.setGmtModified(dateFormatter.parse("2018-01-01 10:00:00")); 
+			
 			return goodsSkuDTO;
 		} catch (Exception e) {
 			logger.error("error", e); 
