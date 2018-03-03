@@ -2,12 +2,14 @@ package com.zhss.eshop.auth.domain;
 
 import java.util.Date;
 
+import com.zhss.eshop.common.util.AbstractObject;
+
 /**
  * 角色和权限的关联关系DO类
  * @author zhonghuashishan
  *
  */
-public class RolePriorityRelationshipDO {
+public class RolePriorityRelationshipDO extends AbstractObject {
 
 	/**
 	 * id

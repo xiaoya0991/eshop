@@ -1,6 +1,5 @@
 package com.zhss.eshop.auth.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,11 +7,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhss.eshop.auth.dao.AccountRoleRelationshipDAO;
 import com.zhss.eshop.auth.dao.RoleDAO;
+import com.zhss.eshop.auth.dao.RolePriorityRelationshipDAO;
 import com.zhss.eshop.auth.domain.RoleDO;
 import com.zhss.eshop.auth.domain.RoleDTO;
+import com.zhss.eshop.auth.domain.RolePriorityRelationshipDO;
+import com.zhss.eshop.auth.domain.RolePriorityRelationshipDTO;
 import com.zhss.eshop.auth.domain.RoleQuery;
 import com.zhss.eshop.auth.service.RoleService;
+import com.zhss.eshop.common.util.ObjectUtils;
 
 /**
  * 角色管理模块service组件
@@ -29,6 +33,16 @@ public class RoleServiceImpl implements RoleService {
 	 */
 	@Autowired
 	private RoleDAO roleDAO;
+	/**
+	 * 角色权限关系管理模块DAO组件
+	 */
+	@Autowired
+	private RolePriorityRelationshipDAO rolePriorityRelationDAO;
+	/**
+	 * 账号角色关系管理模块DAO组件
+	 */
+	@Autowired
+	private AccountRoleRelationshipDAO accountRoleRelationDAO;
 	
 	/**
 	 * 分页查询角色
@@ -37,13 +51,8 @@ public class RoleServiceImpl implements RoleService {
 	 */
 	public List<RoleDTO> listByPage(RoleQuery query) {
 		try {
-			List<RoleDTO> resultRoles = new ArrayList<RoleDTO>();
-			
 			List<RoleDO> roles = roleDAO.listByPage(query);
-			for(RoleDO role : roles) {
-//				resultRoles.add(role)
-			}
-			return null;
+			return ObjectUtils.convertList(roles, RoleDTO.class);  
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return null;
@@ -56,7 +65,24 @@ public class RoleServiceImpl implements RoleService {
 	 * @return 角色DO对象
 	 */
 	public RoleDTO getById(Long id) {
-		return null;
+		try {
+			RoleDO role = roleDAO.getById(id); 
+			if(role == null) {
+				return null;
+			}
+			
+			RoleDTO resultRole = role.clone(RoleDTO.class);
+			
+			List<RolePriorityRelationshipDO> relations = 
+					rolePriorityRelationDAO.listByRoleId(id);
+			resultRole.setRolePriorityRelations(ObjectUtils.convertList(
+					relations, RolePriorityRelationshipDTO.class));  
+			
+			return resultRole;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
 	}
 	
 	/**
@@ -64,7 +90,18 @@ public class RoleServiceImpl implements RoleService {
 	 * @param role 角色DO对象
 	 */
 	public Boolean save(RoleDTO role) {
-		return true;
+		try {
+			roleDAO.save(role.clone(RoleDO.class));  
+			
+			for(RolePriorityRelationshipDTO relation : role.getRolePriorityRelations()) {
+				rolePriorityRelationDAO.save(relation.clone(RolePriorityRelationshipDO.class));
+			}
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -72,7 +109,19 @@ public class RoleServiceImpl implements RoleService {
 	 * @param role 角色DO对象
 	 */
 	public Boolean update(RoleDTO role) {
-		return true;
+		try {
+			roleDAO.update(role.clone(RoleDO.class));
+			rolePriorityRelationDAO.removeByRoleId(role.getId());
+			
+			for(RolePriorityRelationshipDTO relation : role.getRolePriorityRelations()) {
+				rolePriorityRelationDAO.save(relation.clone(RolePriorityRelationshipDO.class));
+			}
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -80,7 +129,20 @@ public class RoleServiceImpl implements RoleService {
 	 * @param id 角色id
 	 */
 	public Boolean remove(Long id) {
-		return true;
+		try {
+			Long count = accountRoleRelationDAO.countByRoleId(id);
+			if(count > 0L) {
+				return false;
+			}
+			
+			roleDAO.remove(id);
+			rolePriorityRelationDAO.removeByRoleId(id);
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 }
