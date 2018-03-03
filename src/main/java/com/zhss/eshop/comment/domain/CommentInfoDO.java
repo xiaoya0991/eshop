@@ -2,12 +2,14 @@ package com.zhss.eshop.comment.domain;
 
 import java.util.Date;
 
+import com.zhss.eshop.common.util.AbstractObject;
+
 /**
  * 评论信息
  * @author zhonghuashishan
  *
  */
-public class CommentInfoDO {
+public class CommentInfoDO extends AbstractObject {
 
 	/**
 	 * id

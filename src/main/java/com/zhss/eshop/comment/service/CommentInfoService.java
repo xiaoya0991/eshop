@@ -1,6 +1,9 @@
 package com.zhss.eshop.comment.service;
 
+import java.util.List;
+
 import com.zhss.eshop.comment.domain.CommentInfoDTO;
+import com.zhss.eshop.comment.domain.CommentInfoQuery;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 
@@ -25,5 +28,19 @@ public interface CommentInfoService {
 	 */
 	CommentInfoDTO saveAutoPublishedCommentInfo(
 			OrderInfoDTO orderInfoDTO, OrderItemDTO orderItemDTO);
+	
+	/**
+	 * 分页查询评论信息
+	 * @param query 评论查询条件
+	 * @return 评论信息
+	 */
+	List<CommentInfoDTO> listByPage(CommentInfoQuery query);
+	
+	/**
+	 * 根据id查询评论信息
+	 * @param id 评论信息id
+	 * @return 评论信息
+	 */
+	CommentInfoDTO getById(Long id);
 	
 }

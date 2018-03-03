@@ -1,21 +1,17 @@
 package com.zhss.eshop.comment.domain;
 
 import java.util.Date;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.zhss.eshop.common.util.BeanCopierUtils;
+import com.zhss.eshop.common.util.AbstractObject;
 
 /**
  * 评论信息
  * @author zhonghuashishan
  *
  */
-public class CommentInfoVO {
+public class CommentInfoVO extends AbstractObject {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CommentInfoVO.class);
-
 	/**
 	 * id
 	 */
@@ -92,6 +88,10 @@ public class CommentInfoVO {
 	 * 评论的修改时间
 	 */
 	private Date gmtModified;
+	/**
+	 * 评论图片集合
+	 */
+	private List<CommentPictureVO> pictures;
 	
 	public Long getId() {
 		return id;
@@ -207,22 +207,11 @@ public class CommentInfoVO {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	
-	/**
-	 * 将自己的数据克隆到指定类型的对象中
-	 * @param clazz 指定类型
-	 * @return 指定类型的对象
-	 */
-	public <T> T clone(Class<T> clazz) {
-		T target = null;
-		try {
-			target = clazz.newInstance();
-			BeanCopierUtils.copyProperties(this, target);  
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
-		return target;
+	public List<CommentPictureVO> getPictures() {
+		return pictures;
+	}
+	public void setPictures(List<CommentPictureVO> pictures) {
+		this.pictures = pictures;
 	}
 	
 }

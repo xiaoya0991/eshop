@@ -9,7 +9,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class CommentPictureDO extends AbstractObject {
+public class CommentPictureDTO extends AbstractObject {
 
 	/**
 	 * id

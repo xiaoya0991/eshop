@@ -1,5 +1,7 @@
 package com.zhss.eshop.comment.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,10 @@ import com.zhss.eshop.comment.constant.ShowPictures;
 import com.zhss.eshop.comment.dao.CommentInfoDAO;
 import com.zhss.eshop.comment.domain.CommentInfoDO;
 import com.zhss.eshop.comment.domain.CommentInfoDTO;
+import com.zhss.eshop.comment.domain.CommentInfoQuery;
 import com.zhss.eshop.comment.service.CommentInfoService;
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 
@@ -138,6 +142,39 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 		commentInfoDTO.setGmtModified(dateProvider.getCurrentTime()); 
 		
 		return commentInfoDTO;
+	}
+	
+	/**
+	 * 分页查询评论信息
+	 * @param query 评论查询条件
+	 * @return 评论信息
+	 */
+	public List<CommentInfoDTO> listByPage(CommentInfoQuery query) {
+		try {
+			List<CommentInfoDO> comments = commentInfoDAO.listByPage(query);
+			List<CommentInfoDTO> resultComments = ObjectUtils.convertList(
+					comments, CommentInfoDTO.class);
+			return resultComments;
+		} catch (Exception e) {
+			logger.error("error", e);
+			return null;
+		}
+	}
+	
+	/**
+	 * 根据id查询评论信息
+	 * @param id 评论信息id
+	 * @return 评论信息
+	 */
+	public CommentInfoDTO getById(Long id) {
+		try {
+			CommentInfoDO comment = commentInfoDAO.getById(id);
+			CommentInfoDTO resultComment = comment.clone(CommentInfoDTO.class);
+			return resultComment;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
 	}
 
 }

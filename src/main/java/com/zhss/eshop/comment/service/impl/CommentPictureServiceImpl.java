@@ -2,6 +2,7 @@ package com.zhss.eshop.comment.service.impl;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.zhss.eshop.comment.constant.CommentPictureUploadDirType;
 import com.zhss.eshop.comment.dao.CommentPictureDAO;
 import com.zhss.eshop.comment.domain.CommentPictureDO;
+import com.zhss.eshop.comment.domain.CommentPictureDTO;
 import com.zhss.eshop.comment.service.CommentPictureService;
+import com.zhss.eshop.common.util.ObjectUtils;
 
 /**
  * 评论晒图管理模块的service组件
@@ -96,4 +99,38 @@ public class CommentPictureServiceImpl implements CommentPictureService {
 		
 		return true;
 	}
+	
+	/**
+	 * 根据评论信息id查询图片
+	 * @param commentId 评论信息id
+	 * @return 评论图片
+	 */
+	public List<CommentPictureDTO> listByCommentId(Long commentId) {
+		try {
+			List<CommentPictureDO> pictures = commentPictureDAO.listByCommentId(commentId);
+			List<CommentPictureDTO> resultPictures = ObjectUtils.convertList(
+					pictures, CommentPictureDTO.class);
+			return resultPictures;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
+	}
+	
+	/**
+	 * 根据id查询图片
+	 * @param id 评论图片id
+	 * @return 评论图片
+	 */
+	public CommentPictureDTO getById(Long id) {
+		try {
+			CommentPictureDO picture = commentPictureDAO.getById(id);
+			CommentPictureDTO resultPicture = picture.clone(CommentPictureDTO.class);
+			return resultPicture;
+		} catch (Exception e) {
+			logger.error("error", e);
+			return null;
+		}
+	}
+	
 }
