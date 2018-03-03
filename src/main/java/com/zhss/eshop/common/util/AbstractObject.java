@@ -7,7 +7,7 @@ package com.zhss.eshop.common.util;
  */
 public class AbstractObject {
 
-	protected <T> T clone(Class<T> clazz) throws Exception {
+	public <T> T clone(Class<T> clazz) throws Exception {
 		T target = clazz.newInstance();
 		BeanCopierUtils.copyProperties(this, target);  
 		return target;
