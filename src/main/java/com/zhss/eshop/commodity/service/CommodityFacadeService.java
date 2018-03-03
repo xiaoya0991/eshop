@@ -7,7 +7,7 @@ import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
  * @author zhonghuashishan
  *
  */
-public interface GoodsFacadeService {
+public interface CommodityFacadeService {
 
 	/**
 	 * 根据id查询商品sku
