@@ -73,4 +73,59 @@ public class RoleDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
+		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((remark == null) ? 0 : remark.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RoleDO other = (RoleDO) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		if (gmtCreate == null) {
+			if (other.gmtCreate != null)
+				return false;
+		} else if (!gmtCreate.equals(other.gmtCreate))
+			return false;
+		if (gmtModified == null) {
+			if (other.gmtModified != null)
+				return false;
+		} else if (!gmtModified.equals(other.gmtModified))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (remark == null) {
+			if (other.remark != null)
+				return false;
+		} else if (!remark.equals(other.remark))
+			return false;
+		return true;
+	}
+	
 }

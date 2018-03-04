@@ -60,13 +60,13 @@ public class RoleDAOImpl implements RoleDAO {
 	 * 新增角色
 	 * @param role 角色DO对象
 	 */
-	public Boolean save(RoleDO role) {
+	public Long save(RoleDO role) {
 		try {
 			roleMapper.save(role);
-			return true;
+			return role.getId();
 		} catch (Exception e) {
 			logger.error("error", e); 
-			return false;
+			return null;
 		}
 	}
 	

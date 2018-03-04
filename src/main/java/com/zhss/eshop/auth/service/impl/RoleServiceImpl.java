@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.auth.dao.AccountRoleRelationshipDAO;
 import com.zhss.eshop.auth.dao.RoleDAO;
@@ -16,6 +17,7 @@ import com.zhss.eshop.auth.domain.RolePriorityRelationshipDO;
 import com.zhss.eshop.auth.domain.RolePriorityRelationshipDTO;
 import com.zhss.eshop.auth.domain.RoleQuery;
 import com.zhss.eshop.auth.service.RoleService;
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.common.util.ObjectUtils;
 
 /**
@@ -24,6 +26,7 @@ import com.zhss.eshop.common.util.ObjectUtils;
  *
  */
 @Service
+@Transactional
 public class RoleServiceImpl implements RoleService {
 
 	private static final Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
@@ -43,6 +46,11 @@ public class RoleServiceImpl implements RoleService {
 	 */
 	@Autowired
 	private AccountRoleRelationshipDAO accountRoleRelationDAO;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 分页查询角色
@@ -91,9 +99,14 @@ public class RoleServiceImpl implements RoleService {
 	 */
 	public Boolean save(RoleDTO role) {
 		try {
-			roleDAO.save(role.clone(RoleDO.class));  
+			role.setGmtCreate(dateProvider.getCurrentTime()); 
+			role.setGmtModified(dateProvider.getCurrentTime());  
+			Long roleId = roleDAO.save(role.clone(RoleDO.class));  
 			
 			for(RolePriorityRelationshipDTO relation : role.getRolePriorityRelations()) {
+				relation.setRoleId(roleId);
+				relation.setGmtCreate(dateProvider.getCurrentTime()); 
+				relation.setGmtModified(dateProvider.getCurrentTime()); 
 				rolePriorityRelationDAO.save(relation.clone(RolePriorityRelationshipDO.class));
 			}
 			
@@ -110,10 +123,15 @@ public class RoleServiceImpl implements RoleService {
 	 */
 	public Boolean update(RoleDTO role) {
 		try {
+			role.setGmtModified(dateProvider.getCurrentTime()); 
 			roleDAO.update(role.clone(RoleDO.class));
+			
 			rolePriorityRelationDAO.removeByRoleId(role.getId());
 			
 			for(RolePriorityRelationshipDTO relation : role.getRolePriorityRelations()) {
+				relation.setRoleId(role.getId());
+				relation.setGmtCreate(dateProvider.getCurrentTime()); 
+				relation.setGmtModified(dateProvider.getCurrentTime()); 
 				rolePriorityRelationDAO.save(relation.clone(RolePriorityRelationshipDO.class));
 			}
 			

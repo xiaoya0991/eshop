@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import com.zhss.eshop.auth.domain.RolePriorityRelationshipDO;
@@ -60,6 +62,13 @@ public interface RolePriorityRelationshipMapper {
 				+ "gmt_modified "
 			+ "FROM auth_role_priority_relationship "
 			+ "WHERE role_id=#{roleId}")  
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "priority_id", property = "priorityId"),
+		@Result(column = "role_id", property = "roleId"),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "gmt_modified", property = "gmtModified") 
+	})
 	List<RolePriorityRelationshipDO> listByRoleId(
 			@Param("roleId") Long roleId);
 	
@@ -67,7 +76,7 @@ public interface RolePriorityRelationshipMapper {
 	 * 根据角色id删除角色权限关联关系
 	 * @param roleId 角色id
 	 */
-	@Delete("DELTEE FROM auth_role_priority_relationship WHERE role_id=#{roleId}")  
+	@Delete("DELETE FROM auth_role_priority_relationship WHERE role_id=#{roleId}")  
 	void removeByRoleId(@Param("roleId") Long roleId);
 	
 }
