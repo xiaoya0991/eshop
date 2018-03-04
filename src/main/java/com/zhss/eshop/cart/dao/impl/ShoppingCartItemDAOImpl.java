@@ -86,4 +86,18 @@ public class ShoppingCartItemDAOImpl implements ShoppingCartItemDAO {
 		return null;
 	}
 	
+	/**
+	 * 删除购物车条目
+	 * @param id 购物车条目id
+	 */ 
+	public Boolean remove(Long id) {
+		try {
+			shoppingCartItemMapper.remove(id);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
 }

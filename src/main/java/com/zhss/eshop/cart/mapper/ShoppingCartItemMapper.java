@@ -2,6 +2,7 @@ package com.zhss.eshop.cart.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -103,5 +104,12 @@ public interface ShoppingCartItemMapper {
 	})
 	List<ShoppingCartItemDO> listShoppingCartItemByCartId(
 			@Param("shoppingCartId") Long shoppingCartId);
+	
+	/**
+	 * 删除购物车条目
+	 * @param id 购物车条目id
+	 */ 
+	@Delete("DELETE FROM shopping_cart_item WHERE id=#{id}")  
+	void remove(@Param("id") Long id);
 	
 }

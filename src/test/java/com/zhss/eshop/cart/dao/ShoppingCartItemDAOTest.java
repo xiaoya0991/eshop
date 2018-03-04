@@ -2,6 +2,7 @@ package com.zhss.eshop.cart.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -150,6 +151,26 @@ public class ShoppingCartItemDAOTest {
 	}
 	
 	/**
+	 * 测试删除购物车条目
+	 * @throws Exception
+	 */
+	@Test
+	public void testRemove() throws Exception {
+		Long shoppingCartId = 1L;
+		Long goodsSkuId = 1L;
+		Long purchaseQuantity = 3L;
+		
+		ShoppingCartItemDO item = createShoppingCartItem(
+				shoppingCartId, goodsSkuId, purchaseQuantity);
+		shoppingCartItemDAO.remove(item.getId());
+		
+		ShoppingCartItemDO resultItem = shoppingCartItemDAO.getShoppingCartItemByGoodsSkuId(
+				shoppingCartId, goodsSkuId);		
+		
+		assertNull(resultItem); 
+	}
+	
+	/**
 	 * 创建一个购物车条目
 	 * @param shoppingCartId 购物车id
 	 * @param goodsSkuId 商品sku id
@@ -159,14 +180,19 @@ public class ShoppingCartItemDAOTest {
 	 */
 	private ShoppingCartItemDO createShoppingCartItem(Long shoppingCartId, 
 			Long goodsSkuId, Long purchaseQuantity) throws Exception {
-		Date currentTime = dateProvider.getCurrentTime();
+		ShoppingCartItemDO item = shoppingCartItemDAO.getShoppingCartItemByGoodsSkuId(
+				shoppingCartId, goodsSkuId);
+		
+		if(item != null) {
+			shoppingCartItemDAO.remove(item.getId());
+		}
 		
 		ShoppingCartItemDO shoppingCartItemDO = new ShoppingCartItemDO();
 		shoppingCartItemDO.setShoppingCartId(shoppingCartId);
 		shoppingCartItemDO.setGoodsSkuId(goodsSkuId); 
 		shoppingCartItemDO.setPurchaseQuantity(purchaseQuantity); 
-		shoppingCartItemDO.setGmtCreate(currentTime);
-		shoppingCartItemDO.setGmtModified(currentTime); 
+		shoppingCartItemDO.setGmtCreate(dateProvider.getCurrentTime());
+		shoppingCartItemDO.setGmtModified(dateProvider.getCurrentTime()); 
 		
 		shoppingCartItemDAO.saveShoppingCartItem(shoppingCartItemDO);
 		
