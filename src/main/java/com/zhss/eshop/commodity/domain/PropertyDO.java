@@ -2,20 +2,15 @@ package com.zhss.eshop.commodity.domain;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.zhss.eshop.common.util.BeanCopierUtils;
+import com.zhss.eshop.common.util.AbstractObject;
 
 /**
  * 商品属性DO类
  * @author zhonghuashishan
  *
  */
-public class PropertyDO {
+public class PropertyDO extends AbstractObject {
 	
-	private static final Logger logger = LoggerFactory.getLogger(PropertyDO.class);
-
 	/**
 	 * id
 	 */
@@ -86,18 +81,6 @@ public class PropertyDO {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
-	}
-	
-	public <T> T clone(Class<T> clazz) {
-		T target = null;
-		try {
-			target = clazz.newInstance();
-			BeanCopierUtils.copyProperties(this, target);  
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
-		return target;
 	}
 	
 	@Override

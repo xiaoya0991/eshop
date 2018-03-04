@@ -48,6 +48,10 @@ public class CategoryVO extends AbstractObject {
 	 * 属性分组
 	 */
 	private List<PropertyGroupVO> propertyGroups;
+	/**
+	 * 类目关联的属性
+	 */
+	private List<PropertyVO> properties;
 	
 	public Long getId() {
 		return id;
@@ -103,6 +107,11 @@ public class CategoryVO extends AbstractObject {
 	public void setPropertyGroups(List<PropertyGroupVO> propertyGroups) {
 		this.propertyGroups = propertyGroups;
 	}
-	
+	public List<PropertyVO> getProperties() {
+		return properties;
+	}
+	public void setProperties(List<PropertyVO> properties) {
+		this.properties = properties;
+	}
 	
 }

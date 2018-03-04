@@ -1,5 +1,7 @@
 package com.zhss.eshop.commodity.dao.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -33,6 +35,20 @@ public class PropertyGroupRelationshipDAOImpl
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;
+		}
+	}
+	
+	/**
+	 * 根据属性分组id查询属性分组与属性的关联关系
+	 * @param propertyGroupId 属性分组id
+	 * @return 属性分组与属性的关联关系
+	 */
+	public List<PropertyGroupRelationshipDO> listByPropertyGroupId(Long propertyGroupId) {
+		try {
+			return propertyGroupRelationMapper.listByPropertyGroupId(propertyGroupId);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
 		}
 	}
 

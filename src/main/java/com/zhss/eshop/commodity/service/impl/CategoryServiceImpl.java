@@ -1,5 +1,6 @@
 package com.zhss.eshop.commodity.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,12 +10,15 @@ import org.springframework.stereotype.Service;
 
 import com.zhss.eshop.commodity.dao.CategoryDAO;
 import com.zhss.eshop.commodity.dao.CategoryPropertyRelationshipDAO;
+import com.zhss.eshop.commodity.dao.PropertyDAO;
 import com.zhss.eshop.commodity.dao.PropertyGroupDAO;
 import com.zhss.eshop.commodity.dao.PropertyGroupRelationshipDAO;
 import com.zhss.eshop.commodity.domain.CategoryDO;
 import com.zhss.eshop.commodity.domain.CategoryDTO;
 import com.zhss.eshop.commodity.domain.CategoryPropertyRelationshipDO;
 import com.zhss.eshop.commodity.domain.CategoryPropertyRelationshipDTO;
+import com.zhss.eshop.commodity.domain.PropertyDO;
+import com.zhss.eshop.commodity.domain.PropertyDTO;
 import com.zhss.eshop.commodity.domain.PropertyGroupDO;
 import com.zhss.eshop.commodity.domain.PropertyGroupDTO;
 import com.zhss.eshop.commodity.domain.PropertyGroupRelationshipDO;
@@ -58,6 +62,11 @@ public class CategoryServiceImpl implements CategoryService {
 	 */
 	@Autowired
 	private DateProvider dateProvider;
+	/**
+	 * 属性管理模块DAO组件
+	 */
+	@Autowired
+	private PropertyDAO propertyDAO;
 
 	/**
 	 * 查询根类目
@@ -182,6 +191,84 @@ public class CategoryServiceImpl implements CategoryService {
 			propertyGroupRelationDAO.save(relation.clone(
 					PropertyGroupRelationshipDO.class));
 		}
+	}
+	
+	/**
+	 * 根据id查询类目
+	 * @param id 类目id
+	 * @return 类目
+	 */
+	public CategoryDTO getById(Long id) {
+		try {
+			// 查询类目基本信息
+			CategoryDTO category = categoryDAO.getById(id).clone(CategoryDTO.class);  
+			
+			// 查询类目与属性的关联关系
+			List<CategoryPropertyRelationshipDO> relations = 
+					categoryPropertyRelationDAO.listByCategoryId(id);
+			category.setPropertyRelations(ObjectUtils.convertList(relations, 
+					CategoryPropertyRelationshipDTO.class)); 
+			 
+			// 查询类目关联的属性
+			List<PropertyDO> properties = new ArrayList<PropertyDO>();
+			for(CategoryPropertyRelationshipDO relation : relations) {
+				properties.add(propertyDAO.getPropertyById(relation.getPropertyId()));  
+			}
+			category.setProperties(ObjectUtils.convertList(properties, PropertyDTO.class));  
+			
+			// 查询类目关联的属性分组
+			List<PropertyGroupDTO> propertyGroups = getPropertyGroupsByCategoryId(id);
+			category.setPropertyGroups(propertyGroups); 
+			
+			return category;
+ 		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
+	}
+	
+	/**
+	 * 根据类目id查询属性分组
+	 * @param categoryId 类目id
+	 * @return 属性分组
+	 * @throws Exception
+	 */
+	private List<PropertyGroupDTO> getPropertyGroupsByCategoryId(
+			Long categoryId) throws Exception {
+		List<PropertyGroupDTO> resultPropertyGroups = new ArrayList<PropertyGroupDTO>();
+		
+		// 查询类目关联的属性分组
+		List<PropertyGroupDO> propertyGroups = propertyGroupDAO.listByCategoryId(categoryId); 
+		
+		// 查询属性分组与属性的关联关系，以及属性分组关联的属性
+		for(PropertyGroupDO propertyGroup : propertyGroups) {
+			PropertyGroupDTO resultPropertyGroup = propertyGroup.clone(PropertyGroupDTO.class);
+			
+			List<PropertyGroupRelationshipDO> relations = propertyGroupRelationDAO
+					.listByPropertyGroupId(propertyGroup.getId());
+			resultPropertyGroup.setRelations(ObjectUtils.convertList(relations, 
+					PropertyGroupRelationshipDTO.class));  
+			
+			List<PropertyDTO> properties = new ArrayList<PropertyDTO>();
+			for(PropertyGroupRelationshipDO relation : relations) {
+				properties.add(getPropertyById(relation.getPropertyId()));
+			}
+			resultPropertyGroup.setProperties(properties); 
+			
+			resultPropertyGroups.add(resultPropertyGroup);
+		}
+		
+		return resultPropertyGroups;
+	}
+	
+	/**
+	 * 根据id查询属性
+	 * @param propertyId 属性id
+	 * @return 属性
+	 */
+	private PropertyDTO getPropertyById(Long propertyId) throws Exception {
+		PropertyDO property = propertyDAO.getPropertyById(propertyId);
+		return property.clone(PropertyDTO.class);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.zhss.eshop.commodity.dao.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,20 @@ public class PropertyGroupDAOImpl implements PropertyGroupDAO {
 		try {
 			propertyGroupMapper.save(group);
 			return group.getId();
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
+	}
+	
+	/**
+	 * 根据类目id查询属性分组
+	 * @param categoryId 类目id
+	 * @return 属性分组
+	 */
+	public List<PropertyGroupDO> listByCategoryId(Long categoryId) {
+		try {
+			return propertyGroupMapper.listByCategoryId(categoryId);
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return null;

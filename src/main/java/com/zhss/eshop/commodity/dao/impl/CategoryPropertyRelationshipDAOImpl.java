@@ -1,5 +1,7 @@
 package com.zhss.eshop.commodity.dao.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -33,6 +35,20 @@ public class CategoryPropertyRelationshipDAOImpl
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;
+		}
+	}
+	
+	/**
+	 * 根据类目id查询类目与属性的关联关系
+	 * @param categoryId 类目id
+	 * @return 类目与属性的关联关系
+	 */
+	public List<CategoryPropertyRelationshipDO> listByCategoryId(Long categoryId) {
+		try {
+			return categoryPropertyRelationMapper.listByCategoryId(categoryId);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
 		}
 	}
 

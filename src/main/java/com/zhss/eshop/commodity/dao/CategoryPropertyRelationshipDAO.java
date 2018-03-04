@@ -1,5 +1,7 @@
 package com.zhss.eshop.commodity.dao;
 
+import java.util.List;
+
 import com.zhss.eshop.commodity.domain.CategoryPropertyRelationshipDO;
 
 /**
@@ -14,5 +16,12 @@ public interface CategoryPropertyRelationshipDAO {
 	 * @param relation 类目属性关系
 	 */
 	Boolean save(CategoryPropertyRelationshipDO relation);
+	
+	/**
+	 * 根据类目id查询类目与属性的关联关系
+	 * @param categoryId 类目id
+	 * @return 类目与属性的关联关系
+	 */
+	List<CategoryPropertyRelationshipDO> listByCategoryId(Long categoryId);
 	
 }

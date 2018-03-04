@@ -20,6 +20,7 @@ import com.zhss.eshop.commodity.domain.PropertyGroupDTO;
 import com.zhss.eshop.commodity.domain.PropertyGroupRelationshipDTO;
 import com.zhss.eshop.commodity.domain.PropertyGroupVO;
 import com.zhss.eshop.commodity.service.CategoryService;
+import com.zhss.eshop.common.util.CloneDirection;
 import com.zhss.eshop.common.util.ObjectUtils;
 
 /**
@@ -107,6 +108,24 @@ public class CategoryController {
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;
+		}
+	}
+	
+	/**
+	 * 根据id查询类目
+	 * @param id 类目id
+	 * @return 类目
+	 */
+	@GetMapping("/{id}")  
+	public CategoryVO getById(@PathVariable("id") Long id) {
+		try {
+			CategoryDTO category = categoryService.getById(id);
+			CategoryVO resultCategory = category.clone(
+					CategoryVO.class, CloneDirection.OPPOSITE);
+			return resultCategory;
+		} catch (Exception e) { 
+			logger.error("error", e); 
+			return null;
 		}
 	}
 	

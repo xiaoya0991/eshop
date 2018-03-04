@@ -45,6 +45,10 @@ public class CategoryDTO extends AbstractObject {
 	 */
 	private List<CategoryPropertyRelationshipDTO> propertyRelations;
 	/**
+	 * 类目关联的属性
+	 */
+	private List<PropertyDTO> properties;
+	/**
 	 * 属性分组
 	 */
 	private List<PropertyGroupDTO> propertyGroups;
@@ -102,6 +106,12 @@ public class CategoryDTO extends AbstractObject {
 	}
 	public void setPropertyGroups(List<PropertyGroupDTO> propertyGroups) {
 		this.propertyGroups = propertyGroups;
+	}
+	public List<PropertyDTO> getProperties() {
+		return properties;
+	}
+	public void setProperties(List<PropertyDTO> properties) {
+		this.properties = properties;
 	}
 	
 }

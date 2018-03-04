@@ -31,4 +31,11 @@ public interface CategoryService {
 	 */
 	Boolean save(CategoryDTO category);
 	
+	/**
+	 * 根据id查询类目
+	 * @param id 类目id
+	 * @return 类目
+	 */
+	CategoryDTO getById(Long id);
+	
 }
