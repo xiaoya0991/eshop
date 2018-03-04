@@ -7,9 +7,21 @@ package com.zhss.eshop.comment.constant;
  */
 public class CommentStatus {
 
+	/**
+	 * 待审核
+	 */
 	public static final Integer APPROVING = 1;
+	/**
+	 * 审核通过
+	 */
 	public static final Integer APPROVED = 2;
+	/**
+	 * 审核未通过
+	 */
 	public static final Integer APPROVE_REJECTED = 3;
-	public static final Integer REMOVED = 4;
+	
+	private CommentStatus() {
+		
+	}
 	
 }

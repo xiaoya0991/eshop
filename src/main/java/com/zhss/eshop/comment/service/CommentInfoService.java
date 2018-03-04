@@ -43,4 +43,17 @@ public interface CommentInfoService {
 	 */
 	CommentInfoDTO getById(Long id);
 	
+	/**
+	 * 更新评论
+	 * @param comment 评论信息
+	 */
+	Boolean update(CommentInfoDTO comment);
+	
+	/**
+	 * 删除评论
+	 * @param id 删除评论
+	 * @return 处理结果
+	 */
+	Boolean remove(Long id);
+	
 }

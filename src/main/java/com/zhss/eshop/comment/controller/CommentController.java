@@ -13,13 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.zhss.eshop.comment.constant.CommentApproved;
+import com.zhss.eshop.comment.constant.CommentStatus;
 import com.zhss.eshop.comment.constant.ShowPictures;
 import com.zhss.eshop.comment.domain.CommentInfoDTO;
 import com.zhss.eshop.comment.domain.CommentInfoQuery;
@@ -193,6 +197,40 @@ public class CommentController {
 				}
         	}
         }
+    }
+    
+    /**
+     * 审核评论
+     * @param comment 评论信息 
+     */
+    @PutMapping("/approve/{id}")  
+    public Boolean update(@PathVariable("id") Long id, Integer approved) {
+    	try {
+    		CommentInfoDTO comment = new CommentInfoDTO();
+    		comment.setId(id);
+    		comment.setCommentStatus(CommentApproved.YES.equals(approved) ? 
+    				CommentStatus.APPROVED : CommentStatus.APPROVE_REJECTED); 
+			Boolean result = commentInfoService.update(comment);
+			return result;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+    }
+    
+    /**
+     * 删除评论
+     * @param id 评论id
+     * @return 处理结果
+     */
+    @DeleteMapping("/{id}") 
+    public Boolean remove(@PathVariable("id") Long id) {
+    	try {
+			return commentInfoService.remove(id);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
     }
 	
 }

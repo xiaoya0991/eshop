@@ -2,6 +2,7 @@ package com.zhss.eshop.comment.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.zhss.eshop.comment.domain.CommentInfoDO;
 import com.zhss.eshop.comment.domain.CommentInfoQuery;
@@ -206,5 +208,22 @@ public interface CommentInfoMapper {
 		@Result(column = "gmt_modified", property = "gmtModified") 
 	})
 	CommentInfoDO getById(@Param("id") Long id);
+	
+	/**
+	 * 更新评论
+	 * @param comment 评论信息
+	 */
+	@Update("UPDATE comment_info SET "
+				+ "comment_status=#{commentStatus},"
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}") 
+	void update(CommentInfoDO comment);
+	
+	/**
+	 * 删除评论
+	 * @param id 评论id
+	 */
+	@Delete("DELETE FROM comment_info WHERE id=#{id}")  
+	void remove(@Param("id") Long id);
  	
 }
