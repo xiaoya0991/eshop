@@ -50,4 +50,13 @@ public class StockUpdateResultManagerImpl
 		observableMap.remove(messageId);
 	}
 	
+	/**
+	 * 获取库存更新结果观察目标
+	 * @param messageId 消息id
+	 * @return
+	 */
+	public StockUpdateObservable getObservable(String messageId) {
+		return observableMap.get(messageId);
+	}
+	
 }

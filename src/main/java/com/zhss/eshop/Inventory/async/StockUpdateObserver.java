@@ -22,9 +22,9 @@ public class StockUpdateObserver implements Observer {
 	 * 通知异步处理结果
 	 */
 	public void update(Observable o, Object arg) {
-		StockUpdateResult goodsStockUpdateResult = (StockUpdateResult) arg;
-		logger.info("商品库存更新消息[messageId=" + goodsStockUpdateResult.getMessageId() + "]"
-				+ "的异步处理结果为：" + goodsStockUpdateResult.getResult());    
+		StockUpdateResult result = (StockUpdateResult) arg;
+		logger.info("商品库存更新消息[messageId=" + result.getMessageId() + "]" 
+				+ "的异步处理结果为：" + result.getResult());    
 	}
 	
 }

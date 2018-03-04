@@ -80,28 +80,36 @@ public abstract class AbstractStockUpdaterFactory<T>
 	 * @return 商品库存DO对象集合
 	 */
 	private List<GoodsStockDO> createGoodsStockDOs(List<Long> goodsSkuIds) throws Exception {
-		List<GoodsStockDO> goodsStockDOs = new ArrayList<GoodsStockDO>(goodsSkuIds.size());
+		List<GoodsStockDO> goodsStocks = new ArrayList<GoodsStockDO>(goodsSkuIds.size());
 		
 		for(Long goodsSkuId : goodsSkuIds) {
-			GoodsStockDO goodsStockDO = goodsStockDAO.getGoodsStockBySkuId(goodsSkuId);
-			
-			if(goodsStockDO == null) {
-				goodsStockDO = new GoodsStockDO();
-				goodsStockDO.setGoodsSkuId(goodsSkuId);
-				goodsStockDO.setSaleStockQuantity(0L);
-				goodsStockDO.setLockedStockQuantity(0L); 
-				goodsStockDO.setSaledStockQuantity(0L);
-				goodsStockDO.setStockStatus(StockStatus.NOT_IN_STOCK); 
-				goodsStockDO.setGmtCreate(dateProvider.getCurrentTime());
-				goodsStockDO.setGmtModified(dateProvider.getCurrentTime());  
-				
-				goodsStockDAO.saveGoodsStock(goodsStockDO);
+			GoodsStockDO goodsStock = goodsStockDAO.getGoodsStockBySkuId(goodsSkuId);
+			if(goodsStock == null) {
+				goodsStock = createGoodsStock(goodsSkuId);
+				goodsStockDAO.saveGoodsStock(goodsStock);
  			}
-			
-			goodsStockDOs.add(goodsStockDO);
+			goodsStocks.add(goodsStock);
 		}
 		
-		return goodsStockDOs;
+		return goodsStocks;
+	}
+	
+	/**
+	 * 创建商品库存DO对象
+	 * @param goodsSkuId 商品sku id
+	 * @return 商品库存DO对象
+	 * @throws Exception
+	 */
+	private GoodsStockDO createGoodsStock(Long goodsSkuId) throws Exception {
+		GoodsStockDO goodsStockDO = new GoodsStockDO();
+		goodsStockDO.setGoodsSkuId(goodsSkuId);
+		goodsStockDO.setSaleStockQuantity(0L);
+		goodsStockDO.setLockedStockQuantity(0L); 
+		goodsStockDO.setSaledStockQuantity(0L);
+		goodsStockDO.setStockStatus(StockStatus.NOT_IN_STOCK); 
+		goodsStockDO.setGmtCreate(dateProvider.getCurrentTime());
+		goodsStockDO.setGmtModified(dateProvider.getCurrentTime());  
+		return goodsStockDO;
 	}
 	
 }

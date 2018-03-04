@@ -91,4 +91,11 @@ public class GoodsStockDO {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsStockDO [id=" + id + ", goodsSkuId=" + goodsSkuId + ", saleStockQuantity=" + saleStockQuantity
+				+ ", lockedStockQuantity=" + lockedStockQuantity + ", saledStockQuantity=" + saledStockQuantity
+				+ ", stockStatus=" + stockStatus + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

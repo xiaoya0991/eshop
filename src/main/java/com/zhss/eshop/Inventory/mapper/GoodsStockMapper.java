@@ -2,6 +2,7 @@ package com.zhss.eshop.Inventory.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -67,6 +68,7 @@ public interface GoodsStockMapper {
 				+ "#{gmtCreate},"
 				+ "#{gmtModified}"
 			+ ")")  
+	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true) 
 	void saveGoodsStock(GoodsStockDO goodsStockDO);
 	
 	/**

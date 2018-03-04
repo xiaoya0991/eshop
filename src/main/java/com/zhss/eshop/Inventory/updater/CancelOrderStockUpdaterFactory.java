@@ -68,7 +68,7 @@ public class CancelOrderStockUpdaterFactory<T>
 			orderItemDTOMap.put(orderItemDTO.getGoodsSkuId(), orderItemDTO);
 		}
 		
-		return new PayOrderStockUpdater(goodsStockDOs, goodsStockDAO, 
+		return new CancelOrderStockUpdater(goodsStockDOs, goodsStockDAO, 
 				dateProvider, orderItemDTOMap);
 	} 
 

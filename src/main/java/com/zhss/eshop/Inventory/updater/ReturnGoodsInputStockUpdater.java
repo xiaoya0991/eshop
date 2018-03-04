@@ -43,7 +43,7 @@ public class ReturnGoodsInputStockUpdater extends AbstractStockUpdater {
 	protected void updateSaleStockQuantity() throws Exception {
 		for(GoodsStockDO goodsStockDO : goodsStockDOs) {
 			ReturnGoodsInputOrderItemDTO returnGoodsInputOrderItemDTO = 
-					returnGoodsInputOrderItemDTOMap.get(goodsStockDO.getId());
+					returnGoodsInputOrderItemDTOMap.get(goodsStockDO.getGoodsSkuId());
 			goodsStockDO.setSaleStockQuantity(goodsStockDO.getSaleStockQuantity() 
 					+ returnGoodsInputOrderItemDTO.getArrivalCount()); 
 		}
@@ -64,8 +64,8 @@ public class ReturnGoodsInputStockUpdater extends AbstractStockUpdater {
 	protected void updateSaledStockQuantity() throws Exception {
 		for(GoodsStockDO goodsStockDO : goodsStockDOs) {
 			ReturnGoodsInputOrderItemDTO returnGoodsInputOrderItemDTO = 
-					returnGoodsInputOrderItemDTOMap.get(goodsStockDO.getId());
-			goodsStockDO.setSaleStockQuantity(goodsStockDO.getSaleStockQuantity() 
+					returnGoodsInputOrderItemDTOMap.get(goodsStockDO.getGoodsSkuId());
+			goodsStockDO.setSaledStockQuantity(goodsStockDO.getSaledStockQuantity() 
 					- returnGoodsInputOrderItemDTO.getArrivalCount()); 
 		}
 	}

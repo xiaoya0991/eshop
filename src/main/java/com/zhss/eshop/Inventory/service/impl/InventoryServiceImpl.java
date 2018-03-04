@@ -13,7 +13,7 @@ import com.zhss.eshop.Inventory.async.StockUpdateQueue;
 import com.zhss.eshop.Inventory.constant.GoodsStockUpdateOperation;
 import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
 import com.zhss.eshop.Inventory.domain.GoodsStockDO;
-import com.zhss.eshop.Inventory.service.InventoryFacadeService;
+import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.Inventory.updater.CancelOrderStockUpdaterFactory;
 import com.zhss.eshop.Inventory.updater.StockUpdater;
 import com.zhss.eshop.Inventory.updater.PayOrderStockUpdaterFactory;
@@ -30,9 +30,9 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
  *
  */
 @Service
-public class InventoryFacadeServiceImpl implements InventoryFacadeService {
+public class InventoryServiceImpl implements InventoryService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(InventoryFacadeServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(InventoryServiceImpl.class);
 	
 	/**
 	 * 采购入库库存更新命令工厂

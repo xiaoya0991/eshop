@@ -42,7 +42,7 @@ public class PurchaseInputStockUpdater extends AbstractStockUpdater {
 	protected void updateSaleStockQuantity() throws Exception {
 		for(GoodsStockDO goodsStockDO : goodsStockDOs) {
 			PurchaseInputOrderItemDTO purchaseInputOrderItemDTO = 
-					purcahseInputOrderItemDTOMap.get(goodsStockDO.getId());
+					purcahseInputOrderItemDTOMap.get(goodsStockDO.getGoodsSkuId());
 			goodsStockDO.setSaleStockQuantity(goodsStockDO.getSaleStockQuantity() 
 					+ purchaseInputOrderItemDTO.getArrivalCount()); 
 		}
