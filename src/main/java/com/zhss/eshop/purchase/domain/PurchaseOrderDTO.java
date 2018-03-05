@@ -1,13 +1,16 @@
 package com.zhss.eshop.purchase.domain;
 
 import java.util.Date;
+import java.util.List;
+
+import com.zhss.eshop.common.util.AbstractObject;
 
 /**
  * 采购单DTO
  * @author zhonghuashishan
  *
  */
-public class PurchaseOrderDTO {
+public class PurchaseOrderDTO extends AbstractObject {
 
 	/**
 	 * id
@@ -53,6 +56,10 @@ public class PurchaseOrderDTO {
 	 * 采购单的修改时间
 	 */
 	private Date gmtModified;
+	/**
+	 * 采购条目集合
+	 */
+	private List<PurchaseOrderItemDTO> items;
 	
 	public Long getId() {
 		return id;
@@ -119,6 +126,12 @@ public class PurchaseOrderDTO {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public List<PurchaseOrderItemDTO> getItems() {
+		return items;
+	}
+	public void setItems(List<PurchaseOrderItemDTO> items) {
+		this.items = items;
 	}
 	
 }
