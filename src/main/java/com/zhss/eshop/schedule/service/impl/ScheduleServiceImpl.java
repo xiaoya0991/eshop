@@ -12,7 +12,7 @@ import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderItemDTO;
-import com.zhss.eshop.schedule.service.ScheduleFacadeService;
+import com.zhss.eshop.schedule.service.ScheduleService;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -24,10 +24,10 @@ import com.zhss.eshop.wms.service.WmsService;
  *
  */
 @Service
-public class ScheduleFacadeServiceImpl implements ScheduleFacadeService {
-	
-	private static final Logger logger = LoggerFactory.getLogger(ScheduleFacadeServiceImpl.class);
+public class ScheduleServiceImpl implements ScheduleService {
 
+	private static final Logger logger = LoggerFactory.getLogger(ScheduleServiceImpl.class);
+	
 	/**
 	 * wms中心对外接口service组件
 	 */

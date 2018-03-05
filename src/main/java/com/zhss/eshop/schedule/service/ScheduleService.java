@@ -11,7 +11,7 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
  * @author zhonghuashishan
  *
  */
-public interface ScheduleFacadeService {
+public interface ScheduleService {
 
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
