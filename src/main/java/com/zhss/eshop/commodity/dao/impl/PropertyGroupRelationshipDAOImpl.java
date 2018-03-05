@@ -2,8 +2,7 @@ package com.zhss.eshop.commodity.dao.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.commodity.dao.PropertyGroupRelationshipDAO;
@@ -19,23 +18,19 @@ import com.zhss.eshop.commodity.mapper.PropertyGroupRelationshipMapper;
 public class PropertyGroupRelationshipDAOImpl 
 		implements PropertyGroupRelationshipDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(
-			PropertyGroupRelationshipDAOImpl.class);
-	
+	/**
+	 * 属性分组与属性关系管理mapper组件
+	 */
+	@Autowired
 	private PropertyGroupRelationshipMapper propertyGroupRelationMapper;
 	
 	/**
 	 * 新增属性分组与属性关系
 	 * @param relation 属性分组与属性关系
 	 */
-	public Boolean save(PropertyGroupRelationshipDO relation) {
-		try {
-			propertyGroupRelationMapper.save(relation); 
-			return true;
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
+	public Boolean save(PropertyGroupRelationshipDO relation) throws Exception {
+		propertyGroupRelationMapper.save(relation); 
+		return true;
 	}
 	
 	/**
@@ -43,13 +38,17 @@ public class PropertyGroupRelationshipDAOImpl
 	 * @param propertyGroupId 属性分组id
 	 * @return 属性分组与属性的关联关系
 	 */
-	public List<PropertyGroupRelationshipDO> listByPropertyGroupId(Long propertyGroupId) {
-		try {
-			return propertyGroupRelationMapper.listByPropertyGroupId(propertyGroupId);
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
+	public List<PropertyGroupRelationshipDO> listByPropertyGroupId(
+			Long propertyGroupId) throws Exception {
+		return propertyGroupRelationMapper.listByPropertyGroupId(propertyGroupId);
+	}
+	
+	/**
+	 * 根据属性分组id删除属性分组与属性的关联关系
+	 * @param propertyGroupId 属性分组id
+	 */ 
+	public void removeByPropertyGroupId(Long propertyGroupId) throws Exception {
+		propertyGroupRelationMapper.removeByPropertyGroupId(propertyGroupId); 
 	}
 
 }

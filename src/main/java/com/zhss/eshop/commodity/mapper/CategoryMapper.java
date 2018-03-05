@@ -2,6 +2,7 @@ package com.zhss.eshop.commodity.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.zhss.eshop.commodity.domain.CategoryDO;
 
@@ -118,5 +120,22 @@ public interface CategoryMapper {
 			+ ")")  
 	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true) 
 	void save(CategoryDO category);
+	
+	/**
+	 * 更新类目
+	 * @param category 类目
+	 */
+	@Update("UPDATE commodity_category SET "
+				+ "description=#{description},"
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}") 
+	void update(CategoryDO category);
+	
+	/**
+	 * 删除类目
+	 * @param id 类目id
+	 */
+	@Delete("DELETE FROM commodity_category WHERE id=#{id}")  
+	void remove(@Param("id") Long id);
 	
 }

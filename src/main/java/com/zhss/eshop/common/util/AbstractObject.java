@@ -63,6 +63,9 @@ public class AbstractObject {
 				
 				// 获取设置克隆好的list的方法名称
 				Method setFieldMethod = getSetCloneListFieldMethodName(field, clazz); // setRelations
+				if(setFieldMethod == null) {
+					System.out.println(); 
+				}
 				setFieldMethod.invoke(target, clonedList); // target是CategoryVO对象，此时就是调用CategoryVO的setRelations方法，将克隆好的List<CategoryVO>给设置进去
 			}
 		}

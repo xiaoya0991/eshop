@@ -6,9 +6,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -126,6 +128,39 @@ public class CategoryController {
 		} catch (Exception e) { 
 			logger.error("error", e); 
 			return null;
+		}
+	}
+	
+	/**
+	 * 更新类目
+	 * @param category 类目
+	 * @return 处理结果
+	 */
+	@PutMapping("/{id}") 
+	public Boolean update(@RequestBody CategoryVO category) {
+		try {
+			CategoryDTO targetCategory = category.clone(
+					CategoryDTO.class, CloneDirection.FORWARD);
+			categoryService.update(targetCategory); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 删除类目
+	 * @param id 类目id
+	 * @return 处理结果
+	 */
+	@DeleteMapping("/{id}")  
+	public Boolean remove(@PathVariable("id") Long id) {
+		try {
+			return categoryService.remove(id);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
 		}
 	}
 	

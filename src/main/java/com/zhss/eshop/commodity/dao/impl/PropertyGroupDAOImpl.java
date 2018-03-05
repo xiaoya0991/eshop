@@ -2,8 +2,6 @@ package com.zhss.eshop.commodity.dao.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,8 +17,6 @@ import com.zhss.eshop.commodity.mapper.PropertyGroupMapper;
 @Repository
 public class PropertyGroupDAOImpl implements PropertyGroupDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(PropertyGroupDAOImpl.class);
-	
 	/**
 	 * 属性分组管理mapper组件
 	 */
@@ -31,14 +27,9 @@ public class PropertyGroupDAOImpl implements PropertyGroupDAO {
 	 * 新增属性分组
 	 * @param group 属性分组
 	 */
-	public Long save(PropertyGroupDO group) {
-		try {
-			propertyGroupMapper.save(group);
-			return group.getId();
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
+	public Long save(PropertyGroupDO group) throws Exception {
+		propertyGroupMapper.save(group);
+		return group.getId();
 	}
 	
 	/**
@@ -46,13 +37,16 @@ public class PropertyGroupDAOImpl implements PropertyGroupDAO {
 	 * @param categoryId 类目id
 	 * @return 属性分组
 	 */
-	public List<PropertyGroupDO> listByCategoryId(Long categoryId) {
-		try {
-			return propertyGroupMapper.listByCategoryId(categoryId);
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
+	public List<PropertyGroupDO> listByCategoryId(Long categoryId) throws Exception {
+		return propertyGroupMapper.listByCategoryId(categoryId);
+	}
+	
+	/**
+	 * 根据类目id删除属性分组
+	 * @param categoryId 类目id
+	 */
+	public void removeByCategoryId(Long categoryId) throws Exception {
+		propertyGroupMapper.removeByCategoryId(categoryId);
 	}
 
 }

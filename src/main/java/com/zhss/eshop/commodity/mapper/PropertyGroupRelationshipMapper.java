@@ -2,6 +2,7 @@ package com.zhss.eshop.commodity.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -47,7 +48,7 @@ public interface PropertyGroupRelationshipMapper {
 	 * @param propertyGroupId 属性分组id
 	 * @return 属性分组与属性的关联关系
 	 */
-	@Select("SELECT"
+	@Select("SELECT "
 				+ "id,"
 				+ "property_group_id,"
 				+ "property_id,"
@@ -68,5 +69,13 @@ public interface PropertyGroupRelationshipMapper {
 	})
 	List<PropertyGroupRelationshipDO> listByPropertyGroupId(
 			@Param("propertyGroupId") Long propertyGroupId);
+	
+	/**
+	 * 根据属性分组id删除属性分组与属性的关联关系
+	 * @param propertyGroupId 属性分组id
+	 */
+	@Delete("DELETE FROM commodity_property_group_relationship "
+			+ "WHERE property_group_id=#{propertyGroupId}")  
+	void removeByPropertyGroupId(@Param("propertyGroupId") Long propertyGroupId);
 	
 }

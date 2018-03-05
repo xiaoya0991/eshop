@@ -2,6 +2,7 @@ package com.zhss.eshop.commodity.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -68,5 +69,12 @@ public interface CategoryPropertyRelationshipMapper {
 	})
 	List<CategoryPropertyRelationshipDO> listByCategoryId(
 			@Param("categoryId") Long categoryId);
+	
+	/**
+	 * 根据类目id删除类目与属性的关联关系
+	 * @param categoryId 类目id
+	 */
+	@Delete("DELETE FROM commodity_category_property_relationship WHERE category_id=#{categoryId}") 
+	void removeByCategoryId(@Param("categoryId") Long categoryId);
 	
 }

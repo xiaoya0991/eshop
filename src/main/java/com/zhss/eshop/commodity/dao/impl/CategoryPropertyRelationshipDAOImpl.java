@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.commodity.dao.CategoryPropertyRelationshipDAO;
@@ -22,6 +23,10 @@ public class CategoryPropertyRelationshipDAOImpl
 	private static final Logger logger = LoggerFactory.getLogger(
 			CategoryPropertyRelationshipDAOImpl.class);
 	
+	/**
+	 * 类目与属性关系管理mapper组件
+	 */
+	@Autowired
 	private CategoryPropertyRelationshipMapper categoryPropertyRelationMapper;
 	
 	/**
@@ -50,6 +55,14 @@ public class CategoryPropertyRelationshipDAOImpl
 			logger.error("error", e); 
 			return null;
 		}
+	}
+	
+	/**
+	 * 根据类目id删除类目与属性的关联关系
+	 * @param categoryId 类目id
+	 */
+	public void removeByCategoryId(Long categoryId) throws Exception {
+		categoryPropertyRelationMapper.removeByCategoryId(categoryId); 
 	}
 
 }
