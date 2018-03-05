@@ -125,15 +125,32 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @throws Exception
 	 */
 	public void update(CategoryDTO category) throws Exception {
-		category.setGmtModified(dateProvider.getCurrentTime()); 
-		categoryDAO.update(category.clone(CategoryDO.class));   
+		updateCategory(category); 
 		
-		categoryPropertyRelationDAO.removeByCategoryId(category.getId());  
+		removeCategoryPropertyRelations(category); 
 		saveCategoryPropertyRelations(category); 
 		
 		removePropertyGroupRelations(category); 
-		propertyGroupDAO.removeByCategoryId(category.getId()); 
 		savePropertyGroup(category); 
+	}
+	
+	/**
+	 * 更新类目
+	 * @param category 类目
+	 * @throws Exception
+	 */
+	private void updateCategory(CategoryDTO category) throws Exception {
+		category.setGmtModified(dateProvider.getCurrentTime()); 
+		categoryDAO.update(category.clone(CategoryDO.class));  
+	}
+	
+	/**
+	 * 删除类目与属性的关联关系
+	 * @param category 类目
+	 * @throws Exception
+	 */
+	private void removeCategoryPropertyRelations(CategoryDTO category) throws Exception {
+		categoryPropertyRelationDAO.removeByCategoryId(category.getId());  
 	}
 	
 	/**
@@ -142,9 +159,13 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @throws Exception
 	 */
 	private void removePropertyGroupRelations(CategoryDTO category) throws Exception {
-		for(PropertyGroupDTO propertyGroup : category.getPropertyGroups()) {
+		List<PropertyGroupDO> propertyGroups = propertyGroupDAO.listByCategoryId(category.getId());
+
+		for(PropertyGroupDO propertyGroup : propertyGroups) {
 			propertyGroupRelationDAO.removeByPropertyGroupId(propertyGroup.getId()); 
 		}
+		
+		propertyGroupDAO.removeByCategoryId(category.getId()); 
 	}
 	
 	/**
@@ -295,7 +316,7 @@ public class CategoryServiceImpl implements CategoryService {
 				CategoryRelatedCheckOperation.class);
 		Boolean result = category.execute(relatedCheckOperation); 
 	
-		if(!result) {
+		if(result) {
 			return false;
 		}
 		
