@@ -88,36 +88,61 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	public Boolean schedulePurchaseInput(PurchaseOrderDTO purchaseOrder) {
 		try {
-			// 将采购单的基本信息拷贝到采购入库单中去
 			PurchaseInputOrderDTO purchaseInputOrder = 
-					purchaseOrder.clone(PurchaseInputOrderDTO.class);
-			purchaseInputOrder.setId(null); 
-			purchaseInputOrder.setGmtCreate(null); 
-			purchaseInputOrder.setGmtModified(null);  
+					createPurchaseInputOrder(purchaseOrder);
 			
-			// 将采购单条目拷贝到采购入库单条目中去
 			List<PurchaseInputOrderItemDTO> purchaseInputOrderItems = 
 					new ArrayList<PurchaseInputOrderItemDTO>();
-			
 			for(PurchaseOrderItemDTO purchaseOrderItem : purchaseOrder.getItems()) {
-				PurchaseInputOrderItemDTO purchaseInputOrderItem = 
-						purchaseOrderItem.clone(PurchaseInputOrderItemDTO.class);
-				purchaseInputOrderItem.setId(null); 
-				purchaseInputOrderItem.setGmtCreate(null); 
-				purchaseInputOrderItem.setGmtModified(null); 
-				
-				purchaseInputOrderItems.add(purchaseInputOrderItem);
+				purchaseInputOrderItems.add(createPurchaseInputOrderItem(purchaseOrderItem)); 
 			}
-			
 			purchaseInputOrder.setPurchaseInputOrderItemDTOs(purchaseInputOrderItems);  
 			
-			// 调用wms中心的接口
 			wmsService.createPurchaseInputOrder(purchaseInputOrder); 
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * 创建一个采购入库单
+	 * @param purchaseOrder 采购单
+	 * @return 采购入库单
+	 * @throws Exception
+	 */
+	private PurchaseInputOrderDTO createPurchaseInputOrder(
+			PurchaseOrderDTO purchaseOrder) throws Exception {
+		PurchaseInputOrderDTO purchaseInputOrder = 
+				purchaseOrder.clone(PurchaseInputOrderDTO.class);
+		
+		purchaseInputOrder.setId(null); 
+		purchaseInputOrder.setGmtCreate(null); 
+		purchaseInputOrder.setGmtModified(null);  
+		purchaseInputOrder.setPurchaseContactor(purchaseOrder.getContactor());
+		purchaseInputOrder.setPurchaseContactPhoneNumber(
+				purchaseOrder.getContactorPhoneNumber()); 
+		purchaseInputOrder.setPurchaseContactEmail(purchaseOrder.getContactorEmail()); 
+		purchaseInputOrder.setPurchaseOrderComment(purchaseOrder.getRemark()); 
+		
+		return purchaseInputOrder;
+	}
+	
+	/**
+	 * 创建采购入库单条目
+	 * @param purchaseOrderItem
+	 * @return
+	 * @throws Exception
+	 */
+	private PurchaseInputOrderItemDTO createPurchaseInputOrderItem(
+			PurchaseOrderItemDTO purchaseOrderItem) throws Exception {
+		PurchaseInputOrderItemDTO purchaseInputOrderItem = 
+				purchaseOrderItem.clone(PurchaseInputOrderItemDTO.class);
+		purchaseInputOrderItem.setId(null); 
+		purchaseInputOrderItem.setGmtCreate(null); 
+		purchaseInputOrderItem.setGmtModified(null); 
+		return purchaseInputOrderItem;
 	}
 
 	/**
