@@ -3,12 +3,14 @@ package com.zhss.eshop.purchase.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.zhss.eshop.common.util.AbstractObject;
+
 /**
  * 采购单DTO
  * @author zhonghuashishan
  *
  */
-public class PurchaseOrderDTO {
+public class PurchaseOrderDTO extends AbstractObject {
 
 	/**
 	 * id
