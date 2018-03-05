@@ -5,11 +5,11 @@ import java.util.Date;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 账号和权限的关联关系DO类
+ * 账号角色关系DO类
  * @author zhonghuashishan
  *
  */
-public class AccountPriorityRelationshipDO extends AbstractObject {
+public class AccountRoleRelationshipVO extends AbstractObject {
 
 	/**
 	 * id
@@ -20,9 +20,9 @@ public class AccountPriorityRelationshipDO extends AbstractObject {
 	 */
 	private Long accountId;
 	/**
-	 * 权限id
+	 * 角色id
 	 */
-	private Long priorityId;
+	private Long roleId;
 	/**
 	 * 创建时间
 	 */
@@ -44,11 +44,11 @@ public class AccountPriorityRelationshipDO extends AbstractObject {
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
-	public Long getPriorityId() {
-		return priorityId;
+	public Long getRoleId() {
+		return roleId;
 	}
-	public void setPriorityId(Long priorityId) {
-		this.priorityId = priorityId;
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
 	public Date getGmtCreate() {
 		return gmtCreate;

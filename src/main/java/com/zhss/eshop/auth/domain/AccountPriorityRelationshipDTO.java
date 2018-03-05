@@ -9,7 +9,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class AccountPriorityRelationshipDO extends AbstractObject {
+public class AccountPriorityRelationshipDTO extends AbstractObject {
 
 	/**
 	 * id

@@ -1,11 +1,12 @@
 package com.zhss.eshop.auth.dao.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.auth.dao.AccountRoleRelationshipDAO;
+import com.zhss.eshop.auth.domain.AccountRoleRelationshipDO;
 import com.zhss.eshop.auth.mapper.AccountRoleRelationshipMapper;
 
 /**
@@ -16,8 +17,6 @@ import com.zhss.eshop.auth.mapper.AccountRoleRelationshipMapper;
 @Repository
 public class AccountRoleRelationshipDAOImpl implements AccountRoleRelationshipDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AccountRoleRelationshipDAOImpl.class);
-
 	/**
 	 * 账号角色关系管理模块mapper组件
 	 */
@@ -30,12 +29,32 @@ public class AccountRoleRelationshipDAOImpl implements AccountRoleRelationshipDA
 	 * @return 记录数
 	 */
 	public Long countByRoleId(Long roleId) {
-		try {
-			return accountRoleRelationMapper.countByRoleId(roleId);
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return 0L;
-		}
+		return accountRoleRelationMapper.countByRoleId(roleId);
+	}
+	
+	/**
+	 * 根据账号id查询账号和角色关联关系
+	 * @param accountId 账号id
+	 * @return 账号和角色关联关系
+	 */
+	public List<AccountRoleRelationshipDO> listByAccountId(Long accountId) {
+		return accountRoleRelationMapper.listByAccountId(accountId);
+	}
+	
+	/**
+	 * 新增账号和角色的关联关系
+	 * @param relation 账号和角色的关联关系
+	 */
+	public void save(AccountRoleRelationshipDO relation) {
+		accountRoleRelationMapper.save(relation);
+	}
+	
+	/**
+	 * 根据账号id删除账号和角色的关联关系
+	 * @param accountId 账号id
+	 */
+	public void removeByAccountId(Long accountId) {
+		accountRoleRelationMapper.removeByAccountId(accountId); 
 	}
 	
 }

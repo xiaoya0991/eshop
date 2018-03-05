@@ -1,7 +1,7 @@
 package com.zhss.eshop.auth.dao.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,27 +17,11 @@ import com.zhss.eshop.auth.mapper.AccountPriorityRelationshipMapper;
 @Repository
 public class AccountPriorityRelationshipDAOImpl implements AccountPriorityRelationshipDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AccountPriorityRelationshipDAOImpl.class);
-
 	/**
 	 * 账号和权限关系管理模块的mapper组件
 	 */
 	@Autowired
 	private AccountPriorityRelationshipMapper accountPriorityRelationshipMapper;
-	
-	/**
-	 * 新增账号和权限的关联关系
-	 * @param accountPriorityRelationshipDO
-	 */
-	public Boolean save(AccountPriorityRelationshipDO accountPriorityRelationshipDO) {
-		try {
-			accountPriorityRelationshipMapper.save(accountPriorityRelationshipDO); 
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
-		return true;
-	}
 	
 	/**
 	 * 根据权限id查询记录数
@@ -46,12 +30,32 @@ public class AccountPriorityRelationshipDAOImpl implements AccountPriorityRelati
 	 */
 	@Override
 	public Long countByPriorityId(Long priorityId) {
-		try {
-			return accountPriorityRelationshipMapper.countByPriorityId(priorityId); 
-		} catch (Exception e) {
-			logger.error("error", e); 
-		}
-		return 0L;
+		return accountPriorityRelationshipMapper.countByPriorityId(priorityId); 
+	}
+	
+	/**
+	 * 根据账号id查询账号和权限的关联关系
+	 * @param accountId 账号id
+	 * @return 账号和权限的关联关系
+	 */
+	public List<AccountPriorityRelationshipDO> listByAccountId(Long accountId) {
+		return accountPriorityRelationshipMapper.listByAccountId(accountId);
+	}
+	
+	/**
+	 * 新增账号和权限的关联关系
+	 * @param accountPriorityRelationshipDO
+	 */
+	public void save(AccountPriorityRelationshipDO accountPriorityRelationshipDO) {
+		accountPriorityRelationshipMapper.save(accountPriorityRelationshipDO); 
+	}
+	
+	/**
+	 * 根据账号id删除账号和权限的关联关系
+	 * @param accountId 账号id
+	 */
+	public void removeByAccountId(Long accountId) {
+		accountPriorityRelationshipMapper.removeByAccountId(accountId);
 	}
 
 }

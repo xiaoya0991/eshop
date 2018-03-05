@@ -5,24 +5,32 @@ import java.util.Date;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 账号和权限的关联关系DO类
+ * 账号DO类
  * @author zhonghuashishan
  *
  */
-public class AccountPriorityRelationshipDO extends AbstractObject {
+public class AccountDO extends AbstractObject {
 
 	/**
 	 * id
 	 */
 	private Long id;
 	/**
-	 * 账号id
+	 * 用户名
 	 */
-	private Long accountId;
+	private String username;
 	/**
-	 * 权限id
+	 * 密码
 	 */
-	private Long priorityId;
+	private String password;
+	/**
+	 * 员工姓名
+	 */
+	private String name;
+	/**
+	 * 账号备注
+	 */
+	private String remark;
 	/**
 	 * 创建时间
 	 */
@@ -38,17 +46,29 @@ public class AccountPriorityRelationshipDO extends AbstractObject {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getAccountId() {
-		return accountId;
+	public String getUsername() {
+		return username;
 	}
-	public void setAccountId(Long accountId) {
-		this.accountId = accountId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public Long getPriorityId() {
-		return priorityId;
+	public String getPassword() {
+		return password;
 	}
-	public void setPriorityId(Long priorityId) {
-		this.priorityId = priorityId;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	public Date getGmtCreate() {
 		return gmtCreate;
