@@ -41,7 +41,7 @@ public class PurchaseInputOrderDTO {
 	/**
 	 * 采购入库单备注
 	 */
-	private String purchaseInputOrderComment;
+	private String purchaseOrderComment;
 	/**
 	 * 采购员
 	 */
@@ -109,11 +109,11 @@ public class PurchaseInputOrderDTO {
 	public void setPurchaseContactEmail(String purchaseContactEmail) {
 		this.purchaseContactEmail = purchaseContactEmail;
 	}
-	public String getPurchaseInputOrderComment() {
-		return purchaseInputOrderComment;
+	public String getPurchaseOrderComment() {
+		return purchaseOrderComment;
 	}
-	public void setPurchaseInputOrderComment(String purchaseInputOrderComment) {
-		this.purchaseInputOrderComment = purchaseInputOrderComment;
+	public void setPurchaseOrderComment(String purchaseOrderComment) {
+		this.purchaseOrderComment = purchaseOrderComment;
 	}
 	public String getPurchaser() {
 		return purchaser;
