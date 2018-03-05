@@ -69,7 +69,9 @@ public class ScheduleFacadeServiceImpl implements ScheduleFacadeService {
 	 * @param purchaseOrderDTO 采购单DTO
 	 * @return 处理结果
 	 */
-	public Boolean schedulePurchaseInput(PurchaseOrderDTO purchaseOrderDTO) {
+	public Boolean schedulePurchaseInput(PurchaseOrderDTO purchaseOrder) {
+		// 将采购单中的数据复制到采购入库单里面去
+		
 		return true;
 	}
 
