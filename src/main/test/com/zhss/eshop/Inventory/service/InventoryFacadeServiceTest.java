@@ -362,7 +362,7 @@ public class InventoryFacadeServiceTest {
 		order.setPurchaseContactor("张三");  
 		order.setPurchaseContactPhoneNumber("18910106578");  
 		order.setPurchaseContactEmail("zhangsan@sina.com");  
-		order.setPurchaseInputOrderComment("测试采购入库单");
+		order.setPurchaseOrderComment("测试采购入库单");
 		order.setPurchaser("李四");  
 		order.setPurcahseInputOrderStatus(5); 
 		order.setGmtCreate(dateProvider.parseDatetime("2018-01-01 10:00:00"));  

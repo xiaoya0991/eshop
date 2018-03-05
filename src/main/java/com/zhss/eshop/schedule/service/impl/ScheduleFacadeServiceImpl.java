@@ -1,13 +1,22 @@
 package com.zhss.eshop.schedule.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
+import com.zhss.eshop.purchase.domain.PurchaseOrderItemDTO;
 import com.zhss.eshop.schedule.service.ScheduleFacadeService;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
+import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
+import com.zhss.eshop.wms.service.WmsService;
 
 /**
  * 调度中心对外接口service组件
@@ -16,7 +25,15 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
  */
 @Service
 public class ScheduleFacadeServiceImpl implements ScheduleFacadeService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ScheduleFacadeServiceImpl.class);
 
+	/**
+	 * wms中心对外接口service组件
+	 */
+	@Autowired
+	private WmsService wmsService;
+	
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
 	 * @param purchaseInputOrderDTO 采购入库单DTO
@@ -70,8 +87,36 @@ public class ScheduleFacadeServiceImpl implements ScheduleFacadeService {
 	 * @return 处理结果
 	 */
 	public Boolean schedulePurchaseInput(PurchaseOrderDTO purchaseOrder) {
-		// 将采购单中的数据复制到采购入库单里面去
-		
+		try {
+			// 将采购单的基本信息拷贝到采购入库单中去
+			PurchaseInputOrderDTO purchaseInputOrder = 
+					purchaseOrder.clone(PurchaseInputOrderDTO.class);
+			purchaseInputOrder.setId(null); 
+			purchaseInputOrder.setGmtCreate(null); 
+			purchaseInputOrder.setGmtModified(null);  
+			
+			// 将采购单条目拷贝到采购入库单条目中去
+			List<PurchaseInputOrderItemDTO> purchaseInputOrderItems = 
+					new ArrayList<PurchaseInputOrderItemDTO>();
+			
+			for(PurchaseOrderItemDTO purchaseOrderItem : purchaseOrder.getItems()) {
+				PurchaseInputOrderItemDTO purchaseInputOrderItem = 
+						purchaseOrderItem.clone(PurchaseInputOrderItemDTO.class);
+				purchaseInputOrderItem.setId(null); 
+				purchaseInputOrderItem.setGmtCreate(null); 
+				purchaseInputOrderItem.setGmtModified(null); 
+				
+				purchaseInputOrderItems.add(purchaseInputOrderItem);
+			}
+			
+			purchaseInputOrder.setPurchaseInputOrderItemDTOs(purchaseInputOrderItems);  
+			
+			// 调用wms中心的接口
+			wmsService.createPurchaseInputOrder(purchaseInputOrder); 
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 		return true;
 	}
 
