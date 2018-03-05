@@ -20,11 +20,11 @@ public class CommentInfoQuery {
 	/**
 	 * 起始时间
 	 */
-	private Date startTime;
+	private String startTime;
 	/**
 	 * 结束时间
 	 */
-	private Date endTime;
+	private String endTime;
 	/**
 	 * 总评分
 	 */
@@ -58,16 +58,16 @@ public class CommentInfoQuery {
 	public void setSize(Integer size) {
 		this.size = size;
 	}
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 	public Integer getTotalScore() {
