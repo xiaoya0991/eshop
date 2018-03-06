@@ -117,6 +117,15 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	/**
+	 * 更新密码
+	 * @param account 账号
+	 */
+	public void updatePassword(AccountDTO account) throws Exception {
+		account.setGmtModified(dateProvider.getCurrentTime()); 
+		accountDAO.updatePassword(account.clone(AccountDO.class));   
+	}
+	
+	/**
 	 * 新增关联关系
 	 * @param account 账号
 	 * @throws Exception

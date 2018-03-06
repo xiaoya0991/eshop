@@ -41,6 +41,12 @@ public interface AccountService {
 	void update(AccountDTO account) throws Exception;
 	
 	/**
+	 * 更新密码
+	 * @param account 账号
+	 */
+	void updatePassword(AccountDTO account) throws Exception;
+	
+	/**
 	 * 删除账号
 	 * @param id 账号id
 	 * @return 处理结果

@@ -2,6 +2,10 @@ package com.zhss.eshop.auth.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.*;
@@ -63,13 +67,87 @@ public class AccountPriorityRelationshipDAOTest {
 		
 		Long accountId1 = 1L;
 		createAccountPriorityRelationshipDO(accountId1, priorityId);
-	
+		
 		Long accountId2 = 2L;
 		createAccountPriorityRelationshipDO(accountId2, priorityId);
 		
 		Long resultCount = accountPriorityRelationshipDAO.countByPriorityId(priorityId);
 		
 		assertEquals(2L, resultCount.longValue());  
+	}
+	
+	/**
+	 * 测试根据账号id查询账号和权限的关联关系
+	 * @throws Exception
+	 */
+	@Test
+	public void testListByAccountId() throws Exception {
+		Long accountId = 1L;
+		int count = 20;
+		Map<Long, AccountPriorityRelationshipDO> relationMap = 
+				createRelations(accountId, count);
+		
+		List<AccountPriorityRelationshipDO> resultRelations = 
+				accountPriorityRelationshipDAO.listByAccountId(accountId);
+		
+		compareRelations(relationMap, resultRelations); 
+	}
+	
+	/**
+	 * 测试根据账号id删除账号和权限的关联关系
+	 * @throws Exception
+	 */
+	@Test
+	public void testRemoveByAccountId() throws Exception {
+		Long accountId = 1L;
+		int count = 20;
+		createRelations(accountId, count);
+		
+		accountPriorityRelationshipDAO.removeByAccountId(accountId); 
+		
+		List<AccountPriorityRelationshipDO> resultRelations = 
+				accountPriorityRelationshipDAO.listByAccountId(accountId);
+		
+		assertEquals(0, resultRelations.size()); 
+	}
+	
+	/**
+	 * 比较两个关联关系集合
+	 * @param relationMap
+	 * @param resultRelations
+	 * @throws Exception
+	 */
+	private void compareRelations(Map<Long, AccountPriorityRelationshipDO> relationMap,
+			List<AccountPriorityRelationshipDO> resultRelations) throws Exception {
+		assertThat(resultRelations.size(), greaterThanOrEqualTo(relationMap.size())); 
+		
+		for(AccountPriorityRelationshipDO relation : resultRelations) {
+			AccountPriorityRelationshipDO targetRelation = relationMap.get(relation.getId());
+			if(targetRelation == null) {
+				continue;
+			}
+			assertEquals(targetRelation, relation);
+		}
+	}
+	
+	/**
+	 * 创建账号和权限关联关系的集合
+	 * @param accountId
+	 * @return
+	 * @throws Exception
+	 */
+	private Map<Long, AccountPriorityRelationshipDO> createRelations(
+			Long accountId, int count) throws Exception {
+		Map<Long, AccountPriorityRelationshipDO> relationMap = 
+				new HashMap<Long, AccountPriorityRelationshipDO>();
+	
+		for(int i = 0; i < count; i++) {
+			AccountPriorityRelationshipDO relation = 
+					createAccountPriorityRelationshipDO(accountId, (long)i);
+			relationMap.put(relation.getId(), relation);
+		}
+		
+		return relationMap;
 	}
 	
 	/**

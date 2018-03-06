@@ -133,11 +133,9 @@ public class AccountController {
 	 * @return 处理结果
 	 */
 	@PutMapping("/password/{id}")    
-	public Boolean updatePassword(@PathVariable("id") Long id, String password) {  
+	public Boolean updatePassword(@RequestBody AccountVO account) {  
 		try {
-			AccountDTO account = accountService.getById(id);
-			account.setPassword(password); 
-			accountService.update(account); 
+			accountService.updatePassword(account.clone(AccountDTO.class));   
 			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 

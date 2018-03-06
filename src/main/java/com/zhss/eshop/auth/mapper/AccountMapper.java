@@ -117,18 +117,27 @@ public interface AccountMapper {
 	 * 更新账号
 	 * @param account 账号
 	 */
-	@Update("UPDATE auth_account SET"
-				+ "password=#{password},"
+	@Update("UPDATE auth_account SET "
 				+ "remark=#{remark},"
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}") 
 	void update(AccountDO account);
 	
 	/**
+	 * 更新密码
+	 * @param account 账号
+	 */
+	@Update("UPDATE auth_account SET "
+				+ "password=#{password},"  
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}") 
+	void updatePassword(AccountDO account);
+	
+	/**
 	 * 删除账号
 	 * @param account 账号
 	 */
-	@Delete("DELETE FROM auth_account WHERE id={id}")  
+	@Delete("DELETE FROM auth_account WHERE id=#{id}")  
 	void remove(@Param("id") Long id);
 	
 }
