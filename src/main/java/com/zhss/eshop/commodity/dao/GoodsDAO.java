@@ -14,4 +14,11 @@ public interface GoodsDAO {
 	 */
 	Long countByCategoryId(Long categoryId) throws Exception;
 	
+	/**
+	 * 根据品牌id查询商品数量
+	 * @param categoryId 类目id
+	 * @return 商品数量
+	 */
+	Long countByBrandId(Long brandId);
+	
 }

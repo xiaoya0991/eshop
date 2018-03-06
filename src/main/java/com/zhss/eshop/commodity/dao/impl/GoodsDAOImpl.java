@@ -29,4 +29,13 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return goodsMapper.countByCategoryId(categoryId);
 	}
 	
+	/**
+	 * 根据品牌id查询商品数量
+	 * @param categoryId 类目id
+	 * @return 商品数量
+	 */
+	public Long countByBrandId(Long brandId) {
+		return goodsMapper.countByBrandId(brandId);
+	}
+	
 }

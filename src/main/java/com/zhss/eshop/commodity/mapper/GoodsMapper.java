@@ -22,4 +22,14 @@ public interface GoodsMapper {
 			+ "WHERE category_id=#{categoryId}") 
 	Long countByCategoryId(@Param("categoryId") Long categoryId);
 	
+	/**
+	 * 根据品牌id查询商品数量
+	 * @param categoryId 类目id
+	 * @return 商品数量
+	 */
+	@Select("SELECT count(*) "
+			+ "FROM commodity_goods "
+			+ "WHERE brand_id=#{brandId}") 
+	Long countByBrandId(@Param("brandId") Long brandId);
+	
 }
