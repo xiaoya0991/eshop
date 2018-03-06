@@ -19,6 +19,7 @@ import com.zhss.eshop.comment.constant.CommentType;
 import com.zhss.eshop.comment.constant.ShowPictures;
 import com.zhss.eshop.comment.dao.CommentAggregateDAO;
 import com.zhss.eshop.comment.domain.CommentAggregateDO;
+import com.zhss.eshop.comment.domain.CommentAggregateDTO;
 import com.zhss.eshop.comment.domain.CommentInfoDTO;
 import com.zhss.eshop.common.util.DateProvider;
 
@@ -68,7 +69,7 @@ public class CommentAggregateServiceTest {
 		when(commentAggregateDAO.getCommentAggregateByGoodsId(goodsId)).thenReturn(null);
 		
 		CommentInfoDTO commentInfoDTO = createCommentInfoDTO(goodsId);
-		CommentAggregateDO resultCommentAggregateDO = commentAggregateService
+		CommentAggregateDTO resultCommentAggregateDO = commentAggregateService
 				.refreshCommentAggregate(commentInfoDTO);
 		
 		assertEquals(goodsId, resultCommentAggregateDO.getGoodsId()); 
@@ -92,7 +93,7 @@ public class CommentAggregateServiceTest {
 		when(commentAggregateDAO.getCommentAggregateByGoodsId(goodsId)).thenReturn(commentAggregateDO);
 		
 		CommentInfoDTO commentInfoDTO = createCommentInfoDTO(goodsId);
-		CommentAggregateDO resultCommentAggregateDO = commentAggregateService
+		CommentAggregateDTO resultCommentAggregateDO = commentAggregateService
 				.refreshCommentAggregate(commentInfoDTO);
 		
 		Double expectedGoodCommentRate = Double.valueOf(new DecimalFormat("#.00").format(
