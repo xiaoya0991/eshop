@@ -48,23 +48,30 @@ public class AbstractObject {
 			field.setAccessible(true); 
 			
 			// 如果判断某个字段是List类型的
-			if(field.getType() == List.class) { // field = private List<Relation> relations; 
-				// field.getType() List 不是 List<Relation> 
-				
-				// 获取List集合中的泛型类型
-				Class<?> listGenericClazz = getListGenericType(field); // RelationDTO
-				// 获取要克隆的目标类型
-				Class<?> cloneTargetClazz = getCloneTargetClazz(listGenericClazz, cloneDirection); // 假设CloneDirection是反向，此时获取到的就是RelationVO
-		        
-		        // 将list集合克隆到目标list集合中去
-				List clonedList = new ArrayList();
-				List<?> list = (List<?>) field.get(this); // List<RelationDTO>集合
-				cloneList(list, clonedList, cloneTargetClazz, cloneDirection); 
-				
-				// 获取设置克隆好的list的方法名称
-				Method setFieldMethod = getSetCloneListFieldMethodName(field, clazz); // setRelations
-				setFieldMethod.invoke(target, clonedList); // target是CategoryVO对象，此时就是调用CategoryVO的setRelations方法，将克隆好的List<CategoryVO>给设置进去
+			if(field.getType() != List.class) { // field = private List<Relation> relations; 
+				continue;
 			}
+			
+			// field.getType() List 不是 List<Relation> 
+			List<?> list = (List<?>) field.get(this); // List<RelationDTO>集合
+			if(list == null || list.size() == 0) {
+				continue;
+			}
+			
+			// 获取List集合中的泛型类型
+			Class<?> listGenericClazz = getListGenericType(field); // RelationDTO
+			// 获取要克隆的目标类型
+			Class<?> cloneTargetClazz = getCloneTargetClazz(listGenericClazz, cloneDirection); // 假设CloneDirection是反向，此时获取到的就是RelationVO
+	        
+	        // 将list集合克隆到目标list集合中去
+			List clonedList = new ArrayList();
+			cloneList(list, clonedList, cloneTargetClazz, cloneDirection); 
+			
+			// 获取设置克隆好的list的方法名称
+			Method setFieldMethod = getSetCloneListFieldMethodName(field, clazz); // setRelations
+			setFieldMethod.invoke(target, clonedList); 
+			// target是CategoryVO对象，此时就是调用CategoryVO的setRelations方法，
+			// 将克隆好的List<CategoryVO>给设置进去
 		}
 		
 		return target;
