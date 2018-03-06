@@ -9,13 +9,20 @@ import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
  * @author zhonghuashishan
  *
  */
-public interface PromotionFacadeService {
+public interface PromotionService {
 	
 	/**
 	 * 根据商品id查询促销活动
 	 * @param goodsId 商品id
 	 * @return 促销活动
 	 */
-	List<PromotionActivityDTO> listPromotionActivitiesByGoodsId(Long goodsId);
+	List<PromotionActivityDTO> listByGoodsId(Long goodsId);
+	
+	/**
+	 * 根据id查询促销活动
+	 * @param id 促销活动id
+	 * @return 促销活动
+	 */
+	PromotionActivityDTO getById(Long id);
 	
 }
