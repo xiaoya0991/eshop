@@ -1,6 +1,6 @@
 package com.zhss.eshop.comment.service;
 
-import com.zhss.eshop.comment.domain.CommentAggregateDO;
+import com.zhss.eshop.comment.domain.CommentAggregateDTO;
 import com.zhss.eshop.comment.domain.CommentInfoDTO;
 
 /**
@@ -15,6 +15,15 @@ public interface CommentAggregateService {
 	 * @param commentInfoDTO 评论信息
 	 * @return 处理结果
 	 */
-	CommentAggregateDO refreshCommentAggregate(CommentInfoDTO commentInfoDTO);
+	CommentAggregateDTO refreshCommentAggregate(
+			CommentInfoDTO commentInfoDTO) throws Exception;
+	
+	/**
+	 * 根据商品id查询评论统计信息
+	 * @param goodsId 商品id
+	 * @return 评论统计信息
+	 */
+	CommentAggregateDTO getCommentAggregateByGoodsId(
+			Long goodsId) throws Exception;
 	
 }

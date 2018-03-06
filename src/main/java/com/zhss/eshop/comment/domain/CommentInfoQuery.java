@@ -1,7 +1,5 @@
 package com.zhss.eshop.comment.domain;
 
-import java.util.Date;
-
 /**
  * 评论信息的查询条件
  * @author zhonghuashishan

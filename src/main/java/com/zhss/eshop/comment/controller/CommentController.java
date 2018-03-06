@@ -25,11 +25,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.zhss.eshop.comment.constant.CommentApproved;
 import com.zhss.eshop.comment.constant.CommentStatus;
 import com.zhss.eshop.comment.constant.ShowPictures;
+import com.zhss.eshop.comment.domain.CommentAggregateDTO;
+import com.zhss.eshop.comment.domain.CommentAggregateVO;
 import com.zhss.eshop.comment.domain.CommentInfoDTO;
 import com.zhss.eshop.comment.domain.CommentInfoQuery;
 import com.zhss.eshop.comment.domain.CommentInfoVO;
 import com.zhss.eshop.comment.domain.CommentPictureDTO;
 import com.zhss.eshop.comment.domain.CommentPictureVO;
+import com.zhss.eshop.comment.domain.CommentShowVO;
 import com.zhss.eshop.comment.service.CommentAggregateService;
 import com.zhss.eshop.comment.service.CommentInfoService;
 import com.zhss.eshop.comment.service.CommentPictureService;
@@ -231,6 +234,69 @@ public class CommentController {
 			logger.error("error", e); 
 			return false;
 		}
+    }
+    
+    /**
+     * 在前台展示评论信息
+     * @param goodsId 商品id
+     * @return 评论信息
+     */
+    @GetMapping("/show/{goodsId}")  
+    public CommentShowVO show(@PathVariable("goodsId") Long goodsId, 
+    		CommentInfoQuery query) { 
+    	try {
+    		// 构造评论展示VO对象
+    		CommentShowVO commentShow = new CommentShowVO();
+    		commentShow.setGoodsId(goodsId); 
+    		
+    		// 查询评论统计信息
+    		CommentAggregateDTO aggregate = commentAggregateService
+    				.getCommentAggregateByGoodsId(goodsId);
+    		commentShow.setAggregate(aggregate.clone(CommentAggregateVO.class));  
+    		
+    		// 查询评论列表
+    		query.setCommentStatus(CommentStatus.APPROVED); 
+    		
+    		List<CommentInfoVO> targetComments = new ArrayList<CommentInfoVO>();
+    		
+    		List<CommentInfoDTO> comments = commentInfoService.listByPage(query);
+    		for(CommentInfoDTO comment : comments) {
+    			CommentInfoVO targetComment = comment.clone(CommentInfoVO.class);
+    			targetComment.setUsername(getEncryptedUsername(targetComment.getUsername()));  
+    			
+    			List<CommentPictureDTO> pictures = commentPictureService
+    					.listByCommentId(comment.getId());
+    			targetComment.setPictures(ObjectUtils.convertList(
+    					pictures, CommentPictureVO.class));  
+    			
+    			targetComments.add(targetComment);
+    		}
+    		
+    		commentShow.setComments(targetComments); 
+    		
+    		// 返回评论展示VO对象
+    		return commentShow;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return new CommentShowVO();
+		}
+    }
+    
+    /**
+     * 获取加密后的用户名
+     * @param username
+     * @return
+     */
+    private String getEncryptedUsername(String username) {
+    	StringBuilder builder = new StringBuilder(""); 
+    	
+    	builder.append(username.substring(0, 1)); 
+    	for(int i = 1; i < username.length() - 1; i++) {
+    		builder.append("*"); 
+    	}
+    	builder.append(username.substring(username.length() - 1));  
+    	
+    	return builder.toString();
     }
 	
 }

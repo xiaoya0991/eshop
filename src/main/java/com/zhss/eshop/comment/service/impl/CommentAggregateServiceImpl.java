@@ -11,6 +11,7 @@ import com.zhss.eshop.comment.constant.CommentType;
 import com.zhss.eshop.comment.constant.ShowPictures;
 import com.zhss.eshop.comment.dao.CommentAggregateDAO;
 import com.zhss.eshop.comment.domain.CommentAggregateDO;
+import com.zhss.eshop.comment.domain.CommentAggregateDTO;
 import com.zhss.eshop.comment.domain.CommentInfoDTO;
 import com.zhss.eshop.comment.service.CommentAggregateService;
 import com.zhss.eshop.common.util.DateProvider;
@@ -41,7 +42,8 @@ public class CommentAggregateServiceImpl implements CommentAggregateService {
 	 * @param commentInfoDTO 评论信息
 	 * @return 处理结果
 	 */
-	public CommentAggregateDO refreshCommentAggregate(CommentInfoDTO commentInfoDTO) {
+	public CommentAggregateDTO refreshCommentAggregate(
+			CommentInfoDTO commentInfoDTO) throws Exception {
 		CommentAggregateDO commentAggregateDO = null;
 		try {
 			commentAggregateDO = commentAggregateDAO.getCommentAggregateByGoodsId(
@@ -55,7 +57,7 @@ public class CommentAggregateServiceImpl implements CommentAggregateService {
 			logger.error("error", e); 
 			return null;
 		}
-		return commentAggregateDO;
+		return commentAggregateDO.clone(CommentAggregateDTO.class);  
 	}
 	
 	/**
@@ -125,6 +127,17 @@ public class CommentAggregateServiceImpl implements CommentAggregateService {
 		commentAggregateDO.setGmtModified(dateProvider.getCurrentTime()); 
 		
 		commentAggregateDAO.updateCommentAggregate(commentAggregateDO);
+	}
+	
+	/**
+	 * 根据商品id查询评论统计信息
+	 * @param goodsId 商品id
+	 * @return 评论统计信息
+	 */
+	public CommentAggregateDTO getCommentAggregateByGoodsId(
+			Long goodsId) throws Exception {
+		return commentAggregateDAO.getCommentAggregateByGoodsId(goodsId)
+				.clone(CommentAggregateDTO.class);
 	}
 
 }

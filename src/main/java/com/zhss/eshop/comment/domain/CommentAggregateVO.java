@@ -9,7 +9,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class CommentAggregateDO extends AbstractObject {
+public class CommentAggregateVO extends AbstractObject {
 
 	/**
 	 * id
@@ -138,7 +138,7 @@ public class CommentAggregateDO extends AbstractObject {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CommentAggregateDO other = (CommentAggregateDO) obj;
+		CommentAggregateVO other = (CommentAggregateVO) obj;
 		if (badCommentCount == null) {
 			if (other.badCommentCount != null)
 				return false;
