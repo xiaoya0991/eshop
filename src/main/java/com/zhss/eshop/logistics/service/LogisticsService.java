@@ -7,7 +7,7 @@ import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
  * @author zhonghuashishan
  *
  */
-public interface LogisticsFacadeService {
+public interface LogisticsService {
 
 	/**
 	 * 计算商品sku的运费
