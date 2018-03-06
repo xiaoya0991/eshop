@@ -18,10 +18,10 @@ import com.zhss.eshop.cart.domain.ShoppingCartItemDO;
 import com.zhss.eshop.cart.domain.ShoppingCartItemDTO;
 import com.zhss.eshop.cart.service.ShoppingCartService;
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
-import com.zhss.eshop.commodity.service.CommodityFacadeService;
+import com.zhss.eshop.commodity.service.CommodityService;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
-import com.zhss.eshop.promotion.service.PromotionFacadeService;
+import com.zhss.eshop.promotion.service.PromotionService;
 
 /**
  * 购物车管理模块的service组件
@@ -52,7 +52,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	 * 商品中心对外接口service组件
 	 */
 	@Autowired
-	private CommodityFacadeService commodityFacadeService;
+	private CommodityService commodityService;
 	/**
 	 * 库存中心对外接口service组件
 	 */
@@ -62,7 +62,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	 * 促销中心对外接口service组件
 	 */
 	@Autowired
-	private PromotionFacadeService promotionFacadeService;
+	private PromotionService promotionService;
 	
 	/**
 	 * 添加购物车商品条目
@@ -163,7 +163,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	 * @throws Exception
 	 */
 	private void setGoodsRelatedData(ShoppingCartItemDTO item) throws Exception {
-		GoodsSkuDTO goodsSkuDTO = commodityFacadeService.getGoodsSkuById(
+		GoodsSkuDTO goodsSkuDTO = commodityService.getGoodsSkuById(
 				item.getGoodsSkuId());
 		
 		item.setGoodsId(goodsSkuDTO.getGoodsId());  
@@ -194,8 +194,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	 * @throws Exception
 	 */
 	private void setPromotionRelatedData(ShoppingCartItemDTO item) throws Exception {
-		List<PromotionActivityDTO> promotionActivityDTOs = promotionFacadeService
-				.listPromotionActivitiesByGoodsId(item.getGoodsId());
+		List<PromotionActivityDTO> promotionActivityDTOs = promotionService
+				.listByGoodsId(item.getGoodsId());
 		item.setPromotionActivityDTOs(promotionActivityDTOs); 
 	}
 	
