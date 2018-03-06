@@ -27,19 +27,19 @@ public class PurchaseOrderDTO extends AbstractObject {
 	/**
 	 * 采购联系人
 	 */
-	private String purchaseContactor;
+	private String contactor;
 	/**
 	 * 采购联系人电话号码
 	 */
-	private String purchaseContactPhoneNumber;
+	private String contactorPhoneNumber;
 	/**
 	 * 采购联系人邮箱地址
 	 */
-	private String purchaseContactEmail;
+	private String contactorEmail;
 	/**
 	 * 采购单备注
 	 */
-	private String purchaseOrderComment;
+	private String remark;
 	/**
 	 * 采购员
 	 */
@@ -47,7 +47,7 @@ public class PurchaseOrderDTO extends AbstractObject {
 	/**
 	 * 采购单的状态
 	 */
-	private Integer purcahseOrderStatus;
+	private Integer status;
 	/**
 	 * 采购单的创建时间
 	 */
@@ -79,29 +79,29 @@ public class PurchaseOrderDTO extends AbstractObject {
 	public void setExpectArrivalTime(Date expectArrivalTime) {
 		this.expectArrivalTime = expectArrivalTime;
 	}
-	public String getPurchaseContactor() {
-		return purchaseContactor;
+	public String getContactor() {
+		return contactor;
 	}
-	public void setPurchaseContactor(String purchaseContactor) {
-		this.purchaseContactor = purchaseContactor;
+	public void setContactor(String contactor) {
+		this.contactor = contactor;
 	}
-	public String getPurchaseContactPhoneNumber() {
-		return purchaseContactPhoneNumber;
+	public String getContactorPhoneNumber() {
+		return contactorPhoneNumber;
 	}
-	public void setPurchaseContactPhoneNumber(String purchaseContactPhoneNumber) {
-		this.purchaseContactPhoneNumber = purchaseContactPhoneNumber;
+	public void setContactorPhoneNumber(String contactorPhoneNumber) {
+		this.contactorPhoneNumber = contactorPhoneNumber;
 	}
-	public String getPurchaseContactEmail() {
-		return purchaseContactEmail;
+	public String getContactorEmail() {
+		return contactorEmail;
 	}
-	public void setPurchaseContactEmail(String purchaseContactEmail) {
-		this.purchaseContactEmail = purchaseContactEmail;
+	public void setContactorEmail(String contactorEmail) {
+		this.contactorEmail = contactorEmail;
 	}
-	public String getPurchaseOrderComment() {
-		return purchaseOrderComment;
+	public String getRemark() {
+		return remark;
 	}
-	public void setPurchaseOrderComment(String purchaseOrderComment) {
-		this.purchaseOrderComment = purchaseOrderComment;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	public String getPurchaser() {
 		return purchaser;
@@ -109,11 +109,11 @@ public class PurchaseOrderDTO extends AbstractObject {
 	public void setPurchaser(String purchaser) {
 		this.purchaser = purchaser;
 	}
-	public Integer getPurcahseOrderStatus() {
-		return purcahseOrderStatus;
+	public Integer getStatus() {
+		return status;
 	}
-	public void setPurcahseOrderStatus(Integer purcahseOrderStatus) {
-		this.purcahseOrderStatus = purcahseOrderStatus;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	public Date getGmtCreate() {
 		return gmtCreate;

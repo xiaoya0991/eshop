@@ -1,68 +1,88 @@
-package com.zhss.eshop.schedule.service;
+package com.zhss.eshop.schedule.service.impl;
+
+import org.springframework.stereotype.Service;
 
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
+import com.zhss.eshop.schedule.service.ScheduleService;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 
 /**
- * 调度中心对外提供的接口
+ * 调度中心对外接口service组件
  * @author zhonghuashishan
  *
  */
-public interface ScheduleFacadeService {
+@Service
+public class ScheduleServiceImpl implements ScheduleService {
 
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
 	 * @param purchaseInputOrderDTO 采购入库单DTO
 	 * @return 处理结果
 	 */
-	Boolean informPurchaseInputFinished(
-			PurchaseInputOrderDTO purchaseInputOrderDTO);
+	public Boolean informPurchaseInputFinished(
+			PurchaseInputOrderDTO purchaseInputOrderDTO) {
+		return true;
+	}
 	
 	/**
 	 * 通知库存中心，“提交订单”事件发生了
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	Boolean informSubmitOrderEvent(OrderInfoDTO orderDTO);
+	public Boolean informSubmitOrderEvent(OrderInfoDTO orderDTO) {
+		return true;
+	}
 	
 	/**
 	 * 通知库存中心，“支付订单”事件发生了
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	Boolean informPayOrderEvent(OrderInfoDTO orderDTO);
+	public Boolean informPayOrderEvent(OrderInfoDTO orderDTO) {
+		return true;
+	}
 	
 	/**
 	 * 通知库存中心，“取消订单”事件发生了
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	Boolean informCancelOrderEvent(OrderInfoDTO orderDTO);
+	public Boolean informCancelOrderEvent(OrderInfoDTO orderDTO) {
+		return true;
+	}
 	
 	/**
 	 * 通知库存中心，“完成退货入库”事件发生了
 	 * @param returnGoodsInputOrderDTO 退货入库单DTO
 	 * @return 处理结果
 	 */
-	Boolean informReturnGoodsInputFinished(
-			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO);
+	public Boolean informReturnGoodsInputFinished(
+			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO) {
+		return true;
+	}
 	
 	/**
 	 * 调度采购入库
 	 * @param purchaseOrderDTO 采购单DTO
 	 * @return 处理结果
 	 */
-	Boolean schedulePurchaseInput(PurchaseOrderDTO purchaseOrderDTO);
+	public Boolean schedulePurchaseInput(PurchaseOrderDTO purchaseOrder) {
+		// 将采购单中的数据复制到采购入库单里面去
+		
+		return true;
+	}
 
 	/**
 	 * 调度销售出库
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	Boolean scheduleSaleDelivery(OrderInfoDTO orderDTO);
+	public Boolean scheduleSaleDelivery(OrderInfoDTO orderDTO) {
+		return true;
+	}
 	
 	/**
 	 * 调度退货入库
@@ -70,7 +90,9 @@ public interface ScheduleFacadeService {
 	 * @param returnGoodsWorksheetDTO 退货工单DTO
 	 * @return 处理结果
 	 */
-	Boolean scheduleReturnGoodsInput(OrderInfoDTO orderDTO, 
-			ReturnGoodsWorksheetDTO returnGoodsWorksheetDTO);
+	public Boolean scheduleReturnGoodsInput(OrderInfoDTO orderDTO, 
+			ReturnGoodsWorksheetDTO returnGoodsWorksheetDTO) {
+		return true;
+	}
 	
 }
