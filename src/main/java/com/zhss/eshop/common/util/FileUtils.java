@@ -47,7 +47,7 @@ public class FileUtils {
 	        uploadDir.mkdir();
 	    }
 	     
-	    String pathSeparator = System.getProperties().getProperty("path.separator");
+	    String pathSeparator = System.getProperties().getProperty("file.separator");
 	    String originalFilename = file.getOriginalFilename();
 	    String suffix = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);  
 	    String filename = UUID.randomUUID().toString().replace("-", "") + "." + suffix;  
