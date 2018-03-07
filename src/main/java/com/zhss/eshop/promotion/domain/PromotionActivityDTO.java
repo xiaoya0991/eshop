@@ -16,27 +16,31 @@ public class PromotionActivityDTO {
 	/**
 	 * 促销活动名称
 	 */
-	private String promotionActivityName;
+	private String name;
 	/**
 	 * 促销活动开始时间
 	 */
-	private Date promotionActivityStartTime;
+	private Date startTime;
 	/**
 	 * 促销活动结束时间
 	 */
-	private Date promotionActivityEndTime;
+	private Date endTime;
 	/**
 	 * 促销活动备注
 	 */
-	private String promotionActivityComment;
+	private String remark;
 	/**
 	 * 促销活动状态
 	 */
-	private Integer promotionActivityStatus;
+	private Integer status;
 	/**
 	 * 促销活动规则
 	 */
-	private String promotionActivityRule;
+	private String rule;
+	/**
+	 * 促销活动类型
+	 */
+	private Integer type;
 	/**
 	 * 促销活动的创建时间
 	 */
@@ -52,41 +56,47 @@ public class PromotionActivityDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getPromotionActivityName() {
-		return promotionActivityName;
+	public String getName() {
+		return name;
 	}
-	public void setPromotionActivityName(String promotionActivityName) {
-		this.promotionActivityName = promotionActivityName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public Date getPromotionActivityStartTime() {
-		return promotionActivityStartTime;
+	public Date getStartTime() {
+		return startTime;
 	}
-	public void setPromotionActivityStartTime(Date promotionActivityStartTime) {
-		this.promotionActivityStartTime = promotionActivityStartTime;
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
-	public Date getPromotionActivityEndTime() {
-		return promotionActivityEndTime;
+	public Date getEndTime() {
+		return endTime;
 	}
-	public void setPromotionActivityEndTime(Date promotionActivityEndTime) {
-		this.promotionActivityEndTime = promotionActivityEndTime;
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
-	public String getPromotionActivityComment() {
-		return promotionActivityComment;
+	public String getRemark() {
+		return remark;
 	}
-	public void setPromotionActivityComment(String promotionActivityComment) {
-		this.promotionActivityComment = promotionActivityComment;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
-	public Integer getPromotionActivityStatus() {
-		return promotionActivityStatus;
+	public Integer getStatus() {
+		return status;
 	}
-	public void setPromotionActivityStatus(Integer promotionActivityStatus) {
-		this.promotionActivityStatus = promotionActivityStatus;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
-	public String getPromotionActivityRule() {
-		return promotionActivityRule;
+	public String getRule() {
+		return rule;
 	}
-	public void setPromotionActivityRule(String promotionActivityRule) {
-		this.promotionActivityRule = promotionActivityRule;
+	public void setRule(String rule) {
+		this.rule = rule;
+	}
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	public Date getGmtCreate() {
 		return gmtCreate;

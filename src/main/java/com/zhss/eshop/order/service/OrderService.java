@@ -5,11 +5,11 @@ import java.util.List;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 
 /**
- * 订单中心对外提供的接口
+ * 订单中心接口
  * @author zhonghuashishan
  *
  */
-public interface OrderFacadeService {
+public interface OrderService {
 
 	/**
 	 * 通知订单中心，“商品完成发货”事件发生了
