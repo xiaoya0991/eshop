@@ -29,7 +29,7 @@ import com.zhss.eshop.common.util.DateProvider;
 @SpringBootTest
 @Transactional 
 @Rollback(true)
-public class CategoryDAOTest {
+public class CategoryDAOTest {  
 	
 	/**
 	 * 类目管理DAO组件
