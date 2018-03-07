@@ -38,7 +38,7 @@ import com.zhss.eshop.comment.service.CommentInfoService;
 import com.zhss.eshop.comment.service.CommentPictureService;
 import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.membership.service.MembershipFacadeService;
-import com.zhss.eshop.order.service.OrderFacadeService;
+import com.zhss.eshop.order.service.OrderService;
 
 /**
  * 评论管理模块的Controller组件
@@ -70,7 +70,7 @@ public class CommentController {
 	 * 订单中心的service组件
 	 */
 	@Autowired
-	private OrderFacadeService orderFacadeService;
+	private OrderService orderService;
 	/**
 	 * 会员中心的service组件
 	 */
@@ -112,7 +112,7 @@ public class CommentController {
 			commentAggregateService.refreshCommentAggregate(commentInfoDTO);
 			
 			// 通知订单中心订单已经发表了评论
-			orderFacadeService.informPublishCommentEvent(commentInfoDTO.getOrderInfoId());
+			orderService.informPublishCommentEvent(commentInfoDTO.getOrderInfoId());
 			
 			// 通知会员中心用户已经发表了评论
 			membershipFacadeService.informPublishCommentEvent(

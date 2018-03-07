@@ -17,7 +17,7 @@ import com.zhss.eshop.comment.service.CommentAggregateService;
 import com.zhss.eshop.comment.service.CommentInfoService;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
-import com.zhss.eshop.order.service.OrderFacadeService;
+import com.zhss.eshop.order.service.OrderService;
 
 /**
  * 自动发表评论调度任务的单元测试类
@@ -37,7 +37,7 @@ public class AutoPublishCommentTaskTest {
 	 * 订单中心对外接口service组件
 	 */
 	@MockBean
-	private OrderFacadeService orderFacadeService;
+	private OrderService orderService;
 	/**
 	 * 评论信息管理模块service组件
 	 */
@@ -62,7 +62,7 @@ public class AutoPublishCommentTaskTest {
 			orderInfoIds.add(orderInfoDTO.getId());
 		}
 		
-		when(orderFacadeService.listNotPublishedCommentOrders()).thenReturn(orderInfoDTOs);
+		when(orderService.listNotPublishedCommentOrders()).thenReturn(orderInfoDTOs);
 		
 		CommentInfoDTO commentInfoDTO1 = new CommentInfoDTO();
 		when(commentInfoService.saveAutoPublishedCommentInfo(orderInfoDTOs.get(0), 
@@ -91,7 +91,7 @@ public class AutoPublishCommentTaskTest {
 		verify(commentInfoService, times(1)).saveAutoPublishedCommentInfo(orderInfoDTOs.get(1), 
 				orderInfoDTOs.get(1).getOrderItems().get(1)); 
 		verify(commentAggregateService, times(4)).refreshCommentAggregate(commentInfoDTO1);
-		verify(orderFacadeService, times(1)).informBatchPublishCommentEvent(orderInfoIds);
+		verify(orderService, times(1)).informBatchPublishCommentEvent(orderInfoIds);
 	}
 	
 	/**
