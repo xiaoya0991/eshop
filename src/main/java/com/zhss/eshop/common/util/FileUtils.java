@@ -59,4 +59,15 @@ public class FileUtils {
 	    return targetFile.getAbsolutePath();
 	}
 	
+	/**
+	 * 删除文件
+	 * @param filePath 文件路径
+	 * @return 文件
+	 * @throws Exception
+	 */
+	public static Boolean deleteFile(String filePath) throws Exception {
+		File file = new File(filePath);
+		return file.delete();
+	}
+	
 }
