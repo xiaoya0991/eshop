@@ -60,7 +60,7 @@ public interface BrandMapper {
 				+ "AND alias_name like '${aliasName}%'"  
  				+ "</if>"
 				
- 				+ "LIMIT #{offset},#{limit} " 
+ 				+ "LIMIT #{offset},#{size} " 
 			+ ") b "
 			+ "WHERE a.id=b.id "
 			
@@ -152,21 +152,38 @@ public interface BrandMapper {
 				+ "chinese_name=#{chineseName},"
 				+ "english_name=#{englishName},"
 				+ "alias_name=#{aliasName},"
-				+ "logo_path=#{logoPath},"
 				+ "introduction=#{introduction},"
-				+ "auth_voucher_path=#{authVoucherPath},"
 				+ "location=#{location},"
 				+ "remark=#{remark},"
-				+ "gmt_create=#{gmtCreate},"
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}")  
 	void update(BrandDO brand);
 	
 	/**
+	 * 更新品牌logo
+	 * @param brand
+	 */
+	@Update("UPDATE commodity_brand SET "
+				+ "logo_path=#{logoPath}," 
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}")  
+	void updateLogoPath(BrandDO brand);
+	
+	/**
+	 * 更新品牌授权认证书
+	 * @param brand
+	 */
+	@Update("UPDATE commodity_brand SET "
+				+ "auth_voucher_path=#{authVoucherPath},"   
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}")  
+	void updateAuthVoucherPath(BrandDO brand);
+	
+	/**
 	 * 删除品牌
 	 * @param id 品牌id
 	 */
-	@Delete("DELETEE FROM commodity_brand WHERE id=#{id}")  
+	@Delete("DELETE FROM commodity_brand WHERE id=#{id}")  
 	void remove(@Param("id") Long id);
 	
 }

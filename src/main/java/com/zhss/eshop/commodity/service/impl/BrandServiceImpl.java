@@ -35,22 +35,22 @@ public class BrandServiceImpl implements BrandService {
 	/**
 	 * logo图片的路径类型
 	 */
-	@Value("commodity.brand.image.upload.logo.path.type") 
+	@Value("${commodity.brand.image.upload.logo.path.type}") 
 	private String logoPathType;
 	/**
 	 * logo图片的上传路径
 	 */
-	@Value("commodity.brand.image.upload.logo.path")
+	@Value("${commodity.brand.image.upload.logo.path}")
 	private String logoPath;
 	/**
 	 * 品牌授权认证图片的路径类型
 	 */
-	@Value("commodity.brand.image.upload.authVoucher.path.type") 
+	@Value("${commodity.brand.image.upload.authVoucher.path.type}") 
 	private String authVoucherPathType;
 	/**
 	 * 品牌授权认证图片的上传路径
 	 */
-	@Value("commodity.brand.image.upload.authVoucher.path")
+	@Value("${commodity.brand.image.upload.authVoucher.path}")
 	private String authVoucherPath; 
 	/**
 	 * 日期辅助组件
@@ -142,19 +142,44 @@ public class BrandServiceImpl implements BrandService {
 	/**
 	 * 编辑品牌
 	 * @param brand 品牌
-	 * @param logoFile logo图片
-	 * @param authVoucherFile 品牌授权认证图片
 	 */
-	public void update(BrandDTO brand, MultipartFile logoFile, 
-			MultipartFile authVoucherFile) throws Exception {
+	public void update(BrandDTO brand) throws Exception {
+		brand.setGmtModified(dateProvider.getCurrentTime()); 
+		brandDAO.update(brand.clone(BrandDO.class)); 
+	}
+	
+	/**
+	 * 更新品牌的logo图片
+	 * @param id
+	 * @param logoFile
+	 * @throws Exception
+	 */
+	public void updateLogoPicture(Long id, MultipartFile logoFile) throws Exception {
+		BrandDO brand = brandDAO.getById(id);
+		
+		FileUtils.deleteFile(brand.getLogoPath());
 		String logoPath = uploadLogoFile(logoFile);
+		
+		brand.setGmtModified(dateProvider.getCurrentTime()); 
+		brand.setLogoPath(logoPath);
+		brandDAO.updateLogoPath(brand); 
+	}
+	
+	/**
+	 * 更新品牌的授权书图片
+	 * @param id
+	 * @param authVoucherFile
+	 * @throws Exception
+	 */
+	public void updateAuthVoucherPicture(Long id, MultipartFile authVoucherFile) throws Exception {
+		BrandDO brand = brandDAO.getById(id);
+		
+		FileUtils.deleteFile(brand.getAuthVoucherPath());  
 		String authVoucherPath = uploadAuthVoucherFile(authVoucherFile);
 		
-		brand.setLogoPath(logoPath);
-		brand.setAuthVoucherPath(authVoucherPath); 
 		brand.setGmtModified(dateProvider.getCurrentTime()); 
-		
-		brandDAO.update(brand.clone(BrandDO.class)); 
+		brand.setAuthVoucherPath(authVoucherPath); 
+		brandDAO.updateAuthVoucherPath(brand); 
 	}
 	
 	/**
@@ -162,6 +187,9 @@ public class BrandServiceImpl implements BrandService {
 	 * @param id 品牌id
 	 */
 	public void remove(Long id) throws Exception {
+		BrandDO brand = brandDAO.getById(id);
+		FileUtils.deleteFile(brand.getLogoPath());
+		FileUtils.deleteFile(brand.getAuthVoucherPath());
 		brandDAO.remove(id);  
 	}
 	

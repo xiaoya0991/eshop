@@ -44,4 +44,16 @@ public interface BrandDAO {
 	 */
 	void remove(Long id);
 	
+	/**
+	 * 更新品牌logo
+	 * @param brand
+	 */
+	void updateLogoPath(BrandDO brand);
+	
+	/**
+	 * 更新品牌授权认证书
+	 * @param brand
+	 */
+	void updateAuthVoucherPath(BrandDO brand);
+	
 }

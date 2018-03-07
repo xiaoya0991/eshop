@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.zhss.eshop.commodity.domain.BrandDO;
 import com.zhss.eshop.commodity.domain.BrandDTO;
 import com.zhss.eshop.commodity.domain.BrandQuery;
 
@@ -40,11 +41,24 @@ public interface BrandService {
 	/**
 	 * 编辑品牌
 	 * @param brand 品牌
-	 * @param logoFile logo图片
-	 * @param authVoucherFile 品牌授权认证图片
 	 */
-	void update(BrandDTO brand, MultipartFile logoFile, 
-			MultipartFile authVoucherFile) throws Exception;
+	void update(BrandDTO brand) throws Exception;
+	
+	/**
+	 * 更新品牌的logo图片
+	 * @param id
+	 * @param logoFile
+	 * @throws Exception
+	 */
+	void updateLogoPicture(Long id, MultipartFile logoFile) throws Exception;
+	
+	/**
+	 * 更新品牌的授权书图片
+	 * @param id
+	 * @param authVoucherFile
+	 * @throws Exception
+	 */
+	void updateAuthVoucherPicture(Long id, MultipartFile authVoucherFile) throws Exception;
 	
 	/**
 	 * 删除品牌

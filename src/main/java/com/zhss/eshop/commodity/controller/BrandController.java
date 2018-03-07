@@ -82,8 +82,8 @@ public class BrandController {
 	 * @return 处理结果
 	 */
 	@PostMapping("/") 
-	public Boolean save(@RequestBody BrandVO brand, 
-			MultipartFile logoFile, MultipartFile authVoucherFile) {
+	public Boolean save(BrandVO brand, MultipartFile logoFile, 
+			MultipartFile authVoucherFile) {
 		try {
 			brandService.save(brand.clone(BrandDTO.class), logoFile, authVoucherFile);
 			return true;
@@ -99,10 +99,40 @@ public class BrandController {
 	 * @return 处理结果
 	 */
 	@PutMapping("/{id}")  
-	public Boolean update(@RequestBody BrandVO brand, 
-			MultipartFile logoFile, MultipartFile authVoucherFile) {
+	public Boolean update(@RequestBody BrandVO brand) {
 		try {
-			brandService.update(brand.clone(BrandDTO.class), logoFile, authVoucherFile);
+			brandService.update(brand.clone(BrandDTO.class));
+			return true;
+		} catch (Exception e) {  
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 更新logo图片
+	 * @return 处理结果
+	 */
+	@PostMapping("/logo/{id}")   
+	public Boolean updateLogoPicture(@PathVariable("id") Long id, MultipartFile logoFile) { 
+		try {
+			brandService.updateLogoPicture(id, logoFile);
+			return true;
+		} catch (Exception e) {  
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 更新logo图片
+	 * @return 处理结果
+	 */
+	@PostMapping("/authVoucher/{id}")   
+	public Boolean updateAuthVoucherPicture(@PathVariable("id") Long id, 
+			MultipartFile authVoucherFile) { 
+		try {
+			brandService.updateAuthVoucherPicture(id, authVoucherFile);  
 			return true;
 		} catch (Exception e) {  
 			logger.error("error", e); 
