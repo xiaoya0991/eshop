@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.zhss.eshop.promotion.constant.PromotionActivityStatus;
 import com.zhss.eshop.promotion.constant.PromotionActivityType;
+import com.zhss.eshop.promotion.domain.CouponDTO;
 import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
 import com.zhss.eshop.promotion.service.PromotionService;
 
@@ -93,6 +94,15 @@ public class PromotionServiceImpl implements PromotionService {
 			logger.error("error", e); 
 			return null;
 		}
+	}
+	
+	/**
+	 * 查询用户当前可以使用的有效优惠券
+	 * @param userAccountId 用户账号id
+	 * @return 有效优惠券
+	 */
+	public List<CouponDTO> listValidByUserAccountId(Long userAccountId) {
+		return null;
 	}
 
 }
