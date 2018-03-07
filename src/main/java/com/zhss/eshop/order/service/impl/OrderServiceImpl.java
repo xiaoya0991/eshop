@@ -6,15 +6,15 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.zhss.eshop.order.domain.OrderInfoDTO;
-import com.zhss.eshop.order.service.OrderFacadeService;
+import com.zhss.eshop.order.service.OrderService;
 
 /**
- * 订单中心对外接口service组件
+ * 订单中心接口service组件
  * @author zhonghuashishan
  *
  */
 @Service
-public class OrderFacadeServiceImpl implements OrderFacadeService {
+public class OrderServiceImpl implements OrderService {
 	
 	/**
 	 * 通知订单中心，“商品完成发货”事件发生了

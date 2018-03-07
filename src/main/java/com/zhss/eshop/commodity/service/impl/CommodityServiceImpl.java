@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
-import com.zhss.eshop.commodity.service.CommodityFacadeService;
+import com.zhss.eshop.commodity.service.CommodityService;
 
 /**
  * 商品中心对外接口service组件
@@ -15,9 +15,9 @@ import com.zhss.eshop.commodity.service.CommodityFacadeService;
  *
  */
 @Service
-public class CommodityFacadeServiceImpl implements CommodityFacadeService {
+public class CommodityServiceImpl implements CommodityService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CommodityFacadeServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(CommodityServiceImpl.class);
 	
 	/**
 	 * 根据id查询商品sku
