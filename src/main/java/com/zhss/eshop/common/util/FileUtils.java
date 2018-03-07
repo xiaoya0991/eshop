@@ -46,10 +46,14 @@ public class FileUtils {
 	    if(!uploadDir.exists()) {
 	        uploadDir.mkdir();
 	    }
+	     
+	    String pathSeparator = System.getProperties().getProperty("path.separator");
+	    String originalFilename = file.getOriginalFilename();
+	    String suffix = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);  
+	    String filename = UUID.randomUUID().toString().replace("-", "") + "." + suffix;  
+	    String targetFilePath = uploadDirPath + pathSeparator + filename;
 	    
-	    String filename = UUID.randomUUID().toString().replace("-", "");  
-	    File targetFile = new File(uploadDirPath + filename);
-	    
+	    File targetFile = new File(targetFilePath);
 	    file.transferTo(targetFile);  
 	    
 	    return targetFile.getAbsolutePath();
