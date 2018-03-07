@@ -2,8 +2,6 @@ package com.zhss.eshop.auth.dao.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,8 +17,6 @@ import com.zhss.eshop.auth.mapper.PriorityMapper;
 @Repository
 public class PriorityDAOImpl implements PriorityDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(PriorityDAOImpl.class);
-	
 	/**
 	 * 权限管理模块的mapper组件
 	 */
@@ -32,12 +28,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @return 根权限集合
 	 */
 	public List<PriorityDO> listRootPriorities() {
-		try {
-			return priorityMapper.listRootPriorities(); 
-		} catch (Exception e) {
-			logger.error("error", e); 
-		}
-		return null;
+		return priorityMapper.listRootPriorities(); 
 	}
 	
 	/**
@@ -46,12 +37,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @return 子权限
 	 */
 	public List<PriorityDO> listChildPriorities(Long parentId) {
-		try {
-			return priorityMapper.listChildPriorities(parentId);
-		} catch (Exception e) {
-			logger.error("error", e); 
-		}
-		return null;
+		return priorityMapper.listChildPriorities(parentId);
 	}
 	
 	/**
@@ -60,12 +46,46 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @return 权限
 	 */
 	public PriorityDO getPriorityById(Long id) {
-		try {
-			return priorityMapper.getPriorityById(id);
-		} catch (Exception e) {
-			logger.error("error", e); 
-		}
-		return null;
+		return priorityMapper.getPriorityById(id);
+	}
+	
+	/**
+	 * 查询账号被授权的菜单
+	 * @param accountId 账号id
+	 * @return
+	 */
+	public List<PriorityDO> listAuthroziedByAccountId(
+			Long accountId, Long parentId) {
+		return priorityMapper.listAuthroziedByAccountId(accountId, parentId);
+	}
+	
+	/**
+	 * 统计账号对指定编号的权限是否有授权记录
+	 * @param accountId 账号id
+	 * @param code 权限编号
+	 * @return 是否有授权记录
+	 */
+	public Long countAuthorizedByCode(Long accountId, String code) {
+		return priorityMapper.countAuthorizedByCode(accountId, code);
+	}
+	
+	/**
+	 * 统计账号对指定url的权限是否有授权记录
+	 * @param accountId 账号id
+	 * @param url 权限url
+	 * @return 是否有授权记录
+	 */
+	public Long countAuthorizedByUrl(Long accountId, String url) {
+		return priorityMapper.countAuthorizedByUrl(accountId, url);
+	}
+	
+	/**
+	 * 根据权限id查询账号id
+	 * @param priorityId 权限id
+	 * @return 
+	 */
+	public List<Long> listAccountIdsByPriorityId(Long priorityId) {
+		return priorityMapper.listAccountIdsByPriorityId(priorityId);
 	}
 	
 	/**
@@ -73,12 +93,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param priorityDO 权限DO对象
 	 */
 	public Long savePriority(PriorityDO priorityDO) {
-		try {
-			priorityMapper.savePriority(priorityDO); 
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
+		priorityMapper.savePriority(priorityDO); 
 		return priorityDO.getId();
 	}
 	
@@ -87,12 +102,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param priorityDO 权限DO对象
 	 */
 	public Boolean updatePriority(PriorityDO priorityDO) {
-		try {
-			priorityMapper.updatePriority(priorityDO); 
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
+		priorityMapper.updatePriority(priorityDO); 
 		return true;
 	}
 	
@@ -101,12 +111,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param id 权限id
 	 */
 	public Boolean removePriority(Long id) {
-		try {
-			priorityMapper.removePriority(id);
-		} catch (Exception e) {
-			logger.error("error", e);
-			return false;
-		}
+		priorityMapper.removePriority(id);
 		return true;
 	}
 

@@ -1,17 +1,17 @@
-package com.zhss.eshop.auth.composite;
+package com.zhss.eshop.auth.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.zhss.eshop.auth.visitor.PriorityNodeVisitor;
+import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 权限树节点
+ * 权限
  * @author zhonghuashishan
  *
  */
-public class PriorityNode {
+public class Priority extends AbstractObject {
 
 	/**
 	 * id
@@ -48,14 +48,14 @@ public class PriorityNode {
 	/**
 	 * 子权限节点
 	 */
-	private List<PriorityNode> children = new ArrayList<PriorityNode>();
+	private List<Priority> children = new ArrayList<Priority>();
 	
 	/**
 	 * 接收一个权限树访问者
 	 * @param visitor 权限树访问者
 	 */
-	public void accept(PriorityNodeVisitor visitor) {
-		visitor.visit(this);  
+	public <T> T execute(PriorityOperation<T> operation) throws Exception {  
+		return operation.doExecute(this);  
 	}
 	
 	public Long getId() {
@@ -106,10 +106,10 @@ public class PriorityNode {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<PriorityNode> getChildren() {
+	public List<Priority> getChildren() {
 		return children;
 	}
-	public void setChildren(List<PriorityNode> children) {
+	public void setChildren(List<Priority> children) {
 		this.children = children;
 	}
 	

@@ -55,6 +55,16 @@ public interface AccountRoleRelationshipMapper {
 			@Param("accountId") Long accountId);
 	
 	/**
+	 * 根据角色id查询账号id集合
+	 * @param roleId 角色id
+	 * @return 账号id集合
+	 */
+	@Select("SELECT account_id "
+			+ "FROM auth_account_role_relationship "
+			+ "WHERE role_id=#{roleId}")    
+	List<Long> listAccountIdsByRoleId(@Param("roleId") Long roleId);
+	
+	/**
 	 * 新增账号和角色的关联关系
 	 * @param relation 账号和角色的关联关系
 	 */

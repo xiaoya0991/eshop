@@ -42,6 +42,15 @@ public class AccountRoleRelationshipDAOImpl implements AccountRoleRelationshipDA
 	}
 	
 	/**
+	 * 根据角色id查询账号id集合
+	 * @param roleId 角色id
+	 * @return 账号id集合
+	 */
+	public List<Long> listAccountIdsByRoleId(Long roleId) {
+		return accountRoleRelationMapper.listAccountIdsByRoleId(roleId);
+	}
+	
+	/**
 	 * 新增账号和角色的关联关系
 	 * @param relation 账号和角色的关联关系
 	 */

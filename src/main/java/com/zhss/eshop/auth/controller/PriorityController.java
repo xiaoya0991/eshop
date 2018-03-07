@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zhss.eshop.auth.domain.PriorityDTO;
 import com.zhss.eshop.auth.domain.PriorityVO;
 import com.zhss.eshop.auth.service.PriorityService;
+import com.zhss.eshop.auth.service.impl.Priority;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -110,6 +111,54 @@ public class PriorityController {
 			logger.error("error", e); 
 		}
 		return new PriorityVO();
+	}
+	
+	/**
+	 * 查询账号被授权的权限树
+	 * @param accountId 账号id
+	 * @return 权限树
+	 */
+	@GetMapping("/authorized/tree/{accountId}")  
+	public List<Priority> listAuthorizedTree(
+			@PathVariable("accountId") Long accountId) {
+		try {
+			return priorityService.listAuthorizedByAccountId(accountId);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return new ArrayList<Priority>();
+		}
+	}
+	
+	/**
+	 * 判断账号对指定编号的权限是否有授权记录
+	 * @param accountId 账号id
+	 */
+	@GetMapping("/authorized/code/{accountId}")  
+	public Boolean existAuthorizedByCode(
+			@PathVariable("accountId") Long accountId,
+			String code) {
+		try {
+			return priorityService.existAuthorizedByCode(accountId, code);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 判断账号对指定url的权限是否有授权记录
+	 * @param accountId 账号id
+	 */
+	@GetMapping("/authorized/url/{accountId}")  
+	public Boolean existAuthorizedByUrl(
+			@PathVariable("accountId") Long accountId,
+			String url) {
+		try {
+			return priorityService.existAuthorizedByUrl(accountId, url);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**

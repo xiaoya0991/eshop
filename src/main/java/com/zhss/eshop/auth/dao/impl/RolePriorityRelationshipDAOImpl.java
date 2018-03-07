@@ -46,7 +46,6 @@ public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationship
 	 * @param priorityId 权限id
 	 * @return 记录数
 	 */
-	@Override
 	public Long countByPriorityId(Long priorityId) {
 		try {
 			return rolePriorityRelationshipMapper.countByPriorityId(priorityId); 

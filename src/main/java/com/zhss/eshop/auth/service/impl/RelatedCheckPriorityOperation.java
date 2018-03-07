@@ -1,19 +1,24 @@
-package com.zhss.eshop.auth.visitor;
+package com.zhss.eshop.auth.service.impl;
 
 import java.util.List;
 
-import com.zhss.eshop.auth.composite.PriorityNode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.zhss.eshop.auth.dao.AccountPriorityRelationshipDAO;
 import com.zhss.eshop.auth.dao.PriorityDAO;
 import com.zhss.eshop.auth.dao.RolePriorityRelationshipDAO;
 import com.zhss.eshop.auth.domain.PriorityDO;
 
 /**
- * 权限树节点的关联检查访问者
+ * 检查权限是否被关联的操作
  * @author zhonghuashishan
  *
  */
-public class PriorityNodeRelateCheckVisitor implements PriorityNodeVisitor {
+@Component
+@Scope("prototype") 
+public class RelatedCheckPriorityOperation implements PriorityOperation<Boolean> {  
 
 	/**
 	 * 关联检查结果
@@ -22,49 +27,38 @@ public class PriorityNodeRelateCheckVisitor implements PriorityNodeVisitor {
 	/**
 	 * 权限管理模块的DAO组件
 	 */
+	@Autowired
 	private PriorityDAO priorityDAO;
 	/**
 	 * 角色和权限关系管理模块的DAO组件
 	 */
+	@Autowired
 	private RolePriorityRelationshipDAO rolePriorityRelationshipDAO;
 	/**
 	 * 账号和权限关系管理模块的DAO组件
 	 */
+	@Autowired
 	private AccountPriorityRelationshipDAO accountPriorityRelationshipDAO;
-	
-	/**
-	 * 构造函数
-	 * @param priorityDAO 权限管理模块的DAO组件
-	 * @param rolePriorityRelationshipDAO 角色和权限关系管理模块的DAO组件
-	 * @param accountPriorityRelationshipDAO 账号和权限关系管理模块的DAO组件
-	 */
-	public PriorityNodeRelateCheckVisitor(
-			PriorityDAO priorityDAO,
-			RolePriorityRelationshipDAO rolePriorityRelationshipDAO,
-			AccountPriorityRelationshipDAO accountPriorityRelationshipDAO) {
-		this.priorityDAO = priorityDAO;
-		this.rolePriorityRelationshipDAO = rolePriorityRelationshipDAO;
-		this.accountPriorityRelationshipDAO = accountPriorityRelationshipDAO;
-	}
 	
 	/**
 	 * 访问权限树节点
 	 */
-	@Override
-	public void visit(PriorityNode node) {
+	public Boolean doExecute(Priority node) throws Exception {
 		List<PriorityDO> priorityDOs = priorityDAO
 				.listChildPriorities(node.getId());
 		
 		if(priorityDOs != null && priorityDOs.size() > 0) {
 			for(PriorityDO priorityDO : priorityDOs) {
-				PriorityNode priorityNode = priorityDO.clone(PriorityNode.class);
-				priorityNode.accept(this); 
+				Priority priorityNode = priorityDO.clone(Priority.class);
+				priorityNode.execute(this); 
 			}
 		}
 		
 		if(relateCheck(node)) {
 			this.relateCheckResult = true;
 		}
+		
+		return this.relateCheckResult;
 	}
 	
 	/**
@@ -72,7 +66,7 @@ public class PriorityNodeRelateCheckVisitor implements PriorityNodeVisitor {
 	 * @param node 权限树节点
 	 * @return 是否被任何一个角色或者是账号关联了，如果有关联则为true；如果没有关联则为false
 	 */
-	private Boolean relateCheck(PriorityNode node) {
+	private Boolean relateCheck(Priority node) {
 		Long roleRelatedCount = rolePriorityRelationshipDAO
 				.countByPriorityId(node.getId());
 		if(roleRelatedCount != null && roleRelatedCount > 0) {

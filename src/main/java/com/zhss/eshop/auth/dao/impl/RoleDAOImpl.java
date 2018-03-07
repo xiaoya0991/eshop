@@ -2,8 +2,6 @@ package com.zhss.eshop.auth.dao.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +18,6 @@ import com.zhss.eshop.auth.mapper.RoleMapper;
 @Repository
 public class RoleDAOImpl implements RoleDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(RoleDAOImpl.class);
-	
 	/**
 	 * 角色管理模块mapper组件
 	 */
@@ -34,12 +30,7 @@ public class RoleDAOImpl implements RoleDAO {
 	 * @return 角色DO对象集合
 	 */
 	public List<RoleDO> listByPage(RoleQuery query) {
-		try {
-			return roleMapper.listByPage(query);
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
+		return roleMapper.listByPage(query);
 	}
 	
 	/**
@@ -48,12 +39,7 @@ public class RoleDAOImpl implements RoleDAO {
 	 * @return 角色DO对象
 	 */
 	public RoleDO getById(Long id) {
-		try {
-			return roleMapper.getById(id);
-		} catch (Exception e) {
-			logger.error("error", e);
-			return null;
-		}
+		return roleMapper.getById(id);
 	}
 	
 	/**
@@ -61,13 +47,8 @@ public class RoleDAOImpl implements RoleDAO {
 	 * @param role 角色DO对象
 	 */
 	public Long save(RoleDO role) {
-		try {
-			roleMapper.save(role);
-			return role.getId();
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
+		roleMapper.save(role);
+		return role.getId();
 	}
 	
 	/**
@@ -75,13 +56,8 @@ public class RoleDAOImpl implements RoleDAO {
 	 * @param role 角色DO对象
 	 */
 	public Boolean update(RoleDO role) {
-		try {
-			roleMapper.update(role); 
-			return true;
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
+		roleMapper.update(role); 
+		return true;
 	}
 	
 	/**
@@ -89,13 +65,8 @@ public class RoleDAOImpl implements RoleDAO {
 	 * @param id 角色id
 	 */
 	public Boolean remove(Long id) {
-		try {
-			roleMapper.remove(id);
-			return true;
-		} catch (Exception e) {
-			logger.error("error", e);
-			return false;
-		}
+		roleMapper.remove(id);
+		return true;
 	}
 
 }

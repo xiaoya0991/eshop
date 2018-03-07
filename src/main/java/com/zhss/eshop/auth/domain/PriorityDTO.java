@@ -2,20 +2,15 @@ package com.zhss.eshop.auth.domain;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.zhss.eshop.common.util.BeanCopierUtils;
+import com.zhss.eshop.common.util.AbstractObject;
 
 /**
  * 权限DTO类
  * @author zhonghuashishan
  *
  */
-public class PriorityDTO {
+public class PriorityDTO extends AbstractObject {
 	
-	private static final Logger logger = LoggerFactory.getLogger(PriorityDTO.class);
-
 	/**
 	 * id
 	 */
@@ -96,25 +91,6 @@ public class PriorityDTO {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
-	}
-	
-	/**
-	 * 克隆方法
-	 * @param clazz 目标Class对象
-	 * @return 克隆后的对象
-	 */
-	public <T> T clone(Class<T> clazz) {
-		T target = null;
-		
-		try {
-			target = clazz.newInstance();
-		} catch (Exception e) {
-			logger.error("error", e);  
-		}
-		
-		BeanCopierUtils.copyProperties(this, target); 
-		
-		return target;
 	}
 	
 	@Override

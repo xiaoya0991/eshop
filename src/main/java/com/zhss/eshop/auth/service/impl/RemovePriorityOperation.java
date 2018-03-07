@@ -1,55 +1,54 @@
-package com.zhss.eshop.auth.visitor;
+package com.zhss.eshop.auth.service.impl;
 
 import java.util.List;
 
-import com.zhss.eshop.auth.composite.PriorityNode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.zhss.eshop.auth.dao.PriorityDAO;
 import com.zhss.eshop.auth.domain.PriorityDO;
 
 /**
- * 权限树节点的删除访问者
+ * 删除权限操作
  * @author zhonghuashishan
  *
  */
-public class PriorityNodeRemoveVisitor implements PriorityNodeVisitor {
+@Component
+@Scope("prototype") 
+public class RemovePriorityOperation implements PriorityOperation<Boolean> { 
 
 	/**
 	 * 权限管理模块的DAO组件
 	 */
+	@Autowired
 	private PriorityDAO priorityDAO;
-	
-	/**
-	 * 构造函数
-	 * @param priorityDAO 权限管理模块的DAO组件
-	 */
-	public PriorityNodeRemoveVisitor(PriorityDAO priorityDAO) {
-		this.priorityDAO = priorityDAO;
-	}
 	
 	/**
 	 * 访问权限树节点
 	 * @param node 权限树节点
 	 */
-	@Override
-	public void visit(PriorityNode node) {
+	public Boolean doExecute(Priority node) throws Exception {
 		List<PriorityDO> priorityDOs = priorityDAO
 				.listChildPriorities(node.getId());
 		
 		if(priorityDOs != null && priorityDOs.size() > 0) {
 			for(PriorityDO priorityDO : priorityDOs) {
-				PriorityNode priorityNode = priorityDO.clone(PriorityNode.class);
-				priorityNode.accept(this); 
+				Priority priorityNode = priorityDO.clone(Priority.class);
+				priorityNode.execute(this);  
 			}
 		}
 		
 		removePriority(node); 
+		
+		return true;
 	}
 	
 	/**
 	 * 删除权限
 	 * @param node 权限树节点
 	 */
-	private void removePriority(PriorityNode node) {
+	private void removePriority(Priority node) {
 		priorityDAO.removePriority(node.getId());
 	}
 

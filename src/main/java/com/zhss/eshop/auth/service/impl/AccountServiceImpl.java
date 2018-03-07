@@ -49,6 +49,11 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	@Autowired
 	private DateProvider dateProvider;
+	/**
+	 * 权限缓存管理组件
+	 */
+	@Autowired
+	private PriorityCacheManager priorityCacheManager;
 	
 	/**
 	 * 分页查询账号
@@ -114,6 +119,8 @@ public class AccountServiceImpl implements AccountService {
 		priorityRelationDAO.removeByAccountId(account.getId()); 
 		
 		saveRelations(account); 
+		
+		priorityCacheManager.remove(account.getId()); 
 	}
 	
 	/**
@@ -155,6 +162,7 @@ public class AccountServiceImpl implements AccountService {
 		roleRelationDAO.removeByAccountId(id); 
 		priorityRelationDAO.removeByAccountId(id); 
 		accountDAO.remove(id); 
+		priorityCacheManager.remove(id);  
 	}
 	
 }

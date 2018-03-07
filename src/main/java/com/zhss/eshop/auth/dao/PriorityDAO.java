@@ -32,6 +32,37 @@ public interface PriorityDAO {
 	PriorityDO getPriorityById(Long id);
 	
 	/**
+	 * 查询账号被授权的菜单
+	 * @param accountId 账号id
+	 * @return
+	 */
+	List<PriorityDO> listAuthroziedByAccountId(
+			Long accountId, Long parentId);
+	
+	/**
+	 * 根据权限id查询账号id
+	 * @param priorityId 权限id
+	 * @return 
+	 */
+	List<Long> listAccountIdsByPriorityId(Long priorityId);
+	
+	/**
+	 * 统计账号对指定编号的权限是否有授权记录
+	 * @param accountId 账号id
+	 * @param code 权限编号
+	 * @return 是否有授权记录
+	 */
+	Long countAuthorizedByCode(Long accountId, String code);
+	
+	/**
+	 * 统计账号对指定URL的权限是否有授权记录
+	 * @param accountId 账号id
+	 * @param url 权限url
+	 * @return 是否有授权记录
+	 */
+	Long countAuthorizedByUrl(Long accountId, String url);
+	
+	/**
 	 * 新增权限
 	 * @param priorityDO 权限DO对象
 	 */
