@@ -73,10 +73,4 @@ public interface OrderService {
 	 */
 	Boolean informBatchPublishCommentEvent(List<Long> orderIds);
 	
-	/**
-	 * 计算订单价格
-	 * @param order 订单
-	 */
-	OrderInfoDTO calculateOrderPrice(OrderInfoDTO order);
-	
 }

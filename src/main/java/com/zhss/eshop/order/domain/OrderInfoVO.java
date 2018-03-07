@@ -10,7 +10,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class OrderInfoDTO extends AbstractObject {
+public class OrderInfoVO extends AbstractObject {
 
 	/**
 	 * id
@@ -99,7 +99,7 @@ public class OrderInfoDTO extends AbstractObject {
 	/**
 	 * 订单包含的订单条目
 	 */
-	private List<OrderItemDTO> orderItems;
+	private List<OrderItemVO> orderItems;
 	
 	public Long getId() {
 		return id;
@@ -227,10 +227,10 @@ public class OrderInfoDTO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<OrderItemDTO> getOrderItems() {
+	public List<OrderItemVO> getOrderItems() {
 		return orderItems;
 	}
-	public void setOrderItems(List<OrderItemDTO> orderItems) {
+	public void setOrderItems(List<OrderItemVO> orderItems) {
 		this.orderItems = orderItems;
 	}
 	

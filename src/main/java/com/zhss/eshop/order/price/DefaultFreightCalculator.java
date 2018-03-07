@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
 import com.zhss.eshop.commodity.service.CommodityService;
 import com.zhss.eshop.logistics.service.LogisticsService;
+import com.zhss.eshop.membership.domain.DeliveryAddressDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 
 /**
@@ -30,9 +31,10 @@ public class DefaultFreightCalculator implements FreightCalculator {
 	/**
 	 * 计算运费
 	 */
-	public Double calculate(OrderItemDTO item , PromotionActivityResult result) {
+	public Double calculate(OrderItemDTO item, DeliveryAddressDTO deliveryAddress,
+			PromotionActivityResult result) {
 		GoodsSkuDTO goodsSku = commodityService.getGoodsSkuById(item.getGoodsSkuId());
-		return logisticsService.calculateFreight(goodsSku);
+		return logisticsService.calculateFreight(goodsSku, deliveryAddress);
 	}
 
 }

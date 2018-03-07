@@ -1,5 +1,6 @@
 package com.zhss.eshop.order.price;
 
+import com.zhss.eshop.membership.domain.DeliveryAddressDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 
 /**
@@ -9,6 +10,7 @@ import com.zhss.eshop.order.domain.OrderItemDTO;
  */
 public interface FreightCalculator {
 	
-	Double calculate(OrderItemDTO item, PromotionActivityResult result); 
+	Double calculate(OrderItemDTO item, DeliveryAddressDTO deliveryAddress, 
+			PromotionActivityResult result); 
 
 }

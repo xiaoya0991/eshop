@@ -9,7 +9,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class OrderItemDTO extends AbstractObject {
+public class OrderItemVO extends AbstractObject {
 
 	/**
 	 * id
