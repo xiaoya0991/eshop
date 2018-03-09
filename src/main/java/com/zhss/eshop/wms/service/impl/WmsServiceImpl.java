@@ -1,8 +1,11 @@
 package com.zhss.eshop.wms.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.wms.domain.GoodsAllcationStockDetailDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
@@ -68,6 +71,15 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	public Boolean informCancelOrderEvent(OrderInfoDTO orderDTO) {
 		return true;
+	}
+	
+	/**
+	 * 根据商品sku id查询货位库存明细
+	 * @param goodsSkuId 商品sku id
+	 * @return 货位库存明细
+	 */
+	public List<GoodsAllcationStockDetailDTO> listStockDetailsByGoodsSkuId(Long goodsSkuId) {
+		return null;
 	}
 
 }

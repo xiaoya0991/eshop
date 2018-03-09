@@ -6,16 +6,28 @@ import java.util.List;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 销售出库单DTO
+ * 发货单
  * @author zhonghuashishan
  *
  */
-public class SaleDeliveryOrderDTO extends AbstractObject {
+public class SendOutOrderDTO extends AbstractObject {
 	
 	/**
 	 * id
 	 */
 	private Long id;
+	/**
+	 * 销售出库单id
+	 */
+	private Long saleDeliveryOrderId;
+	/**
+	 * 用户账号id
+	 */
+	private Long userAccountId;
+	/**
+	 * 用户名
+	 */
+	private String username;
 	/**
 	 * 订单id
 	 */
@@ -24,10 +36,7 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 	 * 订单编号
 	 */
 	private String orderNo;
-	/**
-	 * 用户账号id
-	 */
-	private Long userAccountId;
+	
 	/**
 	 * 收货人
 	 */
@@ -81,10 +90,6 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 	 */
 	private Integer saleDeliveryOrderStatus;
 	/**
-	 * 实际发货时间
-	 */
-	private Date deliveryTime;
-	/**
 	 * 销售出库单的创建时间
 	 */
 	private Date gmtCreate;
@@ -93,17 +98,9 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 	 */
 	private Date gmtModified;
 	/**
-	 * 销售出库单条目
+	 * 发货单条目
 	 */
-	private List<SaleDeliveryOrderItemDTO> saleDeliveryOrderItems;
-	/**
-	 * 发货单
-	 */
-	private SendOutOrderDTO sendOutOrder;
-	/**
-	 * 物流单
-	 */
-	private LogisticOrderDTO logisticOrder;
+	private List<SendOutOrderItemDTO> sendOutOrderItems;
 	
 	public Long getId() {
 		return id;
@@ -207,12 +204,6 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 	public void setSaleDeliveryOrderStatus(Integer saleDeliveryOrderStatus) {
 		this.saleDeliveryOrderStatus = saleDeliveryOrderStatus;
 	}
-	public Date getDeliveryTime() {
-		return deliveryTime;
-	}
-	public void setDeliveryTime(Date deliveryTime) {
-		this.deliveryTime = deliveryTime;
-	}
 	public Date getGmtCreate() {
 		return gmtCreate;
 	}
@@ -225,23 +216,23 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<SaleDeliveryOrderItemDTO> getSaleDeliveryOrderItems() {
-		return saleDeliveryOrderItems;
+	public Long getSaleDeliveryOrderId() {
+		return saleDeliveryOrderId;
 	}
-	public void setSaleDeliveryOrderItems(List<SaleDeliveryOrderItemDTO> saleDeliveryOrderItems) {
-		this.saleDeliveryOrderItems = saleDeliveryOrderItems;
+	public void setSaleDeliveryOrderId(Long saleDeliveryOrderId) {
+		this.saleDeliveryOrderId = saleDeliveryOrderId;
 	}
-	public SendOutOrderDTO getSendOutOrder() {
-		return sendOutOrder;
+	public String getUsername() {
+		return username;
 	}
-	public void setSendOutOrder(SendOutOrderDTO sendOutOrder) {
-		this.sendOutOrder = sendOutOrder;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public LogisticOrderDTO getLogisticOrder() {
-		return logisticOrder;
+	public List<SendOutOrderItemDTO> getSendOutOrderItems() {
+		return sendOutOrderItems;
 	}
-	public void setLogisticOrder(LogisticOrderDTO logisticOrder) {
-		this.logisticOrder = logisticOrder;
+	public void setSendOutOrderItems(List<SendOutOrderItemDTO> sendOutOrderItems) {
+		this.sendOutOrderItems = sendOutOrderItems;
 	}
 	
 }
