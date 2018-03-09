@@ -151,6 +151,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @return 处理结果
 	 */
 	public Boolean scheduleSaleDelivery(OrderInfoDTO orderDTO) {
+		// 1、完成商品发货的调度：订单里的每个商品条目从哪个货位的哪个批次去发货，发几件
+		// 2、创建销售出库单：根据调度好的数据，完成对应的销售出库单的创建
+		
 		return true;
 	}
 	
