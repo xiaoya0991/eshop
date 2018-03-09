@@ -3,7 +3,7 @@ package com.zhss.eshop.wms.service;
 import java.util.List;
 
 import com.zhss.eshop.order.domain.OrderInfoDTO;
-import com.zhss.eshop.wms.domain.GoodsAllcationStockDetailDTO;
+import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
@@ -62,6 +62,6 @@ public interface WmsService {
 	 * @param goodsSkuId 商品sku id
 	 * @return 货位库存明细
 	 */
-	List<GoodsAllcationStockDetailDTO> listStockDetailsByGoodsSkuId(Long goodsSkuId);
+	List<GoodsAllocationStockDetailDTO> listStockDetailsByGoodsSkuId(Long goodsSkuId);
 	
 }
