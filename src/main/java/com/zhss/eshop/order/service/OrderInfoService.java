@@ -27,4 +27,10 @@ public interface OrderInfoService {
 	OrderInfoDTO calculateCouponDiscountPrice(
 			OrderInfoDTO order, CouponDTO coupon);
 	
+	/**
+	 * 新增一个订单
+	 * @param order
+	 */
+	OrderInfoDTO save(OrderInfoDTO order) throws Exception;
+	
 }

@@ -1,10 +1,17 @@
 package com.zhss.eshop.order.service.impl;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.membership.domain.DeliveryAddressDTO;
+import com.zhss.eshop.order.dao.OrderInfoDAO;
+import com.zhss.eshop.order.dao.OrderItemDAO;
+import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.order.domain.OrderItemDO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.order.price.CouponCalculator;
 import com.zhss.eshop.order.price.CouponCalculatorFactory;
@@ -55,6 +62,21 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 */
 	@Autowired
 	private PromotionService promotionService;
+	/**
+	 * 订单管理DAO组件
+	 */
+	@Autowired
+	private OrderInfoDAO orderInfoDAO;
+	/**
+	 * 订单条目管理DAO组件
+	 */
+	@Autowired
+	private OrderItemDAO orderItemDAO;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 计算订单价格
@@ -143,5 +165,26 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		return order;
 	}
 	
+	/**
+	 * 新增一个订单
+	 * @param order
+	 */
+	public OrderInfoDTO save(OrderInfoDTO order) throws Exception {
+		order.setOrderNo(UUID.randomUUID().toString().replace("-", ""));  
+		order.setGmtCreate(dateProvider.getCurrentTime()); 
+		order.setGmtModified(dateProvider.getCurrentTime());
+		
+		Long orderInfoId = orderInfoDAO.save(order.clone(OrderInfoDO.class)); 
+		
+		for(OrderItemDTO orderItem : order.getOrderItems()) {
+			orderItem.setOrderInfoId(orderInfoId); 
+			orderItem.setGmtCreate(dateProvider.getCurrentTime()); 
+			orderItem.setGmtModified(dateProvider.getCurrentTime());  
+			
+			orderItemDAO.save(orderItem.clone(OrderItemDO.class));   
+		}
+		
+		return order;
+	}
 	
 }
