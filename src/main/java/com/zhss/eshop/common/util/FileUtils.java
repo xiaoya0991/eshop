@@ -46,13 +46,28 @@ public class FileUtils {
 	    if(!uploadDir.exists()) {
 	        uploadDir.mkdir();
 	    }
+	     
+	    String pathSeparator = System.getProperties().getProperty("file.separator");
+	    String originalFilename = file.getOriginalFilename();
+	    String suffix = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);  
+	    String filename = UUID.randomUUID().toString().replace("-", "") + "." + suffix;  
+	    String targetFilePath = uploadDirPath + pathSeparator + filename;
 	    
-	    String filename = UUID.randomUUID().toString().replace("-", "");  
-	    File targetFile = new File(uploadDirPath + filename);
-	    
+	    File targetFile = new File(targetFilePath);
 	    file.transferTo(targetFile);  
 	    
 	    return targetFile.getAbsolutePath();
+	}
+	
+	/**
+	 * 删除文件
+	 * @param filePath 文件路径
+	 * @return 文件
+	 * @throws Exception
+	 */
+	public static Boolean deleteFile(String filePath) throws Exception {
+		File file = new File(filePath);
+		return file.delete();
 	}
 	
 }
