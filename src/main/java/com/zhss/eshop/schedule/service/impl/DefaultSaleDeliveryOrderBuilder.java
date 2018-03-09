@@ -8,8 +8,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.logistics.service.LogisticsService;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
+import com.zhss.eshop.wms.constant.SaleDeliveryOrderStatus;
+import com.zhss.eshop.wms.domain.LogisticOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderItemDTO;
 import com.zhss.eshop.wms.domain.SendOutOrderDTO;
@@ -39,6 +42,11 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 */
 	@Autowired
 	private DateProvider dateProvider;
+	/**
+	 * 物流中心接口
+	 */
+	@Autowired
+	private LogisticsService logisticsService;
 	
 	/**
 	 * 设置订单相关的数据
@@ -110,8 +118,8 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 */
 	public SaleDeliveryOrderBuilder createLogisticOrder(
 			OrderInfoDTO order) throws Exception {
-		
-		
+		LogisticOrderDTO logisticOrder = logisticsService.applyLogisticOrder(order);
+		saleDeliveryOrder.setLogisticOrder(logisticOrder); 
 		return this;
 	}
 	
@@ -120,6 +128,7 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 * @return 销售出库单builder
 	 */
 	public SaleDeliveryOrderBuilder initStatus() throws Exception {
+		saleDeliveryOrder.setSaleDeliveryOrderStatus(SaleDeliveryOrderStatus.EDITING);  
 		return this;
 	}
 	
@@ -128,6 +137,8 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 * @return 销售出库单builder
 	 */
 	public SaleDeliveryOrderBuilder initTimes() throws Exception {
+		saleDeliveryOrder.setGmtCreate(dateProvider.getCurrentTime()); 
+		saleDeliveryOrder.setGmtModified(dateProvider.getCurrentTime()); 
 		return this;
 	}
 	

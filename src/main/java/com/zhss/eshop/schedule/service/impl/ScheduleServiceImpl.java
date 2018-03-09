@@ -16,6 +16,7 @@ import com.zhss.eshop.schedule.service.ScheduleService;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
+import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 import com.zhss.eshop.wms.service.WmsService;
 
 /**
@@ -33,6 +34,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	@Autowired
 	private WmsService wmsService;
+	/**
+	 * 销售出库单构建器工厂
+	 */
+	@Autowired
+	private SaleDeliveryOrderBuilderFactory saleDeliveryOrderBuilderFactory;
 	
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
@@ -150,11 +156,27 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	public Boolean scheduleSaleDelivery(OrderInfoDTO orderDTO) {
-		// 1、完成商品发货的调度：订单里的每个商品条目从哪个货位的哪个批次去发货，发几件
-		// 2、创建销售出库单：根据调度好的数据，完成对应的销售出库单的创建
-		
-		return true;
+	public Boolean scheduleSaleDelivery(OrderInfoDTO order) {
+		try {
+			SaleDeliveryOrderBuilder saleDeliveryOrderBuilder = 
+					saleDeliveryOrderBuilderFactory.get();
+			
+			SaleDeliveryOrderDTO saleDeliveryOrder = saleDeliveryOrderBuilder
+					.setOrderRelatedData(order)
+					.createSaleDeliveryOrderItems(order.getOrderItems())
+					.createSendOutOrder(order)
+					.createLogisticOrder(order)
+					.initStatus()
+					.initTimes()
+					.create();
+			
+			wmsService.createSaleDeliveryOrder(saleDeliveryOrder);
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
