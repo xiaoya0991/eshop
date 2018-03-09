@@ -86,15 +86,11 @@ public class SendOutOrderDTO extends AbstractObject {
 	 */
 	private String orderComment;
 	/**
-	 * 销售出库单的状态
-	 */
-	private Integer saleDeliveryOrderStatus;
-	/**
-	 * 销售出库单的创建时间
+	 * 创建时间
 	 */
 	private Date gmtCreate;
 	/**
-	 * 销售出库单的修改时间
+	 * 修改时间
 	 */
 	private Date gmtModified;
 	/**
@@ -197,12 +193,6 @@ public class SendOutOrderDTO extends AbstractObject {
 	}
 	public void setOrderComment(String orderComment) {
 		this.orderComment = orderComment;
-	}
-	public Integer getSaleDeliveryOrderStatus() {
-		return saleDeliveryOrderStatus;
-	}
-	public void setSaleDeliveryOrderStatus(Integer saleDeliveryOrderStatus) {
-		this.saleDeliveryOrderStatus = saleDeliveryOrderStatus;
 	}
 	public Date getGmtCreate() {
 		return gmtCreate;
