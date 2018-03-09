@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.zhss.eshop.order.domain.OrderInfoDTO;
-import com.zhss.eshop.wms.domain.GoodsAllcationStockDetailDTO;
+import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
@@ -78,7 +78,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param goodsSkuId 商品sku id
 	 * @return 货位库存明细
 	 */
-	public List<GoodsAllcationStockDetailDTO> listStockDetailsByGoodsSkuId(Long goodsSkuId) {
+	public List<GoodsAllocationStockDetailDTO> listStockDetailsByGoodsSkuId(Long goodsSkuId) {
 		return null;
 	}
 

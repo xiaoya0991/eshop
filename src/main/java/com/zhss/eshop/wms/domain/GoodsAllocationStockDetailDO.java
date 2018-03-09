@@ -9,7 +9,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class GoodsAllcationStockDetailDO extends AbstractObject {
+public class GoodsAllocationStockDetailDO extends AbstractObject {
 
 	/**
 	 * id
