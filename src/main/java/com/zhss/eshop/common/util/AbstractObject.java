@@ -28,6 +28,17 @@ public class AbstractObject {
 	}
 	
 	/**
+	 * 浅度克隆
+	 * @param clazz
+	 * @return
+	 * @throws Exception
+	 */
+	public <T> T clone(T target) throws Exception {
+		BeanCopierUtils.copyProperties(this, target);  
+		return target;
+	}
+	
+	/**
 	 * 深度克隆
 	 * @param clazz
 	 * @param direction
