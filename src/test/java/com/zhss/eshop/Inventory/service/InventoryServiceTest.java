@@ -40,7 +40,7 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderPutOnItemDTO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-public class InventoryFacadeServiceTest {
+public class InventoryServiceTest {
 	
 	/**
 	 * 库存中心service组件

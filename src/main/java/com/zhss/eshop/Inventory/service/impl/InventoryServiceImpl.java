@@ -20,6 +20,7 @@ import com.zhss.eshop.Inventory.updater.PayOrderStockUpdaterFactory;
 import com.zhss.eshop.Inventory.updater.PurchaseInputStockUpdaterFactory;
 import com.zhss.eshop.Inventory.updater.ReturnGoodsInputStockUpdaterFactory;
 import com.zhss.eshop.Inventory.updater.SubmitOrderStockUpdaterFactory;
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -79,6 +80,11 @@ public class InventoryServiceImpl implements InventoryService {
 	 */
 	@Autowired
 	private StockUpdateResultManager goodsStockUpdateManager;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
@@ -222,5 +228,37 @@ public class InventoryServiceImpl implements InventoryService {
 		}
 		return 0L;
 	}
-
+	
+	/**
+	 * 设置销售库存
+	 * @param goodsSkuId 商品sku id
+	 * @param saleStockQuantity 销售库存
+	 * @return 处理结果
+	 */
+	public Boolean setSaleStockQuantity(Long goodsSkuId, Long saleStockQuantity) {
+		try {
+			GoodsStockDO goodsStock = goodsStockDAO.getGoodsStockBySkuId(goodsSkuId);
+			
+			if(goodsStock == null) {
+				goodsStock = new GoodsStockDO();
+				goodsStock.setGoodsSkuId(goodsSkuId); 
+				goodsStock.setSaleStockQuantity(saleStockQuantity); 
+				goodsStock.setLockedStockQuantity(0L); 
+				goodsStock.setSaledStockQuantity(0L);  
+				goodsStock.setStockStatus(saleStockQuantity > 0L ? 1 : 0); 
+				goodsStock.setGmtCreate(dateProvider.getCurrentTime()); 
+				goodsStock.setGmtModified(dateProvider.getCurrentTime()); 
+				goodsStockDAO.saveGoodsStock(goodsStock);
+			} else {
+				goodsStock.setSaleStockQuantity(saleStockQuantity); 
+				goodsStockDAO.updateGoodsStock(goodsStock);
+			}
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
 }
