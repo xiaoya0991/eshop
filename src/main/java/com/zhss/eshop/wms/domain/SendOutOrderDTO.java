@@ -1,4 +1,4 @@
-package com.zhss.eshop.order.domain;
+package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
 import java.util.List;
@@ -6,20 +6,20 @@ import java.util.List;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 订单信息DTO
+ * 发货单
  * @author zhonghuashishan
  *
  */
-public class OrderInfoDTO extends AbstractObject {
-
+public class SendOutOrderDTO extends AbstractObject {
+	
 	/**
 	 * id
 	 */
 	private Long id;
 	/**
-	 * 订单编号
+	 * 销售出库单id
 	 */
-	private String orderNo;
+	private Long saleDeliveryOrderId;
 	/**
 	 * 用户账号id
 	 */
@@ -29,9 +29,14 @@ public class OrderInfoDTO extends AbstractObject {
 	 */
 	private String username;
 	/**
-	 * 订单状态
+	 * 订单id
 	 */
-	private Integer orderStatus;
+	private Long orderId;
+	/**
+	 * 订单编号
+	 */
+	private String orderNo;
+	
 	/**
 	 * 收货人
 	 */
@@ -81,31 +86,29 @@ public class OrderInfoDTO extends AbstractObject {
 	 */
 	private String orderComment;
 	/**
-	 * 是否发表了评论
-	 */
-	private Integer publishedComment;
-	/**
-	 * 确认收货时间
-	 */
-	private Date confirmReceiptTime;
-	/**
-	 * 销售出库单的创建时间
+	 * 创建时间
 	 */
 	private Date gmtCreate;
 	/**
-	 * 销售出库单的修改时间
+	 * 修改时间
 	 */
 	private Date gmtModified;
 	/**
-	 * 订单包含的订单条目
+	 * 发货单条目
 	 */
-	private List<OrderItemDTO> orderItems;
+	private List<SendOutOrderItemDTO> sendOutOrderItems;
 	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Long getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
 	public String getOrderNo() {
 		return orderNo;
@@ -118,18 +121,6 @@ public class OrderInfoDTO extends AbstractObject {
 	}
 	public void setUserAccountId(Long userAccountId) {
 		this.userAccountId = userAccountId;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public Integer getOrderStatus() {
-		return orderStatus;
-	}
-	public void setOrderStatus(Integer orderStatus) {
-		this.orderStatus = orderStatus;
 	}
 	public String getConsignee() {
 		return consignee;
@@ -203,18 +194,6 @@ public class OrderInfoDTO extends AbstractObject {
 	public void setOrderComment(String orderComment) {
 		this.orderComment = orderComment;
 	}
-	public Integer getPublishedComment() {
-		return publishedComment;
-	}
-	public void setPublishedComment(Integer publishedComment) {
-		this.publishedComment = publishedComment;
-	}
-	public Date getConfirmReceiptTime() {
-		return confirmReceiptTime;
-	}
-	public void setConfirmReceiptTime(Date confirmReceiptTime) {
-		this.confirmReceiptTime = confirmReceiptTime;
-	}
 	public Date getGmtCreate() {
 		return gmtCreate;
 	}
@@ -227,11 +206,23 @@ public class OrderInfoDTO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<OrderItemDTO> getOrderItems() {
-		return orderItems;
+	public Long getSaleDeliveryOrderId() {
+		return saleDeliveryOrderId;
 	}
-	public void setOrderItems(List<OrderItemDTO> orderItems) {
-		this.orderItems = orderItems;
+	public void setSaleDeliveryOrderId(Long saleDeliveryOrderId) {
+		this.saleDeliveryOrderId = saleDeliveryOrderId;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public List<SendOutOrderItemDTO> getSendOutOrderItems() {
+		return sendOutOrderItems;
+	}
+	public void setSendOutOrderItems(List<SendOutOrderItemDTO> sendOutOrderItems) {
+		this.sendOutOrderItems = sendOutOrderItems;
 	}
 	
 }

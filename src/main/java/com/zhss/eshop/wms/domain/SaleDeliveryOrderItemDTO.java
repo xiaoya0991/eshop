@@ -1,28 +1,25 @@
-package com.zhss.eshop.order.domain;
+package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 订单条目DTO类
+ * 销售出库单条目
  * @author zhonghuashishan
  *
  */
-public class OrderItemDTO extends AbstractObject {
+public class SaleDeliveryOrderItemDTO extends AbstractObject {
 
 	/**
 	 * id
 	 */
 	private Long id;
 	/**
-	 * 订单id
+	 * 销售出库单id
 	 */
-	private Long orderInfoId;
-	/**
-	 * 商品id
-	 */
-	private Long goodsId;
+	private Long saleDeliveryOrderId;
 	/**
 	 * 商品sku id
 	 */
@@ -44,21 +41,21 @@ public class OrderItemDTO extends AbstractObject {
 	 */
 	private Double goodsGrossWeight;
 	/**
-	 * 商品sku的购买数量
+	 * 购买数量
 	 */
 	private Long purchaseQuantity;
 	/**
-	 * 商品sku的购买价格
+	 * 购买价格
 	 */
 	private Double purchasePrice;
 	/**
-	 * 商品sku使用的促销活动id
+	 * 使用的促销活动的id
 	 */
 	private Long promotionActivityId;
 	/**
 	 * 商品长度
 	 */
-	private Double goodsLength;
+	private Double goodsLenght;
 	/**
 	 * 商品宽度
 	 */
@@ -68,13 +65,21 @@ public class OrderItemDTO extends AbstractObject {
 	 */
 	private Double goodsHeight;
 	/**
-	 * 订单条目的创建时间
+	 * 创建时间
 	 */
 	private Date gmtCreate;
 	/**
-	 * 订单条目的修改时间
+	 * 修改时间
 	 */
 	private Date gmtModified;
+	/**
+	 * 商品拣货条目
+	 */
+	private List<SaleDeliveryOrderPickingItemDTO> pickingItems;
+	/**
+	 * 发货明细
+	 */
+	private List<SaleDeliveryOrderSendOutDetailDTO> sendOutItems;
 	
 	public Long getId() {
 		return id;
@@ -82,17 +87,11 @@ public class OrderItemDTO extends AbstractObject {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getOrderInfoId() {
-		return orderInfoId;
+	public Long getSaleDeliveryOrderId() {
+		return saleDeliveryOrderId;
 	}
-	public void setOrderInfoId(Long orderInfoId) {
-		this.orderInfoId = orderInfoId;
-	}
-	public Long getGoodsId() {
-		return goodsId;
-	}
-	public void setGoodsId(Long goodsId) {
-		this.goodsId = goodsId;
+	public void setSaleDeliveryOrderId(Long saleDeliveryOrderId) {
+		this.saleDeliveryOrderId = saleDeliveryOrderId;
 	}
 	public Long getGoodsSkuId() {
 		return goodsSkuId;
@@ -142,11 +141,11 @@ public class OrderItemDTO extends AbstractObject {
 	public void setPromotionActivityId(Long promotionActivityId) {
 		this.promotionActivityId = promotionActivityId;
 	}
-	public Double getGoodsLength() {
-		return goodsLength;
+	public Double getGoodsLenght() {
+		return goodsLenght;
 	}
-	public void setGoodsLength(Double goodsLength) {
-		this.goodsLength = goodsLength;
+	public void setGoodsLenght(Double goodsLenght) {
+		this.goodsLenght = goodsLenght;
 	}
 	public Double getGoodsWidth() {
 		return goodsWidth;
@@ -171,6 +170,18 @@ public class OrderItemDTO extends AbstractObject {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public List<SaleDeliveryOrderPickingItemDTO> getPickingItems() {
+		return pickingItems;
+	}
+	public void setPickingItems(List<SaleDeliveryOrderPickingItemDTO> pickingItems) {
+		this.pickingItems = pickingItems;
+	}
+	public List<SaleDeliveryOrderSendOutDetailDTO> getSendOutItems() {
+		return sendOutItems;
+	}
+	public void setSendOutItems(List<SaleDeliveryOrderSendOutDetailDTO> sendOutItems) {
+		this.sendOutItems = sendOutItems;
 	}
 	
 }

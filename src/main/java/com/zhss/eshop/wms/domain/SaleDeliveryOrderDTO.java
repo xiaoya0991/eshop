@@ -1,14 +1,17 @@
 package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
+import java.util.List;
+
+import com.zhss.eshop.common.util.AbstractObject;
 
 /**
  * 销售出库单DTO
  * @author zhonghuashishan
  *
  */
-public class SaleDeliveryOrderDTO {
-
+public class SaleDeliveryOrderDTO extends AbstractObject {
+	
 	/**
 	 * id
 	 */
@@ -89,6 +92,18 @@ public class SaleDeliveryOrderDTO {
 	 * 销售出库单的修改时间
 	 */
 	private Date gmtModified;
+	/**
+	 * 销售出库单条目
+	 */
+	private List<SaleDeliveryOrderItemDTO> saleDeliveryOrderItems;
+	/**
+	 * 发货单
+	 */
+	private SendOutOrderDTO sendOutOrder;
+	/**
+	 * 物流单
+	 */
+	private LogisticOrderDTO logisticOrder;
 	
 	public Long getId() {
 		return id;
@@ -209,6 +224,24 @@ public class SaleDeliveryOrderDTO {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public List<SaleDeliveryOrderItemDTO> getSaleDeliveryOrderItems() {
+		return saleDeliveryOrderItems;
+	}
+	public void setSaleDeliveryOrderItems(List<SaleDeliveryOrderItemDTO> saleDeliveryOrderItems) {
+		this.saleDeliveryOrderItems = saleDeliveryOrderItems;
+	}
+	public SendOutOrderDTO getSendOutOrder() {
+		return sendOutOrder;
+	}
+	public void setSendOutOrder(SendOutOrderDTO sendOutOrder) {
+		this.sendOutOrder = sendOutOrder;
+	}
+	public LogisticOrderDTO getLogisticOrder() {
+		return logisticOrder;
+	}
+	public void setLogisticOrder(LogisticOrderDTO logisticOrder) {
+		this.logisticOrder = logisticOrder;
 	}
 	
 }

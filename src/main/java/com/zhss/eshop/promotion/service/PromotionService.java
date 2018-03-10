@@ -2,6 +2,7 @@ package com.zhss.eshop.promotion.service;
 
 import java.util.List;
 
+import com.zhss.eshop.promotion.domain.CouponDTO;
 import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
 
 /**
@@ -24,5 +25,12 @@ public interface PromotionService {
 	 * @return 促销活动
 	 */
 	PromotionActivityDTO getById(Long id);
+	
+	/**
+	 * 查询用户当前可以使用的有效优惠券
+	 * @param userAccountId 用户账号id
+	 * @return 有效优惠券
+	 */
+	List<CouponDTO> listValidByUserAccountId(Long userAccountId);
 	
 }

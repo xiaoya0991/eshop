@@ -1,24 +1,24 @@
-package com.zhss.eshop.order.domain;
+package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 订单条目DTO类
+ * 返货单条目
  * @author zhonghuashishan
  *
  */
-public class OrderItemDTO extends AbstractObject {
+public class SendOutOrderItemDTO extends AbstractObject {
 
 	/**
 	 * id
 	 */
 	private Long id;
 	/**
-	 * 订单id
+	 * 发货单id
 	 */
-	private Long orderInfoId;
+	private Long sendOutOrderId;
 	/**
 	 * 商品id
 	 */
@@ -44,21 +44,17 @@ public class OrderItemDTO extends AbstractObject {
 	 */
 	private Double goodsGrossWeight;
 	/**
-	 * 商品sku的购买数量
+	 * 购买数量
 	 */
 	private Long purchaseQuantity;
 	/**
-	 * 商品sku的购买价格
+	 * 购买价格
 	 */
 	private Double purchasePrice;
 	/**
-	 * 商品sku使用的促销活动id
-	 */
-	private Long promotionActivityId;
-	/**
 	 * 商品长度
 	 */
-	private Double goodsLength;
+	private Double goodsLenght;
 	/**
 	 * 商品宽度
 	 */
@@ -68,11 +64,11 @@ public class OrderItemDTO extends AbstractObject {
 	 */
 	private Double goodsHeight;
 	/**
-	 * 订单条目的创建时间
+	 * 创建时间
 	 */
 	private Date gmtCreate;
 	/**
-	 * 订单条目的修改时间
+	 * 修改时间
 	 */
 	private Date gmtModified;
 	
@@ -81,18 +77,6 @@ public class OrderItemDTO extends AbstractObject {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Long getOrderInfoId() {
-		return orderInfoId;
-	}
-	public void setOrderInfoId(Long orderInfoId) {
-		this.orderInfoId = orderInfoId;
-	}
-	public Long getGoodsId() {
-		return goodsId;
-	}
-	public void setGoodsId(Long goodsId) {
-		this.goodsId = goodsId;
 	}
 	public Long getGoodsSkuId() {
 		return goodsSkuId;
@@ -136,17 +120,11 @@ public class OrderItemDTO extends AbstractObject {
 	public void setPurchasePrice(Double purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
-	public Long getPromotionActivityId() {
-		return promotionActivityId;
+	public Double getGoodsLenght() {
+		return goodsLenght;
 	}
-	public void setPromotionActivityId(Long promotionActivityId) {
-		this.promotionActivityId = promotionActivityId;
-	}
-	public Double getGoodsLength() {
-		return goodsLength;
-	}
-	public void setGoodsLength(Double goodsLength) {
-		this.goodsLength = goodsLength;
+	public void setGoodsLenght(Double goodsLenght) {
+		this.goodsLenght = goodsLenght;
 	}
 	public Double getGoodsWidth() {
 		return goodsWidth;
@@ -171,6 +149,18 @@ public class OrderItemDTO extends AbstractObject {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public Long getSendOutOrderId() {
+		return sendOutOrderId;
+	}
+	public void setSendOutOrderId(Long sendOutOrderId) {
+		this.sendOutOrderId = sendOutOrderId;
+	}
+	public Long getGoodsId() {
+		return goodsId;
+	}
+	public void setGoodsId(Long goodsId) {
+		this.goodsId = goodsId;
 	}
 	
 }
