@@ -1,13 +1,16 @@
 package com.zhss.eshop.commodity.domain;
 
 import java.util.Date;
+import java.util.List;
+
+import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 商品sku DTO
+ * 商品sku
  * @author zhonghuashishan
  *
  */
-public class GoodsSkuDTO {
+public class GoodsSkuDTO extends AbstractObject {
 
 	/**
 	 * id
@@ -58,6 +61,10 @@ public class GoodsSkuDTO {
 	 */
 	private Double discountPrice;
 	/**
+	 * 销售库存
+	 */
+	private Long saleStockQuantity;
+	/**
 	 * 创建时间
 	 */
 	private Date gmtCreate;
@@ -65,6 +72,10 @@ public class GoodsSkuDTO {
 	 * 修改文件
 	 */
 	private Date gmtModified;
+	/**
+	 * 销售属性值
+	 */
+	List<GoodsSkuSalePropertyValueDTO> propertyValues;
 	
 	public Long getId() {
 		return id;
@@ -149,6 +160,18 @@ public class GoodsSkuDTO {
 	}
 	public void setSaleProperties(String saleProperties) {
 		this.saleProperties = saleProperties;
+	}
+	public List<GoodsSkuSalePropertyValueDTO> getPropertyValues() {
+		return propertyValues;
+	}
+	public void setPropertyValues(List<GoodsSkuSalePropertyValueDTO> propertyValues) {
+		this.propertyValues = propertyValues;
+	}
+	public Long getSaleStockQuantity() {
+		return saleStockQuantity;
+	}
+	public void setSaleStockQuantity(Long saleStockQuantity) {
+		this.saleStockQuantity = saleStockQuantity;
 	}
 	
 }

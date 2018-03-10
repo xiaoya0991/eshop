@@ -1,0 +1,66 @@
+package com.zhss.eshop.commodity.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.zhss.eshop.commodity.domain.GoodsDTO;
+import com.zhss.eshop.commodity.domain.GoodsQuery;
+import com.zhss.eshop.commodity.domain.GoodsVO;
+import com.zhss.eshop.commodity.service.GoodsService;
+import com.zhss.eshop.common.util.ObjectUtils;
+
+/**
+ * 商品管理controller组件
+ * @author zhonghuashishan
+ *
+ */
+@RestController
+@RequestMapping("/commodity/goods")  
+public class GoodsController {
+
+	private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
+	
+	/**
+	 * 商品管理service组件
+	 */
+	@Autowired
+	private GoodsService goodsService;
+	
+	/**
+	 * 分页查询商品
+	 * @param query 查询条件
+	 * @return 商品
+	 */
+	@GetMapping("/") 
+	public List<GoodsVO> listByPage(GoodsQuery query) {
+		try {
+			return ObjectUtils.convertList(goodsService.listByPage(query), GoodsVO.class);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return new ArrayList<GoodsVO>();
+		}
+	}
+	
+	/**
+	 * 新增商品
+	 * @param goods 商品
+	 */
+	@PostMapping("/")  
+	public Long save(GoodsVO goods) throws Exception {
+		try {
+			return goodsService.save(goods.clone(GoodsDTO.class));  
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
+	}
+	
+}

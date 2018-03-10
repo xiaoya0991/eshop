@@ -1,9 +1,13 @@
 package com.zhss.eshop.commodity.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.commodity.dao.GoodsDAO;
+import com.zhss.eshop.commodity.domain.GoodsDO;
+import com.zhss.eshop.commodity.domain.GoodsQuery;
 import com.zhss.eshop.commodity.mapper.GoodsMapper;
 
 /**
@@ -36,6 +40,24 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 */
 	public Long countByBrandId(Long brandId) {
 		return goodsMapper.countByBrandId(brandId);
+	}
+	
+	/**
+	 * 分页查询商品
+	 * @param query 查询条件
+	 * @return 商品
+	 */
+	public List<GoodsDO> listByPage(GoodsQuery query) {
+		return goodsMapper.listByPage(query);
+	}
+	
+	/**
+	 * 新增商品
+	 * @param goods 商品
+	 */
+	public Long save(GoodsDO goods) {
+		goodsMapper.save(goods); 
+		return goods.getId();
 	}
 	
 }

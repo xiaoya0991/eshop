@@ -25,6 +25,13 @@ public interface CategoryPropertyRelationshipDAO {
 	List<CategoryPropertyRelationshipDO> listByCategoryId(Long categoryId) throws Exception;
 	
 	/**
+	 * 根据类目id查询类目与属性的关联关系
+	 * @param categoryId 类目id
+	 * @return 类目与属性的关联关系
+	 */
+	CategoryPropertyRelationshipDO getById(Long id);
+	
+	/**
 	 * 根据类目id删除类目与属性的关联关系
 	 * @param categoryId 类目id
 	 */

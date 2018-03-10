@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.zhss.eshop.commodity.domain.BrandDO;
 import com.zhss.eshop.commodity.domain.BrandDTO;
 import com.zhss.eshop.commodity.domain.BrandQuery;
 

@@ -2,8 +2,6 @@ package com.zhss.eshop.commodity.dao.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,9 +18,6 @@ import com.zhss.eshop.commodity.mapper.CategoryPropertyRelationshipMapper;
 public class CategoryPropertyRelationshipDAOImpl 
 		implements CategoryPropertyRelationshipDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(
-			CategoryPropertyRelationshipDAOImpl.class);
-	
 	/**
 	 * 类目与属性关系管理mapper组件
 	 */
@@ -34,13 +29,8 @@ public class CategoryPropertyRelationshipDAOImpl
 	 * @param relation 类目属性关系
 	 */
 	public Boolean save(CategoryPropertyRelationshipDO relation) {
-		try {
-			categoryPropertyRelationMapper.save(relation); 
-			return true;
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
+		categoryPropertyRelationMapper.save(relation); 
+		return true;
 	}
 	
 	/**
@@ -49,12 +39,16 @@ public class CategoryPropertyRelationshipDAOImpl
 	 * @return 类目与属性的关联关系
 	 */
 	public List<CategoryPropertyRelationshipDO> listByCategoryId(Long categoryId) {
-		try {
-			return categoryPropertyRelationMapper.listByCategoryId(categoryId);
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
+		return categoryPropertyRelationMapper.listByCategoryId(categoryId);
+	}
+	
+	/**
+	 * 根据类目id查询类目与属性的关联关系
+	 * @param categoryId 类目id
+	 * @return 类目与属性的关联关系
+	 */
+	public CategoryPropertyRelationshipDO getById(Long id) {
+		return categoryPropertyRelationMapper.getById(id);
 	}
 	
 	/**

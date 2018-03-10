@@ -1,5 +1,10 @@
 package com.zhss.eshop.commodity.dao;
 
+import java.util.List;
+
+import com.zhss.eshop.commodity.domain.GoodsDO;
+import com.zhss.eshop.commodity.domain.GoodsQuery;
+
 /**
  * 商品管理DAO组件接口
  * @author zhonghuashishan
@@ -20,5 +25,18 @@ public interface GoodsDAO {
 	 * @return 商品数量
 	 */
 	Long countByBrandId(Long brandId);
+	
+	/**
+	 * 分页查询商品
+	 * @param query 查询条件
+	 * @return 商品
+	 */
+	List<GoodsDO> listByPage(GoodsQuery query);
+	
+	/**
+	 * 新增商品
+	 * @param goods 商品
+	 */
+	Long save(GoodsDO goods);
 	
 }

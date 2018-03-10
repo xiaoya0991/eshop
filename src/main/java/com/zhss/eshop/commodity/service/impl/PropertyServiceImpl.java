@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.commodity.dao.PropertyDAO;
 import com.zhss.eshop.commodity.domain.PropertyDO;
@@ -21,6 +22,7 @@ import com.zhss.eshop.common.util.DateProvider;
  *
  */
 @Service
+@Transactional
 public class PropertyServiceImpl implements PropertyService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PropertyServiceImpl.class);
