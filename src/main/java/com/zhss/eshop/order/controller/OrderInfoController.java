@@ -3,15 +3,13 @@ package com.zhss.eshop.order.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zhss.eshop.common.util.CloneDirection;
-import com.zhss.eshop.membership.domain.DeliveryAddressDTO;
-import com.zhss.eshop.membership.domain.DeliveryAddressVO;
+import com.zhss.eshop.order.domain.CalculateCouponeDiscountPriceVO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderInfoVO;
 import com.zhss.eshop.order.service.OrderInfoService;
@@ -41,13 +39,11 @@ public class OrderInfoController {
 	 * @param deliveryAddress
 	 * @return
 	 */
-	@GetMapping("/price")  
-	public OrderInfoVO calculateOrderPrice(@RequestBody OrderInfoVO order, 
-			@RequestBody DeliveryAddressVO deliveryAddress) {
+	@PostMapping("/price")  
+	public OrderInfoVO calculateOrderPrice(@RequestBody OrderInfoVO order) {
 		try {
 			OrderInfoDTO resultOrder = orderInfoService.calculateOrderPrice(
-					order.clone(OrderInfoDTO.class, CloneDirection.FORWARD), 
-					deliveryAddress.clone(DeliveryAddressDTO.class));  
+					order.clone(OrderInfoDTO.class, CloneDirection.FORWARD));  
 			return resultOrder.clone(OrderInfoVO.class, CloneDirection.OPPOSITE);
 		} catch (Exception e) {
 			logger.error("error", e); 
@@ -61,17 +57,20 @@ public class OrderInfoController {
 	 * @param coupon
 	 * @return
 	 */
-	@GetMapping("/coupon")  
+	@PostMapping("/coupon")  
 	public OrderInfoVO calculateCouponDiscountPrice(
-			OrderInfoVO order, CouponVO coupon) {
+			@RequestBody CalculateCouponeDiscountPriceVO vo) {
 		try {
+			OrderInfoVO order = vo.getOrder();
+			CouponVO coupon = vo.getCoupon();
+			
 			OrderInfoDTO resultOrder = orderInfoService.calculateCouponDiscountPrice(
 					order.clone(OrderInfoDTO.class, CloneDirection.FORWARD), 
 					coupon.clone(CouponDTO.class));  
 			return resultOrder.clone(OrderInfoVO.class, CloneDirection.OPPOSITE);
 		} catch (Exception e) {
 			logger.error("error", e); 
-			return order;
+			return vo.getOrder();
 		}
 	}
 	

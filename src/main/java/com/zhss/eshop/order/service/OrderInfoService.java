@@ -1,6 +1,5 @@
 package com.zhss.eshop.order.service;
 
-import com.zhss.eshop.membership.domain.DeliveryAddressDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.promotion.domain.CouponDTO;
 
@@ -15,8 +14,7 @@ public interface OrderInfoService {
 	 * 计算订单价格
 	 * @param order 订单
 	 */
-	OrderInfoDTO calculateOrderPrice(OrderInfoDTO order, 
-			DeliveryAddressDTO deliveryAddress);
+	OrderInfoDTO calculateOrderPrice(OrderInfoDTO order);
 	
 	/**
 	 * 计算优惠券抵扣的金额

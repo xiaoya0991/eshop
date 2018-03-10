@@ -1,12 +1,16 @@
 package com.zhss.eshop.order.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.membership.domain.DeliveryAddressDTO;
+import com.zhss.eshop.order.constant.OrderStatus;
+import com.zhss.eshop.order.constant.PublishedComment;
 import com.zhss.eshop.order.dao.OrderInfoDAO;
 import com.zhss.eshop.order.dao.OrderItemDAO;
 import com.zhss.eshop.order.domain.OrderInfoDO;
@@ -35,6 +39,7 @@ import com.zhss.eshop.promotion.service.PromotionService;
  *
  */
 @Service
+@Transactional
 public class OrderInfoServiceImpl implements OrderInfoService {
 
 	/**
@@ -82,12 +87,13 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * 计算订单价格
 	 * @param order 订单
 	 */
-	public OrderInfoDTO calculateOrderPrice(OrderInfoDTO order,
-			DeliveryAddressDTO deliveryAddress) {
+	public OrderInfoDTO calculateOrderPrice(OrderInfoDTO order) {
 		// 定义订单的各种价格
 		Double totalAmount = 0.0;
 		Double discountAmount = 0.0;
 		Double freight = 0.0;
+		
+		List<OrderItemDTO> giftOrderItems = new ArrayList<OrderItemDTO>();
 		
 		for(OrderItemDTO item : order.getOrderItems()) {
 			// 查询订单条目使用的促销活动
@@ -113,10 +119,10 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 			PromotionActivityResult result = promotionActivityCalculator.calculate(
 					item, promotionActivity); 
 			discountAmount += result.getDiscountAmount();
-			order.getOrderItems().addAll(result.getOrderItems());
+			giftOrderItems.addAll(result.getOrderItems());
 			
 			// 计算订单条目的运费
-			freight += freightCalculator.calculate(item, deliveryAddress, result);
+			freight += freightCalculator.calculate(order, item, result);
 		}
 		
 		// 给订单设置计算后的结果（同时已经包含了所有的赠品）
@@ -124,6 +130,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		order.setDiscountAmount(discountAmount); 
 		order.setFreight(freight); 
 		order.setPayableAmount(totalAmount + freight - discountAmount);  
+		order.getOrderItems().addAll(giftOrderItems);
 		
 		return order;
 	}
@@ -171,6 +178,8 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 */
 	public OrderInfoDTO save(OrderInfoDTO order) throws Exception {
 		order.setOrderNo(UUID.randomUUID().toString().replace("-", ""));  
+		order.setPublishedComment(PublishedComment.NO); 
+		order.setOrderStatus(OrderStatus.WAITING_FOR_PAY);  
 		order.setGmtCreate(dateProvider.getCurrentTime()); 
 		order.setGmtModified(dateProvider.getCurrentTime());
 		
@@ -180,7 +189,6 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 			orderItem.setOrderInfoId(orderInfoId); 
 			orderItem.setGmtCreate(dateProvider.getCurrentTime()); 
 			orderItem.setGmtModified(dateProvider.getCurrentTime());  
-			
 			orderItemDAO.save(orderItem.clone(OrderItemDO.class));   
 		}
 		
