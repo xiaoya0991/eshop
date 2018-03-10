@@ -1,7 +1,6 @@
 package com.zhss.eshop.promotion.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
@@ -10,7 +9,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class PromotionActivityDTO extends AbstractObject {
+public class PromotionActivityDO extends AbstractObject {
 
 	/**
 	 * id
@@ -52,10 +51,6 @@ public class PromotionActivityDTO extends AbstractObject {
 	 * 促销活动的修改时间
 	 */
 	private Date gmtModified;
-	/**
-	 * 促销活动与商品的关联关系
-	 */
-	private List<PromotionActivityGoodsRelationDTO> relations;
 	
 	public Long getId() {
 		return id;
@@ -116,12 +111,6 @@ public class PromotionActivityDTO extends AbstractObject {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
-	}
-	public List<PromotionActivityGoodsRelationDTO> getRelations() {
-		return relations;
-	}
-	public void setRelations(List<PromotionActivityGoodsRelationDTO> relations) {
-		this.relations = relations;
 	}
 	
 }

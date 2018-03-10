@@ -10,7 +10,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class PromotionActivityDTO extends AbstractObject {
+public class PromotionActivityVO extends AbstractObject {
 
 	/**
 	 * id
@@ -55,7 +55,7 @@ public class PromotionActivityDTO extends AbstractObject {
 	/**
 	 * 促销活动与商品的关联关系
 	 */
-	private List<PromotionActivityGoodsRelationDTO> relations;
+	private List<PromotionActivityGoodsRelationVO> relations;
 	
 	public Long getId() {
 		return id;
@@ -117,10 +117,10 @@ public class PromotionActivityDTO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<PromotionActivityGoodsRelationDTO> getRelations() {
+	public List<PromotionActivityGoodsRelationVO> getRelations() {
 		return relations;
 	}
-	public void setRelations(List<PromotionActivityGoodsRelationDTO> relations) {
+	public void setRelations(List<PromotionActivityGoodsRelationVO> relations) {
 		this.relations = relations;
 	}
 	
