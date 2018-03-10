@@ -55,4 +55,12 @@ public interface InventoryFacadeService {
 	 */
 	Long getSaleStockQuantity(Long goodsSkuId);
 	
+	/**
+	 * 设置销售库存
+	 * @param goodsSkuId 商品sku id
+	 * @param saleStockQuantity 销售库存
+	 * @return 处理结果
+	 */
+	Boolean setSaleStockQuantity(Long goodsSkuId, Long saleStockQuantity);
+	
 }
