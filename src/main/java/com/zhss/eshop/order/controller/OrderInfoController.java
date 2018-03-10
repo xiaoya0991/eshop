@@ -42,8 +42,8 @@ public class OrderInfoController {
 	 * @return
 	 */
 	@GetMapping("/price")  
-	public OrderInfoVO calculateOrderPrice(OrderInfoVO order, 
-			DeliveryAddressVO deliveryAddress) {
+	public OrderInfoVO calculateOrderPrice(@RequestBody OrderInfoVO order, 
+			@RequestBody DeliveryAddressVO deliveryAddress) {
 		try {
 			OrderInfoDTO resultOrder = orderInfoService.calculateOrderPrice(
 					order.clone(OrderInfoDTO.class, CloneDirection.FORWARD), 

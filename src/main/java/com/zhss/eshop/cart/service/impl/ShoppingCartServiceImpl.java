@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zhss.eshop.Inventory.service.InventoryFacadeService;
+import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.cart.dao.ShoppingCartDAO;
 import com.zhss.eshop.cart.dao.ShoppingCartItemDAO;
 import com.zhss.eshop.cart.domain.ShoppingCartDO;
@@ -57,7 +57,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	 * 库存中心对外接口service组件
 	 */
 	@Autowired
-	private InventoryFacadeService inventoryFacadeService;
+	private InventoryService inventoryService;
 	/**
 	 * 促销中心对外接口service组件
 	 */
@@ -183,7 +183,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	 * @throws Exception
 	 */
 	private void setStockRelatedData(ShoppingCartItemDTO item) throws Exception {
-		Long saleStockQuantity = inventoryFacadeService.getSaleStockQuantity(
+		Long saleStockQuantity = inventoryService.getSaleStockQuantity(
 				item.getGoodsSkuId());
 		item.setSaleStockQuantity(saleStockQuantity);
 	}

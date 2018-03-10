@@ -56,7 +56,7 @@ public interface OrderInfoMapper {
 				+ "#{invoiceTitle},"
 				+ "#{taxpayerId},"
 				+ "#{orderComment},"
-				+ "#{isPublishedComment},"
+				+ "#{publishedComment},"
 				+ "#{confirmReceiptTime},"
 				+ "#{gmtCreate},"
 				+ "#{gmtModified}"
