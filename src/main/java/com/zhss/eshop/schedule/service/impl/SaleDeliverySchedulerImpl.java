@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderItemDTO;
@@ -28,13 +29,18 @@ public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
 	 */
 	@Autowired
 	private WmsService wmsService;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 对订单条目进行发货调度
 	 * @param orderItem 订单条目
 	 * @return 销售出库单条目
 	 */
-	public SaleDeliveryOrderItemDTO schedule(OrderItemDTO orderItem) {
+	public SaleDeliveryOrderItemDTO schedule(OrderItemDTO orderItem) throws Exception {
 		// 构造好需要创建的销售出库单条目
 		SaleDeliveryOrderItemDTO saleDeliveryOrderItem = new SaleDeliveryOrderItemDTO();
 		saleDeliveryOrderItem.setGoodsSkuId(orderItem.getGoodsSkuId()); 
@@ -128,13 +134,13 @@ public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
 	 * @param stockDetail 库存明细
 	 */
 	private void updatePickingItem(Map<Long, SaleDeliveryOrderPickingItemDTO> pickingItemMap, 
-			GoodsAllocationStockDetailDTO stockDetail, Long pickingCount) {
+			GoodsAllocationStockDetailDTO stockDetail, Long pickingCount) throws Exception {
 		SaleDeliveryOrderPickingItemDTO pickingItem = pickingItemMap.get(
 				stockDetail.getGoodsAllocationId());
 		
 		if(pickingItem == null) {
-			pickingItemMap.put(stockDetail.getGoodsAllocationId(), 
-					createPickingItem(stockDetail.getGoodsAllocationId(), 0L));  
+			pickingItem = createPickingItem(stockDetail.getGoodsAllocationId(), 0L);
+			pickingItemMap.put(stockDetail.getGoodsAllocationId(), pickingItem);  
 		}
 		
 		pickingItem.setPickingCount(pickingItem.getPickingCount() + pickingCount);  
@@ -147,10 +153,12 @@ public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
 	 * @return 拣货条目
 	 */
 	private SaleDeliveryOrderPickingItemDTO createPickingItem(
-			Long goodsAllocationId, Long pickingCount) {
+			Long goodsAllocationId, Long pickingCount) throws Exception {
 		SaleDeliveryOrderPickingItemDTO pickingItem = new SaleDeliveryOrderPickingItemDTO();
 		pickingItem.setGoodsAllocationId(goodsAllocationId); 
 		pickingItem.setPickingCount(pickingCount);  
+		pickingItem.setGmtCreate(dateProvider.getCurrentTime());
+		pickingItem.setGmtModified(dateProvider.getCurrentTime()); 
 		return pickingItem;
 	}
 	
@@ -161,10 +169,12 @@ public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
 	 * @return 发货明细
 	 */
 	private SaleDeliveryOrderSendOutDetailDTO createSendOutDetail(
-			Long goodsAllocationStockDetailId, Long sendOutCount) {
+			Long goodsAllocationStockDetailId, Long sendOutCount) throws Exception {
 		SaleDeliveryOrderSendOutDetailDTO sendOutDetail = new SaleDeliveryOrderSendOutDetailDTO();
 		sendOutDetail.setGoodsAllocationStockDetailId(goodsAllocationStockDetailId);
 		sendOutDetail.setSendOutCount(sendOutCount);
+		sendOutDetail.setGmtCreate(dateProvider.getCurrentTime());
+		sendOutDetail.setGmtModified(dateProvider.getCurrentTime()); 
 		return sendOutDetail;
 	}
 	

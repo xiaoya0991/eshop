@@ -15,6 +15,6 @@ public interface SaleDeliveryScheduler {
 	 * @param orderItem 订单条目
 	 * @return 销售出库单条目
 	 */
-	SaleDeliveryOrderItemDTO schedule(OrderItemDTO orderItem);
+	SaleDeliveryOrderItemDTO schedule(OrderItemDTO orderItem) throws Exception;
 
 }
