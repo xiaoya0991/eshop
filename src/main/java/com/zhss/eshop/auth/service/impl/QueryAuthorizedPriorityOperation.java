@@ -1,7 +1,9 @@
 package com.zhss.eshop.auth.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -29,14 +31,6 @@ public class QueryAuthorizedPriorityOperation implements PriorityOperation<Boole
 	 */
 	@Autowired
 	private PriorityDAO priorityDAO;
-	
-	/**
-	 * 构造函数
-	 * @param accountId
-	 */
-	public QueryAuthorizedPriorityOperation(Long accountId) {
-		this.accountId = accountId;
-	}
 
 	/**
 	 * 执行这个操作
@@ -44,8 +38,11 @@ public class QueryAuthorizedPriorityOperation implements PriorityOperation<Boole
 	public Boolean doExecute(Priority priority) throws Exception { 
 		List<Priority> targetChildren = new ArrayList<Priority>();
 		
-		List<PriorityDO> children = priorityDAO.listAuthroziedByAccountId(
-				accountId, priority.getId());
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("accountId", accountId);
+		parameters.put("parentId", priority.getId());
+		
+		List<PriorityDO> children = priorityDAO.listAuthroziedByAccountId(parameters); 
 		for(PriorityDO child : children) {
 			Priority targetChild = child.clone(Priority.class);
 			targetChild.execute(this);
@@ -55,6 +52,14 @@ public class QueryAuthorizedPriorityOperation implements PriorityOperation<Boole
 		priority.setChildren(targetChildren); 
 		
 		return true;
-	}  
+	}
+
+	public Long getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
+	}
 	
 }

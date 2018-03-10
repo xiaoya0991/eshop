@@ -1,6 +1,7 @@
 package com.zhss.eshop.auth.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -137,7 +138,7 @@ public interface PriorityMapper {
 				+ "JOIN auth_priority p ON rpr.priority_id=p.id "
 				+ "WHERE acr.account_id=#{accountId} "
 				
-				+ "<if test='parentId = null'>"
+				+ "<if test='parentId == null'>"
 				+ "AND p.parent_id IS NULL "
 				+ "AND p.priority_type=1 "
 				+ "</if>"  
@@ -161,7 +162,7 @@ public interface PriorityMapper {
 				+ "JOIN auth_priority p ON apr.priority_id=p.id "
 				+ "WHERE apr.account_id=#{accountId} "
 				
-				+ "<if test='parentId = null'>"
+				+ "<if test='parentId == null'>"
 				+ "AND p.parent_id IS NULL "
 				+ "AND p.priority_type=1 "
 				+ "</if>"  
@@ -183,9 +184,7 @@ public interface PriorityMapper {
 		@Result(column = "gmt_create", property = "gmtCreate"),
 		@Result(column = "gmt_modified", property = "gmtModified")
 	})
-	List<PriorityDO> listAuthroziedByAccountId(
-			@Param("accountId") Long accountId, 
-			@Param("parentId") Long parentId);  
+	List<PriorityDO> listAuthroziedByAccountId(Map<String, Object> parameters);  
 	
 	/**
 	 * 根据权限编号判断账号是否对这个权限有授权记录

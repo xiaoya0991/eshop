@@ -1,6 +1,7 @@
 package com.zhss.eshop.auth.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zhss.eshop.auth.domain.PriorityDO;
 
@@ -37,7 +38,7 @@ public interface PriorityDAO {
 	 * @return
 	 */
 	List<PriorityDO> listAuthroziedByAccountId(
-			Long accountId, Long parentId);
+			Map<String, Object> parameters);
 	
 	/**
 	 * 根据权限id查询账号id

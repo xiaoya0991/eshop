@@ -1,7 +1,9 @@
 package com.zhss.eshop.auth.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -111,11 +113,15 @@ public class PriorityServiceImpl implements PriorityService {
 		
 		QueryAuthorizedPriorityOperation operation = context.getBean(
 				QueryAuthorizedPriorityOperation.class);
+		operation.setAccountId(accountId); 
 		
 		authorizedTree = new ArrayList<Priority>();
 		
-		List<PriorityDO> authorizedRoots = priorityDAO
-				.listAuthroziedByAccountId(accountId, null);
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("accountId", accountId);
+		parameters.put("parentId", null);
+		
+		List<PriorityDO> authorizedRoots = priorityDAO.listAuthroziedByAccountId(parameters);
 		
 		for(PriorityDO root : authorizedRoots) {
 			Priority targetRoot = root.clone(Priority.class);

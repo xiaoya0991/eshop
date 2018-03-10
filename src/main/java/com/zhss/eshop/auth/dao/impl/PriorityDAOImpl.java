@@ -1,6 +1,7 @@
 package com.zhss.eshop.auth.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -55,8 +56,8 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @return
 	 */
 	public List<PriorityDO> listAuthroziedByAccountId(
-			Long accountId, Long parentId) {
-		return priorityMapper.listAuthroziedByAccountId(accountId, parentId);
+			Map<String, Object> parameters) {
+		return priorityMapper.listAuthroziedByAccountId(parameters);
 	}
 	
 	/**
