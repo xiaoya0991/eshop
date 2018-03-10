@@ -28,11 +28,20 @@ public class BeanCopierUtils {
         
         BeanCopier beanCopier = null;  
         
+        // 线程1和线程2，同时过来了
+        
         if (!beanCopierCacheMap.containsKey(cacheKey)) {  
+        	// 两个线程都卡这儿了
+        	// 但是此时线程1先获取到了锁，线程2就等着
         	synchronized(BeanCopierUtils.class) {
-        		 if (!beanCopierCacheMap.containsKey(cacheKey)) {  
+        		// 线程1进来之后，发现这里还是没有那个BeanCopier实例
+        		// 此时线程2，会发现缓存map中已经有了那个BeanCopier实例了，此时就不会进入if判断内的代码
+        		 if(!beanCopierCacheMap.containsKey(cacheKey)) { 
+        			 // 进入到这里会创建一个BeanCopier实例并且放在缓存map中
         			 beanCopier = BeanCopier.create(source.getClass(), target.getClass(), false);  
         			 beanCopierCacheMap.put(cacheKey, beanCopier);  
+        		 } else {
+        			 beanCopier = beanCopierCacheMap.get(cacheKey);   
         		 }
         	}
         } else {  

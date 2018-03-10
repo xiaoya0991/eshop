@@ -1,6 +1,9 @@
 package com.zhss.eshop.logistics.service;
 
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
+import com.zhss.eshop.membership.domain.DeliveryAddressDTO;
+import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.wms.domain.LogisticOrderDTO;
 
 /**
  * 物流中心对外提供的接口
@@ -14,6 +17,14 @@ public interface LogisticsService {
 	 * @param goodsSkuDTO 商品sku DTO
 	 * @return 商品sku的运费
 	 */
-	Double calculateFreight(GoodsSkuDTO goodsSkuDTO);
+	Double calculateFreight(GoodsSkuDTO goodsSkuDTO, 
+			DeliveryAddressDTO deliveryAddress);
+	
+	/**
+	 * 申请物流单
+	 * @param order 订单
+	 * @return 物流单
+	 */
+	LogisticOrderDTO applyLogisticOrder(OrderInfoDTO order);
 	
 }
