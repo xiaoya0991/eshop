@@ -1,5 +1,8 @@
 package com.zhss.eshop.logistics.service.impl;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
 import com.zhss.eshop.logistics.service.LogisticsService;
 import com.zhss.eshop.membership.domain.DeliveryAddressDTO;
@@ -11,6 +14,8 @@ import com.zhss.eshop.wms.domain.LogisticOrderDTO;
  * @author zhonghuashishan
  *
  */
+@Service
+@Transactional
 public class LogisticsServiceImpl implements LogisticsService {
 
 	/**
