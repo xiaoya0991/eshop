@@ -75,25 +75,53 @@ public class PromotionServiceImpl implements PromotionService {
 	 */
 	public PromotionActivityDTO getById(Long id) {
 		try {
-			SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			
-			PromotionActivityDTO promotionActivity = new PromotionActivityDTO();
-			promotionActivity.setGmtCreate(dateFormatter.parse("2018-01-01 10:00:00"));  
-			promotionActivity.setGmtModified(dateFormatter.parse("2018-01-01 10:00:00"));   
-			promotionActivity.setId(1L);  
-			promotionActivity.setRemark("测试促销活动1"); 
-			promotionActivity.setEndTime(dateFormatter.parse("2018-01-10 10:00:00"));
-			promotionActivity.setName("测试促销活动1");  
-			promotionActivity.setRule("测试促销活动的规则"); 
-			promotionActivity.setStartTime(dateFormatter.parse("2018-01-02 10:00:00"));
-			promotionActivity.setStatus(PromotionActivityStatus.ENABLED);
-			promotionActivity.setType(PromotionActivityType.REACH_DISCOUNT); 
-			
-			return promotionActivity;
+			if(id.equals(1L)) {
+				return createDiscountPromotionActivity(id);
+			} else if(id.equals(2L)) {
+				return createGiftPromotionActivity(id);
+			} else {
+				return null;
+			}
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return null;
 		}
+	}
+	
+	private PromotionActivityDTO createDiscountPromotionActivity(Long id) throws Exception {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		PromotionActivityDTO promotionActivity = new PromotionActivityDTO();
+		promotionActivity.setId(id);  
+		promotionActivity.setType(PromotionActivityType.REACH_DISCOUNT); 
+		promotionActivity.setName("测试满减促销活动");  
+		promotionActivity.setRule("[{'thresholdAmount': 200, 'reduceAmount': 20},{'thresholdAmount': 100, 'reduceAmount': 10}]"); 
+		promotionActivity.setStartTime(dateFormatter.parse("2018-01-02 10:00:00"));
+		promotionActivity.setEndTime(dateFormatter.parse("2018-01-10 10:00:00"));
+		promotionActivity.setStatus(PromotionActivityStatus.ENABLED);
+		promotionActivity.setRemark("测试满减促销活动"); 
+		promotionActivity.setGmtCreate(dateFormatter.parse("2018-01-01 10:00:00"));  
+		promotionActivity.setGmtModified(dateFormatter.parse("2018-01-01 10:00:00"));   
+		
+		return promotionActivity;
+	}
+	
+	private PromotionActivityDTO createGiftPromotionActivity(Long id) throws Exception {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		PromotionActivityDTO promotionActivity = new PromotionActivityDTO();
+		promotionActivity.setId(id);  
+		promotionActivity.setType(PromotionActivityType.REACH_GIFT); 
+		promotionActivity.setName("测试满赠促销活动");  
+		promotionActivity.setRule("{'thresholdAmount': 200, 'giftGoodsSkuIds': [3]}");   
+		promotionActivity.setStartTime(dateFormatter.parse("2018-01-02 10:00:00"));
+		promotionActivity.setEndTime(dateFormatter.parse("2018-01-10 10:00:00"));
+		promotionActivity.setStatus(PromotionActivityStatus.ENABLED);
+		promotionActivity.setRemark("测试满赠促销活动"); 
+		promotionActivity.setGmtCreate(dateFormatter.parse("2018-01-01 10:00:00"));  
+		promotionActivity.setGmtModified(dateFormatter.parse("2018-01-01 10:00:00"));   
+		
+		return promotionActivity;
 	}
 	
 	/**
