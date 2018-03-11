@@ -2,7 +2,7 @@ package com.zhss.eshop.Inventory.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.zhss.eshop.Inventory.service.InventoryFacadeService;
+import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -13,7 +13,7 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
  *
  */
 @Service
-public class InventoryFacadeServiceImpl implements InventoryFacadeService {
+public class InventoryServiceImpl implements InventoryService {
 	
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
@@ -69,6 +69,16 @@ public class InventoryFacadeServiceImpl implements InventoryFacadeService {
 	 */
 	public Long getSaleStockQuantity(Long goodsSkuId) {
 		return 1159L;
+	}
+	
+	/**
+	 * 设置销售库存
+	 * @param goodsSkuId 商品sku id
+	 * @param saleStockQuantity 销售库存
+	 * @return 处理结果
+	 */
+	public Boolean setSaleStockQuantity(Long goodsSkuId, Long saleStockQuantity) {
+		return true;
 	}
 
 }

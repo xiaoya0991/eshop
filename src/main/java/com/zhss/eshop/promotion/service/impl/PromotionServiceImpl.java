@@ -53,8 +53,8 @@ public class PromotionServiceImpl implements PromotionService {
 	public PromotionActivityDTO getById(Long id) {
 		try {
 			return promotionActivityDAO.getById(id).clone(PromotionActivityDTO.class); 
-		} catch (Exception e) {
-			logger.error("error", e); 
+		} catch(Exception e) {
+			logger.error("Error", e); 
 			return null;
 		}
 	}
