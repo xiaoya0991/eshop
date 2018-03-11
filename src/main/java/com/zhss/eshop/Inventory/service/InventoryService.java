@@ -9,7 +9,7 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
  * @author zhonghuashishan
  *
  */
-public interface InventoryFacadeService {
+public interface InventoryService {
 
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
@@ -54,5 +54,13 @@ public interface InventoryFacadeService {
 	 * @return 商品sku的库存
 	 */
 	Long getSaleStockQuantity(Long goodsSkuId);
+	
+	/**
+	 * 设置销售库存
+	 * @param goodsSkuId 商品sku id
+	 * @param saleStockQuantity 销售库存
+	 * @return 处理结果
+	 */
+	Boolean setSaleStockQuantity(Long goodsSkuId, Long saleStockQuantity);
 	
 }
