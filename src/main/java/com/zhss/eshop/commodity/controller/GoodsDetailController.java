@@ -3,6 +3,8 @@ package com.zhss.eshop.commodity.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +32,21 @@ public class GoodsDetailController {
 	@Autowired
 	private GoodsDetailService goodsDetailService;
 	
+	/**
+	 * 根据商品id查询商品详情
+	 * @param goodsId 商品id
+	 * @return 商品详情
+	 */
+	@GetMapping("/{goodsId}")   
+	public GoodsDetailVO getByGoodsId(@PathVariable("goodsId") Long goodsId) throws Exception {
+		try {
+			return goodsDetailService.getByGoodsId(goodsId).clone(GoodsDetailVO.class);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return new GoodsDetailVO();
+		}
+	}
+
 	/**
 	 * 新增商品详情
 	 * @param goodsDetail 商品详情

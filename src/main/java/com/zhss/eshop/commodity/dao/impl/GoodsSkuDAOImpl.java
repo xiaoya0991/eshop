@@ -1,5 +1,7 @@
 package com.zhss.eshop.commodity.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,12 +24,29 @@ public class GoodsSkuDAOImpl implements GoodsSkuDAO {
 	private GoodsSkuMapper goodsSkuMapper;
 	
 	/**
+	 * 根据商品id查询商品sku
+	 * @param goodsId 商品id
+	 * @return 商品sku
+	 */
+	public List<GoodsSkuDO> listByGoodsId(Long goodsId) {
+		return goodsSkuMapper.listByGoodsId(goodsId);
+	}
+	
+	/**
 	 * 新增商品sku
 	 * @param goodsSku
 	 */
 	public Long save(GoodsSkuDO goodsSku) {
 		goodsSkuMapper.save(goodsSku); 
 		return goodsSku.getId();
+	}
+	
+	/**
+	 * 根据商品id删除sku
+	 * @param goodsId 商品id
+	 */
+	public void removeByGoodsId(Long goodsId) {
+		goodsSkuMapper.removeByGoodsId(goodsId); 
 	}
 	
 }

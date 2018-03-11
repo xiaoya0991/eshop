@@ -1,5 +1,7 @@
 package com.zhss.eshop.commodity.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,11 +24,28 @@ public class GoodsSkuSalePropertyValueDAOImpl implements GoodsSkuSalePropertyVal
 	private GoodsSkuSalePropertyValueMapper propertyValueMapper;
 	
 	/**
+	 * 根据商品sku id查询属性值
+	 * @param goodsSkuId 商品sku id
+	 * @return 属性值
+	 */
+	public List<GoodsSkuSalePropertyValueDO> listByGoodsSkuId(Long goodsSkuId) {
+		return propertyValueMapper.listByGoodsSkuId(goodsSkuId);
+	}
+	
+	/**
 	 * 新增商品sku销售属性值
 	 * @param propertyValue 商品sku销售属性值
 	 */
 	public void save(GoodsSkuSalePropertyValueDO propertyValue) {
 		propertyValueMapper.save(propertyValue); 
+	}
+	
+	/**
+	 * 根据商品sku id删除属性值
+	 * @param goodsSkuId 商品sku id
+	 */
+	public void removeByGoodsSkuId(Long goodsSkuId) {
+		propertyValueMapper.removeByGoodsSkuId(goodsSkuId); 
 	}
 	
 }

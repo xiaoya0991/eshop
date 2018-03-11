@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.zhss.eshop.commodity.dao.GoodsDetailPictureDAO;
 import com.zhss.eshop.commodity.domain.GoodsDetailPictureDO;
+import com.zhss.eshop.commodity.domain.GoodsDetailPictureDTO;
 import com.zhss.eshop.commodity.service.GoodsDetailPictureService;
 import com.zhss.eshop.common.constant.PathType;
 import com.zhss.eshop.common.util.DateProvider;
@@ -47,6 +48,15 @@ public class GoodsDetailPictureServiceImpl implements GoodsDetailPictureService 
 	private DateProvider dateProvider;
 	
 	/**
+	 * 根据id查询商品图片
+	 * @param id 商品图片id
+	 * @return 商品图片
+	 */
+	public GoodsDetailPictureDTO getById(Long id) throws Exception {
+		return goodsDetailPictureDAO.getById(id).clone(GoodsDetailPictureDTO.class);
+	}
+	
+	/**
 	 * 批量上传图片
 	 * @param goodsDetailId 商品详情id 
 	 * @param pictures 商品详情图片  
@@ -78,6 +88,19 @@ public class GoodsDetailPictureServiceImpl implements GoodsDetailPictureService 
 		picture.setGmtModified(dateProvider.getCurrentTime()); 
 		
 		return goodsDetailPictureDAO.save(picture); 
+	}
+	
+	/**
+	 * 根据商品id删除图片
+	 * @param goodsId 商品id
+	 */
+	public void batchRemoveByGoodsDetailId(Long goodsDetailId) throws Exception {
+		List<GoodsDetailPictureDO> pictures = goodsDetailPictureDAO
+				.listByGoodsDetailId(goodsDetailId);
+		for(GoodsDetailPictureDO picture : pictures) {
+			FileUtils.deleteFile(picture.getPicturePath());
+		}
+		goodsDetailPictureDAO.removeByGoodsDetailId(goodsDetailId);  
 	}
 	
 	/**

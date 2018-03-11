@@ -34,9 +34,22 @@ public interface GoodsDAO {
 	List<GoodsDO> listByPage(GoodsQuery query);
 	
 	/**
+	 * 根据id查询商品
+	 * @param id 商品id
+	 * @return 商品
+	 */
+	GoodsDO getById(Long id);
+	
+	/**
 	 * 新增商品
 	 * @param goods 商品
 	 */
 	Long save(GoodsDO goods);
+	
+	/**
+	 * 更新商品
+	 * @param goods 商品
+	 */
+	void update(GoodsDO goods);
 	
 }

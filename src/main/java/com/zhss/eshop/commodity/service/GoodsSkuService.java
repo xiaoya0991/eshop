@@ -10,6 +10,14 @@ import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
  *
  */
 public interface GoodsSkuService {
+	
+	/**
+	 * 根据商品id查询商品sku
+	 * @param goodsId 商品id 
+	 * @return 商品sku
+	 * @throws Exception
+	 */
+	List<GoodsSkuDTO> listByGoodsId(Long goodsId) throws Exception;
 
 	/**
 	 * 批量新增商品sku
@@ -17,5 +25,11 @@ public interface GoodsSkuService {
 	 * @throws Exception
 	 */
 	void batchSave(List<GoodsSkuDTO> goodsSkus) throws Exception;
+	
+	/**
+	 * 根据商品id删除sku
+	 * @param goodsId 商品id
+	 */
+	void removeByGoodsId(Long goodsId) throws Exception;
 	
 }

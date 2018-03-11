@@ -20,9 +20,22 @@ public interface GoodsService {
 	List<GoodsDTO> listByPage(GoodsQuery query) throws Exception;
 	
 	/**
+	 * 根据id查询商品
+	 * @param id 商品id
+	 * @return 商品
+	 */
+	GoodsDTO getById(Long id) throws Exception;
+	
+	/**
 	 * 新增商品
 	 * @param goods 商品
 	 */
 	Long save(GoodsDTO goods) throws Exception;
+	
+	/**
+	 * 更新商品
+	 * @param goods 商品
+	 */
+	void update(GoodsDTO goods) throws Exception;
 	
 }

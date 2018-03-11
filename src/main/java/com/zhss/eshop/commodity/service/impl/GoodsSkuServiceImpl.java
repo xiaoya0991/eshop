@@ -19,6 +19,7 @@ import com.zhss.eshop.commodity.domain.GoodsSkuSalePropertyValueDTO;
 import com.zhss.eshop.commodity.domain.PropertyDO;
 import com.zhss.eshop.commodity.service.GoodsSkuService;
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.common.util.ObjectUtils;
 
 /**
  * 商品sku管理service组件
@@ -61,6 +62,29 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
 	private InventoryService inventoryService;
 	
 	/**
+	 * 根据商品id查询商品sku
+	 * @param goodsId 商品id 
+	 * @return 商品sku
+	 * @throws Exception
+	 */
+	public List<GoodsSkuDTO> listByGoodsId(Long goodsId) throws Exception {
+		List<GoodsSkuDTO> goodsSkus = ObjectUtils.convertList(
+				goodsSkuDAO.listByGoodsId(goodsId), GoodsSkuDTO.class); 
+		
+		for(GoodsSkuDTO goodsSku : goodsSkus) {
+			Long saleStockQuantity = inventoryService.getSaleStockQuantity(goodsSku.getId());
+			List<GoodsSkuSalePropertyValueDTO> propertyValues = ObjectUtils.convertList(
+					propertyValueDAO.listByGoodsSkuId(goodsSku.getId()), 
+					GoodsSkuSalePropertyValueDTO.class); 
+			
+			goodsSku.setSaleStockQuantity(saleStockQuantity); 
+			goodsSku.setPropertyValues(propertyValues); 
+		}
+		
+		return goodsSkus;
+	}
+	
+	/**
 	 * 批量新增商品sku
 	 * @param goodsSku 商品sku
 	 * @throws Exception
@@ -71,6 +95,18 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
 			batchSavePropertyValues(goodsSkuId, goodsSku.getPropertyValues());  
 			inventoryService.setSaleStockQuantity(goodsSkuId, goodsSku.getSaleStockQuantity());
 		}
+	}
+	
+	/**
+	 * 根据商品id删除sku
+	 * @param goodsId 商品id
+	 */
+	public void removeByGoodsId(Long goodsId) throws Exception {
+		List<GoodsSkuDO> goodsSkus = goodsSkuDAO.listByGoodsId(goodsId);
+		for(GoodsSkuDO goodsSku : goodsSkus) {
+			propertyValueDAO.removeByGoodsSkuId(goodsSku.getId()); 
+		}
+		goodsSkuDAO.removeByGoodsId(goodsId); 
 	}
 	
 	/**

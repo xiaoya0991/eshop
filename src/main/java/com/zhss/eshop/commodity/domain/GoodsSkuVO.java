@@ -1,6 +1,7 @@
 package com.zhss.eshop.commodity.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
@@ -47,6 +48,10 @@ public class GoodsSkuVO extends AbstractObject {
 	 * 修改时间
 	 */
 	private Date gmtModified;
+	/**
+	 * 销售属性值
+	 */
+	List<GoodsSkuSalePropertyValueVO> propertyValues;
 	
 	public Long getId() {
 		return id;
@@ -101,6 +106,12 @@ public class GoodsSkuVO extends AbstractObject {
 	}
 	public void setSaleStockQuantity(Long saleStockQuantity) {
 		this.saleStockQuantity = saleStockQuantity;
+	}
+	public List<GoodsSkuSalePropertyValueVO> getPropertyValues() {
+		return propertyValues;
+	}
+	public void setPropertyValues(List<GoodsSkuSalePropertyValueVO> propertyValues) {
+		this.propertyValues = propertyValues;
 	}
 	
 }

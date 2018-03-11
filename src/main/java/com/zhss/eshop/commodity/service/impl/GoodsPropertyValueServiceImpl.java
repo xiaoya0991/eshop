@@ -10,6 +10,7 @@ import com.zhss.eshop.commodity.dao.GoodsPropertyValueDAO;
 import com.zhss.eshop.commodity.domain.GoodsPropertyValueDO;
 import com.zhss.eshop.commodity.domain.GoodsPropertyValueDTO;
 import com.zhss.eshop.commodity.service.GoodsPropertyValueService;
+import com.zhss.eshop.common.util.ObjectUtils;
 
 /**
  * 商品属性值管理service组件
@@ -27,6 +28,16 @@ public class GoodsPropertyValueServiceImpl implements GoodsPropertyValueService 
 	private GoodsPropertyValueDAO propertyValueDAO;
 	
 	/**
+	 * 根据商品id查询属性值
+	 * @param goodsId 商品id
+	 * @return 属性值
+	 */
+	public List<GoodsPropertyValueDTO> listByGoodsId(Long goodsId) throws Exception {
+		return ObjectUtils.convertList(propertyValueDAO.listByGoodsId(goodsId), 
+				GoodsPropertyValueDTO.class);
+	}
+	
+	/**
 	 * 新增商品属性值
 	 * @param goodsPropertyValue 商品属性值
 	 */
@@ -34,6 +45,14 @@ public class GoodsPropertyValueServiceImpl implements GoodsPropertyValueService 
 		for(GoodsPropertyValueDTO propertyValue : propertyValues) {
 			propertyValueDAO.save(propertyValue.clone(GoodsPropertyValueDO.class));   
 		}
+	}
+	
+	/**
+	 * 根据商品id删除属性值
+	 * @param goodsId 商品id
+	 */
+	public void removeByGoodsId(Long goodsId) throws Exception {
+		propertyValueDAO.removeByGoodsId(goodsId); 
 	}
 	
 }

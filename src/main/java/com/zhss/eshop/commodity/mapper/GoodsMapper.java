@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.zhss.eshop.commodity.domain.GoodsDO;
 import com.zhss.eshop.commodity.domain.GoodsQuery;
@@ -116,6 +117,50 @@ public interface GoodsMapper {
 	List<GoodsDO> listByPage(GoodsQuery query);
 	
 	/**
+	 * 根据id查询商品
+	 * @param id 商品id
+	 * @return 商品
+	 */
+	@Select("SELECT "
+				+ "id,"
+				+ "category_id,"
+				+ "brand_id,"
+				+ "code,"
+				+ "name,"
+				+ "sub_name,"
+				+ "gross_weight,"
+				+ "length,"
+				+ "width,"
+				+ "height,"
+				+ "status,"
+				+ "service_guarantees,"
+				+ "package_list,"
+				+ "freight_template_id,"
+				+ "gmt_create,"
+				+ "gmt_modified "
+			+ "FROM commodity_goods "
+			+ "WHERE id=#{id} ")
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "category_id", property = "categoryId"),
+		@Result(column = "brand_id", property = "brandId"),
+		@Result(column = "code", property = "code"),
+		@Result(column = "name", property = "name"),
+		@Result(column = "sub_name", property = "subName"),
+		@Result(column = "gross_weight", property = "grossWeight"),
+		@Result(column = "length", property = "length"),
+		@Result(column = "width", property = "width"),
+		@Result(column = "height", property = "height"),
+		@Result(column = "status", property = "status"),
+		@Result(column = "service_guarantees", property = "serviceGuarantees"),
+		@Result(column = "package_list", property = "packageList"), 
+		@Result(column = "freight_template_id", property = "freightTemplateId"), 
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "gmt_modified", property = "gmtModified")
+	})
+	GoodsDO getById(@Param("id") Long id);
+	
+	/**
 	 * 新增商品
 	 * @param goods 商品
 	 */
@@ -154,5 +199,26 @@ public interface GoodsMapper {
 			+ ")")  
 	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true)
 	void save(GoodsDO goods);
+	
+	/**
+	 * 更新商品
+	 * @param goods 商品
+	 */
+	@Update("UPDATE commodity_goods SET "
+				+ "category_id=#{categoryId},"
+				+ "brand_id=#{brandId},"
+				+ "code=#{code},"
+				+ "name=#{name},"
+				+ "sub_name=#{subName},"
+				+ "gross_weight=#{grossWeight},"
+				+ "length=#{length},"
+				+ "width=#{width},"
+				+ "height=#{height},"
+				+ "service_gurantees=#{serviceGuarantees},"
+				+ "package_list=#{packageList},"
+				+ "freight_template_id=#{freightTemplateId},"
+				+ "gmt_modified=#{gmtModified} "
+			+ " WHERE id=#{id}")  
+	void update(GoodsDO goods);
 	
 }

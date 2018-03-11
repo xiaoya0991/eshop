@@ -7,7 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,16 +53,46 @@ public class GoodsController {
 	}
 	
 	/**
+	 * 根据id查询商品
+	 * @param id 商品id
+	 * @return 商品
+	 */
+	@GetMapping("/{id}")
+	public GoodsVO getById(@PathVariable("id") Long id) {
+		try {
+			return goodsService.getById(id).clone(GoodsVO.class);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return new GoodsVO();
+		}
+	}
+	
+	/**
 	 * 新增商品
 	 * @param goods 商品
 	 */
 	@PostMapping("/")  
-	public Long save(GoodsVO goods) throws Exception {
+	public Long save(@RequestBody GoodsVO goods) throws Exception {
 		try {
 			return goodsService.save(goods.clone(GoodsDTO.class));  
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return null;
+		}
+	}
+	
+	/**
+	 * 更新商品
+	 * @param goods 商品
+	 */
+	@PutMapping("/")  
+	public Boolean update(@RequestBody GoodsVO goods) throws Exception {
+		try {
+			goodsService.update(goods.clone(GoodsDTO.class));  
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
 		}
 	}
 	

@@ -52,12 +52,29 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	
 	/**
+	 * 根据id查询商品
+	 * @param id 商品id
+	 * @return 商品
+	 */
+	public GoodsDO getById(Long id) {
+		return goodsMapper.getById(id);
+	}
+	
+	/**
 	 * 新增商品
 	 * @param goods 商品
 	 */
 	public Long save(GoodsDO goods) {
 		goodsMapper.save(goods); 
 		return goods.getId();
+	}
+	
+	/**
+	 * 更新商品
+	 * @param goods 商品
+	 */
+	public void update(GoodsDO goods) {
+		goodsMapper.update(goods);
 	}
 	
 }
