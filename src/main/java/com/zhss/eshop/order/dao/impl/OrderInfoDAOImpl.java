@@ -1,10 +1,13 @@
 package com.zhss.eshop.order.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.order.dao.OrderInfoDAO;
 import com.zhss.eshop.order.domain.OrderInfoDO;
+import com.zhss.eshop.order.domain.OrderInfoQuery;
 import com.zhss.eshop.order.mapper.OrderInfoMapper;
 
 /**
@@ -28,6 +31,24 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	public Long save(OrderInfoDO order) {
 		orderInfoMapper.save(order);  
 		return order.getId();
+	}
+	
+	/**
+	 * 分页查询订单
+	 * @param query 查询条件
+	 * @return 订单
+	 */
+	public List<OrderInfoDO> listByPage(OrderInfoQuery query) {
+		return orderInfoMapper.listByPage(query);
+	}
+	
+	/**
+	 * 分页查询订单
+	 * @param query 查询条件
+	 * @return 订单
+	 */
+	public OrderInfoDO getById(Long id) {
+		return orderInfoMapper.getById(id);
 	}
 	
 }

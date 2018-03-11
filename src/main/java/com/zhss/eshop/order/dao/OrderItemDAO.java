@@ -1,5 +1,7 @@
 package com.zhss.eshop.order.dao;
 
+import java.util.List;
+
 import com.zhss.eshop.order.domain.OrderItemDO;
 
 /**
@@ -14,5 +16,12 @@ public interface OrderItemDAO {
 	 * @param orderItem
 	 */
 	void save(OrderItemDO orderItem);
+	
+	/**
+	 * 查询订单条目
+	 * @param orderInfoId 订单id
+	 * @return 订单条目
+	 */
+	List<OrderItemDO> listByOrderInfoId(Long orderInfoId);
 	
 }

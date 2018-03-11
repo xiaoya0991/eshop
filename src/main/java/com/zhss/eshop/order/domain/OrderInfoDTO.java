@@ -100,6 +100,10 @@ public class OrderInfoDTO extends AbstractObject {
 	 * 订单包含的订单条目
 	 */
 	private List<OrderItemDTO> orderItems;
+	/**
+	 * 订单操作日志
+	 */
+	private List<OrderOperateLogDTO> logs;
 	
 	public Long getId() {
 		return id;
@@ -232,6 +236,12 @@ public class OrderInfoDTO extends AbstractObject {
 	}
 	public void setOrderItems(List<OrderItemDTO> orderItems) {
 		this.orderItems = orderItems;
+	}
+	public List<OrderOperateLogDTO> getLogs() {
+		return logs;
+	}
+	public void setLogs(List<OrderOperateLogDTO> logs) {
+		this.logs = logs;
 	}
 	
 }

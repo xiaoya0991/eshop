@@ -100,6 +100,10 @@ public class OrderInfoVO extends AbstractObject {
 	 * 订单包含的订单条目
 	 */
 	private List<OrderItemVO> orderItems;
+	/**
+	 * 订单操作日志
+	 */
+	private List<OrderOperateLogVO> logs;
 	
 	public Long getId() {
 		return id;
@@ -232,6 +236,12 @@ public class OrderInfoVO extends AbstractObject {
 	}
 	public void setOrderItems(List<OrderItemVO> orderItems) {
 		this.orderItems = orderItems;
+	}
+	public List<OrderOperateLogVO> getLogs() {
+		return logs;
+	}
+	public void setLogs(List<OrderOperateLogVO> logs) {
+		this.logs = logs;
 	}
 	
 }

@@ -1,10 +1,17 @@
 package com.zhss.eshop.order.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 import com.zhss.eshop.order.domain.OrderInfoDO;
+import com.zhss.eshop.order.domain.OrderInfoQuery;
 
 /**
  * 订单管理mapper组件
@@ -63,5 +70,89 @@ public interface OrderInfoMapper {
 			+ ")") 
 	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true)
 	void save(OrderInfoDO order);
+	
+	/**
+	 * 分页查询订单
+	 * @param query 查询条件
+	 * @return 订单
+	 */
+	@Select("SELECT "
+				+ "a.id,"
+				+ "a.gmt_create,"
+				+ "a.order_no,"
+				+ "a.consignee,"
+				+ "a.total_amount,"
+				+ "a.discount_amount,"
+				+ "a.coupon_amount,"
+				+ "a.freight,"
+				+ "a.payable_amount,"
+				+ "a.pay_type,"
+				+ "a.order_status "
+			+ "FROM order_info a,"
+			+ "("
+				+ "SELECT id "
+				+ "FROM order_info "
+				+ "WHERE user_account_id=#{userAccountId} "
+				+ "LIMIT #{offset},#{size} "  
+			+ ") b "
+			+ "WHERE a.id=b.id"
+	)
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "order_no", property = "orderNo"),
+		@Result(column = "consignee", property = "consignee"),
+		@Result(column = "total_amount", property = "totalAmount"),
+		@Result(column = "discount_amount", property = "discountAmount"),
+		@Result(column = "coupon_amount", property = "couponAmount"),
+		@Result(column = "freight", property = "freight"),
+		@Result(column = "payable_amount", property = "payableAmount"),
+		@Result(column = "pay_type", property = "payType"),
+		@Result(column = "order_status", property = "orderStatus")
+	})
+	List<OrderInfoDO> listByPage(OrderInfoQuery query);
+	
+	/**
+	 * 分页查询订单
+	 * @param query 查询条件
+	 * @return 订单
+	 */
+	@Select("SELECT "
+				+ "id,"
+				+ "gmt_create,"
+				+ "order_no,"
+				+ "consignee,"
+				+ "delivery_address,"
+				+ "consignee_cell_phone_number,"
+				+ "total_amount,"
+				+ "discount_amount,"
+				+ "coupon_amount,"
+				+ "freight,"
+				+ "payable_amount,"
+				+ "pay_type,"
+				+ "invoice_title,"
+				+ "taxpayer_id,"
+				+ "order_status "
+			+ "FROM order_info "
+			+ "WHERE id=#{id}"
+	)
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "order_no", property = "orderNo"),
+		@Result(column = "consignee", property = "consignee"),
+		@Result(column = "total_amount", property = "totalAmount"),
+		@Result(column = "discount_amount", property = "discountAmount"),
+		@Result(column = "coupon_amount", property = "couponAmount"),
+		@Result(column = "freight", property = "freight"),
+		@Result(column = "payable_amount", property = "payableAmount"),
+		@Result(column = "pay_type", property = "payType"),
+		@Result(column = "order_status", property = "orderStatus"),
+		@Result(column = "delivery_address", property = "deliveryAddress"),
+		@Result(column = "consignee_cell_phone_number", property = "consigneeCellPhoneNumber"),
+		@Result(column = "invoice_title", property = "invoiceTitle"),
+		@Result(column = "taxpayer_id", property = "taxpayerId")
+	})
+	OrderInfoDO getById(@Param("id") Long id);
 	
 }

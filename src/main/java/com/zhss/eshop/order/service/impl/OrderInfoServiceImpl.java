@@ -8,15 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.common.util.ObjectUtils;
+import com.zhss.eshop.order.constant.OrderOperateType;
 import com.zhss.eshop.order.constant.OrderStatus;
 import com.zhss.eshop.order.constant.PublishedComment;
 import com.zhss.eshop.order.dao.OrderInfoDAO;
 import com.zhss.eshop.order.dao.OrderItemDAO;
+import com.zhss.eshop.order.dao.OrderOperateLogDAO;
 import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.order.domain.OrderInfoQuery;
 import com.zhss.eshop.order.domain.OrderItemDO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
+import com.zhss.eshop.order.domain.OrderOperateLogDO;
+import com.zhss.eshop.order.domain.OrderOperateLogDTO;
 import com.zhss.eshop.order.price.CouponCalculator;
 import com.zhss.eshop.order.price.CouponCalculatorFactory;
 import com.zhss.eshop.order.price.DefaultOrderPriceCalculatorFactory;
@@ -82,6 +89,21 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 */
 	@Autowired
 	private DateProvider dateProvider;
+	/**
+	 * 库存中心接口
+	 */
+	@Autowired
+	private InventoryService inventoryService;
+	/**
+	 * 订单操作日志DAO组件
+	 */
+	@Autowired
+	private OrderOperateLogDAO orderOperateLogDAO;
+	/**
+	 * 订单操作内容工厂
+	 */
+	@Autowired
+	private OrderOperateContentFactory orderOperateContentFactory;
 	
 	/**
 	 * 计算订单价格
@@ -177,6 +199,61 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @param order
 	 */
 	public OrderInfoDTO save(OrderInfoDTO order) throws Exception {
+		if(!isStockEnough(order)) {
+			return order;
+		}
+		
+		saveOrder(order);
+		inventoryService.informSubmitOrderEvent(order);
+		saveOrderOperateLog(order, OrderOperateType.CREATE_ORDER);    
+		
+		return order;
+	}
+	
+	/**
+	 * 新增订单操作日志
+	 * @param operateType 操作类型
+	 * @param operateContent 操作内容
+	 * @throws Exception
+	 */
+	private void saveOrderOperateLog(OrderInfoDTO order, Integer operateType) throws Exception {
+		String operateContent = orderOperateContentFactory.getOperateContent(
+				order, OrderOperateType.CREATE_ORDER);
+		
+		OrderOperateLogDO log = new OrderOperateLogDO();
+		log.setOrderInfoId(order.getId()); 
+		log.setOperateType(operateType);
+		log.setOperateContent(operateContent); 
+		log.setGmtCreate(dateProvider.getCurrentTime());
+		log.setGmtModified(dateProvider.getCurrentTime()); 
+		
+		orderOperateLogDAO.save(log); 
+ 	}
+	
+	/**
+	 * 判断库存是否充足
+	 * @param order 订单
+	 * @return 库存是否充足
+	 * @throws Exception
+	 */
+	private Boolean isStockEnough(OrderInfoDTO order) throws Exception {
+		for(OrderItemDTO orderItem : order.getOrderItems()) {
+			Long saleStockQuantity = inventoryService.getSaleStockQuantity(
+					orderItem.getGoodsSkuId());
+			if(saleStockQuantity < orderItem.getPurchaseQuantity()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * 新增订单
+	 * @param order 订单
+	 * @return 订单
+	 * @throws Exception
+	 */
+	private OrderInfoDTO saveOrder(OrderInfoDTO order) throws Exception {
 		order.setOrderNo(UUID.randomUUID().toString().replace("-", ""));  
 		order.setPublishedComment(PublishedComment.NO); 
 		order.setOrderStatus(OrderStatus.WAITING_FOR_PAY);  
@@ -184,6 +261,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		order.setGmtModified(dateProvider.getCurrentTime());
 		
 		Long orderInfoId = orderInfoDAO.save(order.clone(OrderInfoDO.class)); 
+		order.setId(orderInfoId); 
 		
 		for(OrderItemDTO orderItem : order.getOrderItems()) {
 			orderItem.setOrderInfoId(orderInfoId); 
@@ -192,6 +270,42 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 			orderItemDAO.save(orderItem.clone(OrderItemDO.class));   
 		}
 		
+		return order;
+	}
+	
+	/**
+	 * 分页查询订单
+	 * @param query 查询条件 
+	 * @return 订单
+	 * @throws Exception
+	 */
+	public List<OrderInfoDTO> listByPage(OrderInfoQuery query) throws Exception {
+		List<OrderInfoDTO> orders = ObjectUtils.convertList(
+				orderInfoDAO.listByPage(query), OrderInfoDTO.class); 
+		
+		for(OrderInfoDTO order : orders) {
+			List<OrderItemDTO> orderItems = ObjectUtils.convertList(
+					orderItemDAO.listByOrderInfoId(order.getId()), OrderItemDTO.class);
+			order.setOrderItems(orderItems); 
+		}
+		
+		return orders;
+	}
+	
+	/**
+	 * 根据id查询订单
+	 * @param id 订单id
+	 * @return 订单
+	 * @throws Exception
+	 */
+	public OrderInfoDTO getById(Long id) throws Exception {
+		OrderInfoDTO order = orderInfoDAO.getById(id).clone(OrderInfoDTO.class);
+		List<OrderItemDTO> orderItems = ObjectUtils.convertList(
+				orderItemDAO.listByOrderInfoId(order.getId()), OrderItemDTO.class); 
+		List<OrderOperateLogDTO> logs = ObjectUtils.convertList(
+				orderOperateLogDAO.listByOrderInfoId(order.getId()), OrderOperateLogDTO.class);
+		order.setOrderItems(orderItems); 
+		order.setLogs(logs); 
 		return order;
 	}
 	

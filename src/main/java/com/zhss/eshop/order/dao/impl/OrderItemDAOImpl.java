@@ -1,5 +1,7 @@
 package com.zhss.eshop.order.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +29,15 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	 */
 	public void save(OrderItemDO orderItem) {
 		orderItemMapper.save(orderItem);
+	}
+	
+	/**
+	 * 查询订单条目
+	 * @param orderInfoId 订单id
+	 * @return 订单条目
+	 */
+	public List<OrderItemDO> listByOrderInfoId(Long orderInfoId) {
+		return orderItemMapper.listByOrderInfoId(orderInfoId);
 	}
 	
 }

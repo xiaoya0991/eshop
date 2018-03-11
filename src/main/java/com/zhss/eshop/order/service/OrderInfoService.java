@@ -1,6 +1,9 @@
 package com.zhss.eshop.order.service;
 
+import java.util.List;
+
 import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.order.domain.OrderInfoQuery;
 import com.zhss.eshop.promotion.domain.CouponDTO;
 
 /**
@@ -30,5 +33,21 @@ public interface OrderInfoService {
 	 * @param order
 	 */
 	OrderInfoDTO save(OrderInfoDTO order) throws Exception;
+	
+	/**
+	 * 分页查询订单
+	 * @param query 查询条件 
+	 * @return 订单
+	 * @throws Exception
+	 */
+	List<OrderInfoDTO> listByPage(OrderInfoQuery query) throws Exception;
+	
+	/**
+	 * 根据id查询订单
+	 * @param id 订单id
+	 * @return 订单
+	 * @throws Exception
+	 */
+	OrderInfoDTO getById(Long id) throws Exception;
 	
 }
