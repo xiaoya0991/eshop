@@ -18,7 +18,7 @@ import com.zhss.eshop.commodity.dao.GoodsDAO;
  */
 @Component
 @Scope("prototype")   
-public class CategoryRelatedCheckOperation extends AbstractCategoryOperation<Boolean> {    
+public class RelatedCheckCategoryOperation extends AbstractCategoryOperation<Boolean> {    
 	
 	/**
 	 * 是否被商品关联
@@ -34,7 +34,7 @@ public class CategoryRelatedCheckOperation extends AbstractCategoryOperation<Boo
 	 * @param categoryDAO 类目管理DAO组件
 	 */
 	@Autowired
-	public CategoryRelatedCheckOperation(
+	public RelatedCheckCategoryOperation(
 			CategoryDAO categoryDAO, GoodsDAO goodsDAO) {  
 		super(categoryDAO);
 		this.goodsDAO = goodsDAO;

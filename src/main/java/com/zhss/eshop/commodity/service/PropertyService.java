@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zhss.eshop.commodity.domain.PropertyDTO;
 import com.zhss.eshop.commodity.domain.PropertyQuery;
+import com.zhss.eshop.commodity.service.impl.Properties;
 
 /**
  * 商品属性管理模块的service组件接口
@@ -31,6 +32,13 @@ public interface PropertyService {
 	 * @return 商品属性
 	 */
 	PropertyDTO getPropertyById(Long id);
+	
+	/**
+	 * 查询类目id对应的所有属性
+	 * @param categoryId
+	 * @return
+	 */
+	Properties getPropertiesByCategoryId(Long categoryId) throws Exception;
 	
 	/**
 	 * 更新商品属性

@@ -19,7 +19,7 @@ import com.zhss.eshop.commodity.domain.PropertyGroupDO;
  */
 @Component
 @Scope("prototype") 
-public class CategoryRemoveOperation extends AbstractCategoryOperation<Boolean> {  
+public class RemoveCategoryOperation extends AbstractCategoryOperation<Boolean> {  
 
 	/**
 	 * 类目与属性关系管理DAO组件
@@ -42,7 +42,7 @@ public class CategoryRemoveOperation extends AbstractCategoryOperation<Boolean> 
 	 * @param categoryDAO 类目管理DAO组件
 	 */
 	@Autowired
-	public CategoryRemoveOperation(CategoryDAO categoryDAO,
+	public RemoveCategoryOperation(CategoryDAO categoryDAO,
 			CategoryPropertyRelationshipDAO categoryPropertyRelationDAO,
 			PropertyGroupDAO propertyGroupDAO,
 			PropertyGroupRelationshipDAO propertyGroupRelationDAO) {

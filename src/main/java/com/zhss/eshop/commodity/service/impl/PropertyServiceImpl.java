@@ -14,6 +14,7 @@ import com.zhss.eshop.commodity.domain.PropertyDO;
 import com.zhss.eshop.commodity.domain.PropertyDTO;
 import com.zhss.eshop.commodity.domain.PropertyQuery;
 import com.zhss.eshop.commodity.service.PropertyService;
+import com.zhss.eshop.common.bean.SpringApplicationContext;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -37,6 +38,11 @@ public class PropertyServiceImpl implements PropertyService {
 	 */
 	@Autowired
 	private DateProvider dateProvider;
+	/**
+	 * spring容器
+	 */
+	@Autowired
+	private SpringApplicationContext context;
 
 	/**
 	 * 分页查询商品属性
@@ -105,6 +111,18 @@ public class PropertyServiceImpl implements PropertyService {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * 查询类目id对应的所有属性
+	 * @param categoryId
+	 * @return
+	 */
+	public Properties getPropertiesByCategoryId(Long categoryId) throws Exception {
+		CategoryOperation<Properties> operation = context.getBean(
+				QueryPropertyCategoryOperation.class);
+		Category category = new Category(categoryId);
+		return category.execute(operation);
 	}
 	
 }

@@ -39,7 +39,7 @@ public class PropertyGroupVO extends AbstractObject {
 	/**
 	 * 属性分组关联的属性
 	 */
-	private List<PropertyDTO> properties;
+	private List<PropertyVO> properties;
 	
 	public Long getId() {
 		return id;
@@ -77,10 +77,10 @@ public class PropertyGroupVO extends AbstractObject {
 	public void setRelations(List<PropertyGroupRelationshipVO> relations) {
 		this.relations = relations;
 	}
-	public List<PropertyDTO> getProperties() {
+	public List<PropertyVO> getProperties() {
 		return properties;
 	}
-	public void setProperties(List<PropertyDTO> properties) {
+	public void setProperties(List<PropertyVO> properties) {
 		this.properties = properties;
 	}
 	

@@ -313,7 +313,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Category category = new Category(id); 
 		
 		CategoryOperation<Boolean> relatedCheckOperation = context.getBean(
-				CategoryRelatedCheckOperation.class);
+				RelatedCheckCategoryOperation.class);
 		Boolean result = category.execute(relatedCheckOperation); 
 	
 		if(result) {
@@ -321,7 +321,7 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		
 		CategoryOperation<Boolean> removeOperation = 
-				context.getBean(CategoryRemoveOperation.class);
+				context.getBean(RemoveCategoryOperation.class);
 		return category.execute(removeOperation);
 	}
 	

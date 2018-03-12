@@ -18,6 +18,7 @@ import com.zhss.eshop.commodity.domain.PropertyDTO;
 import com.zhss.eshop.commodity.domain.PropertyQuery;
 import com.zhss.eshop.commodity.domain.PropertyVO;
 import com.zhss.eshop.commodity.service.PropertyService;
+import com.zhss.eshop.commodity.service.impl.Properties;
 
 /**
  * 商品属性管理模块的controller组件
@@ -106,6 +107,21 @@ public class PropertyController {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * 查询类目id对应的所有属性
+	 * @param categoryId
+	 * @return
+	 */
+	@GetMapping("/all/{categoryId}")
+	public Properties getPropertiesByCategoryId(@PathVariable("categoryId") Long categoryId) {
+		try {
+			return propertyService.getPropertiesByCategoryId(categoryId);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return new Properties();
+		}
 	}
 	
 }
