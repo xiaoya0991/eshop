@@ -221,4 +221,14 @@ public interface GoodsMapper {
 			+ " WHERE id=#{id}")  
 	void update(GoodsDO goods);
 	
+	/**
+	 * 更新商品状态
+	 * @param goods 商品
+	 */
+	@Update("UPDATE commodity_goods SET "
+			+ "status=#{status},  "
+			+ "gmt_modified=#{gmtModified} "
+		+ " WHERE id=#{id}")  
+	void updateStatus(GoodsDO goods);
+	
 }

@@ -52,4 +52,10 @@ public interface GoodsDAO {
 	 */
 	void update(GoodsDO goods);
 	
+	/**
+	 * 更新商品状态
+	 * @param goods
+	 */
+	void updateStatus(GoodsDO goods);
+	
 }

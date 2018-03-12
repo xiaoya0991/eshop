@@ -7,10 +7,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.commodity.dao.GoodsDAO;
+import com.zhss.eshop.commodity.dao.GoodsDetailDAO;
+import com.zhss.eshop.commodity.dao.GoodsDetailPictureDAO;
+import com.zhss.eshop.commodity.dao.GoodsPictureDAO;
+import com.zhss.eshop.commodity.dao.GoodsPropertyValueDAO;
+import com.zhss.eshop.commodity.dao.GoodsSkuDAO;
+import com.zhss.eshop.commodity.dao.GoodsSkuSalePropertyValueDAO;
 import com.zhss.eshop.commodity.domain.GoodsDO;
 import com.zhss.eshop.commodity.domain.GoodsDTO;
+import com.zhss.eshop.commodity.domain.GoodsDetailDO;
 import com.zhss.eshop.commodity.domain.GoodsQuery;
+import com.zhss.eshop.commodity.domain.GoodsSkuDO;
 import com.zhss.eshop.commodity.service.GoodsService;
+import com.zhss.eshop.commodity.state.GoodsStateManager;
 import com.zhss.eshop.common.util.ObjectUtils;
 
 /**
@@ -27,6 +36,41 @@ public class GoodsServiceImpl implements GoodsService {
 	 */
 	@Autowired
 	private GoodsDAO goodsDAO;
+	/**
+	 * 商品状态管理器
+	 */
+	@Autowired
+	private GoodsStateManager goodsStateManager;
+	/**
+	 * 商品图片管理DAO
+	 */
+	@Autowired
+	private GoodsPictureDAO goodsPictureDAO;
+	/**
+	 * 商品详情管理DAO
+	 */
+	@Autowired
+	private GoodsDetailDAO goodsDetailDAO;
+	/**
+	 * 商品详情图片管理DAO
+	 */
+	@Autowired
+	private GoodsDetailPictureDAO goodsDetailPictureDAO;
+	/**
+	 * 商品属性值管理DAO
+	 */
+	@Autowired
+	private GoodsPropertyValueDAO goodsPropertyValueDAO;
+	/**
+	 * 商品sku管理DAO
+	 */
+	@Autowired
+	private GoodsSkuDAO goodsSkuDAO;
+	/**
+	 * 商品sku属性值管理DAO
+	 */
+	@Autowired
+	private GoodsSkuSalePropertyValueDAO goodsSkuSalePropertyValueDAO;
 	
 	/**
 	 * 分页查询商品
@@ -51,15 +95,96 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @param goods 商品
 	 */
 	public Long save(GoodsDTO goods) throws Exception {
-		return goodsDAO.save(goods.clone(GoodsDO.class)); 
+		Long goodsId = goodsDAO.save(goods.clone(GoodsDO.class)); 
+		goodsStateManager.create(goods); 
+		return goodsId;
 	}
 	
 	/**
 	 * 更新商品
 	 * @param goods 商品
 	 */
-	public void update(GoodsDTO goods) throws Exception {
+	public Boolean update(GoodsDTO goods) throws Exception {
+		if(!goodsStateManager.canEdit(goods)) {
+			return false;
+		}
+		
 		goodsDAO.update(goods.clone(GoodsDO.class));  
+		goodsStateManager.edit(goods); 
+		
+		return true;
+	}
+	
+	/**
+	 * 审核商品
+	 * @param goods 商品
+	 * @return 处理结果
+	 * @throws Exception
+	 */
+	public Boolean approve(GoodsDTO goods, Integer approveResult) throws Exception {
+		if(!goodsStateManager.canApprove(goods)) {
+			return false;
+		}
+		goodsStateManager.approve(goods, approveResult);
+		return true;
+	}
+	
+	/**
+	 * 执行上架操作
+	 * @param goods
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean putOnShelves(GoodsDTO goods) throws Exception {
+		if(!goodsStateManager.canPutOnShelves(goods)) {
+			return false;
+		}
+		goodsStateManager.putOnShelves(goods);
+		return true;
+	}
+	
+	/**
+	 * 执行下架操作
+	 * @param goods 商品
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean pullOffShelves(GoodsDTO goods) throws Exception {
+		if(!goodsStateManager.canPullOffShelves(goods))   {
+			return false;
+		}
+		goodsStateManager.pullOffShelves(goods); 
+		return true;
+	}
+	
+	/**
+	 * 执行删除操作
+	 * @param goodsId
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean remove(Long id) throws Exception {
+		GoodsDTO goods = goodsDAO.getById(id).clone(GoodsDTO.class);
+		
+		if(!goodsStateManager.canRemove(goods)) {
+			return false;
+		}
+		
+		goodsPictureDAO.removeByGoodsId(id); 
+		
+		GoodsDetailDO goodsDetail = goodsDetailDAO.getByGoodsId(id);
+		goodsDetailPictureDAO.removeByGoodsDetailId(goodsDetail.getId());  
+		goodsDetailDAO.remove(goodsDetail.getId()); 
+		
+		goodsPropertyValueDAO.removeByGoodsId(id); 
+		
+		List<GoodsSkuDO> goodsSkus = goodsSkuDAO.listByGoodsId(id);
+		for(GoodsSkuDO goodsSku : goodsSkus) {
+			goodsSkuSalePropertyValueDAO.removeByGoodsSkuId(goodsSku.getId()); 
+		}
+		goodsSkuDAO.removeByGoodsId(id); 
+		
+		return true;
 	}
 	
 }

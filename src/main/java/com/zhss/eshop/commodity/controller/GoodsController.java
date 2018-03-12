@@ -88,8 +88,7 @@ public class GoodsController {
 	@PutMapping("/")  
 	public Boolean update(@RequestBody GoodsVO goods) throws Exception {
 		try {
-			goodsService.update(goods.clone(GoodsDTO.class));  
-			return true;
+			return goodsService.update(goods.clone(GoodsDTO.class));  
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;

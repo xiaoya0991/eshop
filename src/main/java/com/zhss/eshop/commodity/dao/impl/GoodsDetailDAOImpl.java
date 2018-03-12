@@ -46,5 +46,13 @@ public class GoodsDetailDAOImpl implements GoodsDetailDAO {
 	public void update(GoodsDetailDO goodsDetail) {
 		goodsDetailMapper.update(goodsDetail); 
 	}
+	
+	/**
+	 * 删除商品详情
+	 * @param id 商品详情id
+	 */ 
+	public void remove(Long id) {
+		goodsDetailMapper.remove(id);
+	}
 
 }

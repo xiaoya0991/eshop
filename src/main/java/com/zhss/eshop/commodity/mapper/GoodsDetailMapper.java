@@ -1,5 +1,6 @@
 package com.zhss.eshop.commodity.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -65,5 +66,12 @@ public interface GoodsDetailMapper {
 				+ "detail_content=#{detailContent} "
 			+ "WHERE id=#{id}")  
 	void update(GoodsDetailDO goodsDetail);
+	
+	/**
+	 * 删除商品详情
+	 * @param id 商品详情id
+	 */ 
+	@Delete("DELETE FROM commodity_goods_detail WHERE id=#{id}")  
+	void remove(@Param("id") Long id);
 	
 }
