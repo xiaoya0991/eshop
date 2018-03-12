@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
@@ -16,6 +17,7 @@ import com.zhss.eshop.schedule.service.ScheduleService;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 import com.zhss.eshop.wms.service.WmsService;
 
@@ -185,9 +187,28 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param returnGoodsWorksheetDTO 退货工单DTO
 	 * @return 处理结果
 	 */
-	public Boolean scheduleReturnGoodsInput(OrderInfoDTO orderDTO, 
-			ReturnGoodsWorksheetDTO returnGoodsWorksheetDTO) {
-		return true;
+	public Boolean scheduleReturnGoodsInput(OrderInfoDTO order, 
+			ReturnGoodsWorksheetDTO returnGoodsWorksheet) {
+		try {
+			ReturnGoodsInputOrderDTO returnGoodsInputOrder = 
+					order.clone(ReturnGoodsInputOrderDTO.class);
+			returnGoodsInputOrder.setOrderId(order.getId());
+			returnGoodsInputOrder.setReturnGoodsReason(
+					returnGoodsWorksheet.getReturnGoodsReason()); 
+			returnGoodsInputOrder.setReturnGoodsComment(
+					returnGoodsWorksheet.getReturnGoodsComment()); 
+			
+			List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItems = ObjectUtils.convertList(
+					order.getOrderItems(), ReturnGoodsInputOrderItemDTO.class);
+			returnGoodsInputOrder.setReturnGoodsInputOrderItemDTOs(returnGoodsInputOrderItems); 
+			
+			wmsService.createReturnGoodsInputOrder(returnGoodsInputOrder);
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e);  
+			return false;
+		}
 	}
 	
 }
