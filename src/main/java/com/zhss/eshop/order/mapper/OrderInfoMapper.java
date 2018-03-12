@@ -87,7 +87,9 @@ public interface OrderInfoMapper {
 				+ "a.freight,"
 				+ "a.payable_amount,"
 				+ "a.pay_type,"
-				+ "a.order_status "
+				+ "a.order_status,"
+				+ "a.user_account_id,"
+				+ "a.username "
 			+ "FROM order_info a,"
 			+ "("
 				+ "SELECT id "
@@ -108,7 +110,9 @@ public interface OrderInfoMapper {
 		@Result(column = "freight", property = "freight"),
 		@Result(column = "payable_amount", property = "payableAmount"),
 		@Result(column = "pay_type", property = "payType"),
-		@Result(column = "order_status", property = "orderStatus")
+		@Result(column = "order_status", property = "orderStatus"),
+		@Result(column = "user_account_id", property = "userAccountId"),
+		@Result(column = "username", property = "username")
 	})
 	List<OrderInfoDO> listByPage(OrderInfoQuery query);
 	
@@ -132,7 +136,10 @@ public interface OrderInfoMapper {
 				+ "pay_type,"
 				+ "invoice_title,"
 				+ "taxpayer_id,"
-				+ "order_status "
+				+ "order_status,"
+				+ "user_account_id,"
+				+ "username,"
+				+ "order_comment "
 			+ "FROM order_info "
 			+ "WHERE id=#{id}"
 	)
@@ -151,8 +158,11 @@ public interface OrderInfoMapper {
 		@Result(column = "delivery_address", property = "deliveryAddress"),
 		@Result(column = "consignee_cell_phone_number", property = "consigneeCellPhoneNumber"),
 		@Result(column = "invoice_title", property = "invoiceTitle"),
-		@Result(column = "taxpayer_id", property = "taxpayerId")
-	})
+		@Result(column = "taxpayer_id", property = "taxpayerId"),
+		@Result(column = "user_account_id", property = "userAccountId"),
+		@Result(column = "username", property = "username"),
+		@Result(column = "order_comment", property = "orderComment")
+ 	})
 	OrderInfoDO getById(@Param("id") Long id);
 	
 }

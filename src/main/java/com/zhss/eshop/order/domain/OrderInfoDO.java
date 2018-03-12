@@ -223,4 +223,161 @@ public class OrderInfoDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((confirmReceiptTime == null) ? 0 : confirmReceiptTime.hashCode());
+		result = prime * result + ((consignee == null) ? 0 : consignee.hashCode());
+		result = prime * result + ((consigneeCellPhoneNumber == null) ? 0 : consigneeCellPhoneNumber.hashCode());
+		result = prime * result + ((couponAmount == null) ? 0 : couponAmount.hashCode());
+		result = prime * result + ((deliveryAddress == null) ? 0 : deliveryAddress.hashCode());
+		result = prime * result + ((discountAmount == null) ? 0 : discountAmount.hashCode());
+		result = prime * result + ((freight == null) ? 0 : freight.hashCode());
+		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
+		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((invoiceTitle == null) ? 0 : invoiceTitle.hashCode());
+		result = prime * result + ((orderComment == null) ? 0 : orderComment.hashCode());
+		result = prime * result + ((orderNo == null) ? 0 : orderNo.hashCode());
+		result = prime * result + ((orderStatus == null) ? 0 : orderStatus.hashCode());
+		result = prime * result + ((payType == null) ? 0 : payType.hashCode());
+		result = prime * result + ((payableAmount == null) ? 0 : payableAmount.hashCode());
+		result = prime * result + ((publishedComment == null) ? 0 : publishedComment.hashCode());
+		result = prime * result + ((taxpayerId == null) ? 0 : taxpayerId.hashCode());
+		result = prime * result + ((totalAmount == null) ? 0 : totalAmount.hashCode());
+		result = prime * result + ((userAccountId == null) ? 0 : userAccountId.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderInfoDO other = (OrderInfoDO) obj;
+		if (confirmReceiptTime == null) {
+			if (other.confirmReceiptTime != null)
+				return false;
+		} else if (!confirmReceiptTime.equals(other.confirmReceiptTime))
+			return false;
+		if (consignee == null) {
+			if (other.consignee != null)
+				return false;
+		} else if (!consignee.equals(other.consignee))
+			return false;
+		if (consigneeCellPhoneNumber == null) {
+			if (other.consigneeCellPhoneNumber != null)
+				return false;
+		} else if (!consigneeCellPhoneNumber.equals(other.consigneeCellPhoneNumber))
+			return false;
+		if (couponAmount == null) {
+			if (other.couponAmount != null)
+				return false;
+		} else if (!couponAmount.equals(other.couponAmount))
+			return false;
+		if (deliveryAddress == null) {
+			if (other.deliveryAddress != null)
+				return false;
+		} else if (!deliveryAddress.equals(other.deliveryAddress))
+			return false;
+		if (discountAmount == null) {
+			if (other.discountAmount != null)
+				return false;
+		} else if (!discountAmount.equals(other.discountAmount))
+			return false;
+		if (freight == null) {
+			if (other.freight != null)
+				return false;
+		} else if (!freight.equals(other.freight))
+			return false;
+		if (gmtCreate == null) {
+			if (other.gmtCreate != null)
+				return false;
+		} else if (!gmtCreate.equals(other.gmtCreate))
+			return false;
+		if (gmtModified == null) {
+			if (other.gmtModified != null)
+				return false;
+		} else if (!gmtModified.equals(other.gmtModified))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (invoiceTitle == null) {
+			if (other.invoiceTitle != null)
+				return false;
+		} else if (!invoiceTitle.equals(other.invoiceTitle))
+			return false;
+		if (orderComment == null) {
+			if (other.orderComment != null)
+				return false;
+		} else if (!orderComment.equals(other.orderComment))
+			return false;
+		if (orderNo == null) {
+			if (other.orderNo != null)
+				return false;
+		} else if (!orderNo.equals(other.orderNo))
+			return false;
+		if (orderStatus == null) {
+			if (other.orderStatus != null)
+				return false;
+		} else if (!orderStatus.equals(other.orderStatus))
+			return false;
+		if (payType == null) {
+			if (other.payType != null)
+				return false;
+		} else if (!payType.equals(other.payType))
+			return false;
+		if (payableAmount == null) {
+			if (other.payableAmount != null)
+				return false;
+		} else if (!payableAmount.equals(other.payableAmount))
+			return false;
+		if (publishedComment == null) {
+			if (other.publishedComment != null)
+				return false;
+		} else if (!publishedComment.equals(other.publishedComment))
+			return false;
+		if (taxpayerId == null) {
+			if (other.taxpayerId != null)
+				return false;
+		} else if (!taxpayerId.equals(other.taxpayerId))
+			return false;
+		if (totalAmount == null) {
+			if (other.totalAmount != null)
+				return false;
+		} else if (!totalAmount.equals(other.totalAmount))
+			return false;
+		if (userAccountId == null) {
+			if (other.userAccountId != null)
+				return false;
+		} else if (!userAccountId.equals(other.userAccountId))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "OrderInfoDO [id=" + id + ", orderNo=" + orderNo + ", userAccountId=" + userAccountId + ", username="
+				+ username + ", orderStatus=" + orderStatus + ", consignee=" + consignee + ", deliveryAddress="
+				+ deliveryAddress + ", consigneeCellPhoneNumber=" + consigneeCellPhoneNumber + ", freight=" + freight
+				+ ", payType=" + payType + ", totalAmount=" + totalAmount + ", discountAmount=" + discountAmount
+				+ ", couponAmount=" + couponAmount + ", payableAmount=" + payableAmount + ", invoiceTitle="
+				+ invoiceTitle + ", taxpayerId=" + taxpayerId + ", orderComment=" + orderComment + ", publishedComment="
+				+ publishedComment + ", confirmReceiptTime=" + confirmReceiptTime + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

@@ -43,7 +43,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	}
 	
 	/**
-	 * 分页查询订单
+	 * 根据id查询订单
 	 * @param query 查询条件
 	 * @return 订单
 	 */
