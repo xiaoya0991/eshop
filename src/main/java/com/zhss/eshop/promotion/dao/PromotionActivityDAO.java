@@ -56,7 +56,7 @@ public interface PromotionActivityDAO {
 	 * @param id 促销活动id
 	 * @param status 促销活动的状态
 	 */
-	void updateStatus(Long id, Integer status);
+	void updateStatus(PromotionActivityDO activity);
 	
 	/**
 	 * 删除促销活动

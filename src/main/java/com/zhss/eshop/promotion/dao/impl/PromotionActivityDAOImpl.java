@@ -81,8 +81,8 @@ public class PromotionActivityDAOImpl implements PromotionActivityDAO {
 	 * @param id 促销活动id
 	 * @param status 促销活动的状态
 	 */
-	public void updateStatus(Long id, Integer status) {
-		promotionActivityMapper.updateStatus(id, status); 
+	public void updateStatus(PromotionActivityDO activity) {
+		promotionActivityMapper.updateStatus(activity); 
 	}
 	
 	/**

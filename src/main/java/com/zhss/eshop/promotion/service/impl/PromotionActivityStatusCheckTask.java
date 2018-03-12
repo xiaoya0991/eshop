@@ -64,8 +64,9 @@ public class PromotionActivityStatusCheckTask {
     private void tryEnableActivity(PromotionActivityDO activity) throws Exception {
     	Date currentTime = dateProvider.getCurrentTime();
     	if(currentTime.after(activity.getStartTime())) {  
-    		promotionActivityDAO.updateStatus(activity.getId(), 
-    				PromotionActivityStatus.ENABLED);  
+    		activity.setStatus(PromotionActivityStatus.ENABLED);
+    		activity.setGmtModified(dateProvider.getCurrentTime());  
+    		promotionActivityDAO.updateStatus(activity);  
     	}
     }
     
@@ -77,8 +78,9 @@ public class PromotionActivityStatusCheckTask {
     private void tryDisableActivity(PromotionActivityDO activity) throws Exception {
     	Date currentTime = dateProvider.getCurrentTime();
     	if(currentTime.after(activity.getEndTime())) {   
-    		promotionActivityDAO.updateStatus(activity.getId(), 
-    				PromotionActivityStatus.DISABLED);  
+    		activity.setStatus(PromotionActivityStatus.DISABLED);
+    		activity.setGmtModified(dateProvider.getCurrentTime()); 
+    		promotionActivityDAO.updateStatus(activity);  
     	}
     }
 

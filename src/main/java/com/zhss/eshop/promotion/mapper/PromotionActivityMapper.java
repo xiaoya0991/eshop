@@ -152,9 +152,9 @@ public interface PromotionActivityMapper {
 	 * @return 促销活动
 	 */
 	@Select("SELECT "
-				+ "id,"
-				+ "name,"
-				+ "type "
+				+ "pa.id,"
+				+ "pa.name,"
+				+ "pa.type "
 			+ "FROM promotion_activity pa "
 			+ "JOIN promotion_activity_goods_relation pagr ON pa.id=pagr.promotion_activity_id "
 			+ "WHERE (pagr.goods_id=#{goodsId} OR pagr.goods_id=-999) "
@@ -219,7 +219,7 @@ public interface PromotionActivityMapper {
 			+ "status=#{status},"
 			+ "gmt_modified=#{gmtModified} "
 		+ "WHERE id=#{id}")  
-	void updateStatus(@Param("id") Long id, @Param("status") Integer status);
+	void updateStatus(PromotionActivityDO activity); 
 	
 	/**
 	 * 删除促销活动

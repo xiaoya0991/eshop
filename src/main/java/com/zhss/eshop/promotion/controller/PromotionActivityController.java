@@ -93,8 +93,8 @@ public class PromotionActivityController {
 	 * 更新促销活动
 	 * @param activity 促销活动
 	 */
-	@PutMapping("/") 
-	public Boolean update(PromotionActivityVO activity) throws Exception {
+	@PutMapping("/{id}")  
+	public Boolean update(@RequestBody PromotionActivityVO activity) throws Exception {
 		try {
 			promotionActivityService.update(activity.clone(PromotionActivityDTO.class, 
 					CloneDirection.FORWARD));
