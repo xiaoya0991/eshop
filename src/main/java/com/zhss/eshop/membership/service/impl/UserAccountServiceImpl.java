@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.membership.dao.UserAccountDAO;
 import com.zhss.eshop.membership.domain.UserAccountDO;
 import com.zhss.eshop.membership.domain.UserAccountDTO;
@@ -23,13 +24,20 @@ public class UserAccountServiceImpl implements UserAccountService {
 	 */
 	@Autowired
 	private UserAccountDAO userAccountDAO;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 新增用户账号
 	 * @param userAccount 用户账号
 	 */
 	public UserAccountDTO save(UserAccountDTO userAccount) throws Exception {
-		UserAccountDO resultUserAccount = userAccountDAO.save(
+		userAccount.setGmtCreate(dateProvider.getCurrentTime());
+		userAccount.setGmtModified(dateProvider.getCurrentTime());  
+ 		UserAccountDO resultUserAccount = userAccountDAO.save(
 				userAccount.clone(UserAccountDO.class));  
 		return resultUserAccount.clone(UserAccountDTO.class);  
 	}
@@ -40,6 +48,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 	 * @return
 	 */
 	public UserAccountDTO getForLogin(UserAccountDTO userAccount) throws Exception {
+		userAccount.setGmtModified(dateProvider.getCurrentTime()); 
 		UserAccountDO resultUserAccount = userAccountDAO.getForLogin(
 				userAccount.clone(UserAccountDO.class));  
 		return resultUserAccount.clone(UserAccountDTO.class);

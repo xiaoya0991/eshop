@@ -3,8 +3,8 @@ package com.zhss.eshop.membership.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,8 +51,8 @@ public class UserAccountController {
 	 * @param userAccount 用户账号
 	 * @return
 	 */
-	@PutMapping("/login")  
-	public UserAccountVO login(@RequestBody UserAccountVO userAccount) {
+	@GetMapping("/login")  
+	public UserAccountVO login(UserAccountVO userAccount) {
 		try {
 			UserAccountDTO resultUserAccount = userAccountService.getForLogin(
 					userAccount.clone(UserAccountDTO.class));
