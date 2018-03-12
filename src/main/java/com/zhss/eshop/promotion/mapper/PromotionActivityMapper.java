@@ -66,7 +66,7 @@ public interface PromotionActivityMapper {
 				+ "AND type = #{type} "  
 				+ "</if>"
 				
-				+ "LIMIT #{offset},#{limit} "
+				+ "LIMIT #{offset},#{size} "
 			+ ") b "
 			+ "WHERE a.id=b.id"
 			

@@ -3,6 +3,10 @@ package com.zhss.eshop.promotion.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.zhss.eshop.common.json.DateJsonDeserializer;
+import com.zhss.eshop.common.json.DateJsonSerializer;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
@@ -23,10 +27,14 @@ public class PromotionActivityVO extends AbstractObject {
 	/**
 	 * 促销活动开始时间
 	 */
+	@JsonSerialize(using=DateJsonSerializer.class)  
+	@JsonDeserialize(using=DateJsonDeserializer.class)
 	private Date startTime;
 	/**
 	 * 促销活动结束时间
 	 */
+	@JsonSerialize(using=DateJsonSerializer.class)  
+	@JsonDeserialize(using=DateJsonDeserializer.class)
 	private Date endTime;
 	/**
 	 * 促销活动备注
