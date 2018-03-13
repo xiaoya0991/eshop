@@ -1,19 +1,19 @@
-package com.zhss.eshop.Inventory.updater;
+package com.zhss.eshop.Inventory.stock;
 
 import java.util.List;
 import java.util.Map;
 
 import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
-import com.zhss.eshop.Inventory.domain.GoodsStockDO;
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.Inventory.domain.GoodsStockDO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 
 /**
- * 提交订单库存更新组件
+ * 取消订单库存更新组件
  * @author zhonghuashishan
  *
  */
-public class SubmitOrderStockUpdater extends AbstractStockUpdater {
+public class CancelOrderStockUpdater extends AbstractStockUpdater {
 
 	/**
 	 * 订单条目DTO对象集合
@@ -26,7 +26,7 @@ public class SubmitOrderStockUpdater extends AbstractStockUpdater {
 	 * @param goodsStockDAO 商品库存管理模块DAO组件 
 	 * @param dateProvider 日期辅助组件
 	 */
-	public SubmitOrderStockUpdater(
+	public CancelOrderStockUpdater(
 			List<GoodsStockDO> goodsStockDOs, 
 			GoodsStockDAO goodsStockDAO,
 			DateProvider dateProvider,
@@ -43,10 +43,10 @@ public class SubmitOrderStockUpdater extends AbstractStockUpdater {
 		for(GoodsStockDO goodsStockDO : goodsStockDOs) {
 			OrderItemDTO orderItemDTO = orderItemDTOMap.get(goodsStockDO.getGoodsSkuId());
 			goodsStockDO.setSaleStockQuantity(goodsStockDO.getSaleStockQuantity() 
-					- orderItemDTO.getPurchaseQuantity());  
+					+ orderItemDTO.getPurchaseQuantity()); 
 		}
 	}
-
+	
 	/**
 	 * 更新锁定库存
 	 */
@@ -55,7 +55,7 @@ public class SubmitOrderStockUpdater extends AbstractStockUpdater {
 		for(GoodsStockDO goodsStockDO : goodsStockDOs) {
 			OrderItemDTO orderItemDTO = orderItemDTOMap.get(goodsStockDO.getGoodsSkuId());
 			goodsStockDO.setLockedStockQuantity(goodsStockDO.getLockedStockQuantity() 
-					+ orderItemDTO.getPurchaseQuantity()); 
+					- orderItemDTO.getPurchaseQuantity()); 
 		}
 	}
 	

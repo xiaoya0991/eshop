@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zhss.eshop.Inventory.dao.StockUpdateMessageDAO;
-import com.zhss.eshop.Inventory.domain.StockUpdateMessageDO;
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.Inventory.domain.StockUpdateMessageDO;
 
 /**
  * 离线存储管理组件

@@ -53,6 +53,16 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 	
 	/**
+	 * 通知库存中心，“完成退货入库”事件发生了
+	 * @param returnGoodsInputOrderDTO 退货入库单DTO
+	 * @return 处理结果
+	 */
+	public Boolean informReturnGoodsInputFinished(
+			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO) {
+		return true;
+	}
+	
+	/**
 	 * 通知库存中心，“提交订单”事件发生了
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
@@ -76,16 +86,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @return 处理结果
 	 */
 	public Boolean informCancelOrderEvent(OrderInfoDTO orderDTO) {
-		return true;
-	}
-	
-	/**
-	 * 通知库存中心，“完成退货入库”事件发生了
-	 * @param returnGoodsInputOrderDTO 退货入库单DTO
-	 * @return 处理结果
-	 */
-	public Boolean informReturnGoodsInputFinished(
-			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO) {
 		return true;
 	}
 	

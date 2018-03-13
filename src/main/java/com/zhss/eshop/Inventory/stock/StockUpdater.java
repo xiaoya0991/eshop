@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.updater;
+package com.zhss.eshop.Inventory.stock;
 
 /**
  * 商品库存更新命令的接口

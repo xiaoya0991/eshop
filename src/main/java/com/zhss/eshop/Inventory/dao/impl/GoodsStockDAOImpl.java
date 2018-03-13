@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
-import com.zhss.eshop.Inventory.domain.GoodsStockDO;
 import com.zhss.eshop.Inventory.mapper.GoodsStockMapper;
+import com.zhss.eshop.Inventory.domain.GoodsStockDO;
 
 /**
  * 商品库存管理模块的DAO组件

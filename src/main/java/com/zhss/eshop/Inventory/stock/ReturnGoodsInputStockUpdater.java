@@ -1,11 +1,11 @@
-package com.zhss.eshop.Inventory.updater;
+package com.zhss.eshop.Inventory.stock;
 
 import java.util.List;
 import java.util.Map;
 
 import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
-import com.zhss.eshop.Inventory.domain.GoodsStockDO;
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.Inventory.domain.GoodsStockDO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
 
 /**

@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.Inventory.dao.StockUpdateMessageDAO;
-import com.zhss.eshop.Inventory.domain.StockUpdateMessageDO;
 import com.zhss.eshop.Inventory.mapper.StockUpdateMessageMapper;
+import com.zhss.eshop.Inventory.domain.StockUpdateMessageDO;
 
 /**
  * 库存更新消息管理模块DAO组件

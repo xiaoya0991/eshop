@@ -15,15 +15,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.Inventory.async.StockUpdateMessage;
 import com.zhss.eshop.Inventory.async.StockUpdateObservable;
 import com.zhss.eshop.Inventory.async.StockUpdateObserver;
 import com.zhss.eshop.Inventory.async.StockUpdateQueue;
 import com.zhss.eshop.Inventory.async.StockUpdateResult;
 import com.zhss.eshop.Inventory.async.StockUpdateResultManager;
-import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
 import com.zhss.eshop.Inventory.domain.GoodsStockDO;
-import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
@@ -46,7 +46,7 @@ public class InventoryServiceTest {
 	 * 库存中心service组件
 	 */
 	@Autowired
-	private InventoryService inventoryService;
+	private InventoryService InventoryService;
 	/**
 	 * 日期辅助组件
 	 */
@@ -92,7 +92,7 @@ public class InventoryServiceTest {
 		// 构造一个采购入库单，有两个条目，其goodsSkuId分别为1和2，同时采购数量为1000
 		PurchaseInputOrderDTO purchaseInputOrder = createPurchaseInputOrder(
 				purchaseQuantity, goodsSkuIds);    
-		inventoryService.informPurchaseInputFinished(purchaseInputOrder);
+		InventoryService.informPurchaseInputFinished(purchaseInputOrder);
 		
 		// 然后来执行断言
 		for(Long goodsSkuId : goodsSkuIds) { 
@@ -121,7 +121,7 @@ public class InventoryServiceTest {
 		// 构造一个退货入库单，有两个商品条目，goodsSkuId分别为3和4，其购买数量都是3
 		ReturnGoodsInputOrderDTO returnGoodsInputOrder = createReturnGoodsInputOrder(
 				purchaseQuantity, goodsSkuIds);
-		inventoryService.informReturnGoodsInputFinished(returnGoodsInputOrder);
+		InventoryService.informReturnGoodsInputFinished(returnGoodsInputOrder);
 		
 		// 执行断言
 		for(Long goodsSkuId : goodsSkuIds) {
@@ -153,7 +153,7 @@ public class InventoryServiceTest {
 		OrderInfoDTO order = createOrder(goodsSkuIds, purchaseQuantity);
 		
 		// 执行方法逻辑
-		inventoryService.informSubmitOrderEvent(order);
+		InventoryService.informSubmitOrderEvent(order);
 		
 		// 执行库存变更逻辑的断言
 		for(Long goodsSkuId : goodsSkuIds) {
@@ -187,7 +187,7 @@ public class InventoryServiceTest {
 		OrderInfoDTO order = createOrder(goodsSkuIds, purchaseQuantity);
 		
 		// 执行方法逻辑
-		inventoryService.informPayOrderEvent(order);
+		InventoryService.informPayOrderEvent(order);
 		
 		// 执行库存变更逻辑的断言
 		for(Long goodsSkuId : goodsSkuIds) {
@@ -221,7 +221,7 @@ public class InventoryServiceTest {
 		OrderInfoDTO order = createOrder(goodsSkuIds, purchaseQuantity);
 		
 		// 执行方法逻辑
-		inventoryService.informCancelOrderEvent(order);
+		InventoryService.informCancelOrderEvent(order);
 		
 		// 执行库存变更逻辑的断言
 		for(Long goodsSkuId : goodsSkuIds) {
@@ -248,7 +248,7 @@ public class InventoryServiceTest {
 		createGoodsStock(goodsSkuId, saleStockQuantity, 
 				lockedStockQuantity, saledStockQuantity);
 		
-		Long resultSaleStockQuantity = inventoryService.getSaleStockQuantity(goodsSkuId);
+		Long resultSaleStockQuantity = InventoryService.getSaleStockQuantity(goodsSkuId);
 		
 		assertEquals(saleStockQuantity, resultSaleStockQuantity); 
 	}
