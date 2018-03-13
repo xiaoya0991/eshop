@@ -8,9 +8,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.inventory.domain.GoodsStockDO;
+import com.zhss.eshop.schedule.dao.GoodsAllocationStockDAO;
+import com.zhss.eshop.schedule.dao.GoodsStockDAO;
+import com.zhss.eshop.schedule.domain.GoodsAllocationStockDO;
+import com.zhss.eshop.schedule.domain.GoodsAllocationStockId;
+import com.zhss.eshop.schedule.domain.GoodsStockDO;
+import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
+import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
+import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
 
@@ -31,8 +37,9 @@ public class ReturnGoodsInputStockUpdaterFactory<T>
 	@Autowired
 	public ReturnGoodsInputStockUpdaterFactory(
 			GoodsStockDAO goodsStockDAO, 
+			GoodsAllocationStockDAO goodsAllocationStockDAO,
 			DateProvider dateProvider) {
-		super(goodsStockDAO, dateProvider);
+		super(goodsStockDAO, dateProvider, goodsAllocationStockDAO);
 	}
 
 	/**
@@ -44,7 +51,7 @@ public class ReturnGoodsInputStockUpdaterFactory<T>
 	protected List<Long> getGoodsSkuIds(T parameter) throws Exception {		
 		ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO = (ReturnGoodsInputOrderDTO) parameter;
 		List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOs = 
-				returnGoodsInputOrderDTO.getReturnGoodsInputOrderItemDTOs();
+				returnGoodsInputOrderDTO.getItems();
 		
 		if(returnGoodsInputOrderItemDTOs == null || returnGoodsInputOrderItemDTOs.size() == 0) {
 			return new ArrayList<Long>();
@@ -54,6 +61,28 @@ public class ReturnGoodsInputStockUpdaterFactory<T>
 		
 		for(ReturnGoodsInputOrderItemDTO returnGoodsInputOrderItemDTO : returnGoodsInputOrderItemDTOs) {
 			goodsSkuIds.add(returnGoodsInputOrderItemDTO.getGoodsSkuId());
+		}
+		
+		return goodsSkuIds;
+	}
+	
+	@Override
+	protected List<GoodsAllocationStockId> getGoodsAllocationSkuIds(T parameter) throws Exception {
+		PurchaseInputOrderDTO purchaseInputOrderDTO = (PurchaseInputOrderDTO) parameter;
+		List<PurchaseInputOrderItemDTO> purchaseInputOrderItemDTOs = 
+				purchaseInputOrderDTO.getItems();
+		
+		if(purchaseInputOrderItemDTOs == null || purchaseInputOrderItemDTOs.size() == 0) {
+			return new ArrayList<GoodsAllocationStockId>();
+		}
+		
+		List<GoodsAllocationStockId> goodsSkuIds = new ArrayList<GoodsAllocationStockId>(purchaseInputOrderItemDTOs.size());
+		
+		for(PurchaseInputOrderItemDTO purchaseInputOrderItemDTO : purchaseInputOrderItemDTOs) {
+			for(PurchaseInputOrderPutOnItemDTO putOnItem : purchaseInputOrderItemDTO.getPutOnItemDTOs()) {
+				goodsSkuIds.add(new GoodsAllocationStockId(
+						putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId())); 
+			}
 		}
 		
 		return goodsSkuIds;
@@ -68,23 +97,30 @@ public class ReturnGoodsInputStockUpdaterFactory<T>
 	@Override
 	protected StockUpdater create(
 			List<GoodsStockDO> goodsStockDOs,
+			List<GoodsAllocationStockDO> goodsAllocationStocks,
 			T parameter) throws Exception {
-		ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO = (ReturnGoodsInputOrderDTO) parameter;
-		List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOs = 
-				returnGoodsInputOrderDTO.getReturnGoodsInputOrderItemDTOs();
+		PurchaseInputOrderDTO purchaseInputOrderDTO = (PurchaseInputOrderDTO) parameter;
+		List<PurchaseInputOrderItemDTO> purchaseInputOrderItemDTOs = 
+				purchaseInputOrderDTO.getItems();
 		
-		Map<Long, ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOMap = 
-				new HashMap<Long, ReturnGoodsInputOrderItemDTO>();
+		Map<Long, PurchaseInputOrderItemDTO> itemMap = 
+				new HashMap<Long, PurchaseInputOrderItemDTO>();
+		Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap = 
+				new HashMap<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO>();
 		
-		if(returnGoodsInputOrderItemDTOs != null && returnGoodsInputOrderItemDTOs.size() > 0) {
-			for(ReturnGoodsInputOrderItemDTO returnGoodsInputOrderItemDTO : returnGoodsInputOrderItemDTOs) {
-				returnGoodsInputOrderItemDTOMap.put(returnGoodsInputOrderItemDTO.getGoodsSkuId(), 
-						returnGoodsInputOrderItemDTO);
+		if(purchaseInputOrderItemDTOs != null && purchaseInputOrderItemDTOs.size() > 0) {
+			for(PurchaseInputOrderItemDTO purchaseInputOrderItemDTO : purchaseInputOrderItemDTOs) {
+				itemMap.put(purchaseInputOrderItemDTO.getGoodsSkuId(), purchaseInputOrderItemDTO);
+				
+				for(PurchaseInputOrderPutOnItemDTO putOnItem : purchaseInputOrderItemDTO.getPutOnItemDTOs()) { 
+					putOnItemMap.put(new GoodsAllocationStockId(
+							putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId()), putOnItem);
+				}
 			}
 		}
 		
-		return new ReturnGoodsInputStockUpdater(goodsStockDOs, goodsStockDAO, 
-				dateProvider, returnGoodsInputOrderItemDTOMap); 
+		return new PurchaseInputStockUpdater(goodsStockDOs, goodsAllocationStocks, 
+				goodsStockDAO, goodsAllocationStockDAO, dateProvider, itemMap, putOnItemMap);
 	}
 
 }

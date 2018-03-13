@@ -44,7 +44,7 @@ public class PurchaseInputStockUpdaterFactory<T>
 	protected List<Long> getGoodsSkuIds(T parameter) throws Exception {		
 		PurchaseInputOrderDTO purchaseInputOrderDTO = (PurchaseInputOrderDTO) parameter;
 		List<PurchaseInputOrderItemDTO> purchaseInputOrderItemDTOs = 
-				purchaseInputOrderDTO.getPurchaseInputOrderItemDTOs();
+				purchaseInputOrderDTO.getItems();
 		
 		if(purchaseInputOrderItemDTOs == null || purchaseInputOrderItemDTOs.size() == 0) {
 			return new ArrayList<Long>();
@@ -71,7 +71,7 @@ public class PurchaseInputStockUpdaterFactory<T>
 			T parameter) throws Exception {
 		PurchaseInputOrderDTO purchaseInputOrderDTO = (PurchaseInputOrderDTO) parameter;
 		List<PurchaseInputOrderItemDTO> purchaseInputOrderItemDTOs = 
-				purchaseInputOrderDTO.getPurchaseInputOrderItemDTOs();
+				purchaseInputOrderDTO.getItems();
 		
 		Map<Long, PurchaseInputOrderItemDTO> purchaseInputOrderItemDTOMap = 
 				new HashMap<Long, PurchaseInputOrderItemDTO>();

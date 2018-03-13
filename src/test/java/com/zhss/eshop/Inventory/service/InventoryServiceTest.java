@@ -358,13 +358,13 @@ public class InventoryServiceTest {
 		order.setId(1L); 
 		order.setSupplierId(1L); 
 		order.setExpectArrivalTime(dateProvider.parseDatetime("2018-01-10 10:00:00"));  
-		order.setArrivalTime(dateProvider.parseDatetime("2018-01-10 10:05:00"));
+		order.setActualArrivalTime(dateProvider.parseDatetime("2018-01-10 10:05:00"));
 		order.setPurchaseContactor("张三");  
-		order.setPurchaseContactPhoneNumber("18910106578");  
-		order.setPurchaseContactEmail("zhangsan@sina.com");  
-		order.setPurchaseOrderComment("测试采购入库单");
-		order.setPurchaser("李四");  
-		order.setPurcahseInputOrderStatus(5); 
+		order.setPurchaseContactorPhoneNumber("18910106578");  
+		order.setPurchaseContactorEmail("zhangsan@sina.com");  
+		order.setPurchaseOrderRemark("测试采购入库单");
+		order.setPurchaser("李四");   
+		order.setStatus(5); 
 		order.setGmtCreate(dateProvider.parseDatetime("2018-01-01 10:00:00"));  
 		order.setGmtModified(dateProvider.parseDatetime("2018-01-10 10:00:00"));  
 		
@@ -372,14 +372,16 @@ public class InventoryServiceTest {
 		for(int i = 0; i < goodsSkuIds.length; i++) {   
 			items.add(createPurchaseInputItem((long)i, goodsSkuIds[i], 1L, count)); 
 		}
-		order.setPurchaseInputOrderItemDTOs(items);
+		order.setItems(items);
 
-		List<PurchaseInputOrderPutOnItemDTO> putOnItems = 
-				new ArrayList<PurchaseInputOrderPutOnItemDTO>();
-		for(int i = 0; i < goodsSkuIds.length; i++) {
-			putOnItems.add(createPurchaseInputOrderPutOnItem((long)i, (long)i));   
+		for(PurchaseInputOrderItemDTO item : items) {
+			List<PurchaseInputOrderPutOnItemDTO> putOnItems = 
+					new ArrayList<PurchaseInputOrderPutOnItemDTO>();
+			for(int i = 0; i < goodsSkuIds.length; i++) {
+				putOnItems.add(createPurchaseInputOrderPutOnItem((long)i, (long)i));   
+			}
+			item.setPutOnItemDTOs(putOnItems); 
 		}
-		order.setPurchaseInputOrderPutOnItemDTOs(putOnItems); 
 		
 		return order;
 	}
@@ -433,7 +435,7 @@ public class InventoryServiceTest {
 		returnGoodsInputOrder.setUserAccountId(1L); 
 		returnGoodsInputOrder.setOrderId(1L); 
 		returnGoodsInputOrder.setOrderNo("test"); 
-		returnGoodsInputOrder.setReturnGoodsInputOrderStatus(3); 
+		returnGoodsInputOrder.setStatus(3);  
 		returnGoodsInputOrder.setConsignee("张三");
 		returnGoodsInputOrder.setDeliveryAddress("测试地址"); 
 		returnGoodsInputOrder.setConsigneeCellPhoneNumber("18910106578");
@@ -456,14 +458,16 @@ public class InventoryServiceTest {
 		for(Long goodsSkuId : goodsSkuIds) {
 			items.add(createReturnGoodsInputOrderItem(1L, goodsSkuId, purchaseQuantity)); 
 		}
-		returnGoodsInputOrder.setReturnGoodsInputOrderItemDTOs(items); 
+		returnGoodsInputOrder.setItems(items); 
 		
-		List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems = 
-				new ArrayList<ReturnGoodsInputOrderPutOnItemDTO>();
-		for(int i = 0; i < goodsSkuIds.length; i++) {
-			putOnItems.add(createReturnGoodsInputOrderPutOnItem((long)i, (long)i)); 
+		for(ReturnGoodsInputOrderItemDTO item : items) {
+			List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems = 
+					new ArrayList<ReturnGoodsInputOrderPutOnItemDTO>();
+			for(int i = 0; i < goodsSkuIds.length; i++) {
+				putOnItems.add(createReturnGoodsInputOrderPutOnItem((long)i, (long)i)); 
+			}
+			item.setPutOnItemDTO(putOnItems); 
 		}
-		returnGoodsInputOrder.setReturnGoodsInputOrderPutOnItemDTO(putOnItems); 
 		
 		return returnGoodsInputOrder;
 	}

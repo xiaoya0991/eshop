@@ -3,10 +3,14 @@ package com.zhss.eshop.schedule.stock;
 import java.util.List;
 import java.util.Map;
 
-import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.inventory.domain.GoodsStockDO;
+import com.zhss.eshop.schedule.dao.GoodsAllocationStockDAO;
+import com.zhss.eshop.schedule.dao.GoodsStockDAO;
+import com.zhss.eshop.schedule.domain.GoodsAllocationStockDO;
+import com.zhss.eshop.schedule.domain.GoodsAllocationStockId;
+import com.zhss.eshop.schedule.domain.GoodsStockDO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
+import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDTO;
 
 /**
  * 采购入库库存更新命令
@@ -18,7 +22,11 @@ public class PurchaseInputStockUpdater extends AbstractStockUpdater {
 	/**
 	 * 采购入库单条目DTO集合
 	 */
-	private Map<Long, PurchaseInputOrderItemDTO> purcahseInputOrderItemDTOMap;
+	private Map<Long, PurchaseInputOrderItemDTO> itemMap;
+	/**
+	 * 采购入库单条目DTO集合
+	 */
+	private Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap;
 	
 	/**
 	 * 构造函数
@@ -27,40 +35,57 @@ public class PurchaseInputStockUpdater extends AbstractStockUpdater {
 	 * @param dateProvider 日期辅助组件
 	 */
 	public PurchaseInputStockUpdater(
-			List<GoodsStockDO> goodsStockDOs, 
+			List<GoodsStockDO> goodsStocks, 
+			List<GoodsAllocationStockDO> goodsAllocationStocks,
 			GoodsStockDAO goodsStockDAO,
+			GoodsAllocationStockDAO goodsAllocationStockDAO,
 			DateProvider dateProvider,
-			Map<Long, PurchaseInputOrderItemDTO> purcahseInputOrderItemDTOMap) {
-		super(goodsStockDOs, goodsStockDAO, dateProvider);
-		this.purcahseInputOrderItemDTOMap = purcahseInputOrderItemDTOMap;
+			Map<Long, PurchaseInputOrderItemDTO> itemMap,
+			Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap) {
+		super(goodsStocks, goodsAllocationStocks, 
+				goodsStockDAO, goodsAllocationStockDAO, dateProvider);
+		this.itemMap = itemMap;
+		this.putOnItemMap = putOnItemMap;
 	}
-	
-	/**
-	 * 更新销售库存
-	 */
+
 	@Override
-	protected void updateSaleStockQuantity() throws Exception {
-		for(GoodsStockDO goodsStockDO : goodsStockDOs) {
-			PurchaseInputOrderItemDTO purchaseInputOrderItemDTO = 
-					purcahseInputOrderItemDTOMap.get(goodsStockDO.getGoodsSkuId());
-			goodsStockDO.setSaleStockQuantity(goodsStockDO.getSaleStockQuantity() 
-					+ purchaseInputOrderItemDTO.getArrivalCount()); 
+	protected void updateGoodsAvailableStockQuantity() throws Exception {
+		for(GoodsStockDO goodsStock : goodsStocks) {
+			PurchaseInputOrderItemDTO item = itemMap.get(goodsStock.getGoodsSkuId());
+			goodsStock.setAvailableStockQuantity(goodsStock.getAvailableStockQuantity()
+					+ item.getArrivalCount()); 
 		}
 	}
 
-	/**
-	 * 更新锁定库存
-	 */
 	@Override
-	protected void updateLockedStockQuantity() throws Exception {
+	protected void updateGoodsLockedStockQuantity() throws Exception {
 		
 	}
 
-	/**
-	 * 更新已销售库存
-	 */
 	@Override
-	protected void updateSaledStockQuantity() throws Exception {
+	protected void updateGoodsOutputStockQuantity() throws Exception {
+		
+	}
+
+	@Override
+	protected void updateGoodsAllocationAvailableStockQuantity() throws Exception {
+		for(GoodsAllocationStockDO goodsAllocationStock : goodsAllocationStocks) {
+			PurchaseInputOrderPutOnItemDTO putOnItem = putOnItemMap.get(
+					new GoodsAllocationStockId(
+							goodsAllocationStock.getGoodsAllocationId(), 
+							goodsAllocationStock.getGoodsSkuId())); 
+			goodsAllocationStock.setAvailableStockQuantity(goodsAllocationStock.getAvailableStockQuantity()
+					+ putOnItem.getPutOnShelvesCount()); 
+		}
+	}
+
+	@Override
+	protected void updateGoodsAllocationLockedStockQuantity() throws Exception {
+		
+	}
+
+	@Override
+	protected void updateGoodsAllocationOutputStockQuantity() throws Exception {
 		
 	}
 

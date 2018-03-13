@@ -340,16 +340,16 @@ public class ScheduleServiceTest {
 		purchaseInputOrder.setSupplierId(1L); 
 		purchaseInputOrder.setExpectArrivalTime(dateProvider.parseDatetime("2018-01-10 10:00:00")); 
 		purchaseInputOrder.setPurchaseContactor("张三"); 
-		purchaseInputOrder.setPurchaseContactPhoneNumber("测试电话");  
-		purchaseInputOrder.setPurchaseContactEmail("测试邮箱"); 
-		purchaseInputOrder.setPurchaseOrderComment("测试采购单");  
+		purchaseInputOrder.setPurchaseContactorPhoneNumber("测试电话");  
+		purchaseInputOrder.setPurchaseContactorEmail("测试邮箱"); 
+		purchaseInputOrder.setPurchaseOrderRemark("测试采购单");  
 		purchaseInputOrder.setPurchaser("李四");  
 		
 		List<PurchaseInputOrderItemDTO> items = new ArrayList<PurchaseInputOrderItemDTO>();
 		for(int i = 0; i < 5; i++) {
 			items.add(createPurchaseInputOrderItem((long)i));  
 		}
-		purchaseInputOrder.setPurchaseInputOrderItemDTOs(items); 
+		purchaseInputOrder.setItems(items); 
 		
 		return purchaseInputOrder;
 	}

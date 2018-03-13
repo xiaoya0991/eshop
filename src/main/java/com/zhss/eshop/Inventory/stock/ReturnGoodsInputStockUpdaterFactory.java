@@ -44,7 +44,7 @@ public class ReturnGoodsInputStockUpdaterFactory<T>
 	protected List<Long> getGoodsSkuIds(T parameter) throws Exception {		
 		ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO = (ReturnGoodsInputOrderDTO) parameter;
 		List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOs = 
-				returnGoodsInputOrderDTO.getReturnGoodsInputOrderItemDTOs();
+				returnGoodsInputOrderDTO.getItems();
 		
 		if(returnGoodsInputOrderItemDTOs == null || returnGoodsInputOrderItemDTOs.size() == 0) {
 			return new ArrayList<Long>();
@@ -71,7 +71,7 @@ public class ReturnGoodsInputStockUpdaterFactory<T>
 			T parameter) throws Exception {
 		ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO = (ReturnGoodsInputOrderDTO) parameter;
 		List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOs = 
-				returnGoodsInputOrderDTO.getReturnGoodsInputOrderItemDTOs();
+				returnGoodsInputOrderDTO.getItems();
 		
 		Map<Long, ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOMap = 
 				new HashMap<Long, ReturnGoodsInputOrderItemDTO>();

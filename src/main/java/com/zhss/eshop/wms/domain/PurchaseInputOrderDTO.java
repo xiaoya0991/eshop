@@ -146,17 +146,18 @@ public class PurchaseInputOrderDTO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((arrivalTime == null) ? 0 : arrivalTime.hashCode());
+		result = prime * result + ((actualArrivalTime == null) ? 0 : actualArrivalTime.hashCode());
 		result = prime * result + ((expectArrivalTime == null) ? 0 : expectArrivalTime.hashCode());
 		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
 		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((purcahseInputOrderStatus == null) ? 0 : purcahseInputOrderStatus.hashCode());
-		result = prime * result + ((purchaseContactEmail == null) ? 0 : purchaseContactEmail.hashCode());
-		result = prime * result + ((purchaseContactPhoneNumber == null) ? 0 : purchaseContactPhoneNumber.hashCode());
 		result = prime * result + ((purchaseContactor == null) ? 0 : purchaseContactor.hashCode());
-		result = prime * result + ((purchaseOrderComment == null) ? 0 : purchaseOrderComment.hashCode());
+		result = prime * result + ((purchaseContactorEmail == null) ? 0 : purchaseContactorEmail.hashCode());
+		result = prime * result
+				+ ((purchaseContactorPhoneNumber == null) ? 0 : purchaseContactorPhoneNumber.hashCode());
+		result = prime * result + ((purchaseOrderRemark == null) ? 0 : purchaseOrderRemark.hashCode());
 		result = prime * result + ((purchaser == null) ? 0 : purchaser.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((supplierId == null) ? 0 : supplierId.hashCode());
 		return result;
 	}
@@ -170,10 +171,10 @@ public class PurchaseInputOrderDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		PurchaseInputOrderDTO other = (PurchaseInputOrderDTO) obj;
-		if (arrivalTime == null) {
-			if (other.arrivalTime != null)
+		if (actualArrivalTime == null) {
+			if (other.actualArrivalTime != null)
 				return false;
-		} else if (!arrivalTime.equals(other.arrivalTime))
+		} else if (!actualArrivalTime.equals(other.actualArrivalTime))
 			return false;
 		if (expectArrivalTime == null) {
 			if (other.expectArrivalTime != null)
@@ -195,35 +196,35 @@ public class PurchaseInputOrderDTO {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (purcahseInputOrderStatus == null) {
-			if (other.purcahseInputOrderStatus != null)
-				return false;
-		} else if (!purcahseInputOrderStatus.equals(other.purcahseInputOrderStatus))
-			return false;
-		if (purchaseContactEmail == null) {
-			if (other.purchaseContactEmail != null)
-				return false;
-		} else if (!purchaseContactEmail.equals(other.purchaseContactEmail))
-			return false;
-		if (purchaseContactPhoneNumber == null) {
-			if (other.purchaseContactPhoneNumber != null)
-				return false;
-		} else if (!purchaseContactPhoneNumber.equals(other.purchaseContactPhoneNumber))
-			return false;
 		if (purchaseContactor == null) {
 			if (other.purchaseContactor != null)
 				return false;
 		} else if (!purchaseContactor.equals(other.purchaseContactor))
 			return false;
-		if (purchaseOrderComment == null) {
-			if (other.purchaseOrderComment != null)
+		if (purchaseContactorEmail == null) {
+			if (other.purchaseContactorEmail != null)
 				return false;
-		} else if (!purchaseOrderComment.equals(other.purchaseOrderComment))
+		} else if (!purchaseContactorEmail.equals(other.purchaseContactorEmail))
+			return false;
+		if (purchaseContactorPhoneNumber == null) {
+			if (other.purchaseContactorPhoneNumber != null)
+				return false;
+		} else if (!purchaseContactorPhoneNumber.equals(other.purchaseContactorPhoneNumber))
+			return false;
+		if (purchaseOrderRemark == null) {
+			if (other.purchaseOrderRemark != null)
+				return false;
+		} else if (!purchaseOrderRemark.equals(other.purchaseOrderRemark))
 			return false;
 		if (purchaser == null) {
 			if (other.purchaser != null)
 				return false;
 		} else if (!purchaser.equals(other.purchaser))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
 			return false;
 		if (supplierId == null) {
 			if (other.supplierId != null)
@@ -231,16 +232,15 @@ public class PurchaseInputOrderDTO {
 		} else if (!supplierId.equals(other.supplierId))
 			return false;
 		
-		if(this.getPurchaseInputOrderItemDTOs() != null && other.getPurchaseInputOrderItemDTOs() != null) { 
-			if(this.getPurchaseInputOrderItemDTOs().size() != 
-					other.getPurchaseInputOrderItemDTOs().size()) {
+		if(this.getItems() != null && other.getItems() != null) { 
+			if(this.getItems().size() != other.getItems().size()) {
 				return false;
 			}
 			
-			for(PurchaseInputOrderItemDTO item : this.getPurchaseInputOrderItemDTOs()) {
+			for(PurchaseInputOrderItemDTO item : this.getItems()) {
 				Boolean result = false;
 				
-				for(PurchaseInputOrderItemDTO otherItem : other.getPurchaseInputOrderItemDTOs()) {
+				for(PurchaseInputOrderItemDTO otherItem : other.getItems()) {
 					if(item.equals(otherItem)) {
 						result =true;
 						break;

@@ -8,12 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderItemDTO;
 import com.zhss.eshop.schedule.service.ScheduleService;
+import com.zhss.eshop.schedule.stock.PurchaseInputStockUpdaterFactory;
+import com.zhss.eshop.schedule.stock.ReturnGoodsInputStockUpdaterFactory;
+import com.zhss.eshop.schedule.stock.StockUpdater;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -42,6 +46,16 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Autowired
 	private SaleDeliveryOrderBuilderFactory saleDeliveryOrderBuilderFactory;
 	
+	private PurchaseInputStockUpdaterFactory<PurchaseInputOrderDTO> purchaseInputStockUpdaterFactory;
+	
+	private ReturnGoodsInputStockUpdaterFactory<ReturnGoodsInputOrderDTO> returnGoodsInputStockUpdaterFactory;
+	
+	/**
+	 * 库存中心
+	 */
+	@Autowired
+	private InventoryService inventoryService;
+	
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
 	 * @param purchaseInputOrderDTO 采购入库单DTO
@@ -49,6 +63,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	public Boolean informPurchaseInputFinished(
 			PurchaseInputOrderDTO purchaseInputOrderDTO) {
+		StockUpdater stockUpdater = purchaseInputStockUpdaterFactory.create(purchaseInputOrderDTO);
+		stockUpdater.update();
+		inventoryService.informPurchaseInputFinished(purchaseInputOrderDTO);
 		return true;
 	}
 	
@@ -59,6 +76,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	public Boolean informReturnGoodsInputFinished(
 			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO) {
+		StockUpdater stockUpdater = returnGoodsInputStockUpdaterFactory.create(returnGoodsInputOrderDTO);
+		stockUpdater.update();
+		inventoryService.informReturnGoodsInputFinished(returnGoodsInputOrderDTO);
 		return true;
 	}
 	
@@ -104,7 +124,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 			for(PurchaseOrderItemDTO purchaseOrderItem : purchaseOrder.getItems()) {
 				purchaseInputOrderItems.add(createPurchaseInputOrderItem(purchaseOrderItem)); 
 			}
-			purchaseInputOrder.setPurchaseInputOrderItemDTOs(purchaseInputOrderItems);  
+			purchaseInputOrder.setItems(purchaseInputOrderItems);  
 			
 			wmsService.createPurchaseInputOrder(purchaseInputOrder); 
 		} catch (Exception e) {
@@ -129,10 +149,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 		purchaseInputOrder.setGmtCreate(null); 
 		purchaseInputOrder.setGmtModified(null);  
 		purchaseInputOrder.setPurchaseContactor(purchaseOrder.getContactor());
-		purchaseInputOrder.setPurchaseContactPhoneNumber(
+		purchaseInputOrder.setPurchaseContactorPhoneNumber(
 				purchaseOrder.getContactorPhoneNumber()); 
-		purchaseInputOrder.setPurchaseContactEmail(purchaseOrder.getContactorEmail()); 
-		purchaseInputOrder.setPurchaseOrderComment(purchaseOrder.getRemark()); 
+		purchaseInputOrder.setPurchaseContactorEmail(purchaseOrder.getContactorEmail()); 
+		purchaseInputOrder.setPurchaseOrderRemark(purchaseOrder.getRemark()); 
 		
 		return purchaseInputOrder;
 	}
@@ -200,7 +220,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 			
 			List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItems = ObjectUtils.convertList(
 					order.getOrderItems(), ReturnGoodsInputOrderItemDTO.class);
-			returnGoodsInputOrder.setReturnGoodsInputOrderItemDTOs(returnGoodsInputOrderItems); 
+			returnGoodsInputOrder.setItems(returnGoodsInputOrderItems); 
 			
 			wmsService.createReturnGoodsInputOrder(returnGoodsInputOrder);
 			
