@@ -32,7 +32,7 @@ public interface GoodsDetailPictureMapper {
 				+ "picture_path,"
 				+ "gmt_create,"
 				+ "gmt_modified "
-			+ "FROM commodity_goods_picture "
+			+ "FROM commodity_goods_detail_picture "
 			+ "WHERE id=#{id}")
 	@Results({
 		@Result(column = "id", property = "id", id = true),

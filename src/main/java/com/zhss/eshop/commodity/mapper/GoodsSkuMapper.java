@@ -81,7 +81,7 @@ public interface GoodsSkuMapper {
 	 * 根据商品id删除sku
 	 * @param goodsId 商品id
 	 */
-	@Delete("DELETE FROM commodity_goods_sku WHERE goods_id=#{godsId}")  
+	@Delete("DELETE FROM commodity_goods_sku WHERE goods_id=#{goodsId}")  
 	void removeByGoodsId(@Param("goodsId") Long goodsId);
 	
 }

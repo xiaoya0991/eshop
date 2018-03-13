@@ -33,7 +33,7 @@ public class GoodsDetailPictureDAOImpl implements GoodsDetailPictureDAO {
 	}
 	
 	/**
-	 * 根据id查询商品图片
+	 * 根据商品详情id查询商品详情图片
 	 * @param id 商品图片id
 	 * @return 商品图片
 	 */

@@ -58,4 +58,10 @@ public interface GoodsDAO {
 	 */
 	void updateStatus(GoodsDO goods);
 	
+	/**
+	 * 删除商品
+	 * @param id 商品id
+	 */
+	void remove(Long id);
+	
 }

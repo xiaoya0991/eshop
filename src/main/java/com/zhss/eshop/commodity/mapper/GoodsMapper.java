@@ -2,6 +2,7 @@ package com.zhss.eshop.commodity.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -214,7 +215,7 @@ public interface GoodsMapper {
 				+ "length=#{length},"
 				+ "width=#{width},"
 				+ "height=#{height},"
-				+ "service_gurantees=#{serviceGuarantees},"
+				+ "service_guarantees=#{serviceGuarantees},"
 				+ "package_list=#{packageList},"
 				+ "freight_template_id=#{freightTemplateId},"
 				+ "gmt_modified=#{gmtModified} "
@@ -230,5 +231,12 @@ public interface GoodsMapper {
 			+ "gmt_modified=#{gmtModified} "
 		+ " WHERE id=#{id}")  
 	void updateStatus(GoodsDO goods);
+	
+	/**
+	 * 删除商品
+	 * @param id 商品id
+	 */
+	@Delete("DELETE FROM commodity_goods WHERE id=#{id}") 
+	void remove(@Param("id") Long id);
 	
 }

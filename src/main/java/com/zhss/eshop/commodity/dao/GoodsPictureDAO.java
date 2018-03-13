@@ -2,8 +2,6 @@ package com.zhss.eshop.commodity.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.zhss.eshop.commodity.domain.GoodsPictureDO;
 
 /**
@@ -11,7 +9,6 @@ import com.zhss.eshop.commodity.domain.GoodsPictureDO;
  * @author zhonghuashishan
  *
  */
-@Mapper
 public interface GoodsPictureDAO {
 
 	/**

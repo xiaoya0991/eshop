@@ -8,6 +8,14 @@ package com.zhss.eshop.commodity.domain;
 public class GoodsQuery {
 
 	/**
+	 * 分页查询起始位置
+	 */
+	private Integer offset;
+	/**
+	 * 每页显示的记录数量
+	 */
+	private Integer size;
+	/**
 	 * 类目id
 	 */
 	private Long categoryId;
@@ -31,7 +39,19 @@ public class GoodsQuery {
 	 * 商品状态
 	 */
 	private Integer status;
-	
+
+	public Integer getOffset() {
+		return offset;
+	}
+	public void setOffset(Integer offset) {
+		this.offset = offset;
+	}
+	public Integer getSize() {
+		return size;
+	}
+	public void setSize(Integer size) {
+		this.size = size;
+	}
 	public Long getCategoryId() {
 		return categoryId;
 	}

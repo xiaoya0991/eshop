@@ -85,4 +85,12 @@ public class GoodsDAOImpl implements GoodsDAO {
 		goodsMapper.updateStatus(goods);
 	}
 	
+	/**
+	 * 删除商品
+	 * @param id 商品id
+	 */
+	public void remove(Long id) {
+		goodsMapper.remove(id);
+	}
+	
 }

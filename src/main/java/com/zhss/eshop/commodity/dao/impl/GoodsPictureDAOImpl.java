@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.commodity.dao.GoodsPictureDAO;
 import com.zhss.eshop.commodity.domain.GoodsPictureDO;
+import com.zhss.eshop.commodity.mapper.GoodsPictureMapper;
 
 /**
  * 商品图片管理DAO组件
@@ -15,12 +16,12 @@ import com.zhss.eshop.commodity.domain.GoodsPictureDO;
  */
 @Repository
 public class GoodsPictureDAOImpl implements GoodsPictureDAO {
-
+	
 	/**
 	 * 商品图片管理mapper组件
 	 */
 	@Autowired
-	private GoodsPictureDAO goodsPictureMapper;
+	private GoodsPictureMapper goodsPictureMapper;
 	
 	/**
 	 * 根据商品id查询商品图片id

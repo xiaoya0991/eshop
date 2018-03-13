@@ -173,4 +173,119 @@ public class GoodsDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((brandId == null) ? 0 : brandId.hashCode());
+		result = prime * result + ((categoryId == null) ? 0 : categoryId.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((freightTemplateId == null) ? 0 : freightTemplateId.hashCode());
+		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
+		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
+		result = prime * result + ((grossWeight == null) ? 0 : grossWeight.hashCode());
+		result = prime * result + ((height == null) ? 0 : height.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((length == null) ? 0 : length.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((packageList == null) ? 0 : packageList.hashCode());
+		result = prime * result + ((serviceGuarantees == null) ? 0 : serviceGuarantees.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((subName == null) ? 0 : subName.hashCode());
+		result = prime * result + ((width == null) ? 0 : width.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GoodsDO other = (GoodsDO) obj;
+		if (brandId == null) {
+			if (other.brandId != null)
+				return false;
+		} else if (!brandId.equals(other.brandId))
+			return false;
+		if (categoryId == null) {
+			if (other.categoryId != null)
+				return false;
+		} else if (!categoryId.equals(other.categoryId))
+			return false;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		if (freightTemplateId == null) {
+			if (other.freightTemplateId != null)
+				return false;
+		} else if (!freightTemplateId.equals(other.freightTemplateId))
+			return false;
+		if (gmtCreate == null) {
+			if (other.gmtCreate != null)
+				return false;
+		} else if (!gmtCreate.equals(other.gmtCreate))
+			return false;
+		if (gmtModified == null) {
+			if (other.gmtModified != null)
+				return false;
+		} else if (!gmtModified.equals(other.gmtModified))
+			return false;
+		if (grossWeight == null) {
+			if (other.grossWeight != null)
+				return false;
+		} else if (!grossWeight.equals(other.grossWeight))
+			return false;
+		if (height == null) {
+			if (other.height != null)
+				return false;
+		} else if (!height.equals(other.height))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (length == null) {
+			if (other.length != null)
+				return false;
+		} else if (!length.equals(other.length))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (packageList == null) {
+			if (other.packageList != null)
+				return false;
+		} else if (!packageList.equals(other.packageList))
+			return false;
+		if (serviceGuarantees == null) {
+			if (other.serviceGuarantees != null)
+				return false;
+		} else if (!serviceGuarantees.equals(other.serviceGuarantees))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (subName == null) {
+			if (other.subName != null)
+				return false;
+		} else if (!subName.equals(other.subName))
+			return false;
+		if (width == null) {
+			if (other.width != null)
+				return false;
+		} else if (!width.equals(other.width))
+			return false;
+		return true;
+	}
+	
 }

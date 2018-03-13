@@ -22,7 +22,7 @@ public class GoodsSkuSalePropertyValueVO extends AbstractObject {
 	/**
 	 * 类目与属性关联关系id
 	 */
-	private Long categoryPropertyRelationshipId;
+	private Long relationId;
 	/**
 	 * 属性值
 	 */
@@ -48,11 +48,11 @@ public class GoodsSkuSalePropertyValueVO extends AbstractObject {
 	public void setGoodsSkuId(Long goodsSkuId) {
 		this.goodsSkuId = goodsSkuId;
 	}
-	public Long getCategoryPropertyRelationshipId() {
-		return categoryPropertyRelationshipId;
+	public Long getRelationId() {
+		return relationId;
 	}
-	public void setCategoryPropertyRelationshipId(Long categoryPropertyRelationshipId) {
-		this.categoryPropertyRelationshipId = categoryPropertyRelationshipId;
+	public void setRelationId(Long relationId) {
+		this.relationId = relationId;
 	}
 	public String getPropertyValue() {
 		return propertyValue;
