@@ -22,6 +22,10 @@ public class ReturnGoodsInputOrderPutOnItemDTO {
 	 */
 	private Long goodsAllocationId;
 	/**
+	 * 商品sku id
+	 */
+	private Long goodsSkuId;
+	/**
 	 * 商品上架数量
 	 */
 	private Long putOnShelvesCount;
@@ -69,6 +73,12 @@ public class ReturnGoodsInputOrderPutOnItemDTO {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public Long getGoodsSkuId() {
+		return goodsSkuId;
+	}
+	public void setGoodsSkuId(Long goodsSkuId) {
+		this.goodsSkuId = goodsSkuId;
 	}
 	
 }

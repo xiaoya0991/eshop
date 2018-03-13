@@ -1,6 +1,7 @@
 package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 采购入库单条目DTO类
@@ -45,6 +46,10 @@ public class PurchaseInputOrderItemDTO {
 	 * 采购入库单条目的修改时间
 	 */
 	private Date gmtModified;
+	/**
+	 * 采购入库单商品上架条目集合
+	 */
+	private List<PurchaseInputOrderPutOnItemDTO> putOnItemDTOs;
 	
 	public Long getId() {
 		return id;
@@ -99,6 +104,12 @@ public class PurchaseInputOrderItemDTO {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public List<PurchaseInputOrderPutOnItemDTO> getPutOnItemDTOs() {
+		return putOnItemDTOs;
+	}
+	public void setPutOnItemDTOs(List<PurchaseInputOrderPutOnItemDTO> putOnItemDTOs) {
+		this.putOnItemDTOs = putOnItemDTOs;
 	}
 	
 }
