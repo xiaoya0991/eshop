@@ -25,7 +25,7 @@ public class PurchaseInputOrderDTO {
 	/**
 	 * 实际到达时间
 	 */
-	private Date arrivalTime;
+	private Date actualArrivalTime;
 	/**
 	 * 采购联系人
 	 */
@@ -33,15 +33,15 @@ public class PurchaseInputOrderDTO {
 	/**
 	 * 采购联系人电话号码
 	 */
-	private String purchaseContactPhoneNumber;
+	private String purchaseContactorPhoneNumber;
 	/**
 	 * 采购联系人邮箱地址
 	 */
-	private String purchaseContactEmail;
+	private String purchaseContactorEmail;
 	/**
-	 * 采购入库单备注
+	 * 采购单备注
 	 */
-	private String purchaseOrderComment;
+	private String purchaseOrderRemark;
 	/**
 	 * 采购员
 	 */
@@ -49,7 +49,7 @@ public class PurchaseInputOrderDTO {
 	/**
 	 * 采购入库单的状态
 	 */
-	private Integer purcahseInputOrderStatus;
+	private Integer status;
 	/**
 	 * 采购入库单的创建时间
 	 */
@@ -61,11 +61,7 @@ public class PurchaseInputOrderDTO {
 	/**
 	 * 采购入库单条目集合
 	 */
-	private List<PurchaseInputOrderItemDTO> purchaseInputOrderItemDTOs;
-	/**
-	 * 采购入库单商品上架条目集合
-	 */
-	private List<PurchaseInputOrderPutOnItemDTO> purchaseInputOrderPutOnItemDTOs;
+	private List<PurchaseInputOrderItemDTO> items;
 	
 	public Long getId() {
 		return id;
@@ -85,11 +81,11 @@ public class PurchaseInputOrderDTO {
 	public void setExpectArrivalTime(Date expectArrivalTime) {
 		this.expectArrivalTime = expectArrivalTime;
 	}
-	public Date getArrivalTime() {
-		return arrivalTime;
+	public Date getActualArrivalTime() {
+		return actualArrivalTime;
 	}
-	public void setArrivalTime(Date arrivalTime) {
-		this.arrivalTime = arrivalTime;
+	public void setActualArrivalTime(Date actualArrivalTime) {
+		this.actualArrivalTime = actualArrivalTime;
 	}
 	public String getPurchaseContactor() {
 		return purchaseContactor;
@@ -97,23 +93,23 @@ public class PurchaseInputOrderDTO {
 	public void setPurchaseContactor(String purchaseContactor) {
 		this.purchaseContactor = purchaseContactor;
 	}
-	public String getPurchaseContactPhoneNumber() {
-		return purchaseContactPhoneNumber;
+	public String getPurchaseContactorPhoneNumber() {
+		return purchaseContactorPhoneNumber;
 	}
-	public void setPurchaseContactPhoneNumber(String purchaseContactPhoneNumber) {
-		this.purchaseContactPhoneNumber = purchaseContactPhoneNumber;
+	public void setPurchaseContactorPhoneNumber(String purchaseContactorPhoneNumber) {
+		this.purchaseContactorPhoneNumber = purchaseContactorPhoneNumber;
 	}
-	public String getPurchaseContactEmail() {
-		return purchaseContactEmail;
+	public String getPurchaseContactorEmail() {
+		return purchaseContactorEmail;
 	}
-	public void setPurchaseContactEmail(String purchaseContactEmail) {
-		this.purchaseContactEmail = purchaseContactEmail;
+	public void setPurchaseContactorEmail(String purchaseContactorEmail) {
+		this.purchaseContactorEmail = purchaseContactorEmail;
 	}
-	public String getPurchaseOrderComment() {
-		return purchaseOrderComment;
+	public String getPurchaseOrderRemark() {
+		return purchaseOrderRemark;
 	}
-	public void setPurchaseOrderComment(String purchaseOrderComment) {
-		this.purchaseOrderComment = purchaseOrderComment;
+	public void setPurchaseOrderRemark(String purchaseOrderRemark) {
+		this.purchaseOrderRemark = purchaseOrderRemark;
 	}
 	public String getPurchaser() {
 		return purchaser;
@@ -121,11 +117,11 @@ public class PurchaseInputOrderDTO {
 	public void setPurchaser(String purchaser) {
 		this.purchaser = purchaser;
 	}
-	public Integer getPurcahseInputOrderStatus() {
-		return purcahseInputOrderStatus;
+	public Integer getStatus() {
+		return status;
 	}
-	public void setPurcahseInputOrderStatus(Integer purcahseInputOrderStatus) {
-		this.purcahseInputOrderStatus = purcahseInputOrderStatus;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	public Date getGmtCreate() {
 		return gmtCreate;
@@ -139,17 +135,11 @@ public class PurchaseInputOrderDTO {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<PurchaseInputOrderItemDTO> getPurchaseInputOrderItemDTOs() {
-		return purchaseInputOrderItemDTOs;
+	public List<PurchaseInputOrderItemDTO> getItems() {
+		return items;
 	}
-	public void setPurchaseInputOrderItemDTOs(List<PurchaseInputOrderItemDTO> purchaseInputOrderItemDTOs) {
-		this.purchaseInputOrderItemDTOs = purchaseInputOrderItemDTOs;
-	}
-	public List<PurchaseInputOrderPutOnItemDTO> getPurchaseInputOrderPutOnItemDTOs() {
-		return purchaseInputOrderPutOnItemDTOs;
-	}
-	public void setPurchaseInputOrderPutOnItemDTOs(List<PurchaseInputOrderPutOnItemDTO> purchaseInputOrderPutOnItemDTOs) {
-		this.purchaseInputOrderPutOnItemDTOs = purchaseInputOrderPutOnItemDTOs;
+	public void setItems(List<PurchaseInputOrderItemDTO> items) {
+		this.items = items;
 	}
 	
 	@Override

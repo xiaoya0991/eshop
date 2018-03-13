@@ -1,6 +1,7 @@
 package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 退货入库单条目DTO
@@ -77,6 +78,10 @@ public class ReturnGoodsInputOrderItemDTO {
 	 * 退货入库单条目的修改时间
 	 */
 	private Date gmtModified;
+	/**
+	 * 退货入库单商品上架条目DTO集合
+	 */
+	private List<ReturnGoodsInputOrderPutOnItemDTO> putOnItemDTO;
 	
 	public Long getId() {
 		return id;
@@ -179,6 +184,12 @@ public class ReturnGoodsInputOrderItemDTO {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public List<ReturnGoodsInputOrderPutOnItemDTO> getPutOnItemDTO() {
+		return putOnItemDTO;
+	}
+	public void setPutOnItemDTO(List<ReturnGoodsInputOrderPutOnItemDTO> putOnItemDTO) {
+		this.putOnItemDTO = putOnItemDTO;
 	}
 	
 }
