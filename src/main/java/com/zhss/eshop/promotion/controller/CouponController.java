@@ -101,8 +101,7 @@ public class CouponController {
 	@PutMapping("/{id}")
 	public Boolean update(@RequestBody CouponVO coupon) {
 		try {
-			couponService.update(coupon.clone(CouponDTO.class));
-			return true;
+			return couponService.update(coupon.clone(CouponDTO.class));
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;
@@ -116,8 +115,7 @@ public class CouponController {
 	@DeleteMapping("/{id}") 
 	public Boolean remove(@PathVariable("id") Long id) {
 		try {
-			couponService.remove(id);
-			return true;
+			return couponService.remove(id);
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;

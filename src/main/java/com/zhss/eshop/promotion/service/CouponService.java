@@ -36,12 +36,12 @@ public interface CouponService {
 	 * 更新优惠券
 	 * @param coupon 优惠券
 	 */
-	void update(CouponDTO coupon) throws Exception;
+	Boolean update(CouponDTO coupon) throws Exception;
 	
 	/**
 	 * 删除优惠券
 	 * @param id 优惠券id
 	 */
-	void remove(Long id) throws Exception;
+	Boolean remove(Long id) throws Exception;
 	
 }

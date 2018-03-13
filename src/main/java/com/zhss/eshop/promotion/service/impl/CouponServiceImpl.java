@@ -58,16 +58,25 @@ public class CouponServiceImpl implements CouponService {
 	 * 更新优惠券
 	 * @param coupon 优惠券
 	 */
-	public void update(CouponDTO coupon) throws Exception {
+	public Boolean update(CouponDTO coupon) throws Exception {
+		if(coupon.getReceivedCount() > 0L) {
+			return false;
+		}
 		couponDAO.update(coupon.clone(CouponDO.class));   
+		return true;
 	}
 	
 	/**
 	 * 删除优惠券
 	 * @param id 优惠券id
 	 */
-	public void remove(Long id) throws Exception {
+	public Boolean remove(Long id) throws Exception {
+		CouponDO coupon = couponDAO.getById(id);
+		if(coupon.getReceivedCount() > 0L) {
+			return false;
+		}
 		couponDAO.remove(id); 
+		return true;
 	}
 	
 }
