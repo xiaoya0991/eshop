@@ -3,9 +3,11 @@ package com.zhss.eshop.membership.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.zhss.eshop.membership.domain.UserAccountDO;
 
@@ -82,5 +84,39 @@ public interface UserAccountMapper {
 		@Result(column = "gmt_modified", property = "gmtModified")
 	})
 	UserAccountDO getForLogin(UserAccountDO userAccount);
+	
+	/**
+	 * 根据id查询用户账号 
+	 * @param id 用户账号id
+	 * @return 用户账号
+	 */
+	@Select("SELECT "
+				+ "id,"
+				+ "username,"
+				+ "email,"
+				+ "cell_phone_number,"
+				+ "gmt_create,"
+				+ "gmt_modified "
+			+ "FROM membership_user_account "
+			+ "WHERE id=#{id} ")    
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "username", property = "username"),
+		@Result(column = "email", property = "email"),
+		@Result(column = "cell_phone_number", property = "cellPhoneNumber"),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "gmt_modified", property = "gmtModified")
+	})
+	UserAccountDO getById(@Param("id") Long id);
+	
+	/**
+	 * 更新密码
+	 * @param userAccount 用户账号
+	 */
+	@Update("UPDATE membership_user_account SET "
+				+ "password=#{password},"
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}") 
+	void updatePassword(UserAccountDO userAccount);
 	
 }

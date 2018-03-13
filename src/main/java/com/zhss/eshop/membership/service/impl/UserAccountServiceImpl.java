@@ -6,8 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.membership.dao.UserAccountDAO;
+import com.zhss.eshop.membership.dao.UserDetailDAO;
 import com.zhss.eshop.membership.domain.UserAccountDO;
 import com.zhss.eshop.membership.domain.UserAccountDTO;
+import com.zhss.eshop.membership.domain.UserDetailDO;
 import com.zhss.eshop.membership.service.UserAccountService;
 
 /**
@@ -25,6 +27,11 @@ public class UserAccountServiceImpl implements UserAccountService {
 	@Autowired
 	private UserAccountDAO userAccountDAO;
 	/**
+	 * 用户详细信息管理DAO组件
+	 */
+	@Autowired
+	private UserDetailDAO userDetailDAO;
+	/**
 	 * 日期辅助组件
 	 */
 	@Autowired
@@ -39,6 +46,13 @@ public class UserAccountServiceImpl implements UserAccountService {
 		userAccount.setGmtModified(dateProvider.getCurrentTime());  
  		UserAccountDO resultUserAccount = userAccountDAO.save(
 				userAccount.clone(UserAccountDO.class));  
+ 		
+ 		UserDetailDO userDetail = new UserDetailDO();
+ 		userDetail.setUserAccountId(resultUserAccount.getId()); 
+ 		userDetail.setGmtCreate(dateProvider.getCurrentTime()); 
+ 		userDetail.setGmtModified(dateProvider.getCurrentTime()); 
+ 		userDetailDAO.save(userDetail);
+ 		
 		return resultUserAccount.clone(UserAccountDTO.class);  
 	}
 	
@@ -48,10 +62,26 @@ public class UserAccountServiceImpl implements UserAccountService {
 	 * @return
 	 */
 	public UserAccountDTO getForLogin(UserAccountDTO userAccount) throws Exception {
-		userAccount.setGmtModified(dateProvider.getCurrentTime()); 
 		UserAccountDO resultUserAccount = userAccountDAO.getForLogin(
 				userAccount.clone(UserAccountDO.class));  
 		return resultUserAccount.clone(UserAccountDTO.class);
+	}
+	
+	/**
+	 * 根据id查询用户账号 
+	 * @param id 用户账号id
+	 * @return 用户账号
+	 */
+	public UserAccountDTO getById(Long id) throws Exception {
+		return userAccountDAO.getById(id).clone(UserAccountDTO.class);
+	}
+	
+	/**
+	 * 更新密码
+	 * @param userAccount 用户账号
+	 */
+	public void updatePassword(UserAccountDO userAccount) throws Exception {
+		userAccountDAO.updatePassword(userAccount); 
 	}
 	
 }

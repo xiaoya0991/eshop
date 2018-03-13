@@ -22,4 +22,17 @@ public interface UserAccountDAO {
 	 */
 	UserAccountDO getForLogin(UserAccountDO userAccount);
 	
+	/**
+	 * 根据id查询用户账号 
+	 * @param id 用户账号id
+	 * @return 用户账号
+	 */
+	UserAccountDO getById(Long id);
+	
+	/**
+	 * 更新密码
+	 * @param userAccount 用户账号
+	 */
+	void updatePassword(UserAccountDO userAccount);
+	
 }

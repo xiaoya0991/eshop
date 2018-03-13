@@ -5,10 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zhss.eshop.membership.domain.UserAccountDO;
 import com.zhss.eshop.membership.domain.UserAccountDTO;
 import com.zhss.eshop.membership.domain.UserAccountVO;
 import com.zhss.eshop.membership.service.UserAccountService;
@@ -19,7 +21,7 @@ import com.zhss.eshop.membership.service.UserAccountService;
  *
  */
 @RestController
-@RequestMapping("/membership/user")  
+@RequestMapping("/membership/user/account")   
 public class UserAccountController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserAccountController.class);
@@ -60,6 +62,21 @@ public class UserAccountController {
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return userAccount;
+		}
+	}
+	
+	/**
+	 * 更新密码
+	 * @param userAccount 用户账号
+	 */
+	@PutMapping("/{id}")  
+	public Boolean updatePassword(@RequestBody UserAccountDO userAccount) {
+		try {
+			userAccountService.updatePassword(userAccount); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
 		}
 	}
 	

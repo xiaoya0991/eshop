@@ -39,4 +39,21 @@ public class UserAccountDAOImpl implements UserAccountDAO {
 		return userAccountMapper.getForLogin(userAccount);
 	}
 	
+	/**
+	 * 根据id查询用户账号 
+	 * @param id 用户账号id
+	 * @return 用户账号
+	 */
+	public UserAccountDO getById(Long id) {
+		return userAccountMapper.getById(id);
+	}
+	
+	/**
+	 * 更新密码
+	 * @param userAccount 用户账号
+	 */
+	public void updatePassword(UserAccountDO userAccount) {
+		userAccountMapper.updatePassword(userAccount); 
+	}
+	
 }
