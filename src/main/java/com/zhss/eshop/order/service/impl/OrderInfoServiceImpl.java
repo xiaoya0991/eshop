@@ -22,7 +22,6 @@ import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderInfoQuery;
 import com.zhss.eshop.order.domain.OrderItemDO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
-import com.zhss.eshop.order.domain.OrderOperateLogDO;
 import com.zhss.eshop.order.domain.OrderOperateLogDTO;
 import com.zhss.eshop.order.price.CouponCalculator;
 import com.zhss.eshop.order.price.CouponCalculatorFactory;
@@ -35,6 +34,7 @@ import com.zhss.eshop.order.price.PromotionActivityCalculator;
 import com.zhss.eshop.order.price.PromotionActivityResult;
 import com.zhss.eshop.order.price.TotalPriceCalculator;
 import com.zhss.eshop.order.service.OrderInfoService;
+import com.zhss.eshop.order.state.OrderStateManager;
 import com.zhss.eshop.promotion.constant.PromotionActivityType;
 import com.zhss.eshop.promotion.domain.CouponDTO;
 import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
@@ -103,7 +103,12 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * 订单操作内容工厂
 	 */
 	@Autowired
-	private OrderOperateContentFactory orderOperateContentFactory;
+	private OrderOperateLogFactory orderOperateLogFactory;
+	/**
+	 * 订单状态管理器
+	 */
+	@Autowired
+	private OrderStateManager orderStateManager;
 	
 	/**
 	 * 计算订单价格
@@ -204,31 +209,13 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		}
 		
 		saveOrder(order);
+		orderStateManager.create(order); 
+		orderOperateLogDAO.save(orderOperateLogFactory.get(
+				order, OrderOperateType.CREATE_ORDER));      
 		inventoryService.informSubmitOrderEvent(order);
-		saveOrderOperateLog(order, OrderOperateType.CREATE_ORDER);    
 		
 		return order;
 	}
-	
-	/**
-	 * 新增订单操作日志
-	 * @param operateType 操作类型
-	 * @param operateContent 操作内容
-	 * @throws Exception
-	 */
-	private void saveOrderOperateLog(OrderInfoDTO order, Integer operateType) throws Exception {
-		String operateContent = orderOperateContentFactory.getOperateContent(
-				order, OrderOperateType.CREATE_ORDER);
-		
-		OrderOperateLogDO log = new OrderOperateLogDO();
-		log.setOrderInfoId(order.getId()); 
-		log.setOperateType(operateType);
-		log.setOperateContent(operateContent); 
-		log.setGmtCreate(dateProvider.getCurrentTime());
-		log.setGmtModified(dateProvider.getCurrentTime()); 
-		
-		orderOperateLogDAO.save(log); 
- 	}
 	
 	/**
 	 * 判断库存是否充足
@@ -256,7 +243,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	private OrderInfoDTO saveOrder(OrderInfoDTO order) throws Exception {
 		order.setOrderNo(UUID.randomUUID().toString().replace("-", ""));  
 		order.setPublishedComment(PublishedComment.NO); 
-		order.setOrderStatus(OrderStatus.WAITING_FOR_PAY);  
+		order.setOrderStatus(OrderStatus.UNKNOWN);  
 		order.setGmtCreate(dateProvider.getCurrentTime()); 
 		order.setGmtModified(dateProvider.getCurrentTime());
 		
@@ -307,6 +294,45 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		order.setOrderItems(orderItems); 
 		order.setLogs(logs); 
 		return order;
+	}
+	
+	/**
+	 * 取消订单
+	 * @param id 订单id
+	 * @return 处理结果
+	 * @throws Exception
+	 */
+	public Boolean cancel(Long id) throws Exception {
+		OrderInfoDTO order = getOrderInfoDTO(id);
+		if(order == null ) {
+			return false;
+		}
+		
+		if(!orderStateManager.canCancel(order)) {  
+			return false;
+		}
+		
+		orderStateManager.cancel(order);
+		inventoryService.informCancelOrderEvent(order);
+		orderOperateLogDAO.save(orderOperateLogFactory.get(
+				order, OrderOperateType.MANUAL_CANCEL_ORDER)); 
+		
+		return true;
+	}
+	
+	/**
+	 * 获取订单DTO
+	 * @param orderInfoDO
+	 * @return
+	 * @throws Exception
+	 */
+	private OrderInfoDTO getOrderInfoDTO(Long id) throws Exception {
+		OrderInfoDO orderInfoDO = orderInfoDAO.getById(id);
+		OrderInfoDTO orderInfoDTO = orderInfoDO.clone(OrderInfoDTO.class);
+		List<OrderItemDTO> orderItems = ObjectUtils.convertList(
+				orderItemDAO.listByOrderInfoId(orderInfoDTO.getId()), OrderItemDTO.class);
+		orderInfoDTO.setOrderItems(orderItems);
+		return orderInfoDTO;
 	}
 	
 }

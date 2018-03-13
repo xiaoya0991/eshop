@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoQuery;
@@ -164,5 +165,63 @@ public interface OrderInfoMapper {
 		@Result(column = "order_comment", property = "orderComment")
  	})
 	OrderInfoDO getById(@Param("id") Long id);
+	
+	/**
+	 * 更新订单状态
+	 * @param order 订单
+	 */
+	@Update("UPDATE order_info SET "
+				+ "order_status=#{orderStatus} "
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}") 
+	void updateStatus(OrderInfoDO order);
+	
+	/**
+	 * 查询所有未付款的订单
+	 * @return 所有未付款的订单
+	 */
+	@Select("SELECT "
+				+ "id,"
+				+ "gmt_create,"
+				+ "order_no,"
+				+ "consignee,"
+				+ "delivery_address,"
+				+ "consignee_cell_phone_number,"
+				+ "total_amount,"
+				+ "discount_amount,"
+				+ "coupon_amount,"
+				+ "freight,"
+				+ "payable_amount,"
+				+ "pay_type,"
+				+ "invoice_title,"
+				+ "taxpayer_id,"
+				+ "order_status,"
+				+ "user_account_id,"
+				+ "username,"
+				+ "order_comment "
+			+ "FROM order_info "
+			+ "WHERE order_status = 1"
+	)
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "order_no", property = "orderNo"),
+		@Result(column = "consignee", property = "consignee"),
+		@Result(column = "total_amount", property = "totalAmount"),
+		@Result(column = "discount_amount", property = "discountAmount"),
+		@Result(column = "coupon_amount", property = "couponAmount"),
+		@Result(column = "freight", property = "freight"),
+		@Result(column = "payable_amount", property = "payableAmount"),
+		@Result(column = "pay_type", property = "payType"),
+		@Result(column = "order_status", property = "orderStatus"),
+		@Result(column = "delivery_address", property = "deliveryAddress"),
+		@Result(column = "consignee_cell_phone_number", property = "consigneeCellPhoneNumber"),
+		@Result(column = "invoice_title", property = "invoiceTitle"),
+		@Result(column = "taxpayer_id", property = "taxpayerId"),
+		@Result(column = "user_account_id", property = "userAccountId"),
+		@Result(column = "username", property = "username"),
+		@Result(column = "order_comment", property = "orderComment")
+ 	})
+	List<OrderInfoDO> listAllUnpayed();
 	
 }

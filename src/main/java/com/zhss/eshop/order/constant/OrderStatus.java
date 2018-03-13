@@ -10,9 +10,13 @@ public class OrderStatus {
 	// 订单状态，1：待付款，2：已取消，3：待发货，4：待收货，5：已完成，6：售后中（退货申请待审核），7：交易关闭（退货审核不通过），8：交易中（待寄送退货商品），9：售后中（退货商品待收货），10：售后中（退货待入库），11：（1）售后中（退货已入库），12：交易关闭（完成退款）
 	
 	/**
+	 * 未知状态
+	 */
+	public static final Integer UNKNOWN = -999;
+	/**
 	 * 待付款
 	 */
-	public static final Integer WAITING_FOR_PAY = 1;
+	public static final Integer WAIT_FOR_PAY = 1;
 	/**
 	 * 已取消
 	 */
@@ -20,11 +24,11 @@ public class OrderStatus {
 	/**
 	 * 待发货
 	 */
-	public static final Integer WAITING_FOR_DELIVERY = 3; 
+	public static final Integer WAIT_FOR_DELIVERY = 3; 
 	/**
 	 * 待收货
 	 */
-	public static final Integer WAITING_FOR_RECEIVE = 4;
+	public static final Integer WAIT_FOR_RECEIVE = 4;
 	/**
 	 * 已完成
 	 */
@@ -40,15 +44,15 @@ public class OrderStatus {
 	/**
 	 * 退货商品待寄送
 	 */
-	public static final Integer WAITING_FOR_RETURN_GOODS = 8;
+	public static final Integer WAIT_FOR_RETURN_GOODS = 8;
 	/**
 	 * 退货商品待收货
 	 */
-	public static final Integer WAITING_FOR_RECEIVE_RETURN_GOODS = 9;
+	public static final Integer WAIT_FOR_RECEIVE_RETURN_GOODS = 9;
 	/**
 	 * 退货商品待入库
 	 */
-	public static final Integer WAITING_FOR_INPUT_RETURN_GOODS = 10;
+	public static final Integer WAIT_FOR_INPUT_RETURN_GOODS = 10;
 	/**
 	 * 退货商品已入库
 	 */

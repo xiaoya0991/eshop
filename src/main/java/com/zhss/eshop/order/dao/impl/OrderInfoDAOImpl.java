@@ -51,4 +51,20 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 		return orderInfoMapper.getById(id);
 	}
 	
+	/**
+	 * 更新订单状态
+	 * @param order 订单
+	 */
+	public void updateStatus(OrderInfoDO order) {
+		orderInfoMapper.updateStatus(order);
+	}
+	
+	/**
+	 * 查询所有未付款的订单
+	 * @return 所有未付款的订单
+	 */
+	public List<OrderInfoDO> listAllUnpayed() { 
+		return orderInfoMapper.listAllUnpayed();
+	}
+	
 }

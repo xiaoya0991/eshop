@@ -32,4 +32,16 @@ public interface OrderInfoDAO {
 	 */
 	OrderInfoDO getById(Long id);
 	
+	/**
+	 * 更新订单状态
+	 * @param order 订单
+	 */
+	void updateStatus(OrderInfoDO order);
+	
+	/**
+	 * 查询所有未付款的订单
+	 * @return 所有未付款的订单
+	 */
+	List<OrderInfoDO> listAllUnpayed();
+	
 }
