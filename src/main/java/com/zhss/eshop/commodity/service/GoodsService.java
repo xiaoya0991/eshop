@@ -44,7 +44,7 @@ public interface GoodsService {
 	 * @return 处理结果
 	 * @throws Exception
 	 */
-	Boolean approve(GoodsDTO goods, Integer approveResult) throws Exception;  
+	Boolean approve(Long goodsId, Integer approveResult) throws Exception;  
 	
 	/**
 	 * 执行上架操作
@@ -52,7 +52,7 @@ public interface GoodsService {
 	 * @return
 	 * @throws Exception
 	 */
-	Boolean putOnShelves(GoodsDTO goods) throws Exception;
+	Boolean putOnShelves(Long goodsId) throws Exception;
 	
 	/**
 	 * 执行下架操作
@@ -60,7 +60,7 @@ public interface GoodsService {
 	 * @return
 	 * @throws Exception
 	 */
-	Boolean pullOffShelves(GoodsDTO goods) throws Exception;
+	Boolean pullOffShelves(Long goodsId) throws Exception;
 	
 	/**
 	 * 执行删除操作

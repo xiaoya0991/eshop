@@ -10,6 +10,7 @@ import com.zhss.eshop.commodity.dao.GoodsPropertyValueDAO;
 import com.zhss.eshop.commodity.domain.GoodsPropertyValueDO;
 import com.zhss.eshop.commodity.domain.GoodsPropertyValueDTO;
 import com.zhss.eshop.commodity.service.GoodsPropertyValueService;
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.common.util.ObjectUtils;
 
 /**
@@ -26,6 +27,11 @@ public class GoodsPropertyValueServiceImpl implements GoodsPropertyValueService 
 	 */
 	@Autowired
 	private GoodsPropertyValueDAO propertyValueDAO;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 根据商品id查询属性值
@@ -43,6 +49,8 @@ public class GoodsPropertyValueServiceImpl implements GoodsPropertyValueService 
 	 */
 	public void batchSave(List<GoodsPropertyValueDTO> propertyValues) throws Exception {
 		for(GoodsPropertyValueDTO propertyValue : propertyValues) {
+			propertyValue.setGmtCreate(dateProvider.getCurrentTime());
+			propertyValue.setGmtModified(dateProvider.getCurrentTime());
 			propertyValueDAO.save(propertyValue.clone(GoodsPropertyValueDO.class));   
 		}
 	}

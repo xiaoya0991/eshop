@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.commodity.constant.GoodsStatus;
 import com.zhss.eshop.commodity.dao.GoodsDAO;
 import com.zhss.eshop.commodity.dao.GoodsDetailDAO;
 import com.zhss.eshop.commodity.dao.GoodsDetailPictureDAO;
@@ -20,6 +21,7 @@ import com.zhss.eshop.commodity.domain.GoodsQuery;
 import com.zhss.eshop.commodity.domain.GoodsSkuDO;
 import com.zhss.eshop.commodity.service.GoodsService;
 import com.zhss.eshop.commodity.state.GoodsStateManager;
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.common.util.ObjectUtils;
 
 /**
@@ -71,6 +73,11 @@ public class GoodsServiceImpl implements GoodsService {
 	 */
 	@Autowired
 	private GoodsSkuSalePropertyValueDAO goodsSkuSalePropertyValueDAO;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 分页查询商品
@@ -95,7 +102,11 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @param goods 商品
 	 */
 	public Long save(GoodsDTO goods) throws Exception {
+		goods.setStatus(GoodsStatus.UNKNOWN); 
+		goods.setGmtCreate(dateProvider.getCurrentTime()); 
+		goods.setGmtModified(dateProvider.getCurrentTime()); 
 		Long goodsId = goodsDAO.save(goods.clone(GoodsDO.class)); 
+		goods.setId(goodsId); 
 		goodsStateManager.create(goods); 
 		return goodsId;
 	}
@@ -121,7 +132,8 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @return 处理结果
 	 * @throws Exception
 	 */
-	public Boolean approve(GoodsDTO goods, Integer approveResult) throws Exception {
+	public Boolean approve(Long goodsId, Integer approveResult) throws Exception {
+		GoodsDTO goods = goodsDAO.getById(goodsId).clone(GoodsDTO.class);
 		if(!goodsStateManager.canApprove(goods)) {
 			return false;
 		}
@@ -135,7 +147,8 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Boolean putOnShelves(GoodsDTO goods) throws Exception {
+	public Boolean putOnShelves(Long goodsId) throws Exception {
+		GoodsDTO goods = goodsDAO.getById(goodsId).clone(GoodsDTO.class);
 		if(!goodsStateManager.canPutOnShelves(goods)) {
 			return false;
 		}
@@ -149,7 +162,8 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Boolean pullOffShelves(GoodsDTO goods) throws Exception {
+	public Boolean pullOffShelves(Long goodsId) throws Exception {
+		GoodsDTO goods = goodsDAO.getById(goodsId).clone(GoodsDTO.class);
 		if(!goodsStateManager.canPullOffShelves(goods))   {
 			return false;
 		}

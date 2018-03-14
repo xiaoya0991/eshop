@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -89,6 +90,70 @@ public class GoodsController {
 	public Boolean update(@RequestBody GoodsVO goods) throws Exception {
 		try {
 			return goodsService.update(goods.clone(GoodsDTO.class));  
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 审核商品
+	 * @param goods 商品
+	 * @return 处理结果
+	 * @throws Exception
+	 */
+	@PutMapping("/approve/{goodsId}")
+	public Boolean approve(@PathVariable("goodsId") Long goodsId, Integer approveResult) {
+		try {
+			return goodsService.approve(goodsId, approveResult);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 商品上架
+	 * @param goods 商品
+	 * @return 处理结果
+	 * @throws Exception
+	 */
+	@PutMapping("/putOnShelves/{goodsId}") 
+	public Boolean putOnShelves(@PathVariable("goodsId") Long goodsId) {
+		try {
+			return goodsService.putOnShelves(goodsId);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 商品下架
+	 * @param goods 商品
+	 * @return 处理结果
+	 * @throws Exception
+	 */
+	@PutMapping("/pullOffShelves/{goodsId}") 
+	public Boolean pullOffShelves(@PathVariable("goodsId") Long goodsId) {
+		try {
+			return goodsService.pullOffShelves(goodsId);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 商品上架
+	 * @param goods 商品
+	 * @return 处理结果
+	 * @throws Exception
+	 */
+	@DeleteMapping("/{goodsId}")  
+	public Boolean remove(@PathVariable("goodsId") Long goodsId) {
+		try {
+			return goodsService.remove(goodsId);
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;

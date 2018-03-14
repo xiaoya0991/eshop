@@ -8,6 +8,10 @@ package com.zhss.eshop.commodity.constant;
 public class GoodsStatus {
 
 	/**
+	 * 未知类型
+	 */
+	public static final Integer UNKNOWN = 0;
+	/**
 	 * 待审核
 	 */
 	public static final Integer WAIT_FOR_APPROVE = 1;

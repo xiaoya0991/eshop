@@ -17,6 +17,10 @@ public class GoodsSkuDTO extends AbstractObject {
 	 */
 	private Long id;
 	/**
+	 * 商品sku编号
+	 */
+	private String skuCode;
+	/**
 	 * 商品id
 	 */
 	private Long goodsId;
@@ -77,6 +81,12 @@ public class GoodsSkuDTO extends AbstractObject {
 	 */
 	List<GoodsSkuSalePropertyValueDTO> propertyValues;
 	
+	public String getSkuCode() {
+		return skuCode;
+	}
+	public void setSkuCode(String skuCode) {
+		this.skuCode = skuCode;
+	}
 	public Long getId() {
 		return id;
 	}

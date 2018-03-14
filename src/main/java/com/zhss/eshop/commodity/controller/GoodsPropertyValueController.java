@@ -25,7 +25,7 @@ import com.zhss.eshop.common.util.ObjectUtils;
  *
  */
 @RestController
-@RequestMapping("/commodity/goods/propertyValue") 
+@RequestMapping("/commodity/goods/property/value") 
 public class GoodsPropertyValueController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(GoodsPropertyValueController.class);

@@ -8,6 +8,7 @@ import com.zhss.eshop.commodity.dao.GoodsDetailDAO;
 import com.zhss.eshop.commodity.domain.GoodsDetailDO;
 import com.zhss.eshop.commodity.domain.GoodsDetailDTO;
 import com.zhss.eshop.commodity.service.GoodsDetailService;
+import com.zhss.eshop.common.util.DateProvider;
 
 /**
  * 商品详情管理service组件
@@ -23,6 +24,11 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 	 */
 	@Autowired
 	private GoodsDetailDAO goodsDetailDAO;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 根据商品id查询商品详情
@@ -40,6 +46,8 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 	 * @throws Exception
 	 */
 	public Long save(GoodsDetailDTO goodsDetail) throws Exception {
+		goodsDetail.setGmtCreate(dateProvider.getCurrentTime());  
+		goodsDetail.setGmtModified(dateProvider.getCurrentTime()); 
 		return goodsDetailDAO.save(goodsDetail.clone(GoodsDetailDO.class));  
 	}
 	
@@ -49,6 +57,7 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 	 * @throws Exception 
 	 */
 	public void update(GoodsDetailDTO goodsDetail) throws Exception {
+		goodsDetail.setGmtModified(dateProvider.getCurrentTime()); 
 		goodsDetailDAO.update(goodsDetail.clone(GoodsDetailDO.class));  
 	}
 	

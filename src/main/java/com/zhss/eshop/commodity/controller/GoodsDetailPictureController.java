@@ -30,7 +30,7 @@ import com.zhss.eshop.commodity.service.GoodsDetailPictureService;
  *
  */
 @RestController
-@RequestMapping("/commodity/detail/picture")  
+@RequestMapping("/commodity/goods/detail/picture")  
 public class GoodsDetailPictureController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(
@@ -49,8 +49,9 @@ public class GoodsDetailPictureController {
 	 * @return 商品详情图片id
 	 * @throws Exception
 	 */
-	@PostMapping("/") 
-	public List<Long> batchUploadPicture(Long goodsDetailId, 
+	@PostMapping("/{goodsDetailId}") 
+	public List<Long> batchUploadPicture(
+			@PathVariable("goodsDetailId") Long goodsDetailId, 
 			MultipartFile[] pictures) throws Exception {
 		try {
 			return goodsDetailPictureService.batchUploadPicture(
