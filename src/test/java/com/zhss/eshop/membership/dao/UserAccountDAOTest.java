@@ -1,4 +1,4 @@
-package com.zhss.eshop.auth.membership;
+package com.zhss.eshop.membership.dao;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +56,7 @@ public class UserAccountDAOTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_user_account.sql"})  
 	public void testGetForLogin() throws Exception {
 		UserAccountDO userAccount = createUserAccount();
 		
@@ -66,6 +68,39 @@ public class UserAccountDAOTest {
 				.getForLogin(queryUserAccount);
 		
 		assertEquals(userAccount, resultUserAccount); 
+	}
+	
+	/**
+	 * 测试根据id查询用户账号 
+	 * @throws Exception
+	 */
+	@Test
+	public void testGetById() throws Exception {
+		UserAccountDO expectedUserAccount = createUserAccount();  
+		expectedUserAccount.setPassword(null); 
+		UserAccountDO actualUserAccount = userAccountDAO.getById(expectedUserAccount.getId());
+		assertEquals(expectedUserAccount, actualUserAccount); 
+	}
+	
+	/**
+	 * 测试更新密码
+	 * @throws Exception
+	 */
+	@Test
+	@Sql({"clean_user_account.sql"})  
+	public void testUpdatePassword() throws Exception {  
+		UserAccountDO expectedUserAccount = createUserAccount();
+		
+		expectedUserAccount.setPassword("修改后的" + expectedUserAccount.getPassword()); 
+		userAccountDAO.updatePassword(expectedUserAccount); 
+		
+		UserAccountDO query = new UserAccountDO();
+		query.setUsername("zhangsan");  
+		query.setPassword("修改后的12345678");  
+		
+		UserAccountDO actualUserAccount = userAccountDAO.getForLogin(query);
+		
+		assertEquals(expectedUserAccount, actualUserAccount); 
 	}
 	
 	/**

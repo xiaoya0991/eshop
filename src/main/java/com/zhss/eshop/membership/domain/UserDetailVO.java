@@ -2,6 +2,10 @@ package com.zhss.eshop.membership.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.zhss.eshop.common.json.DateJsonDeserializer;
+import com.zhss.eshop.common.json.DateJsonSerializer;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
@@ -30,6 +34,8 @@ public class UserDetailVO extends AbstractObject {
 	/**
 	 * 生日
 	 */
+	@JsonSerialize(using=DateJsonSerializer.class)  
+	@JsonDeserialize(using=DateJsonDeserializer.class)
 	private Date birthday;
 	/**
 	 * 身份证号

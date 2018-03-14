@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.membership.dao.UserDetailDAO;
 import com.zhss.eshop.membership.domain.UserDetailDO;
 import com.zhss.eshop.membership.domain.UserDetailDTO;
@@ -24,6 +25,11 @@ public class UserDetailServiceImpl implements UserDetailService {
 	 */
 	@Autowired
 	private UserDetailDAO userDetailDAO;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 根据用户账号id查询用户详细信息
@@ -39,6 +45,7 @@ public class UserDetailServiceImpl implements UserDetailService {
 	 * @param userDetail 用户详细信息
 	 */
 	public void updateByUserAccountId(UserDetailDTO userDetail) throws Exception {
+		userDetail.setGmtModified(dateProvider.getCurrentTime());
 		userDetailDAO.updateByUserAccountId(userDetail.clone(UserDetailDO.class));   
 	}
 	

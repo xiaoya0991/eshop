@@ -144,4 +144,11 @@ public class UserAccountDO extends AbstractObject {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return "UserAccountDO [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", cellPhoneNumber=" + cellPhoneNumber + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ "]";
+	}
+	
 }

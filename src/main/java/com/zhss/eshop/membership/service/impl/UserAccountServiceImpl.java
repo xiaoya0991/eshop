@@ -74,13 +74,14 @@ public class UserAccountServiceImpl implements UserAccountService {
 	 */
 	public UserAccountDTO getById(Long id) throws Exception {
 		return userAccountDAO.getById(id).clone(UserAccountDTO.class);
-	}
+	} 
 	
 	/**
 	 * 更新密码
 	 * @param userAccount 用户账号
 	 */
 	public void updatePassword(UserAccountDO userAccount) throws Exception {
+		userAccount.setGmtModified(dateProvider.getCurrentTime()); 
 		userAccountDAO.updatePassword(userAccount); 
 	}
 	

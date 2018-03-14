@@ -21,7 +21,7 @@ import com.zhss.eshop.membership.service.MemberPointDetailService;
  *
  */
 @RestController
-@RequestMapping("/membership/member/level") 
+@RequestMapping("/membership/member/point") 
 public class MemberPointController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberPointController.class);

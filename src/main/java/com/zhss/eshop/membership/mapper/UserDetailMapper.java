@@ -76,7 +76,7 @@ public interface UserDetailMapper {
 				+ "id_number=#{idNumber},"
 				+ "address=#{address},"
 				+ "gmt_modified=#{gmtModified} "
-			+ "WHERE user_account_id=#{user_account_id}")
+			+ "WHERE user_account_id=#{userAccountId}")
  	void updateByUserAccountId(UserDetailDO userDetail);
 	
 }
