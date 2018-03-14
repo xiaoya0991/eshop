@@ -1,11 +1,15 @@
 package com.zhss.eshop.membership.service;
 
+import java.util.List;
+
+import com.zhss.eshop.membership.domain.UserAccountDTO;
+
 /**
  * 会员中心对外提供的接口
  * @author zhonghuashishan
  *
  */
-public interface MembershipFacadeService {
+public interface MembershipService {
 
 	/**
 	 * 通知会员中心，“用户今日第一次登录”事件发生了
@@ -45,5 +49,11 @@ public interface MembershipFacadeService {
 	 * @return 处理结果
 	 */
 	Boolean informRemoveCommentEvent(Long userAccountId, Boolean showPictures);
+	
+	/**
+	 * 查询所有的用户账户
+	 * @return
+	 */
+	List<UserAccountDTO> listAllUserAccounts();
 	
 }
