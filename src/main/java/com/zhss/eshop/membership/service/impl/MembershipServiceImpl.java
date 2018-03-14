@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.membership.domain.UserAccountDTO;
-import com.zhss.eshop.membership.service.MembershipFacadeService;
+import com.zhss.eshop.membership.service.MembershipService;
 
 /**
  * 会员中心对外接口service组件
@@ -18,10 +18,10 @@ import com.zhss.eshop.membership.service.MembershipFacadeService;
  *
  */
 @Service
-public class MembershipFacadeServiceImpl implements MembershipFacadeService {
+public class MembershipServiceImpl implements MembershipService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(
-			MembershipFacadeServiceImpl.class);
+			MembershipServiceImpl.class);
 	
 	/**
 	 * 日期辅助组件
