@@ -1,8 +1,19 @@
 package com.zhss.eshop.schedule.domain;
 
+/**
+ * 货位库存id
+ * @author zhonghuashishan
+ *
+ */
 public class GoodsAllocationStockId {
 	
+	/**
+	 * 货位id
+	 */
 	private Long goodsAllocationId;
+	/**
+	 * 商品sku id
+	 */
 	private Long goodsSkuId;
 	
 	public GoodsAllocationStockId() {

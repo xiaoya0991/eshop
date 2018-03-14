@@ -21,7 +21,7 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
 
 /**
- * 退货入库库存更新命令的工厂
+ * 退货入库库存更新组件工厂
  * @author zhonghuashishan
  *
  */
@@ -29,11 +29,6 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
 public class ReturnGoodsInputStockUpdaterFactory<T> 
 		extends AbstractStockUpdaterFactory<T> {
 	
-	/**
-	 * 构造函数
-	 * @param goodsStockDAO 商品库存管理模块的DAO组件
-	 * @param dateProvider 日期辅助组件
-	 */
 	@Autowired
 	public ReturnGoodsInputStockUpdaterFactory(
 			GoodsStockDAO goodsStockDAO, 
@@ -66,6 +61,9 @@ public class ReturnGoodsInputStockUpdaterFactory<T>
 		return goodsSkuIds;
 	}
 	
+	/**
+	 * 获取货位库存id
+	 */
 	@Override
 	protected List<GoodsAllocationStockId> getGoodsAllocationSkuIds(T parameter) throws Exception {
 		PurchaseInputOrderDTO purchaseInputOrderDTO = (PurchaseInputOrderDTO) parameter;
@@ -80,8 +78,9 @@ public class ReturnGoodsInputStockUpdaterFactory<T>
 		
 		for(PurchaseInputOrderItemDTO purchaseInputOrderItemDTO : purchaseInputOrderItemDTOs) {
 			for(PurchaseInputOrderPutOnItemDTO putOnItem : purchaseInputOrderItemDTO.getPutOnItemDTOs()) {
-				goodsSkuIds.add(new GoodsAllocationStockId(
-						putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId())); 
+				GoodsAllocationStockId id = new GoodsAllocationStockId(
+						putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId());
+				goodsSkuIds.add(id); 
 			}
 		}
 		
@@ -113,14 +112,22 @@ public class ReturnGoodsInputStockUpdaterFactory<T>
 				itemMap.put(purchaseInputOrderItemDTO.getGoodsSkuId(), purchaseInputOrderItemDTO);
 				
 				for(PurchaseInputOrderPutOnItemDTO putOnItem : purchaseInputOrderItemDTO.getPutOnItemDTOs()) { 
-					putOnItemMap.put(new GoodsAllocationStockId(
-							putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId()), putOnItem);
+					GoodsAllocationStockId id = new GoodsAllocationStockId(
+							putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId());
+					putOnItemMap.put(id, putOnItem);
 				}
 			}
 		}
 		
-		return new PurchaseInputStockUpdater(goodsStockDOs, goodsAllocationStocks, 
-				goodsStockDAO, goodsAllocationStockDAO, dateProvider, itemMap, putOnItemMap);
+		ReturnGoodsInputStockUpdater updater =  new ReturnGoodsInputStockUpdater(
+				goodsStockDOs, goodsAllocationStocks, 
+				goodsStockDAO, goodsAllocationStockDAO, 
+				dateProvider);
+		
+		updater.setItemMap(itemMap); 
+		updater.setPutOnItemMap(putOnItemMap); 
+		
+		return updater;
 	}
 
 }

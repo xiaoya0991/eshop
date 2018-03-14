@@ -12,7 +12,7 @@ import com.zhss.eshop.schedule.domain.GoodsAllocationStockDO;
 import com.zhss.eshop.schedule.domain.GoodsStockDO;
 
 /**
- * 商品库存更新命令的抽象基类
+ * 库存更新组件的抽象基类
  * @author zhonghuashishan
  *
  */
@@ -25,17 +25,14 @@ public abstract class AbstractStockUpdater implements StockUpdater {
 	 * 商品库存
 	 */
 	protected List<GoodsStockDO> goodsStocks;
-	
 	/**
 	 * 货位库存
 	 */
 	protected List<GoodsAllocationStockDO> goodsAllocationStocks;
-	
 	/**
 	 * 商品库存管理DAO组件
 	 */
 	protected GoodsStockDAO goodsStockDAO;
-	
 	/**
 	 * 货位库存管理DAO组件
 	 */
@@ -46,12 +43,6 @@ public abstract class AbstractStockUpdater implements StockUpdater {
 	 */
 	protected DateProvider dateProvider;
 	
-	/**
-	 * 构造函数
-	 * @param goodsStockDO 商品库存DO对象
-	 * @param goodsStockDAO 商品库存管理模块的DAO组件
-	 * @param dateProvider 日期辅助组件
-	 */
 	public AbstractStockUpdater(
 			List<GoodsStockDO> goodsStocks,
 			List<GoodsAllocationStockDO> goodsAllocationStocks,
@@ -76,7 +67,7 @@ public abstract class AbstractStockUpdater implements StockUpdater {
 			updateGoodsAllocationLockedStockQuantity();
 			updateGoodsAllocationOutputStockQuantity();
 			updateGmtModified();
-			executeUpdateGoodsStock();
+			executeUpdateStock();
 		} catch (Exception e) {
 			logger.error("error", e); 
 		}
@@ -114,7 +105,7 @@ public abstract class AbstractStockUpdater implements StockUpdater {
 	protected abstract void updateGoodsAllocationOutputStockQuantity() throws Exception;
 	
 	/**
-	 * 更新商品库存的修改时间
+	 * 设置库存的修改时间
 	 */
 	private void updateGmtModified() throws Exception {
 		for(GoodsStockDO goodsStock : goodsStocks) {
@@ -126,10 +117,10 @@ public abstract class AbstractStockUpdater implements StockUpdater {
 	}
 	
 	/**
-	 * 实际执行更新商品库存的操作
+	 * 实际执行更新库存操作
 	 * @throws Exception
 	 */
-	private void executeUpdateGoodsStock() throws Exception {
+	private void executeUpdateStock() throws Exception {
 		for(GoodsStockDO goodsStock : goodsStocks) {
 			goodsStockDAO.update(goodsStock);
 		}

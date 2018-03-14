@@ -20,32 +20,22 @@ import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDTO;
 public class ReturnGoodsInputStockUpdater extends AbstractStockUpdater {
 
 	/**
-	 * 采购入库单条目DTO集合
+	 * 采购入库单条目
 	 */
 	private Map<Long, PurchaseInputOrderItemDTO> itemMap;
 	/**
-	 * 采购入库单条目DTO集合
+	 * 采购入库单上架条目
 	 */
 	private Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap;
 	
-	/**
-	 * 构造函数
-	 * @param goodsStockDO 商品库存DO对象
-	 * @param goodsStockDAO 商品库存管理模块的DAO组件
-	 * @param dateProvider 日期辅助组件
-	 */
 	public ReturnGoodsInputStockUpdater(
 			List<GoodsStockDO> goodsStocks, 
 			List<GoodsAllocationStockDO> goodsAllocationStocks,
 			GoodsStockDAO goodsStockDAO,
 			GoodsAllocationStockDAO goodsAllocationStockDAO,
-			DateProvider dateProvider,
-			Map<Long, PurchaseInputOrderItemDTO> itemMap,
-			Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap) {
+			DateProvider dateProvider) {
 		super(goodsStocks, goodsAllocationStocks, 
 				goodsStockDAO, goodsAllocationStockDAO, dateProvider);
-		this.itemMap = itemMap;
-		this.putOnItemMap = putOnItemMap;
 	}
 
 	@Override
@@ -98,4 +88,11 @@ public class ReturnGoodsInputStockUpdater extends AbstractStockUpdater {
 		}
 	}
 
+	public void setItemMap(Map<Long, PurchaseInputOrderItemDTO> itemMap) {
+		this.itemMap = itemMap;
+	}
+	public void setPutOnItemMap(Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap) {
+		this.putOnItemMap = putOnItemMap;
+	}
+	
 }

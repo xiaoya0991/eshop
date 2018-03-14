@@ -14,7 +14,7 @@ import com.zhss.eshop.schedule.domain.GoodsAllocationStockDO;
 import com.zhss.eshop.schedule.domain.GoodsStockDO;
 
 /**
- * 库存更新命令工厂的父类
+ * 库存更新组件工厂的抽象基类
  * @author zhonghuashishan
  *
  */
@@ -25,10 +25,12 @@ public abstract class AbstractStockUpdaterFactory<T>
 			AbstractStockUpdaterFactory.class);
 
 	/**
-	 * 商品库存管理模块的DAO组件
+	 * 商品库存管理DAO组件
 	 */
 	protected GoodsStockDAO goodsStockDAO;
-	
+	/**
+	 * 货位库存管理DAO组件
+	 */
 	protected GoodsAllocationStockDAO goodsAllocationStockDAO;
 	
 	/**
@@ -36,11 +38,6 @@ public abstract class AbstractStockUpdaterFactory<T>
 	 */
 	protected DateProvider dateProvider;
 	
-	/**
-	 * 构造函数
-	 * @param goodsStockDAO 商品库存管理模块的DAO组件
-	 * @param dateProvider 日期辅助组件
-	 */
 	public AbstractStockUpdaterFactory(
 			GoodsStockDAO goodsStockDAO,
 			DateProvider dateProvider,
@@ -67,28 +64,6 @@ public abstract class AbstractStockUpdaterFactory<T>
 		return null;
 	}
 	
-	private List<GoodsAllocationStockDO> getGoodsAllocationStocks(
-			List<GoodsAllocationStockId> goodsAllocationSkuIds) throws Exception { 
-		List<GoodsAllocationStockDO> goodsAllocationStocks = 
-				new ArrayList<GoodsAllocationStockDO>(goodsAllocationSkuIds.size());
-		
-		for(GoodsAllocationStockId goodsAllocationSkuId : goodsAllocationSkuIds) {
-			GoodsAllocationStockDO goodsAllocationStock = goodsAllocationStockDAO.getBySkuId(
-					goodsAllocationSkuId.getGoodsAllocationId(), goodsAllocationSkuId.getGoodsSkuId());
-			if(goodsAllocationStock == null) {
-				goodsAllocationStock = createGoodsAllocationStock(
-						goodsAllocationSkuId.getGoodsAllocationId(),
-						goodsAllocationSkuId.getGoodsSkuId()); 
- 			}
-			goodsAllocationStocks.add(goodsAllocationStock);
-		}
-		
-		return goodsAllocationStocks;
-	}
-
-	protected abstract List<GoodsAllocationStockId> getGoodsAllocationSkuIds(
-			T parameter) throws Exception;
-
 	/**
 	 * 获取商品sku id集合
 	 * @return 商品sku id集合
@@ -113,6 +88,40 @@ public abstract class AbstractStockUpdaterFactory<T>
 		}
 		
 		return goodsStocks;
+	}
+	
+	/**
+	 * 获取货位库存id集合
+	 * @param parameter
+	 * @return
+	 * @throws Exception
+	 */
+	protected abstract List<GoodsAllocationStockId> getGoodsAllocationSkuIds(
+			T parameter) throws Exception;
+	
+	/**
+	 * 创建货位库存
+	 * @param goodsAllocationSkuIds
+	 * @return
+	 * @throws Exception
+	 */
+	private List<GoodsAllocationStockDO> getGoodsAllocationStocks(
+			List<GoodsAllocationStockId> goodsAllocationSkuIds) throws Exception { 
+		List<GoodsAllocationStockDO> goodsAllocationStocks = 
+				new ArrayList<GoodsAllocationStockDO>(goodsAllocationSkuIds.size());
+		
+		for(GoodsAllocationStockId goodsAllocationSkuId : goodsAllocationSkuIds) {
+			GoodsAllocationStockDO goodsAllocationStock = goodsAllocationStockDAO.getBySkuId(
+					goodsAllocationSkuId.getGoodsAllocationId(), goodsAllocationSkuId.getGoodsSkuId());
+			if(goodsAllocationStock == null) {
+				goodsAllocationStock = createGoodsAllocationStock(
+						goodsAllocationSkuId.getGoodsAllocationId(),
+						goodsAllocationSkuId.getGoodsSkuId()); 
+ 			}
+			goodsAllocationStocks.add(goodsAllocationStock);
+		}
+		
+		return goodsAllocationStocks;
 	}
 	
 	/**

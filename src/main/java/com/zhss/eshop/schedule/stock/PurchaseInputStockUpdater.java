@@ -13,47 +13,38 @@ import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDTO;
 
 /**
- * 采购入库库存更新命令
+ * 采购入库库存更新组件
  * @author zhonghuashishan
  *
  */
 public class PurchaseInputStockUpdater extends AbstractStockUpdater {
 
 	/**
-	 * 采购入库单条目DTO集合
+	 * 采购入库单条目
 	 */
 	private Map<Long, PurchaseInputOrderItemDTO> itemMap;
 	/**
-	 * 采购入库单条目DTO集合
+	 * 采购入库单上架条目
 	 */
 	private Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap;
 	
-	/**
-	 * 构造函数
-	 * @param goodsStockDO 商品库存DO对象
-	 * @param goodsStockDAO 商品库存管理模块的DAO组件
-	 * @param dateProvider 日期辅助组件
-	 */
 	public PurchaseInputStockUpdater(
 			List<GoodsStockDO> goodsStocks, 
 			List<GoodsAllocationStockDO> goodsAllocationStocks,
 			GoodsStockDAO goodsStockDAO,
 			GoodsAllocationStockDAO goodsAllocationStockDAO,
-			DateProvider dateProvider,
-			Map<Long, PurchaseInputOrderItemDTO> itemMap,
-			Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap) {
+			DateProvider dateProvider) {
 		super(goodsStocks, goodsAllocationStocks, 
 				goodsStockDAO, goodsAllocationStockDAO, dateProvider);
-		this.itemMap = itemMap;
-		this.putOnItemMap = putOnItemMap;
 	}
-
+	
 	@Override
 	protected void updateGoodsAvailableStockQuantity() throws Exception {
 		for(GoodsStockDO goodsStock : goodsStocks) {
 			PurchaseInputOrderItemDTO item = itemMap.get(goodsStock.getGoodsSkuId());
-			goodsStock.setAvailableStockQuantity(goodsStock.getAvailableStockQuantity()
-					+ item.getArrivalCount()); 
+			Long availableStockQuantity = goodsStock.getAvailableStockQuantity() 
+					+ item.getArrivalCount();
+			goodsStock.setAvailableStockQuantity(availableStockQuantity); 
 		}
 	}
 
@@ -70,15 +61,17 @@ public class PurchaseInputStockUpdater extends AbstractStockUpdater {
 	@Override
 	protected void updateGoodsAllocationAvailableStockQuantity() throws Exception {
 		for(GoodsAllocationStockDO goodsAllocationStock : goodsAllocationStocks) {
-			PurchaseInputOrderPutOnItemDTO putOnItem = putOnItemMap.get(
-					new GoodsAllocationStockId(
-							goodsAllocationStock.getGoodsAllocationId(), 
-							goodsAllocationStock.getGoodsSkuId())); 
-			goodsAllocationStock.setAvailableStockQuantity(goodsAllocationStock.getAvailableStockQuantity()
-					+ putOnItem.getPutOnShelvesCount()); 
+			GoodsAllocationStockId id = new GoodsAllocationStockId(
+					goodsAllocationStock.getGoodsAllocationId(), goodsAllocationStock.getGoodsSkuId());
+			PurchaseInputOrderPutOnItemDTO putOnItem = putOnItemMap.get(id);
+			
+			Long availableStockQuantity = goodsAllocationStock.getAvailableStockQuantity() 
+					+ putOnItem.getPutOnShelvesCount();
+			
+			goodsAllocationStock.setAvailableStockQuantity(availableStockQuantity); 
 		}
 	}
-
+	
 	@Override
 	protected void updateGoodsAllocationLockedStockQuantity() throws Exception {
 		
@@ -89,4 +82,11 @@ public class PurchaseInputStockUpdater extends AbstractStockUpdater {
 		
 	}
 
+	public void setItemMap(Map<Long, PurchaseInputOrderItemDTO> itemMap) {
+		this.itemMap = itemMap;
+	}
+	public void setPutOnItemMap(Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap) {
+		this.putOnItemMap = putOnItemMap;
+	}
+	
 }
