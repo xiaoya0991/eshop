@@ -171,7 +171,7 @@ public interface OrderInfoMapper {
 	 * @param order 订单
 	 */
 	@Update("UPDATE order_info SET "
-				+ "order_status=#{orderStatus} "
+				+ "order_status=#{orderStatus},"
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}") 
 	void updateStatus(OrderInfoDO order);
