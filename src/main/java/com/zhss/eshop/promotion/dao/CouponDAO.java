@@ -44,4 +44,10 @@ public interface CouponDAO {
 	 */
 	void remove(Long id);
 	
+	/**
+	 * 查询所有优惠券
+	 * @return 所有优惠券
+	 */
+	List<CouponDO> listAll();
+	
 }

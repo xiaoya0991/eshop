@@ -93,6 +93,38 @@ public interface CouponMapper {
 	List<CouponDO> listByPage(CouponQuery query);
 	
 	/**
+	 * 查询所有优惠券
+	 * @return 所有优惠券
+	 */
+	@Select("SELECT "
+				+ "id,"
+				+ "name,"
+				+ "type,"
+				+ "valid_start_time,"
+				+ "valid_end_time,"
+				+ "give_out_count,"
+				+ "received_count,"
+				+ "give_out_type,"
+				+ "status,"
+				+ "gmt_create,"
+				+ "gmt_modified "
+			+ "FROM promotion_coupon ")  
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "name", property = "name"),
+		@Result(column = "type", property = "type"),
+		@Result(column = "valid_start_time", property = "validStartTime"),
+		@Result(column = "valid_end_time", property = "validEndTime"),
+		@Result(column = "give_out_count", property = "giveOutCount"),
+		@Result(column = "received_count", property = "receivedCount"),
+		@Result(column = "give_out_type", property = "giveOutType"),
+		@Result(column = "status", property = "status"),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "gmt_modified", property = "gmtModified") 
+	})
+	List<CouponDO> listAll();
+	
+	/**
 	 * 新增优惠券
 	 * @param coupon 优惠券
 	 */

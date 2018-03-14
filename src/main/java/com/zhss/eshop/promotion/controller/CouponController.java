@@ -122,4 +122,37 @@ public class CouponController {
 		}
 	}
 	
+	/**
+	 * 领取优惠券
+	 * @param couponId 优惠券id
+	 * @param userAccountId 用户账号id
+	 * @return 是否领取成功
+	 * @throws Exception
+	 */
+	@PutMapping("/achieve")   
+	public Boolean achieve(Long couponId, Long userAccountId) {
+		try {
+			return couponService.achieve(couponId, userAccountId);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 发放优惠券
+	 * @param couponId 优惠券id
+	 * @return 是否领取成功
+	 * @throws Exception
+	 */
+	@PutMapping("/giveOut")  
+	public Boolean giveOut(Long couponId) {
+		try {
+			return couponService.giveOut(couponId);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
 }

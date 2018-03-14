@@ -37,7 +37,7 @@ import com.zhss.eshop.comment.service.CommentAggregateService;
 import com.zhss.eshop.comment.service.CommentInfoService;
 import com.zhss.eshop.comment.service.CommentPictureService;
 import com.zhss.eshop.common.util.ObjectUtils;
-import com.zhss.eshop.membership.service.MembershipFacadeService;
+import com.zhss.eshop.membership.service.MembershipService;
 import com.zhss.eshop.order.service.OrderService;
 
 /**
@@ -75,7 +75,7 @@ public class CommentController {
 	 * 会员中心的service组件
 	 */
 	@Autowired
-	private MembershipFacadeService membershipFacadeService;
+	private MembershipService membershipService;
 	
 	/**
 	 * 手动发表评论
@@ -115,7 +115,7 @@ public class CommentController {
 			orderService.informPublishCommentEvent(commentInfoDTO.getOrderInfoId());
 			
 			// 通知会员中心用户已经发表了评论
-			membershipFacadeService.informPublishCommentEvent(
+			membershipService.informPublishCommentEvent(
 					commentInfoDTO.getUserAccountId(), ShowPictures.YES.equals(showPictures)); 
 		} catch (Exception e) {
 			logger.error("error", e); 

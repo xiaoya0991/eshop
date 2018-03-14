@@ -66,4 +66,12 @@ public class CouponDAOImpl implements CouponDAO {
 		couponMapper.remove(id);
 	}
 	
+	/**
+	 * 查询所有优惠券
+	 * @return 所有优惠券
+	 */
+	public List<CouponDO> listAll() {
+		return couponMapper.listAll();
+	}
+	
 }
