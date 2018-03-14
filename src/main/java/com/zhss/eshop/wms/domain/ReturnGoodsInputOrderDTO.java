@@ -29,7 +29,7 @@ public class ReturnGoodsInputOrderDTO {
 	/**
 	 * 退货入库单的状态
 	 */
-	private Integer returnGoodsInputOrderStatus;
+	private Integer status;
 	/**
 	 * 收货人
 	 */
@@ -101,11 +101,7 @@ public class ReturnGoodsInputOrderDTO {
 	/**
 	 * 退货入库单条目DTO集合
 	 */
-	private List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOs;
-	/**
-	 * 退货入库单商品上架条目DTO集合
-	 */
-	private List<ReturnGoodsInputOrderPutOnItemDTO> returnGoodsInputOrderPutOnItemDTO;
+	private List<ReturnGoodsInputOrderItemDTO> items;
 	
 	public Long getId() {
 		return id;
@@ -131,11 +127,11 @@ public class ReturnGoodsInputOrderDTO {
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
-	public Integer getReturnGoodsInputOrderStatus() {
-		return returnGoodsInputOrderStatus;
+	public Integer getStatus() {
+		return status;
 	}
-	public void setReturnGoodsInputOrderStatus(Integer returnGoodsInputOrderStatus) {
-		this.returnGoodsInputOrderStatus = returnGoodsInputOrderStatus;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	public String getConsignee() {
 		return consignee;
@@ -239,18 +235,11 @@ public class ReturnGoodsInputOrderDTO {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<ReturnGoodsInputOrderItemDTO> getReturnGoodsInputOrderItemDTOs() {
-		return returnGoodsInputOrderItemDTOs;
+	public List<ReturnGoodsInputOrderItemDTO> getItems() {
+		return items;
 	}
-	public void setReturnGoodsInputOrderItemDTOs(List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOs) {
-		this.returnGoodsInputOrderItemDTOs = returnGoodsInputOrderItemDTOs;
-	}
-	public List<ReturnGoodsInputOrderPutOnItemDTO> getReturnGoodsInputOrderPutOnItemDTO() {
-		return returnGoodsInputOrderPutOnItemDTO;
-	}
-	public void setReturnGoodsInputOrderPutOnItemDTO(
-			List<ReturnGoodsInputOrderPutOnItemDTO> returnGoodsInputOrderPutOnItemDTO) {
-		this.returnGoodsInputOrderPutOnItemDTO = returnGoodsInputOrderPutOnItemDTO;
+	public void setItems(List<ReturnGoodsInputOrderItemDTO> items) {
+		this.items = items;
 	}
 	
 }
