@@ -213,6 +213,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		orderOperateLogDAO.save(orderOperateLogFactory.get(
 				order, OrderOperateType.CREATE_ORDER));      
 		inventoryService.informSubmitOrderEvent(order);
+		promotionService.useCoupon(order.getCouponId(), order.getUserAccountId());
 		
 		return order;
 	}

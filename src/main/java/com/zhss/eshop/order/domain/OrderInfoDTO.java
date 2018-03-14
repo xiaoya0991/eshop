@@ -89,6 +89,10 @@ public class OrderInfoDTO extends AbstractObject {
 	 */
 	private Date confirmReceiptTime;
 	/**
+	 * 优惠券id
+	 */
+	private Long couponId;
+	/**
 	 * 销售出库单的创建时间
 	 */
 	private Date gmtCreate;
@@ -242,6 +246,12 @@ public class OrderInfoDTO extends AbstractObject {
 	}
 	public void setLogs(List<OrderOperateLogDTO> logs) {
 		this.logs = logs;
+	}
+	public Long getCouponId() {
+		return couponId;
+	}
+	public void setCouponId(Long couponId) {
+		this.couponId = couponId;
 	}
 	
 }
