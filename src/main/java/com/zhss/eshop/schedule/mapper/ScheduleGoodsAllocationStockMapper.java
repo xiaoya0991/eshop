@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.zhss.eshop.schedule.domain.GoodsAllocationStockDO;
+import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDO;
 
 /**
  * 商品sku库存管理模块的mapper组件
@@ -17,7 +17,7 @@ import com.zhss.eshop.schedule.domain.GoodsAllocationStockDO;
  *
  */
 @Mapper
-public interface GoodsAllocationStockMapper {
+public interface ScheduleGoodsAllocationStockMapper {
 
 	/**
 	 * 根据商品sku id查询商品库存
@@ -46,7 +46,7 @@ public interface GoodsAllocationStockMapper {
 		@Result(column = "gmt_create", property = "gmtCreate"),
 		@Result(column = "gmt_modified", property = "gmtModified")
 	})
-	GoodsAllocationStockDO getBySkuId(
+	ScheduleGoodsAllocationStockDO getBySkuId(
 			@Param("goodsAllocationId") Long goodsAllocationId,
 			@Param("goodsSkuId") Long goodsSkuId);
 	
@@ -72,7 +72,7 @@ public interface GoodsAllocationStockMapper {
 				+ "#{gmtModified}"
 			+ ")")  
 	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true) 
-	void save(GoodsAllocationStockDO goodsAllocationStock);
+	void save(ScheduleGoodsAllocationStockDO goodsAllocationStock);
 	
 	/**
 	 * 更新商品库存
@@ -84,6 +84,6 @@ public interface GoodsAllocationStockMapper {
 				+ "output_stock_quantity=#{outputStockQuantity},"
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}") 
-	void update(GoodsAllocationStockDO goodsAllocationStock);
+	void update(ScheduleGoodsAllocationStockDO goodsAllocationStock);
 	
 }

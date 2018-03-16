@@ -73,7 +73,7 @@ public class SaleDeliveryOrderItemDTO extends AbstractObject {
 	 */
 	private Date gmtModified;
 	/**
-	 * 商品拣货条目
+	 * 拣货条目
 	 */
 	private List<SaleDeliveryOrderPickingItemDTO> pickingItems;
 	/**

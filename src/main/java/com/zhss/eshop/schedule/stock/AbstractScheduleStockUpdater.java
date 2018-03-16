@@ -6,48 +6,48 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.schedule.dao.GoodsAllocationStockDAO;
-import com.zhss.eshop.schedule.dao.GoodsStockDAO;
-import com.zhss.eshop.schedule.domain.GoodsAllocationStockDO;
-import com.zhss.eshop.schedule.domain.GoodsStockDO;
+import com.zhss.eshop.schedule.dao.ScheduleGoodsAllocationStockDAO;
+import com.zhss.eshop.schedule.dao.ScheduleGoodsStockDAO;
+import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDO;
+import com.zhss.eshop.schedule.domain.ScheduleGoodsStockDO;
 
 /**
  * 库存更新组件的抽象基类
  * @author zhonghuashishan
  *
  */
-public abstract class AbstractStockUpdater implements StockUpdater {
+public abstract class AbstractScheduleStockUpdater implements ScheduleStockUpdater {
 	
 	private static final Logger logger = LoggerFactory.getLogger(
-			AbstractStockUpdater.class);
+			AbstractScheduleStockUpdater.class);
 	
 	/**
 	 * 商品库存
 	 */
-	protected List<GoodsStockDO> goodsStocks;
+	protected List<ScheduleGoodsStockDO> goodsStocks;
 	/**
 	 * 货位库存
 	 */
-	protected List<GoodsAllocationStockDO> goodsAllocationStocks;
+	protected List<ScheduleGoodsAllocationStockDO> goodsAllocationStocks;
 	/**
 	 * 商品库存管理DAO组件
 	 */
-	protected GoodsStockDAO goodsStockDAO;
+	protected ScheduleGoodsStockDAO goodsStockDAO;
 	/**
 	 * 货位库存管理DAO组件
 	 */
-	protected GoodsAllocationStockDAO goodsAllocationStockDAO;
+	protected ScheduleGoodsAllocationStockDAO goodsAllocationStockDAO;
 	
 	/**
 	 * 日期辅助组件
 	 */
 	protected DateProvider dateProvider;
 	
-	public AbstractStockUpdater(
-			List<GoodsStockDO> goodsStocks,
-			List<GoodsAllocationStockDO> goodsAllocationStocks,
-			GoodsStockDAO goodsStockDAO,
-			GoodsAllocationStockDAO goodsAllocationStockDAO,
+	public AbstractScheduleStockUpdater(
+			List<ScheduleGoodsStockDO> goodsStocks,
+			List<ScheduleGoodsAllocationStockDO> goodsAllocationStocks,
+			ScheduleGoodsStockDAO goodsStockDAO,
+			ScheduleGoodsAllocationStockDAO goodsAllocationStockDAO,
 			DateProvider dateProvider) {
 		this.goodsStocks = goodsStocks;
 		this.goodsAllocationStocks = goodsAllocationStocks;
@@ -108,10 +108,10 @@ public abstract class AbstractStockUpdater implements StockUpdater {
 	 * 设置库存的修改时间
 	 */
 	private void updateGmtModified() throws Exception {
-		for(GoodsStockDO goodsStock : goodsStocks) {
+		for(ScheduleGoodsStockDO goodsStock : goodsStocks) {
 			goodsStock.setGmtModified(dateProvider.getCurrentTime());
 		}
-		for(GoodsAllocationStockDO goodsAllocationStock : goodsAllocationStocks) {
+		for(ScheduleGoodsAllocationStockDO goodsAllocationStock : goodsAllocationStocks) {
 			goodsAllocationStock.setGmtModified(dateProvider.getCurrentTime());
 		}
 	}
@@ -121,10 +121,10 @@ public abstract class AbstractStockUpdater implements StockUpdater {
 	 * @throws Exception
 	 */
 	private void executeUpdateStock() throws Exception {
-		for(GoodsStockDO goodsStock : goodsStocks) {
+		for(ScheduleGoodsStockDO goodsStock : goodsStocks) {
 			goodsStockDAO.update(goodsStock);
 		}
-		for(GoodsAllocationStockDO goodsAllocationStock : goodsAllocationStocks) {
+		for(ScheduleGoodsAllocationStockDO goodsAllocationStock : goodsAllocationStocks) {
 			goodsAllocationStockDAO.update(goodsAllocationStock);
 		}
 	}

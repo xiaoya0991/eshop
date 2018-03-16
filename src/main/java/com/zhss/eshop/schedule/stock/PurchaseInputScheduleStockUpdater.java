@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.schedule.dao.GoodsAllocationStockDAO;
-import com.zhss.eshop.schedule.dao.GoodsStockDAO;
-import com.zhss.eshop.schedule.domain.GoodsAllocationStockDO;
+import com.zhss.eshop.schedule.dao.ScheduleGoodsAllocationStockDAO;
+import com.zhss.eshop.schedule.dao.ScheduleGoodsStockDAO;
+import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDO;
 import com.zhss.eshop.schedule.domain.GoodsAllocationStockId;
-import com.zhss.eshop.schedule.domain.GoodsStockDO;
+import com.zhss.eshop.schedule.domain.ScheduleGoodsStockDO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDTO;
 
@@ -17,7 +17,7 @@ import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDTO;
  * @author zhonghuashishan
  *
  */
-public class PurchaseInputStockUpdater extends AbstractStockUpdater {
+public class PurchaseInputScheduleStockUpdater extends AbstractScheduleStockUpdater {
 
 	/**
 	 * 采购入库单条目
@@ -28,11 +28,11 @@ public class PurchaseInputStockUpdater extends AbstractStockUpdater {
 	 */
 	private Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap;
 	
-	public PurchaseInputStockUpdater(
-			List<GoodsStockDO> goodsStocks, 
-			List<GoodsAllocationStockDO> goodsAllocationStocks,
-			GoodsStockDAO goodsStockDAO,
-			GoodsAllocationStockDAO goodsAllocationStockDAO,
+	public PurchaseInputScheduleStockUpdater(
+			List<ScheduleGoodsStockDO> goodsStocks, 
+			List<ScheduleGoodsAllocationStockDO> goodsAllocationStocks,
+			ScheduleGoodsStockDAO goodsStockDAO,
+			ScheduleGoodsAllocationStockDAO goodsAllocationStockDAO,
 			DateProvider dateProvider) {
 		super(goodsStocks, goodsAllocationStocks, 
 				goodsStockDAO, goodsAllocationStockDAO, dateProvider);
@@ -40,7 +40,7 @@ public class PurchaseInputStockUpdater extends AbstractStockUpdater {
 	
 	@Override
 	protected void updateGoodsAvailableStockQuantity() throws Exception {
-		for(GoodsStockDO goodsStock : goodsStocks) {
+		for(ScheduleGoodsStockDO goodsStock : goodsStocks) {
 			PurchaseInputOrderItemDTO item = itemMap.get(goodsStock.getGoodsSkuId());
 			Long availableStockQuantity = goodsStock.getAvailableStockQuantity() 
 					+ item.getArrivalCount();
@@ -60,7 +60,7 @@ public class PurchaseInputStockUpdater extends AbstractStockUpdater {
 
 	@Override
 	protected void updateGoodsAllocationAvailableStockQuantity() throws Exception {
-		for(GoodsAllocationStockDO goodsAllocationStock : goodsAllocationStocks) {
+		for(ScheduleGoodsAllocationStockDO goodsAllocationStock : goodsAllocationStocks) {
 			GoodsAllocationStockId id = new GoodsAllocationStockId(
 					goodsAllocationStock.getGoodsAllocationId(), goodsAllocationStock.getGoodsSkuId());
 			PurchaseInputOrderPutOnItemDTO putOnItem = putOnItemMap.get(id);

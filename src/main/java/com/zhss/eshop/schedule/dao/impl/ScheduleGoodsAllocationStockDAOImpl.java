@@ -3,9 +3,9 @@ package com.zhss.eshop.schedule.dao.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.zhss.eshop.schedule.dao.GoodsAllocationStockDAO;
-import com.zhss.eshop.schedule.domain.GoodsAllocationStockDO;
-import com.zhss.eshop.schedule.mapper.GoodsAllocationStockMapper;
+import com.zhss.eshop.schedule.dao.ScheduleGoodsAllocationStockDAO;
+import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDO;
+import com.zhss.eshop.schedule.mapper.ScheduleGoodsAllocationStockMapper;
 
 /**
  * 货位库存管理dao组件
@@ -13,20 +13,20 @@ import com.zhss.eshop.schedule.mapper.GoodsAllocationStockMapper;
  *
  */
 @Repository
-public class GoodsAllocationStockDAOImpl implements GoodsAllocationStockDAO {
+public class ScheduleGoodsAllocationStockDAOImpl implements ScheduleGoodsAllocationStockDAO {
 	
 	/**
 	 * 货位库存管理mapper组件
 	 */
 	@Autowired
-	private GoodsAllocationStockMapper goodsAllocationStockMapper;
+	private ScheduleGoodsAllocationStockMapper goodsAllocationStockMapper;
 	
 	/**
 	 * 根据商品sku id查询货位库存
 	 * @param goodsSkuId 商品sku id
 	 * @return 货位库存
 	 */
-	public GoodsAllocationStockDO getBySkuId(Long goodsAllocationId, Long goodsSkuId) {
+	public ScheduleGoodsAllocationStockDO getBySkuId(Long goodsAllocationId, Long goodsSkuId) {
 		return goodsAllocationStockMapper.getBySkuId(goodsAllocationId, goodsSkuId);
 	}
 	
@@ -34,7 +34,7 @@ public class GoodsAllocationStockDAOImpl implements GoodsAllocationStockDAO {
 	 * 新增货位库存
 	 * @param goodsAllocationStockDO 货位库存DO对象
 	 */
-	public void save(GoodsAllocationStockDO goodsAllocationStock) {
+	public void save(ScheduleGoodsAllocationStockDO goodsAllocationStock) {
 		goodsAllocationStockMapper.save(goodsAllocationStock); 
 	}
 	
@@ -42,7 +42,7 @@ public class GoodsAllocationStockDAOImpl implements GoodsAllocationStockDAO {
 	 * 更新货位库存
 	 * @param goodsAllocationStockDO 货位库存DO对象
 	 */
-	public void update(GoodsAllocationStockDO goodsAllocationStock) {
+	public void update(ScheduleGoodsAllocationStockDO goodsAllocationStock) {
 		goodsAllocationStockMapper.update(goodsAllocationStock); 
 	}
 

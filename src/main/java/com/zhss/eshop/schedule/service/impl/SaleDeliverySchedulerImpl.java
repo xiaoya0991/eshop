@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderItemDTO;
@@ -34,6 +35,21 @@ public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
 	 */
 	@Autowired
 	private DateProvider dateProvider;
+	
+	/**
+	 * 对订单进行调度销售出库
+	 * @param order 订单
+	 * @return 调度结果
+	 * @throws Exception
+	 */
+	public List<SaleDeliveryOrderItemDTO> scheduleOrder(OrderInfoDTO order) throws Exception {
+		List<SaleDeliveryOrderItemDTO> saleDeliveryOrderItems = 
+				new ArrayList<SaleDeliveryOrderItemDTO>();
+		for(OrderItemDTO orderItem : order.getOrderItems()) {
+			saleDeliveryOrderItems.add(schedule(orderItem));
+		}
+		return saleDeliveryOrderItems;
+	}
 	
 	/**
 	 * 对订单条目进行发货调度

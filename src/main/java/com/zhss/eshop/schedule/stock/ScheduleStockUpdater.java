@@ -5,7 +5,7 @@ package com.zhss.eshop.schedule.stock;
  * @author zhonghuashishan
  *
  */
-public interface StockUpdater {
+public interface ScheduleStockUpdater {
 
 	/**
 	 * 更新商品库存

@@ -12,17 +12,19 @@ import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderItemDTO;
 import com.zhss.eshop.schedule.service.ScheduleService;
-import com.zhss.eshop.schedule.stock.PurchaseInputStockUpdaterFactory;
-import com.zhss.eshop.schedule.stock.ReturnGoodsInputStockUpdaterFactory;
-import com.zhss.eshop.schedule.stock.StockUpdater;
+import com.zhss.eshop.schedule.stock.PurchaseInputScheduleStockUpdaterFactory;
+import com.zhss.eshop.schedule.stock.ReturnGoodsInputScheduleStockUpdaterFactory;
+import com.zhss.eshop.schedule.stock.ScheduleStockUpdater;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
+import com.zhss.eshop.wms.domain.SaleDeliveryOrderItemDTO;
 import com.zhss.eshop.wms.service.WmsService;
 
 /**
@@ -45,16 +47,28 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	@Autowired
 	private SaleDeliveryOrderBuilderFactory saleDeliveryOrderBuilderFactory;
-	
-	private PurchaseInputStockUpdaterFactory<PurchaseInputOrderDTO> purchaseInputStockUpdaterFactory;
-	
-	private ReturnGoodsInputStockUpdaterFactory<ReturnGoodsInputOrderDTO> returnGoodsInputStockUpdaterFactory;
-	
+	/**
+	 * 采购入库库存更新组件工厂
+	 */
+	@Autowired
+	private PurchaseInputScheduleStockUpdaterFactory<PurchaseInputOrderDTO> 
+			purchaseInputStockUpdaterFactory;
+	/**
+	 * 退货入库库存更新组件工厂
+	 */
+	@Autowired
+	private ReturnGoodsInputScheduleStockUpdaterFactory<ReturnGoodsInputOrderDTO> 
+			returnGoodsInputStockUpdaterFactory;
 	/**
 	 * 库存中心
 	 */
 	@Autowired
 	private InventoryService inventoryService;
+	/**
+	 * 销售出库调度器
+	 */
+	@Autowired
+	private SaleDeliveryScheduler saleDeliveryScheduler;
 	
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
@@ -63,7 +77,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	public Boolean informPurchaseInputFinished(
 			PurchaseInputOrderDTO purchaseInputOrderDTO) {
-		StockUpdater stockUpdater = purchaseInputStockUpdaterFactory.create(purchaseInputOrderDTO);
+		ScheduleStockUpdater stockUpdater = purchaseInputStockUpdaterFactory
+				.create(purchaseInputOrderDTO);
 		stockUpdater.update();
 		inventoryService.informPurchaseInputFinished(purchaseInputOrderDTO);
 		return true;
@@ -76,7 +91,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	public Boolean informReturnGoodsInputFinished(
 			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO) {
-		StockUpdater stockUpdater = returnGoodsInputStockUpdaterFactory.create(returnGoodsInputOrderDTO);
+		ScheduleStockUpdater stockUpdater = returnGoodsInputStockUpdaterFactory
+				.create(returnGoodsInputOrderDTO);
 		stockUpdater.update();
 		inventoryService.informReturnGoodsInputFinished(returnGoodsInputOrderDTO);
 		return true;
@@ -87,8 +103,18 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	public Boolean informSubmitOrderEvent(OrderInfoDTO orderDTO) {
-		return true;
+	public Boolean informSubmitOrderEvent(OrderInfoDTO order) {
+		try {
+			List<SaleDeliveryOrderItemDTO> saleDeliveryOrderItems = 
+					saleDeliveryScheduler.scheduleOrder(order);  
+			
+			
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e);
+			return false;
+		}
 	}
 	
 	/**

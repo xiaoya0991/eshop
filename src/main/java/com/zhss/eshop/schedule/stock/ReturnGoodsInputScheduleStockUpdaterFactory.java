@@ -9,28 +9,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.schedule.dao.GoodsAllocationStockDAO;
-import com.zhss.eshop.schedule.dao.GoodsStockDAO;
-import com.zhss.eshop.schedule.domain.GoodsAllocationStockDO;
+import com.zhss.eshop.schedule.dao.ScheduleGoodsAllocationStockDAO;
+import com.zhss.eshop.schedule.dao.ScheduleGoodsStockDAO;
+import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDO;
 import com.zhss.eshop.schedule.domain.GoodsAllocationStockId;
-import com.zhss.eshop.schedule.domain.GoodsStockDO;
+import com.zhss.eshop.schedule.domain.ScheduleGoodsStockDO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
 
 /**
- * 采购入库库存更新组件工厂
+ * 退货入库库存更新组件工厂
  * @author zhonghuashishan
  *
  */
 @Component
-public class PurchaseInputStockUpdaterFactory<T> 
-		extends AbstractStockUpdaterFactory<T> {
+public class ReturnGoodsInputScheduleStockUpdaterFactory<T> 
+		extends AbstractScheduleStockUpdaterFactory<T> {
 	
 	@Autowired
-	public PurchaseInputStockUpdaterFactory(
-			GoodsStockDAO goodsStockDAO,
-			GoodsAllocationStockDAO goodsAllocationStockDAO,
+	public ReturnGoodsInputScheduleStockUpdaterFactory(
+			ScheduleGoodsStockDAO goodsStockDAO, 
+			ScheduleGoodsAllocationStockDAO goodsAllocationStockDAO,
 			DateProvider dateProvider) {
 		super(goodsStockDAO, dateProvider, goodsAllocationStockDAO);
 	}
@@ -42,18 +44,18 @@ public class PurchaseInputStockUpdaterFactory<T>
 	 */
 	@Override
 	protected List<Long> getGoodsSkuIds(T parameter) throws Exception {		
-		PurchaseInputOrderDTO purchaseInputOrderDTO = (PurchaseInputOrderDTO) parameter;
-		List<PurchaseInputOrderItemDTO> purchaseInputOrderItemDTOs = 
-				purchaseInputOrderDTO.getItems();
+		ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO = (ReturnGoodsInputOrderDTO) parameter;
+		List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOs = 
+				returnGoodsInputOrderDTO.getItems();
 		
-		if(purchaseInputOrderItemDTOs == null || purchaseInputOrderItemDTOs.size() == 0) {
+		if(returnGoodsInputOrderItemDTOs == null || returnGoodsInputOrderItemDTOs.size() == 0) {
 			return new ArrayList<Long>();
 		}
 		
-		List<Long> goodsSkuIds = new ArrayList<Long>(purchaseInputOrderItemDTOs.size());
+		List<Long> goodsSkuIds = new ArrayList<Long>(returnGoodsInputOrderItemDTOs.size());
 		
-		for(PurchaseInputOrderItemDTO purchaseInputOrderItemDTO : purchaseInputOrderItemDTOs) {
-			goodsSkuIds.add(purchaseInputOrderItemDTO.getGoodsSkuId());
+		for(ReturnGoodsInputOrderItemDTO returnGoodsInputOrderItemDTO : returnGoodsInputOrderItemDTOs) {
+			goodsSkuIds.add(returnGoodsInputOrderItemDTO.getGoodsSkuId());
 		}
 		
 		return goodsSkuIds;
@@ -72,8 +74,7 @@ public class PurchaseInputStockUpdaterFactory<T>
 			return new ArrayList<GoodsAllocationStockId>();
 		}
 		
-		List<GoodsAllocationStockId> goodsSkuIds = new ArrayList<GoodsAllocationStockId>(
-				purchaseInputOrderItemDTOs.size());
+		List<GoodsAllocationStockId> goodsSkuIds = new ArrayList<GoodsAllocationStockId>(purchaseInputOrderItemDTOs.size());
 		
 		for(PurchaseInputOrderItemDTO purchaseInputOrderItemDTO : purchaseInputOrderItemDTOs) {
 			for(PurchaseInputOrderPutOnItemDTO putOnItem : purchaseInputOrderItemDTO.getPutOnItemDTOs()) {
@@ -93,9 +94,9 @@ public class PurchaseInputStockUpdaterFactory<T>
 	 * @throws Exception
 	 */
 	@Override
-	protected StockUpdater create(
-			List<GoodsStockDO> goodsStockDOs,
-			List<GoodsAllocationStockDO> goodsAllocationStocks,
+	protected ScheduleStockUpdater create(
+			List<ScheduleGoodsStockDO> goodsStockDOs,
+			List<ScheduleGoodsAllocationStockDO> goodsAllocationStocks,
 			T parameter) throws Exception {
 		PurchaseInputOrderDTO purchaseInputOrderDTO = (PurchaseInputOrderDTO) parameter;
 		List<PurchaseInputOrderItemDTO> purchaseInputOrderItemDTOs = 
@@ -118,7 +119,7 @@ public class PurchaseInputStockUpdaterFactory<T>
 			}
 		}
 		
-		PurchaseInputStockUpdater updater = new PurchaseInputStockUpdater(
+		ReturnGoodsInputScheduleStockUpdater updater =  new ReturnGoodsInputScheduleStockUpdater(
 				goodsStockDOs, goodsAllocationStocks, 
 				goodsStockDAO, goodsAllocationStockDAO, 
 				dateProvider);
