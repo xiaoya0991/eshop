@@ -87,7 +87,7 @@ public interface CouponAchieveMapper {
 				+ "gmt_create,"
 				+ "gmt_modified "
 			+ "FROM promotion_coupon_achieve "
-			+ "AND user_account_id = #{userAccountId} "
+			+ "WHERE user_account_id = #{userAccountId} "
 			+ "AND is_used = 0 "
 			+ "AND used_time IS NULL")    
 	@Results({ 

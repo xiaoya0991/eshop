@@ -34,8 +34,8 @@ public class CouponAchieveDAOImpl implements CouponAchieveDAO {
 	}
 	
 	/**
-	 * 更新优惠券
-	 * @param coupon 优惠券
+	 * 新增优惠券领取记录
+	 * @param couponAchieve 优惠券领取记录
 	 */
 	public void save(CouponAchieveDO couponAchieve) {
 		couponAchieveMapper.save(couponAchieve); 

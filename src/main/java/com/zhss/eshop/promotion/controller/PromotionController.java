@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zhss.eshop.common.util.ObjectUtils;
+import com.zhss.eshop.promotion.domain.CouponVO;
 import com.zhss.eshop.promotion.domain.PromotionActivityVO;
 import com.zhss.eshop.promotion.service.PromotionService;
 
@@ -48,6 +49,24 @@ public class PromotionController {
 			logger.error("error", e); 
 			return new ArrayList<PromotionActivityVO>();
 		}
+	}
+	
+	/**
+	 * 查询用户可以使用的有效优惠券
+	 * @param userAccountId
+	 * @return
+	 */
+	@GetMapping("/user/{userAccountId}")  
+	public List<CouponVO> listValidByUserAccountId(
+			@PathVariable("userAccountId") Long userAccountId) {
+		try {
+			return ObjectUtils.convertList(
+					promotionService.listValidByUserAccountId(userAccountId), 
+					CouponVO.class);
+		} catch (Exception e) {
+			logger.error("error", e); 
+		}
+		return new ArrayList<CouponVO>();
 	}
 	
 }

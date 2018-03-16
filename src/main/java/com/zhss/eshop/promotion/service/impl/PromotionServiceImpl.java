@@ -128,15 +128,5 @@ public class PromotionServiceImpl implements PromotionService {
 			return false;
 		}
 	}
-	
-	/**
-	 * 使用优惠券
-	 * @param couponId 优惠券id
-	 * @param userAccountId 用户账号id
-	 * @return 处理结果
-	 */
-	public Boolean useCoupon(Long couponId, Long userAccountId) {
-		return true;
-	}
 
 }

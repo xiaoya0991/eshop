@@ -50,4 +50,10 @@ public interface CouponDAO {
 	 */
 	List<CouponDO> listAll();
 	
+	/**
+	 * 更新优惠券状态
+	 * @param coupon 优惠券
+	 */
+	void updateStatus(CouponDO coupon);
+	
 }

@@ -205,10 +205,19 @@ public interface CouponMapper {
 				+ "give_out_count=#{giveOutCount},"
 				+ "received_count=#{receivedCount},"
 				+ "give_out_type=#{giveOutType},"
-				+ "status=#{status},"
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}")  
 	void update(CouponDO coupon);
+	
+	/**
+	 * 更新优惠券状态
+	 * @param coupon 优惠券
+	 */
+	@Update("UPDATE promotion_coupon SET "
+				+ "status=#{status}," 
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}")  
+	void updateStatus(CouponDO coupon);
 	
 	/**
 	 * 删除优惠券

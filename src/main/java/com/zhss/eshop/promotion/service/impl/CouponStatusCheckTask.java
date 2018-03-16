@@ -64,7 +64,7 @@ public class CouponStatusCheckTask {
 		if(dateProvider.getCurrentTime().after(coupon.getValidStartTime())) {
 			coupon.setStatus(CouponStatus.GIVING_OUT);  
 			coupon.setGmtModified(dateProvider.getCurrentTime()); 
-			couponDAO.update(coupon); 
+			couponDAO.updateStatus(coupon); 
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class CouponStatusCheckTask {
 		if(dateProvider.getCurrentTime().after(coupon.getValidEndTime())) {
  			coupon.setStatus(CouponStatus.EXPIRED);  
 			coupon.setGmtModified(dateProvider.getCurrentTime()); 
-			couponDAO.update(coupon); 
+			couponDAO.updateStatus(coupon); 
 		}
 	}
 	

@@ -74,4 +74,12 @@ public class CouponDAOImpl implements CouponDAO {
 		return couponMapper.listAll();
 	}
 	
+	/**
+	 * 更新优惠券状态
+	 * @param coupon 优惠券
+	 */
+	public void updateStatus(CouponDO coupon) {
+		couponMapper.updateStatus(coupon); 
+	}
+	
 }

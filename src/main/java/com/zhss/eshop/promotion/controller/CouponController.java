@@ -39,17 +39,6 @@ public class CouponController {
 	private CouponService couponService;
 	
 	/**
-	 * 查询用户可以使用的有效优惠券
-	 * @param userAccountId
-	 * @return
-	 */
-	@GetMapping("/user/{userAccountId}")  
-	public List<CouponVO> listValidByUserAccountId(
-			@PathVariable("userAccountId") Long userAccountId) {
-		return null;
-	}
-	
-	/**
 	 * 分页查询优惠券
 	 * @param query 查询条件
 	 * @return 优惠券
@@ -85,7 +74,7 @@ public class CouponController {
 	 * @return 优惠券
 	 */
 	@GetMapping("/{id}")  
-	public CouponVO getById(Long id) {
+	public CouponVO getById(@PathVariable("id") Long id) {
 		try {
 			return couponService.getById(id).clone(CouponVO.class);
 		} catch (Exception e) {
