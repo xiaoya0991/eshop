@@ -8,12 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.commodity.dao.CategoryPropertyRelationshipDAO;
+import com.zhss.eshop.commodity.dao.GoodsDAO;
 import com.zhss.eshop.commodity.dao.GoodsSkuDAO;
 import com.zhss.eshop.commodity.dao.GoodsSkuSalePropertyValueDAO;
 import com.zhss.eshop.commodity.dao.PropertyDAO;
 import com.zhss.eshop.commodity.domain.CategoryPropertyRelationshipDO;
+import com.zhss.eshop.commodity.domain.GoodsDO;
 import com.zhss.eshop.commodity.domain.GoodsSkuDO;
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
+import com.zhss.eshop.commodity.domain.GoodsSkuQuery;
 import com.zhss.eshop.commodity.domain.GoodsSkuSalePropertyValueDO;
 import com.zhss.eshop.commodity.domain.GoodsSkuSalePropertyValueDTO;
 import com.zhss.eshop.commodity.domain.PropertyDO;
@@ -60,6 +63,11 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
 	 */
 	@Autowired
 	private InventoryService inventoryService;
+	/**
+	 * 商品管理DAO组件
+	 */
+	@Autowired
+	private GoodsDAO goodsDAO;
 	
 	/**
 	 * 根据商品id查询商品sku
@@ -161,6 +169,44 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
 		}
 		
 		return builder.toString();
+	}
+	
+	/**
+	 * 根据id查询商品sku
+	 * @param id 商品sku id
+	 * @return 商品sku
+	 */
+	public GoodsSkuDTO getById(Long id) throws Exception {
+		GoodsSkuDTO goodsSku = goodsSkuDAO.getById(id).clone(GoodsSkuDTO.class);
+		setGoodsRelatedFields(goodsSku); 
+		return goodsSku;
+	}
+	
+	/**
+	 * 分页查询商品sku
+	 * @param query 查询条件
+	 * @return 商品sku
+	 */
+	public List<GoodsSkuDTO> listByPage(GoodsSkuQuery query) throws Exception {
+		List<GoodsSkuDTO> goodsSkus = ObjectUtils.convertList(
+				goodsSkuDAO.listByPage(query), GoodsSkuDTO.class);
+		for(GoodsSkuDTO goodsSku : goodsSkus) {
+			setGoodsRelatedFields(goodsSku); 
+		}
+		return goodsSkus;
+	}
+	
+	private void setGoodsRelatedFields(GoodsSkuDTO goodsSku) throws Exception {
+		GoodsDO goods = goodsDAO.getById(goodsSku.getGoodsId());
+		
+		goodsSku.setGoodsName(goods.getName()); 
+		goodsSku.setGrossWeight(goods.getGrossWeight()); 
+		goodsSku.setGoodsLength(goods.getLength()); 
+		goodsSku.setGoodsWidth(goods.getWidth());
+		goodsSku.setGoodsHeight(goods.getHeight()); 
+		goodsSku.setGoodsSkuCode(goodsSku.getSkuCode()); 
+		goodsSku.setSaleStockQuantity(inventoryService
+				.getSaleStockQuantity(goodsSku.getId()));  
 	}
 	
 }

@@ -17,13 +17,13 @@ public class GoodsSkuDTO extends AbstractObject {
 	 */
 	private Long id;
 	/**
-	 * 商品sku编号
-	 */
-	private String skuCode;
-	/**
 	 * 商品id
 	 */
 	private Long goodsId;
+	/**
+	 * 商品sku编号
+	 */
+	private String skuCode;
 	/**
 	 * 商品名称
 	 */

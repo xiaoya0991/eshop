@@ -25,19 +25,47 @@ public class GoodsSkuVO extends AbstractObject {
 	 */
 	private String skuCode;
 	/**
-	 * 商品sku的采购价格
+	 * 商品名称
+	 */
+	private String goodsName;
+	/**
+	 * 商品毛重
+	 */
+	private Double grossWeight;
+	/**
+	 * 商品长度
+	 */
+	private Double goodsLength;
+	/**
+	 * 商品宽度
+	 */
+	private Double goodsWidth;
+	/**
+	 * 商品高度
+	 */
+	private Double goodsHeight;
+	/**
+	 * 商品sku编号
+	 */
+	private String goodsSkuCode;
+	/**
+	 * 销售属性
+	 */
+	private String saleProperties;
+	/**
+	 * 采购价格
 	 */
 	private Double purchasePrice;
 	/**
-	 * 商品sku的销售价格
+	 * 销售价格
 	 */
 	private Double salePrice;
 	/**
-	 * 商品sku的促销价格
+	 * 折扣价格
 	 */
 	private Double discountPrice;
 	/**
-	 * 商品sku的销售库存
+	 * 销售库存
 	 */
 	private Long saleStockQuantity;
 	/**
@@ -45,7 +73,7 @@ public class GoodsSkuVO extends AbstractObject {
 	 */
 	private Date gmtCreate;
 	/**
-	 * 修改时间
+	 * 修改文件
 	 */
 	private Date gmtModified;
 	/**
@@ -53,6 +81,12 @@ public class GoodsSkuVO extends AbstractObject {
 	 */
 	List<GoodsSkuSalePropertyValueVO> propertyValues;
 	
+	public String getSkuCode() {
+		return skuCode;
+	}
+	public void setSkuCode(String skuCode) {
+		this.skuCode = skuCode;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -65,11 +99,11 @@ public class GoodsSkuVO extends AbstractObject {
 	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
-	public String getSkuCode() {
-		return skuCode;
+	public String getGoodsSkuCode() {
+		return goodsSkuCode;
 	}
-	public void setSkuCode(String skuCode) {
-		this.skuCode = skuCode;
+	public void setGoodsSkuCode(String goodsSkuCode) {
+		this.goodsSkuCode = goodsSkuCode;
 	}
 	public Double getPurchasePrice() {
 		return purchasePrice;
@@ -101,17 +135,53 @@ public class GoodsSkuVO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public Long getSaleStockQuantity() {
-		return saleStockQuantity;
+	public String getGoodsName() {
+		return goodsName;
 	}
-	public void setSaleStockQuantity(Long saleStockQuantity) {
-		this.saleStockQuantity = saleStockQuantity;
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+	public Double getGrossWeight() {
+		return grossWeight;
+	}
+	public void setGrossWeight(Double grossWeight) {
+		this.grossWeight = grossWeight;
+	}
+	public Double getGoodsLength() {
+		return goodsLength;
+	}
+	public void setGoodsLength(Double goodsLength) {
+		this.goodsLength = goodsLength;
+	}
+	public Double getGoodsWidth() {
+		return goodsWidth;
+	}
+	public void setGoodsWidth(Double goodsWidth) {
+		this.goodsWidth = goodsWidth;
+	}
+	public Double getGoodsHeight() {
+		return goodsHeight;
+	}
+	public void setGoodsHeight(Double goodsHeight) {
+		this.goodsHeight = goodsHeight;
+	}
+	public String getSaleProperties() {
+		return saleProperties;
+	}
+	public void setSaleProperties(String saleProperties) {
+		this.saleProperties = saleProperties;
 	}
 	public List<GoodsSkuSalePropertyValueVO> getPropertyValues() {
 		return propertyValues;
 	}
 	public void setPropertyValues(List<GoodsSkuSalePropertyValueVO> propertyValues) {
 		this.propertyValues = propertyValues;
+	}
+	public Long getSaleStockQuantity() {
+		return saleStockQuantity;
+	}
+	public void setSaleStockQuantity(Long saleStockQuantity) {
+		this.saleStockQuantity = saleStockQuantity;
 	}
 	
 }

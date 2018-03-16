@@ -3,6 +3,7 @@ package com.zhss.eshop.commodity.service;
 import java.util.List;
 
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
+import com.zhss.eshop.commodity.domain.GoodsSkuQuery;
 
 /**
  * 商品sku管理service接口
@@ -31,5 +32,19 @@ public interface GoodsSkuService {
 	 * @param goodsId 商品id
 	 */
 	void removeByGoodsId(Long goodsId) throws Exception;
+
+	/**
+	 * 根据id查询商品sku
+	 * @param id 商品sku id
+	 * @return 商品sku
+	 */
+	GoodsSkuDTO getById(Long id) throws Exception;
+	
+	/**
+	 * 分页查询商品sku
+	 * @param query 查询条件
+	 * @return 商品sku
+	 */
+	List<GoodsSkuDTO> listByPage(GoodsSkuQuery query) throws Exception;
 	
 }

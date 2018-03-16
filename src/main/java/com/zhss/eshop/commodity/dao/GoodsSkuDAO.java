@@ -3,6 +3,7 @@ package com.zhss.eshop.commodity.dao;
 import java.util.List;
 
 import com.zhss.eshop.commodity.domain.GoodsSkuDO;
+import com.zhss.eshop.commodity.domain.GoodsSkuQuery;
 
 /**
  * 商品sku管理DAO接口
@@ -29,5 +30,19 @@ public interface GoodsSkuDAO {
 	 * @param goodsId 商品id
 	 */
 	void removeByGoodsId(Long goodsId);
+	
+	/**
+	 * 根据id查询商品sku
+	 * @param id 商品sku id
+	 * @return 商品sku
+	 */
+	GoodsSkuDO getById(Long id);
+	
+	/**
+	 * 分页查询商品sku
+	 * @param query 查询条件
+	 * @return 商品sku
+	 */
+	List<GoodsSkuDO> listByPage(GoodsSkuQuery query);
 	
 }

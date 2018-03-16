@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.commodity.dao.GoodsSkuDAO;
 import com.zhss.eshop.commodity.domain.GoodsSkuDO;
+import com.zhss.eshop.commodity.domain.GoodsSkuQuery;
 import com.zhss.eshop.commodity.mapper.GoodsSkuMapper;
 
 /**
@@ -47,6 +48,24 @@ public class GoodsSkuDAOImpl implements GoodsSkuDAO {
 	 */
 	public void removeByGoodsId(Long goodsId) {
 		goodsSkuMapper.removeByGoodsId(goodsId); 
+	}
+	
+	/**
+	 * 根据id查询商品sku
+	 * @param id 商品sku id
+	 * @return 商品sku
+	 */
+	public GoodsSkuDO getById(Long id) {
+		return goodsSkuMapper.getById(id);
+	}
+	
+	/**
+	 * 分页查询商品sku
+	 * @param query 查询条件
+	 * @return 商品sku
+	 */
+	public List<GoodsSkuDO> listByPage(GoodsSkuQuery query) {
+		return goodsSkuMapper.listByPage(query);
 	}
 	
 }
