@@ -9,7 +9,7 @@ import com.zhss.eshop.membership.domain.UserAccountDTO;
  * @author zhonghuashishan
  *
  */
-public interface MembershipFacadeService {
+public interface MembershipService {
 
 	/**
 	 * 通知会员中心，“用户今日第一次登录”事件发生了

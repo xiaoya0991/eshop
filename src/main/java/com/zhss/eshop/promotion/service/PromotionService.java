@@ -33,4 +33,12 @@ public interface PromotionService {
 	 */
 	List<CouponDTO> listValidByUserAccountId(Long userAccountId);
 	
+	/**
+	 * 使用优惠券
+	 * @param couponId 优惠券id
+	 * @param userAccountId 用户账号id
+	 * @return 处理结果
+	 */
+	Boolean useCoupon(Long couponId, Long userAccountId);
+	
 }
