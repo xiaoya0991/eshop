@@ -66,6 +66,8 @@ public abstract class AbstractScheduleStockUpdater implements ScheduleStockUpdat
 			updateGoodsAllocationAvailableStockQuantity();
 			updateGoodsAllocationLockedStockQuantity();
 			updateGoodsAllocationOutputStockQuantity();
+			updateGoodsAllocationDetailCurrentStockQuantity();
+			updateGoodsAllocationDetailLockedStockQuantity();
 			updateGmtModified();
 			executeUpdateStock();
 		} catch (Exception e) {
@@ -103,6 +105,16 @@ public abstract class AbstractScheduleStockUpdater implements ScheduleStockUpdat
 	 * 更新商品的已销售库存
 	 */
 	protected abstract void updateGoodsAllocationOutputStockQuantity() throws Exception;
+	
+	/**
+	 * 更新库存明细的锁定库存
+	 */
+	protected abstract void updateGoodsAllocationDetailLockedStockQuantity() throws Exception;
+	
+	/**
+	 * 更新库存明细的当前库存
+	 */
+	protected abstract void updateGoodsAllocationDetailCurrentStockQuantity() throws Exception;
 	
 	/**
 	 * 设置库存的修改时间

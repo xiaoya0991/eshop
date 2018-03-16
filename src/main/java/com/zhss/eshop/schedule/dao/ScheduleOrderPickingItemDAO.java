@@ -16,7 +16,7 @@ public interface ScheduleOrderPickingItemDAO {
 	 * 新增拣货条目
 	 * @param pickingItem 拣货条目
 	 */
-	void save(OrderItemDTO orderItem, 
-			List<SaleDeliveryOrderPickingItemDTO> saleDeliveryOrderPickingItems);
+	void batchSave(List<SaleDeliveryOrderPickingItemDTO> saleDeliveryOrderPickingItems,
+			OrderItemDTO orderItem) throws Exception;
 	
 }

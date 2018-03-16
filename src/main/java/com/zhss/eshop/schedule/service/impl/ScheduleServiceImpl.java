@@ -15,6 +15,8 @@ import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderItemDTO;
+import com.zhss.eshop.schedule.dao.ScheduleOrderPickingItemDAO;
+import com.zhss.eshop.schedule.dao.ScheduleOrderSendOutDetailDAO;
 import com.zhss.eshop.schedule.service.ScheduleService;
 import com.zhss.eshop.schedule.stock.PurchaseInputScheduleStockUpdaterFactory;
 import com.zhss.eshop.schedule.stock.ReturnGoodsInputScheduleStockUpdaterFactory;
@@ -69,6 +71,16 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	@Autowired
 	private SaleDeliveryScheduler saleDeliveryScheduler;
+	/**
+	 * 拣货条目管理DAO组件
+	 */
+	@Autowired
+	private ScheduleOrderPickingItemDAO pickingItemDAO;
+	/**
+	 * 发货明细管理DAO组件
+	 */
+	@Autowired
+	private ScheduleOrderSendOutDetailDAO sendOutDetailDAO;
 	
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
@@ -105,10 +117,15 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	public Boolean informSubmitOrderEvent(OrderInfoDTO order) {
 		try {
-			List<SaleDeliveryOrderItemDTO> saleDeliveryOrderItems = 
-					saleDeliveryScheduler.scheduleOrder(order);  
-			
-			
+			for(OrderItemDTO orderItem : order.getOrderItems()) {
+				SaleDeliveryOrderItemDTO saleDeliveryOrderItem = 
+						saleDeliveryScheduler.schedule(orderItem);
+				
+				pickingItemDAO.batchSave(saleDeliveryOrderItem.getPickingItems(), orderItem); 
+				sendOutDetailDAO.batchSave(saleDeliveryOrderItem.getSendOutItems(), orderItem);
+				
+				
+			}
 			
 			return true;
 		} catch (Exception e) {

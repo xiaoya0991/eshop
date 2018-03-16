@@ -38,7 +38,7 @@ public class ScheduleOrderPickingItemDO extends AbstractObject {
 	/**
 	 * 创建时间
 	 */
-	private Date gmtCretae;
+	private Date gmtCreate;
 	/**
 	 * 修改时间
 	 */
@@ -80,11 +80,11 @@ public class ScheduleOrderPickingItemDO extends AbstractObject {
 	public void setPickingCount(Long pickingCount) {
 		this.pickingCount = pickingCount;
 	}
-	public Date getGmtCretae() {
-		return gmtCretae;
+	public Date getGmtCreate() {
+		return gmtCreate;
 	}
-	public void setGmtCretae(Date gmtCretae) {
-		this.gmtCretae = gmtCretae;
+	public void setGmtCreate(Date gmtCreate) {
+		this.gmtCreate = gmtCreate;
 	}
 	public Date getGmtModified() {
 		return gmtModified;

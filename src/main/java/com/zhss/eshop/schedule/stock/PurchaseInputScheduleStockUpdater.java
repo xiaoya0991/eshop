@@ -88,5 +88,15 @@ public class PurchaseInputScheduleStockUpdater extends AbstractScheduleStockUpda
 	public void setPutOnItemMap(Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap) {
 		this.putOnItemMap = putOnItemMap;
 	}
+
+	@Override
+	protected void updateGoodsAllocationDetailLockedStockQuantity() throws Exception {
+		
+	}
+
+	@Override
+	protected void updateGoodsAllocationDetailCurrentStockQuantity() throws Exception {
+		
+	}
 	
 }
