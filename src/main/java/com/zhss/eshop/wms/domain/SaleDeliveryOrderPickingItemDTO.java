@@ -24,6 +24,10 @@ public class SaleDeliveryOrderPickingItemDTO extends AbstractObject {
 	 */
 	private Long goodsAllocationId;
 	/**
+	 * 商品sku id
+	 */
+	private Long goodsSkuId;
+	/**
 	 * 拣货数量
 	 */
 	private Long pickingCount;
@@ -72,66 +76,11 @@ public class SaleDeliveryOrderPickingItemDTO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
-		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
-		result = prime * result + ((goodsAllocationId == null) ? 0 : goodsAllocationId.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((pickingCount == null) ? 0 : pickingCount.hashCode());
-		result = prime * result + ((saleDeliveryOrderItemId == null) ? 0 : saleDeliveryOrderItemId.hashCode());
-		return result;
+	public Long getGoodsSkuId() {
+		return goodsSkuId;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SaleDeliveryOrderPickingItemDTO other = (SaleDeliveryOrderPickingItemDTO) obj;
-		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
-				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
-			return false;
-		if (gmtModified == null) {
-			if (other.gmtModified != null)
-				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
-			return false;
-		if (goodsAllocationId == null) {
-			if (other.goodsAllocationId != null)
-				return false;
-		} else if (!goodsAllocationId.equals(other.goodsAllocationId))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (pickingCount == null) {
-			if (other.pickingCount != null)
-				return false;
-		} else if (!pickingCount.equals(other.pickingCount))
-			return false;
-		if (saleDeliveryOrderItemId == null) {
-			if (other.saleDeliveryOrderItemId != null)
-				return false;
-		} else if (!saleDeliveryOrderItemId.equals(other.saleDeliveryOrderItemId))
-			return false;
-		return true;
-	}
-	
-	@Override
-	public String toString() {
-		return "SaleDeliveryOrderPickingItemDTO [id=" + id + ", saleDeliveryOrderItemId=" + saleDeliveryOrderItemId
-				+ ", goodsAllocationId=" + goodsAllocationId + ", pickingCount=" + pickingCount + ", gmtCreate="
-				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
+	public void setGoodsSkuId(Long goodsSkuId) {
+		this.goodsSkuId = goodsSkuId;
 	}
 	
 }
