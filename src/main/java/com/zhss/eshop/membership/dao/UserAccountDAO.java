@@ -1,5 +1,7 @@
 package com.zhss.eshop.membership.dao;
 
+import java.util.List;
+
 import com.zhss.eshop.membership.domain.UserAccountDO;
 
 /**
@@ -34,5 +36,11 @@ public interface UserAccountDAO {
 	 * @param userAccount 用户账号
 	 */
 	void updatePassword(UserAccountDO userAccount);
+	
+	/**
+	 * 查询所有用户账号
+	 * @return
+	 */
+	List<UserAccountDO> listAll();
 	
 }

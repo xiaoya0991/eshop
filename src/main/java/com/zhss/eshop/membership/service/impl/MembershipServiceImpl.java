@@ -8,7 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.common.util.ObjectUtils;
+import com.zhss.eshop.membership.dao.UserAccountDAO;
 import com.zhss.eshop.membership.domain.UserAccountDTO;
 import com.zhss.eshop.membership.service.MembershipService;
 
@@ -24,10 +25,25 @@ public class MembershipServiceImpl implements MembershipService {
 			MembershipServiceImpl.class);
 	
 	/**
-	 * 日期辅助组件
+	 * 用户账号DAO组件
 	 */
 	@Autowired
-	private DateProvider dateProvider;
+	private UserAccountDAO userAccountDAO;
+	/**
+	 * 每天第一次登录会员信息更新组件
+	 */
+	@Autowired
+	private FirstLoginMembershipUpdater firstLoginMembershipUpdater;
+	/**
+	 * 支付订单会员信息更新组件
+	 */
+	@Autowired
+	private PayOrderMembershipUpdater payOrderMembershipUpdater;
+	/**
+	 * 发表评论会员信息更新组件
+	 */
+	@Autowired
+	private PublishCommentMembershipUpdater publishCommentMembershipUpdater;
 	
 	/**
 	 * 通知会员中心，“用户今日第一次登录”事件发生了
@@ -35,7 +51,13 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @return 处理结果
 	 */
 	public Boolean informFirstLoginDailyEvent(Long userAccountId) {
-		return true;
+		try {
+			firstLoginMembershipUpdater.execute(userAccountId, null);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -45,7 +67,13 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @return 处理结果
 	 */
 	public Boolean informPayOrderEvent(Long userAccountId, Long totalOrderAmount) {
-		return true;
+		try {
+			payOrderMembershipUpdater.execute(userAccountId, totalOrderAmount);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -55,7 +83,13 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @return 处理结果
 	 */
 	public Boolean informFinishReturnGoodsEvent(Long userAccountId, Long totalOrderAmount) {
-		return true;
+		try {
+			payOrderMembershipUpdater.undo(userAccountId, totalOrderAmount);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -65,7 +99,13 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @return 处理结果
 	 */
 	public Boolean informPublishCommentEvent(Long userAccountId, Boolean showPictures) {
-		return true;
+		try {
+			publishCommentMembershipUpdater.execute(userAccountId, showPictures);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -75,7 +115,13 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @return 处理结果
 	 */
 	public Boolean informRemoveCommentEvent(Long userAccountId, Boolean showPictures) {
-		return true;
+		try {
+			publishCommentMembershipUpdater.undo(userAccountId, showPictures);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -83,23 +129,12 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @return
 	 */
 	public List<UserAccountDTO> listAllUserAccounts() {
-		List<UserAccountDTO> userAccounts = new ArrayList<UserAccountDTO>(); 
-		
 		try {
-			UserAccountDTO userAccount = new UserAccountDTO();
-			userAccount.setUsername("zhangsan"); 
-			userAccount.setPassword("12345678");  
-			userAccount.setEmail("zhangsan@sian.com");  
-			userAccount.setCellPhoneNumber("18967543209");  
-			userAccount.setGmtCreate(dateProvider.getCurrentTime()); 
-			userAccount.setGmtModified(dateProvider.getCurrentTime()); 
-
-			userAccounts.add(userAccount);
-		} catch (Exception e) {
+			return ObjectUtils.convertList(userAccountDAO.listAll(), UserAccountDTO.class);
+		} catch (Exception e) { 
 			logger.error("error", e); 
+			return new ArrayList<UserAccountDTO>(); 
 		}
-		
-		return userAccounts;
 	}
 
 }

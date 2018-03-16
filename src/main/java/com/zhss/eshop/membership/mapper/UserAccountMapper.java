@@ -1,5 +1,7 @@
 package com.zhss.eshop.membership.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -108,6 +110,27 @@ public interface UserAccountMapper {
 		@Result(column = "gmt_modified", property = "gmtModified")
 	})
 	UserAccountDO getById(@Param("id") Long id);
+	
+	/**
+	 * 查询所有用户账号
+	 */
+	@Select("SELECT "
+				+ "id,"
+				+ "username,"
+				+ "email,"
+				+ "cell_phone_number,"
+				+ "gmt_create,"
+				+ "gmt_modified "
+			+ "FROM membership_user_account")    
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "username", property = "username"),
+		@Result(column = "email", property = "email"),
+		@Result(column = "cell_phone_number", property = "cellPhoneNumber"),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "gmt_modified", property = "gmtModified")
+	}) 
+	List<UserAccountDO> listAll();
 	
 	/**
 	 * 更新密码

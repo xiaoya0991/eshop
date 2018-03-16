@@ -17,6 +17,12 @@ public interface MemberPointDetailDAO {
 	 * @param query 查询调价你
 	 * @return 会员积分变更明细
 	 */
-	List<MemberPointDetailDO> listByPage(MemberPointDetailQuery query);
+	List<MemberPointDetailDO> listByPage(MemberPointDetailQuery query) throws Exception;
+	
+	/**
+	 * 新增会员积分明细
+	 * @param memberPointDetail 会员积分明细
+	 */
+	void save(MemberPointDetailDO memberPointDetail) throws Exception;
 	
 }

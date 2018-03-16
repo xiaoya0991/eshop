@@ -1,5 +1,7 @@
 package com.zhss.eshop.membership.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -54,6 +56,14 @@ public class UserAccountDAOImpl implements UserAccountDAO {
 	 */
 	public void updatePassword(UserAccountDO userAccount) {
 		userAccountMapper.updatePassword(userAccount); 
+	}
+	
+	/**
+	 * 查询所有用户账号
+	 * @return
+	 */
+	public List<UserAccountDO> listAll() {
+		return userAccountMapper.listAll();
 	}
 	
 }

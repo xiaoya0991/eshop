@@ -2,7 +2,9 @@ package com.zhss.eshop.membership.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -51,5 +53,29 @@ public interface MemberPointDetailMapper {
 		@Result(column = "gmt_modified", property = "gmtModified")
 	})
 	List<MemberPointDetailDO> listByPage(MemberPointDetailQuery query);
+	
+	/**
+	 * 新增会员积分明细
+	 * @param memberPointDetail 会员积分明细
+	 */
+	@Insert("INSERT INTO membership_member_point_detail("
+				+ "user_account_id,"
+				+ "old_member_point,"
+				+ "updated_member_point,"
+				+ "new_member_point,"
+				+ "update_reason,"
+				+ "gmt_create,"
+				+ "gmt_modified"
+			+ ") VALUES("
+				+ "#{userAccountId},"
+				+ "#{oldMemberPoint},"
+				+ "#{updatedMemberPoint},"
+				+ "#{newMemberPoint},"
+				+ "#{updateReason},"
+				+ "#{gmtCreate},"
+				+ "#{gmtModified}"
+			+ ")") 
+	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true)
+	void save(MemberPointDetailDO memberPointDetail);
 	
 }

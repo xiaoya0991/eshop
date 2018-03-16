@@ -2,7 +2,9 @@ package com.zhss.eshop.membership.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -54,5 +56,33 @@ public interface MemberLevelDetailMapper {
 		@Result(column = "gmt_modified", property = "gmtModified")
 	})
 	List<MemberLevelDetailDO> listByPage(MemberLevelDetailQuery query);
+	
+	/**
+	 * 新增会员等级明细
+	 * @param memberLevelDetail 会员等级明细
+	 */
+	@Insert("INSERT INTO membership_member_level_detail("
+				+ "user_account_id,"
+				+ "old_growth_value,"
+				+ "updated_growth_value,"
+				+ "new_growth_value,"
+				+ "old_member_level,"
+				+ "new_member_level,"
+				+ "update_reason,"
+				+ "gmt_create,"
+				+ "gmt_modified"
+			+ ") VALUES("
+				+ "#{userAccountId},"
+				+ "#{oldGrowthValue},"
+				+ "#{updatedGrowthValue},"
+				+ "#{newGrowthValue},"
+				+ "#{oldMemberLevel},"
+				+ "#{newMemberLevel},"
+				+ "#{updateReason},"
+				+ "#{gmtCreate},"
+				+ "#{gmtModified}"
+			+ ")") 
+	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true)
+	void save(MemberLevelDetailDO memberLevelDetail);
 	
 }
