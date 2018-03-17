@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.schedule.dao.ScheduleGoodsAllocationStockDetailDAO;
 import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDetailDO;
 import com.zhss.eshop.schedule.mapper.ScheduleGoodsAllocationStockDetailMapper;
@@ -23,6 +24,11 @@ public class ScheduleGoodsAllocationStockDetailDAOImpl
 	 */
 	@Autowired
 	private ScheduleGoodsAllocationStockDetailMapper stockDetailMapper;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 根据商品sku id查询货位库存明细
@@ -49,7 +55,19 @@ public class ScheduleGoodsAllocationStockDetailDAOImpl
 	 * @throws Exception
 	 */
 	public void update(ScheduleGoodsAllocationStockDetailDO stockDetail) throws Exception {
+		stockDetail.setGmtModified(dateProvider.getCurrentTime()); 
 		stockDetailMapper.update(stockDetail); 
+	}
+	
+	/**
+	 * 新增货位库存明细
+	 * @param stockDetail 货位库存明细
+	 * @throws Exception
+	 */
+	public void save(ScheduleGoodsAllocationStockDetailDO stockDetail) throws Exception {
+		stockDetail.setGmtCreate(dateProvider.getCurrentTime()); 
+		stockDetail.setGmtModified(dateProvider.getCurrentTime());
+		stockDetailMapper.save(stockDetail); 
 	}
 	
 }

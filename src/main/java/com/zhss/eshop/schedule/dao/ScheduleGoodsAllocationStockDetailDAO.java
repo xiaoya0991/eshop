@@ -33,4 +33,11 @@ public interface ScheduleGoodsAllocationStockDetailDAO {
 	 */
 	void update(ScheduleGoodsAllocationStockDetailDO stockDetail) throws Exception;
 	
+	/**
+	 * 新增货位库存明细
+	 * @param stockDetail 货位库存明细
+	 * @throws Exception
+	 */
+	void save(ScheduleGoodsAllocationStockDetailDO stockDetail) throws Exception;
+	
 }

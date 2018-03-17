@@ -2,6 +2,7 @@ package com.zhss.eshop.schedule.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
@@ -92,5 +93,32 @@ public interface ScheduleGoodsAllocationStockDetailMapper {
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}")  
 	void update(ScheduleGoodsAllocationStockDetailDO stockDetail);
+	
+	/**
+	 * 新增货位库存明细
+	 * @param stockDetail 货位库存明细
+	 */
+	@Insert("INSERT INTO schedule_goods_allocation_stock_detail("
+				+ "id,"
+				+ "goods_sku_id,"
+				+ "goods_allocation_id,"
+				+ "put_on_time,"
+				+ "put_on_quantity,"
+				+ "current_stock_quantity,"
+				+ "locked_stock_quantity,"
+				+ "gmt_create,"
+				+ "gmt_modified"
+			+ ") VALUES("
+				+ "#{id}," 
+				+ "#{goodsSkuId},"
+				+ "#{goodsAllocationId},"
+				+ "#{putOnTime},"
+				+ "#{putOnQuantity},"
+				+ "#{currentStockQuantity},"
+				+ "#{lockedStockQuantity},"
+				+ "#{gmtCreate},"
+				+ "#{gmtModified}"
+			+ ")")
+	void save(ScheduleGoodsAllocationStockDetailDO stockDetail);
 	
 }

@@ -30,14 +30,17 @@ public class ScheduleStockUpdaterFactory {
 		
 		if(StockUpdateEvent.SUBMIT_ORDER.equals(stockUpdateEvent)) {
 			stockUpdater = context.getBean(SubmitOrderScheduleStockUpdater.class);
-			stockUpdater.setParameter(parameter);  
 		} else if(StockUpdateEvent.CANCEL_ORDER.equals(stockUpdateEvent)) {
 			stockUpdater = context.getBean(CancelOrderScheduleStockUpdater.class);
-			stockUpdater.setParameter(parameter);  
 		} else if(StockUpdateEvent.PAY_ORDER.equals(stockUpdateEvent)) {
 			stockUpdater = context.getBean(PayOrderScheduleStockUpdater.class);
-			stockUpdater.setParameter(parameter);  
+		} else if(StockUpdateEvent.PURCHASE_INPUT.equals(stockUpdateEvent)) {
+			stockUpdater = context.getBean(PurchaseInputScheduleStockUpdater.class);
+		} else if(StockUpdateEvent.RETURN_GOODS_INPUT.equals(stockUpdateEvent)) {
+			stockUpdater = context.getBean(ReturnGoodsInputScheduleStockUpdater.class);
 		}
+		
+		stockUpdater.setParameter(parameter); 
 		
 		return stockUpdater;
 	}

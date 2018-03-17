@@ -20,10 +20,6 @@ import com.zhss.eshop.schedule.constant.StockUpdateEvent;
 import com.zhss.eshop.schedule.dao.ScheduleOrderPickingItemDAO;
 import com.zhss.eshop.schedule.dao.ScheduleOrderSendOutDetailDAO;
 import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
-import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDO;
-import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDTO;
-import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDO;
-import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDTO;
 import com.zhss.eshop.schedule.service.SaleDeliveryOrderBuilder;
 import com.zhss.eshop.schedule.service.SaleDeliveryScheduler;
 import com.zhss.eshop.schedule.service.ScheduleService;
@@ -34,7 +30,6 @@ import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
-import com.zhss.eshop.wms.domain.SaleDeliveryOrderItemDTO;
 import com.zhss.eshop.wms.service.WmsService;
 
 /**
@@ -90,9 +85,19 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @return 处理结果
 	 */
 	public Boolean informPurchaseInputFinished(
-			PurchaseInputOrderDTO purchaseInputOrderDTO) {
-		inventoryService.informPurchaseInputFinished(purchaseInputOrderDTO);
-		return true;
+			PurchaseInputOrderDTO purchaseInputOrder) {
+		try {
+			ScheduleStockUpdater stockUpdater = stockUpdaterFactory.create(
+					StockUpdateEvent.PURCHASE_INPUT, purchaseInputOrder);
+			stockUpdater.update();
+			
+			inventoryService.informPurchaseInputFinished(purchaseInputOrder);
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -101,9 +106,19 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @return 处理结果
 	 */
 	public Boolean informReturnGoodsInputFinished(
-			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO) {
-		inventoryService.informReturnGoodsInputFinished(returnGoodsInputOrderDTO);
-		return true;
+			ReturnGoodsInputOrderDTO returnGoodsInputOrder) {
+		try {
+			ScheduleStockUpdater stockUpdater = stockUpdaterFactory.create(
+					StockUpdateEvent.RETURN_GOODS_INPUT, returnGoodsInputOrder);
+			stockUpdater.update();
+			
+			inventoryService.informReturnGoodsInputFinished(returnGoodsInputOrder);
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
