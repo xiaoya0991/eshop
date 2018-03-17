@@ -34,11 +34,10 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @return 处理结果
 	 */
 	public Boolean createReturnGoodsWorksheet(Long orderId, String orderNo, 
-			String returnGoodsReason, String returnGoodsRemark) {
+			Integer returnGoodsReason, String returnGoodsRemark) {
 		ReturnGoodsWorksheetDO worksheet = new ReturnGoodsWorksheetDO();
 		worksheet.setOrderId(orderId); 
 		worksheet.setOrderNo(orderNo); 
-		worksheet.setReturnGoodsReason(returnGoodsReason); 
 		
 		return true;
 	}
