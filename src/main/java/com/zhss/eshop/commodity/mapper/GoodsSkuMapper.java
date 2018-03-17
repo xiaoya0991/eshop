@@ -101,7 +101,7 @@ public interface GoodsSkuMapper {
 				+ "a.gmt_modified "
 			+ "FROM commodity_goods_sku a,"
 			+ "("
-				+ "SELECT id "
+				+ "SELECT cgs.id "
 				+ "FROM commodity_goods_sku cgs "
 				+ "JOIN commodity_goods cg ON cgs.goods_id=cg.id "
 				+ "WHERE 1=1 "

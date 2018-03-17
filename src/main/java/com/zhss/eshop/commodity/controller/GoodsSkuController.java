@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
+import com.zhss.eshop.commodity.domain.GoodsSkuQuery;
 import com.zhss.eshop.commodity.domain.GoodsSkuVO;
 import com.zhss.eshop.commodity.service.GoodsSkuService;
 import com.zhss.eshop.common.util.CloneDirection;
@@ -83,6 +84,22 @@ public class GoodsSkuController {
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;
+		}
+	}
+	
+	/**
+	 * 分页查询商品sku
+	 * @param query
+	 * @return
+	 */
+	@GetMapping("/")  
+	public List<GoodsSkuVO> listByPage(GoodsSkuQuery query) {
+		try {
+			return ObjectUtils.convertList(goodsSkuService.listByPage(query), 
+					GoodsSkuVO.class);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return new ArrayList<GoodsSkuVO>();
 		}
 	}
 	
