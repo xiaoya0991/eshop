@@ -9,7 +9,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class ReturnGoodsWorksheetDTO extends AbstractObject {
+public class ReturnGoodsWorksheetDO extends AbstractObject {
 
 	/**
 	 * id

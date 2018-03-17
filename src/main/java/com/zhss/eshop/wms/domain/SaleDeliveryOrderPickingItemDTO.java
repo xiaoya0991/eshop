@@ -24,6 +24,10 @@ public class SaleDeliveryOrderPickingItemDTO extends AbstractObject {
 	 */
 	private Long goodsAllocationId;
 	/**
+	 * 商品sku id
+	 */
+	private Long goodsSkuId;
+	/**
 	 * 拣货数量
 	 */
 	private Long pickingCount;
@@ -71,6 +75,12 @@ public class SaleDeliveryOrderPickingItemDTO extends AbstractObject {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public Long getGoodsSkuId() {
+		return goodsSkuId;
+	}
+	public void setGoodsSkuId(Long goodsSkuId) {
+		this.goodsSkuId = goodsSkuId;
 	}
 	
 }
