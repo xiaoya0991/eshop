@@ -30,7 +30,7 @@ public class ReturnGoodsWorksheetDO extends AbstractObject {
 	/**
 	 * 退货原因
 	 */
-	private String returnGoodsReason;
+	private Integer returnGoodsReason;
 	/**
 	 * 退货备注
 	 */
@@ -72,10 +72,10 @@ public class ReturnGoodsWorksheetDO extends AbstractObject {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public String getReturnGoodsReason() {
+	public Integer getReturnGoodsReason() {
 		return returnGoodsReason;
 	}
-	public void setReturnGoodsReason(String returnGoodsReason) {
+	public void setReturnGoodsReason(Integer returnGoodsReason) {
 		this.returnGoodsReason = returnGoodsReason;
 	}
 	public String getReturnGoodsRemark() {
