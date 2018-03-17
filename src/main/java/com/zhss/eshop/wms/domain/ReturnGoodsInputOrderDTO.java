@@ -102,6 +102,10 @@ public class ReturnGoodsInputOrderDTO {
 	 * 退货入库单条目DTO集合
 	 */
 	private List<ReturnGoodsInputOrderItemDTO> items;
+	/**
+	 * 退货入库单上架条目
+	 */
+	private List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems;
 	
 	public Long getId() {
 		return id;
@@ -240,6 +244,12 @@ public class ReturnGoodsInputOrderDTO {
 	}
 	public void setItems(List<ReturnGoodsInputOrderItemDTO> items) {
 		this.items = items;
+	}
+	public List<ReturnGoodsInputOrderPutOnItemDTO> getPutOnItems() {
+		return putOnItems;
+	}
+	public void setPutOnItems(List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems) {
+		this.putOnItems = putOnItems;
 	}
 	
 }
