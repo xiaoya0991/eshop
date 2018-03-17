@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.common.util.ObjectUtils;
-import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDO;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
@@ -259,8 +258,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 			returnGoodsInputOrder.setOrderId(order.getId());
 			returnGoodsInputOrder.setReturnGoodsReason(
 					returnGoodsWorksheet.getReturnGoodsReason()); 
-			returnGoodsInputOrder.setReturnGoodsComment(
-					returnGoodsWorksheet.getReturnGoodsComment()); 
+			returnGoodsInputOrder.setReturnGoodsRemark(
+					returnGoodsWorksheet.getReturnGoodsRemark()); 
 			
 			List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItems = ObjectUtils.convertList(
 					order.getOrderItems(), ReturnGoodsInputOrderItemDTO.class);
