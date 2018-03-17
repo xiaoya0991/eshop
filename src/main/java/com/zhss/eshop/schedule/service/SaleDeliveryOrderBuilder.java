@@ -1,4 +1,4 @@
-package com.zhss.eshop.schedule.service.impl;
+package com.zhss.eshop.schedule.service;
 
 import java.util.List;
 

@@ -19,90 +19,29 @@ import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDTO;
  */
 public class ReturnGoodsInputScheduleStockUpdater extends AbstractScheduleStockUpdater {
 
-	/**
-	 * 采购入库单条目
-	 */
-	private Map<Long, PurchaseInputOrderItemDTO> itemMap;
-	/**
-	 * 采购入库单上架条目
-	 */
-	private Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap;
+	public void setParameter(Object parameter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void updateGoodsStock() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void updateGoodsAllocationStock() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void updateGoodsAllocationStockDetail() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
-	public ReturnGoodsInputScheduleStockUpdater(
-			List<ScheduleGoodsStockDO> goodsStocks, 
-			List<ScheduleGoodsAllocationStockDO> goodsAllocationStocks,
-			ScheduleGoodsStockDAO goodsStockDAO,
-			ScheduleGoodsAllocationStockDAO goodsAllocationStockDAO,
-			DateProvider dateProvider) {
-		super(goodsStocks, goodsAllocationStocks, 
-				goodsStockDAO, goodsAllocationStockDAO, dateProvider);
-	}
-
-	@Override
-	protected void updateGoodsAvailableStockQuantity() throws Exception {
-		for(ScheduleGoodsStockDO goodsStock : goodsStocks) {
-			PurchaseInputOrderItemDTO item = itemMap.get(goodsStock.getGoodsSkuId());
-			goodsStock.setAvailableStockQuantity(goodsStock.getAvailableStockQuantity()
-					+ item.getArrivalCount()); 
-		}
-	}
-
-	@Override
-	protected void updateGoodsLockedStockQuantity() throws Exception {
-		
-	}
-
-	@Override
-	protected void updateGoodsOutputStockQuantity() throws Exception {
-		for(ScheduleGoodsStockDO goodsStock : goodsStocks) {
-			PurchaseInputOrderItemDTO item = itemMap.get(goodsStock.getGoodsSkuId());
-			goodsStock.setOutputStockQuantity(goodsStock.getOutputStockQuantity()
-					- item.getArrivalCount());  
-		}
-	}
-
-	@Override
-	protected void updateGoodsAllocationAvailableStockQuantity() throws Exception {
-		for(ScheduleGoodsAllocationStockDO goodsAllocationStock : goodsAllocationStocks) {
-			PurchaseInputOrderPutOnItemDTO putOnItem = putOnItemMap.get(new GoodsAllocationStockId(
-					goodsAllocationStock.getGoodsAllocationId(),
-					goodsAllocationStock.getGoodsSkuId()));
-			goodsAllocationStock.setAvailableStockQuantity(goodsAllocationStock.getAvailableStockQuantity()
-					+ putOnItem.getPutOnShelvesCount()); 
-		}
-	}
-
-	@Override
-	protected void updateGoodsAllocationLockedStockQuantity() throws Exception {
-		
-	}
-
-	@Override
-	protected void updateGoodsAllocationOutputStockQuantity() throws Exception {
-		for(ScheduleGoodsAllocationStockDO goodsAllocationStock : goodsAllocationStocks) {
-			PurchaseInputOrderPutOnItemDTO putOnItem = putOnItemMap.get(new GoodsAllocationStockId(
-					goodsAllocationStock.getGoodsAllocationId(),
-					goodsAllocationStock.getGoodsSkuId()));
-			goodsAllocationStock.setOutputStockQuantity(goodsAllocationStock.getOutputStockQuantity()
-					- putOnItem.getPutOnShelvesCount()); 
-		}
-	}
-
-	public void setItemMap(Map<Long, PurchaseInputOrderItemDTO> itemMap) {
-		this.itemMap = itemMap;
-	}
-	public void setPutOnItemMap(Map<GoodsAllocationStockId, PurchaseInputOrderPutOnItemDTO> putOnItemMap) {
-		this.putOnItemMap = putOnItemMap;
-	}
-
-	@Override
-	protected void updateGoodsAllocationDetailLockedStockQuantity() throws Exception {
-		
-	}
-
-	@Override
-	protected void updateGoodsAllocationDetailCurrentStockQuantity() throws Exception {
-		
-	}
 	
 }

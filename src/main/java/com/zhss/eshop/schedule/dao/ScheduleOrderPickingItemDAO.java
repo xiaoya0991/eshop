@@ -3,7 +3,8 @@ package com.zhss.eshop.schedule.dao;
 import java.util.List;
 
 import com.zhss.eshop.order.domain.OrderItemDTO;
-import com.zhss.eshop.wms.domain.SaleDeliveryOrderPickingItemDTO;
+import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDO;
+import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDTO;
 
 /**
  * 拣货条目管理DAO接口
@@ -13,10 +14,28 @@ import com.zhss.eshop.wms.domain.SaleDeliveryOrderPickingItemDTO;
 public interface ScheduleOrderPickingItemDAO {
 
 	/**
-	 * 新增拣货条目
-	 * @param pickingItem 拣货条目
+	 * 批量插入拣货条目
+	 * @param orderItem 订单条目 
+	 * @param pickingItems 拣货条目
+	 * @throws Exception
 	 */
-	void batchSave(List<SaleDeliveryOrderPickingItemDTO> saleDeliveryOrderPickingItems,
-			OrderItemDTO orderItem) throws Exception;
+	void batchSave(OrderItemDTO orderItem, 
+			List<ScheduleOrderPickingItemDTO> pickingItems) throws Exception;
+	
+	/**
+	 * 根据订单id和订单条目id查询拣货条目
+	 * @param orderInfoId 订单id
+	 * @param orderItemId 订单条目id
+	 * @return
+	 */
+	List<ScheduleOrderPickingItemDO> listByOrderItemId(
+			Long orderInfoId, Long orderItemId) throws Exception;
+	
+	/**
+	 * 根据订单条目id删除拣货条目
+	 * @param orderInfoId 订单id
+	 * @param orderItemId 订单条目id
+	 */
+	void removeByOrderItemId(Long orderInfoId, Long orderItemId) throws Exception;
 	
 }

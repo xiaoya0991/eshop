@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.common.util.ObjectUtils;
@@ -15,12 +16,19 @@ import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderItemDTO;
+import com.zhss.eshop.schedule.constant.StockUpdateEvent;
 import com.zhss.eshop.schedule.dao.ScheduleOrderPickingItemDAO;
 import com.zhss.eshop.schedule.dao.ScheduleOrderSendOutDetailDAO;
+import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
+import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDO;
+import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDTO;
+import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDO;
+import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDTO;
+import com.zhss.eshop.schedule.service.SaleDeliveryOrderBuilder;
+import com.zhss.eshop.schedule.service.SaleDeliveryScheduler;
 import com.zhss.eshop.schedule.service.ScheduleService;
-import com.zhss.eshop.schedule.stock.PurchaseInputScheduleStockUpdaterFactory;
-import com.zhss.eshop.schedule.stock.ReturnGoodsInputScheduleStockUpdaterFactory;
 import com.zhss.eshop.schedule.stock.ScheduleStockUpdater;
+import com.zhss.eshop.schedule.stock.ScheduleStockUpdaterFactory;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -35,6 +43,7 @@ import com.zhss.eshop.wms.service.WmsService;
  *
  */
 @Service
+@Transactional
 public class ScheduleServiceImpl implements ScheduleService {
 
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleServiceImpl.class);
@@ -49,18 +58,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	@Autowired
 	private SaleDeliveryOrderBuilderFactory saleDeliveryOrderBuilderFactory;
-	/**
-	 * 采购入库库存更新组件工厂
-	 */
-	@Autowired
-	private PurchaseInputScheduleStockUpdaterFactory<PurchaseInputOrderDTO> 
-			purchaseInputStockUpdaterFactory;
-	/**
-	 * 退货入库库存更新组件工厂
-	 */
-	@Autowired
-	private ReturnGoodsInputScheduleStockUpdaterFactory<ReturnGoodsInputOrderDTO> 
-			returnGoodsInputStockUpdaterFactory;
 	/**
 	 * 库存中心
 	 */
@@ -81,6 +78,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	@Autowired
 	private ScheduleOrderSendOutDetailDAO sendOutDetailDAO;
+	/**
+	 * 库存更新组件工厂
+	 */
+	@Autowired
+	private ScheduleStockUpdaterFactory stockUpdaterFactory;
 	
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
@@ -89,9 +91,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	public Boolean informPurchaseInputFinished(
 			PurchaseInputOrderDTO purchaseInputOrderDTO) {
-		ScheduleStockUpdater stockUpdater = purchaseInputStockUpdaterFactory
-				.create(purchaseInputOrderDTO);
-		stockUpdater.update();
 		inventoryService.informPurchaseInputFinished(purchaseInputOrderDTO);
 		return true;
 	}
@@ -103,9 +102,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	public Boolean informReturnGoodsInputFinished(
 			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO) {
-		ScheduleStockUpdater stockUpdater = returnGoodsInputStockUpdaterFactory
-				.create(returnGoodsInputOrderDTO);
-		stockUpdater.update();
 		inventoryService.informReturnGoodsInputFinished(returnGoodsInputOrderDTO);
 		return true;
 	}
@@ -118,14 +114,18 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public Boolean informSubmitOrderEvent(OrderInfoDTO order) {
 		try {
 			for(OrderItemDTO orderItem : order.getOrderItems()) {
-				SaleDeliveryOrderItemDTO saleDeliveryOrderItem = 
+				SaleDeliveryScheduleResult scheduleResult = 
 						saleDeliveryScheduler.schedule(orderItem);
 				
-				pickingItemDAO.batchSave(saleDeliveryOrderItem.getPickingItems(), orderItem); 
-				sendOutDetailDAO.batchSave(saleDeliveryOrderItem.getSendOutItems(), orderItem);
+				pickingItemDAO.batchSave(orderItem, scheduleResult.getPickingItems()); 
+				sendOutDetailDAO.batchSave(orderItem, scheduleResult.getSendOutDetails());
 				
-				
+				ScheduleStockUpdater stockUpdater = stockUpdaterFactory.create(
+						StockUpdateEvent.SUBMIT_ORDER, scheduleResult);
+				stockUpdater.update();
 			}
+
+			wmsService.informSubmitOrderEvent(order);
 			
 			return true;
 		} catch (Exception e) {
@@ -135,21 +135,56 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 	
 	/**
-	 * 通知库存中心，“支付订单”事件发生了
-	 * @param orderDTO 订单DTO
-	 * @return 处理结果
-	 */
-	public Boolean informPayOrderEvent(OrderInfoDTO orderDTO) {
-		return true;
-	}
-	
-	/**
 	 * 通知库存中心，“取消订单”事件发生了
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	public Boolean informCancelOrderEvent(OrderInfoDTO orderDTO) {
-		return true;
+	public Boolean informCancelOrderEvent(OrderInfoDTO order) {
+		try {
+			for(OrderItemDTO orderItem : order.getOrderItems()) {
+				SaleDeliveryScheduleResult scheduleResult = saleDeliveryScheduler
+						.getScheduleResult(orderItem);
+				
+				ScheduleStockUpdater stockUpdater = stockUpdaterFactory.create(
+						StockUpdateEvent.CANCEL_ORDER, scheduleResult);
+				stockUpdater.update();
+				
+				pickingItemDAO.removeByOrderItemId(orderItem.getOrderInfoId(), orderItem.getId()); 
+				sendOutDetailDAO.removeByOrderItemId(orderItem.getOrderInfoId(), orderItem.getId()); 
+			}
+			
+			wmsService.informCancelOrderEvent(order);
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 通知库存中心，“支付订单”事件发生了
+	 * @param orderDTO 订单DTO
+	 * @return 处理结果
+	 */
+	public Boolean informPayOrderEvent(OrderInfoDTO order) {
+		try {
+			for(OrderItemDTO orderItem : order.getOrderItems()) {
+				SaleDeliveryScheduleResult scheduleResult = saleDeliveryScheduler
+						.getScheduleResult(orderItem);
+				
+				ScheduleStockUpdater stockUpdater = stockUpdaterFactory.create(
+						StockUpdateEvent.PAY_ORDER, scheduleResult);
+				stockUpdater.update();
+			}
+			
+			wmsService.informPayOrderEvent(order);
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**

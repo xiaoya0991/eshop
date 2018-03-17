@@ -19,14 +19,14 @@ import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDTO;
 import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDTO;
 
 /**
- * 提交订单库存更新组件
+ * 支付订单库存更新组件
  * @author zhonghuashishan
  *
  */
 @Component
 @Scope("prototype")  
 @Transactional
-public class SubmitOrderScheduleStockUpdater extends AbstractScheduleStockUpdater { 
+public class PayOrderScheduleStockUpdater extends AbstractScheduleStockUpdater { 
 
 	/**
 	 * 商品库存管理的DAO组件
@@ -56,10 +56,10 @@ public class SubmitOrderScheduleStockUpdater extends AbstractScheduleStockUpdate
 	protected void updateGoodsStock() throws Exception {
 		OrderItemDTO orderItem = scheduleResult.getOrderItem();
 		ScheduleGoodsStockDO goodsStock = goodsStockDAO.getBySkuId(orderItem.getGoodsSkuId());
-		goodsStock.setAvailableStockQuantity(goodsStock.getAvailableStockQuantity() 
-				- orderItem.getPurchaseQuantity());  
-		goodsStock.setLockedStockQuantity(goodsStock.getLockedStockQuantity() + 
-				orderItem.getPurchaseQuantity()); 
+		goodsStock.setLockedStockQuantity(goodsStock.getLockedStockQuantity()  
+				- orderItem.getPurchaseQuantity()); 
+		goodsStock.setOutputStockQuantity(goodsStock.getOutputStockQuantity()
+				+ orderItem.getPurchaseQuantity()); 
 		goodsStockDAO.update(goodsStock); 
 	}
 	
@@ -71,11 +71,11 @@ public class SubmitOrderScheduleStockUpdater extends AbstractScheduleStockUpdate
 		List<ScheduleOrderPickingItemDTO> pickingItems = scheduleResult.getPickingItems();
 		for(ScheduleOrderPickingItemDTO pickingItem : pickingItems) {
 			ScheduleGoodsAllocationStockDO goodsAllocationStock = goodsAllocationStockDAO.getBySkuId(
-					pickingItem.getGoodsAllocationId(), pickingItem.getGoodsSkuId());  
-			goodsAllocationStock.setAvailableStockQuantity(goodsAllocationStock.getAvailableStockQuantity() 
-					- pickingItem.getPickingCount()); 
+					pickingItem.getGoodsAllocationId(), pickingItem.getGoodsSkuId());   
 			goodsAllocationStock.setLockedStockQuantity(goodsAllocationStock.getLockedStockQuantity()
-					+ pickingItem.getPickingCount()); 
+					- pickingItem.getPickingCount()); 
+			goodsAllocationStock.setOutputStockQuantity(goodsAllocationStock.getOutputStockQuantity()
+					+ pickingItem.getPickingCount());  
 			goodsAllocationStockDAO.update(goodsAllocationStock); 
 		}
 	}
@@ -89,11 +89,14 @@ public class SubmitOrderScheduleStockUpdater extends AbstractScheduleStockUpdate
 		for(ScheduleOrderSendOutDetailDTO sendOutDetail : sendOutDetails) {
 			ScheduleGoodsAllocationStockDetailDO stockDetail = stockDetailDAO.getById(
 					sendOutDetail.getGoodsAllocationStockDetailId());
-			stockDetail.setCurrentStockQuantity(stockDetail.getCurrentStockQuantity() 
-					- sendOutDetail.getSendOutCount());
 			stockDetail.setLockedStockQuantity(stockDetail.getLockedStockQuantity()
-					+ sendOutDetail.getSendOutCount());
+					- sendOutDetail.getSendOutCount());
 			stockDetailDAO.update(stockDetail); 
+			
+			// 上架数量
+			// 当前数量
+			// 锁定数量
+			// 上架数量 - 当前数量 - 锁定数量 = 这个库存明细已经被发掉的库存数量
 		}
 	}
 	

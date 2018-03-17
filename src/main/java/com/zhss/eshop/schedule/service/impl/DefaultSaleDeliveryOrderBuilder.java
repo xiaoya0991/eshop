@@ -8,13 +8,19 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.logistics.service.LogisticsService;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
+import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
+import com.zhss.eshop.schedule.service.SaleDeliveryOrderBuilder;
+import com.zhss.eshop.schedule.service.SaleDeliveryScheduler;
 import com.zhss.eshop.wms.constant.SaleDeliveryOrderStatus;
 import com.zhss.eshop.wms.domain.LogisticOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderItemDTO;
+import com.zhss.eshop.wms.domain.SaleDeliveryOrderPickingItemDTO;
+import com.zhss.eshop.wms.domain.SaleDeliveryOrderSendOutDetailDTO;
 import com.zhss.eshop.wms.domain.SendOutOrderDTO;
 import com.zhss.eshop.wms.domain.SendOutOrderItemDTO;
 
@@ -69,13 +75,20 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 			List<OrderItemDTO> orderItems) throws Exception {
 		List<SaleDeliveryOrderItemDTO> saleDeliveryOrderItems = 
 				new ArrayList<SaleDeliveryOrderItemDTO>();
-	
+		
 		for(OrderItemDTO orderItem : orderItems) {
+			SaleDeliveryScheduleResult scheduleResult = saleDeliveryScheduler
+					.getScheduleResult(orderItem);
+			
 			SaleDeliveryOrderItemDTO saleDeliveryOrderItem = 
-					saleDeliveryScheduler.schedule(orderItem);
-			orderItem.clone(saleDeliveryOrderItem);
+					orderItem.clone(SaleDeliveryOrderItemDTO.class);
+			saleDeliveryOrderItem.setPickingItems(ObjectUtils.convertList(
+					scheduleResult.getPickingItems(), SaleDeliveryOrderPickingItemDTO.class));
+			saleDeliveryOrderItem.setSendOutItems(ObjectUtils.convertList(
+					scheduleResult.getSendOutDetails(), SaleDeliveryOrderSendOutDetailDTO.class)); 
 			saleDeliveryOrderItem.setGmtCreate(dateProvider.getCurrentTime());
 			saleDeliveryOrderItem.setGmtModified(dateProvider.getCurrentTime());  
+			
 			saleDeliveryOrderItems.add(saleDeliveryOrderItem);
 		}
 		

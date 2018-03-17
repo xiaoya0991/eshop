@@ -14,18 +14,18 @@ public interface ScheduleGoodsStockDAO {
 	 * @param goodsSkuId 商品sku id
 	 * @return 商品库存
 	 */
-	ScheduleGoodsStockDO getBySkuId(Long goodsSkuId);
+	ScheduleGoodsStockDO getBySkuId(Long goodsSkuId) throws Exception;
 	
 	/**
 	 * 新增商品库存
 	 * @param goodsStockDO 商品库存DO对象
 	 */
-	void save(ScheduleGoodsStockDO goodsStock);
+	void save(ScheduleGoodsStockDO goodsStock) throws Exception;
 	
 	/**
 	 * 更新商品库存
 	 * @param goodsStockDO 商品库存DO对象
 	 */
-	void update(ScheduleGoodsStockDO goodsStock);
+	void update(ScheduleGoodsStockDO goodsStock) throws Exception;
 	
 }
