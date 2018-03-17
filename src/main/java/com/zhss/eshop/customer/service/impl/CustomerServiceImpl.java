@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @return 处理结果
 	 */
 	public Boolean createReturnGoodsWorksheet(Long orderId, String orderNo, 
-			String returnGoodsReason, String returnGoodsRemark) {
+			Integer returnGoodsReason, String returnGoodsRemark) {
 		return true;
 	}
 	
