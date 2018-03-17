@@ -29,4 +29,14 @@ public class DefaultOrderState implements OrderState {
 		return false;
 	}
 	
+	/**
+	 * 判断订单能否执行支付操作
+	 * @param order 订单
+	 * @return 能否执行支付操作
+	 * @throws Exception
+	 */
+	public Boolean canPay(OrderInfoDTO order) throws Exception {
+		return false;
+	}
+	
 }

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.common.util.DateProvider;
@@ -26,6 +27,7 @@ import com.zhss.eshop.order.state.OrderStateManager;
  *
  */
 @Component
+@Transactional
 public class AutoCancelOrderTask {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AutoCancelOrderTask.class);

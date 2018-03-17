@@ -35,6 +35,7 @@ import com.zhss.eshop.order.price.PromotionActivityResult;
 import com.zhss.eshop.order.price.TotalPriceCalculator;
 import com.zhss.eshop.order.service.OrderInfoService;
 import com.zhss.eshop.order.state.OrderStateManager;
+import com.zhss.eshop.pay.service.PayService;
 import com.zhss.eshop.promotion.constant.PromotionActivityType;
 import com.zhss.eshop.promotion.domain.CouponDTO;
 import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
@@ -109,6 +110,12 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 */
 	@Autowired
 	private OrderStateManager orderStateManager;
+	
+	/**
+	 * 支付中心接口
+	 */
+	@Autowired
+	private PayService payService;
 	
 	/**
 	 * 计算订单价格
@@ -288,12 +295,18 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 */
 	public OrderInfoDTO getById(Long id) throws Exception {
 		OrderInfoDTO order = orderInfoDAO.getById(id).clone(OrderInfoDTO.class);
+		
 		List<OrderItemDTO> orderItems = ObjectUtils.convertList(
-				orderItemDAO.listByOrderInfoId(order.getId()), OrderItemDTO.class); 
+				orderItemDAO.listByOrderInfoId(order.getId()), 
+				OrderItemDTO.class); 
+		
 		List<OrderOperateLogDTO> logs = ObjectUtils.convertList(
-				orderOperateLogDAO.listByOrderInfoId(order.getId()), OrderOperateLogDTO.class);
+				orderOperateLogDAO.listByOrderInfoId(order.getId()), 
+				OrderOperateLogDTO.class);
+		
 		order.setOrderItems(orderItems); 
 		order.setLogs(logs); 
+		
 		return order;
 	}
 	
@@ -304,7 +317,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @throws Exception
 	 */
 	public Boolean cancel(Long id) throws Exception {
-		OrderInfoDTO order = getOrderInfoDTO(id);
+		OrderInfoDTO order = getById(id);
 		if(order == null ) {
 			return false;
 		}
@@ -322,18 +335,17 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	}
 	
 	/**
-	 * 获取订单DTO
-	 * @param orderInfoDO
-	 * @return
+	 * 支付订单
+	 * @param id 订单id
+	 * @return 处理结果
 	 * @throws Exception
 	 */
-	private OrderInfoDTO getOrderInfoDTO(Long id) throws Exception {
-		OrderInfoDO orderInfoDO = orderInfoDAO.getById(id);
-		OrderInfoDTO orderInfoDTO = orderInfoDO.clone(OrderInfoDTO.class);
-		List<OrderItemDTO> orderItems = ObjectUtils.convertList(
-				orderItemDAO.listByOrderInfoId(orderInfoDTO.getId()), OrderItemDTO.class);
-		orderInfoDTO.setOrderItems(orderItems);
-		return orderInfoDTO;
+	public String pay(Long id) throws Exception {
+		OrderInfoDTO order = getById(id);
+		if(!orderStateManager.canPay(order)) {
+			return null;
+		}
+		return payService.getQrCode(order);
 	}
 	
 }

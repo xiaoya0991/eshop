@@ -36,6 +36,8 @@ public class OrderOperateLogFactory {
 			operateContent = "手动取消订单，订单编号为：" + order.getOrderNo();
 		} else if(OrderOperateType.AUTO_CANCEL_ORDER.equals(operateType)) {
 			operateContent = "自动取消订单，订单编号为：" + order.getOrderNo();
+		} else if(OrderOperateType.PAY_ORDER.equals(operateType)) {
+			operateContent = "支付订单，订单编号为：" + order.getOrderNo() + "，支付金额为：" + order.getPayableAmount();
 		}
 		
 		OrderOperateLogDO log = create(order, operateType, operateContent);

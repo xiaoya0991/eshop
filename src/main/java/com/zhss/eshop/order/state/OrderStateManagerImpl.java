@@ -28,6 +28,11 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 */
 	@Autowired
 	private CanceledOrderState canceledOrderState;
+	/**
+	 * 待发货状态
+	 */
+	@Autowired
+	private WaitForDeliveryOrderState waitForDeliveryOrderState;
 	
 	/**
 	 * 创建订单
@@ -56,6 +61,26 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 */
 	public void cancel(OrderInfoDTO order) throws Exception {
 		canceledOrderState.doTransition(order); 
+	}
+	
+	/**
+	 * 判断订单能否进行支付操作
+	 * @param order 订单
+	 * @return 能否进行支付操作
+	 * @throws Exception
+	 */
+	public Boolean canPay(OrderInfoDTO order) throws Exception {
+		OrderState orderState = orderStateFactory.get(order);
+		return orderState.canPay(order);
+	}
+	
+	/**
+	 * 执行支付订单操作
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void pay(OrderInfoDTO order) throws Exception {
+		waitForDeliveryOrderState.doTransition(order); 
 	}
 	
 }

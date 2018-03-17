@@ -3,18 +3,68 @@ package com.zhss.eshop.order.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.Inventory.service.InventoryService;
+import com.zhss.eshop.membership.service.MembershipService;
+import com.zhss.eshop.order.constant.OrderOperateType;
+import com.zhss.eshop.order.dao.OrderOperateLogDAO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.order.service.OrderInfoService;
 import com.zhss.eshop.order.service.OrderService;
+import com.zhss.eshop.order.state.OrderStateManager;
+import com.zhss.eshop.schedule.service.ScheduleService;
 
 /**
- * 订单中心接口service组件
+ * 订单中心接口
  * @author zhonghuashishan
  *
  */
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+	
+	/**
+	 * 订单状态管理器
+	 */
+	@Autowired
+	private OrderStateManager orderStateManager;
+	/**
+	 * 订单管理service组件
+	 */
+	@Autowired
+	private OrderInfoService orderInfoService;
+	/**
+	 * 库存中心接口
+	 */
+	@Autowired
+	private InventoryService inventoryService;
+	/**
+	 * 调度中心接口
+	 */
+	@Autowired
+	private ScheduleService scheduleService;
+	/**
+	 * 会员中心接口
+	 */
+	@Autowired
+	private MembershipService membershipService;
+	/**
+	 * 订单操作日志管理DAO组件
+	 */
+	@Autowired
+	private OrderOperateLogDAO orderOperateLogDAO;
+	/**
+	 * 订单操作日志工厂
+	 */
+	@Autowired
+	private OrderOperateLogFactory orderOperateLogFactory;
 	
 	/**
 	 * 通知订单中心，“商品完成发货”事件发生了
@@ -102,7 +152,18 @@ public class OrderServiceImpl implements OrderService {
 	 * @return 处理结果
 	 */
 	public Boolean informPayOrderSuccessed(Long orderInfoId) {
-		return true;
+		try {
+			OrderInfoDTO order = orderInfoService.getById(orderInfoId);
+			orderStateManager.pay(order);
+			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.PAY_ORDER));  
+			inventoryService.informPayOrderEvent(order);
+			scheduleService.scheduleSaleDelivery(order);
+			membershipService.informPayOrderEvent(order.getUserAccountId(), order.getPayableAmount());
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 }
