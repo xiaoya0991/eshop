@@ -66,7 +66,7 @@ public interface MemberPointMapper {
 	@Update("UPDATE membership_member_point SET "
 				+ "point=#{point},"
 				+ "gmt_modified=#{gmtModified} "
-			+ "WHERE id=#[id}") 
+			+ "WHERE id=#{id}") 
 	void update(MemberPointDO memberPoint);
 	
 }

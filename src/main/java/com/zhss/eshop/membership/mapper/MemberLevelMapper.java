@@ -71,7 +71,7 @@ public interface MemberLevelMapper {
 				+ "growth_value=#{growthValue},"
 				+ "level=#{level},"
 				+ "gmt_modified=#{gmtModified} "
-			+ "WHERE id=#[id}") 
+			+ "WHERE id=#{id}") 
 	void update(MemberLevelDO memberLevel);
 	
 }
