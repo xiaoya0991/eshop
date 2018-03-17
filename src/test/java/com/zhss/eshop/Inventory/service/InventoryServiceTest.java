@@ -448,8 +448,8 @@ public class InventoryServiceTest {
 		returnGoodsInputOrder.setInvoiceTitle("测试发票抬头"); 
 		returnGoodsInputOrder.setTaxpayerId("测试纳税人识别号");
 		returnGoodsInputOrder.setOrderComment("测试订单");
-		returnGoodsInputOrder.setReturnGoodsReason("测试退货原因");
-		returnGoodsInputOrder.setReturnGoodsComment("测试退货备注"); 
+		returnGoodsInputOrder.setReturnGoodsReason(1);
+		returnGoodsInputOrder.setReturnGoodsRemark("测试退货备注"); 
 		returnGoodsInputOrder.setArrivalTime(dateProvider.parseDatetime("2018-01-10 10:00:00")); 
 		returnGoodsInputOrder.setGmtCreate(dateProvider.parseDatetime("2018-01-01 10:00:00"));  
 		returnGoodsInputOrder.setGmtModified(dateProvider.parseDatetime("2018-01-10 10:00:00"));  
