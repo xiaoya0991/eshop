@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zhss.eshop.customer.constant.ReturnGoodsWorksheetStatus;
 import com.zhss.eshop.customer.dao.ReturnGoodsWorksheetDAO;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDO;
 import com.zhss.eshop.customer.service.CustomerService;
@@ -35,11 +36,21 @@ public class CustomerServiceImpl implements CustomerService {
 	 */
 	public Boolean createReturnGoodsWorksheet(Long orderId, String orderNo, 
 			Integer returnGoodsReason, String returnGoodsRemark) {
-		ReturnGoodsWorksheetDO worksheet = new ReturnGoodsWorksheetDO();
-		worksheet.setOrderId(orderId); 
-		worksheet.setOrderNo(orderNo); 
-		
-		return true;
+		try {
+			ReturnGoodsWorksheetDO worksheet = new ReturnGoodsWorksheetDO();
+			worksheet.setOrderId(orderId); 
+			worksheet.setOrderNo(orderNo); 
+			worksheet.setReturnGoodsReason(returnGoodsReason); 
+			worksheet.setReturnGoodsRemark(returnGoodsRemark); 
+			worksheet.setStatus(ReturnGoodsWorksheetStatus.WAIT_FOR_APPROVE);  
+			
+			returnGoodsWorksheetDAO.save(worksheet); 
+			
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
