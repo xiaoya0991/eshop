@@ -62,6 +62,10 @@ public class PurchaseInputOrderDTO {
 	 * 采购入库单条目集合
 	 */
 	private List<PurchaseInputOrderItemDTO> items;
+	/**
+	 * 采购入库单上架条目
+	 */
+	private List<PurchaseInputOrderPutOnItemDTO> putOnItems;
 	
 	public Long getId() {
 		return id;
@@ -140,6 +144,12 @@ public class PurchaseInputOrderDTO {
 	}
 	public void setItems(List<PurchaseInputOrderItemDTO> items) {
 		this.items = items;
+	}
+	public List<PurchaseInputOrderPutOnItemDTO> getPutOnItems() {
+		return putOnItems;
+	}
+	public void setPutOnItems(List<PurchaseInputOrderPutOnItemDTO> putOnItems) {
+		this.putOnItems = putOnItems;
 	}
 	
 	@Override
