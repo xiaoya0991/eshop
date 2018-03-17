@@ -2,7 +2,7 @@ package com.zhss.eshop.schedule.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDO;
+import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
 import com.zhss.eshop.schedule.service.ScheduleService;
@@ -91,7 +91,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @return 处理结果
 	 */
 	public Boolean scheduleReturnGoodsInput(OrderInfoDTO orderDTO, 
-			ReturnGoodsWorksheetDO returnGoodsWorksheetDTO) {
+			ReturnGoodsWorksheetDTO returnGoodsWorksheetDTO) {
 		return true;
 	}
 	
