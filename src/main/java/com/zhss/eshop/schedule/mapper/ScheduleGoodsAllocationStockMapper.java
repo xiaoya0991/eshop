@@ -42,7 +42,7 @@ public interface ScheduleGoodsAllocationStockMapper {
 		@Result(column = "goods_allocation_id", property = "goodsAllocationId"),
 		@Result(column = "available_stock_quantity", property = "availableStockQuantity"),
 		@Result(column = "locked_stock_quantity", property = "lockedStockQuantity"),
-		@Result(column = "output_stock_quantity", property = "outputpStockQuantity"),
+		@Result(column = "output_stock_quantity", property = "outputStockQuantity"),
 		@Result(column = "gmt_create", property = "gmtCreate"),
 		@Result(column = "gmt_modified", property = "gmtModified")
 	})
@@ -54,7 +54,7 @@ public interface ScheduleGoodsAllocationStockMapper {
 	 * 新增商品库存
 	 * @param goodsAllocationStock 商品库存DO对象
 	 */
-	@Insert("INSERT INTO schedule_goods_stock ("
+	@Insert("INSERT INTO schedule_goods_allocation_stock ("
 				+ "goods_allocation_id,"
 				+ "goods_sku_id,"
 				+ "available_stock_quantity,"
@@ -78,7 +78,7 @@ public interface ScheduleGoodsAllocationStockMapper {
 	 * 更新商品库存
 	 * @param goodsAllocationStock 商品库存DO对象
 	 */
-	@Update("UPDATE schedule_goods_stock SET "
+	@Update("UPDATE schedule_goods_allocation_stock SET "
 				+ "available_stock_quantity=#{availableStockQuantity},"
 				+ "locked_stock_quantity=#{lockedStockQuantity},"
 				+ "output_stock_quantity=#{outputStockQuantity},"

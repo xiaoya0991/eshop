@@ -21,6 +21,8 @@ import com.zhss.eshop.schedule.constant.StockUpdateEvent;
 import com.zhss.eshop.schedule.dao.ScheduleOrderPickingItemDAO;
 import com.zhss.eshop.schedule.dao.ScheduleOrderSendOutDetailDAO;
 import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
+import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDO;
+import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDO;
 import com.zhss.eshop.schedule.service.SaleDeliveryOrderBuilder;
 import com.zhss.eshop.schedule.service.SaleDeliveryScheduler;
 import com.zhss.eshop.schedule.service.ScheduleService;
@@ -139,8 +141,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 				SaleDeliveryScheduleResult scheduleResult = 
 						saleDeliveryScheduler.schedule(orderItem);
 				
-				pickingItemDAO.batchSave(orderItem, scheduleResult.getPickingItems()); 
-				sendOutDetailDAO.batchSave(orderItem, scheduleResult.getSendOutDetails());
+				List<ScheduleOrderPickingItemDO> pickingItems = ObjectUtils.convertList(
+						scheduleResult.getPickingItems(), ScheduleOrderPickingItemDO.class);
+				List<ScheduleOrderSendOutDetailDO> sendOutDetails = ObjectUtils.convertList(
+						scheduleResult.getSendOutDetails(), ScheduleOrderSendOutDetailDO.class);
+				
+				pickingItemDAO.batchSave(orderItem.getOrderInfoId(), orderItem.getId(), pickingItems); 
+				sendOutDetailDAO.batchSave(orderItem.getOrderInfoId(), orderItem.getId(), sendOutDetails);
 				
 				ScheduleStockUpdater stockUpdater = stockUpdaterFactory.create(
 						StockUpdateEvent.SUBMIT_ORDER, scheduleResult);

@@ -2,9 +2,7 @@ package com.zhss.eshop.schedule.dao;
 
 import java.util.List;
 
-import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDO;
-import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDTO;
 
 /**
  * 发货明细管理DAO接口
@@ -19,8 +17,8 @@ public interface ScheduleOrderSendOutDetailDAO {
 	 * @param sendOutDetails 发货明细
 	 * @throws Exception
 	 */
-	void batchSave(OrderItemDTO orderItem, 
-			List<ScheduleOrderSendOutDetailDTO> sendOutDetails) throws Exception;
+	void batchSave(Long orderInfoId, Long orderItemId,
+			List<ScheduleOrderSendOutDetailDO> sendOutDetails) throws Exception;
 	
 	/**
 	 * 根据订单id和订单条目id查询发货明细

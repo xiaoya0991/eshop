@@ -30,7 +30,7 @@ public class ScheduleOrderSendOutDetailVO extends AbstractObject {
 	/**
 	 * 发货数量
 	 */
-	private Long sendOutQuantity;
+	private Long sendOutCount;
 	/**
 	 * 创建时间
 	 */
@@ -64,11 +64,11 @@ public class ScheduleOrderSendOutDetailVO extends AbstractObject {
 	public void setGoodsAllocationStockDetailId(Long goodsAllocationStockDetailId) {
 		this.goodsAllocationStockDetailId = goodsAllocationStockDetailId;
 	}
-	public Long getSendOutQuantity() {
-		return sendOutQuantity;
+	public Long getSendOutCount() {
+		return sendOutCount;
 	}
-	public void setSendOutQuantity(Long sendOutQuantity) {
-		this.sendOutQuantity = sendOutQuantity;
+	public void setSendOutCount(Long sendOutCount) {
+		this.sendOutCount = sendOutCount;
 	}
 	public Date getGmtCreate() {
 		return gmtCreate;

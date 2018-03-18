@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.schedule.dao.ScheduleOrderSendOutDetailDAO;
 import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDO;
-import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDTO;
 import com.zhss.eshop.schedule.mapper.ScheduleOrderSendOutDetailMapper;
 
 /**
@@ -37,14 +35,14 @@ public class ScheduleOrderSendOutDetailDAOImpl implements ScheduleOrderSendOutDe
 	 * @param sendOutDetails 发货明细
 	 * @throws Exception
 	 */
-	public void batchSave(OrderItemDTO orderItem, 
-			List<ScheduleOrderSendOutDetailDTO> sendOutDetails) throws Exception {
-		for(ScheduleOrderSendOutDetailDTO sendOutDetail : sendOutDetails) {
-			sendOutDetail.setOrderInfoId(orderItem.getOrderInfoId()); 
-			sendOutDetail.setOrderItemId(orderItem.getId()); 
+	public void batchSave(Long orderInfoId, Long orderItemId,
+			List<ScheduleOrderSendOutDetailDO> sendOutDetails) throws Exception {
+		for(ScheduleOrderSendOutDetailDO sendOutDetail : sendOutDetails) {
+			sendOutDetail.setOrderInfoId(orderInfoId); 
+			sendOutDetail.setOrderItemId(orderItemId); 
 			sendOutDetail.setGmtCreate(dateProvider.getCurrentTime()); 
 			sendOutDetail.setGmtModified(dateProvider.getCurrentTime());  
-			sendOutDetailMapper.save(sendOutDetail.clone(ScheduleOrderSendOutDetailDO.class));   
+			sendOutDetailMapper.save(sendOutDetail);   
 		}
 	}
 	

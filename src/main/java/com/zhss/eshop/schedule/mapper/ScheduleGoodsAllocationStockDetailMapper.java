@@ -89,7 +89,7 @@ public interface ScheduleGoodsAllocationStockDetailMapper {
 	 */
 	@Update("UPDATE schedule_goods_allocation_stock_detail SET "
 				+ "current_stock_quantity=#{currentStockQuantity},"
-				+ "locked_stock_quantity=#{lockStockQuantity},"
+				+ "locked_stock_quantity=#{lockedStockQuantity},"
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}")  
 	void update(ScheduleGoodsAllocationStockDetailDO stockDetail);

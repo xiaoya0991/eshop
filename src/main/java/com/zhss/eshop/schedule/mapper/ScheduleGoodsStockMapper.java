@@ -39,7 +39,7 @@ public interface ScheduleGoodsStockMapper {
 		@Result(column = "goods_sku_id", property = "goodsSkuId"),
 		@Result(column = "available_stock_quantity", property = "availableStockQuantity"),
 		@Result(column = "locked_stock_quantity", property = "lockedStockQuantity"),
-		@Result(column = "output_stock_quantity", property = "outputpStockQuantity"),
+		@Result(column = "output_stock_quantity", property = "outputStockQuantity"),
 		@Result(column = "gmt_create", property = "gmtCreate"),
 		@Result(column = "gmt_modified", property = "gmtModified")
 	})

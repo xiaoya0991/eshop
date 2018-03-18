@@ -2,9 +2,7 @@ package com.zhss.eshop.schedule.dao;
 
 import java.util.List;
 
-import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDO;
-import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDTO;
 
 /**
  * 拣货条目管理DAO接口
@@ -19,8 +17,8 @@ public interface ScheduleOrderPickingItemDAO {
 	 * @param pickingItems 拣货条目
 	 * @throws Exception
 	 */
-	void batchSave(OrderItemDTO orderItem, 
-			List<ScheduleOrderPickingItemDTO> pickingItems) throws Exception;
+	void batchSave(Long orderInfoId, Long orderItemId, 
+			List<ScheduleOrderPickingItemDO> pickingItems) throws Exception;
 	
 	/**
 	 * 根据订单id和订单条目id查询拣货条目
