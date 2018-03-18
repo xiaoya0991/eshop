@@ -20,11 +20,11 @@ public interface CustomerService {
 	
 	/**
 	 * 同步物流单号
-	 * @param orderId 订单id
+	 * @param orderInfoId 订单id
 	 * @param returnGoodsLogisticsCode 退货物流单号
 	 * @return 处理结果
 	 */
-	Boolean syncReturnGoodsCourierNumber(Long orderId, 
+	Boolean syncReturnGoodsLogisticsCode(Long orderInfoId, 
 			String returnGoodsLogisticsCode);
 	
 	/**
