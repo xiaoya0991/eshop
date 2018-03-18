@@ -80,4 +80,11 @@ public interface OrderService {
 	 */
 	Boolean informPayOrderSuccessed(Long orderInfoId);
 	
+	/**
+	 * 根据id查询订单
+	 * @param orderInfoId 订单id
+	 * @return 订单
+	 */
+	OrderInfoDTO getOrderById(Long orderInfoId);
+	
 }
