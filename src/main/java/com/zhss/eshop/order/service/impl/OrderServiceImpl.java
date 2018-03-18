@@ -166,4 +166,13 @@ public class OrderServiceImpl implements OrderService {
 		}
 	}
 	
+	/**
+	 * 根据id查询订单
+	 * @param orderInfoId 订单id
+	 * @return 订单
+	 */
+	public OrderInfoDTO getOrderById(Long orderInfoId) {
+		return null;
+	}
+	
 }
