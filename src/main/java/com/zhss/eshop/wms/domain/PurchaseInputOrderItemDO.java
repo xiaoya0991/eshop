@@ -10,7 +10,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class PurchaseInputOrderItemDTO extends AbstractObject {
+public class PurchaseInputOrderItemDO extends AbstractObject {
 
 	/**
 	 * id

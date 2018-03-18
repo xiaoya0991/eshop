@@ -1,16 +1,15 @@
 package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 采购入库单DTO
+ * 采购入库单
  * @author zhonghuashishan
  *
  */
-public class PurchaseInputOrderDTO extends AbstractObject {
+public class PurchaseInputOrderDO extends AbstractObject {
 
 	/**
 	 * id
@@ -60,18 +59,6 @@ public class PurchaseInputOrderDTO extends AbstractObject {
 	 * 采购入库单的修改时间
 	 */
 	private Date gmtModified;
-	/**
-	 * 采购入库单条目集合
-	 */
-	private List<PurchaseInputOrderItemDTO> items;
-	/**
-	 * 采购入库单上架条目
-	 */
-	private List<PurchaseInputOrderPutOnItemDTO> putOnItems;
-	/**
-	 * 货位库存明细
-	 */
-	private List<GoodsAllocationStockDetailDTO> stockDetails;
 	
 	public Long getId() {
 		return id;
@@ -144,24 +131,6 @@ public class PurchaseInputOrderDTO extends AbstractObject {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
-	}
-	public List<PurchaseInputOrderItemDTO> getItems() {
-		return items;
-	}
-	public void setItems(List<PurchaseInputOrderItemDTO> items) {
-		this.items = items;
-	}
-	public List<PurchaseInputOrderPutOnItemDTO> getPutOnItems() {
-		return putOnItems;
-	}
-	public void setPutOnItems(List<PurchaseInputOrderPutOnItemDTO> putOnItems) {
-		this.putOnItems = putOnItems;
-	}
-	public List<GoodsAllocationStockDetailDTO> getStockDetails() {
-		return stockDetails;
-	}
-	public void setStockDetails(List<GoodsAllocationStockDetailDTO> stockDetails) {
-		this.stockDetails = stockDetails;
 	}
 	
 }

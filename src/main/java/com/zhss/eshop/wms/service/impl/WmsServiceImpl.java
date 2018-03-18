@@ -15,6 +15,7 @@ import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
+import com.zhss.eshop.wms.service.PurchaseInputOrderService;
 import com.zhss.eshop.wms.service.WmsService;
 
 /**
@@ -33,14 +34,25 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Autowired
 	private DateProvider dateProvider;
+	/**
+	 * 采购入库单管理service组件
+	 */
+	@Autowired
+	private PurchaseInputOrderService purchaseInputOrderService;
 	
 	/**
 	 * 创建采购入库单
 	 * @param purchaseInputOrderDTO 采购入库单DTO
 	 * @return 处理结果
 	 */
-	public Boolean createPurchaseInputOrder(PurchaseInputOrderDTO purchaseInputOrderDTO) {
-		return true;
+	public Boolean createPurchaseInputOrder(PurchaseInputOrderDTO purchaseInputOrder) {
+		try {
+			purchaseInputOrderService.save(purchaseInputOrder); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
