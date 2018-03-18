@@ -81,11 +81,11 @@ public class ReturnGoodsInputOrderDTO {
 	/**
 	 * 退货原因
 	 */
-	private String returnGoodsReason;
+	private Integer returnGoodsReason;
 	/**
 	 * 退货备注
 	 */
-	private String returnGoodsComment;
+	private String returnGoodsRemark;
 	/**
 	 * 退货的实际到货时间
 	 */
@@ -102,6 +102,14 @@ public class ReturnGoodsInputOrderDTO {
 	 * 退货入库单条目DTO集合
 	 */
 	private List<ReturnGoodsInputOrderItemDTO> items;
+	/**
+	 * 退货入库单上架条目
+	 */
+	private List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems;
+	/**
+	 * 货位库存明细
+	 */
+	private List<GoodsAllocationStockDetailDTO> stockDetails;
 	
 	public Long getId() {
 		return id;
@@ -205,17 +213,17 @@ public class ReturnGoodsInputOrderDTO {
 	public void setOrderComment(String orderComment) {
 		this.orderComment = orderComment;
 	}
-	public String getReturnGoodsReason() {
+	public Integer getReturnGoodsReason() {
 		return returnGoodsReason;
 	}
-	public void setReturnGoodsReason(String returnGoodsReason) {
+	public void setReturnGoodsReason(Integer returnGoodsReason) {
 		this.returnGoodsReason = returnGoodsReason;
 	}
-	public String getReturnGoodsComment() {
-		return returnGoodsComment;
+	public String getReturnGoodsRemark() {
+		return returnGoodsRemark;
 	}
-	public void setReturnGoodsComment(String returnGoodsComment) {
-		this.returnGoodsComment = returnGoodsComment;
+	public void setReturnGoodsRemark(String returnGoodsRemark) {
+		this.returnGoodsRemark = returnGoodsRemark;
 	}
 	public Date getArrivalTime() {
 		return arrivalTime;
@@ -240,6 +248,18 @@ public class ReturnGoodsInputOrderDTO {
 	}
 	public void setItems(List<ReturnGoodsInputOrderItemDTO> items) {
 		this.items = items;
+	}
+	public List<ReturnGoodsInputOrderPutOnItemDTO> getPutOnItems() {
+		return putOnItems;
+	}
+	public void setPutOnItems(List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems) {
+		this.putOnItems = putOnItems;
+	}
+	public List<GoodsAllocationStockDetailDTO> getStockDetails() {
+		return stockDetails;
+	}
+	public void setStockDetails(List<GoodsAllocationStockDetailDTO> stockDetails) {
+		this.stockDetails = stockDetails;
 	}
 	
 }

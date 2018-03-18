@@ -73,4 +73,18 @@ public interface OrderService {
 	 */
 	Boolean informBatchPublishCommentEvent(List<Long> orderIds);
 	
+	/**
+	 * 通知订单中心，“支付订单成功了”
+	 * @param orderInfoId 订单id
+	 * @return 处理结果
+	 */
+	Boolean informPayOrderSuccessed(Long orderInfoId);
+	
+	/**
+	 * 根据id查询订单
+	 * @param orderInfoId 订单id
+	 * @return 订单
+	 */
+	OrderInfoDTO getOrderById(Long orderInfoId);
+	
 }

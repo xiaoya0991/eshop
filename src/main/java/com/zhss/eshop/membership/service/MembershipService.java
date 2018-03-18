@@ -24,7 +24,7 @@ public interface MembershipService {
 	 * @param totalOrderAmount 订单总金额
 	 * @return 处理结果
 	 */
-	Boolean informPayOrderEvent(Long userAccountId, Long totalOrderAmount);
+	Boolean informPayOrderEvent(Long userAccountId, Double totalOrderAmount);
 	
 	/**
 	 * 通知会员中心，“完成退货”事件发生了
@@ -32,7 +32,7 @@ public interface MembershipService {
 	 * @param totalOrderAmount 订单总金额
 	 * @return 处理结果
 	 */
-	Boolean informFinishReturnGoodsEvent(Long userAccountId, Long totalOrderAmount);
+	Boolean informFinishReturnGoodsEvent(Long userAccountId, Double totalOrderAmount);
 	
 	/**
 	 * 通知会员中心，“发表评论”事件发生了
