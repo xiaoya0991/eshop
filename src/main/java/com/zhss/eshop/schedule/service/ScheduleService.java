@@ -1,6 +1,6 @@
 package com.zhss.eshop.schedule.service;
 
-import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDO;
+import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
@@ -71,6 +71,6 @@ public interface ScheduleService {
 	 * @return 处理结果
 	 */
 	Boolean scheduleReturnGoodsInput(OrderInfoDTO orderDTO, 
-			ReturnGoodsWorksheetDO returnGoodsWorksheetDTO);
+			ReturnGoodsWorksheetDTO returnGoodsWorksheetDTO);
 	
 }
