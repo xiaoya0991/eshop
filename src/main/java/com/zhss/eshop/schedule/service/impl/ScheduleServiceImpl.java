@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.Inventory.service.InventoryService;
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
@@ -25,6 +26,7 @@ import com.zhss.eshop.schedule.service.SaleDeliveryScheduler;
 import com.zhss.eshop.schedule.service.ScheduleService;
 import com.zhss.eshop.schedule.stock.ScheduleStockUpdater;
 import com.zhss.eshop.schedule.stock.ScheduleStockUpdaterFactory;
+import com.zhss.eshop.wms.constant.PurchaseInputOrderStatus;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -78,6 +80,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	@Autowired
 	private ScheduleStockUpdaterFactory stockUpdaterFactory;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
@@ -239,8 +246,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 				purchaseOrder.clone(PurchaseInputOrderDTO.class);
 		
 		purchaseInputOrder.setId(null); 
-		purchaseInputOrder.setGmtCreate(null); 
-		purchaseInputOrder.setGmtModified(null);  
+		purchaseInputOrder.setGmtCreate(dateProvider.getCurrentTime());
+		purchaseInputOrder.setGmtModified(dateProvider.getCurrentTime()); 
+		purchaseInputOrder.setStatus(PurchaseInputOrderStatus.EDITING); 
 		purchaseInputOrder.setPurchaseContactor(purchaseOrder.getContactor());
 		purchaseInputOrder.setPurchaseContactorPhoneNumber(
 				purchaseOrder.getContactorPhoneNumber()); 
@@ -261,8 +269,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 		PurchaseInputOrderItemDTO purchaseInputOrderItem = 
 				purchaseOrderItem.clone(PurchaseInputOrderItemDTO.class);
 		purchaseInputOrderItem.setId(null); 
-		purchaseInputOrderItem.setGmtCreate(null); 
-		purchaseInputOrderItem.setGmtModified(null); 
+		purchaseInputOrderItem.setGmtCreate(dateProvider.getCurrentTime()); 
+		purchaseInputOrderItem.setGmtModified(dateProvider.getCurrentTime());  
 		return purchaseInputOrderItem;
 	}
 
