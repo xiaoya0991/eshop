@@ -95,5 +95,14 @@ public class OrderServiceImpl implements OrderService {
 	public Boolean informBatchPublishCommentEvent(List<Long> orderIds) {
 		return true;
 	}
-
+	
+	/**
+	 * 通知订单中心，“支付订单成功了”
+	 * @param orderInfoId 订单id
+	 * @return 处理结果
+	 */
+	public Boolean informPayOrderSuccessed(Long orderInfoId) {
+		return true;
+	}
+	
 }

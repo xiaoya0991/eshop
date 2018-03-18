@@ -66,7 +66,7 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @param totalOrderAmount 订单总金额
 	 * @return 处理结果
 	 */
-	public Boolean informPayOrderEvent(Long userAccountId, Long totalOrderAmount) {
+	public Boolean informPayOrderEvent(Long userAccountId, Double totalOrderAmount) {
 		try {
 			payOrderMembershipUpdater.execute(userAccountId, totalOrderAmount);
 			return true;
@@ -82,7 +82,7 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @param totalOrderAmount 订单总金额
 	 * @return 处理结果
 	 */
-	public Boolean informFinishReturnGoodsEvent(Long userAccountId, Long totalOrderAmount) {
+	public Boolean informFinishReturnGoodsEvent(Long userAccountId, Double totalOrderAmount) {
 		try {
 			payOrderMembershipUpdater.undo(userAccountId, totalOrderAmount);
 			return true;
