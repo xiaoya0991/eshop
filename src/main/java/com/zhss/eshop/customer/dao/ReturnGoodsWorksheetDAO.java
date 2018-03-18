@@ -32,4 +32,23 @@ public interface ReturnGoodsWorksheetDAO {
 	 */
 	ReturnGoodsWorksheetDO getById(Long id) throws Exception;
 	
+	/**
+	 * 更新退货工单的状态
+	 * @param worksheet 退货工单
+	 */ 
+	void updateStatus(ReturnGoodsWorksheetDO worksheet) throws Exception;
+	
+	/**
+	 * 更新退货工单的退货物流单号
+	 * @param worksheet 退货工单
+	 */ 
+	void updateReturnGoodsLogisticsCode(ReturnGoodsWorksheetDO worksheet) throws Exception;
+	
+	/**
+	 * 根据订单id查询退货工单
+	 * @param id 订单id
+	 * @return 退货工单
+	 */
+	ReturnGoodsWorksheetDO getByOrderInfoId(Long orderInfoId) throws Exception; 
+	
 }

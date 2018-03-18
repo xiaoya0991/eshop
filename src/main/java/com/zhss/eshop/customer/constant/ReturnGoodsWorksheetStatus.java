@@ -26,7 +26,7 @@ public class ReturnGoodsWorksheetStatus {
 	/**
 	 * 退货商品待入库
 	 */
-	public static final Integer WAIT_FOR_RETURN_GOODS_INNPUT = 5;
+	public static final Integer WAIT_FOR_RETURN_GOODS_INPUT = 5;
 	/**
 	 * 退货商品已入库
 	 */

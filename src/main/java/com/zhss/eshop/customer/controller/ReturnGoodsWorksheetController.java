@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,6 +65,39 @@ public class ReturnGoodsWorksheetController {
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return new ReturnGoodsWorksheetVO();
+		}
+	}
+	
+	/**
+	 * 审核退货工单
+	 * @param id 退货工单id
+	 * @param approveResult 审核结果
+	 * @throws Exception
+	 */
+	@PutMapping("/approve/{id}")
+	public Boolean approve(@PathVariable("id") Long id, Integer approveResult) {
+		try {
+			returnGoodsWorksheetService.approve(id, approveResult); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 确认退货工单已经收到了退货商品
+	 * @param id 退货工单id
+	 * @throws Exception
+	 */
+	@PutMapping("/confirm/received/{id}")
+	public Boolean confirmReceivedReturnGoods(@PathVariable("id") Long id) {
+		try {
+			returnGoodsWorksheetService.confirmReceivedReturnGoods(id);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
 		}
 	}
 	

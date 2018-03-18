@@ -26,4 +26,19 @@ public interface ReturnGoodsWorksheetService {
 	 */
 	ReturnGoodsWorksheetDTO getById(Long id) throws Exception;
 	
+	/**
+	 * 审核退货工单
+	 * @param id 退货工单id
+	 * @param approveResult 审核结果
+	 * @throws Exception
+	 */
+	void approve(Long id, Integer approveResult) throws Exception;
+	
+	/**
+	 * 确认退货工单已经收到了退货商品
+	 * @param id 退货工单id
+	 * @throws Exception
+	 */
+	void confirmReceivedReturnGoods(Long id) throws Exception;
+	
 }
