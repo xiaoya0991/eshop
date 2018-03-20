@@ -63,7 +63,7 @@ public interface ReturnGoodsWorksheetMapper {
 				+ "a.return_goods_reason,"
 				+ "a.return_goods_logistics_code,"
 				+ "a.gmt_create,"
-				+ "a.gmt_modifieid "
+				+ "a.gmt_modified "
 			+ "FROM customer_return_goods_worksheet a,"
 			+ "("
 				+ "SELECT id "
@@ -117,7 +117,7 @@ public interface ReturnGoodsWorksheetMapper {
 				+ "return_goods_remark,"
  				+ "return_goods_logistics_code,"
 				+ "gmt_create,"
-				+ "gmt_modifieid "
+				+ "gmt_modified "
 			+ "FROM customer_return_goods_worksheet "
 			+ "WHERE id=#{id}")  
 	@Results({
