@@ -47,7 +47,7 @@ public class OfflineResumeThread extends Thread {
 				
 				// 将这批数据写入内存队列中
 				for(StockUpdateMessage message : stockUpdateMessages) {
-					stockUpdateQueue.put(message);
+					stockUpdateQueue.putDirect(message);
 				}
 				
 				// 批量删除这批数据
