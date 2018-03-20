@@ -3,7 +3,7 @@ package com.zhss.eshop.wms.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.zhss.eshop.finance.service.FinanceFacadeService;
+import com.zhss.eshop.finance.service.FinanceService;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 
 /**
@@ -18,7 +18,7 @@ public class InformFinanceCenterHandler extends AbstractPurchaseInputOrderHandle
 	 * 财务中心接口
 	 */
 	@Autowired
-	private FinanceFacadeService financeService;
+	private FinanceService financeService;
 	
 	/**
 	 * 执行处理结果
