@@ -52,6 +52,10 @@ public class PurchaseInputOrderItemDTO extends AbstractObject {
 	 * 采购入库单商品上架条目集合
 	 */
 	private List<PurchaseInputOrderPutOnItemDTO> putOnItemDTOs;
+	/**
+	 * 货位库存明细
+	 */
+	private List<GoodsAllocationStockDetailDTO> stockDetails;
 	
 	public Long getId() {
 		return id;
@@ -112,6 +116,12 @@ public class PurchaseInputOrderItemDTO extends AbstractObject {
 	}
 	public void setPutOnItemDTOs(List<PurchaseInputOrderPutOnItemDTO> putOnItemDTOs) {
 		this.putOnItemDTOs = putOnItemDTOs;
+	}
+	public List<GoodsAllocationStockDetailDTO> getStockDetails() {
+		return stockDetails;
+	}
+	public void setStockDetails(List<GoodsAllocationStockDetailDTO> stockDetails) {
+		this.stockDetails = stockDetails;
 	}
 	
 }
