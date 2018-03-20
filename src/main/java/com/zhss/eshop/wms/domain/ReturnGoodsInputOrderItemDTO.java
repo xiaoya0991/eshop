@@ -82,6 +82,10 @@ public class ReturnGoodsInputOrderItemDTO {
 	 * 退货入库单商品上架条目DTO集合
 	 */
 	private List<ReturnGoodsInputOrderPutOnItemDTO> putOnItemDTO;
+	/**
+	 * 货位库存明细
+	 */
+	private List<GoodsAllocationStockDetailDTO> stockDetails;
 	
 	public Long getId() {
 		return id;
@@ -190,6 +194,12 @@ public class ReturnGoodsInputOrderItemDTO {
 	}
 	public void setPutOnItemDTO(List<ReturnGoodsInputOrderPutOnItemDTO> putOnItemDTO) {
 		this.putOnItemDTO = putOnItemDTO;
+	}
+	public List<GoodsAllocationStockDetailDTO> getStockDetails() {
+		return stockDetails;
+	}
+	public void setStockDetails(List<GoodsAllocationStockDetailDTO> stockDetails) {
+		this.stockDetails = stockDetails;
 	}
 	
 }
