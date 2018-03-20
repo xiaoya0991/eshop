@@ -46,4 +46,11 @@ public interface OrderStateManager {
 	 */
 	void pay(OrderInfoDTO order) throws Exception;
 	
+	/**
+	 * 完成商品发货
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	void finishDelivery(OrderInfoDTO order) throws Exception;
+	
 }

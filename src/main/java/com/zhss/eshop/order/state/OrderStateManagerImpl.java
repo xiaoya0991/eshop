@@ -33,6 +33,11 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 */
 	@Autowired
 	private WaitForDeliveryOrderState waitForDeliveryOrderState;
+	/**
+	 * 待收货状态
+	 */
+	@Autowired
+	private WaitForReceiveOrderState waitForReceiveOrderState;
 	
 	/**
 	 * 创建订单
@@ -81,6 +86,15 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 */
 	public void pay(OrderInfoDTO order) throws Exception {
 		waitForDeliveryOrderState.doTransition(order); 
+	}
+	
+	/**
+	 * 完成商品发货
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void finishDelivery(OrderInfoDTO order) throws Exception {
+		waitForReceiveOrderState.doTransition(order); 
 	}
 	
 }
