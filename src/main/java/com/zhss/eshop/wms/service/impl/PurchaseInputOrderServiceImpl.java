@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.common.util.ObjectUtils;
+import com.zhss.eshop.purchase.service.PurchaseService;
+import com.zhss.eshop.wms.constant.PurchaseInputOrderApproveResult;
+import com.zhss.eshop.wms.constant.PurchaseInputOrderStatus;
 import com.zhss.eshop.wms.dao.PurchaseInputOrderDAO;
 import com.zhss.eshop.wms.dao.PurchaseInputOrderItemDAO;
 import com.zhss.eshop.wms.dao.PurchaseInputOrderPutOnItemDAO;
@@ -43,6 +46,16 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	 */
 	@Autowired
 	private PurchaseInputOrderPutOnItemDAO purchaseInputOrderPutOnItemDAO;
+	/**
+	 * 采购中心接口
+	 */
+	@Autowired
+	private PurchaseService purchaseService;
+	/**
+	 * 采购入库单handler工厂
+	 */
+	@Autowired
+	private PurchaseInputOrderHandlerFactory handlerFactory;
 	
 	/**
 	 * 新增采购入库单
@@ -56,6 +69,9 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 				purchaseInputOrder.getItems(), PurchaseInputOrderItemDO.class);
 		
 		purchaseInputOrderItemDAO.batchSave(purchaseInputOrderId, purchaseInputOrderItems);
+		
+		purchaseService.informCreatePurchaseInputOrderEvent(purchaseInputOrder
+				.getPurchaseInputOrderId());
 	}
 	
 	/**
@@ -116,6 +132,34 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	public void batchSavePutOnItems(List<PurchaseInputOrderPutOnItemDTO> putOnItems) throws Exception {
 		purchaseInputOrderPutOnItemDAO.batchSave(ObjectUtils.convertList(
 				putOnItems, PurchaseInputOrderPutOnItemDO.class)); 
+	}
+	
+	/**
+	 * 对采购入库单提交审核
+	 * @param id 采购入库单id
+	 * @throws Exception 
+	 */
+	public void submitApprove(Long id) throws Exception {
+		purchaseInputOrderDAO.updateStatus(id, PurchaseInputOrderStatus.WAIT_FOR_APPROVE);  
+	}
+	
+	/**
+	 * 审核采购入库单
+	 * @param id 采购入库单id
+	 * @param approveResult 审核结果
+	 * @throws Exception
+	 */
+	public void approve(Long id, Integer approveResult) throws Exception {
+		if(PurchaseInputOrderApproveResult.REJECTED.equals(approveResult)) {
+			purchaseInputOrderDAO.updateStatus(id, PurchaseInputOrderStatus.EDITING);  
+			return;
+		}
+		
+		if(PurchaseInputOrderApproveResult.PASSED.equals(approveResult)) {
+			PurchaseInputOrderDTO purchaseInputOrder = getById(id);
+			PurchaseInputOrderHandler handlerChain = handlerFactory.getHandlerChain();
+			handlerChain.execute(purchaseInputOrder);
+		}
 	}
 	
 }

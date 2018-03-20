@@ -47,4 +47,19 @@ public interface PurchaseInputOrderService {
 	 */
 	void batchSavePutOnItems(List<PurchaseInputOrderPutOnItemDTO> putOnItems) throws Exception;
 	
+	/**
+	 * 对采购入库单提交审核
+	 * @param id 采购入库单id
+	 * @throws Exception 
+	 */
+	void submitApprove(Long id) throws Exception;
+	
+	/**
+	 * 审核采购入库单
+	 * @param id 采购入库单id
+	 * @param approveResult 审核结果
+	 * @throws Exception
+	 */
+	void approve(Long id, Integer approveResult) throws Exception;
+	
 }

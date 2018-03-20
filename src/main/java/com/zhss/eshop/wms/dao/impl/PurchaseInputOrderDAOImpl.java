@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.dao.PurchaseInputOrderDAO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderQuery;
@@ -23,6 +24,11 @@ public class PurchaseInputOrderDAOImpl implements PurchaseInputOrderDAO {
 	 */
 	@Autowired
 	private PurchaseInputOrderMapper purchaseInputOrderMapper;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 新增采购入库单
@@ -57,6 +63,7 @@ public class PurchaseInputOrderDAOImpl implements PurchaseInputOrderDAO {
 	 * @param purchaseInputOrder 采购入库单
 	 */
 	public void update(PurchaseInputOrderDO purchaseInputOrder) throws Exception {
+		purchaseInputOrder.setGmtModified(dateProvider.getCurrentTime()); 
 		purchaseInputOrderMapper.update(purchaseInputOrder); 
 	}
 	
@@ -65,7 +72,20 @@ public class PurchaseInputOrderDAOImpl implements PurchaseInputOrderDAO {
 	 * @param purchaseInputOrder 采购入库单
 	 */
 	public void updateStatus(PurchaseInputOrderDO purchaseInputOrder) throws Exception {
+		purchaseInputOrder.setGmtModified(dateProvider.getCurrentTime()); 
 		purchaseInputOrderMapper.updateStatus(purchaseInputOrder);
+	}
+	
+	/**
+	 * 更新采购入库单状态
+	 * @param id 采购入库单id
+	 * @param status 采购入库单状态
+	 * @throws Exception
+	 */
+	public void updateStatus(Long id, Integer status) throws Exception {
+		PurchaseInputOrderDO purchaseInputOrder = getById(id);
+		purchaseInputOrder.setStatus(status);   
+		updateStatus(purchaseInputOrder);  
 	}
 	
 }
