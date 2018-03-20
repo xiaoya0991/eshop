@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.dao.GoodsAllocationDAO;
 import com.zhss.eshop.wms.domain.GoodsAllocationDO;
 import com.zhss.eshop.wms.domain.GoodsAllocationQuery;
@@ -23,6 +24,11 @@ public class GoodsAllocationDAOImpl implements GoodsAllocationDAO {
 	 */
 	@Autowired
 	private GoodsAllocationMapper goodsAllocationMapper;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 分页查询货位
@@ -38,6 +44,8 @@ public class GoodsAllocationDAOImpl implements GoodsAllocationDAO {
 	 * @param goodsAllocation 货位
 	 */
 	public void save(GoodsAllocationDO goodsAllocation) throws Exception {
+		goodsAllocation.setGmtCreate(dateProvider.getCurrentTime()); 
+		goodsAllocation.setGmtModified(dateProvider.getCurrentTime()); 
 		goodsAllocationMapper.save(goodsAllocation); 
 	}
 	
@@ -55,6 +63,7 @@ public class GoodsAllocationDAOImpl implements GoodsAllocationDAO {
 	 * @param goodsAllocation 货位
 	 */
 	public void update(GoodsAllocationDO goodsAllocation) throws Exception {
+		goodsAllocation.setGmtModified(dateProvider.getCurrentTime()); 
 		goodsAllocationMapper.update(goodsAllocation); 
 	}
 	

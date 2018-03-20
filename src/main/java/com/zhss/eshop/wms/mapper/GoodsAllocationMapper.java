@@ -41,7 +41,7 @@ public interface GoodsAllocationMapper {
 				+ "FROM wms_goods_allocation "
 				+ "WHERE 1=1 "
 				
-				+ "<if test='code != ll'>"
+				+ "<if test='code != null'>"
 				+ "AND code like '${code}%'" 
  				+ "</if>"
 				
