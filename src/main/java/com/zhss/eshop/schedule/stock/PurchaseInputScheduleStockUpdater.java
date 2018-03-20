@@ -68,13 +68,18 @@ public class PurchaseInputScheduleStockUpdater extends AbstractScheduleStockUpda
 	 */
 	@Override
 	protected void updateGoodsAllocationStock() throws Exception {
-		List<PurchaseInputOrderPutOnItemDTO> putOnItems = purchaseInputOrder.getPutOnItems();
-		for(PurchaseInputOrderPutOnItemDTO putOnItem : putOnItems) {
-			ScheduleGoodsAllocationStockDO goodsAllocationStock = goodsAllocationStockDAO.getBySkuId(
-					putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId());
-			goodsAllocationStock.setAvailableStockQuantity(goodsAllocationStock.getAvailableStockQuantity() 
-					+ putOnItem.getPutOnShelvesCount());
-			goodsAllocationStockDAO.update(goodsAllocationStock); 
+		List<PurchaseInputOrderItemDTO> items = purchaseInputOrder.getItems();
+		
+		for(PurchaseInputOrderItemDTO item : items) {
+			List<PurchaseInputOrderPutOnItemDTO> putOnItems = item.getPutOnItemDTOs();
+			
+			for(PurchaseInputOrderPutOnItemDTO putOnItem : putOnItems) {
+				ScheduleGoodsAllocationStockDO goodsAllocationStock = goodsAllocationStockDAO
+						.getBySkuId(putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId());
+				goodsAllocationStock.setAvailableStockQuantity(goodsAllocationStock.getAvailableStockQuantity() 
+						+ putOnItem.getPutOnShelvesCount());
+				goodsAllocationStockDAO.update(goodsAllocationStock); 
+			}
 		}
 	}
 	
@@ -83,9 +88,14 @@ public class PurchaseInputScheduleStockUpdater extends AbstractScheduleStockUpda
 	 */
 	@Override
 	protected void updateGoodsAllocationStockDetail() throws Exception {
-		List<GoodsAllocationStockDetailDTO> stockDetails = purchaseInputOrder.getStockDetails();
-		for(GoodsAllocationStockDetailDTO stockDetail : stockDetails) {
-			stockDetailDAO.save(stockDetail.clone(ScheduleGoodsAllocationStockDetailDO.class));  
+		List<PurchaseInputOrderItemDTO> items = purchaseInputOrder.getItems();
+		
+		for(PurchaseInputOrderItemDTO item : items) {
+			List<GoodsAllocationStockDetailDTO> stockDetails = item.getStockDetails();
+			
+			for(GoodsAllocationStockDetailDTO stockDetail : stockDetails) {
+				stockDetailDAO.save(stockDetail.clone(ScheduleGoodsAllocationStockDetailDO.class));  
+			}
 		}
  	}
 	
