@@ -136,5 +136,14 @@ public class WmsServiceImpl implements WmsService {
 		
 		return stockDetails;
 	}
+	
+	/**
+	 * 获取订单对应的物流单号 
+	 * @param orderId 订单id
+	 * @return 物流单号
+	 */
+	public String getLogisticCode(Long orderId) {
+		return null;
+	}
 
 }
