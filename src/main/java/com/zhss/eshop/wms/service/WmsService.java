@@ -64,4 +64,11 @@ public interface WmsService {
 	 */
 	List<GoodsAllocationStockDetailDTO> listStockDetailsByGoodsSkuId(Long goodsSkuId);
 	
+	/**
+	 * 获取订单对应的物流单号 
+	 * @param orderId 订单id
+	 * @return 物流单号
+	 */
+	String getLogisticCode(Long orderId);
+	
 }

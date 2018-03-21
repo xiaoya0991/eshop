@@ -15,6 +15,10 @@ public class PurchaseInputOrderDTO {
 	 */
 	private Long id;
 	/**
+	 * 采购入库单id
+	 */
+	private Long purchaseInputOrderId;
+	/**
 	 * 供应商id
 	 */
 	private Long supplierId;
@@ -62,14 +66,6 @@ public class PurchaseInputOrderDTO {
 	 * 采购入库单条目集合
 	 */
 	private List<PurchaseInputOrderItemDTO> items;
-	/**
-	 * 采购入库单上架条目
-	 */
-	private List<PurchaseInputOrderPutOnItemDTO> putOnItems;
-	/**
-	 * 货位库存明细
-	 */
-	private List<GoodsAllocationStockDetailDTO> stockDetails;
 	
 	public Long getId() {
 		return id;
@@ -149,17 +145,11 @@ public class PurchaseInputOrderDTO {
 	public void setItems(List<PurchaseInputOrderItemDTO> items) {
 		this.items = items;
 	}
-	public List<PurchaseInputOrderPutOnItemDTO> getPutOnItems() {
-		return putOnItems;
+	public Long getPurchaseInputOrderId() {
+		return purchaseInputOrderId;
 	}
-	public void setPutOnItems(List<PurchaseInputOrderPutOnItemDTO> putOnItems) {
-		this.putOnItems = putOnItems;
-	}
-	public List<GoodsAllocationStockDetailDTO> getStockDetails() {
-		return stockDetails;
-	}
-	public void setStockDetails(List<GoodsAllocationStockDetailDTO> stockDetails) {
-		this.stockDetails = stockDetails;
+	public void setPurchaseInputOrderId(Long purchaseInputOrderId) {
+		this.purchaseInputOrderId = purchaseInputOrderId;
 	}
 	
 }
