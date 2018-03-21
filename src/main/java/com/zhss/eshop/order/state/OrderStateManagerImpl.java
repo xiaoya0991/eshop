@@ -38,6 +38,11 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 */
 	@Autowired
 	private WaitForReceiveOrderState waitForReceiveOrderState;
+	/**
+	 * 已完成状态
+	 */
+	@Autowired
+	private FinishedOrderState finishedOrderState;
 	
 	/**
 	 * 创建订单
@@ -95,6 +100,26 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 */
 	public void finishDelivery(OrderInfoDTO order) throws Exception {
 		waitForReceiveOrderState.doTransition(order); 
+	}
+	
+	/**
+	 * 判断能否执行手动确认收货的操作
+	 * @param order 订单
+	 * @return 能否执行手动确认收货的操作
+	 * @throws Exception
+	 */
+	public Boolean canConfirmReceipt(OrderInfoDTO order) throws Exception {
+		OrderState orderState = orderStateFactory.get(order);
+		return orderState.canConfirmReceipt(order);
+	}
+	
+	/**
+	 * 手动确认收货
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void confirmReceipt(OrderInfoDTO order) throws Exception {
+		finishedOrderState.doTransition(order);  
 	}
 	
 }

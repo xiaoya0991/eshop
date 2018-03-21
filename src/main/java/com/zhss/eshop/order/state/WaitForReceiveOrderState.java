@@ -57,4 +57,14 @@ public class WaitForReceiveOrderState implements OrderState {
 		return false;
 	}
 	
+	/**
+	 * 判断能否执行手动确认收货的操作
+	 * @param order 订单
+	 * @return 能否执行手动确认收货的操作
+	 * @throws Exception
+	 */
+	public Boolean canConfirmReceipt(OrderInfoDTO order) throws Exception {
+		return true;
+	}
+	
 }

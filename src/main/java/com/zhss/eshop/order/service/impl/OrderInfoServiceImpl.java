@@ -348,4 +348,23 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		return payService.getQrCode(order);
 	}
 	
+	/**
+	 * 手动确认收货
+	 * @param id 订单id
+	 * @throws Exception
+	 */
+	public Boolean manualConfirmReceipt(Long id) throws Exception {
+		OrderInfoDTO order = getById(id);
+		
+		if(!orderStateManager.canConfirmReceipt(order)) {
+			return false;
+		}
+		
+		orderStateManager.confirmReceipt(order); 
+		orderInfoDAO.updateConfirmReceiptTime(id, dateProvider.getCurrentTime()); 
+		orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.MANUAL_CONFIRM_RECEIPT));  
+		
+		return true;
+	}
+	
 }

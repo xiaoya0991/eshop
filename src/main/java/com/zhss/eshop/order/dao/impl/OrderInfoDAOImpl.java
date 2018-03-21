@@ -1,10 +1,13 @@
 package com.zhss.eshop.order.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.order.constant.OrderStatus;
 import com.zhss.eshop.order.dao.OrderInfoDAO;
 import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoQuery;
@@ -23,12 +26,17 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 */
 	@Autowired
 	private OrderInfoMapper orderInfoMapper;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 新增订单
 	 * @param order
 	 */
-	public Long save(OrderInfoDO order) {
+	public Long save(OrderInfoDO order) throws Exception {
 		orderInfoMapper.save(order);  
 		return order.getId();
 	}
@@ -38,7 +46,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * @param query 查询条件
 	 * @return 订单
 	 */
-	public List<OrderInfoDO> listByPage(OrderInfoQuery query) {
+	public List<OrderInfoDO> listByPage(OrderInfoQuery query) throws Exception {
 		return orderInfoMapper.listByPage(query);
 	}
 	
@@ -47,7 +55,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * @param query 查询条件
 	 * @return 订单
 	 */
-	public OrderInfoDO getById(Long id) {
+	public OrderInfoDO getById(Long id) throws Exception {
 		return orderInfoMapper.getById(id);
 	}
 	
@@ -55,7 +63,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * 更新订单状态
 	 * @param order 订单
 	 */
-	public void updateStatus(OrderInfoDO order) {
+	public void updateStatus(OrderInfoDO order) throws Exception {
 		orderInfoMapper.updateStatus(order);
 	}
 	
@@ -63,8 +71,28 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * 查询所有未付款的订单
 	 * @return 所有未付款的订单
 	 */
-	public List<OrderInfoDO> listAllUnpayed() { 
+	public List<OrderInfoDO> listAllUnpayed() throws Exception { 
 		return orderInfoMapper.listAllUnpayed();
+	}
+	
+	/**
+	 * 更新订单的确认收货时间
+	 * @param order 订单
+	 */
+	public void updateConfirmReceiptTime(Long id, Date confirmReceiptTime) throws Exception {
+		OrderInfoDO order = getById(id);
+		order.setConfirmReceiptTime(confirmReceiptTime); 
+		order.setGmtModified(dateProvider.getCurrentTime()); 
+		orderInfoMapper.updateConfirmReceiptTime(order); 
+	}
+	
+	/**
+	 * 查询待收货的订单
+	 * @return 订单
+	 * @throws Exception
+	 */
+	public List<OrderInfoDO> listUnreceived() throws Exception {
+		return orderInfoMapper.listByStatus(OrderStatus.WAIT_FOR_RECEIVE);
 	}
 	
 }

@@ -17,7 +17,7 @@ public interface OrderInfoService {
 	 * 计算订单价格
 	 * @param order 订单
 	 */
-	OrderInfoDTO calculateOrderPrice(OrderInfoDTO order);
+	OrderInfoDTO calculateOrderPrice(OrderInfoDTO order) throws Exception;
 	
 	/**
 	 * 计算优惠券抵扣的金额
@@ -26,7 +26,7 @@ public interface OrderInfoService {
 	 * @return
 	 */
 	OrderInfoDTO calculateCouponDiscountPrice(
-			OrderInfoDTO order, CouponDTO coupon);
+			OrderInfoDTO order, CouponDTO coupon) throws Exception;
 	
 	/**
 	 * 新增一个订单
@@ -65,5 +65,12 @@ public interface OrderInfoService {
 	 * @throws Exception
 	 */
 	String pay(Long id) throws Exception;
+	
+	/**
+	 * 手动确认收货
+	 * @param id 订单id
+	 * @throws Exception
+	 */
+	Boolean manualConfirmReceipt(Long id) throws Exception;
 	
 }

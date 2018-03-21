@@ -39,6 +39,11 @@ public class OrderStateFactory {
 	 */
 	@Autowired
 	private DefaultOrderState defaultOrderState;
+	/**
+	 * 已完成状态
+	 */
+	@Autowired
+	private FinishedOrderState finishedOrderState;
 	
 	/**
 	 * 获取订单状态组件
@@ -55,6 +60,8 @@ public class OrderStateFactory {
 			return waitforDeliveryOrderState;
 		} else if(OrderStatus.WAIT_FOR_RECEIVE.equals(order.getOrderStatus())) {
 			return waitForReceiveState;
+		} else if(OrderStatus.FINISHED.equals(order.getOrderStatus())) {
+			return finishedOrderState;
 		}
 		return defaultOrderState;
 	}

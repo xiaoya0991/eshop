@@ -30,4 +30,12 @@ public interface OrderState {
 	 */
 	Boolean canPay(OrderInfoDTO order) throws Exception;
 	
+	/**
+	 * 判断能否执行手动确认收货的操作
+	 * @param order 订单
+	 * @return 能否执行手动确认收货的操作
+	 * @throws Exception
+	 */
+	Boolean canConfirmReceipt(OrderInfoDTO order) throws Exception;
+	
 }

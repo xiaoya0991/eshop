@@ -118,8 +118,8 @@ public interface OrderInfoMapper {
 	List<OrderInfoDO> listByPage(OrderInfoQuery query);
 	
 	/**
-	 * 分页查询订单
-	 * @param query 查询条件
+	 * 根据id查询订单
+	 * @param id 订单id
 	 * @return 订单
 	 */
 	@Select("SELECT "
@@ -223,5 +223,63 @@ public interface OrderInfoMapper {
 		@Result(column = "order_comment", property = "orderComment")
  	})
 	List<OrderInfoDO> listAllUnpayed();
+	
+	/**
+	 * 更新订单的确认收货时间
+	 * @param order 订单
+	 */
+	@Update("UPDATE order_info SET "
+				+ "confirm_receipt_time=#{confirmReceiptTime},"
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}")  
+	void updateConfirmReceiptTime(OrderInfoDO order);
+	
+	/**
+	 * 查询处于待收货状态的订单
+	 * @return 订单
+	 */
+	@Select("SELECT "
+				+ "id,"
+				+ "gmt_create,"
+				+ "order_no,"
+				+ "consignee,"
+				+ "delivery_address,"
+				+ "consignee_cell_phone_number,"
+				+ "total_amount,"
+				+ "discount_amount,"
+				+ "coupon_amount,"
+				+ "freight,"
+				+ "payable_amount,"
+				+ "pay_type,"
+				+ "invoice_title,"
+				+ "taxpayer_id,"
+				+ "order_status,"
+				+ "user_account_id,"
+				+ "username,"
+				+ "order_comment "
+			+ "FROM order_info "
+			+ "WHERE status=#{status}" 
+	)
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "order_no", property = "orderNo"),
+		@Result(column = "consignee", property = "consignee"),
+		@Result(column = "total_amount", property = "totalAmount"),
+		@Result(column = "discount_amount", property = "discountAmount"),
+		@Result(column = "coupon_amount", property = "couponAmount"),
+		@Result(column = "freight", property = "freight"),
+		@Result(column = "payable_amount", property = "payableAmount"),
+		@Result(column = "pay_type", property = "payType"),
+		@Result(column = "order_status", property = "orderStatus"),
+		@Result(column = "delivery_address", property = "deliveryAddress"),
+		@Result(column = "consignee_cell_phone_number", property = "consigneeCellPhoneNumber"),
+		@Result(column = "invoice_title", property = "invoiceTitle"),
+		@Result(column = "taxpayer_id", property = "taxpayerId"),
+		@Result(column = "user_account_id", property = "userAccountId"),
+		@Result(column = "username", property = "username"),
+		@Result(column = "order_comment", property = "orderComment")
+ 	})
+	List<OrderInfoDO> listByStatus(@Param("status") Integer status); 
 	
 }

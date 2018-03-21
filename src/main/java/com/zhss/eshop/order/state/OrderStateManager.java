@@ -53,4 +53,19 @@ public interface OrderStateManager {
 	 */
 	void finishDelivery(OrderInfoDTO order) throws Exception;
 	
+	/**
+	 * 判断能否确认收货
+	 * @param order 订单
+	 * @return 能否确认收货
+	 * @throws Exception
+	 */
+	Boolean canConfirmReceipt(OrderInfoDTO order) throws Exception;
+	
+	/**
+	 * 手动确认收货
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	void confirmReceipt(OrderInfoDTO order) throws Exception;
+	
 }

@@ -40,7 +40,11 @@ public class OrderOperateLogFactory {
 			operateContent = "支付订单，订单编号为：" + order.getOrderNo() + "，支付金额为：" + order.getPayableAmount();
 		} else if(OrderOperateType.GOODS_DELIVERY.equals(operateType)) {
 			operateContent = "已经将订单中的商品进行发货"; 
-		}
+		} else if(OrderOperateType.MANUAL_CONFIRM_RECEIPT.equals(operateType)) {
+			operateContent = "手动完成确认收货"; 
+		} else if(OrderOperateType.AUTO_CONFIRM_RECEIPT.equals(operateType)) {
+			operateContent = "系统自动完成确认收货"; 
+		} 
 		
 		OrderOperateLogDO log = create(order, operateType, operateContent);
 		
