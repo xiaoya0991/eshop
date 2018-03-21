@@ -26,7 +26,7 @@ public interface PurchaseInputOrderItemMapper {
 	 * @param purchaseInputOrderItem 采购入库单条目
 	 * @throws Exception
 	 */
-	@Insert("INSRET INTO wms_purchase_input_order_item("
+	@Insert("INSERT INTO wms_purchase_input_order_item("
 				+ "purchase_input_order_id,"
 				+ "goods_sku_id,"
 				+ "purchase_count,"
@@ -60,13 +60,13 @@ public interface PurchaseInputOrderItemMapper {
 				+ "gmt_create,"
 				+ "gmt_modified "
 			+ "FROM wms_purchase_input_order_item "
-			+ "WHERE purchase_input_order_id=#{purcahseInputOrderId}")
+			+ "WHERE purchase_input_order_id=#{purchaseInputOrderId}")
 	@Results({
 		@Result(column = "id", property = "id", id = true),
 		@Result(column = "purchase_input_order_id", property = "purchaseInputOrderId"),
 		@Result(column = "goods_sku_id", property = "goodsSkuId"),
 		@Result(column = "purchase_count", property = "purchaseCount"),
-		@Result(column = "purcahse_price", property = "purchasePrice"),
+		@Result(column = "purchase_price", property = "purchasePrice"),
 		@Result(column = "qualified_count", property = "qualifiedCount"),
 		@Result(column = "arrival_count", property = "arrivalCount"),
 		@Result(column = "gmt_create", property = "gmtCreate"),

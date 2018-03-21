@@ -27,6 +27,7 @@ public interface PurchaseInputOrderMapper {
 	 * @param purchaseInputOrder 采购入库单
 	 */
 	@Insert("INSERT INTO wms_purchase_input_order("
+				+ "purchase_order_id,"
 				+ "supplier_id,"
 				+ "expect_arrival_time,"
 				+ "purchase_contactor,"
@@ -38,6 +39,7 @@ public interface PurchaseInputOrderMapper {
 				+ "gmt_create,"
 				+ "gmt_modified"
 			+ ") VALUES("
+				+ "#{purchaseOrderId},"  
 				+ "#{supplierId},"
 				+ "#{expectArrivalTime},"
 				+ "#{purchaseContactor},"
@@ -61,6 +63,7 @@ public interface PurchaseInputOrderMapper {
 			
 			+ "SELECT "
 				+ "a.id,"
+				+ "a.purchase_order_id,"
 				+ "a.supplier_id,"
 				+ "a.expect_arrival_time,"
 				+ "a.actual_arrival_time,"
@@ -93,13 +96,14 @@ public interface PurchaseInputOrderMapper {
 			+ "</script>")
 	@Results({
 		@Result(column = "id", property = "id", id = true),
+		@Result(column = "purchase_order_id", property = "purchaseOrderId"), 
 		@Result(column = "supplier_id", property = "supplierId"),
 		@Result(column = "expect_arrival_time", property = "expectArrivalTime"),
 		@Result(column = "actual_arrival_time", property = "actualArrivalTime"),
 		@Result(column = "purchase_contactor", property = "purchaseContactor"),
 		@Result(column = "purchase_contactor_phone_number", property = "purchaseContactorPhoneNumber"),
 		@Result(column = "purchase_contactor_email", property = "purchaseContactorEmail"),
-		@Result(column = "purcahse_order_remark", property = "purchaseOrderRemark"),
+		@Result(column = "purchase_order_remark", property = "purchaseOrderRemark"),
 		@Result(column = "purchaser", property = "purchaser"),
 		@Result(column = "status", property = "status"),
 		@Result(column = "gmt_create", property = "gmtCreate"),
@@ -114,6 +118,7 @@ public interface PurchaseInputOrderMapper {
 	 */
 	@Select("SELECT "
 				+ "id,"
+				+ "purchase_order_id,"
 				+ "supplier_id,"
 				+ "expect_arrival_time,"
 				+ "actual_arrival_time,"
@@ -129,13 +134,14 @@ public interface PurchaseInputOrderMapper {
 			+ "WHERE id=#{id}") 
 	@Results({
 		@Result(column = "id", property = "id", id = true),
+		@Result(column = "purchase_order_id", property = "purchaseOrderId"), 
 		@Result(column = "supplier_id", property = "supplierId"),
 		@Result(column = "expect_arrival_time", property = "expectArrivalTime"),
 		@Result(column = "actual_arrival_time", property = "actualArrivalTime"),
 		@Result(column = "purchase_contactor", property = "purchaseContactor"),
 		@Result(column = "purchase_contactor_phone_number", property = "purchaseContactorPhoneNumber"),
 		@Result(column = "purchase_contactor_email", property = "purchaseContactorEmail"),
-		@Result(column = "purcahse_order_remark", property = "purchaseOrderRemark"),
+		@Result(column = "purchase_order_remark", property = "purchaseOrderRemark"),
 		@Result(column = "purchaser", property = "purchaser"),
 		@Result(column = "status", property = "status"),
 		@Result(column = "gmt_create", property = "gmtCreate"),

@@ -12,6 +12,11 @@ import org.springframework.stereotype.Component;
 public class PurchaseInputOrderHandlerFactory {
 
 	/**
+	 * 是否构建好了handler链条
+	 */
+	private Boolean buildedHandlerChain = false;
+	
+	/**
 	 * 更新采购入库单状态handler
 	 */
 	@Autowired
@@ -38,23 +43,27 @@ public class PurchaseInputOrderHandlerFactory {
 	private InformFinanceCenterHandler informFinanceCenterHandler;
 	
 	/**
-	 * 构造函数：组装责任链条
-	 */
-	public PurchaseInputOrderHandlerFactory() {
-		updatePurchaseInputOrderStatusHandler.setSuccessor(informPurchaseCenterHandler);
-		informPurchaseCenterHandler.setSuccessor(updateStockHandler);
-		updateStockHandler.setSuccessor(informScheduleCenterHandler); 
-		informScheduleCenterHandler.setSuccessor(informFinanceCenterHandler); 
-	}
-	
-	/**
 	 * 创建采购入库单handler链条
 	 * @param purchaseInputOrder 采购入库单
 	 * @return handler链条
 	 * @throws Exception
 	 */
 	public PurchaseInputOrderHandler getHandlerChain() throws Exception {
+		if(!buildedHandlerChain) {
+			buildHandlerChain();
+		}
 		return updatePurchaseInputOrderStatusHandler;
+	}
+	
+	/**
+	 * 构造handler链条
+	 * @throws Exception
+	 */
+	private void buildHandlerChain() throws Exception {
+		updatePurchaseInputOrderStatusHandler.setSuccessor(informPurchaseCenterHandler);
+		informPurchaseCenterHandler.setSuccessor(updateStockHandler);
+		updateStockHandler.setSuccessor(informScheduleCenterHandler); 
+		informScheduleCenterHandler.setSuccessor(informFinanceCenterHandler); 
 	}
 	
 }

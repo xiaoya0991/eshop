@@ -1,7 +1,6 @@
 package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
@@ -48,10 +47,6 @@ public class PurchaseInputOrderItemDO extends AbstractObject {
 	 * 采购入库单条目的修改时间
 	 */
 	private Date gmtModified;
-	/**
-	 * 采购入库单商品上架条目集合
-	 */
-	private List<PurchaseInputOrderPutOnItemDTO> putOnItemDTOs;
 	
 	public Long getId() {
 		return id;
@@ -107,11 +102,86 @@ public class PurchaseInputOrderItemDO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<PurchaseInputOrderPutOnItemDTO> getPutOnItemDTOs() {
-		return putOnItemDTOs;
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((arrivalCount == null) ? 0 : arrivalCount.hashCode());
+		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
+		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
+		result = prime * result + ((goodsSkuId == null) ? 0 : goodsSkuId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((purchaseCount == null) ? 0 : purchaseCount.hashCode());
+		result = prime * result + ((purchaseInputOrderId == null) ? 0 : purchaseInputOrderId.hashCode());
+		result = prime * result + ((purchasePrice == null) ? 0 : purchasePrice.hashCode());
+		result = prime * result + ((qualifiedCount == null) ? 0 : qualifiedCount.hashCode());
+		return result;
 	}
-	public void setPutOnItemDTOs(List<PurchaseInputOrderPutOnItemDTO> putOnItemDTOs) {
-		this.putOnItemDTOs = putOnItemDTOs;
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PurchaseInputOrderItemDO other = (PurchaseInputOrderItemDO) obj;
+		if (arrivalCount == null) {
+			if (other.arrivalCount != null)
+				return false;
+		} else if (!arrivalCount.equals(other.arrivalCount))
+			return false;
+		if (gmtCreate == null) {
+			if (other.gmtCreate != null)
+				return false;
+		} else if (!gmtCreate.equals(other.gmtCreate))
+			return false;
+		if (gmtModified == null) {
+			if (other.gmtModified != null)
+				return false;
+		} else if (!gmtModified.equals(other.gmtModified))
+			return false;
+		if (goodsSkuId == null) {
+			if (other.goodsSkuId != null)
+				return false;
+		} else if (!goodsSkuId.equals(other.goodsSkuId))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (purchaseCount == null) {
+			if (other.purchaseCount != null)
+				return false;
+		} else if (!purchaseCount.equals(other.purchaseCount))
+			return false;
+		if (purchaseInputOrderId == null) {
+			if (other.purchaseInputOrderId != null)
+				return false;
+		} else if (!purchaseInputOrderId.equals(other.purchaseInputOrderId))
+			return false;
+		if (purchasePrice == null) {
+			if (other.purchasePrice != null)
+				return false;
+		} else if (!purchasePrice.equals(other.purchasePrice))
+			return false;
+		if (qualifiedCount == null) {
+			if (other.qualifiedCount != null)
+				return false;
+		} else if (!qualifiedCount.equals(other.qualifiedCount))
+			return false;
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "PurchaseInputOrderItemDO [id=" + id + ", purchaseInputOrderId=" + purchaseInputOrderId + ", goodsSkuId="
+				+ goodsSkuId + ", purchaseCount=" + purchaseCount + ", purchasePrice=" + purchasePrice
+				+ ", qualifiedCount=" + qualifiedCount + ", arrivalCount=" + arrivalCount + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
 	}
 	
 }
