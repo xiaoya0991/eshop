@@ -1,5 +1,7 @@
 package com.zhss.eshop.logistics.service;
 
+import java.util.Date;
+
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.wms.domain.LogisticOrderDTO;
@@ -24,5 +26,13 @@ public interface LogisticsService {
 	 * @return 物流单
 	 */
 	LogisticOrderDTO applyLogisticOrder(OrderInfoDTO order);
+	
+	/**
+	 * 获取订单的签收时间
+	 * @param orderId 订单id
+	 * @param orderNo 订单编号
+	 * @return 签收时间
+	 */
+	Date getSignedTime(Long orderId, Long orderNo);
 	
 }
