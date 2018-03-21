@@ -1,12 +1,12 @@
 package com.zhss.eshop.purchase.service;
 
 /**
- * 采购中心对外提供的接口
+ * 采购中心接口
  * @author zhonghuashishan
  *
  */
-public interface PurchaseFacadeService {
-
+public interface PurchaseService {
+	
 	/**
 	 * 判断是否有关联商品sku的采购单
 	 * @param goodsSkuId 商品sku id
@@ -26,7 +26,7 @@ public interface PurchaseFacadeService {
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果
 	 */
-	Boolean informFinishePurchaseInputOrderEvent(Long purcaseOrderId);
+	Boolean informFinishedPurchaseInputOrderEvent(Long purcaseOrderId);
 	
 	/**
 	 * 通知采购中心，“创建采购结算单”事件发生了
@@ -40,6 +40,6 @@ public interface PurchaseFacadeService {
 	 * @param purchaseOrderId
 	 * @return
 	 */
-	Boolean informFinishePurchaseSettlementOrderEvent(Long purchaseOrderId);
+	Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseOrderId);
 	
 }
