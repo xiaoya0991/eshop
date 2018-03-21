@@ -55,7 +55,7 @@ public class LogisticsServiceImpl implements LogisticsService {
 	 * @param orderNo 订单编号
 	 * @return 签收时间
 	 */
-	public Date getSignedTime(Long orderId, Long orderNo) {
+	public Date getSignedTime(Long orderId, String orderNo) {
 		try {
 			return dateProvider.getCurrentTime();
 		} catch (Exception e) {
