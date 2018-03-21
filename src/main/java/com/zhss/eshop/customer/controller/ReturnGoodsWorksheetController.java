@@ -90,7 +90,7 @@ public class ReturnGoodsWorksheetController {
 	 * @param id 退货工单id
 	 * @throws Exception
 	 */
-	@PutMapping("/confirm/received/{id}")
+	@PutMapping("/confirmReceivedReturnGoods/{id}")
 	public Boolean confirmReceivedReturnGoods(@PathVariable("id") Long id) {
 		try {
 			returnGoodsWorksheetService.confirmReceivedReturnGoods(id);
