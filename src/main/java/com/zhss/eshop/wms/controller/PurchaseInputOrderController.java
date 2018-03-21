@@ -122,4 +122,20 @@ public class PurchaseInputOrderController {
 		}
 	}
 	
+	/**
+	 * 对采购入库单进行审核
+	 * @param id 采购入库单id
+	 * @throws Exception 
+	 */
+	@PutMapping("/approve/{id}") 
+	public Boolean submitApprove(@PathVariable("id") Long id, Integer approveResult) throws Exception {
+		try {
+			purchaseInputOrderService.approve(id, approveResult); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
 }
