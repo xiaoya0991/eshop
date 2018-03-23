@@ -79,7 +79,7 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 	/**
 	 * 销售出库单的状态
 	 */
-	private Integer saleDeliveryOrderStatus;
+	private Integer status;
 	/**
 	 * 实际发货时间
 	 */
@@ -201,11 +201,11 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 	public void setOrderComment(String orderComment) {
 		this.orderComment = orderComment;
 	}
-	public Integer getSaleDeliveryOrderStatus() {
-		return saleDeliveryOrderStatus;
+	public Integer getStatus() {
+		return status;
 	}
-	public void setSaleDeliveryOrderStatus(Integer saleDeliveryOrderStatus) {
-		this.saleDeliveryOrderStatus = saleDeliveryOrderStatus;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	public Date getDeliveryTime() {
 		return deliveryTime;
