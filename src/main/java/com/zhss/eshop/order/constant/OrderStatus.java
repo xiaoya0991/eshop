@@ -36,7 +36,7 @@ public class OrderStatus {
 	/**
 	 * 退货申请待审核
 	 */
-	public static final Integer RETURN_GOODS_APPROVING = 6;
+	public static final Integer WAIT_FOR_RETURN_GOODS_APPROVE = 6;
 	/**
 	 * 退货审核不通过
 	 */
@@ -44,7 +44,7 @@ public class OrderStatus {
 	/**
 	 * 退货商品待寄送
 	 */
-	public static final Integer WAIT_FOR_RETURN_GOODS = 8;
+	public static final Integer WAIT_FOR_SEND_OUT_RETURN_GOODS = 8;
 	/**
 	 * 退货商品待收货
 	 */

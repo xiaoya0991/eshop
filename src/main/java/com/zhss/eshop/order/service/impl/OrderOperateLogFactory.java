@@ -44,7 +44,13 @@ public class OrderOperateLogFactory {
 			operateContent = "手动完成确认收货"; 
 		} else if(OrderOperateType.AUTO_CONFIRM_RECEIPT.equals(operateType)) {
 			operateContent = "系统自动完成确认收货"; 
-		} 
+		} else if(OrderOperateType.APPLY_RETURN_GOODS.equals(operateType)) {
+			operateContent = "申请退货"; 
+		} else if(OrderOperateType.RETURN_GOODS_REJECTED.equals(operateType)) {
+			operateContent = "退货申请审核不通过"; 
+		} else if(OrderOperateType.RETURN_GOODS_REJECTED.equals(operateType)) {
+			operateContent = "退货申请审核已通过"; 
+		}     
 		
 		OrderOperateLogDO log = create(order, operateType, operateContent);
 		

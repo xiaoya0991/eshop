@@ -38,4 +38,12 @@ public interface OrderState {
 	 */
 	Boolean canConfirmReceipt(OrderInfoDTO order) throws Exception;
 	
+	/**
+	 * 判断能否申请退货
+	 * @param order 订单
+	 * @return 能否申请退货
+	 * @throws Exception
+	 */
+	Boolean canApplyReturnGoods(OrderInfoDTO order) throws Exception;
+	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderInfoQuery;
+import com.zhss.eshop.order.domain.ReturnGoodsApplyDTO;
 import com.zhss.eshop.promotion.domain.CouponDTO;
 
 /**
@@ -72,5 +73,13 @@ public interface OrderInfoService {
 	 * @throws Exception
 	 */
 	Boolean manualConfirmReceipt(Long id) throws Exception;
+	
+	/**
+	 * 申请退货
+	 * @param apply 退货申请
+	 * @return 处理结果
+	 * @throws Exception
+	 */
+	Boolean applyReturnGoods(ReturnGoodsApplyDTO apply) throws Exception;
 	
 }

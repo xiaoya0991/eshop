@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.membership.service.MembershipService;
 import com.zhss.eshop.order.constant.OrderOperateType;
+import com.zhss.eshop.order.constant.ReturnGoodsApplyStatus;
 import com.zhss.eshop.order.dao.OrderOperateLogDAO;
+import com.zhss.eshop.order.dao.ReturnGoodsApplyDAO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.service.OrderInfoService;
 import com.zhss.eshop.order.service.OrderService;
@@ -65,6 +67,11 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Autowired
 	private OrderOperateLogFactory orderOperateLogFactory;
+	/**
+	 * 退货申请管理DAO
+	 */
+	@Autowired
+	private ReturnGoodsApplyDAO returnGoodsApplyDAO;
 	
 	/**
 	 * 通知订单中心，“商品完成发货”事件发生了
@@ -75,9 +82,7 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
 			orderStateManager.finishDelivery(order);
-			
-			orderOperateLogDAO.save(orderOperateLogFactory.get(order, 
-					OrderOperateType.GOODS_DELIVERY));  
+			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.GOODS_DELIVERY));  
 			
 			return true;
 		} catch (Exception e) {
@@ -92,7 +97,16 @@ public class OrderServiceImpl implements OrderService {
 	 * @return 处理结果
 	 */
 	public Boolean informReturnGoodsWorksheetRejectedEvent(Long orderId) {
-		return true;
+		try {
+			OrderInfoDTO order = orderInfoService.getById(orderId);
+			orderStateManager.rejectReturnGoodsApply(order);
+			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.RETURN_GOODS_REJECTED));  
+			returnGoodsApplyDAO.updateStatus(orderId, ReturnGoodsApplyStatus.REJECTED); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e);
+			return false;
+		}
 	}
 	
 	/**
@@ -101,7 +115,16 @@ public class OrderServiceImpl implements OrderService {
 	 * @return 处理结果
 	 */
 	public Boolean informReturnGoodsWorsheetApprovedEvent(Long orderId) {
-		return true;
+		try {
+			OrderInfoDTO order = orderInfoService.getById(orderId);
+			orderStateManager.passedReturnGoodsApply(order); 
+			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.RETURN_GOODS_APPROVED));  
+			returnGoodsApplyDAO.updateStatus(orderId, ReturnGoodsApplyStatus.PASSED); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e);
+			return false;
+		}
 	}
 	
 	/**

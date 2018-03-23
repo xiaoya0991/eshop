@@ -11,18 +11,22 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.common.util.ObjectUtils;
+import com.zhss.eshop.customer.service.CustomerService;
 import com.zhss.eshop.order.constant.OrderOperateType;
 import com.zhss.eshop.order.constant.OrderStatus;
 import com.zhss.eshop.order.constant.PublishedComment;
 import com.zhss.eshop.order.dao.OrderInfoDAO;
 import com.zhss.eshop.order.dao.OrderItemDAO;
 import com.zhss.eshop.order.dao.OrderOperateLogDAO;
+import com.zhss.eshop.order.dao.ReturnGoodsApplyDAO;
 import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderInfoQuery;
 import com.zhss.eshop.order.domain.OrderItemDO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.order.domain.OrderOperateLogDTO;
+import com.zhss.eshop.order.domain.ReturnGoodsApplyDO;
+import com.zhss.eshop.order.domain.ReturnGoodsApplyDTO;
 import com.zhss.eshop.order.price.CouponCalculator;
 import com.zhss.eshop.order.price.CouponCalculatorFactory;
 import com.zhss.eshop.order.price.DefaultOrderPriceCalculatorFactory;
@@ -116,6 +120,16 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 */
 	@Autowired
 	private PayService payService;
+	/**
+	 * 退货申请管理DAO组件
+	 */
+	@Autowired
+	private ReturnGoodsApplyDAO returnGoodsApplyDAO;
+	/**
+	 * 客服中心接口
+	 */
+	@Autowired
+	private CustomerService customerService;
 	
 	/**
 	 * 计算订单价格
@@ -363,6 +377,28 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		orderStateManager.confirmReceipt(order); 
 		orderInfoDAO.updateConfirmReceiptTime(id, dateProvider.getCurrentTime()); 
 		orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.MANUAL_CONFIRM_RECEIPT));  
+		
+		return true;
+	}
+	
+	/**
+	 * 申请退货
+	 * @param apply 退货申请
+	 * @return 处理结果
+	 * @throws Exception
+	 */
+	public Boolean applyReturnGoods(ReturnGoodsApplyDTO apply) throws Exception {
+		OrderInfoDTO order = getById(apply.getOrderInfoId());
+		
+		if(!orderStateManager.canApplyReturnGoods(order)) {
+			return false;
+		}
+		
+		returnGoodsApplyDAO.save(apply.clone(ReturnGoodsApplyDO.class));  
+		orderStateManager.applyReturnGoods(order); 
+		orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.APPLY_RETURN_GOODS));  
+		customerService.createReturnGoodsWorksheet(order.getId(), order.getOrderNo(), 
+				apply.getReturnGoodsReason(), apply.getReturnGoodsComment());
 		
 		return true;
 	}

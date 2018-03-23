@@ -74,4 +74,14 @@ public class WaitForDeliveryOrderState implements OrderState {
 		return false;
 	}
 	
+	/**
+	 * 判断能否申请退货
+	 * @param order 订单
+	 * @return 能否申请退货
+	 * @throws Exception
+	 */
+	public Boolean canApplyReturnGoods(OrderInfoDTO order) throws Exception {
+		return false;
+	}
+	
 }

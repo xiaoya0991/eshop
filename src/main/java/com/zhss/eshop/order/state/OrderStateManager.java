@@ -68,4 +68,33 @@ public interface OrderStateManager {
 	 */
 	void confirmReceipt(OrderInfoDTO order) throws Exception;
 	
+	/**
+	 * 判断能否申请退货
+	 * @param order 订单
+	 * @return 能否申请退货
+	 * @throws Exception
+	 */
+	Boolean canApplyReturnGoods(OrderInfoDTO order) throws Exception;
+	
+	/**
+	 * 申请退货
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	void applyReturnGoods(OrderInfoDTO order) throws Exception;
+	
+	/**
+	 * 拒绝退货申请
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	void rejectReturnGoodsApply(OrderInfoDTO order) throws Exception;
+	
+	/**
+	 * 退货申请审核通过
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	void passedReturnGoodsApply(OrderInfoDTO order) throws Exception;
+	
 }

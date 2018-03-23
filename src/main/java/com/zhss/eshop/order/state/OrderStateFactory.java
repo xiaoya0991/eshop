@@ -44,6 +44,11 @@ public class OrderStateFactory {
 	 */
 	@Autowired
 	private FinishedOrderState finishedOrderState;
+	/**
+	 * 等待退货申请审核状态
+	 */
+	@Autowired
+	private WaitForReturnGoodsApproveOrderState waitForReturnGoodsApproveOrderState;
 	
 	/**
 	 * 获取订单状态组件
@@ -62,6 +67,8 @@ public class OrderStateFactory {
 			return waitForReceiveState;
 		} else if(OrderStatus.FINISHED.equals(order.getOrderStatus())) {
 			return finishedOrderState;
+		} else if(OrderStatus.WAIT_FOR_RETURN_GOODS_APPROVE.equals(order.getOrderStatus())) {
+			return waitForReturnGoodsApproveOrderState;
 		}
 		return defaultOrderState;
 	}

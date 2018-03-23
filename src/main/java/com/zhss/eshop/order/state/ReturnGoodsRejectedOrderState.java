@@ -10,12 +10,12 @@ import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 
 /**
- * 待收货状态
+ * 退后审核不通过状态
  * @author zhonghuashishan
  *
  */
 @Component
-public class WaitForReceiveOrderState implements OrderState {
+public class ReturnGoodsRejectedOrderState implements OrderState {
 
 	/**
 	 * 日期辅助组件
@@ -28,53 +28,26 @@ public class WaitForReceiveOrderState implements OrderState {
 	@Autowired
 	private OrderInfoDAO orderInfoDAO;
 	
-	/**
-	 * 订单流转到当前这个状态
-	 * @param order 订单
-	 */
 	public void doTransition(OrderInfoDTO order) throws Exception {
-		order.setOrderStatus(OrderStatus.WAIT_FOR_RECEIVE); 
+		order.setOrderStatus(OrderStatus.RETURN_GOODS_REJECTED); 
 		order.setGmtModified(dateProvider.getCurrentTime()); 
-		orderInfoDAO.updateStatus(order.clone(OrderInfoDO.class));  
+		orderInfoDAO.updateStatus(order.clone(OrderInfoDO.class)); 
 	}
-	
-	/**
-	 * 判断当前状态下能否执行取消订单操作
-	 * @param order 订单
-	 * @return 能否执行取消订单操作
-	 */
+
 	public Boolean canCancel(OrderInfoDTO order) throws Exception {
 		return false;
 	}
-	
-	/**
-	 * 判断订单能否执行支付操作
-	 * @param order 订单
-	 * @return 能否执行支付操作
-	 * @throws Exception
-	 */
+
 	public Boolean canPay(OrderInfoDTO order) throws Exception {
 		return false;
 	}
-	
-	/**
-	 * 判断能否执行手动确认收货的操作
-	 * @param order 订单
-	 * @return 能否执行手动确认收货的操作
-	 * @throws Exception
-	 */
+
 	public Boolean canConfirmReceipt(OrderInfoDTO order) throws Exception {
-		return true;
-	}
-	
-	/**
-	 * 判断能否申请退货
-	 * @param order 订单
-	 * @return 能否申请退货
-	 * @throws Exception
-	 */
-	public Boolean canApplyReturnGoods(OrderInfoDTO order) throws Exception {
 		return false;
 	}
 	
+	public Boolean canApplyReturnGoods(OrderInfoDTO order) throws Exception {
+		return false;
+	}
+
 }

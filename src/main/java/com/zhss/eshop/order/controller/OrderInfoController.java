@@ -20,6 +20,7 @@ import com.zhss.eshop.order.domain.CalculateCouponeDiscountPriceVO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderInfoQuery;
 import com.zhss.eshop.order.domain.OrderInfoVO;
+import com.zhss.eshop.order.domain.ReturnGoodsApplyDTO;
 import com.zhss.eshop.order.service.OrderInfoService;
 import com.zhss.eshop.promotion.domain.CouponDTO;
 import com.zhss.eshop.promotion.domain.CouponVO;
@@ -160,6 +161,22 @@ public class OrderInfoController {
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return null;
+		}
+	}
+	
+	/**
+	 * 申请退货
+	 * @param apply 退货申请
+	 * @return 处理结果
+	 * @throws Exception
+	 */
+	@PutMapping("/applyReturnGoods/{id}")  
+	public Boolean applyReturnGoods(@RequestBody ReturnGoodsApplyDTO apply) {
+		try {
+			return orderInfoService.applyReturnGoods(apply);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
 		}
 	}
 	

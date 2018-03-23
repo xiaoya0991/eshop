@@ -43,6 +43,21 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 */
 	@Autowired
 	private FinishedOrderState finishedOrderState;
+	/**
+	 * 等待退货申请审核状态
+	 */
+	@Autowired
+	private WaitForReturnGoodsApproveOrderState waitForReturnGoodsApproveOrderState;
+	/**
+	 * 退货申请被拒状态
+	 */
+	@Autowired
+	private ReturnGoodsRejectedOrderState returnGoodsRejectedOrderState;
+	/**
+	 * 待寄送退货商品状态
+	 */
+	@Autowired
+	private WaitForSendOutReturnGoodsOrderState waitForSendOutReturnGoodsOrderState;
 	
 	/**
 	 * 创建订单
@@ -120,6 +135,44 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 */
 	public void confirmReceipt(OrderInfoDTO order) throws Exception {
 		finishedOrderState.doTransition(order);  
+	}
+	
+	/**
+	 * 判断能否申请退货
+	 * @param order 订单
+	 * @return 能否申请退货
+	 * @throws Exception
+	 */
+	public Boolean canApplyReturnGoods(OrderInfoDTO order) throws Exception {
+		OrderState orderState = orderStateFactory.get(order);
+		return orderState.canApplyReturnGoods(order);
+	}
+	
+	/**
+	 * 申请退货
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void applyReturnGoods(OrderInfoDTO order) throws Exception {
+		waitForReturnGoodsApproveOrderState.doTransition(order); 
+	}
+	
+	/**
+	 * 拒绝退货申请
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void rejectReturnGoodsApply(OrderInfoDTO order) throws Exception {
+		returnGoodsRejectedOrderState.doTransition(order); 
+	}
+	
+	/**
+	 * 退货申请审核通过
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void passedReturnGoodsApply(OrderInfoDTO order) throws Exception {
+		waitForSendOutReturnGoodsOrderState.doTransition(order); 
 	}
 	
 }
