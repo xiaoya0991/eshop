@@ -82,10 +82,12 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 			
 			SaleDeliveryOrderItemDTO saleDeliveryOrderItem = 
 					orderItem.clone(SaleDeliveryOrderItemDTO.class);
+			
 			saleDeliveryOrderItem.setPickingItems(ObjectUtils.convertList(
 					scheduleResult.getPickingItems(), SaleDeliveryOrderPickingItemDTO.class));
 			saleDeliveryOrderItem.setSendOutItems(ObjectUtils.convertList(
 					scheduleResult.getSendOutDetails(), SaleDeliveryOrderSendOutDetailDTO.class)); 
+			
 			saleDeliveryOrderItem.setGmtCreate(dateProvider.getCurrentTime());
 			saleDeliveryOrderItem.setGmtModified(dateProvider.getCurrentTime());  
 			
