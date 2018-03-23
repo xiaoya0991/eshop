@@ -15,9 +15,9 @@ public class PurchaseInputOrderDTO {
 	 */
 	private Long id;
 	/**
-	 * 采购入库单id
+	 * 采购单id
 	 */
-	private Long purchaseInputOrderId;
+	private Long purchaseOrderId;
 	/**
 	 * 供应商id
 	 */
@@ -145,11 +145,11 @@ public class PurchaseInputOrderDTO {
 	public void setItems(List<PurchaseInputOrderItemDTO> items) {
 		this.items = items;
 	}
-	public Long getPurchaseInputOrderId() {
-		return purchaseInputOrderId;
+	public Long getPurchaseOrderId() {
+		return purchaseOrderId;
 	}
-	public void setPurchaseInputOrderId(Long purchaseInputOrderId) {
-		this.purchaseInputOrderId = purchaseInputOrderId;
+	public void setPurchaseOrderId(Long purchaseOrderId) {
+		this.purchaseOrderId = purchaseOrderId;
 	}
 	
 }
