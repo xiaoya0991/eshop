@@ -4,11 +4,9 @@ import java.util.List;
 
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
-import com.zhss.eshop.wms.domain.LogisticOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
-import com.zhss.eshop.wms.domain.SendOutOrderDTO;
 
 /**
  * WMS中心接口
@@ -29,8 +27,7 @@ public interface WmsService {
 	 * @param saleDeliveryOrderDTO 销售出库单DTO
 	 * @return 处理结果
 	 */
-	Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder,
-			SendOutOrderDTO sendOutOrder, LogisticOrderDTO logisticOrder);
+	Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder);
 	
 	/**
 	 * 创建退货入库单

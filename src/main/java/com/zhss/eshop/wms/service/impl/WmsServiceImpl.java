@@ -12,11 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
-import com.zhss.eshop.wms.domain.LogisticOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
-import com.zhss.eshop.wms.domain.SendOutOrderDTO;
 import com.zhss.eshop.wms.service.WmsService;
 
 /**
@@ -50,8 +48,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param saleDeliveryOrderDTO 销售出库单DTO
 	 * @return 处理结果
 	 */
-	public Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder,
-			SendOutOrderDTO sendOutOrder, LogisticOrderDTO logisticOrder) {
+	public Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder) {
 		return true;
 	}
 	
