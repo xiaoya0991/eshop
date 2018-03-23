@@ -16,6 +16,7 @@ import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 import com.zhss.eshop.wms.service.PurchaseInputOrderService;
+import com.zhss.eshop.wms.service.SaleDeliveryOrderService;
 import com.zhss.eshop.wms.service.WmsService;
 
 /**
@@ -39,6 +40,11 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Autowired
 	private PurchaseInputOrderService purchaseInputOrderService;
+	/**
+	 * 销售出库单管理service组件
+	 */
+	@Autowired
+	private SaleDeliveryOrderService saleDeliveryOrderService;
 	
 	/**
 	 * 创建采购入库单
@@ -61,7 +67,13 @@ public class WmsServiceImpl implements WmsService {
 	 * @return 处理结果
 	 */
 	public Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder) {
-		return true;
+		try {
+			saleDeliveryOrderService.save(saleDeliveryOrder); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**

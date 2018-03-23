@@ -71,7 +71,7 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 		purchaseInputOrderItemDAO.batchSave(purchaseInputOrderId, purchaseInputOrderItems);
 		
 		purchaseService.informCreatePurchaseInputOrderEvent(purchaseInputOrder
-				.getPurchaseInputOrderId());
+				.getPurchaseOrderId());
 	}
 	
 	/**

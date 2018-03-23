@@ -26,7 +26,7 @@ public class InformPurchaseCenterHandler extends AbstractPurchaseInputOrderHandl
 	public PurchaseInputOrderHandlerResult doExecute(
 			PurchaseInputOrderDTO purchaseInputOrder) throws Exception {
 		purchaseService.informFinishedPurchaseInputOrderEvent(
-				purchaseInputOrder.getPurchaseInputOrderId());
+				purchaseInputOrder.getPurchaseOrderId());
 		return new PurchaseInputOrderHandlerResult(true); 
 	}
 
