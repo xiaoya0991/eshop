@@ -141,7 +141,7 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 * @return 销售出库单builder
 	 */
 	public SaleDeliveryOrderBuilder initStatus() throws Exception {
-		saleDeliveryOrder.setSaleDeliveryOrderStatus(SaleDeliveryOrderStatus.EDITING);  
+		saleDeliveryOrder.setStatus(SaleDeliveryOrderStatus.EDITING);  
 		return this;
 	}
 	

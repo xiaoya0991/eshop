@@ -253,7 +253,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 				purchaseOrder.clone(PurchaseInputOrderDTO.class);
 		
 		purchaseInputOrder.setId(null); 
-		purchaseInputOrder.setPurchaseInputOrderId(purchaseOrder.getId()); 
+		purchaseInputOrder.setPurchaseOrderId(purchaseOrder.getId()); 
 		purchaseInputOrder.setGmtCreate(dateProvider.getCurrentTime());
 		purchaseInputOrder.setGmtModified(dateProvider.getCurrentTime()); 
 		purchaseInputOrder.setStatus(PurchaseInputOrderStatus.EDITING); 

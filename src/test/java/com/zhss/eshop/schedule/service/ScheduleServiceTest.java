@@ -171,7 +171,7 @@ public class ScheduleServiceTest {
 			saleDeliveryOrderItems.add(saleDeliveryOrderItem);
 		}
 		
-		saleDeliveryOrder.setSaleDeliveryOrderStatus(SaleDeliveryOrderStatus.EDITING);
+		saleDeliveryOrder.setStatus(SaleDeliveryOrderStatus.EDITING);
 		saleDeliveryOrder.setGmtCreate(dateProvider.getCurrentTime()); 
 		saleDeliveryOrder.setGmtModified(dateProvider.getCurrentTime());
 		

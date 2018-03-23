@@ -264,7 +264,7 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 		result = prime * result + ((orderNo == null) ? 0 : orderNo.hashCode());
 		result = prime * result + ((payType == null) ? 0 : payType.hashCode());
 		result = prime * result + ((payableAmount == null) ? 0 : payableAmount.hashCode());
-		result = prime * result + ((saleDeliveryOrderStatus == null) ? 0 : saleDeliveryOrderStatus.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((taxpayerId == null) ? 0 : taxpayerId.hashCode());
 		result = prime * result + ((totalAmount == null) ? 0 : totalAmount.hashCode());
 		result = prime * result + ((userAccountId == null) ? 0 : userAccountId.hashCode());
@@ -360,10 +360,10 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 				return false;
 		} else if (!payableAmount.equals(other.payableAmount))
 			return false;
-		if (saleDeliveryOrderStatus == null) {
-			if (other.saleDeliveryOrderStatus != null)
+		if (status == null) {
+			if (other.status != null)
 				return false;
-		} else if (!saleDeliveryOrderStatus.equals(other.saleDeliveryOrderStatus))
+		} else if (!status.equals(other.status))
 			return false;
 		if (taxpayerId == null) {
 			if (other.taxpayerId != null)
@@ -406,7 +406,7 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 				+ ", consigneeCellPhoneNumber=" + consigneeCellPhoneNumber + ", freight=" + freight + ", payType="
 				+ payType + ", totalAmount=" + totalAmount + ", discountAmount=" + discountAmount + ", couponAmount="
 				+ couponAmount + ", payableAmount=" + payableAmount + ", invoiceTitle=" + invoiceTitle + ", taxpayerId="
-				+ taxpayerId + ", orderComment=" + orderComment + ", saleDeliveryOrderStatus=" + saleDeliveryOrderStatus
+				+ taxpayerId + ", orderComment=" + orderComment + ", saleDeliveryOrderStatus=" + status
 				+ ", deliveryTime=" + deliveryTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
 				+ ", saleDeliveryOrderItems=" + saleDeliveryOrderItems + ", sendOutOrder=" + sendOutOrder
 				+ ", logisticOrder=" + logisticOrder + "]";
