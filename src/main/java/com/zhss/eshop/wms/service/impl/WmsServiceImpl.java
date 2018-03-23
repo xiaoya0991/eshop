@@ -12,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
+import com.zhss.eshop.wms.domain.LogisticOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
+import com.zhss.eshop.wms.domain.SendOutOrderDTO;
 import com.zhss.eshop.wms.service.WmsService;
 
 /**
@@ -48,7 +50,8 @@ public class WmsServiceImpl implements WmsService {
 	 * @param saleDeliveryOrderDTO 销售出库单DTO
 	 * @return 处理结果
 	 */
-	public Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrderDTO) {
+	public Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder,
+			SendOutOrderDTO sendOutOrder, LogisticOrderDTO logisticOrder) {
 		return true;
 	}
 	
@@ -144,6 +147,24 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	public String getLogisticCode(Long orderId) {
 		return null;
+	}
+	
+	/**
+	 * 通知wms中心，“创建采购结算单”事件发生了
+	 * @param purchaseInputOrderId 采购入库单id
+	 * @return 处理结果
+	 */
+	public Boolean informCreatePurchaseSettlementOrderEvent(Long purchaseInputOrderId) {
+		return true;
+	}
+	
+	/**
+	 * 通知wms中心，“完成采购结算单”事件发生了
+	 * @param purchaseInputOrderId 采购入库单id
+	 * @return 处理结果
+	 */
+	public Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseInputOrderId) {
+		return true;
 	}
 
 }
