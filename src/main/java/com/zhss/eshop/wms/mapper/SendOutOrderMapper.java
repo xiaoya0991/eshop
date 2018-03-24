@@ -3,6 +3,10 @@ package com.zhss.eshop.wms.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 import com.zhss.eshop.wms.domain.SendOutOrderDO;
 
@@ -61,5 +65,59 @@ public interface SendOutOrderMapper {
 			+ ")") 
 	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true)
 	void save(SendOutOrderDO sendOutOrder);
-
+	
+	/**
+	 * 根据id查询发货单
+	 * @param id 发货单id
+	 * @return 发货单
+	 */
+	@Select("SELECT "
+				+ "id,"
+				+ "sale_delivery_order_id," 
+				+ "user_account_id,"
+				+ "username,"
+				+ "order_id," 
+				+ "order_no,"
+				+ "consignee,"
+				+ "delivery_address,"
+				+ "consignee_cell_phone_number,"
+				+ "total_amount,"
+				+ "discount_amount,"
+				+ "coupon_amount,"
+				+ "freight,"
+				+ "payable_amount,"
+				+ "pay_type,"
+				+ "invoice_title,"
+				+ "taxpayer_id,"
+				+ "order_comment "
+				+ "gmt_create,"
+				+ "gmt_modified "
+			+ "FROM wms_send_out_order "
+			+ "WHERE sale_delivery_order_id=#{saleDeliveryOrderId}"
+	)
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "sale_delivery_order_id", property = "saleDeliveryOrderId"), 
+		@Result(column = "user_account_id", property = "userAccountId"),
+		@Result(column = "username", property = "username"),
+		@Result(column = "order_id", property = "orderId"),
+		@Result(column = "order_no", property = "orderNo"),
+		@Result(column = "consignee", property = "consignee"),
+		@Result(column = "total_amount", property = "totalAmount"),
+		@Result(column = "discount_amount", property = "discountAmount"),
+		@Result(column = "coupon_amount", property = "couponAmount"),
+		@Result(column = "freight", property = "freight"),
+		@Result(column = "payable_amount", property = "payableAmount"),
+		@Result(column = "pay_type", property = "payType"),
+		@Result(column = "order_status", property = "orderStatus"),
+		@Result(column = "delivery_address", property = "deliveryAddress"),
+		@Result(column = "consignee_cell_phone_number", property = "consigneeCellPhoneNumber"),
+		@Result(column = "invoice_title", property = "invoiceTitle"),
+		@Result(column = "taxpayer_id", property = "taxpayerId"),
+		@Result(column = "order_comment", property = "orderComment"),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "gmt_modified", property = "gmtModified") 
+ 	})
+	SendOutOrderDO getBySaleDeliveryOrderId(@Param("id") Long id);
+	
 }

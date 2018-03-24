@@ -29,4 +29,14 @@ public class LogisticOrderDAOImpl implements LogisticOrderDAO {
 		logisticOrderMapper.save(logisticOrder); 
 	}
 	
+	/**
+	 * 根据销售出库单id查询物流单
+	 * @param saleDeliveryOrderId 销售出库单id
+	 * @return 物流单
+	 */
+	public LogisticOrderDO getBySaleDeliveryOrderId(
+			Long saleDeliveryOrderId) throws Exception {
+		return logisticOrderMapper.getBySaleDeliveryOrderId(saleDeliveryOrderId);
+	}
+	
 }

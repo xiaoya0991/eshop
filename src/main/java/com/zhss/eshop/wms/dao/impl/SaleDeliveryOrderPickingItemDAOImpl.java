@@ -1,5 +1,7 @@
 package com.zhss.eshop.wms.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +29,16 @@ public class SaleDeliveryOrderPickingItemDAOImpl implements SaleDeliveryOrderPic
 	 */
 	public void save(SaleDeliveryOrderPickingItemDO pickingItem) throws Exception {
 		pickingItemMapper.save(pickingItem); 
+	}
+	
+	/**
+	 * 根据销售出库单条目id查询拣货条目
+	 * @param saleDeliveryOrderItemId 销售出库单条目id
+	 * @return 拣货条目
+	 */
+	public List<SaleDeliveryOrderPickingItemDO> listBySaleDeliveryOrderItemId(
+			Long saleDeliveryOrderItemId) throws Exception {
+		return pickingItemMapper.listBySaleDeliveryOrderItemId(saleDeliveryOrderItemId);
 	}
 	
 }

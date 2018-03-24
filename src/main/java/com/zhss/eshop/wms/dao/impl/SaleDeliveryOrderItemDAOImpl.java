@@ -1,5 +1,7 @@
 package com.zhss.eshop.wms.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +30,16 @@ public class SaleDeliveryOrderItemDAOImpl implements SaleDeliveryOrderItemDAO {
 	public Long save(SaleDeliveryOrderItemDO saleDeliveryOrderItem) throws Exception {
 		saleDeliveryOrderItemMapper.save(saleDeliveryOrderItem); 
 		return saleDeliveryOrderItem.getId();
+	}
+	
+	/**
+	 * 根据销售出库单id查询销售出库单条目
+	 * @param saleDeliveryOrderId 销售出库单idi
+	 * @return 销售出库单条目
+	 */
+	public List<SaleDeliveryOrderItemDO> listBySaleDeliveryOrderId(
+			Long saleDeliveryOrderId) throws Exception {
+		return saleDeliveryOrderItemMapper.listBySaleDeliveryOrderId(saleDeliveryOrderId);
 	}
 	
 }

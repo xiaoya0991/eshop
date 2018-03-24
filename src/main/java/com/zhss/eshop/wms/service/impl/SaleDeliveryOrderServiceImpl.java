@@ -1,5 +1,6 @@
 package com.zhss.eshop.wms.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.common.util.ObjectUtils;
+import com.zhss.eshop.finance.service.FinanceService;
+import com.zhss.eshop.order.service.OrderService;
+import com.zhss.eshop.wms.constant.SaleDeliveryOrderApproveResult;
+import com.zhss.eshop.wms.constant.SaleDeliveryOrderStatus;
 import com.zhss.eshop.wms.dao.LogisticOrderDAO;
 import com.zhss.eshop.wms.dao.SaleDeliveryOrderDAO;
 import com.zhss.eshop.wms.dao.SaleDeliveryOrderItemDAO;
@@ -75,6 +80,16 @@ public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 	 */
 	@Autowired
 	private LogisticOrderDAO logisticOrderDAO;
+	/**
+	 * 财务中心接口
+	 */
+	@Autowired
+	private FinanceService financeService;
+	/**
+	 * 订单中心接口
+	 */
+	@Autowired
+	private OrderService orderService;
 	
 	/**
 	 * 新增销售出库单
@@ -131,6 +146,99 @@ public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 		return ObjectUtils.convertList(
 				saleDeliveryOrderDAO.listByPage(query), 
 				SaleDeliveryOrderDTO.class); 
+	}
+	
+	/**
+	 * 根据id查询销售出库单
+	 * @param id 销售出库单id
+	 * @return
+	 * @throws Exception
+	 */
+	public SaleDeliveryOrderDTO getById(Long id) throws Exception {
+		// 查询销售出库单自己的数据
+		SaleDeliveryOrderDTO saleDeliveryOrder = saleDeliveryOrderDAO.getById(id)
+				.clone(SaleDeliveryOrderDTO.class);
+	
+		// 查询销售出库单条目
+		List<SaleDeliveryOrderItemDTO> saleDeliveryOrderItems = ObjectUtils.convertList(
+				saleDeliveryOrderItemDAO.listBySaleDeliveryOrderId(id), 
+				SaleDeliveryOrderItemDTO.class);
+		saleDeliveryOrder.setSaleDeliveryOrderItems(saleDeliveryOrderItems); 
+		
+		for(SaleDeliveryOrderItemDTO saleDeliveryOrderItem : saleDeliveryOrderItems) {  
+			// 查询拣货条目
+			List<SaleDeliveryOrderPickingItemDTO> pickingItems = ObjectUtils.convertList(
+					pickingItemDAO.listBySaleDeliveryOrderItemId(saleDeliveryOrderItem.getId()),
+					SaleDeliveryOrderPickingItemDTO.class);
+			saleDeliveryOrderItem.setPickingItems(pickingItems); 
+			  
+			// 查询发货明细
+			List<SaleDeliveryOrderSendOutDetailDTO> sendOutDetails = ObjectUtils.convertList(
+					sendOutDetailDAO.listBySaleDeliveryOrderItemId(saleDeliveryOrderItem.getId()), 
+					SaleDeliveryOrderSendOutDetailDTO.class);
+			saleDeliveryOrderItem.setSendOutItems(sendOutDetails); 
+		}
+		
+		// 查询发货单
+		SendOutOrderDTO sendOutOrder = sendOutOrderDAO.getBySaleDeliveryOrderId(id)
+				.clone(SendOutOrderDTO.class);
+		saleDeliveryOrder.setSendOutOrder(sendOutOrder); 
+		 
+		List<SendOutOrderItemDTO> sendOutOrderItems = ObjectUtils.convertList(
+				sendOutOrderItemDAO.listByOrderInfoId(sendOutOrder.getId()), 
+				SendOutOrderItemDTO.class);
+		sendOutOrder.setSendOutOrderItems(sendOutOrderItems); 
+		
+		// 查询物流单
+		LogisticOrderDTO logisticOrder = logisticOrderDAO.getBySaleDeliveryOrderId(id)
+				.clone(LogisticOrderDTO.class);
+		saleDeliveryOrder.setLogisticOrder(logisticOrder); 
+		
+		return saleDeliveryOrder;
+	}
+	
+	/**
+	 * 更新销售出库单的发货时间
+	 * @param saleDeliveryOrder 销售出库单
+	 */
+	public void updateDeliveryTime(Long id, Date deliveryTime) throws Exception {
+		SaleDeliveryOrderDTO saleDeliveryOrder = getById(id);
+		saleDeliveryOrder.setDeliveryTime(deliveryTime); 
+		saleDeliveryOrderDAO.update(saleDeliveryOrder.clone(SaleDeliveryOrderDO.class));  
+	}
+	
+	/**
+	 * 对销售出库单提交审核
+	 * @param id 销售出库单id
+	 * @throws Exception
+	 */
+	public void submitApprove(Long id) throws Exception {
+		SaleDeliveryOrderDTO saleDeliveryOrder = getById(id);
+		saleDeliveryOrder.setStatus(SaleDeliveryOrderStatus.WAIT_FOR_APPROVE);
+		saleDeliveryOrderDAO.update(saleDeliveryOrder.clone(SaleDeliveryOrderDO.class));   
+	}
+	
+	/**
+	 * 审核销售出库单 
+	 * @param id 销售出库单id
+	 * @param approveResult 审核结果
+	 * @throws Exception
+	 */
+	public void approve(Long id, Integer approveResult) throws Exception {
+		SaleDeliveryOrderDTO saleDeliveryOrder = getById(id);
+		
+		if(SaleDeliveryOrderApproveResult.REJECTED.equals(approveResult)) {
+			saleDeliveryOrder.setStatus(SaleDeliveryOrderStatus.EDITING);
+			saleDeliveryOrderDAO.update(saleDeliveryOrder.clone(SaleDeliveryOrderDO.class));   
+			return;
+		}
+		
+		saleDeliveryOrder.setStatus(SaleDeliveryOrderStatus.FINISHED);
+		saleDeliveryOrderDAO.update(saleDeliveryOrder.clone(SaleDeliveryOrderDO.class));   
+		
+		financeService.payForLogisticsCompany(saleDeliveryOrder);
+		
+		orderService.informGoodsDeliveryFinishedEvent(saleDeliveryOrder.getOrderId());
 	}
 	
 }

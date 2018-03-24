@@ -1,5 +1,7 @@
 package com.zhss.eshop.wms.dao;
 
+import java.util.List;
+
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderItemDO;
 
 /**
@@ -14,5 +16,13 @@ public interface SaleDeliveryOrderItemDAO {
 	 * @param saleDeliveryOrderItem 销售出库单条目
 	 */
 	Long save(SaleDeliveryOrderItemDO saleDeliveryOrderItem) throws Exception;
+	
+	/**
+	 * 根据销售出库单id查询销售出库单条目
+	 * @param saleDeliveryOrderId 销售出库单idi
+	 * @return 销售出库单条目
+	 */
+	List<SaleDeliveryOrderItemDO> listBySaleDeliveryOrderId(
+			Long saleDeliveryOrderId) throws Exception;
 	
 }

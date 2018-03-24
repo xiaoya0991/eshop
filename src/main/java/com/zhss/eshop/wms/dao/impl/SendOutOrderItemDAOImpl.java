@@ -1,5 +1,7 @@
 package com.zhss.eshop.wms.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +29,15 @@ public class SendOutOrderItemDAOImpl implements SendOutOrderItemDAO {
 	 */
 	public void save(SendOutOrderItemDO sendOutOrderItem) throws Exception {
 		sendOutOrderItemMapper.save(sendOutOrderItem); 
+	}
+	
+	/**
+	 * 查询发货单条目
+	 * @param sendOutOrderId 发货单id
+	 * @return 发货单条目
+	 */
+	public List<SendOutOrderItemDO> listByOrderInfoId(Long sendOutOrderId) throws Exception {
+		return sendOutOrderItemMapper.listByOrderInfoId(sendOutOrderId);
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.zhss.eshop.wms.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
@@ -25,5 +26,34 @@ public interface SaleDeliveryOrderService {
 	 * @return 销售出库单
 	 */
 	List<SaleDeliveryOrderDTO> listByPage(SaleDeliveryOrderQuery query) throws Exception;
+	
+	/**
+	 * 根据id查询销售出库单
+	 * @param id 销售出库单id
+	 * @return
+	 * @throws Exception
+	 */
+	SaleDeliveryOrderDTO getById(Long id) throws Exception;
+	
+	/**
+	 * 更新销售出库单的发货时间
+	 * @param saleDeliveryOrder 销售出库单
+	 */
+	void updateDeliveryTime(Long id, Date deliveryTime) throws Exception;
+	
+	/**
+	 * 对销售出库单提交审核
+	 * @param id 销售出库单id
+	 * @throws Exception
+	 */
+	void submitApprove(Long id) throws Exception; 
+	
+	/**
+	 * 审核销售出库单 
+	 * @param id 销售出库单id
+	 * @param approveResult 审核结果
+	 * @throws Exception
+	 */
+	void approve(Long id, Integer approveResult) throws Exception;
 	
 }
