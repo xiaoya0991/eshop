@@ -1,5 +1,6 @@
 package com.zhss.eshop.finance.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.zhss.eshop.finance.domain.PurchaseSettlementOrderDO;
@@ -51,5 +52,15 @@ public interface PurchaseSettlementOrderDAO {
 	 * @throws Exception
 	 */
 	void updateStatus(Long id, Integer status) throws Exception;
+	
+	/**
+	 * 查询指定供应商在指定时间范围内的已完成的采购结算单
+	 * @param supplierId 供应商id
+	 * @param startTime 起始时间
+	 * @param endTime 结束时间
+	 * @return 采购结算单
+	 */
+	List<PurchaseSettlementOrderDO> listFinishedBySettlementPeriod(
+			Long supplierId, Date startTime, Date endTime) throws Exception; 
 	
 }

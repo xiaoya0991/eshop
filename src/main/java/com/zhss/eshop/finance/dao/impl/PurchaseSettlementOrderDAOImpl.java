@@ -1,5 +1,6 @@
 package com.zhss.eshop.finance.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,19 @@ public class PurchaseSettlementOrderDAOImpl implements PurchaseSettlementOrderDA
 		PurchaseSettlementOrderDO purchaseSettlementOrder = getById(id);
 		purchaseSettlementOrder.setStatus(status);   
 		updateStatus(purchaseSettlementOrder);  
+	}
+	
+	/**
+	 * 查询指定供应商在指定时间范围内的已完成的采购结算单
+	 * @param supplierId 供应商id
+	 * @param startTime 起始时间
+	 * @param endTime 结束时间
+	 * @return 采购结算单
+	 */
+	public List<PurchaseSettlementOrderDO> listFinishedBySettlementPeriod(
+			Long supplierId, Date startTime, Date endTime) throws Exception {
+		return purchaseSettlementOrderMapper.listFinishedBySettlementPeriod(
+				supplierId, startTime, endTime);
 	}
 	
 }
