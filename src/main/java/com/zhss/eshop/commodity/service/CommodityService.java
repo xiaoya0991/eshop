@@ -1,5 +1,6 @@
 package com.zhss.eshop.commodity.service;
 
+import com.zhss.eshop.commodity.domain.GoodsDTO;
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
 
 /**
@@ -15,5 +16,12 @@ public interface CommodityService {
 	 * @return 商品sku DTO
 	 */
 	GoodsSkuDTO getGoodsSkuById(Long goodsSkuId);
+	
+	/**
+	 * 根据id查询商品
+	 * @param goodsId 商品id
+	 * @return 商品
+	 */
+	GoodsDTO getGoodsById(Long goodsId);
 	
 }
