@@ -6,48 +6,24 @@ import org.springframework.stereotype.Component;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.constant.OrderStatus;
 import com.zhss.eshop.order.dao.OrderInfoDAO;
-import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 
 /**
- * 退后审核不通过状态
+ * 退货审核不通过状态
  * @author zhonghuashishan
  *
  */
 @Component
-public class ReturnGoodsRejectedOrderState implements OrderState {
+public class ReturnGoodsRejectedOrderState extends AbstractOrderState {
 
-	/**
-	 * 日期辅助组件
-	 */
 	@Autowired
-	private DateProvider dateProvider;
-	/**
-	 * 订单管理DAO组件
-	 */
-	@Autowired
-	private OrderInfoDAO orderInfoDAO;
-	
-	public void doTransition(OrderInfoDTO order) throws Exception {
-		order.setOrderStatus(OrderStatus.RETURN_GOODS_REJECTED); 
-		order.setGmtModified(dateProvider.getCurrentTime()); 
-		orderInfoDAO.updateStatus(order.clone(OrderInfoDO.class)); 
+	public ReturnGoodsRejectedOrderState(DateProvider dateProvider, OrderInfoDAO orderInfoDAO) {
+		super(dateProvider, orderInfoDAO);
 	}
 
-	public Boolean canCancel(OrderInfoDTO order) throws Exception {
-		return false;
-	}
-
-	public Boolean canPay(OrderInfoDTO order) throws Exception {
-		return false;
-	}
-
-	public Boolean canConfirmReceipt(OrderInfoDTO order) throws Exception {
-		return false;
-	}
-	
-	public Boolean canApplyReturnGoods(OrderInfoDTO order) throws Exception {
-		return false;
+	@Override
+	protected Integer getOrderStatus(OrderInfoDTO order) throws Exception {
+		return OrderStatus.RETURN_GOODS_REJECTED;
 	}
 
 }
