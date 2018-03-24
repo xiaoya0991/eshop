@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.commodity.domain.GoodsDTO;
+import com.zhss.eshop.commodity.service.CommodityService;
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.logistics.domain.FreightTemplateDTO;
+import com.zhss.eshop.logistics.service.FreightTemplateService;
 import com.zhss.eshop.logistics.service.LogisticsService;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
@@ -30,6 +34,21 @@ public class LogisticsServiceImpl implements LogisticsService {
 	 */
 	@Autowired
 	private DateProvider dateProvider;
+	/**
+	 * 商品中心接口
+	 */
+	@Autowired
+	private CommodityService commodityService;
+	/**
+	 * 运费模板管理service组件
+	 */
+	@Autowired
+	private FreightTemplateService freightTemplateService;
+	/**
+	 * 运费计算器工厂
+	 */
+	@Autowired
+	private FreightCalculatorFactory freightCalculatorFactory;
 
 	/**
 	 * 计算商品sku的运费
@@ -37,7 +56,22 @@ public class LogisticsServiceImpl implements LogisticsService {
 	 * @return 商品sku的运费
 	 */
 	public Double calculateFreight(OrderInfoDTO order, OrderItemDTO orderItem) {
-		return 5.5;
+		try {
+			// 获取商品对应的运费模板
+			Long goodsId = orderItem.getGoodsId();
+			GoodsDTO goods = commodityService.getGoodsById(goodsId);
+			FreightTemplateDTO freightTemplate = freightTemplateService.getById(
+					goods.getFreightTemplateId());
+			
+			// 获取运费计算器
+			FreightCalculator freightCalculator = freightCalculatorFactory.get(freightTemplate);
+			Double freight = freightCalculator.calculate(freightTemplate, order, orderItem);
+			
+			return freight;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return 0.0;
+		}
 	}
 	
 	/**
