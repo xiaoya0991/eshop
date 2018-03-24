@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.purchase.constant.PurchaseOrderStatus;
 import com.zhss.eshop.purchase.domain.SupplierDTO;
+import com.zhss.eshop.purchase.service.PurchaseOrderService;
 import com.zhss.eshop.purchase.service.PurchaseService;
 import com.zhss.eshop.purchase.service.SupplierService;
 
@@ -28,23 +30,25 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 */
 	@Autowired
 	private SupplierService supplierService;
-	
 	/**
-	 * 判断是否有关联商品sku的采购单
-	 * @param goodsSkuId 商品sku id
-	 * @return 是否有采购单关联了商品sku
+	 * 采购单管理service组件
 	 */
-	public Boolean existRelatedPurchaseOrder(Long goodsSkuId) {
-		return true;
-	}
+	@Autowired
+	private PurchaseOrderService purchaseOrderService;
 	
 	/**
 	 * 通知采购中心，“创建采购入库单”事件发生了
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果
 	 */
-	public Boolean informCreatePurchaseInputOrderEvent(Long purcaseOrderId) {
-		return true;
+	public Boolean informCreatePurchaseInputOrderEvent(Long purchaseOrderId) {
+		try {
+			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.WAIT_FOR_INPUT);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -52,8 +56,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果
 	 */
-	public Boolean informFinishedPurchaseInputOrderEvent(Long purcaseOrderId) {
-		return true;
+	public Boolean informFinishedPurchaseInputOrderEvent(Long purchaseOrderId) {
+		try {
+			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.FINISHED_INPUT);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -61,8 +71,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果
 	 */
-	public Boolean informCreatePurchaseSettlementOrderEvent(Long purcaseOrderId) {
-		return true;
+	public Boolean informCreatePurchaseSettlementOrderEvent(Long purchaseOrderId) {
+		try {
+			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.WAIT_FOR_SETTLEMENT);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -71,7 +87,13 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @return
 	 */
 	public Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseOrderId) {
-		return true;
+		try {
+			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.FINISHED);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**

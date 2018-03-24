@@ -32,4 +32,18 @@ public interface PurchaseOrderDAO {
 	 */
 	PurchaseOrderDO getById(Long id) throws Exception; 
 	
+	/**
+	 * 更新采购单
+	 * @param purchaseOrder 采购单
+	 */
+	void update(PurchaseOrderDO purchaseOrder) throws Exception;
+	
+	/**
+	 * 更新采购单的状态
+	 * @param id 采购单id
+	 * @param status 采购单状态
+	 * @throws Exception
+	 */
+	void updateStatus(Long id, Integer status) throws Exception;
+	
 }

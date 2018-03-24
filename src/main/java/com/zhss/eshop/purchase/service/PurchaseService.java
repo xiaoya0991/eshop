@@ -12,13 +12,6 @@ import com.zhss.eshop.purchase.domain.SupplierDTO;
 public interface PurchaseService {
 	
 	/**
-	 * 判断是否有关联商品sku的采购单
-	 * @param goodsSkuId 商品sku id
-	 * @return 是否有采购单关联了商品sku
-	 */
-	Boolean existRelatedPurchaseOrder(Long goodsSkuId);
-	
-	/**
 	 * 通知采购中心，“创建采购入库单”事件发生了
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果

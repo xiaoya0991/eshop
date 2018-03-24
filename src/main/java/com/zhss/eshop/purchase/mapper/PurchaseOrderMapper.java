@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.zhss.eshop.purchase.domain.PurchaseOrderDO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderQuery;
@@ -137,5 +138,22 @@ public interface PurchaseOrderMapper {
 		@Result(column = "gmt_modified", property = "gmtModified") 
 	})
 	PurchaseOrderDO getById(@Param("id") Long id); 
+	
+	/**
+	 * 更新采购单
+	 * @param purchaseOrder 采购单
+	 */
+	@Update("UPDATE purchase_order SET "
+				+ "supplier_id=#{supplierId},"
+				+ "expect_arrival_time=#{expectArrivalTime},"
+				+ "contactor=#{contactor},"
+				+ "contactor_phone_number=#{contactorPhoneNumber},"
+				+ "contactor_email=#{contactorEmail},"
+				+ "remark=#{remark},"
+				+ "purchaser=#{purchaser},"
+				+ "status=#{status},"
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}")
+	void update(PurchaseOrderDO purchaseOrder);
 	
 }

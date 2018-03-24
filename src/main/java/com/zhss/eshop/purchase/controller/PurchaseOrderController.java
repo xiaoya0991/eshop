@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -76,13 +77,63 @@ public class PurchaseOrderController {
 	 * @throws Exception
 	 */
 	@PostMapping("/")  
-	public Boolean update(@RequestBody PurchaseOrderVO purchaseOrder) {
+	public Boolean save(@RequestBody PurchaseOrderVO purchaseOrder) {
 		try {
 			purchaseOrderService.save(purchaseOrder.clone(
 					PurchaseOrderDTO.class, CloneDirection.FORWARD));
 			return true;
 		} catch (Exception e) {
 			logger.error("error", e);
+			return false;
+		}
+	}
+
+	/**
+	 * 更新采购单
+	 * @param purchaseOrder 采购单
+	 * @throws Exception
+	 */
+	@PutMapping("/{id}")
+	public Boolean update(@RequestBody PurchaseOrderDTO purchaseOrder) { 
+		try {
+			purchaseOrderService.update(purchaseOrder.clone(
+					PurchaseOrderDTO.class, CloneDirection.FORWARD));
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e);
+			return false;
+		}
+	}
+	
+	/**
+	 * 提交审核
+	 * @param id 采购单id
+	 * @throws Exception
+	 */
+	@PutMapping("/submitApprove/{id}")
+	public Boolean submitApprove(@PathVariable("id") Long id) {
+		try {
+			purchaseOrderService.submitApprove(id);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 审核采购单
+	 * @param id 采购单id
+	 * @param approveResult 审核结果
+	 * @throws Exception
+	 */
+	@PutMapping("/approve/{id}")  
+	public Boolean approve(@PathVariable("id") Long id, Integer approveResult) throws Exception {
+		try {
+			purchaseOrderService.approve(id, approveResult); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
 			return false;
 		}
 	}

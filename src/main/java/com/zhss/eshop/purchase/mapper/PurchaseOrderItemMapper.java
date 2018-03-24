@@ -2,6 +2,7 @@ package com.zhss.eshop.purchase.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -25,7 +26,7 @@ public interface PurchaseOrderItemMapper {
 	 * @param purchaseOrderItem 采购单条目
 	 * @throws Exception
 	 */
-	@Insert("INSERT INTO purchase_order("
+	@Insert("INSERT INTO purchase_order_item("
 				+ "purchase_order_id,"
 				+ "goods_sku_id,"
 				+ "purchase_count,"
@@ -56,7 +57,7 @@ public interface PurchaseOrderItemMapper {
 				+ "purchase_price,"
 				+ "gmt_create,"
 				+ "gmt_modified "
-			+ "FROM purchase_order "
+			+ "FROM purchase_order_item "
 			+ "WHERE purchase_order_id=#{purchaseOrderId}")
 	@Results({
 		@Result(column = "id", property = "id", id = true),
@@ -69,5 +70,12 @@ public interface PurchaseOrderItemMapper {
 	})
 	List<PurchaseOrderItemDO> listByPurchaseOrderId(
 			@Param("purchaseOrderId") Long purchaseOrderId);
+	
+	/**
+	 * 根据采购单id删除采购单条目
+	 * @param purchaseOrderId 采购单id
+	 */
+	@Delete("DELETE FROM purchase_order_item WHERE purchase_order_id=#{purchaseOrderId}") 
+	void removeByPurchaseOrderId(@Param("purchaseOrderId") Long purchaseOrderId);
 	
 }

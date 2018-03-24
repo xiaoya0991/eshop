@@ -24,13 +24,17 @@ public class PurchaseOrderStatus {
 	 */
 	public static final Integer WAIT_FOR_INPUT = 4;
 	/**
+	 * 已入库
+	 */
+	public static final Integer FINISHED_INPUT = 5;
+	/**
 	 * 待结算
 	 */
-	public static final Integer WAIT_FOR_SETTLEMENT = 5;
+	public static final Integer WAIT_FOR_SETTLEMENT = 6;
 	/**
 	 * 已完成
 	 */
-	public static final Integer FINISHED = 6;
+	public static final Integer FINISHED = 7;
 	
 	private PurchaseOrderStatus() {
 		

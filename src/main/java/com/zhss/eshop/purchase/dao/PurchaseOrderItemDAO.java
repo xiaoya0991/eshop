@@ -25,7 +25,12 @@ public interface PurchaseOrderItemDAO {
 	 * @param purchaseOrderId 采购单id
 	 * @return 采购单条目
 	 */
-	List<PurchaseOrderItemDO> listByPurchaseOrderId(
-			Long purchaseOrderId) throws Exception;
+	List<PurchaseOrderItemDO> listByPurchaseOrderId(Long purchaseOrderId) throws Exception;
+	
+	/**
+	 * 根据采购单id删除采购单条目
+	 * @param purchaseOrderId 采购单id
+	 */
+	void removeByPurchaseOrderId(Long purchaseOrderId) throws Exception;
 	
 }
