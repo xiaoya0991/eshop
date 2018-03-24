@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.zhss.eshop.commodity.domain.GoodsDTO;
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
 import com.zhss.eshop.commodity.service.CommodityService;
 
@@ -49,6 +50,15 @@ public class CommodityServiceImpl implements CommodityService {
 		} catch (Exception e) {
 			logger.error("error", e); 
 		}
+		return null;
+	}
+	
+	/**
+	 * 根据id查询商品
+	 * @param goodsId 商品id
+	 * @return 商品
+	 */
+	public GoodsDTO getGoodsById(Long goodsId) {
 		return null;
 	}
 	
