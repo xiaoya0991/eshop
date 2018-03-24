@@ -82,4 +82,21 @@ public interface OrderInfoService {
 	 */
 	Boolean applyReturnGoods(ReturnGoodsApplyDTO apply) throws Exception;
 	
+	/**
+	 * 根据订单id查询退货申请 
+	 * @param orderInfoId 订单id
+	 * @return 退货申请
+	 * @throws Exception
+	 */
+	ReturnGoodsApplyDTO getByOrderInfoId(Long orderInfoId) throws Exception;
+	
+	/**
+	 * 更新退货物流单号
+	 * @param orderInfoId 订单id
+	 * @param returnGoodsLogisticCode 退货物流单号
+	 * @throws Exception
+	 */
+	void updateReturnGoodsLogisticCode(Long orderInfoId, 
+			String returnGoodsLogisticCode) throws Exception;
+	
 }

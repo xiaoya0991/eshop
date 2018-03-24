@@ -72,13 +72,14 @@ public interface ReturnGoodsApplyMapper {
 	ReturnGoodsApplyDO getByOrderInfoId(@Param("orderInfoId") Long orderInfoId);
 	
 	/**
-	 * 更新退货申请的状态
+	 * 更新退货申请
 	 * @param apply 退货申请
 	 */
 	@Update("UPDATE order_return_goods_apply SET "
-				+ "return_goods_apply_status=#{returnGoodsApplyStatus} "
+				+ "return_goods_apply_status=#{returnGoodsApplyStatus},"
+				+ "return_goods_logistic_code=#{returnGoodsLogisticCode} " 
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}") 
-	void updateStatus(ReturnGoodsApplyDO apply);
+	void update(ReturnGoodsApplyDO apply); 
 	
 }

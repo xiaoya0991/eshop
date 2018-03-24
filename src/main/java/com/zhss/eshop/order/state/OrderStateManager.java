@@ -97,4 +97,32 @@ public interface OrderStateManager {
 	 */
 	void passedReturnGoodsApply(OrderInfoDTO order) throws Exception;
 	
+	/**
+	 * 寄送退货商品
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	void sendOutReturnGoods(OrderInfoDTO order) throws Exception;
+	
+	/**
+	 * 确认收到退货商品
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	void confirmReceivedReturnGoods(OrderInfoDTO order) throws Exception;
+	
+	/**
+	 * 完成退货入库
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	void finishedInputReturnGoods(OrderInfoDTO order) throws Exception;
+	
+	/**
+	 * 完成退款
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	void finishedRefund(OrderInfoDTO order) throws Exception;
+	
 }

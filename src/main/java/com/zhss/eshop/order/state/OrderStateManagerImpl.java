@@ -58,6 +58,26 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 */
 	@Autowired
 	private WaitForSendOutReturnGoodsOrderState waitForSendOutReturnGoodsOrderState;
+	/**
+	 * 退货商品待收货状态
+	 */
+	@Autowired
+	private WaitForReceiveReturnGoodsOrderState waitForReceiveReturnGoodsOrderState;
+	/**
+	 * 退货商品待入库状态
+	 */
+	@Autowired
+	private WaitForInputReturnGoodsOrderState waitForInputReturnGoodsOrderState;
+	/**
+	 * 完成退货入库状态
+	 */
+	@Autowired
+	private FinishedInputReturnGoodsOrderState finishedInputReturnGoodsOrderState;
+	/**
+	 * 完成退款状态
+	 */
+	@Autowired
+	private FinishedRefundOrderState finishedRefundOrderState;
 	
 	/**
 	 * 创建订单
@@ -173,6 +193,42 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 */
 	public void passedReturnGoodsApply(OrderInfoDTO order) throws Exception {
 		waitForSendOutReturnGoodsOrderState.doTransition(order); 
+	}
+	
+	/**
+	 * 寄送退货商品
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void sendOutReturnGoods(OrderInfoDTO order) throws Exception {
+		waitForReceiveReturnGoodsOrderState.doTransition(order); 
+	}
+	
+	/**
+	 * 确认收到退货商品
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void confirmReceivedReturnGoods(OrderInfoDTO order) throws Exception {
+		waitForInputReturnGoodsOrderState.doTransition(order); 
+	}
+	
+	/**
+	 * 完成退货入库
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void finishedInputReturnGoods(OrderInfoDTO order) throws Exception {
+		finishedInputReturnGoodsOrderState.doTransition(order); 
+	}
+	
+	/**
+	 * 完成退款
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void finishedRefund(OrderInfoDTO order) throws Exception {
+		finishedRefundOrderState.doTransition(order); 
 	}
 	
 }

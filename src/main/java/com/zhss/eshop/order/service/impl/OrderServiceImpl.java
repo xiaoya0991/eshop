@@ -133,7 +133,15 @@ public class OrderServiceImpl implements OrderService {
 	 * @return 处理结果
 	 */
 	public Boolean informReturnGoodsReceivedEvent(Long orderId) {
-		return true;
+		try {
+			OrderInfoDTO order = orderInfoService.getById(orderId);
+			orderStateManager.confirmReceivedReturnGoods(order); 
+			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.CONFIRM_RETURN_GOODS_RECEIPT));  
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e);
+			return false;
+		}
 	}
 	
 	/**
@@ -142,7 +150,15 @@ public class OrderServiceImpl implements OrderService {
 	 * @return 处理结果
 	 */
 	public Boolean informReturnGoodsInputOrderApprovedEvent(Long orderId) {
-		return true;
+		try {
+			OrderInfoDTO order = orderInfoService.getById(orderId);
+			orderStateManager.finishedInputReturnGoods(order); 
+			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.FINISHED_RETURN_GOODS_INPUT));  
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e);
+			return false;
+		}
 	}
 	
 	/**
@@ -151,7 +167,15 @@ public class OrderServiceImpl implements OrderService {
 	 * @return 处理结果
 	 */
 	public Boolean informRefundFinishedEvent(Long orderId) {
-		return true;
+		try {
+			OrderInfoDTO order = orderInfoService.getById(orderId);
+			orderStateManager.finishedRefund(order); 
+			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.FINISHED_RETURN_GOODS_REFUND));  
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e);
+			return false;
+		}
 	}
 	
 	/**

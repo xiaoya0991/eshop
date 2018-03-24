@@ -21,6 +21,7 @@ import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderInfoQuery;
 import com.zhss.eshop.order.domain.OrderInfoVO;
 import com.zhss.eshop.order.domain.ReturnGoodsApplyDTO;
+import com.zhss.eshop.order.domain.ReturnGoodsApplyVO;
 import com.zhss.eshop.order.service.OrderInfoService;
 import com.zhss.eshop.promotion.domain.CouponDTO;
 import com.zhss.eshop.promotion.domain.CouponVO;
@@ -174,6 +175,40 @@ public class OrderInfoController {
 	public Boolean applyReturnGoods(@RequestBody ReturnGoodsApplyDTO apply) {
 		try {
 			return orderInfoService.applyReturnGoods(apply);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 根据订单id查询退货申请 
+	 * @param orderInfoId 订单id
+	 * @return 退货申请
+	 * @throws Exception
+	 */
+	@GetMapping("/returnGoodsApply/{orderInfoId}")  
+	public ReturnGoodsApplyVO getByOrderInfoId(@PathVariable("orderInfoId") Long orderInfoId) {
+		try {
+			return orderInfoService.getByOrderInfoId(orderInfoId).clone(ReturnGoodsApplyVO.class);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
+	}
+	
+	/**
+	 * 更新退货物流单号
+	 * @param orderInfoId 订单id
+	 * @param returnGoodsLogisticCode 退货物流单号
+	 * @throws Exception
+	 */
+	@PutMapping("/returnGoodsLogisticCode/{orderInfoId}")
+	public Boolean updateReturnGoodsLogisticCode(@PathVariable("orderInfoId") Long orderInfoId, 
+			String returnGoodsLogisticCode) {
+		try {
+			orderInfoService.updateReturnGoodsLogisticCode(orderInfoId, returnGoodsLogisticCode); 
+			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;

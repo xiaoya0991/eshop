@@ -23,17 +23,17 @@ public interface ReturnGoodsApplyDAO {
 	ReturnGoodsApplyDO getByOrderInfoId(Long orderInfoId) throws Exception;
 	
 	/**
-	 * 更新退货申请的状态
+	 * 更新退货申请
 	 * @param apply 退货申请
 	 */
-	void updateStatus(ReturnGoodsApplyDO apply) throws Exception;
+	void update(ReturnGoodsApplyDO apply) throws Exception;
 	
 	/**
 	 * 更新退货申请的状态
 	 * @param orderInfoId 订单id
-	 * @param status 退货申请状态
+	 * @param returnGoodsApplyStatus 退货申请状态
 	 * @throws Exception
 	 */
-	void updateStatus(Long orderInfoId, Integer status) throws Exception;
-	
+	void updateStatus(Long orderInfoId, Integer returnGoodsApplyStatus) throws Exception;
+
 }

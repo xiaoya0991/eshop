@@ -50,6 +50,14 @@ public class OrderOperateLogFactory {
 			operateContent = "退货申请审核不通过"; 
 		} else if(OrderOperateType.RETURN_GOODS_REJECTED.equals(operateType)) {
 			operateContent = "退货申请审核已通过"; 
+		} else if(OrderOperateType.SEND_OUT_RETURN_GOODS.equals(operateType)) {
+			operateContent = "寄送退货商品"; 
+		} else if(OrderOperateType.CONFIRM_RETURN_GOODS_RECEIPT.equals(operateType)) {
+			operateContent = "确认收到退货商品"; 
+		} else if(OrderOperateType.FINISHED_RETURN_GOODS_INPUT.equals(operateType)) {
+			operateContent = "完成退货商品入库"; 
+		} else if(OrderOperateType.FINISHED_RETURN_GOODS_REFUND.equals(operateType)) {
+			operateContent = "完成退款"; 
 		}     
 		
 		OrderOperateLogDO log = create(order, operateType, operateContent);

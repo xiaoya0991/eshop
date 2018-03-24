@@ -52,21 +52,21 @@ public class ReturnGoodsApplyDAOImpl implements ReturnGoodsApplyDAO {
 	 * 更新退货申请的状态
 	 * @param apply 退货申请
 	 */
-	public void updateStatus(ReturnGoodsApplyDO apply) throws Exception {
+	public void update(ReturnGoodsApplyDO apply) throws Exception {
 		apply.setGmtModified(dateProvider.getCurrentTime()); 
-		returnGoodsApplyMapper.updateStatus(apply); 
+		returnGoodsApplyMapper.update(apply); 
 	}
 	
 	/**
 	 * 更新退货申请的状态
 	 * @param orderInfoId 订单id
-	 * @param status 退货申请状态
+	 * @param returnGoodsApplyStatus 退货申请状态
 	 * @throws Exception
 	 */
-	public void updateStatus(Long orderInfoId, Integer status) throws Exception {
+	public void updateStatus(Long orderInfoId, Integer returnGoodsApplyStatus) throws Exception {
 		ReturnGoodsApplyDO apply = getByOrderInfoId(orderInfoId);
-		apply.setReturnGoodsApplyStatus(status);  
-		returnGoodsApplyMapper.updateStatus(apply); 
+		apply.setReturnGoodsApplyStatus(returnGoodsApplyStatus); 
+		returnGoodsApplyMapper.update(apply); 
 	}
 	
 }

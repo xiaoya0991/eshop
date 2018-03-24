@@ -60,7 +60,7 @@ public class OrderStatus {
 	/**
 	 * 完成退货商品退款
 	 */
-	public static final Integer FINISHED_RETURN_GOODS_REFUND = 12;
+	public static final Integer FINISHED_REFUND = 12;
 	
 	private OrderStatus() {
 		
