@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.zhss.eshop.commodity.domain.GoodsDTO;
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
 import com.zhss.eshop.commodity.service.CommodityService;
+import com.zhss.eshop.commodity.service.GoodsService;
 import com.zhss.eshop.commodity.service.GoodsSkuService;
 
 /**
@@ -25,6 +26,11 @@ public class CommodityServiceImpl implements CommodityService {
 	 */
 	@Autowired
 	private GoodsSkuService goodsSkuService;
+	/**
+	 * 商品管理service组件
+	 */
+	@Autowired
+	private GoodsService goodsService;
 	
 	/**
 	 * 根据id查询商品sku
@@ -46,7 +52,12 @@ public class CommodityServiceImpl implements CommodityService {
 	 * @return 商品
 	 */
 	public GoodsDTO getGoodsById(Long goodsId) {
-		return null;
+		try {
+			return goodsService.getById(goodsId); 
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
 	}
 	
 }
