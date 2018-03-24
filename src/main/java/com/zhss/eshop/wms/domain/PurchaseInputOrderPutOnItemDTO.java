@@ -2,12 +2,14 @@ package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
 
+import com.zhss.eshop.common.util.AbstractObject;
+
 /**
  * 采购入库单的商品上架条目
  * @author zhonghuashishan
  *
  */
-public class PurchaseInputOrderPutOnItemDTO {
+public class PurchaseInputOrderPutOnItemDTO extends AbstractObject {
 
 	/**
 	 * id

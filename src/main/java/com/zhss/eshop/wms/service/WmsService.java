@@ -27,7 +27,7 @@ public interface WmsService {
 	 * @param saleDeliveryOrderDTO 销售出库单DTO
 	 * @return 处理结果
 	 */
-	Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrderDTO);
+	Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder);
 	
 	/**
 	 * 创建退货入库单
@@ -70,5 +70,19 @@ public interface WmsService {
 	 * @return 物流单号
 	 */
 	String getLogisticCode(Long orderId);
+	
+	/**
+	 * 通知wms中心，“创建采购结算单”事件发生了
+	 * @param purchaseInputOrderId 采购入库单id
+	 * @return 处理结果
+	 */
+	Boolean informCreatePurchaseSettlementOrderEvent(Long purchaseInputOrderId);
+	
+	/**
+	 * 通知wms中心，“完成采购结算单”事件发生了
+	 * @param purchaseInputOrderId 采购入库单id
+	 * @return 处理结果
+	 */
+	Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseInputOrderId);
 	
 }
