@@ -2,11 +2,15 @@ package com.zhss.eshop.purchase.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.purchase.domain.SupplierDTO;
 import com.zhss.eshop.purchase.service.PurchaseService;
+import com.zhss.eshop.purchase.service.SupplierService;
 
 /**
  * 采购中心接口
@@ -16,7 +20,15 @@ import com.zhss.eshop.purchase.service.PurchaseService;
 @Service
 @Transactional
 public class PurchaseServiceImpl implements PurchaseService {
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(PurchaseServiceImpl.class);
+	
+	/**
+	 * 供应商管理service组件
+	 */
+	@Autowired
+	private SupplierService supplierService;
+	
 	/**
 	 * 判断是否有关联商品sku的采购单
 	 * @param goodsSkuId 商品sku id
@@ -68,7 +80,12 @@ public class PurchaseServiceImpl implements PurchaseService {
  	 * @return 供应商
 	 */
 	public List<SupplierDTO> listSuppliersBySettlementPeriod(Integer settlementPeriod) {
-		return null;
+		try {
+			return supplierService.listBySettlementPeriod(settlementPeriod);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
 	}
 	
 }

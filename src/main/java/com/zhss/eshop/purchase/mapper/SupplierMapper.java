@@ -152,4 +152,49 @@ public interface SupplierMapper {
 	})
 	SupplierDO getById(@Param("id") Long id);
 	
+	/**
+	 * 根据结算周期查询供应商
+	 * @param settlementPeriod 结算周期
+	 * @return 供应商
+	 */
+	@Select("SELECT "
+				+ "id,"
+				+ "name,"
+				+ "company_name,"
+				+ "company_address,"
+				+ "contactor,"
+				+ "contactor_phone_number,"
+				+ "settlement_period,"
+				+ "bank_name,"
+				+ "bank_account,"
+				+ "bank_account_holder,"
+				+ "invoice_title,"
+				+ "taxpayer_id,"
+				+ "business_scope,"
+				+ "remark,"
+				+ "gmt_create,"
+				+ "gmt_modified "
+			+ "FROM purchase_supplier "
+			+ "WHERE settlement_period=#{settlementPeriod}")  
+	@Results({
+		@Result(column = "id", property = "id", id = true),
+		@Result(column = "name", property = "name"),
+		@Result(column = "company_name", property = "companyName"),
+		@Result(column = "company_address", property = "companyAddress"),
+		@Result(column = "contactor", property = "contactor"),
+		@Result(column = "contactor_phone_number", property = "contactorPhoneNumber"),
+		@Result(column = "settlement_period", property = "settlementPeriod"),
+		@Result(column = "bank_name", property = "bankName"),
+		@Result(column = "bank_account", property = "bankAccount"),
+		@Result(column = "bank_account_holder", property = "bankAccountHolder"),
+		@Result(column = "invoice_title", property = "invoiceTitle"),
+		@Result(column = "taxpayer_id", property = "taxpayerId"),
+		@Result(column = "business_scope", property = "businessScope"),
+		@Result(column = "remark", property = "remark"),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "gmt_modified", property = "gmtModified")
+	})
+	List<SupplierDO> listBySettlementPeriod(
+			@Param("settlementPeriod") Integer settlementPeriod); 
+	
 }
