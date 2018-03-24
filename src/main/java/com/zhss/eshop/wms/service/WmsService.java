@@ -27,7 +27,7 @@ public interface WmsService {
 	 * @param saleDeliveryOrderDTO 销售出库单DTO
 	 * @return 处理结果
 	 */
-	Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrderDTO);
+	Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder);
 	
 	/**
 	 * 创建退货入库单

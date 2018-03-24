@@ -48,7 +48,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param saleDeliveryOrderDTO 销售出库单DTO
 	 * @return 处理结果
 	 */
-	public Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrderDTO) {
+	public Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder) {
 		return true;
 	}
 	
