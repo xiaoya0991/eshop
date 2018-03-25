@@ -123,4 +123,89 @@ public class PurchaseOrderDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((contactor == null) ? 0 : contactor.hashCode());
+		result = prime * result + ((contactorEmail == null) ? 0 : contactorEmail.hashCode());
+		result = prime * result + ((contactorPhoneNumber == null) ? 0 : contactorPhoneNumber.hashCode());
+		result = prime * result + ((expectArrivalTime == null) ? 0 : expectArrivalTime.hashCode());
+		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
+		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((purchaser == null) ? 0 : purchaser.hashCode());
+		result = prime * result + ((remark == null) ? 0 : remark.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((supplierId == null) ? 0 : supplierId.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PurchaseOrderDO other = (PurchaseOrderDO) obj;
+		if (contactor == null) {
+			if (other.contactor != null)
+				return false;
+		} else if (!contactor.equals(other.contactor))
+			return false;
+		if (contactorEmail == null) {
+			if (other.contactorEmail != null)
+				return false;
+		} else if (!contactorEmail.equals(other.contactorEmail))
+			return false;
+		if (contactorPhoneNumber == null) {
+			if (other.contactorPhoneNumber != null)
+				return false;
+		} else if (!contactorPhoneNumber.equals(other.contactorPhoneNumber))
+			return false;
+		if (expectArrivalTime == null) {
+			if (other.expectArrivalTime != null)
+				return false;
+		} else if (!expectArrivalTime.equals(other.expectArrivalTime))
+			return false;
+		if (gmtCreate == null) {
+			if (other.gmtCreate != null)
+				return false;
+		} else if (!gmtCreate.equals(other.gmtCreate))
+			return false;
+		if (gmtModified == null) {
+			if (other.gmtModified != null)
+				return false;
+		} else if (!gmtModified.equals(other.gmtModified))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (purchaser == null) {
+			if (other.purchaser != null)
+				return false;
+		} else if (!purchaser.equals(other.purchaser))
+			return false;
+		if (remark == null) {
+			if (other.remark != null)
+				return false;
+		} else if (!remark.equals(other.remark))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (supplierId == null) {
+			if (other.supplierId != null)
+				return false;
+		} else if (!supplierId.equals(other.supplierId))
+			return false;
+		return true;
+	}
+	
 }
