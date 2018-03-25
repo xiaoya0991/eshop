@@ -99,4 +99,17 @@ public interface OrderInfoService {
 	void updateReturnGoodsLogisticCode(Long orderInfoId, 
 			String returnGoodsLogisticCode) throws Exception;
 	
+	/**
+	 * 更新订单
+	 * @param order 订单
+	 * @throws Exception 
+	 */
+	void update(OrderInfoDTO order) throws Exception;
+	
+	/**
+	 * 查询确认收货时间超过了7天而且还没有发表评论的订单
+	 * @return 订单
+	 */
+	List<OrderInfoDTO> listNotPublishedCommentOrders() throws Exception; 
+	
 }

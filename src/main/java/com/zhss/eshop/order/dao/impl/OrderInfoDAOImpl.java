@@ -60,14 +60,6 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	}
 	
 	/**
-	 * 更新订单状态
-	 * @param order 订单
-	 */
-	public void updateStatus(OrderInfoDO order) throws Exception {
-		orderInfoMapper.updateStatus(order);
-	}
-	
-	/**
 	 * 查询所有未付款的订单
 	 * @return 所有未付款的订单
 	 */
@@ -76,14 +68,34 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	}
 	
 	/**
+	 * 更新订单
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	public void update(OrderInfoDO order) throws Exception {
+		order.setGmtModified(dateProvider.getCurrentTime()); 
+		orderInfoMapper.update(order); 
+	}
+	
+	/**
+	 * 更新订单状态
+	 * @param order 订单
+	 */
+	public void updateStatus(Long id, Integer status) throws Exception {
+		OrderInfoDO order = getById(id);
+		order.setOrderStatus(status);
+		update(order);
+	}
+	 
+	/**
 	 * 更新订单的确认收货时间
 	 * @param order 订单
 	 */
 	public void updateConfirmReceiptTime(Long id, Date confirmReceiptTime) throws Exception {
 		OrderInfoDO order = getById(id);
 		order.setConfirmReceiptTime(confirmReceiptTime); 
-		order.setGmtModified(dateProvider.getCurrentTime()); 
-		orderInfoMapper.updateConfirmReceiptTime(order); 
+		order.setGmtModified(dateProvider.getCurrentTime());
+		update(order); 
 	}
 	
 	/**
@@ -93,6 +105,14 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 */
 	public List<OrderInfoDO> listUnreceived() throws Exception {
 		return orderInfoMapper.listByStatus(OrderStatus.WAIT_FOR_RECEIVE);
+	}
+	
+	/**
+	 * 查询确认收货时间超过了7天而且还没有发表评论的订单
+	 * @return 订单
+	 */
+	public List<OrderInfoDO> listNotPublishedCommentOrders() throws Exception {
+		return orderInfoMapper.listNotPublishedCommentOrders();
 	}
 	
 }

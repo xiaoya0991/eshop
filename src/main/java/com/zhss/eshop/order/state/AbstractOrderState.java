@@ -1,9 +1,7 @@
 package com.zhss.eshop.order.state;
 
-
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.dao.OrderInfoDAO;
-import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 
 /**
@@ -33,9 +31,7 @@ public abstract class AbstractOrderState implements OrderState {
 	 * @param order 订单
 	 */
 	public void doTransition(OrderInfoDTO order) throws Exception {
-		order.setOrderStatus(getOrderStatus(order));  
-		order.setGmtModified(dateProvider.getCurrentTime()); 
-		orderInfoDAO.updateStatus(order.clone(OrderInfoDO.class));  
+		orderInfoDAO.updateStatus(order.getId(), getOrderStatus(order));  
 	}
 	
 	/**

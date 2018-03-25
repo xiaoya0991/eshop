@@ -1,6 +1,5 @@
 package com.zhss.eshop.order.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.membership.service.MembershipService;
 import com.zhss.eshop.order.constant.OrderOperateType;
+import com.zhss.eshop.order.constant.PublishedComment;
 import com.zhss.eshop.order.constant.ReturnGoodsApplyStatus;
 import com.zhss.eshop.order.dao.OrderOperateLogDAO;
 import com.zhss.eshop.order.dao.ReturnGoodsApplyDAO;
@@ -179,32 +179,6 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	/**
-	 * 通知订单中心，“订单发表评论”事件发生了
-	 * @param orderId 订单id
-	 * @return 处理结果
-	 */
-	public Boolean informPublishCommentEvent(Long orderId) {
-		return true;
-	}
-	
-	/**
-	 * 从订单中心获取，确认收货时间超过了7天，而且还没有发表评论的订单
-	 * @return 订单信息DTO集合
-	 */
-	public List<OrderInfoDTO> listNotPublishedCommentOrders() {
-		return new ArrayList<OrderInfoDTO>();
-	}
-	
-	/**
-	 * 通知订单中心，“订单批量发表评论”事件发生了
-	 * @param orderIds 订单id集合
-	 * @return 处理结果
-	 */
-	public Boolean informBatchPublishCommentEvent(List<Long> orderIds) {
-		return true;
-	}
-	
-	/**
 	 * 通知订单中心，“支付订单成功了”
 	 * @param orderInfoId 订单id
 	 * @return 处理结果
@@ -225,12 +199,64 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	/**
+	 * 通知订单中心，“订单发表评论”事件发生了
+	 * @param orderId 订单id
+	 * @return 处理结果
+	 */
+	public Boolean informPublishCommentEvent(Long orderId) {
+		try {
+			OrderInfoDTO order = orderInfoService.getById(orderId);
+			order.setPublishedComment(PublishedComment.YES);  
+			orderInfoService.update(order); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 通知订单中心，“订单批量发表评论”事件发生了
+	 * @param orderIds 订单id集合
+	 * @return 处理结果
+	 */
+	public Boolean informBatchPublishCommentEvent(List<Long> orderIds) {
+		try {
+			for(Long orderId : orderIds) {
+				informPublishCommentEvent(orderId);
+			}
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
+	/**
+	 * 从订单中心获取，确认收货时间超过了7天，而且还没有发表评论的订单
+	 * @return 订单信息DTO集合
+	 */
+	public List<OrderInfoDTO> listNotPublishedCommentOrders() {
+		try {
+			return orderInfoService.listNotPublishedCommentOrders();
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
+	}
+	
+	/**
 	 * 根据id查询订单
 	 * @param orderInfoId 订单id
 	 * @return 订单
 	 */
 	public OrderInfoDTO getOrderById(Long orderInfoId) {
-		return null;
+		try {
+			return orderInfoService.getById(orderInfoId); 
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
 	}
 	
 }

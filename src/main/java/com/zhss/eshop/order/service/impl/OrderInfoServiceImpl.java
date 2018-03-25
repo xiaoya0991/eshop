@@ -309,18 +309,36 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 */
 	public OrderInfoDTO getById(Long id) throws Exception {
 		OrderInfoDTO order = orderInfoDAO.getById(id).clone(OrderInfoDTO.class);
-		
+		setOrderItems(order);
+		setOrderOperateLogs(order);
+		return order;
+	}
+	
+	/**
+	 * 为订单查询并且设置订单条目
+	 * @param order 订单 
+	 * @return 订单
+	 * @throws Exception
+	 */
+	private OrderInfoDTO setOrderItems(OrderInfoDTO order) throws Exception {
 		List<OrderItemDTO> orderItems = ObjectUtils.convertList(
 				orderItemDAO.listByOrderInfoId(order.getId()), 
 				OrderItemDTO.class); 
-		
+		order.setOrderItems(orderItems); 
+		return order;
+	}
+	
+	/**
+	 * 为订单查询并且设置订单操作日志
+	 * @param order 订单
+	 * @return 订单
+	 * @throws Exception
+	 */
+	private OrderInfoDTO setOrderOperateLogs(OrderInfoDTO order) throws Exception {
 		List<OrderOperateLogDTO> logs = ObjectUtils.convertList(
 				orderOperateLogDAO.listByOrderInfoId(order.getId()), 
 				OrderOperateLogDTO.class);
-		
-		order.setOrderItems(orderItems); 
 		order.setLogs(logs); 
-		
 		return order;
 	}
 	
@@ -432,6 +450,32 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		
 		orderOperateLogDAO.save(orderOperateLogFactory.get(
 				order, OrderOperateType.SEND_OUT_RETURN_GOODS));  
+	}
+	
+	/**
+	 * 更新订单
+	 * @param order 订单
+	 * @throws Exception 
+	 */
+	public void update(OrderInfoDTO order) throws Exception {
+		orderInfoDAO.update(order.clone(OrderInfoDO.class));  
+	}
+	
+	/**
+	 * 查询确认收货时间超过了7天而且还没有发表评论的订单
+	 * @return 订单
+	 */
+	public List<OrderInfoDTO> listNotPublishedCommentOrders() throws Exception {
+		List<OrderInfoDTO> orders = ObjectUtils.convertList(
+				orderInfoDAO.listNotPublishedCommentOrders(), 
+				OrderInfoDTO.class);
+		
+		for(OrderInfoDTO order : orders) {
+			setOrderItems(order);
+			setOrderOperateLogs(order);
+		}
+		
+		return orders;
 	}
 	
 }

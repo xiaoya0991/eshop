@@ -34,10 +34,17 @@ public interface OrderInfoDAO {
 	OrderInfoDO getById(Long id) throws Exception;
 	
 	/**
+	 * 更新订单
+	 * @param order 订单
+	 * @throws Exception
+	 */
+	void update(OrderInfoDO order) throws Exception;
+	
+	/**
 	 * 更新订单状态
 	 * @param order 订单
 	 */
-	void updateStatus(OrderInfoDO order) throws Exception;
+	void updateStatus(Long id, Integer status) throws Exception;
 	
 	/**
 	 * 查询所有未付款的订单
@@ -57,5 +64,11 @@ public interface OrderInfoDAO {
 	 * @throws Exception
 	 */
 	List<OrderInfoDO> listUnreceived() throws Exception;
+	
+	/**
+	 * 查询确认收货时间超过了7天而且还没有发表评论的订单
+	 * @return 订单
+	 */
+	List<OrderInfoDO> listNotPublishedCommentOrders() throws Exception; 
 	
 }
