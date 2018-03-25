@@ -1,9 +1,11 @@
 package com.zhss.eshop.order.price;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.zhss.eshop.common.json.JsonExtractor;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
 
@@ -15,11 +17,14 @@ import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
 @Component
 public class ReachDiscountPromotionActivityCalculator implements PromotionActivityCalculator {
 
+	@Autowired
+	private JsonExtractor jsonExtractor;
+	
 	/**
 	 * 计算促销活动的减免金额
 	 */
 	public PromotionActivityResult calculate(OrderItemDTO item, 
-			PromotionActivityDTO promotionActivity) {
+			PromotionActivityDTO promotionActivity) throws Exception {
 		Double totalAmount = item.getPurchaseQuantity() * item.getPurchasePrice();
 		
 		String rulesJson = promotionActivity.getRule();
@@ -29,8 +34,8 @@ public class ReachDiscountPromotionActivityCalculator implements PromotionActivi
 		for(int i = 0; i < rules.size(); i++) {
 			JSONObject rule = rules.getJSONObject(i);
 		
-			Double thresholdAmount = rule.getDouble("thresholdAmount");
-			Double reduceAmount = rule.getDouble("reduceAmount");
+			Double thresholdAmount = jsonExtractor.getDouble(rule, "thresholdAmount"); 
+			Double reduceAmount = jsonExtractor.getDouble(rule, "reduceAmount"); 
 			
 			if(totalAmount > thresholdAmount) {
 				return new PromotionActivityResult(reduceAmount); 

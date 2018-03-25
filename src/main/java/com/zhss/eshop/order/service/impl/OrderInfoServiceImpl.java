@@ -135,7 +135,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * 计算订单价格
 	 * @param order 订单
 	 */
-	public OrderInfoDTO calculateOrderPrice(OrderInfoDTO order) {
+	public OrderInfoDTO calculateOrderPrice(OrderInfoDTO order) throws Exception {
 		// 定义订单的各种价格
 		Double totalAmount = 0.0;
 		Double discountAmount = 0.0;
@@ -212,7 +212,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @return
 	 */
 	public OrderInfoDTO calculateCouponDiscountPrice(
-			OrderInfoDTO order, CouponDTO coupon) {
+			OrderInfoDTO order, CouponDTO coupon) throws Exception {
 		CouponCalculator couponCalculator = couponCalculatorFactory.create(coupon);
 		Double couponAmount = couponCalculator.calculate(order, coupon);
 		order.setCouponAmount(couponAmount); 

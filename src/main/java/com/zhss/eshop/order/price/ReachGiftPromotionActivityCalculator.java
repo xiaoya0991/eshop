@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zhss.eshop.commodity.domain.GoodsSkuDTO;
 import com.zhss.eshop.commodity.service.CommodityService;
+import com.zhss.eshop.common.json.JsonExtractor;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
 
@@ -26,14 +27,18 @@ public class ReachGiftPromotionActivityCalculator
 	@Autowired
 	private CommodityService commodityService;
 	
+	@Autowired
+	private JsonExtractor jsonExtractor;
+	
 	/**
 	 * 计算促销活动的减免金额
 	 */
-	public PromotionActivityResult calculate(OrderItemDTO item, PromotionActivityDTO promotionActivity) {
+	public PromotionActivityResult calculate(OrderItemDTO item, 
+			PromotionActivityDTO promotionActivity) throws Exception {
 		Double totalAmount = item.getPurchaseQuantity() * item.getPurchasePrice();
 		
 		JSONObject rule = JSONObject.parseObject(promotionActivity.getRule());
-		Double thresholdAmount = rule.getDouble("thresholdAmount");
+		Double thresholdAmount = jsonExtractor.getDouble(rule, "thresholdAmount"); 
 		JSONArray giftGoodsSkuIds = rule.getJSONArray("giftGoodsSkuIds");
 		
 		if(totalAmount > thresholdAmount) {

@@ -16,6 +16,6 @@ public interface CouponCalculator {
 	 * @param coupon
 	 * @return
 	 */
-	Double calculate(OrderInfoDTO order, CouponDTO coupon);
+	Double calculate(OrderInfoDTO order, CouponDTO coupon) throws Exception;
 	
 }

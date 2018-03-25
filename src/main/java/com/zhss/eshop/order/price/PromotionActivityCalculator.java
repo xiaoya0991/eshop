@@ -15,6 +15,6 @@ public interface PromotionActivityCalculator {
 	 * @return
 	 */
 	PromotionActivityResult calculate(OrderItemDTO item, 
-			PromotionActivityDTO promotionActivity);
+			PromotionActivityDTO promotionActivity) throws Exception;
 	
 }
