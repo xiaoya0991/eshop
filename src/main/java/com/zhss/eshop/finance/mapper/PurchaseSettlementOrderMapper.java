@@ -32,13 +32,14 @@ public interface PurchaseSettlementOrderMapper {
 				+ "purchase_order_id,"
 				+ "supplier_id,"
 				+ "expect_arrival_time,"
+				+ "actual_arrival_time,"
 				+ "purchase_contactor,"
 				+ "purchase_contactor_phone_number,"
 				+ "purchase_contactor_email,"
 				+ "purchase_order_remark,"
 				+ "purchaser,"
 				+ "status,"
-				+ "total_setlement_amount,"  
+				+ "total_settlement_amount,"  
 				+ "gmt_create,"
 				+ "gmt_modified"
 			+ ") VALUES("
@@ -46,6 +47,7 @@ public interface PurchaseSettlementOrderMapper {
 				+ "#{purchaseOrderId},"  
 				+ "#{supplierId},"
 				+ "#{expectArrivalTime},"
+				+ "#{actualArrivalTime},"  
 				+ "#{purchaseContactor},"
 				+ "#{purchaseContactorPhoneNumber},"
 				+ "#{purchaseContactorEmail},"
@@ -188,7 +190,7 @@ public interface PurchaseSettlementOrderMapper {
 			+ "FROM finance_purchase_settlement_order "
 			+ "WHERE supplier_id=#{supplierId} "
 			+ "AND gmt_create >= #{startTime} "
-			+ "AND gmt_modified <= #{endTime} "
+			+ "AND gmt_create <= #{endTime} "
 			+ "AND status=3")  
 	@Results({
 		@Result(column = "id", property = "id", id = true),

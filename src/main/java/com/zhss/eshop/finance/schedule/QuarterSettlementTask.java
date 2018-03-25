@@ -44,8 +44,11 @@ public class QuarterSettlementTask {
 	
 	/**
 	 * 每季度运行一次
+	 * 
+	 * 从1月的1号的0点0分0秒开始，运行一次，以后每隔3个月的1号的0点0分0秒都会运行一次
+	 * 
 	 */
-	@Scheduled(fixedRate = 1 * 90 * 24 * 60 * 60 * 1000)
+	@Scheduled(cron = "0 0 0 1 1/3 ?") 
 	public void execute() {
 		try {
 			List<SupplierDTO> suppliers = purchaseService.listSuppliersBySettlementPeriod(
