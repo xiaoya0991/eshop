@@ -12,15 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.common.util.ObjectUtils;
-import com.zhss.eshop.order.constant.OrderOperateType;
 import com.zhss.eshop.order.dao.OrderInfoDAO;
 import com.zhss.eshop.order.dao.OrderItemDAO;
-import com.zhss.eshop.order.dao.OrderOperateLogDAO;
 import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
-import com.zhss.eshop.order.service.impl.OrderOperateLogFactory;
-import com.zhss.eshop.order.state.OrderStateManager;
+import com.zhss.eshop.order.state.LoggedOrderStateManager;
 
 /**
  * 自动取消订单任务
@@ -52,22 +49,12 @@ public class AutoCancelOrderTask {
 	 * 订单状态管理组件
 	 */
 	@Autowired
-	private OrderStateManager orderStateManager;
+	private LoggedOrderStateManager orderStateManager;
 	/**
 	 * 库存中心接口
 	 */
 	@Autowired
 	private InventoryService inventoryService;
-	/**
-	 * 订单操作日志管理DAO组件
-	 */
-	@Autowired
-	private OrderOperateLogDAO orderOperateLogDAO;
-	/**
-	 * 订单操作日志工厂
-	 */
-	@Autowired
-	private OrderOperateLogFactory orderOperateLogFactory;
 	
 	/**
 	 * 执行任务逻辑
@@ -85,8 +72,6 @@ public class AutoCancelOrderTask {
 				 
 				 orderStateManager.cancel(order);
 				 inventoryService.informCancelOrderEvent(order);
-				 orderOperateLogDAO.save(orderOperateLogFactory.get(order, 
-						 OrderOperateType.AUTO_CANCEL_ORDER)); 
 			 }
 		} catch (Exception e) {
 			logger.error("error", e); 

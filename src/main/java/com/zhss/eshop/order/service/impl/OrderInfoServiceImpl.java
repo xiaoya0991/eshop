@@ -12,7 +12,6 @@ import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.customer.service.CustomerService;
-import com.zhss.eshop.order.constant.OrderOperateType;
 import com.zhss.eshop.order.constant.OrderStatus;
 import com.zhss.eshop.order.constant.PublishedComment;
 import com.zhss.eshop.order.dao.OrderInfoDAO;
@@ -38,7 +37,7 @@ import com.zhss.eshop.order.price.PromotionActivityCalculator;
 import com.zhss.eshop.order.price.PromotionActivityResult;
 import com.zhss.eshop.order.price.TotalPriceCalculator;
 import com.zhss.eshop.order.service.OrderInfoService;
-import com.zhss.eshop.order.state.OrderStateManager;
+import com.zhss.eshop.order.state.LoggedOrderStateManager;
 import com.zhss.eshop.pay.service.PayService;
 import com.zhss.eshop.promotion.constant.PromotionActivityType;
 import com.zhss.eshop.promotion.domain.CouponDTO;
@@ -100,21 +99,10 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	@Autowired
 	private InventoryService inventoryService;
 	/**
-	 * 订单操作日志DAO组件
-	 */
-	@Autowired
-	private OrderOperateLogDAO orderOperateLogDAO;
-	/**
-	 * 订单操作内容工厂
-	 */
-	@Autowired
-	private OrderOperateLogFactory orderOperateLogFactory;
-	/**
 	 * 订单状态管理器
 	 */
 	@Autowired
-	private OrderStateManager orderStateManager;
-	
+	private LoggedOrderStateManager orderStateManager;
 	/**
 	 * 支付中心接口
 	 */
@@ -130,6 +118,11 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 */
 	@Autowired
 	private CustomerService customerService;
+	/**
+	 * 订单操作日志DAO组件
+	 */
+	@Autowired
+	private OrderOperateLogDAO orderOperateLogDAO;
 	
 	/**
 	 * 计算订单价格
@@ -231,8 +224,6 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		
 		saveOrder(order);
 		orderStateManager.create(order); 
-		orderOperateLogDAO.save(orderOperateLogFactory.get(
-				order, OrderOperateType.CREATE_ORDER));      
 		inventoryService.informSubmitOrderEvent(order);
 		promotionService.useCoupon(order.getCouponId(), order.getUserAccountId());
 		
@@ -360,8 +351,6 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		
 		orderStateManager.cancel(order);
 		inventoryService.informCancelOrderEvent(order);
-		orderOperateLogDAO.save(orderOperateLogFactory.get(
-				order, OrderOperateType.MANUAL_CANCEL_ORDER)); 
 		
 		return true;
 	}
@@ -394,8 +383,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		
 		orderStateManager.confirmReceipt(order); 
 		orderInfoDAO.updateConfirmReceiptTime(id, dateProvider.getCurrentTime()); 
-		orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.MANUAL_CONFIRM_RECEIPT));  
-		
+
 		return true;
 	}
 	
@@ -414,7 +402,6 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		
 		returnGoodsApplyDAO.save(apply.clone(ReturnGoodsApplyDO.class));  
 		orderStateManager.applyReturnGoods(order); 
-		orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.APPLY_RETURN_GOODS));  
 		customerService.createReturnGoodsWorksheet(order.getId(), order.getOrderNo(), 
 				apply.getReturnGoodsReason(), apply.getReturnGoodsComment());
 		
@@ -445,11 +432,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		apply.setReturnGoodsLogisticCode(returnGoodsLogisticCode); 
 		
 		customerService.syncReturnGoodsLogisticsCode(orderInfoId, returnGoodsLogisticCode);
-		
 		orderStateManager.sendOutReturnGoods(order);  
-		
-		orderOperateLogDAO.save(orderOperateLogFactory.get(
-				order, OrderOperateType.SEND_OUT_RETURN_GOODS));  
 	}
 	
 	/**

@@ -12,57 +12,49 @@ public class OrderOperateType {
 	 */
 	public static final Integer CREATE_ORDER = 1;
 	/**
-	 * 手动取消订单
+	 * 取消订单
 	 */
-	public static final Integer MANUAL_CANCEL_ORDER = 2;
-	/**
-	 * 自动取消订单
-	 */
-	public static final Integer AUTO_CANCEL_ORDER = 3;
+	public static final Integer CANCEL_ORDER = 2;
 	/**
 	 * 支付订单
 	 */
-	public static final Integer PAY_ORDER = 4;
+	public static final Integer PAY_ORDER = 3;
 	/**
-	 * 手动确认收货
+	 * 确认收货
 	 */
-	public static final Integer MANUAL_CONFIRM_RECEIPT = 5;
-	/**
-	 * 自动确认收货
-	 */
-	public static final Integer AUTO_CONFIRM_RECEIPT = 6;
+	public static final Integer CONFIRM_RECEIPT = 4;
 	/**
 	 * 商品发货
 	 */
-	public static final Integer GOODS_DELIVERY = 7;
+	public static final Integer GOODS_DELIVERY = 5;
 	/**
 	 * 申请退货
 	 */
-	public static final Integer APPLY_RETURN_GOODS = 8;
+	public static final Integer APPLY_RETURN_GOODS = 6;
 	/**
 	 * 退货审核不通过
 	 */
-	public static final Integer RETURN_GOODS_REJECTED = 9;
+	public static final Integer RETURN_GOODS_REJECTED = 7;
 	/**
 	 * 退货审核通过
 	 */
-	public static final Integer RETURN_GOODS_APPROVED = 10;
+	public static final Integer RETURN_GOODS_APPROVED = 8;
 	/**
 	 * 寄送退货商品
 	 */
-	public static final Integer SEND_OUT_RETURN_GOODS = 11;
+	public static final Integer SEND_OUT_RETURN_GOODS = 9;
 	/**
 	 * 确认收到退货
 	 */
-	public static final Integer CONFIRM_RETURN_GOODS_RECEIPT = 12;
+	public static final Integer CONFIRM_RETURN_GOODS_RECEIPT = 10;
 	/**
 	 * 完成退货入库
 	 */
-	public static final Integer FINISHED_RETURN_GOODS_INPUT = 13;
+	public static final Integer FINISHED_RETURN_GOODS_INPUT = 11;
 	/**
 	 * 完成退货退款
 	 */
-	public static final Integer FINISHED_RETURN_GOODS_REFUND = 14;
+	public static final Integer FINISHED_RETURN_GOODS_REFUND = 12;
 	
 	private OrderOperateType() {
 		

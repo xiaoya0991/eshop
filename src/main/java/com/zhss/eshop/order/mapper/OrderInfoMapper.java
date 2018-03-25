@@ -250,7 +250,7 @@ public interface OrderInfoMapper {
 				+ "username,"
 				+ "order_comment "
 			+ "FROM order_info "
-			+ "WHERE status=#{status}" 
+			+ "WHERE order_status=#{orderStatus}" 
 	)
 	@Results({
 		@Result(column = "id", property = "id", id = true),
@@ -272,7 +272,7 @@ public interface OrderInfoMapper {
 		@Result(column = "username", property = "username"),
 		@Result(column = "order_comment", property = "orderComment")
  	})
-	List<OrderInfoDO> listByStatus(@Param("status") Integer status); 
+	List<OrderInfoDO> listByStatus(@Param("orderStatus") Integer orderStatus); 
 	
 	/**
 	 * 查询确认收货时间超过了7天而且还没有发表评论的订单

@@ -11,13 +11,10 @@ import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.logistics.service.LogisticsService;
-import com.zhss.eshop.order.constant.OrderOperateType;
 import com.zhss.eshop.order.dao.OrderInfoDAO;
-import com.zhss.eshop.order.dao.OrderOperateLogDAO;
 import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
-import com.zhss.eshop.order.service.impl.OrderOperateLogFactory;
-import com.zhss.eshop.order.state.OrderStateManager;
+import com.zhss.eshop.order.state.LoggedOrderStateManager;
 
 /**
  * 自动确认收货任务
@@ -48,17 +45,7 @@ public class AutoConfirmReceiptTask {
 	 * 订单状态管理器
 	 */
 	@Autowired
-	private OrderStateManager orderStateManager;
-	/**
-	 * 订单操作日志DAO组件
-	 */
-	@Autowired
-	private OrderOperateLogDAO orderOperateLogDAO;
-	/**
-	 * 订单操作内容工厂
-	 */
-	@Autowired
-	private OrderOperateLogFactory orderOperateLogFactory;
+	private LoggedOrderStateManager orderStateManager;
 	
 	@Scheduled(fixedRate = 1 * 60 * 1000)
 	public void execute() {
@@ -77,7 +64,6 @@ public class AutoConfirmReceiptTask {
 						7 * 24 * 60 * 60 * 1000) {
 					orderStateManager.confirmReceipt(unreceivedOrder.clone(OrderInfoDTO.class));   
 					orderInfoDAO.updateConfirmReceiptTime(unreceivedOrder.getId(), dateProvider.getCurrentTime()); 
-					orderOperateLogDAO.save(orderOperateLogFactory.get(unreceivedOrder.clone(OrderInfoDTO.class), OrderOperateType.AUTO_CONFIRM_RECEIPT));  
 				} 
 			}
 		} catch (Exception e) {

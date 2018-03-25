@@ -10,15 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.Inventory.service.InventoryService;
 import com.zhss.eshop.membership.service.MembershipService;
-import com.zhss.eshop.order.constant.OrderOperateType;
 import com.zhss.eshop.order.constant.PublishedComment;
 import com.zhss.eshop.order.constant.ReturnGoodsApplyStatus;
-import com.zhss.eshop.order.dao.OrderOperateLogDAO;
 import com.zhss.eshop.order.dao.ReturnGoodsApplyDAO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.service.OrderInfoService;
 import com.zhss.eshop.order.service.OrderService;
-import com.zhss.eshop.order.state.OrderStateManager;
+import com.zhss.eshop.order.state.LoggedOrderStateManager;
 import com.zhss.eshop.schedule.service.ScheduleService;
 
 /**
@@ -36,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
 	 * 订单状态管理器
 	 */
 	@Autowired
-	private OrderStateManager orderStateManager;
+	private LoggedOrderStateManager orderStateManager;
 	/**
 	 * 订单管理service组件
 	 */
@@ -58,16 +56,6 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private MembershipService membershipService;
 	/**
-	 * 订单操作日志管理DAO组件
-	 */
-	@Autowired
-	private OrderOperateLogDAO orderOperateLogDAO;
-	/**
-	 * 订单操作日志工厂
-	 */
-	@Autowired
-	private OrderOperateLogFactory orderOperateLogFactory;
-	/**
 	 * 退货申请管理DAO
 	 */
 	@Autowired
@@ -82,8 +70,6 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
 			orderStateManager.finishDelivery(order);
-			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.GOODS_DELIVERY));  
-			
 			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 
@@ -100,7 +86,6 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
 			orderStateManager.rejectReturnGoodsApply(order);
-			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.RETURN_GOODS_REJECTED));  
 			returnGoodsApplyDAO.updateStatus(orderId, ReturnGoodsApplyStatus.REJECTED); 
 			return true;
 		} catch (Exception e) {
@@ -118,7 +103,6 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
 			orderStateManager.passedReturnGoodsApply(order); 
-			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.RETURN_GOODS_APPROVED));  
 			returnGoodsApplyDAO.updateStatus(orderId, ReturnGoodsApplyStatus.PASSED); 
 			return true;
 		} catch (Exception e) {
@@ -136,7 +120,6 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
 			orderStateManager.confirmReceivedReturnGoods(order); 
-			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.CONFIRM_RETURN_GOODS_RECEIPT));  
 			return true;
 		} catch (Exception e) {
 			logger.error("error", e);
@@ -153,7 +136,6 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
 			orderStateManager.finishedInputReturnGoods(order); 
-			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.FINISHED_RETURN_GOODS_INPUT));  
 			return true;
 		} catch (Exception e) {
 			logger.error("error", e);
@@ -170,7 +152,6 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
 			orderStateManager.finishedRefund(order); 
-			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.FINISHED_RETURN_GOODS_REFUND));  
 			return true;
 		} catch (Exception e) {
 			logger.error("error", e);
@@ -187,7 +168,6 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderInfoId);
 			orderStateManager.pay(order);
-			orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.PAY_ORDER));  
 			inventoryService.informPayOrderEvent(order);
 			scheduleService.scheduleSaleDelivery(order);
 			membershipService.informPayOrderEvent(order.getUserAccountId(), order.getPayableAmount());

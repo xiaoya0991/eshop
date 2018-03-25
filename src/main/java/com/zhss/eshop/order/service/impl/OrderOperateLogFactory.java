@@ -32,18 +32,14 @@ public class OrderOperateLogFactory {
 		
 		if(OrderOperateType.CREATE_ORDER.equals(operateType)) {
 			operateContent = "完成订单创建，订单编号为：" + order.getOrderNo(); 
-		} else if(OrderOperateType.MANUAL_CANCEL_ORDER.equals(operateType)) {
-			operateContent = "手动取消订单，订单编号为：" + order.getOrderNo();
-		} else if(OrderOperateType.AUTO_CANCEL_ORDER.equals(operateType)) {
-			operateContent = "自动取消订单，订单编号为：" + order.getOrderNo();
+		} else if(OrderOperateType.CANCEL_ORDER.equals(operateType)) {
+			operateContent = "取消订单，订单编号为：" + order.getOrderNo();
 		} else if(OrderOperateType.PAY_ORDER.equals(operateType)) {
 			operateContent = "支付订单，订单编号为：" + order.getOrderNo() + "，支付金额为：" + order.getPayableAmount();
 		} else if(OrderOperateType.GOODS_DELIVERY.equals(operateType)) {
 			operateContent = "已经将订单中的商品进行发货"; 
-		} else if(OrderOperateType.MANUAL_CONFIRM_RECEIPT.equals(operateType)) {
-			operateContent = "手动完成确认收货"; 
-		} else if(OrderOperateType.AUTO_CONFIRM_RECEIPT.equals(operateType)) {
-			operateContent = "系统自动完成确认收货"; 
+		} else if(OrderOperateType.CONFIRM_RECEIPT.equals(operateType)) {
+			operateContent = "完成确认收货"; 
 		} else if(OrderOperateType.APPLY_RETURN_GOODS.equals(operateType)) {
 			operateContent = "申请退货"; 
 		} else if(OrderOperateType.RETURN_GOODS_REJECTED.equals(operateType)) {
