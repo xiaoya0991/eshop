@@ -1,8 +1,10 @@
 package com.zhss.eshop.logistics.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zhss.eshop.common.json.JsonExtractor;
 import com.zhss.eshop.logistics.domain.FreightTemplateDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
@@ -14,6 +16,9 @@ import com.zhss.eshop.order.domain.OrderItemDTO;
  */
 @Component
 public class ReachFreeFreightCalculator implements FreightCalculator {
+	
+	@Autowired
+	private JsonExtractor jsonExtractor;
 
 	/**
 	 * 计算订单条目的运费
@@ -26,9 +31,9 @@ public class ReachFreeFreightCalculator implements FreightCalculator {
 	public Double calculate(FreightTemplateDTO freightTemplate, 
 			OrderInfoDTO order, OrderItemDTO orderItem) throws Exception {
 		JSONObject rule = JSONObject.parseObject(freightTemplate.getRule());
-		Double threshold = rule.getDouble("threshold");  
-		Double lessThanThresholdFreight = rule.getDouble("less_than_threshold_freight"); 
-		
+		Double threshold = jsonExtractor.getDouble(rule, "threshold"); 
+		Double lessThanThresholdFreight = jsonExtractor.getDouble(rule, "less_than_threshold_freight");
+		 
 		Double amount = orderItem.getPurchaseQuantity() * orderItem.getPurchasePrice();
 	
 		if(amount >= threshold) {
