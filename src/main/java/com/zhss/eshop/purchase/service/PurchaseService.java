@@ -1,5 +1,9 @@
 package com.zhss.eshop.purchase.service;
 
+import java.util.List;
+
+import com.zhss.eshop.purchase.domain.SupplierDTO;
+
 /**
  * 采购中心接口
  * @author zhonghuashishan
@@ -41,5 +45,12 @@ public interface PurchaseService {
 	 * @return
 	 */
 	Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseOrderId);
+	
+	/**
+	 * 根据结算周期来查询供应商
+	 * @param settlementPeriod 结算周期
+ 	 * @return 供应商
+	 */
+	List<SupplierDTO> listSuppliersBySettlementPeriod(Integer settlementPeriod);
 	
 }
