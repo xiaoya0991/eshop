@@ -38,27 +38,32 @@ public class OfflineResumeThread extends Thread {
 	 */
 	@Override
 	public void run() {
-		// 如果表中还有数据的话
-		while(offlineStorageManager.hasNext()) {
-			try {
-				// 每次就从mysql中查询50条数据，批量查询，批量处理，批量删除
-				List<StockUpdateMessage> stockUpdateMessages = 
-						offlineStorageManager.getNextBatch();
-				
-				// 将这批数据写入内存队列中
-				for(StockUpdateMessage message : stockUpdateMessages) {
-					stockUpdateQueue.putDirect(message);
+		try {
+			// 如果表中还有数据的话
+			OfflineStorageIterator offlineStorageIterator = offlineStorageManager.iterator();
+			
+			while(offlineStorageIterator.hasNext()) {
+				try {
+					// 每次就从mysql中查询50条数据，批量查询，批量处理，批量删除
+					List<StockUpdateMessage> stockUpdateMessages = offlineStorageIterator.next();
+					
+					// 将这批数据写入内存队列中
+					for(StockUpdateMessage message : stockUpdateMessages) {
+						stockUpdateQueue.putDirect(message);
+					}
+					
+					// 批量删除这批数据
+					offlineStorageManager.removeByBatch(stockUpdateMessages); 
+				} catch (Exception e) {
+					logger.error("error", e); 
 				}
-				
-				// 批量删除这批数据
-				offlineStorageManager.removeByBatch(stockUpdateMessages); 
-			} catch (Exception e) {
-				logger.error("error", e); 
 			}
+			
+			// 此时mysql中的数据全部恢复完，更新内存标识
+			offlineStorageManager.setOffline(false); 
+		} catch (Exception e) {
+			logger.error("error", e); 
 		}
-		
-		// 此时mysql中的数据全部恢复完，更新内存标识
-		offlineStorageManager.setOffline(false); 
 	}
 	
 }

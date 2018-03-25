@@ -80,35 +80,6 @@ public class OfflineStorageManagerImpl implements OfflineStorageManager {
 	}
 	
 	/**
-	 * 判断是否还有下一批库存更新消息
-	 * @return 是否还有下一批库存更新消息
-	 */
-	public Boolean hasNext() {
-		return stockUpdateMessageDAO.count().equals(0L) ? false : true;
-	}
-	
-	/**
-	 * 获取下一批库存更新消息
-	 * @return 下一批库存更新消息
-	 */
-	public List<StockUpdateMessage> getNextBatch() throws Exception {
-		List<StockUpdateMessage> StockUpdateMessages = new ArrayList<StockUpdateMessage>();
-		
-		List<StockUpdateMessageDO> stockUpdateMessageDOs = 
-				stockUpdateMessageDAO.listByBatch();
-		for(StockUpdateMessageDO stockUpdateMessageDO : stockUpdateMessageDOs) {
-			StockUpdateMessage stockUpdateMessage = new StockUpdateMessage();
-			stockUpdateMessage.setId(stockUpdateMessageDO.getMessageId()); 
-			stockUpdateMessage.setOperation(stockUpdateMessageDO.getOperation()); 
-			stockUpdateMessage.setParameter(JSONObject.parseObject(stockUpdateMessageDO.getParameter(), 
-					Class.forName(stockUpdateMessageDO.getParamterClazz())));  
-			StockUpdateMessages.add(stockUpdateMessage);
-		}
-		
-		return StockUpdateMessages;
-	}
-	
-	/**
 	 * 批量删除库存更新消息
 	 * @param stockUpdateMessages 库存更新消息
 	 * @throws Exception
@@ -122,6 +93,51 @@ public class OfflineStorageManagerImpl implements OfflineStorageManager {
 			}
 		}
 		stockUpdateMessageDAO.removeByBatch(builder.toString());
+	}
+	
+	/**
+	 * 获取离线数据迭代器
+	 */
+	public OfflineStorageIterator iterator() throws Exception {
+		return new OfflineStorageIteratorImpl();
+	}
+	
+	/**
+	 * 离线数据迭代器
+	 * @author zhonghuashishan
+	 *
+	 */
+	public class OfflineStorageIteratorImpl implements OfflineStorageIterator {
+		
+		/**
+		 * 判断是否还有下一批库存更新消息
+		 * @return 是否还有下一批库存更新消息
+		 */
+		public Boolean hasNext() {
+			return stockUpdateMessageDAO.count().equals(0L) ? false : true;
+		}
+		
+		/**
+		 * 获取下一批库存更新消息
+		 * @return 下一批库存更新消息
+		 */
+		public List<StockUpdateMessage> next() throws Exception {
+			List<StockUpdateMessage> StockUpdateMessages = new ArrayList<StockUpdateMessage>();
+			
+			List<StockUpdateMessageDO> stockUpdateMessageDOs = 
+					stockUpdateMessageDAO.listByBatch();
+			for(StockUpdateMessageDO stockUpdateMessageDO : stockUpdateMessageDOs) {
+				StockUpdateMessage stockUpdateMessage = new StockUpdateMessage();
+				stockUpdateMessage.setId(stockUpdateMessageDO.getMessageId()); 
+				stockUpdateMessage.setOperation(stockUpdateMessageDO.getOperation()); 
+				stockUpdateMessage.setParameter(JSONObject.parseObject(stockUpdateMessageDO.getParameter(), 
+						Class.forName(stockUpdateMessageDO.getParamterClazz())));  
+				StockUpdateMessages.add(stockUpdateMessage);
+			}
+			
+			return StockUpdateMessages;
+		}
+		
 	}
 	
 }
