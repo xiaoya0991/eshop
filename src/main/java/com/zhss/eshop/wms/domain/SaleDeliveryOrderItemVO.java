@@ -55,7 +55,7 @@ public class SaleDeliveryOrderItemVO extends AbstractObject {
 	/**
 	 * 商品长度
 	 */
-	private Double goodsLenght;
+	private Double goodsLength;
 	/**
 	 * 商品宽度
 	 */
@@ -141,11 +141,11 @@ public class SaleDeliveryOrderItemVO extends AbstractObject {
 	public void setPromotionActivityId(Long promotionActivityId) {
 		this.promotionActivityId = promotionActivityId;
 	}
-	public Double getGoodsLenght() {
-		return goodsLenght;
+	public Double getGoodsLength() {
+		return goodsLength;
 	}
-	public void setGoodsLenght(Double goodsLenght) {
-		this.goodsLenght = goodsLenght;
+	public void setGoodsLength(Double goodsLength) {
+		this.goodsLength = goodsLength;
 	}
 	public Double getGoodsWidth() {
 		return goodsWidth;

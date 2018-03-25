@@ -51,7 +51,7 @@ public interface LogisticOrderMapper {
 				+ "gmt_create,"
 				+ "gmt_modified "
 			+ "FROM wms_logistic_order "
-			+ "WHERE sale_deliviery_order_id=#{saleDeliveryOrderId}")    
+			+ "WHERE sale_delivery_order_id=#{saleDeliveryOrderId}")    
 	@Results({
 		@Result(column = "id", property = "id", id = true),
 		@Result(column = "sale_delivery_order_id", property = "saleDeliveryOrderId"),

@@ -35,8 +35,8 @@ public class SendOutOrderDAOImpl implements SendOutOrderDAO {
 	 * @param id 发货单id
 	 * @return 发货单
 	 */
-	public SendOutOrderDO getBySaleDeliveryOrderId(Long id) throws Exception {
-		return sendOutOrderMapper.getBySaleDeliveryOrderId(id);
+	public SendOutOrderDO getBySaleDeliveryOrderId(Long saleDeliveryOrderId) throws Exception {
+		return sendOutOrderMapper.getBySaleDeliveryOrderId(saleDeliveryOrderId);
 	}
 	
 }

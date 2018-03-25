@@ -20,6 +20,6 @@ public interface SendOutOrderDAO {
 	 * @param id 发货单id
 	 * @return 发货单
 	 */
-	SendOutOrderDO getBySaleDeliveryOrderId(Long id) throws Exception;
+	SendOutOrderDO getBySaleDeliveryOrderId(Long saleDeliveryOrderId) throws Exception;
 	
 }

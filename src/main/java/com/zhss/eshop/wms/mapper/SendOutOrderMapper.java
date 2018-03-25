@@ -89,7 +89,7 @@ public interface SendOutOrderMapper {
 				+ "pay_type,"
 				+ "invoice_title,"
 				+ "taxpayer_id,"
-				+ "order_comment "
+				+ "order_comment,"
 				+ "gmt_create,"
 				+ "gmt_modified "
 			+ "FROM wms_send_out_order "
@@ -118,6 +118,7 @@ public interface SendOutOrderMapper {
 		@Result(column = "gmt_create", property = "gmtCreate"),
 		@Result(column = "gmt_modified", property = "gmtModified") 
  	})
-	SendOutOrderDO getBySaleDeliveryOrderId(@Param("id") Long id);
+	SendOutOrderDO getBySaleDeliveryOrderId(
+			@Param("saleDeliveryOrderId") Long saleDeliveryOrderId);
 	
 }

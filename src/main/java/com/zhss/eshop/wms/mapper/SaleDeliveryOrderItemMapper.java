@@ -24,7 +24,7 @@ public interface SaleDeliveryOrderItemMapper {
 	 * 新增销售出库单条目
 	 * @param saleDeliveryOrderItem 销售出库单条目
 	 */
-	@Insert("INSRET INTO wms_sale_delivery_order_item("
+	@Insert("INSERT INTO wms_sale_delivery_order_item("
 				+ "sale_delivery_order_id,"
 				+ "goods_sku_id,"
 				+ "goods_sku_code,"

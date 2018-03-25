@@ -34,7 +34,6 @@ public interface SendOutOrderItemMapper {
 				+ "goods_gross_weight,"
 				+ "purchase_quantity,"
 				+ "purchase_price,"
-				+ "promotion_activity_id,"
 				+ "goods_length,"
 				+ "goods_width,"
 				+ "goods_height,"
@@ -50,7 +49,6 @@ public interface SendOutOrderItemMapper {
 				+ "#{goodsGrossWeight},"
 				+ "#{purchaseQuantity},"
 				+ "#{purchasePrice},"
-				+ "#{promotionActivityId},"
 				+ "#{goodsLength},"
 				+ "#{goodsWidth},"
 				+ "#{goodsHeight},"
@@ -76,7 +74,6 @@ public interface SendOutOrderItemMapper {
 				+ "goods_gross_weight,"
 				+ "purchase_quantity,"
 				+ "purchase_price,"
-				+ "promotion_activity_id,"
 				+ "goods_length,"
 				+ "goods_width,"
 				+ "goods_height,"
@@ -95,7 +92,6 @@ public interface SendOutOrderItemMapper {
 		@Result(column = "goods_gross_weight", property = "goodsGrossWeight"),
 		@Result(column = "purchase_quantity", property = "purchaseQuantity"),
 		@Result(column = "purchase_price", property = "purchasePrice"),
-		@Result(column = "promotion_activity_id", property = "promotionActivityId"),
 		@Result(column = "goods_length", property = "goodsLength"),
 		@Result(column = "goods_width", property = "goodsWidth"),
 		@Result(column = "goods_height", property = "goodsHeight"),

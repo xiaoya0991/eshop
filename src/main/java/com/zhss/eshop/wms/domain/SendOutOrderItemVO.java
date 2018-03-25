@@ -54,7 +54,7 @@ public class SendOutOrderItemVO extends AbstractObject {
 	/**
 	 * 商品长度
 	 */
-	private Double goodsLenght;
+	private Double goodsLength;
 	/**
 	 * 商品宽度
 	 */
@@ -120,11 +120,11 @@ public class SendOutOrderItemVO extends AbstractObject {
 	public void setPurchasePrice(Double purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
-	public Double getGoodsLenght() {
-		return goodsLenght;
+	public Double getGoodsLength() {
+		return goodsLength;
 	}
-	public void setGoodsLenght(Double goodsLenght) {
-		this.goodsLenght = goodsLenght;
+	public void setGoodsLength(Double goodsLength) {
+		this.goodsLength = goodsLength;
 	}
 	public Double getGoodsWidth() {
 		return goodsWidth;
