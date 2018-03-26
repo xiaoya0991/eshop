@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.order.constant.OrderStatus;
 import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoQuery;
 
@@ -49,9 +50,11 @@ public class OrderInfoDAOTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_order.sql"})    
 	public void testSave() throws Exception {
 		Long userAccountId = 1L;
-		OrderInfoDO order = createOrder(userAccountId);  
+		Integer orderStatus = OrderStatus.WAIT_FOR_PAY;
+		OrderInfoDO order = createOrder(userAccountId, orderStatus);  
 		assertNotNull(order.getId()); 
 		assertThat(order.getId(), greaterThan(0L));  
 	}
@@ -64,9 +67,10 @@ public class OrderInfoDAOTest {
 	@Sql({"clean_order.sql"})    
 	public void testListByPage() throws Exception {
 		Long userAccountId = 1L;
+		Integer orderStatus = OrderStatus.WAIT_FOR_PAY;
 		
 		Integer count = 30;
-		Map<Long, OrderInfoDO> expectedOrderMap = createOrderMap(count, userAccountId);
+		Map<Long, OrderInfoDO> expectedOrderMap = createOrderMap(count, userAccountId, orderStatus);
 		processExpectedOrderForListByPage(expectedOrderMap); 
 		
 		Integer offset = 10;
@@ -82,11 +86,106 @@ public class OrderInfoDAOTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_order.sql"})    
 	public void testGetById() throws Exception {
 		Long userAccountId = 1L;
-		OrderInfoDO expectedOrder = createOrder(userAccountId);  
-		processExpectedOrderForGetById(expectedOrder); 
+		Integer orderStatus = OrderStatus.WAIT_FOR_PAY;
+		OrderInfoDO expectedOrder = createOrder(userAccountId, orderStatus);  
 		OrderInfoDO actualOrder = orderInfoDAO.getById(expectedOrder.getId());
+		assertEquals(expectedOrder, actualOrder);  
+	}
+	
+	/**
+	 * 测试查询所有未付款的订单
+	 * @throws Exception
+	 */
+	@Test
+	@Sql({"clean_order.sql"})    
+	public void testListAllUnpayed() throws Exception {
+		Long userAccountId = 1L;
+		Integer orderStatus = OrderStatus.WAIT_FOR_PAY;
+		
+		Integer count = 10;
+		Map<Long, OrderInfoDO> expectedOrders = createOrderMap(count, userAccountId, orderStatus);
+		
+		List<OrderInfoDO> actualOrders = orderInfoDAO.listAllUnpayed();
+		
+		compareOrders(count, expectedOrders, actualOrders); 
+	}
+	
+	/**
+	 * 测试查询所有待收货的订单
+	 * @throws Exception
+	 */
+	@Test
+	@Sql({"clean_order.sql"})    
+	public void testListAllUnreceived() throws Exception {
+		Long userAccountId = 1L;
+		Integer orderStatus = OrderStatus.WAIT_FOR_RECEIVE;
+		
+		Integer count = 10;
+		Map<Long, OrderInfoDO> expectedOrders = createOrderMap(count, userAccountId, orderStatus);
+		
+		List<OrderInfoDO> actualOrders = orderInfoDAO.listUnreceived();
+		
+		compareOrders(count, expectedOrders, actualOrders); 
+	}
+	
+	/**
+	 * 测试查询确认收货时间超过了7天而且还没有发表评论的订单
+	 * @throws Exception
+	 */
+	@Test
+	@Sql({"clean_order.sql"})    
+	public void testListNotPublishedCommentOrders() throws Exception {
+		Long userAccountId = 1L;
+		Integer orderStatus = OrderStatus.WAIT_FOR_PAY;
+		
+		Integer count = 10;
+		Map<Long, OrderInfoDO> expectedOrders = createOrderMap(count, userAccountId, orderStatus);
+		
+		List<OrderInfoDO> actualOrders = orderInfoDAO.listNotPublishedCommentOrders();
+		
+		compareOrders(count, expectedOrders, actualOrders); 
+	}
+	
+	/**
+	 * 测试更新订单
+	 * @throws Exception
+	 */
+	@Test
+	@Sql({"clean_order.sql"})    
+	public void testUpdate() throws Exception {
+		Long userAccountId = 1L;
+		Integer orderStatus = OrderStatus.WAIT_FOR_PAY;
+		
+		OrderInfoDO expectedOrder = createOrder(userAccountId, orderStatus);  
+		
+		expectedOrder.setOrderStatus(OrderStatus.WAIT_FOR_DELIVERY);  
+		orderInfoDAO.update(expectedOrder); 
+		
+		OrderInfoDO actualOrder = orderInfoDAO.getById(expectedOrder.getId());
+		
+		assertEquals(expectedOrder, actualOrder);  
+	}
+	
+	/**
+	 * 测试更新订单状态
+	 * @throws Exception
+	 */
+	@Test
+	@Sql({"clean_order.sql"})    
+	public void testUpdateStatus() throws Exception {
+		Long userAccountId = 1L;
+		Integer orderStatus = OrderStatus.WAIT_FOR_PAY;
+		
+		OrderInfoDO expectedOrder = createOrder(userAccountId, orderStatus);  
+		expectedOrder.setOrderStatus(OrderStatus.WAIT_FOR_DELIVERY);  
+
+		orderInfoDAO.updateStatus(expectedOrder.getId(), OrderStatus.WAIT_FOR_DELIVERY); 
+		
+		OrderInfoDO actualOrder = orderInfoDAO.getById(expectedOrder.getId());
+		
 		assertEquals(expectedOrder, actualOrder);  
 	}
 	
@@ -106,16 +205,6 @@ public class OrderInfoDAOTest {
 			expectedOrder.setPublishedComment(null); 
 			expectedOrder.setGmtModified(null); 
 		}
-	}
-	
-	/**
-	 * 为分页查询处理一下期望的订单集合
-	 * @param expectedOrderMap 期望的订单集合
-	 * @throws Exception
-	 */
-	private void processExpectedOrderForGetById(OrderInfoDO expectedOrder) throws Exception {
-		expectedOrder.setPublishedComment(null); 
-		expectedOrder.setGmtModified(null); 
 	}
 	
 	/**
@@ -158,10 +247,10 @@ public class OrderInfoDAOTest {
 	 * @throws Exception
 	 */
 	private Map<Long, OrderInfoDO> createOrderMap(Integer count, 
-			Long userAccountId) throws Exception {
+			Long userAccountId, Integer orderStatus) throws Exception {
 		Map<Long, OrderInfoDO> orderMap = new HashMap<Long, OrderInfoDO>();
 	
-		List<OrderInfoDO> orders = createOrders(count, userAccountId);
+		List<OrderInfoDO> orders = createOrders(count, userAccountId, orderStatus);
 		for(OrderInfoDO order : orders) {
 			orderMap.put(order.getId(), order);
 		}
@@ -175,21 +264,22 @@ public class OrderInfoDAOTest {
 	 * @return 订单集合
 	 * @throws Exception
 	 */
-	private List<OrderInfoDO> createOrders(Integer count, Long userAccountId) throws Exception {
+	private List<OrderInfoDO> createOrders(Integer count, 
+			Long userAccountId, Integer orderStatus) throws Exception {
 		List<OrderInfoDO> orders = new ArrayList<OrderInfoDO>();
 		for(int i = 0; i < count; i++) {
-			orders.add(createOrder(userAccountId));
+			orders.add(createOrder(userAccountId, orderStatus));
 		}
 		return orders;
 	}
 	
-	private OrderInfoDO createOrder(Long userAccountId) throws Exception {
+	private OrderInfoDO createOrder(Long userAccountId, Integer orderStatus) throws Exception {
 		OrderInfoDO order = new OrderInfoDO();
 		
 		order.setUserAccountId(userAccountId); 
 		order.setUsername("zhangsan"); 
 		order.setOrderNo(UUID.randomUUID().toString().replace("-", ""));   
-		order.setOrderStatus(1); 
+		order.setOrderStatus(orderStatus); 
 		order.setConsignee("张三");  
 		order.setDeliveryAddress("上海市");  
 		order.setConsigneeCellPhoneNumber("13900567849");  
@@ -203,6 +293,7 @@ public class OrderInfoDAOTest {
 		order.setTaxpayerId(UUID.randomUUID().toString().replace("-", ""));  
 		order.setOrderComment("测试订单");  
 		order.setPublishedComment(0); 
+		order.setConfirmReceiptTime(dateProvider.parseDatetime("2018-01-01 10:00:00"));   
 		order.setGmtCreate(dateProvider.getCurrentTime()); 
 		order.setGmtModified(dateProvider.getCurrentTime()); 
 		

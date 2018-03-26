@@ -1,6 +1,5 @@
 package com.zhss.eshop.order.dao.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +63,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * @return 所有未付款的订单
 	 */
 	public List<OrderInfoDO> listAllUnpayed() throws Exception { 
-		return orderInfoMapper.listAllUnpayed();
+		return orderInfoMapper.listByStatus(OrderStatus.WAIT_FOR_PAY);
 	}
 	
 	/**
@@ -85,17 +84,6 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 		OrderInfoDO order = getById(id);
 		order.setOrderStatus(status);
 		update(order);
-	}
-	 
-	/**
-	 * 更新订单的确认收货时间
-	 * @param order 订单
-	 */
-	public void updateConfirmReceiptTime(Long id, Date confirmReceiptTime) throws Exception {
-		OrderInfoDO order = getById(id);
-		order.setConfirmReceiptTime(confirmReceiptTime); 
-		order.setGmtModified(dateProvider.getCurrentTime());
-		update(order); 
 	}
 	
 	/**

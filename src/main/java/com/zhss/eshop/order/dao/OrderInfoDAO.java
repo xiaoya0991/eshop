@@ -1,6 +1,5 @@
 package com.zhss.eshop.order.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import com.zhss.eshop.order.domain.OrderInfoDO;
@@ -51,12 +50,6 @@ public interface OrderInfoDAO {
 	 * @return 所有未付款的订单
 	 */
 	List<OrderInfoDO> listAllUnpayed() throws Exception;
-	
-	/**
-	 * 更新订单的确认收货时间
-	 * @param order 订单
-	 */
-	void updateConfirmReceiptTime(Long id, Date confirmReceiptTime) throws Exception;
 	
 	/**
 	 * 查询待收货的订单

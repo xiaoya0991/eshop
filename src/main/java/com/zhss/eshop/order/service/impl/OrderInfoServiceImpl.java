@@ -382,7 +382,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		}
 		
 		orderStateManager.confirmReceipt(order); 
-		orderInfoDAO.updateConfirmReceiptTime(id, dateProvider.getCurrentTime()); 
+		
+		order.setConfirmReceiptTime(dateProvider.getCurrentTime()); 
+		orderInfoDAO.update(order.clone(OrderInfoDO.class)); 
 
 		return true;
 	}
