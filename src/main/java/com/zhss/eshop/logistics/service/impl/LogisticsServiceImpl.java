@@ -11,6 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zhss.eshop.commodity.domain.GoodsDTO;
 import com.zhss.eshop.commodity.service.CommodityService;
 import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.logistics.api.CreateEOrderRequest;
+import com.zhss.eshop.logistics.api.CreateEOrderRequestBuilder;
+import com.zhss.eshop.logistics.api.CreateEOrderResponse;
+import com.zhss.eshop.logistics.api.LogisticApi;
 import com.zhss.eshop.logistics.domain.FreightTemplateDTO;
 import com.zhss.eshop.logistics.service.FreightTemplateService;
 import com.zhss.eshop.logistics.service.LogisticsService;
@@ -49,6 +53,11 @@ public class LogisticsServiceImpl implements LogisticsService {
 	 */
 	@Autowired
 	private FreightCalculatorFactory freightCalculatorFactory;
+	/**
+	 * 物流api接口
+	 */
+	@Autowired
+	private LogisticApi logisticApi;
 
 	/**
 	 * 计算商品sku的运费
@@ -80,7 +89,27 @@ public class LogisticsServiceImpl implements LogisticsService {
 	 * @return 物流单
 	 */
 	public LogisticOrderDTO applyLogisticOrder(OrderInfoDTO order) {
-		return null;
+		try {
+			CreateEOrderRequest request = CreateEOrderRequestBuilder.get()
+					.buildOrderRelatedInfo(order)
+					.buildReceiver(order) 
+					.buildGoodsList(order)
+					.buildTotalDataMetric(order)
+					.create();
+			
+			CreateEOrderResponse response = logisticApi.createEOrder(request);
+			
+			LogisticOrderDTO logisticOrder = new LogisticOrderDTO();
+			logisticOrder.setLogisticCode(response.getLogisticCode());
+			logisticOrder.setContent(response.getLogisticOrderContent()); 
+			logisticOrder.setGmtCreate(dateProvider.getCurrentTime()); 
+			logisticOrder.setGmtModified(dateProvider.getCurrentTime()); 
+ 			
+			return logisticOrder;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
 	}
 	
 	/**
