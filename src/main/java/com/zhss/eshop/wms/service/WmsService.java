@@ -1,9 +1,6 @@
 package com.zhss.eshop.wms.service;
 
-import java.util.List;
-
 import com.zhss.eshop.order.domain.OrderInfoDTO;
-import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
@@ -56,13 +53,6 @@ public interface WmsService {
 	 * @return 处理结果
 	 */
 	Boolean informCancelOrderEvent(OrderInfoDTO orderDTO);
-	
-	/**
-	 * 根据商品sku id查询货位库存明细
-	 * @param goodsSkuId 商品sku id
-	 * @return 货位库存明细
-	 */
-	List<GoodsAllocationStockDetailDTO> listStockDetailsByGoodsSkuId(Long goodsSkuId);
 	
 	/**
 	 * 获取订单对应的物流单号 

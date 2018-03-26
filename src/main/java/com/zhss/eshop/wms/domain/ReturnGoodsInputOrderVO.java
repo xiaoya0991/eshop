@@ -6,11 +6,11 @@ import java.util.List;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 退货入库单DTO
+ * 退货入库单
  * @author zhonghuashishan
  *
  */
-public class ReturnGoodsInputOrderDTO extends AbstractObject {
+public class ReturnGoodsInputOrderVO extends AbstractObject {
 
 	/**
 	 * id
@@ -103,7 +103,7 @@ public class ReturnGoodsInputOrderDTO extends AbstractObject {
 	/**
 	 * 退货入库单条目DTO集合
 	 */
-	private List<ReturnGoodsInputOrderItemDTO> items;
+	private List<ReturnGoodsInputOrderItemVO> items;
 	
 	public Long getId() {
 		return id;
@@ -237,10 +237,10 @@ public class ReturnGoodsInputOrderDTO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<ReturnGoodsInputOrderItemDTO> getItems() {
+	public List<ReturnGoodsInputOrderItemVO> getItems() {
 		return items;
 	}
-	public void setItems(List<ReturnGoodsInputOrderItemDTO> items) {
+	public void setItems(List<ReturnGoodsInputOrderItemVO> items) {
 		this.items = items;
 	}
 

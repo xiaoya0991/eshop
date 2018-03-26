@@ -5,11 +5,11 @@ import java.util.Date;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 退货入库单商品上架条目DTO类
+ * 退货入库单商品上架条目
  * @author zhonghuashishan
  *
  */
-public class ReturnGoodsInputOrderPutOnItemDTO extends AbstractObject {
+public class ReturnGoodsInputOrderPutOnItemDO extends AbstractObject {
 
 	/**
 	 * id

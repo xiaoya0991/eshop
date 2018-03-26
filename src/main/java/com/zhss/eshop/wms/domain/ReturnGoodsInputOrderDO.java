@@ -1,16 +1,15 @@
 package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 退货入库单DTO
+ * 退货入库单
  * @author zhonghuashishan
  *
  */
-public class ReturnGoodsInputOrderDTO extends AbstractObject {
+public class ReturnGoodsInputOrderDO extends AbstractObject {
 
 	/**
 	 * id
@@ -100,10 +99,6 @@ public class ReturnGoodsInputOrderDTO extends AbstractObject {
 	 * 销售出库单的修改时间
 	 */
 	private Date gmtModified;
-	/**
-	 * 退货入库单条目DTO集合
-	 */
-	private List<ReturnGoodsInputOrderItemDTO> items;
 	
 	public Long getId() {
 		return id;
@@ -236,12 +231,6 @@ public class ReturnGoodsInputOrderDTO extends AbstractObject {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
-	}
-	public List<ReturnGoodsInputOrderItemDTO> getItems() {
-		return items;
-	}
-	public void setItems(List<ReturnGoodsInputOrderItemDTO> items) {
-		this.items = items;
 	}
 
 }

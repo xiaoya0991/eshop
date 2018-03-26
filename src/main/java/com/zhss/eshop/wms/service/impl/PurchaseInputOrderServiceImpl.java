@@ -67,7 +67,6 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 		
 		List<PurchaseInputOrderItemDO> purchaseInputOrderItems = ObjectUtils.convertList(
 				purchaseInputOrder.getItems(), PurchaseInputOrderItemDO.class);
-		
 		purchaseInputOrderItemDAO.batchSave(purchaseInputOrderId, purchaseInputOrderItems);
 		
 		purchaseService.informCreatePurchaseInputOrderEvent(purchaseInputOrder

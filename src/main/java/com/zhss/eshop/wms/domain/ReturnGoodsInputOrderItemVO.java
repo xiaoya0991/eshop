@@ -6,11 +6,11 @@ import java.util.List;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 退货入库单条目DTO
+ * 退货入库单条目
  * @author zhonghuashishan
  *
  */
-public class ReturnGoodsInputOrderItemDTO extends AbstractObject {
+public class ReturnGoodsInputOrderItemVO extends AbstractObject {
 
 	/**
 	 * id
@@ -83,11 +83,11 @@ public class ReturnGoodsInputOrderItemDTO extends AbstractObject {
 	/**
 	 * 退货入库单商品上架条目DTO集合
 	 */
-	private List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems;
+	private List<ReturnGoodsInputOrderPutOnItemVO> putOnItems;
 	/**
 	 * 货位库存明细
 	 */
-	private List<GoodsAllocationStockDetailDTO> stockDetails;
+	private List<GoodsAllocationStockDetailVO> stockDetails;
 	
 	public Long getId() {
 		return id;
@@ -191,16 +191,16 @@ public class ReturnGoodsInputOrderItemDTO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<ReturnGoodsInputOrderPutOnItemDTO> getPutOnItems() {
+	public List<ReturnGoodsInputOrderPutOnItemVO> getPutOnItems() {
 		return putOnItems;
 	}
-	public void setPutOnItems(List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems) {
+	public void setPutOnItems(List<ReturnGoodsInputOrderPutOnItemVO> putOnItems) {
 		this.putOnItems = putOnItems;
 	}
-	public List<GoodsAllocationStockDetailDTO> getStockDetails() {
+	public List<GoodsAllocationStockDetailVO> getStockDetails() {
 		return stockDetails;
 	}
-	public void setStockDetails(List<GoodsAllocationStockDetailDTO> stockDetails) {
+	public void setStockDetails(List<GoodsAllocationStockDetailVO> stockDetails) {
 		this.stockDetails = stockDetails;
 	}
 	

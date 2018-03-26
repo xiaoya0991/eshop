@@ -1,7 +1,6 @@
 package com.zhss.eshop.wms.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
@@ -10,7 +9,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class ReturnGoodsInputOrderItemDTO extends AbstractObject {
+public class ReturnGoodsInputOrderItemDO extends AbstractObject {
 
 	/**
 	 * id
@@ -80,14 +79,6 @@ public class ReturnGoodsInputOrderItemDTO extends AbstractObject {
 	 * 退货入库单条目的修改时间
 	 */
 	private Date gmtModified;
-	/**
-	 * 退货入库单商品上架条目DTO集合
-	 */
-	private List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems;
-	/**
-	 * 货位库存明细
-	 */
-	private List<GoodsAllocationStockDetailDTO> stockDetails;
 	
 	public Long getId() {
 		return id;
@@ -190,18 +181,6 @@ public class ReturnGoodsInputOrderItemDTO extends AbstractObject {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
-	}
-	public List<ReturnGoodsInputOrderPutOnItemDTO> getPutOnItems() {
-		return putOnItems;
-	}
-	public void setPutOnItems(List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems) {
-		this.putOnItems = putOnItems;
-	}
-	public List<GoodsAllocationStockDetailDTO> getStockDetails() {
-		return stockDetails;
-	}
-	public void setStockDetails(List<GoodsAllocationStockDetailDTO> stockDetails) {
-		this.stockDetails = stockDetails;
 	}
 	
 }
