@@ -81,6 +81,8 @@ public class FinanceServiceImpl implements FinanceService {
 	 * @return 处理结果
 	 */
 	public Boolean payForLogisticsCompany(SaleDeliveryOrderDTO saleDeliveryOrder) {
+		// 就是将销售出库单中的运费取出来
+		// 将运费对应的款项打到物流公司的账号里面去
 		return true;
 	}
 	
