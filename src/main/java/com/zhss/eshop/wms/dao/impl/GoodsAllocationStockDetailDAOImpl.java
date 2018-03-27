@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.dao.GoodsAllocationStockDetailDAO;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDO;
-import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDO;
 import com.zhss.eshop.wms.mapper.GoodsAllocationStockDetailMapper;
 
 /**
@@ -68,26 +67,6 @@ public class GoodsAllocationStockDetailDAOImpl implements GoodsAllocationStockDe
 		stockDetail.setGmtCreate(dateProvider.getCurrentTime()); 
 		stockDetail.setGmtModified(dateProvider.getCurrentTime());
 		stockDetailMapper.save(stockDetail); 
-	}
-	
-	/**
-	 * 根据上架条目新增一个货位库存明细
-	 * @param putOnItem 上架条目
-	 * @throws Exception
-	 */
-	public GoodsAllocationStockDetailDO saveByPutOnItem(
-			PurchaseInputOrderPutOnItemDO putOnItem) throws Exception {
-		GoodsAllocationStockDetailDO stockDetail = new GoodsAllocationStockDetailDO();
-		stockDetail.setGoodsAllocationId(putOnItem.getGoodsAllocationId());
-		stockDetail.setGoodsSkuId(putOnItem.getGoodsSkuId()); 
-		stockDetail.setPutOnQuantity(putOnItem.getPutOnShelvesCount()); 
-		stockDetail.setPutOnTime(putOnItem.getGmtCreate());  
-		stockDetail.setCurrentStockQuantity(stockDetail.getPutOnQuantity()); 
-		stockDetail.setLockedStockQuantity(0L); 
-		
-		save(stockDetail); 
-		
-		return stockDetail;
 	}
 	
 }

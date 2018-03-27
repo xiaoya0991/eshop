@@ -34,4 +34,33 @@ public interface ReturnGoodsInputOrderService {
 	 */
 	ReturnGoodsInputOrderDTO getById(Long id) throws Exception;
 	
+	/**
+	 * 更新退货入库单
+	 * @param returnGoodsInputOrder 退货入库单
+	 * @throws Exception 
+	 */
+	void update(ReturnGoodsInputOrderDTO returnGoodsInputOrder) throws Exception;
+	
+	/**
+	 * 批量新增退货入库单上架条目
+	 * @param putOnItems 上架条目
+	 * @throws Exception
+	 */
+	void batchSavePutOnItems(ReturnGoodsInputOrderDTO returnGoodsInputOrder) throws Exception;
+	
+	/**
+	 * 退货入库单提交审核
+	 * @param id 退货入库单id
+	 * @throws Exception
+	 */
+	void submitApprove(Long id) throws Exception;
+	
+	/**
+	 * 审核退货入库单
+	 * @param id 退货入库单id
+	 * @param approveResult 审核结果
+	 * @throws Exception
+	 */
+	void approve(Long id, Integer approveResult) throws Exception;
+	
 }

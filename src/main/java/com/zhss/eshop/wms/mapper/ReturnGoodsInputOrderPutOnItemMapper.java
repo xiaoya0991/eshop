@@ -2,7 +2,9 @@ package com.zhss.eshop.wms.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -44,5 +46,27 @@ public interface ReturnGoodsInputOrderPutOnItemMapper {
 	})
 	List<ReturnGoodsInputOrderPutOnItemDO> listByReturnGoodsInputOrderItemId(
 			@Param("returnGoodsInputOrderItemId") Long returnGoodsInputOrderItemId);
+	
+	/**
+	 * 新增退货入库单上架条目
+	 * @param putOnItem 上架条目
+	 */
+	@Insert("INSERT INTO wms_return_goods_input_order_put_on_item("
+				+ "return_goods_input_order_item_id,"
+				+ "goods_allocation_id,"
+				+ "goods_sku_id,"
+				+ "put_on_shelves_count,"
+				+ "gmt_create,"
+				+ "gmt_modified"
+			+ ") VALUES("
+				+ "#{returnGoodsInputOrderItemId},"
+				+ "#{goodsAllocationId},"
+				+ "#{goodsSkuId},"
+				+ "#{putOnShelvesCount},"
+				+ "#{gmtCreate},"
+				+ "#{gmtModified}"
+			+ ")")  
+	@Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true)  
+ 	void save(ReturnGoodsInputOrderPutOnItemDO putOnItem);
 	
 }

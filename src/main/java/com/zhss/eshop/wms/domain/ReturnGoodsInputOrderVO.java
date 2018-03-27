@@ -17,6 +17,10 @@ public class ReturnGoodsInputOrderVO extends AbstractObject {
 	 */
 	private Long id;
 	/**
+	 * 退货工单id
+	 */
+	private Long returnGoodsWorksheetId;
+	/**
 	 * 用户账号ID
 	 */
 	private Long userAccountId;
@@ -105,6 +109,12 @@ public class ReturnGoodsInputOrderVO extends AbstractObject {
 	 */
 	private List<ReturnGoodsInputOrderItemVO> items;
 	
+	public Long getReturnGoodsWorksheetId() {
+		return returnGoodsWorksheetId;
+	}
+	public void setReturnGoodsWorksheetId(Long returnGoodsWorksheetId) {
+		this.returnGoodsWorksheetId = returnGoodsWorksheetId;
+	}
 	public Long getId() {
 		return id;
 	}

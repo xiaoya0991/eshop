@@ -13,26 +13,25 @@ import com.zhss.eshop.wms.dao.WmsGoodsAllocationStockDAO;
 import com.zhss.eshop.wms.dao.WmsGoodsStockDAO;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDO;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
-import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
-import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
-import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderPutOnItemDTO;
 import com.zhss.eshop.wms.domain.WmsGoodsAllocationStockDO;
 import com.zhss.eshop.wms.domain.WmsGoodsStockDO;
 
 /**
- * 采购入库库存更新组件
+ * 退货入库库存更新组件
  * @author zhonghuashishan
  *
  */
 @Component
 @Scope("prototype") 
-public class PurchaseInputWmsStockUpdater extends AbstractWmsStockUpdater {
+public class ReturnGoodsInputWmsStockUpdater extends AbstractWmsStockUpdater {
 
 	/**
-	 * 采购入库单
+	 * 退货入库单
 	 */
-	private PurchaseInputOrderDTO purchaseInputOrder;
-	
+	private ReturnGoodsInputOrderDTO returnGoodsInputOrder;
 	/**
 	 * 商品库存管理的DAO组件
 	 */
@@ -54,13 +53,21 @@ public class PurchaseInputWmsStockUpdater extends AbstractWmsStockUpdater {
 	 */
 	@Override
 	protected void updateGoodsStock() throws Exception {
-		List<PurchaseInputOrderItemDTO> purchaseInputOrderItems = 
-				purchaseInputOrder.getItems();
-		for(PurchaseInputOrderItemDTO purchaseInputOrderItem : purchaseInputOrderItems) {
+		List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItems = 
+				returnGoodsInputOrder.getItems();
+		
+		for(ReturnGoodsInputOrderItemDTO returnGoodsInputOrderItem : returnGoodsInputOrderItems) {
 			WmsGoodsStockDO goodsStock = goodsStockDAO.getBySkuId(
-					purchaseInputOrderItem.getGoodsSkuId());
-			goodsStock.setAvailableStockQuantity(goodsStock.getAvailableStockQuantity()
-					+ purchaseInputOrderItem.getArrivalCount()); 
+					returnGoodsInputOrderItem.getGoodsSkuId());
+			
+			Long availableStockQuantity = goodsStock.getAvailableStockQuantity() 
+					+ returnGoodsInputOrderItem.getArrivalCount();
+			goodsStock.setAvailableStockQuantity(availableStockQuantity); 
+			
+			Long outputStockQuantity = goodsStock.getOutputStockQuantity()
+					- returnGoodsInputOrderItem.getArrivalCount();
+			goodsStock.setOutputStockQuantity(outputStockQuantity);
+			
 			goodsStockDAO.update(goodsStock); 
 		}
 	}
@@ -70,16 +77,23 @@ public class PurchaseInputWmsStockUpdater extends AbstractWmsStockUpdater {
 	 */
 	@Override
 	protected void updateGoodsAllocationStock() throws Exception {
-		List<PurchaseInputOrderItemDTO> items = purchaseInputOrder.getItems();
+		List<ReturnGoodsInputOrderItemDTO> items = returnGoodsInputOrder.getItems();
 		
-		for(PurchaseInputOrderItemDTO item : items) {
-			List<PurchaseInputOrderPutOnItemDTO> putOnItems = item.getPutOnItemDTOs();
+		for(ReturnGoodsInputOrderItemDTO item : items) {
+			List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems = item.getPutOnItems();
 			
-			for(PurchaseInputOrderPutOnItemDTO putOnItem : putOnItems) {
+			for(ReturnGoodsInputOrderPutOnItemDTO putOnItem : putOnItems) {
 				WmsGoodsAllocationStockDO goodsAllocationStock = goodsAllocationStockDAO
 						.getBySkuId(putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId());
-				goodsAllocationStock.setAvailableStockQuantity(goodsAllocationStock.getAvailableStockQuantity() 
-						+ putOnItem.getPutOnShelvesCount());
+				
+				Long availableStockQuantity = goodsAllocationStock.getAvailableStockQuantity() 
+						+ putOnItem.getPutOnShelvesCount();
+				goodsAllocationStock.setAvailableStockQuantity(availableStockQuantity);
+				
+				Long outputStockQuantity = goodsAllocationStock.getOutputStockQuantity() 
+						- putOnItem.getPutOnShelvesCount();
+				goodsAllocationStock.setOutputStockQuantity(outputStockQuantity); 
+				
 				goodsAllocationStockDAO.update(goodsAllocationStock); 
 			}
 		}
@@ -90,14 +104,13 @@ public class PurchaseInputWmsStockUpdater extends AbstractWmsStockUpdater {
 	 */
 	@Override
 	protected void updateGoodsAllocationStockDetail() throws Exception {
-		List<PurchaseInputOrderItemDTO> items = purchaseInputOrder.getItems();
+		List<ReturnGoodsInputOrderItemDTO> items = returnGoodsInputOrder.getItems();
 		
-		for(PurchaseInputOrderItemDTO item : items) {
-			List<PurchaseInputOrderPutOnItemDTO> putOnItems = item.getPutOnItemDTOs();
-			List<GoodsAllocationStockDetailDO> stockDetails = 
-					new ArrayList<GoodsAllocationStockDetailDO>();
+		for(ReturnGoodsInputOrderItemDTO item : items) {
+			List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems = item.getPutOnItems();
+			List<GoodsAllocationStockDetailDO> stockDetails = new ArrayList<GoodsAllocationStockDetailDO>();
 			
-			for(PurchaseInputOrderPutOnItemDTO putOnItem : putOnItems) {
+			for(ReturnGoodsInputOrderPutOnItemDTO putOnItem : putOnItems) {
 				GoodsAllocationStockDetailDO stockDetail = new GoodsAllocationStockDetailDO();
 				stockDetail.setGoodsAllocationId(putOnItem.getGoodsAllocationId());
 				stockDetail.setGoodsSkuId(putOnItem.getGoodsSkuId()); 
@@ -120,7 +133,7 @@ public class PurchaseInputWmsStockUpdater extends AbstractWmsStockUpdater {
 	 * 设置需要的参数
 	 */
 	public void setParameter(Object parameter) {
-		this.purchaseInputOrder = (PurchaseInputOrderDTO) parameter;
+		this.returnGoodsInputOrder = (ReturnGoodsInputOrderDTO) parameter;
 	}
 
 }

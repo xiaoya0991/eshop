@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderQuery;
@@ -26,6 +27,7 @@ public interface ReturnGoodsInputOrderMapper {
 	 * @param returnGoodsInputOrder 退货入库单
 	 */
 	@Insert("INSERT INTO wms_return_goods_input_order("
+				+ "return_goods_worksheet_id,"  
 				+ "user_account_id,"
 				+ "order_id,"
 				+ "order_no,"
@@ -47,7 +49,8 @@ public interface ReturnGoodsInputOrderMapper {
 				+ "gmt_create,"
 				+ "gmt_modified"
 			+ ") VALUES("
-				+ "#{userAccountId},"
+				+ "#{returnGoodsWorksheetId},"
+  				+ "#{userAccountId},"
 				+ "#{orderId},"
 				+ "#{orderNo},"
 				+ "#{status},"
@@ -164,5 +167,16 @@ public interface ReturnGoodsInputOrderMapper {
 		@Result(column = "gmt_modified", property = "gmtModified")
  	})
 	ReturnGoodsInputOrderDO getById(@Param("id") Long id);
-
+	
+	/**
+	 * 更新退货入库单
+	 * @param returnGoodsInputOrder 退货入库单
+	 */
+	@Update("UPDATE wms_return_goods_input_order SET "
+				+ "arrival_time=#{arrivalTime},"
+				+ "status=#{status},"
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}")  
+	void update(ReturnGoodsInputOrderDO returnGoodsInputOrder);
+	
 }

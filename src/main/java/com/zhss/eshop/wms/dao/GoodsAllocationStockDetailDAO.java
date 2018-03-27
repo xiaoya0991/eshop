@@ -3,7 +3,6 @@ package com.zhss.eshop.wms.dao;
 import java.util.List;
 
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDO;
-import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDO;
 
 /**
  * 调度中心的货位库存明细管理的DAO接口
@@ -40,13 +39,5 @@ public interface GoodsAllocationStockDetailDAO {
 	 * @throws Exception
 	 */
 	void save(GoodsAllocationStockDetailDO stockDetail) throws Exception;
-	
-	/**
-	 * 根据上架条目新增一个货位库存明细
-	 * @param putOnItem 上架条目
-	 * @throws Exception
-	 */
-	GoodsAllocationStockDetailDO saveByPutOnItem(
-			PurchaseInputOrderPutOnItemDO putOnItem) throws Exception;
 	
 }

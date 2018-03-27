@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDO;
 
@@ -104,5 +105,16 @@ public interface ReturnGoodsInputOrderItemMapper {
 	})
 	List<ReturnGoodsInputOrderItemDO> listByReturnGoodsInputOrderId(
 			@Param("returnGoodsInputOrderId") Long returnGoodsInputOrderId); 
-
+	
+	/**
+	 * 更新退货入库单条目
+	 * @param returnGoodsInputOrderItem 退货入库单条目
+	 */
+	@Update("UPDATE wms_return_goods_input_order_item SET "
+				+ "qualified_count=#{qualifiedCount},"
+				+ "arrival_count=#{arrivalCount},"
+				+ "gmt_modified=#{gmtModified} "
+			+ "WHERE id=#{id}") 
+	void update(ReturnGoodsInputOrderItemDO returnGoodsInputOrderItem);
+	
 }

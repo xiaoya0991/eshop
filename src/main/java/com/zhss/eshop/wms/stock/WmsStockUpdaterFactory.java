@@ -30,6 +30,8 @@ public class WmsStockUpdaterFactory {
 		
 		if(WmsStockUpdateEvent.PURCHASE_INPUT.equals(stockUpdateEvent)) {
 			stockUpdater = context.getBean(PurchaseInputWmsStockUpdater.class);
+		} else if(WmsStockUpdateEvent.RETURN_GOODS_INPUT.equals(stockUpdateEvent)) {
+			stockUpdater = context.getBean(ReturnGoodsInputWmsStockUpdater.class);
 		}
 		
 		stockUpdater.setParameter(parameter); 

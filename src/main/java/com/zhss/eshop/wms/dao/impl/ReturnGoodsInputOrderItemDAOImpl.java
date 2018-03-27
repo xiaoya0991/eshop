@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.dao.ReturnGoodsInputOrderItemDAO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDO;
 import com.zhss.eshop.wms.mapper.ReturnGoodsInputOrderItemMapper;
@@ -22,6 +23,11 @@ public class ReturnGoodsInputOrderItemDAOImpl implements ReturnGoodsInputOrderIt
 	 */
 	@Autowired
 	private ReturnGoodsInputOrderItemMapper returnGoodsInputOrderItemMapper;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 新增退货入库单条目
@@ -39,6 +45,15 @@ public class ReturnGoodsInputOrderItemDAOImpl implements ReturnGoodsInputOrderIt
 	public List<ReturnGoodsInputOrderItemDO> listByReturnGoodsInputOrderId(
 			Long returnGoodsInputOrderId) throws Exception {
 		return returnGoodsInputOrderItemMapper.listByReturnGoodsInputOrderId(returnGoodsInputOrderId);
+	}
+	
+	/**
+	 * 更新退货入库单条目
+	 * @param returnGoodsInputOrderItem 退货入库单条目
+	 */
+	public void update(ReturnGoodsInputOrderItemDO returnGoodsInputOrderItem) throws Exception {
+		returnGoodsInputOrderItem.setGmtModified(dateProvider.getCurrentTime()); 
+		returnGoodsInputOrderItemMapper.update(returnGoodsInputOrderItem); 
 	}
 	
 }
