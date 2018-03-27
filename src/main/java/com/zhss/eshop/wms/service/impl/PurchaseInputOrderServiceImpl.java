@@ -161,4 +161,14 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 		}
 	}
 	
+	/**
+	 * 更新采购入库单状态
+	 * @param id 采购入库单id
+	 * @param status 采购入库单状态
+	 * @throws Exception
+	 */
+	public void updateStatus(Long id, Integer status) throws Exception {
+		purchaseInputOrderDAO.updateStatus(id, status); 
+	}
+	
 }

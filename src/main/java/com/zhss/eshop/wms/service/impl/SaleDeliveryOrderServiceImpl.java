@@ -198,6 +198,15 @@ public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 	}
 	
 	/**
+	 * 根据id查询销售出库单
+	 * @param id 销售出库单id
+	 * @return 销售出库单
+	 */
+	public SaleDeliveryOrderDTO getByOrderId(Long orderId) throws Exception {
+		return saleDeliveryOrderDAO.getByOrderId(orderId).clone(SaleDeliveryOrderDTO.class); 
+	}
+	
+	/**
 	 * 更新销售出库单的发货时间
 	 * @param saleDeliveryOrder 销售出库单
 	 */

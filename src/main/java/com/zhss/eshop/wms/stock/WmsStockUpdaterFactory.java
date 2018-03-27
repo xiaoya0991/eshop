@@ -32,6 +32,12 @@ public class WmsStockUpdaterFactory {
 			stockUpdater = context.getBean(PurchaseInputWmsStockUpdater.class);
 		} else if(WmsStockUpdateEvent.RETURN_GOODS_INPUT.equals(stockUpdateEvent)) {
 			stockUpdater = context.getBean(ReturnGoodsInputWmsStockUpdater.class);
+		} else if(WmsStockUpdateEvent.SUBMIT_ORDER.equals(stockUpdateEvent)) {
+			stockUpdater = context.getBean(SubmitOrderWmsStockUpdater.class);
+		} else if(WmsStockUpdateEvent.CANCEL_ORDER.equals(stockUpdateEvent)) {
+			stockUpdater = context.getBean(CancelOrderWmsStockUpdater.class);
+		} else if(WmsStockUpdateEvent.PAY_ORDER.equals(stockUpdateEvent)) {
+			stockUpdater = context.getBean(PayOrderWmsStockUpdater.class);
 		}
 		
 		stockUpdater.setParameter(parameter); 

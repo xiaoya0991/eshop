@@ -33,6 +33,13 @@ public interface SaleDeliveryOrderDAO {
 	SaleDeliveryOrderDO getById(Long id) throws Exception;
 	
 	/**
+	 * 根据id查询销售出库单
+	 * @param id 销售出库单id
+	 * @return 销售出库单
+	 */
+	SaleDeliveryOrderDO getByOrderId(Long orderId) throws Exception;
+	
+	/**
 	 * 更新销售出库单
 	 * @param saleDeliveryOrder 销售出库单
 	 */

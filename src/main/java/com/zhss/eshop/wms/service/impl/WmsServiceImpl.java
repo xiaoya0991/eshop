@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.purchase.service.PurchaseService;
 import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
+import com.zhss.eshop.wms.constant.PurchaseInputOrderStatus;
+import com.zhss.eshop.wms.constant.WmsStockUpdateEvent;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
@@ -14,6 +17,8 @@ import com.zhss.eshop.wms.service.PurchaseInputOrderService;
 import com.zhss.eshop.wms.service.ReturnGoodsInputOrderService;
 import com.zhss.eshop.wms.service.SaleDeliveryOrderService;
 import com.zhss.eshop.wms.service.WmsService;
+import com.zhss.eshop.wms.stock.WmsStockUpdater;
+import com.zhss.eshop.wms.stock.WmsStockUpdaterFactory;
 
 /**
  * wms中心对外接口service组件
@@ -41,6 +46,16 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Autowired
 	private ReturnGoodsInputOrderService returnGoodsInputOrderService;
+	/**
+	 * 库存更新组件工厂
+	 */
+	@Autowired
+	private WmsStockUpdaterFactory stockUpdaterFactory;
+	/**
+	 * 采购中心
+	 */
+	@Autowired
+	private PurchaseService purchaseService;
 	
 	/**
 	 * 创建采购入库单
@@ -93,7 +108,15 @@ public class WmsServiceImpl implements WmsService {
 	 * @return 处理结果
 	 */
 	public Boolean informSubmitOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
-		return true;
+		try {
+			WmsStockUpdater stockUpdater = stockUpdaterFactory.create(
+					WmsStockUpdateEvent.SUBMIT_ORDER, scheduleResult);
+			stockUpdater.update();
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -102,7 +125,15 @@ public class WmsServiceImpl implements WmsService {
 	 * @return 处理结果
 	 */
 	public Boolean informPayOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
-		return true;
+		try {
+			WmsStockUpdater stockUpdater = stockUpdaterFactory.create(
+					WmsStockUpdateEvent.PAY_ORDER, scheduleResult);
+			stockUpdater.update();
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -111,7 +142,15 @@ public class WmsServiceImpl implements WmsService {
 	 * @return 处理结果
 	 */
 	public Boolean informCancelOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
-		return true;
+		try {
+			WmsStockUpdater stockUpdater = stockUpdaterFactory.create(
+					WmsStockUpdateEvent.CANCEL_ORDER, scheduleResult);
+			stockUpdater.update();
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -120,7 +159,14 @@ public class WmsServiceImpl implements WmsService {
 	 * @return 物流单号
 	 */
 	public String getLogisticCode(Long orderId) {
-		return null;
+		try {
+			SaleDeliveryOrderDTO saleDeliveryOrder = saleDeliveryOrderService.getByOrderId(orderId);
+			saleDeliveryOrder = saleDeliveryOrderService.getById(saleDeliveryOrder.getId());
+			return saleDeliveryOrder.getLogisticOrder().getLogisticCode();
+		} catch (Exception e) {
+			logger.error("error", e);
+			return null;
+		}
 	}
 	
 	/**
@@ -129,7 +175,18 @@ public class WmsServiceImpl implements WmsService {
 	 * @return 处理结果
 	 */
 	public Boolean informCreatePurchaseSettlementOrderEvent(Long purchaseInputOrderId) {
-		return true;
+		try {
+			PurchaseInputOrderDTO purchaseInputOrder = purchaseInputOrderService.getById(
+					purchaseInputOrderId);
+			purchaseInputOrderService.updateStatus(purchaseInputOrderId, 
+					PurchaseInputOrderStatus.WAIT_FOR_SETTLEMENT);
+			purchaseService.informCreatePurchaseSettlementOrderEvent(
+					purchaseInputOrder.getPurchaseOrderId());
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -138,7 +195,18 @@ public class WmsServiceImpl implements WmsService {
 	 * @return 处理结果
 	 */
 	public Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseInputOrderId) {
-		return true;
+		try {
+			PurchaseInputOrderDTO purchaseInputOrder = purchaseInputOrderService.getById(
+					purchaseInputOrderId);
+			purchaseInputOrderService.updateStatus(purchaseInputOrderId, 
+					PurchaseInputOrderStatus.FINISHED);
+			purchaseService.informFinishedPurchaseSettlementOrderEvent(
+					purchaseInputOrder.getPurchaseOrderId());
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
-
+	
 }
