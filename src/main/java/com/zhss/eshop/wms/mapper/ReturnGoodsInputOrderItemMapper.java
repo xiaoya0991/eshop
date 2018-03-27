@@ -82,6 +82,8 @@ public interface ReturnGoodsInputOrderItemMapper {
 				+ "goods_length,"
 				+ "goods_width,"
 				+ "goods_height,"
+				+ "qualified_count,"
+				+ "arrival_count," 
 				+ "gmt_create,"
 				+ "gmt_modified "
 			+ "FROM wms_return_goods_input_order_item "
@@ -100,6 +102,8 @@ public interface ReturnGoodsInputOrderItemMapper {
 		@Result(column = "goods_length", property = "goodsLength"),
 		@Result(column = "goods_width", property = "goodsWidth"),
 		@Result(column = "goods_height", property = "goodsHeight"),
+		@Result(column = "qualified_count", property = "qualifiedCount"),
+		@Result(column = "arrival_count", property = "arrivalCount"),
 		@Result(column = "gmt_create", property = "gmtCreate"),
 		@Result(column = "gmt_modified", property = "gmtModified")
 	})

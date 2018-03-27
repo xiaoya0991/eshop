@@ -81,7 +81,9 @@ public interface ReturnGoodsInputOrderMapper {
 	 */
 	@Select("SELECT "
 				+ "a.id,"
-				+ "a.gmt_create,"
+				+ "a.return_goods_worksheet_id,"
+				+ "a.user_account_id,"
+				+ "a.order_id," 
 				+ "a.order_no,"
 				+ "a.consignee,"
 				+ "a.total_amount,"
@@ -91,7 +93,10 @@ public interface ReturnGoodsInputOrderMapper {
 				+ "a.payable_amount,"
 				+ "a.pay_type,"
 				+ "a.status,"
-				+ "a.user_account_id "
+				+ "a.return_goods_reason,"
+				+ "a.return_goods_remark,"
+				+ "a.gmt_create,"
+				+ "a.gmt_modified "
 			+ "FROM wms_return_goods_input_order a,"
 			+ "("
 				+ "SELECT id "
@@ -102,8 +107,10 @@ public interface ReturnGoodsInputOrderMapper {
 	)
 	@Results({
 		@Result(column = "id", property = "id", id = true),
-		@Result(column = "gmt_create", property = "gmtCreate"),
-		@Result(column = "order_no", property = "orderNo"),
+		@Result(column = "return_goods_worksheet_id", property = "returnGoodsWorksheetId"), 
+		@Result(column = "user_account_id", property = "userAccountId"),
+		@Result(column = "order_id", property = "orderId"),
+ 		@Result(column = "order_no", property = "orderNo"),
 		@Result(column = "consignee", property = "consignee"),
 		@Result(column = "total_amount", property = "totalAmount"),
 		@Result(column = "discount_amount", property = "discountAmount"),
@@ -112,7 +119,10 @@ public interface ReturnGoodsInputOrderMapper {
 		@Result(column = "payable_amount", property = "payableAmount"),
 		@Result(column = "pay_type", property = "payType"),
 		@Result(column = "status", property = "status"),
-		@Result(column = "user_account_id", property = "userAccountId")
+		@Result(column = "return_goods_reason", property = "returnGoodsReason"),
+		@Result(column = "return_goods_remark", property = "returnGoodsRemark"),
+		@Result(column = "gmt_create", property = "gmtCreate"),
+		@Result(column = "gmt_modified", property = "gmtModified"),
 	})
 	List<ReturnGoodsInputOrderDO> listByPage(ReturnGoodsInputOrderQuery query);
 	
@@ -123,6 +133,7 @@ public interface ReturnGoodsInputOrderMapper {
 	 */
 	@Select("SELECT "
 				+ "id,"
+				+ "return_goods_worksheet_id," 
 				+ "user_account_id,"
 				+ "order_id,"
 				+ "order_no,"
@@ -139,13 +150,17 @@ public interface ReturnGoodsInputOrderMapper {
 				+ "invoice_title,"
 				+ "taxpayer_id,"
 				+ "order_comment,"
+				+ "return_goods_reason,"
+				+ "return_goods_remark,"
+				+ "arrival_time,"
 				+ "gmt_create,"
 				+ "gmt_modified "
-			+ "FROM order_info "
+			+ "FROM wms_return_goods_input_order "
 			+ "WHERE id=#{id}"
 	)
 	@Results({
 		@Result(column = "id", property = "id", id = true),
+		@Result(column = "return_goods_worksheet_id", property = "returnGoodsWorksheetId"), 
 		@Result(column = "user_account_id", property = "userAccountId"),
 		@Result(column = "order_id", property = "orderId"),
 		@Result(column = "order_no", property = "orderNo"),
@@ -163,6 +178,9 @@ public interface ReturnGoodsInputOrderMapper {
 		@Result(column = "invoice_title", property = "invoiceTitle"),
 		@Result(column = "taxpayer_id", property = "taxpayerId"),
 		@Result(column = "order_comment", property = "orderComment"),
+		@Result(column = "return_goods_reason", property = "returnGoodsReason"),
+		@Result(column = "return_goods_remark", property = "returnGoodsRemark"),
+		@Result(column = "arrival_time", property = "arrivalTime"),
 		@Result(column = "gmt_create", property = "gmtCreate"),
 		@Result(column = "gmt_modified", property = "gmtModified")
  	})
