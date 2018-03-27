@@ -2,7 +2,7 @@ package com.zhss.eshop.wms.service;
 
 import java.util.List;
 
-import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -38,24 +38,24 @@ public interface WmsService {
 	
 	/**
 	 * 通知WMS中心，“提交订单”事件发生了
-	 * @param orderDTO 订单DTO
+	 * @param scheduleResult 调度结果
 	 * @return 处理结果
 	 */
-	Boolean informSubmitOrderEvent(OrderInfoDTO orderDTO);
+	Boolean informSubmitOrderEvent(SaleDeliveryScheduleResult scheduleResult);
 	
 	/**
 	 * 通知WMS中心，“支付订单”事件发生了
-	 * @param orderDTO 订单DTO
+	 * @param scheduleResult 调度结果
 	 * @return 处理结果
 	 */
-	Boolean informPayOrderEvent(OrderInfoDTO orderDTO);
+	Boolean informPayOrderEvent(SaleDeliveryScheduleResult scheduleResult);
 	
 	/**
 	 * 通知WMS中心，“取消订单”事件发生了
-	 * @param orderDTO 订单DTO
+	 * @param scheduleResult 调度结果
 	 * @return 处理结果
 	 */
-	Boolean informCancelOrderEvent(OrderInfoDTO orderDTO);
+	Boolean informCancelOrderEvent(SaleDeliveryScheduleResult scheduleResult);
 	
 	/**
 	 * 根据商品sku id查询货位库存明细

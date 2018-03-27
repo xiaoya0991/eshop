@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -66,7 +66,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	public Boolean informSubmitOrderEvent(OrderInfoDTO orderDTO) {
+	public Boolean informSubmitOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
 		return true;
 	}
 	
@@ -75,7 +75,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	public Boolean informPayOrderEvent(OrderInfoDTO orderDTO) {
+	public Boolean informPayOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
 		return true;
 	}
 	
@@ -84,7 +84,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
-	public Boolean informCancelOrderEvent(OrderInfoDTO orderDTO) {
+	public Boolean informCancelOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
 		return true;
 	}
 	
