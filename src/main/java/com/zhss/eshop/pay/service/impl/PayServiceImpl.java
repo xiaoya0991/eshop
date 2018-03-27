@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.pay.service.PayService;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 
 /**
  * 支付中心接口
@@ -22,6 +23,15 @@ public class PayServiceImpl implements PayService {
 	 */
 	public String getQrCode(OrderInfoDTO order) {
 		return null;
+	}
+	
+	/**
+	 * 进行退款
+	 * @param returnGoodsInputOrder 退货入库单
+	 * @return 退款结果
+	 */
+	public Boolean refund(ReturnGoodsInputOrderDTO returnGoodsInputOrder) {
+		return true;
 	}
 	
 }
