@@ -152,10 +152,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 				ScheduleStockUpdater stockUpdater = stockUpdaterFactory.create(
 						StockUpdateEvent.SUBMIT_ORDER, scheduleResult);
 				stockUpdater.update();
+				
+				wmsService.informSubmitOrderEvent(scheduleResult);
 			}
 
-			wmsService.informSubmitOrderEvent(order);
-			
 			return true;
 		} catch (Exception e) {
 			logger.error("error", e);
@@ -180,9 +180,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 				
 				pickingItemDAO.removeByOrderItemId(orderItem.getOrderInfoId(), orderItem.getId()); 
 				sendOutDetailDAO.removeByOrderItemId(orderItem.getOrderInfoId(), orderItem.getId()); 
+				
+				wmsService.informCancelOrderEvent(scheduleResult);
 			}
-			
-			wmsService.informCancelOrderEvent(order);
 			
 			return true;
 		} catch (Exception e) {
@@ -205,9 +205,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 				ScheduleStockUpdater stockUpdater = stockUpdaterFactory.create(
 						StockUpdateEvent.PAY_ORDER, scheduleResult);
 				stockUpdater.update();
+				
+				wmsService.informPayOrderEvent(scheduleResult);
 			}
-			
-			wmsService.informPayOrderEvent(order);
 			
 			return true;
 		} catch (Exception e) {
