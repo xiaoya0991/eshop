@@ -77,7 +77,7 @@ public interface ReturnGoodsApplyMapper {
 	 */
 	@Update("UPDATE order_return_goods_apply SET "
 				+ "return_goods_apply_status=#{returnGoodsApplyStatus},"
-				+ "return_goods_logistic_code=#{returnGoodsLogisticCode} " 
+				+ "return_goods_logistic_code=#{returnGoodsLogisticCode}," 
 				+ "gmt_modified=#{gmtModified} "
 			+ "WHERE id=#{id}") 
 	void update(ReturnGoodsApplyDO apply); 
