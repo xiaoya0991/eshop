@@ -58,4 +58,20 @@ public class PayApiImpl implements PayApi {
 		return response;
 	}
 	
+	/**
+	 * 退款
+	 * @param transactionChannel 交易渠道
+	 * @param orderNo 订单编号
+	 * @param refundAmount 退款金额
+	 * @return 退款结果
+	 * @throws Exception
+	 */
+	public Boolean refund(Integer transactionChannel, 
+			String orderNo, Double refundAmount) throws Exception {
+		// 根据交易渠道选择支付宝或者微信的api接口，去发送请求，申请退款
+		// 根据退款的结果判断来返回true或者false
+		// true就代表退款成功了，false就代表退款失败了
+		return true;
+	}
+	
 }

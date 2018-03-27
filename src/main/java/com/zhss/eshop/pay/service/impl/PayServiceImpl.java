@@ -65,7 +65,19 @@ public class PayServiceImpl implements PayService {
 	 * @return 退款结果
 	 */
 	public Boolean refund(ReturnGoodsInputOrderDTO returnGoodsInputOrder) {
-		return true;
+		try {
+			PayTransactionDTO payTransaction = payTransactionService.getByOrderNo(
+					returnGoodsInputOrder.getOrderNo());
+			
+			Integer transactionChannel = payTransaction.getTransactionChannel();
+			String orderNo = returnGoodsInputOrder.getOrderNo();
+			Double refundAmount = returnGoodsInputOrder.getPayableAmount();
+			
+			return payApi.refund(transactionChannel, orderNo, refundAmount);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 }

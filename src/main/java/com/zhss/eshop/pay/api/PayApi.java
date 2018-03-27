@@ -27,5 +27,16 @@ public interface PayApi {
 	 */
 	QueryPayStatusResponse queryPayStatus(Integer transactionChannel, 
 			String orderNo) throws Exception;
+
+	/**
+	 * 退款
+	 * @param transactionChannel 交易渠道
+	 * @param orderNo 订单编号
+	 * @param refundAmount 退款金额
+	 * @return 退款结果
+	 * @throws Exception
+	 */
+	Boolean refund(Integer transactionChannel, 
+			String orderNo, Double refundAmount) throws Exception;
 	
 }
