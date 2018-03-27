@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.finance.service.FinanceService;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
-import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 
 /**
@@ -32,15 +31,6 @@ public class FinanceServiceImpl implements FinanceService {
 	 * @return 处理结果
 	 */
 	public Boolean payForLogisticsCompany(SaleDeliveryOrderDTO saleDeliveryOrder) {
-		return true;
-	}
-	
-	/**
-	 * 执行退货退款操作
-	 * @param returnGoodsInputOrderDTO 退货入库单DTO
-	 * @return 处理结果
-	 */
-	public Boolean executeReturnGoodsRefund(ReturnGoodsInputOrderDTO returnGoodsInputOrder) {
 		return true;
 	}
 	

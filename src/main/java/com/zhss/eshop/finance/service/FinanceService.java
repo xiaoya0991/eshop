@@ -1,7 +1,6 @@
 package com.zhss.eshop.finance.service;
 
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
-import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 
 /**
@@ -24,12 +23,5 @@ public interface FinanceService {
 	 * @return 处理结果
 	 */
 	Boolean payForLogisticsCompany(SaleDeliveryOrderDTO saleDeliveryOrder);
-	
-	/**
-	 * 执行退货退款操作
-	 * @param returnGoodsInputOrderDTO 退货入库单DTO
-	 * @return 处理结果
-	 */
-	Boolean executeReturnGoodsRefund(ReturnGoodsInputOrderDTO returnGoodsInputOrder);
 	
 }
