@@ -143,4 +143,101 @@ public class PayTransactionDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((finishPayTime == null) ? 0 : finishPayTime.hashCode());
+		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
+		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((orderInfoId == null) ? 0 : orderInfoId.hashCode());
+		result = prime * result + ((orderNo == null) ? 0 : orderNo.hashCode());
+		result = prime * result + ((payableAmount == null) ? 0 : payableAmount.hashCode());
+		result = prime * result + ((responseCode == null) ? 0 : responseCode.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((transactionChannel == null) ? 0 : transactionChannel.hashCode());
+		result = prime * result + ((transactionNumber == null) ? 0 : transactionNumber.hashCode());
+		result = prime * result + ((userAccountId == null) ? 0 : userAccountId.hashCode());
+		result = prime * result + ((userPayAccount == null) ? 0 : userPayAccount.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PayTransactionDO other = (PayTransactionDO) obj;
+		if (finishPayTime == null) {
+			if (other.finishPayTime != null)
+				return false;
+		} else if (!finishPayTime.equals(other.finishPayTime))
+			return false;
+		if (gmtCreate == null) {
+			if (other.gmtCreate != null)
+				return false;
+		} else if (!gmtCreate.equals(other.gmtCreate))
+			return false;
+		if (gmtModified == null) {
+			if (other.gmtModified != null)
+				return false;
+		} else if (!gmtModified.equals(other.gmtModified))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (orderInfoId == null) {
+			if (other.orderInfoId != null)
+				return false;
+		} else if (!orderInfoId.equals(other.orderInfoId))
+			return false;
+		if (orderNo == null) {
+			if (other.orderNo != null)
+				return false;
+		} else if (!orderNo.equals(other.orderNo))
+			return false;
+		if (payableAmount == null) {
+			if (other.payableAmount != null)
+				return false;
+		} else if (!payableAmount.equals(other.payableAmount))
+			return false;
+		if (responseCode == null) {
+			if (other.responseCode != null)
+				return false;
+		} else if (!responseCode.equals(other.responseCode))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (transactionChannel == null) {
+			if (other.transactionChannel != null)
+				return false;
+		} else if (!transactionChannel.equals(other.transactionChannel))
+			return false;
+		if (transactionNumber == null) {
+			if (other.transactionNumber != null)
+				return false;
+		} else if (!transactionNumber.equals(other.transactionNumber))
+			return false;
+		if (userAccountId == null) {
+			if (other.userAccountId != null)
+				return false;
+		} else if (!userAccountId.equals(other.userAccountId))
+			return false;
+		if (userPayAccount == null) {
+			if (other.userPayAccount != null)
+				return false;
+		} else if (!userPayAccount.equals(other.userPayAccount))
+			return false;
+		return true;
+	}
+	
 }

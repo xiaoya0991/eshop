@@ -23,6 +23,10 @@ public class PayTransactionStatus {
 	 * 支付交易关闭
 	 */
 	public static final Integer CLOSED = 4;
+	/**
+	 * 支付退款
+	 */
+	public static final Integer REFUND = 5;
 	
 	private PayTransactionStatus() {
 		

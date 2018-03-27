@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.pay.dao.PayTransactionDAO;
 import com.zhss.eshop.pay.domain.PayTransactionDO;
+import com.zhss.eshop.pay.domain.PayTransactionQuery;
 import com.zhss.eshop.pay.mapper.PayTransactionMapper;
 
 /**
@@ -57,6 +58,15 @@ public class PayTransactionDAOImpl implements PayTransactionDAO {
 	public void update(PayTransactionDO payTransaction) throws Exception {
 		payTransaction.setGmtModified(dateProvider.getCurrentTime()); 
 		payTransactionMapper.update(payTransaction); 
+	}
+	
+	/**
+	 * 分页查询支付交易流水
+	 * @param query 查询条件
+	 * @return 支付交易流水
+	 */
+	public List<PayTransactionDO> listByPage(PayTransactionQuery query) throws Exception {
+		return payTransactionMapper.listByPage(query);
 	}
 	
 }

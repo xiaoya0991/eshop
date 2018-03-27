@@ -1,6 +1,9 @@
 package com.zhss.eshop.pay.service;
 
+import java.util.List;
+
 import com.zhss.eshop.pay.domain.PayTransactionDTO;
+import com.zhss.eshop.pay.domain.PayTransactionQuery;
 
 /**
  * 支付交易流水管理service接口
@@ -29,5 +32,12 @@ public interface PayTransactionService {
 	 * @throws Exception
 	 */
 	PayTransactionDTO getByOrderNo(String orderNo) throws Exception;
+	
+	/**
+	 * 分页查询支付交易流水
+	 * @param query 查询条件
+	 * @return 支付交易流水
+	 */
+	List<PayTransactionDTO> listByPage(PayTransactionQuery query) throws Exception; 
 	
 }

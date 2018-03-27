@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.zhss.eshop.pay.domain.PayTransactionDO;
+import com.zhss.eshop.pay.domain.PayTransactionQuery;
 
 /**
  * 支付交易流水管理DAO接口
@@ -31,5 +32,12 @@ public interface PayTransactionDAO {
 	 * @param payTransaction 支付交易流水
 	 */
 	void update(PayTransactionDO payTransaction) throws Exception;
+	
+	/**
+	 * 分页查询支付交易流水
+	 * @param query 查询条件
+	 * @return 支付交易流水
+	 */
+	List<PayTransactionDO> listByPage(PayTransactionQuery query) throws Exception; 
 	
 }

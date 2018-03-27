@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.pay.dao.PayTransactionDAO;
 import com.zhss.eshop.pay.domain.PayTransactionDO;
 import com.zhss.eshop.pay.domain.PayTransactionDTO;
+import com.zhss.eshop.pay.domain.PayTransactionQuery;
 import com.zhss.eshop.pay.service.PayTransactionService;
 
 /**
@@ -62,6 +64,17 @@ public class PayTransactionServiceImpl implements PayTransactionService {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * 分页查询支付交易流水
+	 * @param query 查询条件
+	 * @return 支付交易流水
+	 */
+	public List<PayTransactionDTO> listByPage(PayTransactionQuery query) throws Exception {
+		return ObjectUtils.convertList(
+				payTransactionDAO.listByPage(query), 
+				PayTransactionDTO.class); 
 	}
 	
 }

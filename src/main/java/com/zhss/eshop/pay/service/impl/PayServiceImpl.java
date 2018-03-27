@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.pay.api.PayApi;
+import com.zhss.eshop.pay.constant.PayTransactionStatus;
 import com.zhss.eshop.pay.domain.PayTransactionBuilder;
 import com.zhss.eshop.pay.domain.PayTransactionDTO;
 import com.zhss.eshop.pay.service.PayService;
@@ -68,6 +69,9 @@ public class PayServiceImpl implements PayService {
 		try {
 			PayTransactionDTO payTransaction = payTransactionService.getByOrderNo(
 					returnGoodsInputOrder.getOrderNo());
+			
+			payTransaction.setStatus(PayTransactionStatus.REFUND); 
+			payTransactionService.update(payTransaction); 
 			
 			Integer transactionChannel = payTransaction.getTransactionChannel();
 			String orderNo = returnGoodsInputOrder.getOrderNo();
