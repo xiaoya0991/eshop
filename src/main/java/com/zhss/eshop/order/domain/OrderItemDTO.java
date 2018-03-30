@@ -173,4 +173,14 @@ public class OrderItemDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "OrderItemDTO [id=" + id + ", orderInfoId=" + orderInfoId + ", goodsId=" + goodsId + ", goodsSkuId="
+				+ goodsSkuId + ", goodsSkuCode=" + goodsSkuCode + ", goodsName=" + goodsName + ", saleProperties="
+				+ saleProperties + ", goodsGrossWeight=" + goodsGrossWeight + ", purchaseQuantity=" + purchaseQuantity
+				+ ", purchasePrice=" + purchasePrice + ", promotionActivityId=" + promotionActivityId + ", goodsLength="
+				+ goodsLength + ", goodsWidth=" + goodsWidth + ", goodsHeight=" + goodsHeight + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

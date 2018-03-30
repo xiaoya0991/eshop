@@ -1,8 +1,8 @@
-package com.zhss.eshop.Inventory.service.impl;
+package com.zhss.eshop.inventory.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.zhss.eshop.Inventory.service.InventoryService;
+import com.zhss.eshop.inventory.service.InventoryService;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
