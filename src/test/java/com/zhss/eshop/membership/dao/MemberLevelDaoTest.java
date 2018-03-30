@@ -26,7 +26,7 @@ import com.zhss.eshop.membership.domain.MemberLevelDO;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class MemberLevelDAOTest {
+public class MemberLevelDaoTest {
 
 	/**
 	 * 日期辅助组件

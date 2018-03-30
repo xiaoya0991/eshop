@@ -23,6 +23,18 @@ public class MemberLevel {
 	 * 钻石会员
 	 */
 	public static final Integer DIAMOND = 1;
+	/**
+	 * 青铜会员成长值
+	 */
+	public static final Integer BRONZE_THRESHOLD = 100;
+	/**
+	 * 白银会员成长值
+	 */
+	public static final Integer SLIVER_THRESHOLD = 500;
+	/**
+	 * 黄金会员成长值
+	 */
+	public static final Integer GOLD_THRESHOLD = 1000;
 	
 	private MemberLevel() {
 		
@@ -35,13 +47,13 @@ public class MemberLevel {
 	 * @throws Exception
 	 */
 	public static Integer get(Long growthValue) throws Exception {
-		if(growthValue <= 100) {
+		if(growthValue <= BRONZE_THRESHOLD) {
 			return MemberLevel.BRONZE;
-		} else if(growthValue > 100 && growthValue <= 500) {
+		} else if(growthValue > BRONZE_THRESHOLD && growthValue <= SLIVER_THRESHOLD) {
 			return MemberLevel.SILVER;
-		} else if(growthValue > 500 && growthValue <= 1000) {
+		} else if(growthValue > SLIVER_THRESHOLD && growthValue <= GOLD_THRESHOLD) {
 			return MemberLevel.GOLD;
-		} else if(growthValue > 1000) {
+		} else if(growthValue > GOLD_THRESHOLD) {
 			return MemberLevel.DIAMOND;
 		}
 		return MemberLevel.BRONZE;

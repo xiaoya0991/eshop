@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.auth.domain.AccountDO;
 import com.zhss.eshop.auth.domain.AccountQuery;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -30,7 +31,7 @@ import com.zhss.eshop.common.util.DateProvider;
 @SpringBootTest
 @Transactional (rollbackFor = Exception.class)
 @Rollback(true)
-public class AccountDAOTest {
+public class AccountDaoTest {
 
 	/**
 	 * 账号管理DAO组件
@@ -156,7 +157,7 @@ public class AccountDAOTest {
 	 * @throws Exception
 	 */ 
 	private Map<Long, AccountDO> createAccounts(int count) throws Exception {
-		Map<Long, AccountDO> accountMap = new HashMap<Long, AccountDO>();
+		Map<Long, AccountDO> accountMap = new HashMap<Long, AccountDO>(CollectionSize.DEFAULT);
 	
 		AccountDO account = null;
 		for(int i = 0; i < count; i++) {

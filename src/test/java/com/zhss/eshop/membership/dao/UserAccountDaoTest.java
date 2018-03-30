@@ -27,7 +27,7 @@ import com.zhss.eshop.membership.domain.UserAccountDO;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class UserAccountDAOTest {
+public class UserAccountDaoTest {
 	
 	/**
 	 * 用户账号管理DAO组件

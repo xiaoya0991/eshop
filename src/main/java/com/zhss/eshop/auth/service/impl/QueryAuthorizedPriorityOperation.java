@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.auth.dao.PriorityDAO;
 import com.zhss.eshop.auth.domain.PriorityDO;
+import com.zhss.eshop.common.constant.CollectionSize;
 
 /**
  * 查询授权权限的操作
@@ -39,7 +40,7 @@ public class QueryAuthorizedPriorityOperation implements PriorityOperation<Boole
 	public Boolean doExecute(Priority priority) throws Exception { 
 		List<Priority> targetChildren = new ArrayList<Priority>();
 		
-		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> parameters = new HashMap<String, Object>(CollectionSize.DEFAULT); 
 		parameters.put("accountId", accountId);
 		parameters.put("parentId", priority.getId());
 		

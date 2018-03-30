@@ -14,6 +14,7 @@ import com.zhss.eshop.auth.domain.PriorityDO;
 import com.zhss.eshop.auth.domain.PriorityDTO;
 import com.zhss.eshop.auth.service.PriorityService;
 import com.zhss.eshop.common.bean.SpringApplicationContext;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -121,7 +122,7 @@ public class PriorityServiceImpl implements PriorityService {
 		
 		authorizedTree = new ArrayList<Priority>();
 		
-		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> parameters = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		parameters.put("accountId", accountId);
 		parameters.put("parentId", null);
 		

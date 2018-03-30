@@ -24,6 +24,7 @@ import com.zhss.eshop.auth.domain.AccountRoleRelationshipDO;
 import com.zhss.eshop.auth.domain.PriorityDO;
 import com.zhss.eshop.auth.domain.RoleDO;
 import com.zhss.eshop.auth.domain.RolePriorityRelationshipDO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -35,7 +36,7 @@ import com.zhss.eshop.common.util.DateProvider;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class PriorityDAOTest {
+public class PriorityDaoTest {
 	
 	/**
 	 * 权限管理模块的DAO组件
@@ -174,7 +175,7 @@ public class PriorityDAOTest {
 		List<PriorityDO> accountRelatedPriorities = mockResult.getAccountRelatedPriorities();
 		
 		// 执行核心的业务逻辑
-		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> parameters = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		parameters.put("accountId", account.getId());
 		parameters.put("parentId", parentId);
 		
@@ -466,7 +467,7 @@ public class PriorityDAOTest {
 	private Map<Long, PriorityDO> createPriorityMap(
 			Long parentId, Integer count) throws Exception {
 		List<PriorityDO> priorities = createPriorities(parentId, count);
-		Map<Long, PriorityDO> priorityMap = new HashMap<Long, PriorityDO>();
+		Map<Long, PriorityDO> priorityMap = new HashMap<Long, PriorityDO>(CollectionSize.DEFAULT);
 		for(PriorityDO priority : priorities) {
 			priorityMap.put(priority.getId(), priority);
 		}

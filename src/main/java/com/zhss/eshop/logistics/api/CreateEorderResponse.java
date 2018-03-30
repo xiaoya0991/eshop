@@ -5,7 +5,7 @@ package com.zhss.eshop.logistics.api;
  * @author zhonghuashishan
  *
  */
-public class CreateEOrderResponse {
+public class CreateEorderResponse {
 	
 	public static final Integer SUCCESS = 1;
 	public static final Integer FAILURE = 0;

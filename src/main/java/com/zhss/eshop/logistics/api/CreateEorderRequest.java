@@ -7,7 +7,7 @@ import java.util.List;
  * @author zhonghuashishan
  *
  */
-public class CreateEOrderRequest {
+public class CreateEorderRequest {
 
 	/**
 	 * 订单编号

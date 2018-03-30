@@ -18,6 +18,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.wms.domain.GoodsAllocationDO;
 import com.zhss.eshop.wms.domain.GoodsAllocationQuery;
 
@@ -30,7 +31,7 @@ import com.zhss.eshop.wms.domain.GoodsAllocationQuery;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class GoodsAllocationDAOTest {
+public class GoodsAllocationDaoTest {
 
 	/**
 	 * 货位管理DAO组件
@@ -125,7 +126,7 @@ public class GoodsAllocationDAOTest {
 	 * @throws Exception
 	 */ 
 	private Map<Long, GoodsAllocationDO> createGoodsAllocations(int count) throws Exception {
-		Map<Long, GoodsAllocationDO> goodsAllocationMap = new HashMap<Long, GoodsAllocationDO>();
+		Map<Long, GoodsAllocationDO> goodsAllocationMap = new HashMap<Long, GoodsAllocationDO>(CollectionSize.DEFAULT);
 	
 		GoodsAllocationDO goodsAllocation = null;
 		for(int i = 0; i < count; i++) {

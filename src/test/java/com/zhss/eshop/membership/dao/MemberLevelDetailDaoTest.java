@@ -29,7 +29,7 @@ import com.zhss.eshop.membership.domain.MemberLevelDetailQuery;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class MemberLevelDetailDAOTest {
+public class MemberLevelDetailDaoTest {
 	
 	/**
 	 * 会员等级明细管理DAO组件

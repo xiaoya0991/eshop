@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.membership.constant.MemberLevel;
 import com.zhss.eshop.membership.constant.UpdateMemberLevelResult;
 import com.zhss.eshop.membership.constant.UpdateMemberPointResult;
@@ -57,7 +58,7 @@ public class FirstLoginMembershipUpdater extends AbstractMembershipUpdater<Objec
 	@Override
 	protected Map<String, Object> updateMemberLevel(Long userAccountId, 
 			Object parameter) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		
 		MemberLevelDO memberLevel = memberLevelDAO.getByUserAccountId(userAccountId);
 		
@@ -83,7 +84,7 @@ public class FirstLoginMembershipUpdater extends AbstractMembershipUpdater<Objec
 	@Override
 	protected Map<String, Object> updateMemberPoint(Long userAccountId, 
 			Object parameter) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		
 		MemberPointDO memberPoint = memberPointDAO.getByUserAccountId(userAccountId);
 		

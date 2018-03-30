@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.auth.domain.AccountPriorityRelationshipDO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -29,7 +30,7 @@ import com.zhss.eshop.common.util.DateProvider;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class)
 @Rollback(true)
-public class AccountPriorityRelationshipDAOTest {
+public class AccountPriorityRelationshipDaoTest {
 
 	/**
 	 * 账号和权限关系管理模块的DAO组件
@@ -139,7 +140,7 @@ public class AccountPriorityRelationshipDAOTest {
 	private Map<Long, AccountPriorityRelationshipDO> createRelations(
 			Long accountId, int count) throws Exception {
 		Map<Long, AccountPriorityRelationshipDO> relationMap = 
-				new HashMap<Long, AccountPriorityRelationshipDO>();
+				new HashMap<Long, AccountPriorityRelationshipDO>(CollectionSize.DEFAULT);
 	
 		for(int i = 0; i < count; i++) {
 			AccountPriorityRelationshipDO relation = 

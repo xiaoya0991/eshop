@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.auth.domain.AccountRoleRelationshipDO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -29,7 +30,7 @@ import com.zhss.eshop.common.util.DateProvider;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class AccountRoleRelationshipDAOTest {
+public class AccountRoleRelationshipDaoTest {
 
 	/**
 	 * 账号和角色关系管理模块的DAO组件
@@ -139,7 +140,7 @@ public class AccountRoleRelationshipDAOTest {
 	private Map<Long, AccountRoleRelationshipDO> createRelations(
 			Long accountId, int count) throws Exception {
 		Map<Long, AccountRoleRelationshipDO> relationMap = 
-				new HashMap<Long, AccountRoleRelationshipDO>();
+				new HashMap<Long, AccountRoleRelationshipDO>(CollectionSize.DEFAULT);
 	
 		for(int i = 0; i < count; i++) {
 			AccountRoleRelationshipDO relation = 

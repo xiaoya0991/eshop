@@ -26,7 +26,7 @@ import com.zhss.eshop.membership.domain.MemberPointDO;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class MemberPointDAOTest {
+public class MemberPointDaoTest {
 
 	/**
 	 * 日期辅助组件

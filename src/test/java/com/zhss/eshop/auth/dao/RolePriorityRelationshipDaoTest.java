@@ -25,7 +25,7 @@ import com.zhss.eshop.common.util.DateProvider;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class RolePriorityRelationshipDAOTest {
+public class RolePriorityRelationshipDaoTest {
 
 	/**
 	 * 角色和权限关系管理模块的DAO组件

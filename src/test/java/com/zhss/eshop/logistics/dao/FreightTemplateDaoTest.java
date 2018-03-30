@@ -18,6 +18,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.logistics.domain.FreightTemplateDO;
 import com.zhss.eshop.logistics.domain.FreightTemplateQuery;
 
@@ -30,7 +31,7 @@ import com.zhss.eshop.logistics.domain.FreightTemplateQuery;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class FreightTemplateDAOTest {
+public class FreightTemplateDaoTest {
 
 	/**
 	 * 运费模板管理DAO组件
@@ -129,7 +130,7 @@ public class FreightTemplateDAOTest {
 	 * @throws Exception
 	 */ 
 	private Map<Long, FreightTemplateDO> createFreightTemplates(int count) throws Exception {
-		Map<Long, FreightTemplateDO> freightTemplateMap = new HashMap<Long, FreightTemplateDO>();
+		Map<Long, FreightTemplateDO> freightTemplateMap = new HashMap<Long, FreightTemplateDO>(CollectionSize.DEFAULT);
 	
 		FreightTemplateDO freightTemplate = null;
 		for(int i = 0; i < count; i++) {

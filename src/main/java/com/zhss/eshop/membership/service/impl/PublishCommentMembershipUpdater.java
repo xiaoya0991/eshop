@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.membership.constant.MemberLevel;
 import com.zhss.eshop.membership.constant.UpdateMemberLevelResult;
 import com.zhss.eshop.membership.constant.UpdateMemberPointResult;
@@ -67,7 +68,7 @@ public class PublishCommentMembershipUpdater extends AbstractMembershipUpdater<O
 			Object parameter) throws Exception {
 		Boolean showPictures = (Boolean) parameter;
 		
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		
 		MemberLevelDO memberLevel = memberLevelDAO.getByUserAccountId(userAccountId);
 		
@@ -95,7 +96,7 @@ public class PublishCommentMembershipUpdater extends AbstractMembershipUpdater<O
 			Object parameter) throws Exception {
 		Boolean showPictures = (Boolean) parameter;
 		
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		
 		MemberPointDO memberPoint = memberPointDAO.getByUserAccountId(userAccountId);
 		
@@ -146,7 +147,7 @@ public class PublishCommentMembershipUpdater extends AbstractMembershipUpdater<O
 			Object parameter) throws Exception {
 		Boolean showPictures = (Boolean) parameter;
 		
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		
 		MemberLevelDO memberLevel = memberLevelDAO.getByUserAccountId(userAccountId);
 		
@@ -174,7 +175,7 @@ public class PublishCommentMembershipUpdater extends AbstractMembershipUpdater<O
 			Object parameter) throws Exception {
 		Boolean showPictures = (Boolean) parameter;
 		
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		
 		MemberPointDO memberPoint = memberPointDAO.getByUserAccountId(userAccountId);
 		

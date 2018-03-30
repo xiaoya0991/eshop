@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.membership.domain.DeliveryAddressDO;
 
@@ -31,7 +32,7 @@ import com.zhss.eshop.membership.domain.DeliveryAddressDO;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class DeliveryAddressDAOTest {
+public class DeliveryAddressDaoTest {
 
 	/**
 	 * 日期辅助组件
@@ -157,7 +158,7 @@ public class DeliveryAddressDAOTest {
 	private Map<Long, DeliveryAddressDO> createDeliveryAddressMap(
 			Long userAccountId, Integer count) throws Exception {
 		Map<Long, DeliveryAddressDO> deliveryAddressMap = 
-				new HashMap<Long, DeliveryAddressDO>();
+				new HashMap<Long, DeliveryAddressDO>(CollectionSize.DEFAULT);
 	
 		List<DeliveryAddressDO> deliveryAddresses = createDeliveryAddresses(
 				userAccountId, count);

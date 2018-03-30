@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zhss.eshop.commodity.domain.GoodsDTO;
 import com.zhss.eshop.commodity.service.CommodityService;
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.logistics.api.CreateEOrderRequest;
-import com.zhss.eshop.logistics.api.CreateEOrderRequestBuilder;
-import com.zhss.eshop.logistics.api.CreateEOrderResponse;
+import com.zhss.eshop.logistics.api.CreateEorderRequest;
+import com.zhss.eshop.logistics.api.CreateEorderRequestBuilder;
+import com.zhss.eshop.logistics.api.CreateEorderResponse;
 import com.zhss.eshop.logistics.api.LogisticApi;
 import com.zhss.eshop.logistics.domain.FreightTemplateDTO;
 import com.zhss.eshop.logistics.service.FreightTemplateService;
@@ -92,14 +92,14 @@ public class LogisticsServiceImpl implements LogisticsService {
 	@Override
 	public LogisticOrderDTO applyLogisticOrder(OrderInfoDTO order) {
 		try {
-			CreateEOrderRequest request = CreateEOrderRequestBuilder.get()
+			CreateEorderRequest request = CreateEorderRequestBuilder.get()
 					.buildOrderRelatedInfo(order)
 					.buildReceiver(order) 
 					.buildGoodsList(order)
 					.buildTotalDataMetric(order)
 					.create();
 			
-			CreateEOrderResponse response = logisticApi.createEOrder(request);
+			CreateEorderResponse response = logisticApi.createEOrder(request);
 			
 			LogisticOrderDTO logisticOrder = createLogisticOrder(response);
  			
@@ -117,7 +117,7 @@ public class LogisticsServiceImpl implements LogisticsService {
 	 * @throws Exception
 	 */
 	private LogisticOrderDTO createLogisticOrder(
-			CreateEOrderResponse response) throws Exception {
+			CreateEorderResponse response) throws Exception {
 		LogisticOrderDTO logisticOrder = new LogisticOrderDTO();
 		logisticOrder.setLogisticCode(response.getLogisticCode());
 		logisticOrder.setContent(response.getLogisticOrderContent()); 

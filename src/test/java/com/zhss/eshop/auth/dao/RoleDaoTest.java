@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.auth.domain.RoleDO;
 import com.zhss.eshop.auth.domain.RoleQuery;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -30,7 +31,7 @@ import com.zhss.eshop.common.util.DateProvider;
 @SpringBootTest
 @Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class RoleDAOTest {
+public class RoleDaoTest {
 
 	/**
 	 * 角色管理模块DAO组件
@@ -59,7 +60,7 @@ public class RoleDAOTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testListByPage() throws Exception {
+	public void testListByPage(Integer count) throws Exception {
 		// 准备参数
 		String namePrefix = "测试角色";
 		String codePrefix = "TEST_ROLE";
@@ -70,11 +71,11 @@ public class RoleDAOTest {
 		
 		// 构造6个角色出来
 		// 其中5个角色都是以“测试角色”打头
-		Map<Long, RoleDO> roleMap = new HashMap<Long, RoleDO>();
+		Map<Long, RoleDO> roleMap = new HashMap<Long, RoleDO>(CollectionSize.DEFAULT);
 		
 		RoleDO role = null;
 		
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < count; i++) {
 			role = createRole(namePrefix + i, codePrefix + i);
 			roleMap.put(role.getId(), role);
 		}
