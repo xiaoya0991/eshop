@@ -7,6 +7,11 @@ import com.zhss.eshop.commodity.domain.CategoryPropertyRelationshipVO;
 import com.zhss.eshop.commodity.domain.PropertyGroupVO;
 import com.zhss.eshop.commodity.domain.PropertyVO;
 
+/**
+ * 
+ * @author zhonghuashishan
+ *
+ */
 public class Properties {
 	
 	/**

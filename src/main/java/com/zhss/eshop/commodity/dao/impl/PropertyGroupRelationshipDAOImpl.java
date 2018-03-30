@@ -28,9 +28,9 @@ public class PropertyGroupRelationshipDAOImpl
 	 * 新增属性分组与属性关系
 	 * @param relation 属性分组与属性关系
 	 */
-	public Boolean save(PropertyGroupRelationshipDO relation) throws Exception {
+	@Override
+	public void save(PropertyGroupRelationshipDO relation) throws Exception {
 		propertyGroupRelationMapper.save(relation); 
-		return true;
 	}
 	
 	/**
@@ -38,6 +38,7 @@ public class PropertyGroupRelationshipDAOImpl
 	 * @param propertyGroupId 属性分组id
 	 * @return 属性分组与属性的关联关系
 	 */
+	@Override
 	public List<PropertyGroupRelationshipDO> listByPropertyGroupId(
 			Long propertyGroupId) throws Exception {
 		return propertyGroupRelationMapper.listByPropertyGroupId(propertyGroupId);
@@ -47,6 +48,7 @@ public class PropertyGroupRelationshipDAOImpl
 	 * 根据属性分组id删除属性分组与属性的关联关系
 	 * @param propertyGroupId 属性分组id
 	 */ 
+	@Override
 	public void removeByPropertyGroupId(Long propertyGroupId) throws Exception {
 		propertyGroupRelationMapper.removeByPropertyGroupId(propertyGroupId); 
 	}

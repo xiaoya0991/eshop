@@ -13,7 +13,8 @@ public interface SaleDeliveryOrderPickingItemDAO {
 
 	/**
 	 * 新增销售出库单拣货条目
-	 * @param pickingItem
+	 * @param pickingItem 拣货条目
+	 * @throws Exception
 	 */
 	void save(SaleDeliveryOrderPickingItemDO pickingItem) throws Exception;
 	
@@ -21,6 +22,7 @@ public interface SaleDeliveryOrderPickingItemDAO {
 	 * 根据销售出库单条目id查询拣货条目
 	 * @param saleDeliveryOrderItemId 销售出库单条目id
 	 * @return 拣货条目
+	 * @throws Exception
 	 */
 	List<SaleDeliveryOrderPickingItemDO> listBySaleDeliveryOrderItemId(
 			Long saleDeliveryOrderItemId) throws Exception;

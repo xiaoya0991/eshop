@@ -23,6 +23,7 @@ public interface ReturnGoodsInputOrderService {
 	 * 分页查询退货入库单
 	 * @param query 查询条件
 	 * @return 退货入库单
+	 * @throws Exception
 	 */
 	List<ReturnGoodsInputOrderDTO> listByPage(ReturnGoodsInputOrderQuery query) throws Exception;
 	
@@ -43,7 +44,7 @@ public interface ReturnGoodsInputOrderService {
 	
 	/**
 	 * 批量新增退货入库单上架条目
-	 * @param putOnItems 上架条目
+	 * @param returnGoodsInputOrder 退货入库单
 	 * @throws Exception
 	 */
 	void batchSavePutOnItems(ReturnGoodsInputOrderDTO returnGoodsInputOrder) throws Exception;

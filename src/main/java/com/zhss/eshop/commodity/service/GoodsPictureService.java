@@ -17,6 +17,7 @@ public interface GoodsPictureService {
 	 * 根据商品id查询商品图片id
 	 * @param goodsId 商品id
 	 * @return 商品图片id
+	 * @throws Exception
 	 */
 	List<Long> listIdsByGoodsId(Long goodsId) throws Exception;
 	
@@ -24,6 +25,7 @@ public interface GoodsPictureService {
 	 * 根据id查询商品图片
 	 * @param id 商品图片id
 	 * @return 商品图片
+	 * @throws Exception
 	 */
 	GoodsPictureDTO getById(Long id) throws Exception;
 
@@ -38,6 +40,7 @@ public interface GoodsPictureService {
 	/**
 	 * 根据商品id删除图片
 	 * @param goodsId 商品id
+	 * @throws Exception
 	 */
 	void batchRemoveByGoodsId(Long goodsId) throws Exception;
 	

@@ -29,6 +29,7 @@ public class PurchaseInputOrderItemDAOImpl implements PurchaseInputOrderItemDAO 
 	 * @param purchaseInputOrderItems 采购入库单条目
 	 * @throws Exception
 	 */
+	@Override
 	public void batchSave(Long purchaseInputOrderId, 
 			List<PurchaseInputOrderItemDO> purchaseInputOrderItems) throws Exception {
 		for(PurchaseInputOrderItemDO purchaseInputOrderItem : purchaseInputOrderItems) {
@@ -42,6 +43,7 @@ public class PurchaseInputOrderItemDAOImpl implements PurchaseInputOrderItemDAO 
 	 * @param purchaseInputOrderId 采购入库单id
 	 * @return 采购入库单条目
 	 */
+	@Override
 	public List<PurchaseInputOrderItemDO> listByPurchaseInputOrderId(
 			Long purchaseInputOrderId) throws Exception {
 		return purchaseInputOrderItemMapper.listByPurchaseInputOrderId(
@@ -52,6 +54,7 @@ public class PurchaseInputOrderItemDAOImpl implements PurchaseInputOrderItemDAO 
 	 * 更新采购入库单条目
 	 * @param purchaseInputOrderItem 采购入库单条目
 	 */
+	@Override
 	public void update(PurchaseInputOrderItemDO purchaseInputOrderItem) throws Exception {
 		purchaseInputOrderItemMapper.update(purchaseInputOrderItem);
 	}

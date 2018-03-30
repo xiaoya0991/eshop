@@ -173,4 +173,13 @@ public class GoodsVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsVO [id=" + id + ", categoryId=" + categoryId + ", brandId=" + brandId + ", code=" + code
+				+ ", name=" + name + ", subName=" + subName + ", grossWeight=" + grossWeight + ", length=" + length
+				+ ", width=" + width + ", height=" + height + ", status=" + status + ", serviceGuarantees="
+				+ serviceGuarantees + ", packageList=" + packageList + ", freightTemplateId=" + freightTemplateId
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

@@ -143,69 +143,102 @@ public class BrandDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		BrandDO other = (BrandDO) obj;
 		if (aliasName == null) {
-			if (other.aliasName != null)
+			if (other.aliasName != null) {
 				return false;
-		} else if (!aliasName.equals(other.aliasName))
+			}
+		} else if (!aliasName.equals(other.aliasName)) {
 			return false;
+		}
 		if (authVoucherPath == null) {
-			if (other.authVoucherPath != null)
+			if (other.authVoucherPath != null) {
 				return false;
-		} else if (!authVoucherPath.equals(other.authVoucherPath))
+			}
+		} else if (!authVoucherPath.equals(other.authVoucherPath)) {
 			return false;
+		}
 		if (chineseName == null) {
-			if (other.chineseName != null)
+			if (other.chineseName != null) {
 				return false;
-		} else if (!chineseName.equals(other.chineseName))
+			}
+		} else if (!chineseName.equals(other.chineseName)) {
 			return false;
+		}
 		if (englishName == null) {
-			if (other.englishName != null)
+			if (other.englishName != null) {
 				return false;
-		} else if (!englishName.equals(other.englishName))
+			}
+		} else if (!englishName.equals(other.englishName)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (introduction == null) {
-			if (other.introduction != null)
+			if (other.introduction != null) {
 				return false;
-		} else if (!introduction.equals(other.introduction))
+			}
+		} else if (!introduction.equals(other.introduction)) {
 			return false;
+		}
 		if (location == null) {
-			if (other.location != null)
+			if (other.location != null) {
 				return false;
-		} else if (!location.equals(other.location))
+			}
+		} else if (!location.equals(other.location)) {
 			return false;
+		}
 		if (logoPath == null) {
-			if (other.logoPath != null)
+			if (other.logoPath != null) {
 				return false;
-		} else if (!logoPath.equals(other.logoPath))
+			}
+		} else if (!logoPath.equals(other.logoPath)) {
 			return false;
+		}
 		if (remark == null) {
-			if (other.remark != null)
+			if (other.remark != null) {
 				return false;
-		} else if (!remark.equals(other.remark))
+			}
+		} else if (!remark.equals(other.remark)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "BrandDO [id=" + id + ", chineseName=" + chineseName + ", englishName=" + englishName + ", aliasName="
+				+ aliasName + ", introduction=" + introduction + ", location=" + location + ", logoPath=" + logoPath
+				+ ", authVoucherPath=" + authVoucherPath + ", remark=" + remark + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

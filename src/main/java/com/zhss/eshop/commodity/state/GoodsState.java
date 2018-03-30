@@ -20,6 +20,7 @@ public interface GoodsState {
 	 * 判断当前商品能否执行编辑操作
 	 * @param goods 商品
 	 * @return 能否执行编辑操作
+	 * @throws Exception
 	 */
 	Boolean canEdit(GoodsDTO goods) throws Exception;
 	

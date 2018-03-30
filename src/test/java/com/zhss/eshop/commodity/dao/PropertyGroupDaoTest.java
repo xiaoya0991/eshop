@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.commodity.domain.PropertyGroupDO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -27,9 +28,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class PropertyGroupDAOTest {
+public class PropertyGroupDaoTest {
 
 	/**
 	 * 属性分组管理DAO组件
@@ -102,7 +103,7 @@ public class PropertyGroupDAOTest {
 	 */
 	private Map<Long, PropertyGroupDO> createPropertyGroups(
 			Integer count, Long categoryId) throws Exception {
-		Map<Long, PropertyGroupDO> propertyGroupMap = new HashMap<Long, PropertyGroupDO>();
+		Map<Long, PropertyGroupDO> propertyGroupMap = new HashMap<Long, PropertyGroupDO>(CollectionSize.DEFAULT);
 		for(int i = 0; i < count; i++) {
 			PropertyGroupDO propertyGroup = createPropertyGroup(categoryId);
 			propertyGroupMap.put(propertyGroup.getId(), propertyGroup);

@@ -23,6 +23,7 @@ public class InformPurchaseCenterHandler extends AbstractPurchaseInputOrderHandl
 	/**
 	 * 执行处理逻辑
 	 */
+	@Override
 	public PurchaseInputOrderHandlerResult doExecute(
 			PurchaseInputOrderDTO purchaseInputOrder) throws Exception {
 		purchaseService.informFinishedPurchaseInputOrderEvent(

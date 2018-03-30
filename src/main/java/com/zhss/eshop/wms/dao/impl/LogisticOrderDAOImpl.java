@@ -25,6 +25,7 @@ public class LogisticOrderDAOImpl implements LogisticOrderDAO {
 	 * 新增物流单
 	 * @param logisticOrder 物流单
 	 */
+	@Override
 	public void save(LogisticOrderDO logisticOrder) throws Exception {
 		logisticOrderMapper.save(logisticOrder); 
 	}
@@ -34,6 +35,7 @@ public class LogisticOrderDAOImpl implements LogisticOrderDAO {
 	 * @param saleDeliveryOrderId 销售出库单id
 	 * @return 物流单
 	 */
+	@Override
 	public LogisticOrderDO getBySaleDeliveryOrderId(
 			Long saleDeliveryOrderId) throws Exception {
 		return logisticOrderMapper.getBySaleDeliveryOrderId(saleDeliveryOrderId);

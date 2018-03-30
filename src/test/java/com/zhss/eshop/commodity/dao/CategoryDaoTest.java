@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.commodity.constant.CategoryLeaf;
 import com.zhss.eshop.commodity.domain.CategoryDO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -27,9 +28,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class CategoryDAOTest {  
+public class CategoryDaoTest {  
 	
 	/**
 	 * 类目管理DAO组件
@@ -139,7 +140,7 @@ public class CategoryDAOTest {
 	 */
 	private Map<Long, CategoryDO> createCategories(
 			Integer categoryCount, Long parentId) throws Exception {
-		Map<Long, CategoryDO> categoryMap = new HashMap<Long, CategoryDO>();
+		Map<Long, CategoryDO> categoryMap = new HashMap<Long, CategoryDO>(CollectionSize.DEFAULT); 
 		for(int i = 0; i < categoryCount; i++) {
 			CategoryDO category = createCategory(parentId);
 			categoryMap.put(category.getId(), category);

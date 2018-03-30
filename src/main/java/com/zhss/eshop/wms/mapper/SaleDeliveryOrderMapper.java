@@ -181,8 +181,8 @@ public interface SaleDeliveryOrderMapper {
 	SaleDeliveryOrderDO getById(@Param("id") Long id);
 	
 	/**
-	 * 根据id查询销售出库单
-	 * @param id 销售出库单id
+	 * 根据订单id查询销售出库单
+	 * @param orderId 订单id
 	 * @return 销售出库单
 	 */
 	@Select("SELECT "

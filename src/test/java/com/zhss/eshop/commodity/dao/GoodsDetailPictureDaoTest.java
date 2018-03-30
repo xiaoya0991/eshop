@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.commodity.domain.GoodsDetailPictureDO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -28,9 +29,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class GoodsDetailPictureDAOTest {
+public class GoodsDetailPictureDaoTest {
 
 	/**
 	 * 日期辅助组件
@@ -134,7 +135,7 @@ public class GoodsDetailPictureDAOTest {
 	private Map<Long, GoodsDetailPictureDO> createGoodsDetailPictureMap(
 			Long goodsDetailId, Integer count) throws Exception {
 		Map<Long, GoodsDetailPictureDO> goodsDetailPictureMap = 
-				new HashMap<Long, GoodsDetailPictureDO>();
+				new HashMap<Long, GoodsDetailPictureDO>(CollectionSize.DEFAULT);
 		
 		List<GoodsDetailPictureDO> goodsDetailPictures = createGoodsDetailPictures(
 				goodsDetailId, count);

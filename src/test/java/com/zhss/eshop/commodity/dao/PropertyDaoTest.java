@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zhss.eshop.commodity.constant.PropertyInputType;
 import com.zhss.eshop.commodity.domain.PropertyDO;
 import com.zhss.eshop.commodity.domain.PropertyQuery;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -28,9 +29,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class PropertyDAOTest {
+public class PropertyDaoTest {
 
 	/**
 	 * 属性管理模块DAO组件
@@ -74,7 +75,7 @@ public class PropertyDAOTest {
 		PropertyDO propertyDO5 = createPropertyDO(null, "手机前后摄像头的像素", "摄像头像素");
 		PropertyDO propertyDO6 = createPropertyDO("红色,蓝色,白色", "手机机身的颜色", "机身颜色5");
 		
-		Map<Long, PropertyDO> propertyDOMap = new HashMap<Long, PropertyDO>();
+		Map<Long, PropertyDO> propertyDOMap = new HashMap<Long, PropertyDO>(CollectionSize.DEFAULT);
 		propertyDOMap.put(propertyDO1.getId(), propertyDO1);
 		propertyDOMap.put(propertyDO2.getId(), propertyDO2);
 		propertyDOMap.put(propertyDO3.getId(), propertyDO3);

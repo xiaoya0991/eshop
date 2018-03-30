@@ -62,6 +62,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param purchaseInputOrderDTO 采购入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean createPurchaseInputOrder(PurchaseInputOrderDTO purchaseInputOrder) {
 		try {
 			purchaseInputOrderService.save(purchaseInputOrder); 

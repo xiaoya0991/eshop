@@ -17,6 +17,7 @@ public class DefaultGoodsState implements GoodsState {
 	 * @param goods 商品
 	 * @throws Exception
 	 */
+	@Override
 	public void doTransition(GoodsDTO goods) throws Exception {
 		
 	}
@@ -26,6 +27,7 @@ public class DefaultGoodsState implements GoodsState {
 	 * @param goods 商品
 	 * @return 能否执行编辑操作
 	 */
+	@Override
 	public Boolean canEdit(GoodsDTO goods) throws Exception {
 		return false;
 	}
@@ -36,6 +38,7 @@ public class DefaultGoodsState implements GoodsState {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canApprove(GoodsDTO goods) throws Exception {
 		return false;
 	}
@@ -46,6 +49,7 @@ public class DefaultGoodsState implements GoodsState {
 	 * @return 能否执行上架操作
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canPutOnShelves(GoodsDTO goods) throws Exception {
 		return false;
 	}
@@ -56,6 +60,7 @@ public class DefaultGoodsState implements GoodsState {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canPullOffShelves(GoodsDTO goods) throws Exception {
 		return false;
 	}
@@ -66,6 +71,7 @@ public class DefaultGoodsState implements GoodsState {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canRemove(GoodsDTO goods) throws Exception {
 		return false;
 	}

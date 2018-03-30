@@ -204,4 +204,16 @@ public class ReturnGoodsInputOrderItemVO extends AbstractObject {
 		this.stockDetails = stockDetails;
 	}
 	
+	@Override
+	public String toString() {
+		return "ReturnGoodsInputOrderItemVO [id=" + id + ", returnGoodsInputOrderId=" + returnGoodsInputOrderId
+				+ ", goodsSkuId=" + goodsSkuId + ", goodsSkuCode=" + goodsSkuCode + ", goodsName=" + goodsName
+				+ ", saleProperties=" + saleProperties + ", goodsGrossWeight=" + goodsGrossWeight
+				+ ", purchaseQuantity=" + purchaseQuantity + ", purchasePrice=" + purchasePrice
+				+ ", promotionActivityId=" + promotionActivityId + ", goodsLength=" + goodsLength + ", goodsWidth="
+				+ goodsWidth + ", goodsHeight=" + goodsHeight + ", qualifiedCount=" + qualifiedCount + ", arrivalCount="
+				+ arrivalCount + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", putOnItems="
+				+ putOnItems + ", stockDetails=" + stockDetails + "]";
+	}
+	
 }

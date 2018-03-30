@@ -33,6 +33,7 @@ public class WaitForApproveGoodsState implements GoodsState {
 	 * @param goods 商品
 	 * @throws Exception
 	 */
+	@Override
 	public void doTransition(GoodsDTO goods) throws Exception {
 		goods.setStatus(GoodsStatus.WAIT_FOR_APPROVE); 
 		goods.setGmtModified(dateProvider.getCurrentTime()); 
@@ -44,6 +45,7 @@ public class WaitForApproveGoodsState implements GoodsState {
 	 * @param goods 商品
 	 * @return 能否执行编辑操作
 	 */
+	@Override
 	public Boolean canEdit(GoodsDTO goods) throws Exception {
 		return true;
 	}
@@ -54,6 +56,7 @@ public class WaitForApproveGoodsState implements GoodsState {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canApprove(GoodsDTO goods) throws Exception {
 		return true;
 	}
@@ -64,6 +67,7 @@ public class WaitForApproveGoodsState implements GoodsState {
 	 * @return 能否执行上架操作
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canPutOnShelves(GoodsDTO goods) throws Exception {
 		return false;
 	}
@@ -74,6 +78,7 @@ public class WaitForApproveGoodsState implements GoodsState {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canPullOffShelves(GoodsDTO goods) throws Exception {
 		return false;
 	}
@@ -84,6 +89,7 @@ public class WaitForApproveGoodsState implements GoodsState {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canRemove(GoodsDTO goods) throws Exception {
 		return true;
 	}

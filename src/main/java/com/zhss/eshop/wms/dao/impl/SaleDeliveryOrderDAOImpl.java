@@ -34,6 +34,7 @@ public class SaleDeliveryOrderDAOImpl implements SaleDeliveryOrderDAO {
 	 * 新增销售出库单
 	 * @param saleDeliveryOrder
 	 */
+	@Override
 	public Long save(SaleDeliveryOrderDO saleDeliveryOrder) throws Exception {
 		saleDeliveryOrderMapper.save(saleDeliveryOrder); 
 		return saleDeliveryOrder.getId();
@@ -44,6 +45,7 @@ public class SaleDeliveryOrderDAOImpl implements SaleDeliveryOrderDAO {
 	 * @param query 查询条件
 	 * @return 销售出库单
 	 */
+	@Override
 	public List<SaleDeliveryOrderDO> listByPage(SaleDeliveryOrderQuery query) throws Exception {
 		return saleDeliveryOrderMapper.listByPage(query);
 	}
@@ -53,6 +55,7 @@ public class SaleDeliveryOrderDAOImpl implements SaleDeliveryOrderDAO {
 	 * @param id 销售出库单id
 	 * @return 销售出库单
 	 */
+	@Override
 	public SaleDeliveryOrderDO getById(Long id) throws Exception {
 		return saleDeliveryOrderMapper.getById(id);
 	}
@@ -62,6 +65,7 @@ public class SaleDeliveryOrderDAOImpl implements SaleDeliveryOrderDAO {
 	 * @param id 销售出库单id
 	 * @return 销售出库单
 	 */
+	@Override
 	public SaleDeliveryOrderDO getByOrderId(Long orderId) throws Exception {
 		return saleDeliveryOrderMapper.getByOrderId(orderId);
 	}
@@ -70,6 +74,7 @@ public class SaleDeliveryOrderDAOImpl implements SaleDeliveryOrderDAO {
 	 * 更新销售出库单
 	 * @param saleDeliveryOrder 销售出库单
 	 */
+	@Override
 	public void update(SaleDeliveryOrderDO saleDeliveryOrder) throws Exception {
 		saleDeliveryOrder.setGmtModified(dateProvider.getCurrentTime());
 		saleDeliveryOrderMapper.update(saleDeliveryOrder); 

@@ -30,7 +30,7 @@ import com.zhss.eshop.common.util.ObjectUtils;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class GoodsServiceImpl implements GoodsService {
 
 	/**
@@ -84,6 +84,7 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @param query 查询条件
 	 * @return 商品
 	 */
+	@Override
 	public List<GoodsDTO> listByPage(GoodsQuery query) throws Exception {
 		return ObjectUtils.convertList(goodsDAO.listByPage(query), GoodsDTO.class); 
 	}
@@ -93,6 +94,7 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @param id 商品id
 	 * @return 商品
 	 */
+	@Override
 	public GoodsDTO getById(Long id) throws Exception {
 		return goodsDAO.getById(id).clone(GoodsDTO.class);
 	}
@@ -101,6 +103,7 @@ public class GoodsServiceImpl implements GoodsService {
 	 * 新增商品
 	 * @param goods 商品
 	 */
+	@Override
 	public Long save(GoodsDTO goods) throws Exception {
 		goods.setStatus(GoodsStatus.UNKNOWN); 
 		goods.setGmtCreate(dateProvider.getCurrentTime()); 
@@ -115,6 +118,7 @@ public class GoodsServiceImpl implements GoodsService {
 	 * 更新商品
 	 * @param goods 商品
 	 */
+	@Override
 	public Boolean update(GoodsDTO goods) throws Exception {
 		if(!goodsStateManager.canEdit(goods)) {
 			return false;
@@ -132,6 +136,7 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @return 处理结果
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean approve(Long goodsId, Integer approveResult) throws Exception {
 		GoodsDTO goods = goodsDAO.getById(goodsId).clone(GoodsDTO.class);
 		if(!goodsStateManager.canApprove(goods)) {
@@ -147,6 +152,7 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean putOnShelves(Long goodsId) throws Exception {
 		GoodsDTO goods = goodsDAO.getById(goodsId).clone(GoodsDTO.class);
 		if(!goodsStateManager.canPutOnShelves(goods)) {
@@ -162,6 +168,7 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean pullOffShelves(Long goodsId) throws Exception {
 		GoodsDTO goods = goodsDAO.getById(goodsId).clone(GoodsDTO.class);
 		if(!goodsStateManager.canPullOffShelves(goods))   {
@@ -177,6 +184,7 @@ public class GoodsServiceImpl implements GoodsService {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean remove(Long id) throws Exception {
 		GoodsDTO goods = goodsDAO.getById(id).clone(GoodsDTO.class);
 		

@@ -23,6 +23,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.constant.PurchaseInputOrderStatus;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDO;
@@ -35,9 +36,9 @@ import com.zhss.eshop.wms.domain.PurchaseInputOrderQuery;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class PurchaseInputOrderDAOTest {
+public class PurchaseInputOrderDaoTest {
 
 	/**
 	 * 日期辅助组件
@@ -198,7 +199,8 @@ public class PurchaseInputOrderDAOTest {
 	 * @throws Exception
 	 */
 	private Map<Long, PurchaseInputOrderDO> createPurchaseInputOrderMap(Integer count) throws Exception {
-		Map<Long, PurchaseInputOrderDO> purchaseInputOrderMap = new HashMap<Long, PurchaseInputOrderDO>();
+		Map<Long, PurchaseInputOrderDO> purchaseInputOrderMap = 
+				new HashMap<Long, PurchaseInputOrderDO>(CollectionSize.DEFAULT);
 		
 		List<PurchaseInputOrderDO> purchaseInputOrderList = createPurchaseInputOrders(count);
 		for(PurchaseInputOrderDO purchaseInputOrder : purchaseInputOrderList) {

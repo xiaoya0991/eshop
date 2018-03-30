@@ -22,7 +22,7 @@ import com.zhss.eshop.common.util.FileUtils;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class GoodsPictureServiceImpl implements GoodsPictureService {
 
 	/**
@@ -51,6 +51,7 @@ public class GoodsPictureServiceImpl implements GoodsPictureService {
 	 * @param goodsId 商品id
 	 * @return 商品图片id
 	 */
+	@Override
 	public List<Long> listIdsByGoodsId(Long goodsId) throws Exception {
 		return goodsPictureDAO.listIdsByGoodsId(goodsId);
 	}
@@ -60,6 +61,7 @@ public class GoodsPictureServiceImpl implements GoodsPictureService {
 	 * @param id 商品图片id
 	 * @return 商品图片
 	 */
+	@Override
 	public GoodsPictureDTO getById(Long id) throws Exception {
 		return goodsPictureDAO.getById(id).clone(GoodsPictureDTO.class);
 	}
@@ -70,6 +72,7 @@ public class GoodsPictureServiceImpl implements GoodsPictureService {
 	 * @param pictures 商品图片
 	 * @throws Exception
 	 */
+	@Override
 	public void batchSave(Long goodsId, 
 			MultipartFile[] pictures) throws Exception {
 		for(MultipartFile picture : pictures) {
@@ -82,6 +85,7 @@ public class GoodsPictureServiceImpl implements GoodsPictureService {
 	 * 根据商品id删除图片
 	 * @param goodsId 商品id
 	 */
+	@Override
 	public void batchRemoveByGoodsId(Long goodsId) throws Exception {
 		List<GoodsPictureDO> pictures = goodsPictureDAO.listByGoodsId(goodsId);
 		for(GoodsPictureDO picture : pictures) {

@@ -28,6 +28,7 @@ public class GoodsPictureDAOImpl implements GoodsPictureDAO {
 	 * @param goodsId 商品id
 	 * @return 商品图片id
 	 */
+	@Override
 	public List<Long> listIdsByGoodsId(Long goodsId) {
 		return goodsPictureMapper.listIdsByGoodsId(goodsId);
 	}
@@ -37,6 +38,7 @@ public class GoodsPictureDAOImpl implements GoodsPictureDAO {
 	 * @param id 商品图片id
 	 * @return 商品图片
 	 */
+	@Override
 	public List<GoodsPictureDO> listByGoodsId(Long goodsId) {
 		return goodsPictureMapper.listByGoodsId(goodsId);
 	}
@@ -46,6 +48,7 @@ public class GoodsPictureDAOImpl implements GoodsPictureDAO {
 	 * @param id 商品图片id
 	 * @return 商品图片
 	 */
+	@Override
 	public GoodsPictureDO getById(Long id) {
 		return goodsPictureMapper.getById(id);
 	}
@@ -54,6 +57,7 @@ public class GoodsPictureDAOImpl implements GoodsPictureDAO {
 	 * 新增商品图片
 	 * @param picture 图片
 	 */
+	@Override
 	public void save(GoodsPictureDO picture) {
 		goodsPictureMapper.save(picture); 
 	}
@@ -62,6 +66,7 @@ public class GoodsPictureDAOImpl implements GoodsPictureDAO {
 	 * 根据商品id删除图片
 	 * @param goodsId 商品id
 	 */
+	@Override
 	public void removeByGoodsId(Long goodsId) {
 		goodsPictureMapper.removeByGoodsId(goodsId);
 	}

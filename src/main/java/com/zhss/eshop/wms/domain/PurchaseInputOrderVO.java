@@ -144,4 +144,14 @@ public class PurchaseInputOrderVO extends AbstractObject {
 		this.items = items;
 	}
 	
+	@Override
+	public String toString() {
+		return "PurchaseInputOrderVO [id=" + id + ", supplierId=" + supplierId + ", expectArrivalTime="
+				+ expectArrivalTime + ", actualArrivalTime=" + actualArrivalTime + ", purchaseContactor="
+				+ purchaseContactor + ", purchaseContactorPhoneNumber=" + purchaseContactorPhoneNumber
+				+ ", purchaseContactorEmail=" + purchaseContactorEmail + ", purchaseOrderRemark=" + purchaseOrderRemark
+				+ ", purchaser=" + purchaser + ", status=" + status + ", gmtCreate=" + gmtCreate + ", gmtModified="
+				+ gmtModified + ", items=" + items + "]";
+	}
+	
 }

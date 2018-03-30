@@ -30,7 +30,7 @@ import com.zhss.eshop.common.util.ObjectUtils;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class GoodsSkuServiceImpl implements GoodsSkuService {
 
 	/**
@@ -75,6 +75,7 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
 	 * @return 商品sku
 	 * @throws Exception
 	 */
+	@Override
 	public List<GoodsSkuDTO> listByGoodsId(Long goodsId) throws Exception {
 		List<GoodsSkuDTO> goodsSkus = ObjectUtils.convertList(
 				goodsSkuDAO.listByGoodsId(goodsId), GoodsSkuDTO.class); 
@@ -97,6 +98,7 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
 	 * @param goodsSku 商品sku
 	 * @throws Exception
 	 */
+	@Override
 	public void batchSave(List<GoodsSkuDTO> goodsSkus) throws Exception {
 		for(GoodsSkuDTO goodsSku : goodsSkus) {
 			Long goodsSkuId = saveGoodsSku(goodsSku);
@@ -109,6 +111,7 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
 	 * 根据商品id删除sku
 	 * @param goodsId 商品id
 	 */
+	@Override
 	public void removeByGoodsId(Long goodsId) throws Exception {
 		List<GoodsSkuDO> goodsSkus = goodsSkuDAO.listByGoodsId(goodsId);
 		for(GoodsSkuDO goodsSku : goodsSkus) {
@@ -176,6 +179,7 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
 	 * @param id 商品sku id
 	 * @return 商品sku
 	 */
+	@Override
 	public GoodsSkuDTO getById(Long id) throws Exception {
 		GoodsSkuDTO goodsSku = goodsSkuDAO.getById(id).clone(GoodsSkuDTO.class);
 		setGoodsRelatedFields(goodsSku); 
@@ -187,6 +191,7 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
 	 * @param query 查询条件
 	 * @return 商品sku
 	 */
+	@Override
 	public List<GoodsSkuDTO> listByPage(GoodsSkuQuery query) throws Exception {
 		List<GoodsSkuDTO> goodsSkus = ObjectUtils.convertList(
 				goodsSkuDAO.listByPage(query), GoodsSkuDTO.class);

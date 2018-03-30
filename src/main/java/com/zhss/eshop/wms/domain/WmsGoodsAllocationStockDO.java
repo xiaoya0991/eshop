@@ -110,53 +110,72 @@ public class WmsGoodsAllocationStockDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		WmsGoodsAllocationStockDO other = (WmsGoodsAllocationStockDO) obj;
 		if (availableStockQuantity == null) {
-			if (other.availableStockQuantity != null)
+			if (other.availableStockQuantity != null) {
 				return false;
-		} else if (!availableStockQuantity.equals(other.availableStockQuantity))
+			}
+		} else if (!availableStockQuantity.equals(other.availableStockQuantity)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (goodsAllocationId == null) {
-			if (other.goodsAllocationId != null)
+			if (other.goodsAllocationId != null) {
 				return false;
-		} else if (!goodsAllocationId.equals(other.goodsAllocationId))
+			}
+		} else if (!goodsAllocationId.equals(other.goodsAllocationId)) {
 			return false;
+		}
 		if (goodsSkuId == null) {
-			if (other.goodsSkuId != null)
+			if (other.goodsSkuId != null) {
 				return false;
-		} else if (!goodsSkuId.equals(other.goodsSkuId))
+			}
+		} else if (!goodsSkuId.equals(other.goodsSkuId)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (lockedStockQuantity == null) {
-			if (other.lockedStockQuantity != null)
+			if (other.lockedStockQuantity != null) {
 				return false;
-		} else if (!lockedStockQuantity.equals(other.lockedStockQuantity))
+			}
+		} else if (!lockedStockQuantity.equals(other.lockedStockQuantity)) {
 			return false;
+		}
 		if (outputStockQuantity == null) {
-			if (other.outputStockQuantity != null)
+			if (other.outputStockQuantity != null) {
 				return false;
-		} else if (!outputStockQuantity.equals(other.outputStockQuantity))
+			}
+		} else if (!outputStockQuantity.equals(other.outputStockQuantity)) {
 			return false;
+		}
 		return true;
 	}
 	

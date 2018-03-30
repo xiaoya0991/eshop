@@ -132,6 +132,7 @@ public class ReturnGoodsInputWmsStockUpdater extends AbstractWmsStockUpdater {
 	/**
 	 * 设置需要的参数
 	 */
+	@Override
 	public void setParameter(Object parameter) {
 		this.returnGoodsInputOrder = (ReturnGoodsInputOrderDTO) parameter;
 	}

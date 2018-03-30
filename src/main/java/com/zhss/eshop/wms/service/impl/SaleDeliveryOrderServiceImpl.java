@@ -42,7 +42,7 @@ import com.zhss.eshop.wms.service.SaleDeliveryOrderService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 
 	/**
@@ -96,6 +96,7 @@ public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 	 * @param saleDeliveryOrder 销售出库单
 	 * @throws Exception
 	 */
+	@Override
 	public void save(SaleDeliveryOrderDTO saleDeliveryOrder) throws Exception {
 		// 新增销售出库单
 		Long saleDeliveryOrderId = saleDeliveryOrderDAO.save(
@@ -142,6 +143,7 @@ public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 	 * @param query 查询条件
 	 * @return 销售出库单
 	 */
+	@Override
 	public List<SaleDeliveryOrderDTO> listByPage(SaleDeliveryOrderQuery query) throws Exception {
 		return ObjectUtils.convertList(
 				saleDeliveryOrderDAO.listByPage(query), 
@@ -154,6 +156,7 @@ public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public SaleDeliveryOrderDTO getById(Long id) throws Exception {
 		// 查询销售出库单自己的数据
 		SaleDeliveryOrderDTO saleDeliveryOrder = saleDeliveryOrderDAO.getById(id)
@@ -202,6 +205,7 @@ public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 	 * @param id 销售出库单id
 	 * @return 销售出库单
 	 */
+	@Override
 	public SaleDeliveryOrderDTO getByOrderId(Long orderId) throws Exception {
 		return saleDeliveryOrderDAO.getByOrderId(orderId).clone(SaleDeliveryOrderDTO.class); 
 	}
@@ -210,6 +214,7 @@ public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 	 * 更新销售出库单的发货时间
 	 * @param saleDeliveryOrder 销售出库单
 	 */
+	@Override
 	public void updateDeliveryTime(Long id, Date deliveryTime) throws Exception {
 		SaleDeliveryOrderDTO saleDeliveryOrder = getById(id);
 		saleDeliveryOrder.setDeliveryTime(deliveryTime); 
@@ -221,6 +226,7 @@ public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 	 * @param id 销售出库单id
 	 * @throws Exception
 	 */
+	@Override
 	public void submitApprove(Long id) throws Exception {
 		SaleDeliveryOrderDTO saleDeliveryOrder = getById(id);
 		saleDeliveryOrder.setStatus(SaleDeliveryOrderStatus.WAIT_FOR_APPROVE);
@@ -233,6 +239,7 @@ public class SaleDeliveryOrderServiceImpl implements SaleDeliveryOrderService {
 	 * @param approveResult 审核结果
 	 * @throws Exception
 	 */
+	@Override
 	public void approve(Long id, Integer approveResult) throws Exception {
 		SaleDeliveryOrderDTO saleDeliveryOrder = getById(id);
 		

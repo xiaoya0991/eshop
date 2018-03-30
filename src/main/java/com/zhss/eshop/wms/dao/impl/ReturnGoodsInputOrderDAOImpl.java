@@ -34,6 +34,7 @@ public class ReturnGoodsInputOrderDAOImpl implements ReturnGoodsInputOrderDAO {
 	 * 新增退货入库单
 	 * @param returnGoodsInputOrder 退货入库单
 	 */
+	@Override
 	public Long save(ReturnGoodsInputOrderDO returnGoodsInputOrder) throws Exception {
 		returnGoodsInputOrderMapper.save(returnGoodsInputOrder); 
 		return returnGoodsInputOrder.getId();
@@ -44,6 +45,7 @@ public class ReturnGoodsInputOrderDAOImpl implements ReturnGoodsInputOrderDAO {
 	 * @param query 查询条件
 	 * @return 退货入库单
 	 */
+	@Override
 	public List<ReturnGoodsInputOrderDO> listByPage(
 			ReturnGoodsInputOrderQuery query) throws Exception {
 		return returnGoodsInputOrderMapper.listByPage(query);
@@ -54,6 +56,7 @@ public class ReturnGoodsInputOrderDAOImpl implements ReturnGoodsInputOrderDAO {
 	 * @param id 退货入库单id
 	 * @return 退后入库单
 	 */
+	@Override
 	public ReturnGoodsInputOrderDO getById(Long id) throws Exception {
 		return returnGoodsInputOrderMapper.getById(id);
 	}
@@ -62,6 +65,7 @@ public class ReturnGoodsInputOrderDAOImpl implements ReturnGoodsInputOrderDAO {
 	 * 更新退货入库单
 	 * @param returnGoodsInputOrder 退货入库单
 	 */
+	@Override
 	public void update(ReturnGoodsInputOrderDO returnGoodsInputOrder) throws Exception {
 		returnGoodsInputOrder.setGmtModified(dateProvider.getCurrentTime());
 		returnGoodsInputOrderMapper.update(returnGoodsInputOrder); 
@@ -73,6 +77,7 @@ public class ReturnGoodsInputOrderDAOImpl implements ReturnGoodsInputOrderDAO {
 	 * @param status 退货入库单状态
 	 * @throws Exception
 	 */
+	@Override
 	public void updateStatus(Long id, Integer status) throws Exception {
 		ReturnGoodsInputOrderDO returnGoodsInputOrder = getById(id);
 		returnGoodsInputOrder.setStatus(status); 

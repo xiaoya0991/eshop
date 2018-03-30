@@ -34,7 +34,7 @@ import com.zhss.eshop.wms.stock.WmsStockUpdaterFactory;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ReturnGoodsInputOrderServiceImpl implements ReturnGoodsInputOrderService {
 
 	/**
@@ -83,6 +83,7 @@ public class ReturnGoodsInputOrderServiceImpl implements ReturnGoodsInputOrderSe
 	 * @param returnGoodsInputOrder 退货入库单
 	 * @throws Exception
 	 */
+	@Override
 	public void save(ReturnGoodsInputOrderDTO returnGoodsInputOrder) throws Exception {
 		Long returnGoodsInputOrderId = returnGoodsInputOrderDAO.save(
 				returnGoodsInputOrder.clone(ReturnGoodsInputOrderDO.class)); 
@@ -98,6 +99,7 @@ public class ReturnGoodsInputOrderServiceImpl implements ReturnGoodsInputOrderSe
 	 * @param query 查询条件
 	 * @return 退货入库单
 	 */
+	@Override
 	public List<ReturnGoodsInputOrderDTO> listByPage(
 			ReturnGoodsInputOrderQuery query) throws Exception {
 		return ObjectUtils.convertList(
@@ -111,6 +113,7 @@ public class ReturnGoodsInputOrderServiceImpl implements ReturnGoodsInputOrderSe
 	 * @return 退货入库单
 	 * @throws Exception
 	 */
+	@Override
 	public ReturnGoodsInputOrderDTO getById(Long id) throws Exception {
 		ReturnGoodsInputOrderDTO returnGoodsInputOrder = returnGoodsInputOrderDAO.getById(id)
 				.clone(ReturnGoodsInputOrderDTO.class); 
@@ -135,6 +138,7 @@ public class ReturnGoodsInputOrderServiceImpl implements ReturnGoodsInputOrderSe
 	 * @param returnGoodsInputOrder 退货入库单
 	 * @throws Exception 
 	 */
+	@Override
 	public void update(ReturnGoodsInputOrderDTO returnGoodsInputOrder) throws Exception {
 		returnGoodsInputOrder.setStatus(ReturnGoodsInputOrderStatus.EDITING); 
 		returnGoodsInputOrderDAO.update(returnGoodsInputOrder.clone(ReturnGoodsInputOrderDO.class));  
@@ -149,6 +153,7 @@ public class ReturnGoodsInputOrderServiceImpl implements ReturnGoodsInputOrderSe
 	 * @param putOnItems 上架条目
 	 * @throws Exception
 	 */
+	@Override
 	public void batchSavePutOnItems(ReturnGoodsInputOrderDTO returnGoodsInputOrder) throws Exception {
 		for(ReturnGoodsInputOrderItemDTO returnGoodsInputOrderItem : returnGoodsInputOrder.getItems()) {
 			for(ReturnGoodsInputOrderPutOnItemDTO putOnItem : returnGoodsInputOrderItem.getPutOnItems()) {
@@ -162,6 +167,7 @@ public class ReturnGoodsInputOrderServiceImpl implements ReturnGoodsInputOrderSe
 	 * @param id 退货入库单id
 	 * @throws Exception
 	 */
+	@Override
 	public void submitApprove(Long id) throws Exception {
 		returnGoodsInputOrderDAO.updateStatus(id, ReturnGoodsInputOrderStatus.WAIT_FOR_APPROVE);
 	}
@@ -172,6 +178,7 @@ public class ReturnGoodsInputOrderServiceImpl implements ReturnGoodsInputOrderSe
 	 * @param approveResult 审核结果
 	 * @throws Exception
 	 */
+	@Override
 	public void approve(Long id, Integer approveResult) throws Exception {
 		if(ReturnGoodsInputOrderApproveResult.REJECTED.equals(approveResult)) {
 			returnGoodsInputOrderDAO.updateStatus(id, ReturnGoodsInputOrderStatus.EDITING);

@@ -99,49 +99,73 @@ public class CategoryPropertyRelationshipDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		CategoryPropertyRelationshipDO other = (CategoryPropertyRelationshipDO) obj;
 		if (categoryId == null) {
-			if (other.categoryId != null)
+			if (other.categoryId != null) {
 				return false;
-		} else if (!categoryId.equals(other.categoryId))
+			}
+		} else if (!categoryId.equals(other.categoryId)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (propertyId == null) {
-			if (other.propertyId != null)
+			if (other.propertyId != null) {
 				return false;
-		} else if (!propertyId.equals(other.propertyId))
+			}
+		} else if (!propertyId.equals(other.propertyId)) {
 			return false;
+		}
 		if (propertyTypes == null) {
-			if (other.propertyTypes != null)
+			if (other.propertyTypes != null) {
 				return false;
-		} else if (!propertyTypes.equals(other.propertyTypes))
+			}
+		} else if (!propertyTypes.equals(other.propertyTypes)) {
 			return false;
+		}
 		if (required == null) {
-			if (other.required != null)
+			if (other.required != null) {
 				return false;
-		} else if (!required.equals(other.required))
+			}
+		} else if (!required.equals(other.required)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "CategoryPropertyRelationshipDO [id=" + id + ", categoryId=" + categoryId + ", propertyId=" + propertyId
+				+ ", required=" + required + ", propertyTypes=" + propertyTypes + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

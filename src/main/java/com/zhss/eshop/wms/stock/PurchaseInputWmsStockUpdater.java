@@ -119,6 +119,7 @@ public class PurchaseInputWmsStockUpdater extends AbstractWmsStockUpdater {
 	/**
 	 * 设置需要的参数
 	 */
+	@Override
 	public void setParameter(Object parameter) {
 		this.purchaseInputOrder = (PurchaseInputOrderDTO) parameter;
 	}

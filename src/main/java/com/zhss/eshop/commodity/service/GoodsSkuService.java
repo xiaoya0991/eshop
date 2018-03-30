@@ -22,7 +22,7 @@ public interface GoodsSkuService {
 
 	/**
 	 * 批量新增商品sku
-	 * @param goodsSku 商品sku
+	 * @param goodsSkus 商品sku
 	 * @throws Exception
 	 */
 	void batchSave(List<GoodsSkuDTO> goodsSkus) throws Exception;
@@ -30,6 +30,7 @@ public interface GoodsSkuService {
 	/**
 	 * 根据商品id删除sku
 	 * @param goodsId 商品id
+	 * @throws Exception
 	 */
 	void removeByGoodsId(Long goodsId) throws Exception;
 
@@ -37,6 +38,7 @@ public interface GoodsSkuService {
 	 * 根据id查询商品sku
 	 * @param id 商品sku id
 	 * @return 商品sku
+	 * @throws Exception
 	 */
 	GoodsSkuDTO getById(Long id) throws Exception;
 	
@@ -44,6 +46,7 @@ public interface GoodsSkuService {
 	 * 分页查询商品sku
 	 * @param query 查询条件
 	 * @return 商品sku
+	 * @throws Exception
 	 */
 	List<GoodsSkuDTO> listByPage(GoodsSkuQuery query) throws Exception;
 	

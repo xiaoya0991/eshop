@@ -27,6 +27,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 * 查询根类目
 	 * @return 根类目集合
 	 */
+	@Override
  	public List<CategoryDO> listRoots() throws Exception {
 		return categoryMapper.listRoots();
  	}
@@ -35,6 +36,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 * @param id 父类目id
 	 * @return 子类目集合
 	 */
+	@Override
 	public List<CategoryDO> listChildren(Long id) throws Exception {
 		return categoryMapper.listChildren(id);
 	}
@@ -43,6 +45,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 * 新增类目
 	 * @param category 类目
 	 */
+	@Override
 	public Long save(CategoryDO category) throws Exception {
 		categoryMapper.save(category);
 		return category.getId();
@@ -53,6 +56,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 * @param id 类目id
 	 * @return 类目
 	 */
+	@Override
 	public CategoryDO getById(Long id) throws Exception {
 		return categoryMapper.getById(id);
 	}
@@ -61,6 +65,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 * 更新类目
 	 * @param category 类目
 	 */
+	@Override
 	public void update(CategoryDO category) throws Exception {
 		categoryMapper.update(category); 
 	}
@@ -69,6 +74,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 * 删除类目
 	 * @param id 类目id
 	 */
+	@Override
 	public void remove(Long id) throws Exception {
 		categoryMapper.remove(id);
 	}

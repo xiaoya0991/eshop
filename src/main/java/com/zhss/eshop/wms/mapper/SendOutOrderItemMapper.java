@@ -22,7 +22,7 @@ public interface SendOutOrderItemMapper {
 
 	/**
 	 * 新增发货单条目
-	 * @param orderItem
+	 * @param sendOutOrderItem 发货单条目
 	 */
 	@Insert("INSERT INTO wms_send_out_order_item("
 				+ "send_out_order_id,"

@@ -25,6 +25,7 @@ public class UpdateStockHandler extends AbstractPurchaseInputOrderHandler {
 	/**
 	 * 执行处理逻辑
 	 */
+	@Override
 	public PurchaseInputOrderHandlerResult doExecute(PurchaseInputOrderDTO purchaseInputOrder) throws Exception {
 		WmsStockUpdater stockUpdater = stockUpdaterFactory.create(
 				WmsStockUpdateEvent.PURCHASE_INPUT, purchaseInputOrder);

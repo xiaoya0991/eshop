@@ -16,26 +16,30 @@ public interface PropertyDAO {
 	 * 分页查询商品属性
 	 * @param propertyQuery 查询条件
 	 * @return 商品属性
+	 * @throws Exception
 	 */
-	List<PropertyDO> listPropertiesByPage(PropertyQuery propertyQuery);
+	List<PropertyDO> listPropertiesByPage(PropertyQuery propertyQuery) throws Exception;
 	
 	/**
 	 * 新增商品属性
 	 * @param propertyDO 商品属性DO对象
+	 * @throws Exception
 	 */
-	Boolean saveProperty(PropertyDO propertyDO);
+	void saveProperty(PropertyDO propertyDO) throws Exception;
 	
 	/**
 	 * 根据id查询商品属性 
 	 * @param id 商品属性id
 	 * @return 商品属性
+	 * @throws Exception
 	 */
-	PropertyDO getPropertyById(Long id);
+	PropertyDO getPropertyById(Long id) throws Exception;
 	
 	/**
 	 * 更新商品属性
 	 * @param propertyDO 商品属性DO对象
+	 * @throws Exception
 	 */
-	Boolean updateProperty(PropertyDO propertyDO);
+	void updateProperty(PropertyDO propertyDO) throws Exception;
 	
 }

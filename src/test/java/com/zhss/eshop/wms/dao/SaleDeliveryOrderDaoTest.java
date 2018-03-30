@@ -23,6 +23,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderQuery;
@@ -34,9 +35,9 @@ import com.zhss.eshop.wms.domain.SaleDeliveryOrderQuery;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class SaleDeliveryOrderDAOTest {
+public class SaleDeliveryOrderDaoTest {
 
 	/**
 	 * 销售出库单管理DAO组件
@@ -184,7 +185,8 @@ public class SaleDeliveryOrderDAOTest {
 	 */
 	private Map<Long, SaleDeliveryOrderDO> createSaleDeliveryOrderMap(Integer count,
 			Long orderId, Long userAccountId) throws Exception {
-		Map<Long, SaleDeliveryOrderDO> saleDeliveryOrderMap = new HashMap<Long, SaleDeliveryOrderDO>();
+		Map<Long, SaleDeliveryOrderDO> saleDeliveryOrderMap = 
+				new HashMap<Long, SaleDeliveryOrderDO>(CollectionSize.DEFAULT);
 	
 		List<SaleDeliveryOrderDO> saleDeliveryOrders = createSaleDeliveryOrders(
 				count, orderId, userAccountId);

@@ -63,4 +63,10 @@ public class GoodsPictureVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsPictureVO [id=" + id + ", goodsId=" + goodsId + ", picturePath=" + picturePath + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

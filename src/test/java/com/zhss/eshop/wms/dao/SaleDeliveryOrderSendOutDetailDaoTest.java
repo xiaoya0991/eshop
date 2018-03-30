@@ -18,6 +18,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderSendOutDetailDO;
 
@@ -28,9 +29,9 @@ import com.zhss.eshop.wms.domain.SaleDeliveryOrderSendOutDetailDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class SaleDeliveryOrderSendOutDetailDAOTest {
+public class SaleDeliveryOrderSendOutDetailDaoTest {
 
 	/**
 	 * 销售出库单管理DAO组件
@@ -102,7 +103,8 @@ public class SaleDeliveryOrderSendOutDetailDAOTest {
 	 */
 	private Map<Long, SaleDeliveryOrderSendOutDetailDO> createSaleDeliveryOrderSendOutDetailMap(Integer count, 
 			Long saleDeliveryOrderItemId) throws Exception {
-		Map<Long, SaleDeliveryOrderSendOutDetailDO> sendOutDetailMap = new HashMap<Long, SaleDeliveryOrderSendOutDetailDO>();
+		Map<Long, SaleDeliveryOrderSendOutDetailDO> sendOutDetailMap = 
+				new HashMap<Long, SaleDeliveryOrderSendOutDetailDO>(CollectionSize.DEFAULT);
 		
 		List<SaleDeliveryOrderSendOutDetailDO> sendOutDetails = createSaleDeliveryOrderSendOutDetails(count, saleDeliveryOrderItemId);
 		for(SaleDeliveryOrderSendOutDetailDO sendOutDetail : sendOutDetails) {

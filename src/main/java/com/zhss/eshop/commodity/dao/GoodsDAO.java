@@ -16,12 +16,13 @@ public interface GoodsDAO {
 	 * 根据类目id查询商品数量
 	 * @param categoryId 类目id
 	 * @return 商品数量
+	 * @throws Exception
 	 */
 	Long countByCategoryId(Long categoryId) throws Exception;
 	
 	/**
 	 * 根据品牌id查询商品数量
-	 * @param categoryId 类目id
+	 * @param brandId 类目id
 	 * @return 商品数量
 	 */
 	Long countByBrandId(Long brandId);
@@ -43,6 +44,7 @@ public interface GoodsDAO {
 	/**
 	 * 新增商品
 	 * @param goods 商品
+	 * @return 商品id
 	 */
 	Long save(GoodsDO goods);
 	

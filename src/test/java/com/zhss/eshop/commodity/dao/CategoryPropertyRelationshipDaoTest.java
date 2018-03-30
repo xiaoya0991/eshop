@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.commodity.constant.PropertyRequired;
 import com.zhss.eshop.commodity.domain.CategoryPropertyRelationshipDO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -27,9 +28,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class CategoryPropertyRelationshipDAOTest {
+public class CategoryPropertyRelationshipDaoTest {
 	
 	/**
 	 * 类目与属性关系管理DAO组件
@@ -113,7 +114,7 @@ public class CategoryPropertyRelationshipDAOTest {
 	private Map<Long, CategoryPropertyRelationshipDO> createRelations(
 			Integer relationCount, Long categoryId) throws Exception {
 		Map<Long, CategoryPropertyRelationshipDO> relationMap = 
-				new HashMap<Long, CategoryPropertyRelationshipDO>();
+				new HashMap<Long, CategoryPropertyRelationshipDO>(CollectionSize.DEFAULT);
 		for(int i = 0; i < relationCount; i++) {
 			CategoryPropertyRelationshipDO relation = createRelation(categoryId);
 			relationMap.put(relation.getId(), relation);

@@ -35,7 +35,7 @@ public interface GoodsMapper {
 	
 	/**
 	 * 根据品牌id查询商品数量
-	 * @param categoryId 类目id
+	 * @param brandId 类目id
 	 * @return 商品数量
 	 */
 	@Select("SELECT count(*) "

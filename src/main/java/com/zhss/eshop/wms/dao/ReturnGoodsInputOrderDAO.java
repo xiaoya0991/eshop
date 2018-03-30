@@ -15,6 +15,8 @@ public interface ReturnGoodsInputOrderDAO {
 	/**
 	 * 新增退货入库单
 	 * @param returnGoodsInputOrder 退货入库单
+	 * @return 退货入库单id
+	 * @throws Exception
 	 */
 	Long save(ReturnGoodsInputOrderDO returnGoodsInputOrder) throws Exception;
 	
@@ -22,6 +24,7 @@ public interface ReturnGoodsInputOrderDAO {
 	 * 分页查询退货入库单
 	 * @param query 查询条件
 	 * @return 退货入库单
+	 * @throws Exception
 	 */
 	List<ReturnGoodsInputOrderDO> listByPage(ReturnGoodsInputOrderQuery query) throws Exception;
 	
@@ -29,12 +32,14 @@ public interface ReturnGoodsInputOrderDAO {
 	 * 根据id查询退后入库单
 	 * @param id 退货入库单id
 	 * @return 退后入库单
+	 * @throws Exception
 	 */
 	ReturnGoodsInputOrderDO getById(Long id) throws Exception;
 	
 	/**
 	 * 更新退货入库单
 	 * @param returnGoodsInputOrder 退货入库单
+	 * @throws Exception
 	 */
 	void update(ReturnGoodsInputOrderDO returnGoodsInputOrder) throws Exception;
 	

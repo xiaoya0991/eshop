@@ -73,4 +73,11 @@ public class SaleDeliveryOrderSendOutDetailVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "SaleDeliveryOrderSendOutDetailVO [id=" + id + ", saleDeliveryOrderItemId=" + saleDeliveryOrderItemId
+				+ ", goodsAllocationStockDetailId=" + goodsAllocationStockDetailId + ", sendOutCount=" + sendOutCount
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

@@ -29,6 +29,7 @@ public class GoodsSkuDAOImpl implements GoodsSkuDAO {
 	 * @param goodsId 商品id
 	 * @return 商品sku
 	 */
+	@Override
 	public List<GoodsSkuDO> listByGoodsId(Long goodsId) {
 		return goodsSkuMapper.listByGoodsId(goodsId);
 	}
@@ -37,6 +38,7 @@ public class GoodsSkuDAOImpl implements GoodsSkuDAO {
 	 * 新增商品sku
 	 * @param goodsSku
 	 */
+	@Override
 	public Long save(GoodsSkuDO goodsSku) {
 		goodsSkuMapper.save(goodsSku); 
 		return goodsSku.getId();
@@ -46,6 +48,7 @@ public class GoodsSkuDAOImpl implements GoodsSkuDAO {
 	 * 根据商品id删除sku
 	 * @param goodsId 商品id
 	 */
+	@Override
 	public void removeByGoodsId(Long goodsId) {
 		goodsSkuMapper.removeByGoodsId(goodsId); 
 	}
@@ -55,6 +58,7 @@ public class GoodsSkuDAOImpl implements GoodsSkuDAO {
 	 * @param id 商品sku id
 	 * @return 商品sku
 	 */
+	@Override
 	public GoodsSkuDO getById(Long id) {
 		return goodsSkuMapper.getById(id);
 	}
@@ -64,6 +68,7 @@ public class GoodsSkuDAOImpl implements GoodsSkuDAO {
 	 * @param query 查询条件
 	 * @return 商品sku
 	 */
+	@Override
 	public List<GoodsSkuDO> listByPage(GoodsSkuQuery query) {
 		return goodsSkuMapper.listByPage(query);
 	}

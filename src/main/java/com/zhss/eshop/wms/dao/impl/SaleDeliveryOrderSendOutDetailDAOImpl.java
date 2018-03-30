@@ -27,6 +27,7 @@ public class SaleDeliveryOrderSendOutDetailDAOImpl implements SaleDeliveryOrderS
 	 * 新增销售出库单发货明细
 	 * @param sendOutDetail 销售出库单发货明细
 	 */
+	@Override
 	public void save(SaleDeliveryOrderSendOutDetailDO sendOutDetail) throws Exception {
 		sendOutDetailMapper.save(sendOutDetail); 
 	}
@@ -36,6 +37,7 @@ public class SaleDeliveryOrderSendOutDetailDAOImpl implements SaleDeliveryOrderS
 	 * @param saleDeliveryOrderItemId 销售出库单id
 	 * @return 发货明细
 	 */
+	@Override
 	public List<SaleDeliveryOrderSendOutDetailDO> listBySaleDeliveryOrderItemId(
 			Long saleDeliveryOrderItemId) throws Exception {
 		return sendOutDetailMapper.listBySaleDeliveryOrderItemId(saleDeliveryOrderItemId);

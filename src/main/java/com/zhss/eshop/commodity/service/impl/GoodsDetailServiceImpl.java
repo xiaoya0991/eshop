@@ -16,7 +16,7 @@ import com.zhss.eshop.common.util.DateProvider;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class GoodsDetailServiceImpl implements GoodsDetailService {
 
 	/**
@@ -35,6 +35,7 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 	 * @param goodsId 商品id
 	 * @return 商品详情
 	 */
+	@Override
 	public GoodsDetailDTO getByGoodsId(Long goodsId) throws Exception {
 		return goodsDetailDAO.getByGoodsId(goodsId).clone(GoodsDetailDTO.class);  
 	}
@@ -45,6 +46,7 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 	 * @return 商品详情id
 	 * @throws Exception
 	 */
+	@Override
 	public Long save(GoodsDetailDTO goodsDetail) throws Exception {
 		goodsDetail.setGmtCreate(dateProvider.getCurrentTime());  
 		goodsDetail.setGmtModified(dateProvider.getCurrentTime()); 
@@ -56,6 +58,7 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 	 * @param goodsDetail 商品详情
 	 * @throws Exception 
 	 */
+	@Override
 	public void update(GoodsDetailDTO goodsDetail) throws Exception {
 		goodsDetail.setGmtModified(dateProvider.getCurrentTime()); 
 		goodsDetailDAO.update(goodsDetail.clone(GoodsDetailDO.class));  

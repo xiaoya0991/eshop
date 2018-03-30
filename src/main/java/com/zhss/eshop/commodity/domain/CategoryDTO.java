@@ -114,4 +114,12 @@ public class CategoryDTO extends AbstractObject {
 		this.properties = properties;
 	}
 	
+	@Override
+	public String toString() {
+		return "CategoryDTO [id=" + id + ", name=" + name + ", description=" + description + ", leaf=" + leaf
+				+ ", parentId=" + parentId + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ ", propertyRelations=" + propertyRelations + ", properties=" + properties + ", propertyGroups="
+				+ propertyGroups + "]";
+	}
+	
 }

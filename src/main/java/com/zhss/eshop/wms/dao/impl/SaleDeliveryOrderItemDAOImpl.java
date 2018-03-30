@@ -27,6 +27,7 @@ public class SaleDeliveryOrderItemDAOImpl implements SaleDeliveryOrderItemDAO {
 	 * 新增销售出库单条目
 	 * @param saleDeliveryOrderItem 销售出库单条目
 	 */
+	@Override
 	public Long save(SaleDeliveryOrderItemDO saleDeliveryOrderItem) throws Exception {
 		saleDeliveryOrderItemMapper.save(saleDeliveryOrderItem); 
 		return saleDeliveryOrderItem.getId();
@@ -37,6 +38,7 @@ public class SaleDeliveryOrderItemDAOImpl implements SaleDeliveryOrderItemDAO {
 	 * @param saleDeliveryOrderId 销售出库单idi
 	 * @return 销售出库单条目
 	 */
+	@Override
 	public List<SaleDeliveryOrderItemDO> listBySaleDeliveryOrderId(
 			Long saleDeliveryOrderId) throws Exception {
 		return saleDeliveryOrderItemMapper.listBySaleDeliveryOrderId(saleDeliveryOrderId);

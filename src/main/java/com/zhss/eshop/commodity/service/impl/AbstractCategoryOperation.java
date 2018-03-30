@@ -29,6 +29,7 @@ public abstract class AbstractCategoryOperation<T> implements CategoryOperation<
 	 * 执行类目操作
 	 * @param category 类目树节点
 	 */
+	@Override
 	public T doExecute(Category category) throws Exception {
 		doExecuteForChildren(category); 
 		doRealExecute(category); 

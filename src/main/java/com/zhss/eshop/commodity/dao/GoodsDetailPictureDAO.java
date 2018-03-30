@@ -20,7 +20,7 @@ public interface GoodsDetailPictureDAO {
 
 	/**
 	 * 根据id查询商品图片
-	 * @param id 商品图片id
+	 * @param goodsDetailId 商品图片id
 	 * @return 商品图片
 	 */
 	List<GoodsDetailPictureDO> listByGoodsDetailId(Long goodsDetailId);
@@ -28,12 +28,13 @@ public interface GoodsDetailPictureDAO {
 	/**
 	 * 新增商品详情图片
 	 * @param picture 图片
+	 * @return 商品详情图片id
 	 */
 	Long save(GoodsDetailPictureDO picture);
 	
 	/**
 	 * 根据商品id删除图片
-	 * @param goodsId 商品id
+	 * @param goodsDetailId 商品id
 	 */
 	void removeByGoodsDetailId(Long goodsDetailId);
 	

@@ -72,7 +72,7 @@ public interface CategoryPropertyRelationshipMapper {
 	
 	/**
 	 * 根据类目id查询类目与属性的关联关系
-	 * @param categoryId 类目id
+	 * @param id 类目id
 	 * @return 类目与属性的关联关系
 	 */
 	@Select("SELECT "

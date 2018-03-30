@@ -73,4 +73,11 @@ public class GoodsSkuSalePropertyValueVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsSkuSalePropertyValueVO [id=" + id + ", goodsSkuId=" + goodsSkuId + ", relationId=" + relationId
+				+ ", propertyValue=" + propertyValue + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ "]";
+	}
+	
 }

@@ -184,4 +184,14 @@ public class GoodsSkuVO extends AbstractObject {
 		this.saleStockQuantity = saleStockQuantity;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsSkuVO [id=" + id + ", goodsId=" + goodsId + ", skuCode=" + skuCode + ", goodsName=" + goodsName
+				+ ", grossWeight=" + grossWeight + ", goodsLength=" + goodsLength + ", goodsWidth=" + goodsWidth
+				+ ", goodsHeight=" + goodsHeight + ", goodsSkuCode=" + goodsSkuCode + ", saleProperties="
+				+ saleProperties + ", purchasePrice=" + purchasePrice + ", salePrice=" + salePrice + ", discountPrice="
+				+ discountPrice + ", saleStockQuantity=" + saleStockQuantity + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + ", propertyValues=" + propertyValues + "]";
+	}
+	
 }

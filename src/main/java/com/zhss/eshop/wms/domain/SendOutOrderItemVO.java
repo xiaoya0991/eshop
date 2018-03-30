@@ -163,4 +163,14 @@ public class SendOutOrderItemVO extends AbstractObject {
 		this.goodsId = goodsId;
 	}
 	
+	@Override
+	public String toString() {
+		return "SendOutOrderItemVO [id=" + id + ", sendOutOrderId=" + sendOutOrderId + ", goodsId=" + goodsId
+				+ ", goodsSkuId=" + goodsSkuId + ", goodsSkuCode=" + goodsSkuCode + ", goodsName=" + goodsName
+				+ ", saleProperties=" + saleProperties + ", goodsGrossWeight=" + goodsGrossWeight
+				+ ", purchaseQuantity=" + purchaseQuantity + ", purchasePrice=" + purchasePrice + ", goodsLength="
+				+ goodsLength + ", goodsWidth=" + goodsWidth + ", goodsHeight=" + goodsHeight + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

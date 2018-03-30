@@ -45,7 +45,7 @@ public interface GoodsDetailPictureMapper {
 	
 	/**
 	 * 根据id查询商品图片
-	 * @param id 商品图片id
+	 * @param goodsDetailId 商品图片id
 	 * @return 商品图片
 	 */
 	@Select("SELECT "

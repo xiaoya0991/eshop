@@ -17,6 +17,7 @@ public interface GoodsDetailPictureService {
 	 * 根据id查询商品图片
 	 * @param id 商品图片id
 	 * @return 商品图片
+	 * @throws Exception
 	 */
 	GoodsDetailPictureDTO getById(Long id) throws Exception;
 
@@ -32,7 +33,8 @@ public interface GoodsDetailPictureService {
 	
 	/**
 	 * 根据商品id删除图片
-	 * @param goodsId 商品id
+	 * @param goodsDetailId 商品id
+	 * @throws Exception
 	 */
 	void batchRemoveByGoodsDetailId(Long goodsDetailId) throws Exception;
 	

@@ -63,4 +63,10 @@ public class GoodsDetailDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsDetailDTO [id=" + id + ", goodsId=" + goodsId + ", detailContent=" + detailContent + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

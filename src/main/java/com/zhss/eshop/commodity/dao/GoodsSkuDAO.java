@@ -22,6 +22,7 @@ public interface GoodsSkuDAO {
 	/**
 	 * 新增商品sku
 	 * @param goodsSku
+	 * @return 商品sku id
 	 */
 	Long save(GoodsSkuDO goodsSku);
 	

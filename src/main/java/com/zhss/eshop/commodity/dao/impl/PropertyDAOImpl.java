@@ -1,10 +1,7 @@
 package com.zhss.eshop.commodity.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,8 +18,6 @@ import com.zhss.eshop.commodity.mapper.PropertyMapper;
 @Repository
 public class PropertyDAOImpl implements PropertyDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(PropertyDAOImpl.class);
-	
 	/**
 	 * 商品属性管理模块的mapper组件
 	 */
@@ -34,27 +29,18 @@ public class PropertyDAOImpl implements PropertyDAO {
 	 * @param propertyQuery 查询条件
 	 * @return 商品属性
 	 */
-	public List<PropertyDO> listPropertiesByPage(PropertyQuery propertyQuery) {
-		try {
-			return propertyMapper.listPropertiesByPage(propertyQuery);
-		} catch (Exception e) {
-			logger.error("error", e); 
-		}
-		return new ArrayList<PropertyDO>();
+	@Override
+	public List<PropertyDO> listPropertiesByPage(PropertyQuery propertyQuery) throws Exception {
+		return propertyMapper.listPropertiesByPage(propertyQuery);
 	}
 	
 	/**
 	 * 新增商品属性
 	 * @param propertyDO 商品属性DO对象
 	 */
-	public Boolean saveProperty(PropertyDO propertyDO) {
-		try {
-			propertyMapper.saveProperty(propertyDO); 
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
-		return true;
+	@Override
+	public void saveProperty(PropertyDO propertyDO) throws Exception {
+		propertyMapper.saveProperty(propertyDO); 
 	}
 	
 	/**
@@ -62,27 +48,18 @@ public class PropertyDAOImpl implements PropertyDAO {
 	 * @param id 商品属性id
 	 * @return 商品属性
 	 */
-	public PropertyDO getPropertyById(Long id) {
-		try {
-			return propertyMapper.getPropertyById(id);
-		} catch (Exception e) {
-			logger.error("error", e); 
-		}
-		return new PropertyDO();
+	@Override
+	public PropertyDO getPropertyById(Long id) throws Exception {
+		return propertyMapper.getPropertyById(id);
 	}
 	
 	/**
 	 * 更新商品属性
 	 * @param propertyDO 商品属性DO对象
 	 */
-	public Boolean updateProperty(PropertyDO propertyDO) {
-		try {
-			propertyMapper.updateProperty(propertyDO); 
-		} catch (Exception e) {
-			logger.error("error", e);
-			return false;
-		}
-		return true;
+	@Override
+	public void updateProperty(PropertyDO propertyDO) throws Exception {
+		propertyMapper.updateProperty(propertyDO); 
 	}
 	
 }

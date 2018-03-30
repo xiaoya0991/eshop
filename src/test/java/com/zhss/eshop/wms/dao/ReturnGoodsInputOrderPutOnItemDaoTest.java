@@ -22,6 +22,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderPutOnItemDO;
 
@@ -32,9 +33,9 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderPutOnItemDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class ReturnGoodsInputOrderPutOnItemDAOTest {
+public class ReturnGoodsInputOrderPutOnItemDaoTest {
 
 	/**
 	 * 日期辅助组件
@@ -116,7 +117,8 @@ public class ReturnGoodsInputOrderPutOnItemDAOTest {
 	 */
 	private Map<Long, ReturnGoodsInputOrderPutOnItemDO> createReturnGoodsInputOrderPutOnItemMap(
 			Integer count, Long returnGoodsInputOrderItemId) throws Exception {
-		Map<Long, ReturnGoodsInputOrderPutOnItemDO> returnGoodsInputOrderPutOnItemMap = new HashMap<Long, ReturnGoodsInputOrderPutOnItemDO>();
+		Map<Long, ReturnGoodsInputOrderPutOnItemDO> returnGoodsInputOrderPutOnItemMap = 
+				new HashMap<Long, ReturnGoodsInputOrderPutOnItemDO>(CollectionSize.DEFAULT);
 		
 		List<ReturnGoodsInputOrderPutOnItemDO> returnGoodsInputOrderPutOnItemList = createReturnGoodsInputOrderPutOnItems(
 				count, returnGoodsInputOrderItemId);

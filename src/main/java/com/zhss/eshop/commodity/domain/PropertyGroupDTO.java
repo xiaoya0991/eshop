@@ -84,4 +84,11 @@ public class PropertyGroupDTO extends AbstractObject {
 		this.properties = properties;
 	}
 	
+	@Override
+	public String toString() {
+		return "PropertyGroupDTO [id=" + id + ", name=" + name + ", categoryId=" + categoryId + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + ", relations=" + relations + ", properties=" + properties
+				+ "]";
+	}
+	
 }

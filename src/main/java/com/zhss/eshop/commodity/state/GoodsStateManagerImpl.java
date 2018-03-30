@@ -45,6 +45,7 @@ public class GoodsStateManagerImpl implements GoodsStateManager {
 	 * @param goods
 	 * @throws Exception
 	 */
+	@Override
 	public void create(GoodsDTO goods) throws Exception {
 		waitForApproveGoodsState.doTransition(goods); 
 	}
@@ -55,6 +56,7 @@ public class GoodsStateManagerImpl implements GoodsStateManager {
 	 * @return 能否执行编辑操作
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canEdit(GoodsDTO goods) throws Exception {
 		GoodsState state = goodsStateFactory.get(goods);
 		return state.canEdit(goods);
@@ -65,6 +67,7 @@ public class GoodsStateManagerImpl implements GoodsStateManager {
 	 * @param goods 商品
 	 * @throws Exception
 	 */
+	@Override
 	public void edit(GoodsDTO goods) throws Exception {
 		waitForApproveGoodsState.doTransition(goods); 
 	}
@@ -75,6 +78,7 @@ public class GoodsStateManagerImpl implements GoodsStateManager {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canApprove(GoodsDTO goods) throws Exception {
 		GoodsState state = goodsStateFactory.get(goods);
 		return state.canApprove(goods);
@@ -86,6 +90,7 @@ public class GoodsStateManagerImpl implements GoodsStateManager {
 	 * @param approveResult
 	 * @throws Exception
 	 */
+	@Override
 	public void approve(GoodsDTO goods, Integer approveResult) throws Exception {
 		if(ApproveResult.APPROVE_PASS.equals(approveResult)) {
 			waitForPutOnShelvesGoodsState.doTransition(goods); 
@@ -100,6 +105,7 @@ public class GoodsStateManagerImpl implements GoodsStateManager {
 	 * @return 能否执行上架操作
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canPutOnShelves(GoodsDTO goods) throws Exception {
 		GoodsState state = goodsStateFactory.get(goods);
 		return state.canPutOnShelves(goods);
@@ -110,6 +116,7 @@ public class GoodsStateManagerImpl implements GoodsStateManager {
 	 * @param goods
 	 * @throws Exception
 	 */
+	@Override
 	public void putOnShelves(GoodsDTO goods) throws Exception {
 		puttedOnShelvesGoodsState.doTransition(goods); 
 	}
@@ -120,6 +127,7 @@ public class GoodsStateManagerImpl implements GoodsStateManager {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canPullOffShelves(GoodsDTO goods) throws Exception {
 		GoodsState state = goodsStateFactory.get(goods);
 		return state.canPullOffShelves(goods);
@@ -130,6 +138,7 @@ public class GoodsStateManagerImpl implements GoodsStateManager {
 	 * @param goods 商品
 	 * @throws Exception
 	 */
+	@Override
 	public void pullOffShelves(GoodsDTO goods) throws Exception {
 		waitForPutOnShelvesGoodsState.doTransition(goods); 
 	}
@@ -140,6 +149,7 @@ public class GoodsStateManagerImpl implements GoodsStateManager {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canRemove(GoodsDTO goods) throws Exception {
 		GoodsState state = goodsStateFactory.get(goods);
 		return state.canRemove(goods);

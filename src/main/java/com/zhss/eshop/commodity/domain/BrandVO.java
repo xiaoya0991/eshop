@@ -123,4 +123,12 @@ public class BrandVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "BrandVO [id=" + id + ", chineseName=" + chineseName + ", englishName=" + englishName + ", aliasName="
+				+ aliasName + ", introduction=" + introduction + ", location=" + location + ", logoPath=" + logoPath
+				+ ", authVoucherPath=" + authVoucherPath + ", remark=" + remark + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.commodity.domain.GoodsDO;
 import com.zhss.eshop.commodity.domain.GoodsQuery;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -30,9 +31,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class GoodsDAOTest {
+public class GoodsDaoTest {
 
 	/**
 	 * 日期辅助组件
@@ -236,7 +237,7 @@ public class GoodsDAOTest {
 	 */
 	private Map<Long, GoodsDO> createGoodsMap(Long categoryId, Long brandId,
 			Integer count) throws Exception {
-		Map<Long, GoodsDO> goodsMap = new HashMap<Long, GoodsDO>();
+		Map<Long, GoodsDO> goodsMap = new HashMap<Long, GoodsDO>(CollectionSize.DEFAULT);
 		
 		List<GoodsDO> goodsList = createGoodsList(categoryId, brandId, count);
 		for(GoodsDO goods : goodsList) {

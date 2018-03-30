@@ -83,4 +83,11 @@ public class PropertyVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "PropertyVO [id=" + id + ", propertyName=" + propertyName + ", propertyDesc=" + propertyDesc
+				+ ", inputType=" + inputType + ", inputValues=" + inputValues + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

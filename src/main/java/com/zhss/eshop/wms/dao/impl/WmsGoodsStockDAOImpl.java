@@ -32,6 +32,7 @@ public class WmsGoodsStockDAOImpl implements WmsGoodsStockDAO {
 	 * @param goodsSkuId 商品sku id
 	 * @return 商品库存
 	 */
+	@Override
 	public WmsGoodsStockDO getBySkuId(Long goodsSkuId) throws Exception {
 		WmsGoodsStockDO goodsStock = stockMapper.getBySkuId(goodsSkuId) ;
 		
@@ -51,6 +52,7 @@ public class WmsGoodsStockDAOImpl implements WmsGoodsStockDAO {
 	 * 新增商品库存
 	 * @param goodsStockDO 商品库存DO对象
 	 */
+	@Override
 	public void save(WmsGoodsStockDO goodsStock) throws Exception {
 		goodsStock.setGmtCreate(dateProvider.getCurrentTime()); 
 		goodsStock.setGmtModified(dateProvider.getCurrentTime()); 
@@ -61,6 +63,7 @@ public class WmsGoodsStockDAOImpl implements WmsGoodsStockDAO {
 	 * 更新商品库存
 	 * @param goodsStockDO 商品库存DO对象
 	 */
+	@Override
 	public void update(WmsGoodsStockDO goodsStock) throws Exception {
 		goodsStock.setGmtModified(dateProvider.getCurrentTime()); 
 		stockMapper.update(goodsStock); 

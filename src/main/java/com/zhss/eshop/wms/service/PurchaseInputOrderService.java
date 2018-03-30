@@ -16,11 +16,13 @@ public interface PurchaseInputOrderService {
 	/**
 	 * 新增采购入库单
 	 * @param purchaseInputOrder 采购入库单
+	 * @throws Exception
 	 */
 	void save(PurchaseInputOrderDTO purchaseInputOrder) throws Exception;
 	
 	/**
 	 * 分页查询采购入库单
+	 * @param query 查询条件
 	 * @return 采购入库单
 	 * @throws Exception
 	 */
@@ -28,6 +30,7 @@ public interface PurchaseInputOrderService {
 	
 	/**
 	 * 根据id查询采购入库单
+	 * @param id 采购入库单id
 	 * @return 采购入库单
 	 * @throws Exception
 	 */

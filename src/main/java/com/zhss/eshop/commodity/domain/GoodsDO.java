@@ -198,94 +198,138 @@ public class GoodsDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		GoodsDO other = (GoodsDO) obj;
 		if (brandId == null) {
-			if (other.brandId != null)
+			if (other.brandId != null) {
 				return false;
-		} else if (!brandId.equals(other.brandId))
+			}
+		} else if (!brandId.equals(other.brandId)) {
 			return false;
+		}
 		if (categoryId == null) {
-			if (other.categoryId != null)
+			if (other.categoryId != null) {
 				return false;
-		} else if (!categoryId.equals(other.categoryId))
+			}
+		} else if (!categoryId.equals(other.categoryId)) {
 			return false;
+		}
 		if (code == null) {
-			if (other.code != null)
+			if (other.code != null) {
 				return false;
-		} else if (!code.equals(other.code))
+			}
+		} else if (!code.equals(other.code)) {
 			return false;
+		}
 		if (freightTemplateId == null) {
-			if (other.freightTemplateId != null)
+			if (other.freightTemplateId != null) {
 				return false;
-		} else if (!freightTemplateId.equals(other.freightTemplateId))
+			}
+		} else if (!freightTemplateId.equals(other.freightTemplateId)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (grossWeight == null) {
-			if (other.grossWeight != null)
+			if (other.grossWeight != null) {
 				return false;
-		} else if (!grossWeight.equals(other.grossWeight))
+			}
+		} else if (!grossWeight.equals(other.grossWeight)) {
 			return false;
+		}
 		if (height == null) {
-			if (other.height != null)
+			if (other.height != null) {
 				return false;
-		} else if (!height.equals(other.height))
+			}
+		} else if (!height.equals(other.height)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (length == null) {
-			if (other.length != null)
+			if (other.length != null) {
 				return false;
-		} else if (!length.equals(other.length))
+			}
+		} else if (!length.equals(other.length)) {
 			return false;
+		}
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null) {
 				return false;
-		} else if (!name.equals(other.name))
+			}
+		} else if (!name.equals(other.name)) {
 			return false;
+		}
 		if (packageList == null) {
-			if (other.packageList != null)
+			if (other.packageList != null) {
 				return false;
-		} else if (!packageList.equals(other.packageList))
+			}
+		} else if (!packageList.equals(other.packageList)) {
 			return false;
+		}
 		if (serviceGuarantees == null) {
-			if (other.serviceGuarantees != null)
+			if (other.serviceGuarantees != null) {
 				return false;
-		} else if (!serviceGuarantees.equals(other.serviceGuarantees))
+			}
+		} else if (!serviceGuarantees.equals(other.serviceGuarantees)) {
 			return false;
+		}
 		if (status == null) {
-			if (other.status != null)
+			if (other.status != null) {
 				return false;
-		} else if (!status.equals(other.status))
+			}
+		} else if (!status.equals(other.status)) {
 			return false;
+		}
 		if (subName == null) {
-			if (other.subName != null)
+			if (other.subName != null) {
 				return false;
-		} else if (!subName.equals(other.subName))
+			}
+		} else if (!subName.equals(other.subName)) {
 			return false;
+		}
 		if (width == null) {
-			if (other.width != null)
+			if (other.width != null) {
 				return false;
-		} else if (!width.equals(other.width))
+			}
+		} else if (!width.equals(other.width)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "GoodsDO [id=" + id + ", categoryId=" + categoryId + ", brandId=" + brandId + ", code=" + code
+				+ ", name=" + name + ", subName=" + subName + ", grossWeight=" + grossWeight + ", length=" + length
+				+ ", width=" + width + ", height=" + height + ", status=" + status + ", serviceGuarantees="
+				+ serviceGuarantees + ", packageList=" + packageList + ", freightTemplateId=" + freightTemplateId
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

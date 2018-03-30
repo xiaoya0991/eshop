@@ -166,78 +166,107 @@ public class PurchaseInputOrderDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		PurchaseInputOrderDO other = (PurchaseInputOrderDO) obj;
 		if (actualArrivalTime == null) {
-			if (other.actualArrivalTime != null)
+			if (other.actualArrivalTime != null) {
 				return false;
-		} else if (!actualArrivalTime.equals(other.actualArrivalTime))
+			}
+		} else if (!actualArrivalTime.equals(other.actualArrivalTime)) {
 			return false;
+		}
 		if (expectArrivalTime == null) {
-			if (other.expectArrivalTime != null)
+			if (other.expectArrivalTime != null) {
 				return false;
-		} else if (!expectArrivalTime.equals(other.expectArrivalTime))
+			}
+		} else if (!expectArrivalTime.equals(other.expectArrivalTime)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (purchaseContactor == null) {
-			if (other.purchaseContactor != null)
+			if (other.purchaseContactor != null) {
 				return false;
-		} else if (!purchaseContactor.equals(other.purchaseContactor))
+			}
+		} else if (!purchaseContactor.equals(other.purchaseContactor)) {
 			return false;
+		}
 		if (purchaseContactorEmail == null) {
-			if (other.purchaseContactorEmail != null)
+			if (other.purchaseContactorEmail != null) {
 				return false;
-		} else if (!purchaseContactorEmail.equals(other.purchaseContactorEmail))
+			}
+		} else if (!purchaseContactorEmail.equals(other.purchaseContactorEmail)) {
 			return false;
+		}
 		if (purchaseContactorPhoneNumber == null) {
-			if (other.purchaseContactorPhoneNumber != null)
+			if (other.purchaseContactorPhoneNumber != null) {
 				return false;
-		} else if (!purchaseContactorPhoneNumber.equals(other.purchaseContactorPhoneNumber))
+			}
+		} else if (!purchaseContactorPhoneNumber.equals(other.purchaseContactorPhoneNumber)) {
 			return false;
+		}
 		if (purchaseOrderId == null) {
-			if (other.purchaseOrderId != null)
+			if (other.purchaseOrderId != null) {
 				return false;
-		} else if (!purchaseOrderId.equals(other.purchaseOrderId))
+			}
+		} else if (!purchaseOrderId.equals(other.purchaseOrderId)) {
 			return false;
+		}
 		if (purchaseOrderRemark == null) {
-			if (other.purchaseOrderRemark != null)
+			if (other.purchaseOrderRemark != null) {
 				return false;
-		} else if (!purchaseOrderRemark.equals(other.purchaseOrderRemark))
+			}
+		} else if (!purchaseOrderRemark.equals(other.purchaseOrderRemark)) {
 			return false;
+		}
 		if (purchaser == null) {
-			if (other.purchaser != null)
+			if (other.purchaser != null) {
 				return false;
-		} else if (!purchaser.equals(other.purchaser))
+			}
+		} else if (!purchaser.equals(other.purchaser)) {
 			return false;
+		}
 		if (status == null) {
-			if (other.status != null)
+			if (other.status != null) {
 				return false;
-		} else if (!status.equals(other.status))
+			}
+		} else if (!status.equals(other.status)) {
 			return false;
+		}
 		if (supplierId == null) {
-			if (other.supplierId != null)
+			if (other.supplierId != null) {
 				return false;
-		} else if (!supplierId.equals(other.supplierId))
+			}
+		} else if (!supplierId.equals(other.supplierId)) {
 			return false;
+		}
 		return true;
 	}
 	

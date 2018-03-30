@@ -116,6 +116,7 @@ public class SubmitOrderWmsStockUpdater extends AbstractWmsStockUpdater {
 	/**
 	 * 设置需要的参数
 	 */
+	@Override
 	public void setParameter(Object parameter) {
 		this.scheduleResult = (SaleDeliveryScheduleResult) parameter; 
 	}

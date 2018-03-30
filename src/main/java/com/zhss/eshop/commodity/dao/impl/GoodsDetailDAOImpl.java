@@ -26,6 +26,7 @@ public class GoodsDetailDAOImpl implements GoodsDetailDAO {
 	 * @param goodsId 商品id
 	 * @return 商品详情
 	 */
+	@Override
 	public GoodsDetailDO getByGoodsId(Long goodsId) {
 		return goodsDetailMapper.getByGoodsId(goodsId);
 	}
@@ -34,6 +35,7 @@ public class GoodsDetailDAOImpl implements GoodsDetailDAO {
 	 * 新增商品详情
 	 * @param goodsDetail 商品详情
 	 */
+	@Override
 	public Long save(GoodsDetailDO goodsDetail) {
 		goodsDetailMapper.save(goodsDetail);
 		return goodsDetail.getId();
@@ -43,6 +45,7 @@ public class GoodsDetailDAOImpl implements GoodsDetailDAO {
 	 * 更新商品详情
 	 * @param goodsDetail 商品详情
 	 */
+	@Override
 	public void update(GoodsDetailDO goodsDetail) {
 		goodsDetailMapper.update(goodsDetail); 
 	}
@@ -50,7 +53,8 @@ public class GoodsDetailDAOImpl implements GoodsDetailDAO {
 	/**
 	 * 删除商品详情
 	 * @param id 商品详情id
-	 */ 
+	 */
+	@Override
 	public void remove(Long id) {
 		goodsDetailMapper.remove(id);
 	}

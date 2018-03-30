@@ -114,4 +114,12 @@ public class CategoryVO extends AbstractObject {
 		this.properties = properties;
 	}
 	
+	@Override
+	public String toString() {
+		return "CategoryVO [id=" + id + ", name=" + name + ", description=" + description + ", leaf=" + leaf
+				+ ", parentId=" + parentId + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ ", propertyRelations=" + propertyRelations + ", propertyGroups=" + propertyGroups + ", properties="
+				+ properties + "]";
+	}
+	
 }

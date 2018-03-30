@@ -28,6 +28,7 @@ public class GoodsPropertyValueDAOImpl implements GoodsPropertyValueDAO {
 	 * @param goodsId 商品id
 	 * @return 属性值
 	 */
+	@Override
 	public List<GoodsPropertyValueDO> listByGoodsId(Long goodsId) {
 		return goodsPropertyValueMapper.listByGoodsId(goodsId);
 	}
@@ -36,6 +37,7 @@ public class GoodsPropertyValueDAOImpl implements GoodsPropertyValueDAO {
 	 * 新增商品属性值
 	 * @param goodsPropertyValue 商品属性值
 	 */
+	@Override
 	public void save(GoodsPropertyValueDO goodsPropertyValue) {
 		goodsPropertyValueMapper.save(goodsPropertyValue);
 	}
@@ -44,6 +46,7 @@ public class GoodsPropertyValueDAOImpl implements GoodsPropertyValueDAO {
 	 * 根据商品id删除属性值
 	 * @param goodsId 商品id
 	 */
+	@Override
 	public void removeByGoodsId(Long goodsId) {
 		goodsPropertyValueMapper.removeByGoodsId(goodsId);
 	}

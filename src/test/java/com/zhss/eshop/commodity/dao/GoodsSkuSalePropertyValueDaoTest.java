@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.commodity.domain.GoodsSkuSalePropertyValueDO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -28,9 +29,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class GoodsSkuSalePropertyValueDAOTest {
+public class GoodsSkuSalePropertyValueDaoTest {
 
 	/**
 	 * 日期辅助组件
@@ -119,7 +120,7 @@ public class GoodsSkuSalePropertyValueDAOTest {
 	private Map<Long, GoodsSkuSalePropertyValueDO> createGoodsSkuSalePropertyValueMap(
 			Long goodsSkuId, Integer count) throws Exception {
 		Map<Long, GoodsSkuSalePropertyValueDO> goodsSkuSalePropertyValueMap = 
-				new HashMap<Long, GoodsSkuSalePropertyValueDO>();
+				new HashMap<Long, GoodsSkuSalePropertyValueDO>(CollectionSize.DEFAULT);
 		
 		List<GoodsSkuSalePropertyValueDO> goodsSkuSalePropertyValues = createGoodsSkuSalePropertyValues(
 				goodsSkuId, count);

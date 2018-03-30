@@ -244,4 +244,17 @@ public class SaleDeliveryOrderVO extends AbstractObject {
 		this.logisticOrder = logisticOrder;
 	}
 	
+	@Override
+	public String toString() {
+		return "SaleDeliveryOrderVO [id=" + id + ", orderId=" + orderId + ", orderNo=" + orderNo + ", userAccountId="
+				+ userAccountId + ", consignee=" + consignee + ", deliveryAddress=" + deliveryAddress
+				+ ", consigneeCellPhoneNumber=" + consigneeCellPhoneNumber + ", freight=" + freight + ", payType="
+				+ payType + ", totalAmount=" + totalAmount + ", discountAmount=" + discountAmount + ", couponAmount="
+				+ couponAmount + ", payableAmount=" + payableAmount + ", invoiceTitle=" + invoiceTitle + ", taxpayerId="
+				+ taxpayerId + ", orderComment=" + orderComment + ", status=" + status + ", deliveryTime="
+				+ deliveryTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ ", saleDeliveryOrderItems=" + saleDeliveryOrderItems + ", sendOutOrder=" + sendOutOrder
+				+ ", logisticOrder=" + logisticOrder + "]";
+	}
+	
 }

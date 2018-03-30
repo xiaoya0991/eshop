@@ -24,7 +24,7 @@ import com.zhss.eshop.common.util.ObjectUtils;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class BrandServiceImpl implements BrandService {
 	
 	/**
@@ -63,6 +63,7 @@ public class BrandServiceImpl implements BrandService {
 	 * @param query 查询条件
 	 * @return 品牌
 	 */
+	@Override
 	public List<BrandDTO> listByPage(BrandQuery query) throws Exception {
 		return ObjectUtils.convertList(brandDAO.listByPage(query), BrandDTO.class); 
 	}
@@ -72,6 +73,7 @@ public class BrandServiceImpl implements BrandService {
 	 * @param id 品牌id
 	 * @return 品牌
 	 */
+	@Override
 	public BrandDTO getById(Long id) throws Exception {
 		return brandDAO.getById(id).clone(BrandDTO.class);
 	}
@@ -82,6 +84,7 @@ public class BrandServiceImpl implements BrandService {
 	 * @param logoFile logo图片
 	 * @param authVoucherFile 品牌授权认证图片
 	 */
+	@Override
 	public void save(BrandDTO brand, MultipartFile logoFile, 
 			MultipartFile authVoucherFile) throws Exception {
 		String logoPath = uploadLogoFile(logoFile);
@@ -143,6 +146,7 @@ public class BrandServiceImpl implements BrandService {
 	 * 编辑品牌
 	 * @param brand 品牌
 	 */
+	@Override
 	public void update(BrandDTO brand) throws Exception {
 		brand.setGmtModified(dateProvider.getCurrentTime()); 
 		brandDAO.update(brand.clone(BrandDO.class)); 
@@ -154,6 +158,7 @@ public class BrandServiceImpl implements BrandService {
 	 * @param logoFile
 	 * @throws Exception
 	 */
+	@Override
 	public void updateLogoPicture(Long id, MultipartFile logoFile) throws Exception {
 		BrandDO brand = brandDAO.getById(id);
 		
@@ -171,6 +176,7 @@ public class BrandServiceImpl implements BrandService {
 	 * @param authVoucherFile
 	 * @throws Exception
 	 */
+	@Override
 	public void updateAuthVoucherPicture(Long id, MultipartFile authVoucherFile) throws Exception {
 		BrandDO brand = brandDAO.getById(id);
 		
@@ -186,6 +192,7 @@ public class BrandServiceImpl implements BrandService {
 	 * 删除品牌
 	 * @param id 品牌id
 	 */
+	@Override
 	public void remove(Long id) throws Exception {
 		BrandDO brand = brandDAO.getById(id);
 		FileUtils.deleteFile(brand.getLogoPath());

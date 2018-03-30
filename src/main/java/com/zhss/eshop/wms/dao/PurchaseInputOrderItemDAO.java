@@ -24,6 +24,7 @@ public interface PurchaseInputOrderItemDAO {
 	 * 根据采购入库单id查询采购入库单条目
 	 * @param purchaseInputOrderId 采购入库单id
 	 * @return 采购入库单条目
+	 * @throws Exception
 	 */
 	List<PurchaseInputOrderItemDO> listByPurchaseInputOrderId(
 			Long purchaseInputOrderId) throws Exception;
@@ -31,6 +32,7 @@ public interface PurchaseInputOrderItemDAO {
 	/**
 	 * 更新采购入库单条目
 	 * @param purchaseInputOrderItem 采购入库单条目
+	 * @throws Exception
 	 */
 	void update(PurchaseInputOrderItemDO purchaseInputOrderItem) throws Exception;
 	

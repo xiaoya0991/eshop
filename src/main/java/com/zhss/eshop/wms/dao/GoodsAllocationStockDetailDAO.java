@@ -15,6 +15,7 @@ public interface GoodsAllocationStockDetailDAO {
 	 * 根据商品sku id查询货位库存明细
 	 * @param goodsSkuId 商品sku id 
 	 * @return 货位库存明细
+	 * @throws Exception
 	 */
 	List<GoodsAllocationStockDetailDO> listByGoodsSkuId(
 			Long goodsSkuId) throws Exception;
@@ -23,6 +24,7 @@ public interface GoodsAllocationStockDetailDAO {
 	 * 根据id查询货位库存明细
 	 * @param id 货位库粗明细id
 	 * @return 货位库存明细
+	 * @throws Exception
 	 */
 	GoodsAllocationStockDetailDO getById(Long id) throws Exception;
 	

@@ -33,6 +33,7 @@ public class ReturnGoodsInputOrderItemDAOImpl implements ReturnGoodsInputOrderIt
 	 * 新增退货入库单条目
 	 * @param returnGoodsInputOrderItem 退货入库单条目
 	 */
+	@Override
 	public void save(ReturnGoodsInputOrderItemDO returnGoodsInputOrderItem) throws Exception {
 		returnGoodsInputOrderItemMapper.save(returnGoodsInputOrderItem); 
 	}
@@ -42,6 +43,7 @@ public class ReturnGoodsInputOrderItemDAOImpl implements ReturnGoodsInputOrderIt
 	 * @param returnGoodsInputOrderId 退货入库单id
 	 * @return 退货入库单条目
 	 */
+	@Override
 	public List<ReturnGoodsInputOrderItemDO> listByReturnGoodsInputOrderId(
 			Long returnGoodsInputOrderId) throws Exception {
 		return returnGoodsInputOrderItemMapper.listByReturnGoodsInputOrderId(returnGoodsInputOrderId);
@@ -51,6 +53,7 @@ public class ReturnGoodsInputOrderItemDAOImpl implements ReturnGoodsInputOrderIt
 	 * 更新退货入库单条目
 	 * @param returnGoodsInputOrderItem 退货入库单条目
 	 */
+	@Override
 	public void update(ReturnGoodsInputOrderItemDO returnGoodsInputOrderItem) throws Exception {
 		returnGoodsInputOrderItem.setGmtModified(dateProvider.getCurrentTime()); 
 		returnGoodsInputOrderItemMapper.update(returnGoodsInputOrderItem); 

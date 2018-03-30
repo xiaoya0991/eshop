@@ -23,6 +23,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderQuery;
@@ -34,9 +35,9 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderQuery;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class ReturnGoodsInputOrderDAOTest {
+public class ReturnGoodsInputOrderDaoTest {
 
 	/**
 	 * 退货入库单管理DAO组件
@@ -214,7 +215,8 @@ public class ReturnGoodsInputOrderDAOTest {
 	 */
 	private Map<Long, ReturnGoodsInputOrderDO> createReturnGoodsInputOrderMap(Integer count,
 			Long returnGoodsWorksheetId, Long orderId, Long userAccountId) throws Exception {
-		Map<Long, ReturnGoodsInputOrderDO> returnGoodsInputOrderMap = new HashMap<Long, ReturnGoodsInputOrderDO>();
+		Map<Long, ReturnGoodsInputOrderDO> returnGoodsInputOrderMap = 
+				new HashMap<Long, ReturnGoodsInputOrderDO>(CollectionSize.DEFAULT);
 	
 		List<ReturnGoodsInputOrderDO> returnGoodsInputOrders = createReturnGoodsInputOrders(
 				count, returnGoodsWorksheetId, orderId, userAccountId);

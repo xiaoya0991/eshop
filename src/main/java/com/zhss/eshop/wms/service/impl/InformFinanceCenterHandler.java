@@ -23,6 +23,7 @@ public class InformFinanceCenterHandler extends AbstractPurchaseInputOrderHandle
 	/**
 	 * 执行处理结果
 	 */
+	@Override
 	public PurchaseInputOrderHandlerResult doExecute(
 			PurchaseInputOrderDTO purchaseInputOrder) throws Exception {
 		financeService.createPurchaseSettlementOrder(purchaseInputOrder);

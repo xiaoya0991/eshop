@@ -20,6 +20,7 @@ public abstract class AbstractPurchaseInputOrderHandler implements PurchaseInput
 	 * @return 处理结果
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean execute(PurchaseInputOrderDTO purchaseInputOrder) throws Exception {
 		PurchaseInputOrderHandlerResult result = doExecute(purchaseInputOrder);
 		if(successor != null && result.getDoNext()) { 

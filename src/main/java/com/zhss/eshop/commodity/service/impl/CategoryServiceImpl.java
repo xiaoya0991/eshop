@@ -33,7 +33,7 @@ import com.zhss.eshop.common.util.ObjectUtils;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class CategoryServiceImpl implements CategoryService {
 	
 	/**
@@ -76,6 +76,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 * 查询根类目
 	 * @return 根类目集合
 	 */
+	@Override
  	public List<CategoryDTO> listRoots() throws Exception {
 		List<CategoryDO> categories = categoryDAO.listRoots(); 
 		List<CategoryDTO> resultCategories = ObjectUtils.convertList(
@@ -88,6 +89,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @param id 父类目id
 	 * @return 子类目集合
 	 */
+	@Override
 	public List<CategoryDTO> listChildren(Long id) throws Exception {
 		List<CategoryDO> categories = categoryDAO.listChildren(id);
 		List<CategoryDTO> resultCategories = ObjectUtils.convertList(
@@ -100,6 +102,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @param category 类目
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean save(CategoryDTO category) throws Exception {
 		saveCategory(category);
 		saveCategoryPropertyRelations(category); 
@@ -124,6 +127,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @param category 类目
 	 * @throws Exception
 	 */
+	@Override
 	public void update(CategoryDTO category) throws Exception {
 		updateCategory(category); 
 		
@@ -236,6 +240,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @param id 类目id
 	 * @return 类目
 	 */
+	@Override
 	public CategoryDTO getById(Long id) throws Exception {
 		// 查询类目基本信息
 		CategoryDTO category = categoryDAO.getById(id).clone(CategoryDTO.class);  
@@ -309,6 +314,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 * @param id 类目id
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean remove(Long id) throws Exception {
 		Category category = new Category(id); 
 		

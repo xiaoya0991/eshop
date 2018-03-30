@@ -73,4 +73,11 @@ public class GoodsSkuSalePropertyValueDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsSkuSalePropertyValueDTO [id=" + id + ", goodsSkuId=" + goodsSkuId + ", relationId=" + relationId
+				+ ", propertyValue=" + propertyValue + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ "]";
+	}
+	
 }

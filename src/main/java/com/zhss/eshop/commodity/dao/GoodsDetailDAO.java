@@ -19,6 +19,7 @@ public interface GoodsDetailDAO {
 	/**
 	 * 新增商品详情
 	 * @param goodsDetail 商品详情
+	 * @return 商品详情id
 	 */
 	Long save(GoodsDetailDO goodsDetail);
 	

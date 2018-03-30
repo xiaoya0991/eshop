@@ -19,7 +19,7 @@ import com.zhss.eshop.common.util.ObjectUtils;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class GoodsPropertyValueServiceImpl implements GoodsPropertyValueService {
 
 	/**
@@ -38,6 +38,7 @@ public class GoodsPropertyValueServiceImpl implements GoodsPropertyValueService 
 	 * @param goodsId 商品id
 	 * @return 属性值
 	 */
+	@Override
 	public List<GoodsPropertyValueDTO> listByGoodsId(Long goodsId) throws Exception {
 		return ObjectUtils.convertList(propertyValueDAO.listByGoodsId(goodsId), 
 				GoodsPropertyValueDTO.class);
@@ -47,6 +48,7 @@ public class GoodsPropertyValueServiceImpl implements GoodsPropertyValueService 
 	 * 新增商品属性值
 	 * @param goodsPropertyValue 商品属性值
 	 */
+	@Override
 	public void batchSave(List<GoodsPropertyValueDTO> propertyValues) throws Exception {
 		for(GoodsPropertyValueDTO propertyValue : propertyValues) {
 			propertyValue.setGmtCreate(dateProvider.getCurrentTime());
@@ -59,6 +61,7 @@ public class GoodsPropertyValueServiceImpl implements GoodsPropertyValueService 
 	 * 根据商品id删除属性值
 	 * @param goodsId 商品id
 	 */
+	@Override
 	public void removeByGoodsId(Long goodsId) throws Exception {
 		propertyValueDAO.removeByGoodsId(goodsId); 
 	}

@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.domain.SendOutOrderItemDO;
 
@@ -29,9 +30,9 @@ import com.zhss.eshop.wms.domain.SendOutOrderItemDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class SendOutOrderItemDAOTest {
+public class SendOutOrderItemDaoTest {
 
 	/**
 	 * 发货单管理DAO组件
@@ -99,7 +100,8 @@ public class SendOutOrderItemDAOTest {
 	 */
 	private Map<Long, SendOutOrderItemDO> createSendOutOrderItemMap(Integer count, 
 			Long sendOutOrderId) throws Exception {
-		Map<Long, SendOutOrderItemDO> sendOutOrderItemMap = new HashMap<Long, SendOutOrderItemDO>();
+		Map<Long, SendOutOrderItemDO> sendOutOrderItemMap = 
+				new HashMap<Long, SendOutOrderItemDO>(CollectionSize.DEFAULT);
 		
 		List<SendOutOrderItemDO> sendOutOrderItems = createSendOutOrderItems(count, sendOutOrderId);
 		for(SendOutOrderItemDO sendOutOrderItem : sendOutOrderItems) {

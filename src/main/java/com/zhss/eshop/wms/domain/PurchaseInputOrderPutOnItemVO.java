@@ -83,4 +83,11 @@ public class PurchaseInputOrderPutOnItemVO extends AbstractObject {
 		this.goodsSkuId = goodsSkuId;
 	}
 	
+	@Override
+	public String toString() {
+		return "PurchaseInputOrderPutOnItemVO [id=" + id + ", purchaseInputOrderItemId=" + purchaseInputOrderItemId
+				+ ", goodsAllocationId=" + goodsAllocationId + ", goodsSkuId=" + goodsSkuId + ", putOnShelvesCount="
+				+ putOnShelvesCount + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

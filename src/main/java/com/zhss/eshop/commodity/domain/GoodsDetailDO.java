@@ -77,38 +77,51 @@ public class GoodsDetailDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		GoodsDetailDO other = (GoodsDetailDO) obj;
 		if (detailContent == null) {
-			if (other.detailContent != null)
+			if (other.detailContent != null) {
 				return false;
-		} else if (!detailContent.equals(other.detailContent))
+			}
+		} else if (!detailContent.equals(other.detailContent)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (goodsId == null) {
-			if (other.goodsId != null)
+			if (other.goodsId != null) {
 				return false;
-		} else if (!goodsId.equals(other.goodsId))
+			}
+		} else if (!goodsId.equals(other.goodsId)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		return true;
 	}
 	

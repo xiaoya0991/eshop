@@ -29,6 +29,7 @@ public class BrandDAOImpl implements BrandDAO {
 	 * @param query 查询条件
 	 * @return 品牌
 	 */
+	@Override
 	public List<BrandDO> listByPage(BrandQuery query) {
 		return brandMapper.listByPage(query);
 	}
@@ -38,6 +39,7 @@ public class BrandDAOImpl implements BrandDAO {
 	 * @param id 品牌id
 	 * @return 品牌
 	 */
+	@Override
 	public BrandDO getById(Long id) {
 		return brandMapper.getById(id);
 	}
@@ -46,6 +48,7 @@ public class BrandDAOImpl implements BrandDAO {
 	 * 新增品牌
 	 * @param brand 品牌
 	 */
+	@Override
 	public void save(BrandDO brand) {
 		brandMapper.save(brand); 
 	}
@@ -54,6 +57,7 @@ public class BrandDAOImpl implements BrandDAO {
 	 * 更新品牌
 	 * @param brand
 	 */
+	@Override
 	public void update(BrandDO brand) {
 		brandMapper.update(brand); 
 	}
@@ -62,6 +66,7 @@ public class BrandDAOImpl implements BrandDAO {
 	 * 删除品牌
 	 * @param id 品牌id
 	 */
+	@Override
 	public void remove(Long id) {
 		brandMapper.remove(id); 
 	}
@@ -70,6 +75,7 @@ public class BrandDAOImpl implements BrandDAO {
 	 * 更新品牌logo
 	 * @param brand
 	 */
+	@Override
 	public void updateLogoPath(BrandDO brand) {
 		brandMapper.updateLogoPath(brand); 
 	}
@@ -78,6 +84,7 @@ public class BrandDAOImpl implements BrandDAO {
 	 * 更新品牌授权认证书
 	 * @param brand
 	 */
+	@Override
 	public void updateAuthVoucherPath(BrandDO brand) {
 		brandMapper.updateAuthVoucherPath(brand); 
 	}

@@ -28,6 +28,7 @@ public class GoodsSkuSalePropertyValueDAOImpl implements GoodsSkuSalePropertyVal
 	 * @param goodsSkuId 商品sku id
 	 * @return 属性值
 	 */
+	@Override
 	public List<GoodsSkuSalePropertyValueDO> listByGoodsSkuId(Long goodsSkuId) {
 		return propertyValueMapper.listByGoodsSkuId(goodsSkuId);
 	}
@@ -36,6 +37,7 @@ public class GoodsSkuSalePropertyValueDAOImpl implements GoodsSkuSalePropertyVal
 	 * 新增商品sku销售属性值
 	 * @param propertyValue 商品sku销售属性值
 	 */
+	@Override
 	public void save(GoodsSkuSalePropertyValueDO propertyValue) {
 		propertyValueMapper.save(propertyValue); 
 	}
@@ -44,6 +46,7 @@ public class GoodsSkuSalePropertyValueDAOImpl implements GoodsSkuSalePropertyVal
 	 * 根据商品sku id删除属性值
 	 * @param goodsSkuId 商品sku id
 	 */
+	@Override
 	public void removeByGoodsSkuId(Long goodsSkuId) {
 		propertyValueMapper.removeByGoodsSkuId(goodsSkuId); 
 	}

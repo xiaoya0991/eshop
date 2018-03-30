@@ -124,4 +124,13 @@ public class PurchaseInputOrderItemVO extends AbstractObject {
 		this.stockDetails = stockDetails;
 	}
 	
+	@Override
+	public String toString() {
+		return "PurchaseInputOrderItemVO [id=" + id + ", purchaseInputOrderId=" + purchaseInputOrderId + ", goodsSkuId="
+				+ goodsSkuId + ", purchaseCount=" + purchaseCount + ", purchasePrice=" + purchasePrice
+				+ ", qualifiedCount=" + qualifiedCount + ", arrivalCount=" + arrivalCount + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + ", putOnItemDTOs=" + putOnItemDTOs + ", stockDetails=" + stockDetails
+				+ "]";
+	}
+	
 }

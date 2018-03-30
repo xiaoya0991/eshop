@@ -34,6 +34,7 @@ public class GoodsAllocationStockDetailDAOImpl implements GoodsAllocationStockDe
 	 * @param goodsSkuId 商品sku id 
 	 * @return 货位库存明细
 	 */
+	@Override
 	public List<GoodsAllocationStockDetailDO> listByGoodsSkuId(
 			Long goodsSkuId) throws Exception {
 		return stockDetailMapper.listByGoodsSkuId(goodsSkuId);
@@ -44,6 +45,7 @@ public class GoodsAllocationStockDetailDAOImpl implements GoodsAllocationStockDe
 	 * @param id 货位库粗明细id
 	 * @return 货位库存明细
 	 */
+	@Override
 	public GoodsAllocationStockDetailDO getById(Long id) throws Exception {
 		return stockDetailMapper.getById(id);
 	}
@@ -53,6 +55,7 @@ public class GoodsAllocationStockDetailDAOImpl implements GoodsAllocationStockDe
 	 * @param stockDetail 货位库存明细
 	 * @throws Exception
 	 */
+	@Override
 	public void update(GoodsAllocationStockDetailDO stockDetail) throws Exception {
 		stockDetail.setGmtModified(dateProvider.getCurrentTime()); 
 		stockDetailMapper.update(stockDetail); 
@@ -63,6 +66,7 @@ public class GoodsAllocationStockDetailDAOImpl implements GoodsAllocationStockDe
 	 * @param stockDetail 货位库存明细
 	 * @throws Exception
 	 */
+	@Override
 	public void save(GoodsAllocationStockDetailDO stockDetail) throws Exception {
 		stockDetail.setGmtCreate(dateProvider.getCurrentTime()); 
 		stockDetail.setGmtModified(dateProvider.getCurrentTime());

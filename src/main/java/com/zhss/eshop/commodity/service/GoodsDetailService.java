@@ -13,6 +13,7 @@ public interface GoodsDetailService {
 	 * 根据商品id查询商品详情
 	 * @param goodsId 商品id
 	 * @return 商品详情
+	 * @throws Exception
 	 */
 	GoodsDetailDTO getByGoodsId(Long goodsId) throws Exception;
 

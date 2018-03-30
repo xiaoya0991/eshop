@@ -24,9 +24,9 @@ import com.zhss.eshop.wms.domain.SendOutOrderDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class SendOutOrderDAOTest {
+public class SendOutOrderDaoTest {
 
 	/**
 	 * 发货单管理DAO组件

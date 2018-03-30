@@ -27,6 +27,7 @@ public class UpdatePurchaseInputOrderStatusHandler extends AbstractPurchaseInput
 	 * @return 处理结果
 	 * @throws Exception
 	 */
+	@Override
 	public PurchaseInputOrderHandlerResult doExecute(
 			PurchaseInputOrderDTO purchaseInputOrder) throws Exception {
 		purchaseInputOrderDAO.updateStatus(purchaseInputOrder.getId(),

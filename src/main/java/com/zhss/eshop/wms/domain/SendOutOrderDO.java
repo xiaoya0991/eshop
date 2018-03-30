@@ -243,114 +243,168 @@ public class SendOutOrderDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SendOutOrderDO other = (SendOutOrderDO) obj;
 		if (consignee == null) {
-			if (other.consignee != null)
+			if (other.consignee != null) {
 				return false;
-		} else if (!consignee.equals(other.consignee))
+			}
+		} else if (!consignee.equals(other.consignee)) {
 			return false;
+		}
 		if (consigneeCellPhoneNumber == null) {
-			if (other.consigneeCellPhoneNumber != null)
+			if (other.consigneeCellPhoneNumber != null) {
 				return false;
-		} else if (!consigneeCellPhoneNumber.equals(other.consigneeCellPhoneNumber))
+			}
+		} else if (!consigneeCellPhoneNumber.equals(other.consigneeCellPhoneNumber)) {
 			return false;
+		}
 		if (couponAmount == null) {
-			if (other.couponAmount != null)
+			if (other.couponAmount != null) {
 				return false;
-		} else if (!couponAmount.equals(other.couponAmount))
+			}
+		} else if (!couponAmount.equals(other.couponAmount)) {
 			return false;
+		}
 		if (deliveryAddress == null) {
-			if (other.deliveryAddress != null)
+			if (other.deliveryAddress != null) {
 				return false;
-		} else if (!deliveryAddress.equals(other.deliveryAddress))
+			}
+		} else if (!deliveryAddress.equals(other.deliveryAddress)) {
 			return false;
+		}
 		if (discountAmount == null) {
-			if (other.discountAmount != null)
+			if (other.discountAmount != null) {
 				return false;
-		} else if (!discountAmount.equals(other.discountAmount))
+			}
+		} else if (!discountAmount.equals(other.discountAmount)) {
 			return false;
+		}
 		if (freight == null) {
-			if (other.freight != null)
+			if (other.freight != null) {
 				return false;
-		} else if (!freight.equals(other.freight))
+			}
+		} else if (!freight.equals(other.freight)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (invoiceTitle == null) {
-			if (other.invoiceTitle != null)
+			if (other.invoiceTitle != null) {
 				return false;
-		} else if (!invoiceTitle.equals(other.invoiceTitle))
+			}
+		} else if (!invoiceTitle.equals(other.invoiceTitle)) {
 			return false;
+		}
 		if (orderComment == null) {
-			if (other.orderComment != null)
+			if (other.orderComment != null) {
 				return false;
-		} else if (!orderComment.equals(other.orderComment))
+			}
+		} else if (!orderComment.equals(other.orderComment)) {
 			return false;
+		}
 		if (orderId == null) {
-			if (other.orderId != null)
+			if (other.orderId != null) {
 				return false;
-		} else if (!orderId.equals(other.orderId))
+			}
+		} else if (!orderId.equals(other.orderId)) {
 			return false;
+		}
 		if (orderNo == null) {
-			if (other.orderNo != null)
+			if (other.orderNo != null) {
 				return false;
-		} else if (!orderNo.equals(other.orderNo))
+			}
+		} else if (!orderNo.equals(other.orderNo)) {
 			return false;
+		}
 		if (payType == null) {
-			if (other.payType != null)
+			if (other.payType != null) {
 				return false;
-		} else if (!payType.equals(other.payType))
+			}
+		} else if (!payType.equals(other.payType)) {
 			return false;
+		}
 		if (payableAmount == null) {
-			if (other.payableAmount != null)
+			if (other.payableAmount != null) {
 				return false;
-		} else if (!payableAmount.equals(other.payableAmount))
+			}
+		} else if (!payableAmount.equals(other.payableAmount)) {
 			return false;
+		}
 		if (saleDeliveryOrderId == null) {
-			if (other.saleDeliveryOrderId != null)
+			if (other.saleDeliveryOrderId != null) {
 				return false;
-		} else if (!saleDeliveryOrderId.equals(other.saleDeliveryOrderId))
+			}
+		} else if (!saleDeliveryOrderId.equals(other.saleDeliveryOrderId)) {
 			return false;
+		}
 		if (taxpayerId == null) {
-			if (other.taxpayerId != null)
+			if (other.taxpayerId != null) {
 				return false;
-		} else if (!taxpayerId.equals(other.taxpayerId))
+			}
+		} else if (!taxpayerId.equals(other.taxpayerId)) {
 			return false;
+		}
 		if (totalAmount == null) {
-			if (other.totalAmount != null)
+			if (other.totalAmount != null) {
 				return false;
-		} else if (!totalAmount.equals(other.totalAmount))
+			}
+		} else if (!totalAmount.equals(other.totalAmount)) {
 			return false;
+		}
 		if (userAccountId == null) {
-			if (other.userAccountId != null)
+			if (other.userAccountId != null) {
 				return false;
-		} else if (!userAccountId.equals(other.userAccountId))
+			}
+		} else if (!userAccountId.equals(other.userAccountId)) {
 			return false;
+		}
 		if (username == null) {
-			if (other.username != null)
+			if (other.username != null) {
 				return false;
-		} else if (!username.equals(other.username))
+			}
+		} else if (!username.equals(other.username)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "SendOutOrderDO [id=" + id + ", saleDeliveryOrderId=" + saleDeliveryOrderId + ", userAccountId="
+				+ userAccountId + ", username=" + username + ", orderId=" + orderId + ", orderNo=" + orderNo
+				+ ", consignee=" + consignee + ", deliveryAddress=" + deliveryAddress + ", consigneeCellPhoneNumber="
+				+ consigneeCellPhoneNumber + ", freight=" + freight + ", payType=" + payType + ", totalAmount="
+				+ totalAmount + ", discountAmount=" + discountAmount + ", couponAmount=" + couponAmount
+				+ ", payableAmount=" + payableAmount + ", invoiceTitle=" + invoiceTitle + ", taxpayerId=" + taxpayerId
+				+ ", orderComment=" + orderComment + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

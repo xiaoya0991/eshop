@@ -184,4 +184,15 @@ public class SaleDeliveryOrderItemVO extends AbstractObject {
 		this.sendOutItems = sendOutItems;
 	}
 	
+	@Override
+	public String toString() {
+		return "SaleDeliveryOrderItemVO [id=" + id + ", saleDeliveryOrderId=" + saleDeliveryOrderId + ", goodsSkuId="
+				+ goodsSkuId + ", goodsSkuCode=" + goodsSkuCode + ", goodsName=" + goodsName + ", saleProperties="
+				+ saleProperties + ", goodsGrossWeight=" + goodsGrossWeight + ", purchaseQuantity=" + purchaseQuantity
+				+ ", purchasePrice=" + purchasePrice + ", promotionActivityId=" + promotionActivityId + ", goodsLength="
+				+ goodsLength + ", goodsWidth=" + goodsWidth + ", goodsHeight=" + goodsHeight + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + ", pickingItems=" + pickingItems + ", sendOutItems="
+				+ sendOutItems + "]";
+	}
+	
 }

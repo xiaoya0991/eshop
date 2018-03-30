@@ -20,7 +20,7 @@ public interface SendOutOrderMapper {
 
 	/**
 	 * 新增发货单
-	 * @param order
+	 * @param sendOutOrder 发货单
 	 */
 	@Insert("INSERT INTO wms_send_out_order("
 				+ "sale_delivery_order_id," 
@@ -67,8 +67,8 @@ public interface SendOutOrderMapper {
 	void save(SendOutOrderDO sendOutOrder);
 	
 	/**
-	 * 根据id查询发货单
-	 * @param id 发货单id
+	 * 根据销售出库单id查询发货单
+	 * @param saleDeliveryOrderId 销售出库单id
 	 * @return 发货单
 	 */
 	@Select("SELECT "

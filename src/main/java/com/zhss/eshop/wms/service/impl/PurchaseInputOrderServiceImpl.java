@@ -28,7 +28,7 @@ import com.zhss.eshop.wms.service.PurchaseInputOrderService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService {
 
 	/**
@@ -61,6 +61,7 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	 * 新增采购入库单
 	 * @param purchaseInputOrder 采购入库单
 	 */
+	@Override
 	public void save(PurchaseInputOrderDTO purchaseInputOrder) throws Exception {
 		Long purchaseInputOrderId = purchaseInputOrderDAO.save(
 				purchaseInputOrder.clone(PurchaseInputOrderDO.class));  
@@ -78,6 +79,7 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	 * @return 采购入库单
 	 * @throws Exception
 	 */
+	@Override
 	public List<PurchaseInputOrderDTO> listByPage(
 			PurchaseInputOrderQuery query) throws Exception {
 		return ObjectUtils.convertList(
@@ -90,6 +92,7 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	 * @return 采购入库单
 	 * @throws Exception
 	 */
+	@Override
 	public PurchaseInputOrderDTO getById(Long id) throws Exception {
 		PurchaseInputOrderDTO purchaseInputOrder = purchaseInputOrderDAO.getById(id)
 				.clone(PurchaseInputOrderDTO.class); 
@@ -114,6 +117,7 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	 * @param purchaseInputOrder 采购入库单
 	 * @throws Exception
 	 */
+	@Override
 	public void update(PurchaseInputOrderDTO purchaseInputOrder) throws Exception {
 		purchaseInputOrderDAO.update(purchaseInputOrder.clone(PurchaseInputOrderDO.class));  
 		purchaseInputOrderDAO.updateStatus(purchaseInputOrder.clone(PurchaseInputOrderDO.class)); 
@@ -128,6 +132,7 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	 * @param putOnItems 上架条目
 	 * @throws Exception
 	 */
+	@Override
 	public void batchSavePutOnItems(List<PurchaseInputOrderPutOnItemDTO> putOnItems) throws Exception {
 		purchaseInputOrderPutOnItemDAO.batchSave(ObjectUtils.convertList(
 				putOnItems, PurchaseInputOrderPutOnItemDO.class)); 
@@ -138,6 +143,7 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	 * @param id 采购入库单id
 	 * @throws Exception 
 	 */
+	@Override
 	public void submitApprove(Long id) throws Exception {
 		purchaseInputOrderDAO.updateStatus(id, PurchaseInputOrderStatus.WAIT_FOR_APPROVE);  
 	}
@@ -148,6 +154,7 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	 * @param approveResult 审核结果
 	 * @throws Exception
 	 */
+	@Override
 	public void approve(Long id, Integer approveResult) throws Exception {
 		if(PurchaseInputOrderApproveResult.REJECTED.equals(approveResult)) {
 			purchaseInputOrderDAO.updateStatus(id, PurchaseInputOrderStatus.EDITING);  
@@ -167,6 +174,7 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	 * @param status 采购入库单状态
 	 * @throws Exception
 	 */
+	@Override
 	public void updateStatus(Long id, Integer status) throws Exception {
 		purchaseInputOrderDAO.updateStatus(id, status); 
 	}

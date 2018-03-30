@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.commodity.domain.BrandDO;
 import com.zhss.eshop.commodity.domain.BrandQuery;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -27,9 +28,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class BrandDAOTest {
+public class BrandDaoTest {
 
 	/**
 	 * 评论信息管理模块的DAO组件
@@ -59,9 +60,11 @@ public class BrandDAOTest {
 	 */
 	@Test
 	public void testListByPage() throws Exception {
+		Integer count = 20;
+		
 		// 构造20条评论数据
-		Map<Long, BrandDO> brandMap = new HashMap<Long, BrandDO>();
-		for(int i = 0; i < 20; i++) {
+		Map<Long, BrandDO> brandMap = new HashMap<Long, BrandDO>(CollectionSize.DEFAULT); 
+		for(int i = 0; i < count; i++) {
 			BrandDO brand = createBrandDO();
 			brandMap.put(brand.getId(), brand);
 		}

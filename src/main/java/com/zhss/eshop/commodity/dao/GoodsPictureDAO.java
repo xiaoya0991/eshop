@@ -26,7 +26,7 @@ public interface GoodsPictureDAO {
 	
 	/**
 	 * 根据id查询商品图片
-	 * @param id 商品图片id
+	 * @param goodsId 商品图片id
 	 * @return 商品图片
 	 */
 	List<GoodsPictureDO> listByGoodsId(Long goodsId);

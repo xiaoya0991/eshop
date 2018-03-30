@@ -83,4 +83,11 @@ public class PropertyGroupRelationshipDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "PropertyGroupRelationshipDTO [id=" + id + ", propertyGroupId=" + propertyGroupId + ", propertyId="
+				+ propertyId + ", required=" + required + ", propertyTypes=" + propertyTypes + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

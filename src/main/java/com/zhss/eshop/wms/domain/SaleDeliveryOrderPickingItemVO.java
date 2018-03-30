@@ -83,4 +83,11 @@ public class SaleDeliveryOrderPickingItemVO extends AbstractObject {
 		this.goodsSkuId = goodsSkuId;
 	}
 	
+	@Override
+	public String toString() {
+		return "SaleDeliveryOrderPickingItemVO [id=" + id + ", saleDeliveryOrderItemId=" + saleDeliveryOrderItemId
+				+ ", goodsAllocationId=" + goodsAllocationId + ", goodsSkuId=" + goodsSkuId + ", pickingCount="
+				+ pickingCount + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

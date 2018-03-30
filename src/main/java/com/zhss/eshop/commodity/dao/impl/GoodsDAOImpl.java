@@ -29,6 +29,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 * @param categoryId 类目id
 	 * @return 商品数量
 	 */
+	@Override
 	public Long countByCategoryId(Long categoryId) throws Exception {
 		return goodsMapper.countByCategoryId(categoryId);
 	}
@@ -38,6 +39,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 * @param categoryId 类目id
 	 * @return 商品数量
 	 */
+	@Override
 	public Long countByBrandId(Long brandId) {
 		return goodsMapper.countByBrandId(brandId);
 	}
@@ -47,6 +49,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 * @param query 查询条件
 	 * @return 商品
 	 */
+	@Override
 	public List<GoodsDO> listByPage(GoodsQuery query) {
 		return goodsMapper.listByPage(query);
 	}
@@ -56,6 +59,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 * @param id 商品id
 	 * @return 商品
 	 */
+	@Override
 	public GoodsDO getById(Long id) {
 		return goodsMapper.getById(id);
 	}
@@ -64,6 +68,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 * 新增商品
 	 * @param goods 商品
 	 */
+	@Override
 	public Long save(GoodsDO goods) {
 		goodsMapper.save(goods); 
 		return goods.getId();
@@ -73,6 +78,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 * 更新商品
 	 * @param goods 商品
 	 */
+	@Override
 	public void update(GoodsDO goods) {
 		goodsMapper.update(goods);
 	}
@@ -81,6 +87,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 * 更新商品状态
 	 * @param goods
 	 */
+	@Override
 	public void updateStatus(GoodsDO goods) {
 		goodsMapper.updateStatus(goods);
 	}
@@ -89,6 +96,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 * 删除商品
 	 * @param id 商品id
 	 */
+	@Override
 	public void remove(Long id) {
 		goodsMapper.remove(id);
 	}

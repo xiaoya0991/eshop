@@ -24,9 +24,9 @@ import com.zhss.eshop.wms.domain.LogisticOrderDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class LogisticOrderDAOTest {
+public class LogisticOrderDaoTest {
 
 	/**
 	 * 物流单管理DAO组件

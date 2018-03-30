@@ -70,6 +70,7 @@ public class QueryPropertyCategoryOperation implements CategoryOperation<Propert
 	/**
 	 * 执行操作
 	 */
+	@Override
 	public Properties doExecute(Category category) throws Exception {
 		List<CategoryPropertyRelationshipVO> relations = queryCategoryPropertyRelations(category); 
 		queryProperties(relations); 
