@@ -33,6 +33,7 @@ public class DefaultOrderPriceCalculatorFactory implements OrderPriceCalculatorF
 	 * 创建订单总金额价格计算组件
 	 * @return 订单总金额价格计算组件
 	 */
+	@Override
 	public TotalPriceCalculator createTotalPriceCalculator() {
 		return totalPriceCalculator;
 	}
@@ -41,6 +42,7 @@ public class DefaultOrderPriceCalculatorFactory implements OrderPriceCalculatorF
 	 * 创建促销活动价格计算组件
 	 * @return 促销活动价格计算组件
 	 */
+	@Override
 	public PromotionActivityCalculator createPromotionActivityCalculator(
 			PromotionActivityDTO promotionActivity) {
 		return promotionActivityCalculator;
@@ -50,6 +52,7 @@ public class DefaultOrderPriceCalculatorFactory implements OrderPriceCalculatorF
 	 * 创建运费价格计算组件
 	 * @return 运费价格计算组件
 	 */
+	@Override
 	public FreightCalculator createFreightCalculator() {
 		return freightCalculator;
 	}

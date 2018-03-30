@@ -16,6 +16,7 @@ public class DefaultPromotionActivityCalculator implements PromotionActivityCalc
 	/**
 	 * 计算促销活动减免的金额
 	 */
+	@Override
 	public PromotionActivityResult calculate(OrderItemDTO item, 
 			PromotionActivityDTO promotionActivity) {
 		return new PromotionActivityResult(); 

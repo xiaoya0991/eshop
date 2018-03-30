@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.domain.OrderOperateLogDO;
 
@@ -29,9 +30,9 @@ import com.zhss.eshop.order.domain.OrderOperateLogDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class OrderOperateLogDAOTest {
+public class OrderOperateLogDaoTest {
 
 	/**
 	 * 订单管理DAO组件
@@ -100,7 +101,7 @@ public class OrderOperateLogDAOTest {
 	 */
 	private Map<Long, OrderOperateLogDO> createOrderOperateLogMap(Integer count, 
 			Long orderInfoId) throws Exception {
-		Map<Long, OrderOperateLogDO> orderOperateLogMap = new HashMap<Long, OrderOperateLogDO>();
+		Map<Long, OrderOperateLogDO> orderOperateLogMap = new HashMap<Long, OrderOperateLogDO>(CollectionSize.DEFAULT);
 		
 		List<OrderOperateLogDO> orderOperateLogs = createOrderOperateLogs(count, orderInfoId);
 		for(OrderOperateLogDO orderOperateLog : orderOperateLogs) {

@@ -25,7 +25,7 @@ import com.zhss.eshop.schedule.service.ScheduleService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class OrderServiceImpl implements OrderService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
@@ -170,6 +170,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderInfoId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPayOrderSuccessed(Long orderInfoId) {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderInfoId);
@@ -189,6 +190,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPublishCommentEvent(Long orderId) {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
@@ -223,6 +225,7 @@ public class OrderServiceImpl implements OrderService {
 	 * 从订单中心获取，确认收货时间超过了7天，而且还没有发表评论的订单
 	 * @return 订单信息DTO集合
 	 */
+	@Override
 	public List<OrderInfoDTO> listNotPublishedCommentOrders() {
 		try {
 			return orderInfoService.listNotPublishedCommentOrders();

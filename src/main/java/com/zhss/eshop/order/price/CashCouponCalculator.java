@@ -19,6 +19,7 @@ public class CashCouponCalculator implements CouponCalculator {
 	@Autowired
 	private JsonExtractor jsonExtractor;
 
+	@Override
 	public Double calculate(OrderInfoDTO order, CouponDTO coupon) throws Exception {
 		JSONObject rule = JSONObject.parseObject(coupon.getRule());
 		Double discountAmount = jsonExtractor.getDouble(rule, "discountAmount"); 

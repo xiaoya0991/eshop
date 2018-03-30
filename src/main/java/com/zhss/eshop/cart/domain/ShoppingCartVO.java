@@ -3,12 +3,14 @@ package com.zhss.eshop.cart.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.zhss.eshop.common.util.AbstractObject;
+
 /**
  * 购物车VO类
  * @author zhonghuashishan
  *
  */
-public class ShoppingCartVO {
+public class ShoppingCartVO extends AbstractObject {
 
 	/**
 	 * id
@@ -61,6 +63,10 @@ public class ShoppingCartVO {
 	public void setShoppingCartItemVOs(List<ShoppingCartItemVO> shoppingCartItemVOs) {
 		this.shoppingCartItemVOs = shoppingCartItemVOs;
 	}
-	
+	@Override
+	public String toString() {
+		return "ShoppingCartVO [id=" + id + ", userAccountId=" + userAccountId + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + ", shoppingCartItemVOs=" + shoppingCartItemVOs + "]";
+	}
 	
 }

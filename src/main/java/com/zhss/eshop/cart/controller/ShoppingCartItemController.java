@@ -38,7 +38,8 @@ public class ShoppingCartItemController {
 	public Boolean updatePurchaseQuantity(@PathVariable("id") Long id,
 			Long purchaseQuantity) {
 		try {
-			return shoppingCartItemService.updatePurchaseQuantity(id, purchaseQuantity);
+			shoppingCartItemService.updatePurchaseQuantity(id, purchaseQuantity);
+			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;
@@ -53,7 +54,8 @@ public class ShoppingCartItemController {
 	@DeleteMapping("/{id}")   
 	public Boolean remove(@PathVariable("id") Long id) {
 		try {
-			return shoppingCartItemService.remove(id);
+			shoppingCartItemService.remove(id);
+			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;

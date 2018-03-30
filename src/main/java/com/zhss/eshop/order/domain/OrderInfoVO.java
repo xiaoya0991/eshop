@@ -254,4 +254,17 @@ public class OrderInfoVO extends AbstractObject {
 		this.couponId = couponId;
 	}
 	
+	@Override
+	public String toString() {
+		return "OrderInfoVO [id=" + id + ", orderNo=" + orderNo + ", userAccountId=" + userAccountId + ", username="
+				+ username + ", orderStatus=" + orderStatus + ", consignee=" + consignee + ", deliveryAddress="
+				+ deliveryAddress + ", consigneeCellPhoneNumber=" + consigneeCellPhoneNumber + ", freight=" + freight
+				+ ", payType=" + payType + ", totalAmount=" + totalAmount + ", discountAmount=" + discountAmount
+				+ ", couponAmount=" + couponAmount + ", payableAmount=" + payableAmount + ", invoiceTitle="
+				+ invoiceTitle + ", taxpayerId=" + taxpayerId + ", orderComment=" + orderComment + ", publishedComment="
+				+ publishedComment + ", confirmReceiptTime=" + confirmReceiptTime + ", couponId=" + couponId
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", orderItems=" + orderItems + ", logs="
+				+ logs + "]";
+	}
+	
 }

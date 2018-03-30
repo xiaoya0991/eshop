@@ -50,7 +50,7 @@ import com.zhss.eshop.promotion.service.PromotionService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class OrderInfoServiceImpl implements OrderInfoService {
 
 	/**
@@ -128,6 +128,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * 计算订单价格
 	 * @param order 订单
 	 */
+	@Override
 	public OrderInfoDTO calculateOrderPrice(OrderInfoDTO order) throws Exception {
 		// 定义订单的各种价格
 		Double totalAmount = 0.0;
@@ -204,6 +205,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @param coupon
 	 * @return
 	 */
+	@Override
 	public OrderInfoDTO calculateCouponDiscountPrice(
 			OrderInfoDTO order, CouponDTO coupon) throws Exception {
 		CouponCalculator couponCalculator = couponCalculatorFactory.create(coupon);
@@ -217,6 +219,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * 新增一个订单
 	 * @param order
 	 */
+	@Override
 	public OrderInfoDTO save(OrderInfoDTO order) throws Exception {
 		if(!isStockEnough(order)) {
 			return order;
@@ -279,6 +282,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @return 订单
 	 * @throws Exception
 	 */
+	@Override
 	public List<OrderInfoDTO> listByPage(OrderInfoQuery query) throws Exception {
 		List<OrderInfoDTO> orders = ObjectUtils.convertList(
 				orderInfoDAO.listByPage(query), OrderInfoDTO.class); 
@@ -298,6 +302,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @return 订单
 	 * @throws Exception
 	 */
+	@Override
 	public OrderInfoDTO getById(Long id) throws Exception {
 		OrderInfoDTO order = orderInfoDAO.getById(id).clone(OrderInfoDTO.class);
 		setOrderItems(order);
@@ -339,6 +344,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @return 处理结果
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean cancel(Long id) throws Exception {
 		OrderInfoDTO order = getById(id);
 		if(order == null ) {
@@ -361,6 +367,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @return 处理结果
 	 * @throws Exception
 	 */
+	@Override
 	public String pay(Long id) throws Exception {
 		OrderInfoDTO order = getById(id);
 		if(!orderStateManager.canPay(order)) {
@@ -374,6 +381,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @param id 订单id
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean manualConfirmReceipt(Long id) throws Exception {
 		OrderInfoDTO order = getById(id);
 		
@@ -395,6 +403,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @return 处理结果
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean applyReturnGoods(ReturnGoodsApplyDTO apply) throws Exception {
 		OrderInfoDTO order = getById(apply.getOrderInfoId());
 		
@@ -416,6 +425,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @return 退货申请
 	 * @throws Exception
 	 */
+	@Override
 	public ReturnGoodsApplyDTO getByOrderInfoId(Long orderInfoId) throws Exception {
 		return returnGoodsApplyDAO.getByOrderInfoId(orderInfoId).clone(ReturnGoodsApplyDTO.class);
 	}
@@ -426,6 +436,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @param returnGoodsLogisticCode 退货物流单号
 	 * @throws Exception
 	 */
+	@Override
 	public void updateReturnGoodsLogisticCode(Long orderInfoId, 
 			String returnGoodsLogisticCode) throws Exception {
 		OrderInfoDTO order = getById(orderInfoId);
@@ -442,6 +453,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * @param order 订单
 	 * @throws Exception 
 	 */
+	@Override
 	public void update(OrderInfoDTO order) throws Exception {
 		orderInfoDAO.update(order.clone(OrderInfoDO.class));  
 	}
@@ -450,6 +462,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * 查询确认收货时间超过了7天而且还没有发表评论的订单
 	 * @return 订单
 	 */
+	@Override
 	public List<OrderInfoDTO> listNotPublishedCommentOrders() throws Exception {
 		List<OrderInfoDTO> orders = ObjectUtils.convertList(
 				orderInfoDAO.listNotPublishedCommentOrders(), 

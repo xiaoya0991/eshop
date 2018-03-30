@@ -73,4 +73,11 @@ public class OrderOperateLogVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "OrderOperateLogVO [id=" + id + ", orderInfoId=" + orderInfoId + ", operateType=" + operateType
+				+ ", operateContent=" + operateContent + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ "]";
+	}
+	
 }

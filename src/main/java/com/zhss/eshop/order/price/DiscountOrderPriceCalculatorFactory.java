@@ -48,6 +48,7 @@ public class DiscountOrderPriceCalculatorFactory implements OrderPriceCalculator
 	/**
 	 * 创建总金额计算组件
 	 */
+	@Override
 	public TotalPriceCalculator createTotalPriceCalculator() {
 		return totalPriceCalculator;
 	}
@@ -55,6 +56,7 @@ public class DiscountOrderPriceCalculatorFactory implements OrderPriceCalculator
 	/**
 	 * 创建促销活动计算组件
 	 */
+	@Override
 	public PromotionActivityCalculator createPromotionActivityCalculator(
 			PromotionActivityDTO promotionActivity) {
 		if(promotionActivity == null) { 
@@ -76,6 +78,7 @@ public class DiscountOrderPriceCalculatorFactory implements OrderPriceCalculator
 	/**
 	 * 创建运费计算组件
 	 */
+	@Override
 	public FreightCalculator createFreightCalculator() {
 		return freightCalculator;
 	}

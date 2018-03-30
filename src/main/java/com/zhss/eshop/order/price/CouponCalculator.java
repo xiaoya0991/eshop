@@ -12,9 +12,10 @@ public interface CouponCalculator {
 
 	/**
 	 * 计算优惠券对当前订单的抵扣金额
-	 * @param order
-	 * @param coupon
-	 * @return
+	 * @param order 订单
+	 * @param coupon 优惠券
+	 * @return 抵扣金额
+	 * @throws Exception
 	 */
 	Double calculate(OrderInfoDTO order, CouponDTO coupon) throws Exception;
 	

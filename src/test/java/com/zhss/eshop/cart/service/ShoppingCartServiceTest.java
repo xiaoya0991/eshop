@@ -1,6 +1,5 @@
 package com.zhss.eshop.cart.service;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 import java.text.SimpleDateFormat;
@@ -77,14 +76,11 @@ public class ShoppingCartServiceTest {
 				shoppingCartDO.getId(), goodsSkuId)).thenReturn(shoppingCartItemDO);
 		
 		shoppingCartItemDO.setPurchaseQuantity(shoppingCartItemDO.getPurchaseQuantity() + 1L); 
-		when(shoppingCartItemDAO.updateShoppingCartItem(shoppingCartItemDO)).thenReturn(true); 
 		
 		// 执行service的方法
-		Boolean addShoppingCartItemResult = shoppingCartService
-				.addShoppingCartItem(userAccountId, goodsSkuId);
+		shoppingCartService.addShoppingCartItem(userAccountId, goodsSkuId);
 		
 		// 执行断言
-		assertTrue(addShoppingCartItemResult);
 		verify(shoppingCartDAO, times(1)).getShoppingCartByUserAccountId(userAccountId);
 		verify(shoppingCartItemDAO, times(1)).getShoppingCartItemByGoodsSkuId(
 				shoppingCartDO.getId(), goodsSkuId);

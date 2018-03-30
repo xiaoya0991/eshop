@@ -88,44 +88,66 @@ public class OrderOperateLogDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		OrderOperateLogDO other = (OrderOperateLogDO) obj;
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (operateContent == null) {
-			if (other.operateContent != null)
+			if (other.operateContent != null) {
 				return false;
-		} else if (!operateContent.equals(other.operateContent))
+			}
+		} else if (!operateContent.equals(other.operateContent)) {
 			return false;
+		}
 		if (operateType == null) {
-			if (other.operateType != null)
+			if (other.operateType != null) {
 				return false;
-		} else if (!operateType.equals(other.operateType))
+			}
+		} else if (!operateType.equals(other.operateType)) {
 			return false;
+		}
 		if (orderInfoId == null) {
-			if (other.orderInfoId != null)
+			if (other.orderInfoId != null) {
 				return false;
-		} else if (!orderInfoId.equals(other.orderInfoId))
+			}
+		} else if (!orderInfoId.equals(other.orderInfoId)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "OrderOperateLogDO [id=" + id + ", orderInfoId=" + orderInfoId + ", operateType=" + operateType
+				+ ", operateContent=" + operateContent + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ "]";
 	}
 	
 }

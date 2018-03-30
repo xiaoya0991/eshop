@@ -3,10 +3,7 @@ package com.zhss.eshop.cart.domain;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.zhss.eshop.common.util.BeanCopierUtils;
+import com.zhss.eshop.common.util.AbstractObject;
 import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
 
 /**
@@ -14,10 +11,8 @@ import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
  * @author zhonghuashishan
  *
  */
-public class ShoppingCartItemDTO {
+public class ShoppingCartItemDTO extends AbstractObject {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartItemDTO.class);
-
 	/**
 	 * id
 	 */
@@ -190,16 +185,15 @@ public class ShoppingCartItemDTO {
 		this.goodsId = goodsId;
 	}
 	
-	public <T> T clone(Class<T> clazz) {
-		T target = null;
-		try {
-			target = clazz.newInstance();
-			BeanCopierUtils.copyProperties(this, target);  
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
-		return target;
+	@Override
+	public String toString() {
+		return "ShoppingCartItemDTO [id=" + id + ", shoppingCartId=" + shoppingCartId + ", goodsSkuId=" + goodsSkuId
+				+ ", goodsSkuCode=" + goodsSkuCode + ", goodsName=" + goodsName + ", saleProperties=" + saleProperties
+				+ ", salePrice=" + salePrice + ", grossWeight=" + grossWeight + ", goodsLength=" + goodsLength
+				+ ", goodsWidth=" + goodsWidth + ", goodsHeight=" + goodsHeight + ", saleStockQuantity="
+				+ saleStockQuantity + ", goodsId=" + goodsId + ", purchaseQuantity=" + purchaseQuantity
+				+ ", promotionActivityDTOs=" + promotionActivityDTOs + ", gmtCreate=" + gmtCreate + ", gmtModified="
+				+ gmtModified + "]";
 	}
 	
 }

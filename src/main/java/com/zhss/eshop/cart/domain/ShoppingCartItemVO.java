@@ -3,6 +3,7 @@ package com.zhss.eshop.cart.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.zhss.eshop.common.util.AbstractObject;
 import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
 
 /**
@@ -10,7 +11,7 @@ import com.zhss.eshop.promotion.domain.PromotionActivityDTO;
  * @author zhonghuashishan
  *
  */
-public class ShoppingCartItemVO {
+public class ShoppingCartItemVO extends AbstractObject {
 
 	/**
 	 * id
@@ -182,6 +183,17 @@ public class ShoppingCartItemVO {
 	}
 	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
+	}
+	
+	@Override
+	public String toString() {
+		return "ShoppingCartItemVO [id=" + id + ", shoppingCartId=" + shoppingCartId + ", goodsSkuId=" + goodsSkuId
+				+ ", goodsSkuCode=" + goodsSkuCode + ", goodsName=" + goodsName + ", saleProperties=" + saleProperties
+				+ ", salePrice=" + salePrice + ", grossWeight=" + grossWeight + ", goodsLength=" + goodsLength
+				+ ", goodsWidth=" + goodsWidth + ", goodsHeight=" + goodsHeight + ", saleStockQuantity="
+				+ saleStockQuantity + ", goodsId=" + goodsId + ", purchaseQuantity=" + purchaseQuantity
+				+ ", promotionActivityDTOs=" + promotionActivityDTOs + ", gmtCreate=" + gmtCreate + ", gmtModified="
+				+ gmtModified + "]";
 	}
 	
 }

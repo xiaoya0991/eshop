@@ -46,12 +46,13 @@ public class ShoppingCartController {
 	@PostMapping("/item/add") 
 	public Boolean addShoppingCartItem(@RequestBody AddShoppingCartItemQuery query) {
 		try {
-			return shoppingCartService.addShoppingCartItem(
-					query.getUserAccountId(), query.getGoodsSkuId());  
+			shoppingCartService.addShoppingCartItem(query.getUserAccountId(), 
+					query.getGoodsSkuId()); 
+			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 
+			return false;
 		}
-		return false;
 	}
 	
 	/**

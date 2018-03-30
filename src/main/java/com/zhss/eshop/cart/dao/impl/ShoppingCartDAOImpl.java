@@ -1,7 +1,5 @@
 package com.zhss.eshop.cart.dao.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,8 +15,6 @@ import com.zhss.eshop.cart.mapper.ShoppingCartMapper;
 @Repository
 public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartDAOImpl.class);
-	
 	/**
 	 * 购物车管理模块的mapper组件
 	 */
@@ -30,26 +26,18 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
 	 * @param userAccountId 用户账号id
 	 * @return 购物车
 	 */
-	public ShoppingCartDO getShoppingCartByUserAccountId(Long userAccountId) {
-		try {
-			return shoppingCartMapper.getShoppingCartByUserAccountId(userAccountId);
-		} catch (Exception e) {
-			logger.error("error", e); 
-		}
-		return null;
+	@Override
+	public ShoppingCartDO getShoppingCartByUserAccountId(Long userAccountId) throws Exception {
+		return shoppingCartMapper.getShoppingCartByUserAccountId(userAccountId);
 	}
 	
 	/**
 	 * 新增购物车
 	 * @param shoppingCartDO 购物车DO对象
 	 */
-	public Long saveShoppingCart(ShoppingCartDO shoppingCartDO) {
-		try {
-			shoppingCartMapper.saveShoppingCart(shoppingCartDO); 
-		} catch (Exception e) {
-			logger.error("error", e);
-			return null;
-		}
+	@Override
+	public Long saveShoppingCart(ShoppingCartDO shoppingCartDO) throws Exception {
+		shoppingCartMapper.saveShoppingCart(shoppingCartDO); 
 		return shoppingCartDO.getId();
 	}
 

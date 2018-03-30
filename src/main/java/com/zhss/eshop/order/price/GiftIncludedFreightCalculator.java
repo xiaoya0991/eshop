@@ -24,6 +24,7 @@ public class GiftIncludedFreightCalculator implements FreightCalculator {
 	/**
 	 * 计算运费
 	 */
+	@Override
 	public Double calculate(OrderInfoDTO order, OrderItemDTO orderItem, 
 			PromotionActivityResult result) {
 		Double freight = 0.0;

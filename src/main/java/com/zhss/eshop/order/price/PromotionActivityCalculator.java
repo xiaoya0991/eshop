@@ -12,7 +12,10 @@ public interface PromotionActivityCalculator {
 
 	/**
 	 * 处理促销活动
-	 * @return
+	 * @param item 订单条目
+	 * @param promotionActivity 促销活动
+	 * @return 促销活动计算结果
+	 * @throws Exception
 	 */
 	PromotionActivityResult calculate(OrderItemDTO item, 
 			PromotionActivityDTO promotionActivity) throws Exception;

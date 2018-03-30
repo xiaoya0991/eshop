@@ -13,6 +13,7 @@ import com.zhss.eshop.promotion.domain.CouponDTO;
 @Component
 public class DefaultCouponCalculator implements CouponCalculator {
 
+	@Override
 	public Double calculate(OrderInfoDTO order, CouponDTO coupon) {
 		return 0.0;
 	}

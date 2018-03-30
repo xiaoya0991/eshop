@@ -188,6 +188,7 @@ public interface OrderInfoMapper {
 	
 	/**
 	 * 根据状态查询订单
+	 * @param orderStatus 订单状态
 	 * @return 订单
 	 */
 	@Select("SELECT "

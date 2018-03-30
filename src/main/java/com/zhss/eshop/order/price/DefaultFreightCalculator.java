@@ -24,6 +24,7 @@ public class DefaultFreightCalculator implements FreightCalculator {
 	/**
 	 * 计算运费
 	 */
+	@Override
 	public Double calculate(OrderInfoDTO order, OrderItemDTO orderItem, 
 			PromotionActivityResult result) {
 		return logisticsService.calculateFreight(order, orderItem);

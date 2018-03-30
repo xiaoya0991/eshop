@@ -27,7 +27,8 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	 * 新增订单条目
 	 * @param orderItem
 	 */
-	public void save(OrderItemDO orderItem) {
+	@Override
+	public void save(OrderItemDO orderItem) throws Exception {
 		orderItemMapper.save(orderItem);
 	}
 	
@@ -36,7 +37,8 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	 * @param orderInfoId 订单id
 	 * @return 订单条目
 	 */
-	public List<OrderItemDO> listByOrderInfoId(Long orderInfoId) {
+	@Override
+	public List<OrderItemDO> listByOrderInfoId(Long orderInfoId) throws Exception {
 		return orderItemMapper.listByOrderInfoId(orderInfoId);
 	}
 	

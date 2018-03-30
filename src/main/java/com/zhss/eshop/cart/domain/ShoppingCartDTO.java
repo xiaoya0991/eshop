@@ -3,20 +3,15 @@ package com.zhss.eshop.cart.domain;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.zhss.eshop.common.util.BeanCopierUtils;
+import com.zhss.eshop.common.util.AbstractObject;
 
 /**
  * 购物车DTO类
  * @author zhonghuashishan
  *
  */
-public class ShoppingCartDTO {
+public class ShoppingCartDTO extends AbstractObject {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartDTO.class);
-
 	/**
 	 * id
 	 */
@@ -69,16 +64,10 @@ public class ShoppingCartDTO {
 		this.shoppingCartItemDTOs = shoppingCartItemDTOs;
 	}
 	
-	public <T> T clone(Class<T> clazz) {
-		T target = null;
-		try {
-			target = clazz.newInstance();
-			BeanCopierUtils.copyProperties(this, target);  
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
-		return target;
+	@Override
+	public String toString() {
+		return "ShoppingCartDTO [id=" + id + ", userAccountId=" + userAccountId + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + ", shoppingCartItemDTOs=" + shoppingCartItemDTOs + "]";
 	}
 	
 }

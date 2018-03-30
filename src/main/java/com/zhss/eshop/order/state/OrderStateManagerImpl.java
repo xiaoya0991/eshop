@@ -85,6 +85,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void create(OrderInfoDTO order) throws Exception {
 		waitForPayOrderState.doTransition(order);
 	}
@@ -95,6 +96,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @return 能否执行取消操作
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canCancel(OrderInfoDTO order) throws Exception {
 		return getOrderState(order).canCancel(order);
 	}
@@ -104,6 +106,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void cancel(OrderInfoDTO order) throws Exception {
 		canceledOrderState.doTransition(order); 
 	}
@@ -114,6 +117,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @return 能否进行支付操作
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canPay(OrderInfoDTO order) throws Exception {
 		return getOrderState(order).canPay(order);
 	}
@@ -123,6 +127,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void pay(OrderInfoDTO order) throws Exception {
 		waitForDeliveryOrderState.doTransition(order); 
 	}
@@ -132,6 +137,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void finishDelivery(OrderInfoDTO order) throws Exception {
 		waitForReceiveOrderState.doTransition(order); 
 	}
@@ -142,6 +148,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @return 能否执行手动确认收货的操作
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canConfirmReceipt(OrderInfoDTO order) throws Exception {
 		return getOrderState(order).canConfirmReceipt(order);
 	}
@@ -151,6 +158,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void confirmReceipt(OrderInfoDTO order) throws Exception {
 		finishedOrderState.doTransition(order);  
 	}
@@ -161,6 +169,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @return 能否申请退货
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canApplyReturnGoods(OrderInfoDTO order) throws Exception {
 		return getOrderState(order).canApplyReturnGoods(order);
 	}
@@ -170,6 +179,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void applyReturnGoods(OrderInfoDTO order) throws Exception {
 		waitForReturnGoodsApproveOrderState.doTransition(order); 
 	}
@@ -179,6 +189,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void rejectReturnGoodsApply(OrderInfoDTO order) throws Exception {
 		returnGoodsRejectedOrderState.doTransition(order); 
 	}
@@ -188,6 +199,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void passedReturnGoodsApply(OrderInfoDTO order) throws Exception {
 		waitForSendOutReturnGoodsOrderState.doTransition(order); 
 	}
@@ -197,6 +209,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void sendOutReturnGoods(OrderInfoDTO order) throws Exception {
 		waitForReceiveReturnGoodsOrderState.doTransition(order); 
 	}
@@ -206,6 +219,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void confirmReceivedReturnGoods(OrderInfoDTO order) throws Exception {
 		waitForInputReturnGoodsOrderState.doTransition(order); 
 	}
@@ -215,6 +229,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void finishedInputReturnGoods(OrderInfoDTO order) throws Exception {
 		finishedInputReturnGoodsOrderState.doTransition(order); 
 	}
@@ -224,6 +239,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void finishedRefund(OrderInfoDTO order) throws Exception {
 		finishedRefundOrderState.doTransition(order); 
 	}

@@ -17,6 +17,7 @@ public interface OrderPriceCalculatorFactory {
 	
 	/**
 	 * 创建促销活动价格计算组件
+	 * @param promotionActivity 促销活动
 	 * @return 促销活动价格计算组件
 	 */
 	PromotionActivityCalculator createPromotionActivityCalculator(

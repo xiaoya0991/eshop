@@ -30,6 +30,7 @@ public abstract class AbstractOrderState implements OrderState {
 	 * 订单流转到当前这个状态
 	 * @param order 订单
 	 */
+	@Override
 	public void doTransition(OrderInfoDTO order) throws Exception {
 		orderInfoDAO.updateStatus(order.getId(), getOrderStatus(order));  
 	}
@@ -47,6 +48,7 @@ public abstract class AbstractOrderState implements OrderState {
 	 * @param order 订单
 	 * @return 能否执行取消订单操作
 	 */
+	@Override
 	public Boolean canCancel(OrderInfoDTO order) throws Exception {
 		return false;
 	}
@@ -57,6 +59,7 @@ public abstract class AbstractOrderState implements OrderState {
 	 * @return 能否执行支付操作
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canPay(OrderInfoDTO order) throws Exception {
 		return false;
 	}
@@ -67,6 +70,7 @@ public abstract class AbstractOrderState implements OrderState {
 	 * @return 能否执行手动确认收货的操作
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canConfirmReceipt(OrderInfoDTO order) throws Exception {
 		return false;
 	}
@@ -77,6 +81,7 @@ public abstract class AbstractOrderState implements OrderState {
 	 * @return 能否申请退货
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean canApplyReturnGoods(OrderInfoDTO order) throws Exception {
 		return false;
 	}

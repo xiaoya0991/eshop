@@ -20,6 +20,7 @@ public class ReachDiscountCouponCalculator implements CouponCalculator {
 	@Autowired
 	private JsonExtractor jsonExtractor;
 	
+	@Override
 	public Double calculate(OrderInfoDTO order, CouponDTO coupon) throws Exception {
 		Double payableAmount = order.getPayableAmount();
 		

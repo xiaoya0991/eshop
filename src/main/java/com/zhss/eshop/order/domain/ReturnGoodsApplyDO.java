@@ -110,54 +110,81 @@ public class ReturnGoodsApplyDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		ReturnGoodsApplyDO other = (ReturnGoodsApplyDO) obj;
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (orderInfoId == null) {
-			if (other.orderInfoId != null)
+			if (other.orderInfoId != null) {
 				return false;
-		} else if (!orderInfoId.equals(other.orderInfoId))
+			}
+		} else if (!orderInfoId.equals(other.orderInfoId)) {
 			return false;
+		}
 		if (returnGoodsApplyStatus == null) {
-			if (other.returnGoodsApplyStatus != null)
+			if (other.returnGoodsApplyStatus != null) {
 				return false;
-		} else if (!returnGoodsApplyStatus.equals(other.returnGoodsApplyStatus))
+			}
+		} else if (!returnGoodsApplyStatus.equals(other.returnGoodsApplyStatus)) {
 			return false;
+		}
 		if (returnGoodsComment == null) {
-			if (other.returnGoodsComment != null)
+			if (other.returnGoodsComment != null) {
 				return false;
-		} else if (!returnGoodsComment.equals(other.returnGoodsComment))
+			}
+		} else if (!returnGoodsComment.equals(other.returnGoodsComment)) {
 			return false;
+		}
 		if (returnGoodsLogisticCode == null) {
-			if (other.returnGoodsLogisticCode != null)
+			if (other.returnGoodsLogisticCode != null) {
 				return false;
-		} else if (!returnGoodsLogisticCode.equals(other.returnGoodsLogisticCode))
+			}
+		} else if (!returnGoodsLogisticCode.equals(other.returnGoodsLogisticCode)) {
 			return false;
+		}
 		if (returnGoodsReason == null) {
-			if (other.returnGoodsReason != null)
+			if (other.returnGoodsReason != null) {
 				return false;
-		} else if (!returnGoodsReason.equals(other.returnGoodsReason))
+			}
+		} else if (!returnGoodsReason.equals(other.returnGoodsReason)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "ReturnGoodsApplyDO [id=" + id + ", orderInfoId=" + orderInfoId + ", returnGoodsReason="
+				+ returnGoodsReason + ", returnGoodsComment=" + returnGoodsComment + ", returnGoodsApplyStatus="
+				+ returnGoodsApplyStatus + ", returnGoodsLogisticCode=" + returnGoodsLogisticCode + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

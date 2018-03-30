@@ -17,21 +17,26 @@ public interface OrderInfoService {
 	/**
 	 * 计算订单价格
 	 * @param order 订单
+	 * @return 订单
+	 * @throws Exception
 	 */
 	OrderInfoDTO calculateOrderPrice(OrderInfoDTO order) throws Exception;
 	
 	/**
 	 * 计算优惠券抵扣的金额
-	 * @param order 
-	 * @param coupon
-	 * @return
+	 * @param order 订单
+	 * @param coupon 优惠券
+	 * @return 抵扣金额
+	 * @throws Exception
 	 */
 	OrderInfoDTO calculateCouponDiscountPrice(
 			OrderInfoDTO order, CouponDTO coupon) throws Exception;
 	
 	/**
 	 * 新增一个订单
-	 * @param order
+	 * @param order 订单
+	 * @return 订单
+	 * @throws Exception
 	 */
 	OrderInfoDTO save(OrderInfoDTO order) throws Exception;
 	
@@ -70,6 +75,7 @@ public interface OrderInfoService {
 	/**
 	 * 手动确认收货
 	 * @param id 订单id
+	 * @return 处理结果
 	 * @throws Exception
 	 */
 	Boolean manualConfirmReceipt(Long id) throws Exception;
@@ -109,6 +115,7 @@ public interface OrderInfoService {
 	/**
 	 * 查询确认收货时间超过了7天而且还没有发表评论的订单
 	 * @return 订单
+	 * @throws Exception
 	 */
 	List<OrderInfoDTO> listNotPublishedCommentOrders() throws Exception; 
 	

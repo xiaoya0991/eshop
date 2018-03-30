@@ -18,6 +18,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.constant.OrderStatus;
 import com.zhss.eshop.order.domain.OrderInfoDO;
@@ -30,9 +31,9 @@ import com.zhss.eshop.order.domain.OrderInfoQuery;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class OrderInfoDAOTest {
+public class OrderInfoDaoTest {
 
 	/**
 	 * 订单管理DAO组件
@@ -248,7 +249,7 @@ public class OrderInfoDAOTest {
 	 */
 	private Map<Long, OrderInfoDO> createOrderMap(Integer count, 
 			Long userAccountId, Integer orderStatus) throws Exception {
-		Map<Long, OrderInfoDO> orderMap = new HashMap<Long, OrderInfoDO>();
+		Map<Long, OrderInfoDO> orderMap = new HashMap<Long, OrderInfoDO>(CollectionSize.DEFAULT);
 	
 		List<OrderInfoDO> orders = createOrders(count, userAccountId, orderStatus);
 		for(OrderInfoDO order : orders) {

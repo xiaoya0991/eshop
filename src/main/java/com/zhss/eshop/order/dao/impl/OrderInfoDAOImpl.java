@@ -35,6 +35,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * 新增订单
 	 * @param order
 	 */
+	@Override
 	public Long save(OrderInfoDO order) throws Exception {
 		orderInfoMapper.save(order);  
 		return order.getId();
@@ -45,6 +46,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * @param query 查询条件
 	 * @return 订单
 	 */
+	@Override
 	public List<OrderInfoDO> listByPage(OrderInfoQuery query) throws Exception {
 		return orderInfoMapper.listByPage(query);
 	}
@@ -54,6 +56,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * @param query 查询条件
 	 * @return 订单
 	 */
+	@Override
 	public OrderInfoDO getById(Long id) throws Exception {
 		return orderInfoMapper.getById(id);
 	}
@@ -62,6 +65,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * 查询所有未付款的订单
 	 * @return 所有未付款的订单
 	 */
+	@Override
 	public List<OrderInfoDO> listAllUnpayed() throws Exception { 
 		return orderInfoMapper.listByStatus(OrderStatus.WAIT_FOR_PAY);
 	}
@@ -71,6 +75,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * @param order 订单
 	 * @throws Exception
 	 */
+	@Override
 	public void update(OrderInfoDO order) throws Exception {
 		order.setGmtModified(dateProvider.getCurrentTime()); 
 		orderInfoMapper.update(order); 
@@ -80,6 +85,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * 更新订单状态
 	 * @param order 订单
 	 */
+	@Override
 	public void updateStatus(Long id, Integer status) throws Exception {
 		OrderInfoDO order = getById(id);
 		order.setOrderStatus(status);
@@ -91,6 +97,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * @return 订单
 	 * @throws Exception
 	 */
+	@Override
 	public List<OrderInfoDO> listUnreceived() throws Exception {
 		return orderInfoMapper.listByStatus(OrderStatus.WAIT_FOR_RECEIVE);
 	}
@@ -99,6 +106,7 @@ public class OrderInfoDAOImpl implements OrderInfoDAO {
 	 * 查询确认收货时间超过了7天而且还没有发表评论的订单
 	 * @return 订单
 	 */
+	@Override
 	public List<OrderInfoDO> listNotPublishedCommentOrders() throws Exception {
 		return orderInfoMapper.listNotPublishedCommentOrders();
 	}

@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.cart.domain.ShoppingCartItemDO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -29,9 +30,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class ShoppingCartItemDAOTest {
+public class ShoppingCartItemDaoTest {
 
 	/**
 	 * 购物车条目管理模块的DAO组件
@@ -124,7 +125,7 @@ public class ShoppingCartItemDAOTest {
 		Long shoppingCartId = 1L;
 		
 		Map<Long, ShoppingCartItemDO> itemMap = 
-				new HashMap<Long, ShoppingCartItemDO>();
+				new HashMap<Long, ShoppingCartItemDO>(CollectionSize.DEFAULT);
 		
 		ShoppingCartItemDO item = null;
 		

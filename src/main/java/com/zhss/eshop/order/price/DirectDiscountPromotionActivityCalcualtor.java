@@ -22,6 +22,7 @@ public class DirectDiscountPromotionActivityCalcualtor implements PromotionActiv
 	/**
 	 * 计算促销活动的减免金额
 	 */
+	@Override
 	public PromotionActivityResult calculate(OrderItemDTO item, 
 			PromotionActivityDTO promotionActivity) throws Exception {
 		Double totalAmount = item.getPurchaseQuantity() * item.getPurchasePrice();

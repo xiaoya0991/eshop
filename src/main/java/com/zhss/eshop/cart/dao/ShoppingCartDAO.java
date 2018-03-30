@@ -13,13 +13,16 @@ public interface ShoppingCartDAO {
 	 * 根据用户账号id查询购物车
 	 * @param userAccountId 用户账号id
 	 * @return 购物车
+	 * @throws Exception
 	 */
-	ShoppingCartDO getShoppingCartByUserAccountId(Long userAccountId);
+	ShoppingCartDO getShoppingCartByUserAccountId(Long userAccountId) throws Exception;
 	
 	/**
 	 * 新增购物车
 	 * @param shoppingCartDO 购物车DO对象
+	 * @return 购物车id
+	 * @throws Exception
 	 */
-	Long saveShoppingCart(ShoppingCartDO shoppingCartDO);
+	Long saveShoppingCart(ShoppingCartDO shoppingCartDO) throws Exception;
 	
 }

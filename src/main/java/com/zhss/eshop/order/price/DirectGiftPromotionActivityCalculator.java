@@ -26,6 +26,7 @@ public class DirectGiftPromotionActivityCalculator
 	@Autowired
 	private CommodityService commodityService;
 	
+	@Override
 	public PromotionActivityResult calculate(OrderItemDTO item, 
 			PromotionActivityDTO promotionActivity) {
 		JSONObject rule = JSONObject.parseObject(promotionActivity.getRule());

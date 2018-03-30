@@ -1,5 +1,6 @@
 package com.zhss.eshop.order.domain;
 
+import com.zhss.eshop.common.util.AbstractObject;
 import com.zhss.eshop.promotion.domain.CouponVO;
 
 /**
@@ -7,7 +8,7 @@ import com.zhss.eshop.promotion.domain.CouponVO;
  * @author zhonghuashishan
  *
  */
-public class CalculateCouponeDiscountPriceVO {
+public class CalculateCouponeDiscountPriceVO extends AbstractObject {
 
 	/**
 	 * 订单
@@ -29,6 +30,11 @@ public class CalculateCouponeDiscountPriceVO {
 	}
 	public void setCoupon(CouponVO coupon) {
 		this.coupon = coupon;
+	}
+	
+	@Override
+	public String toString() {
+		return "CalculateCouponeDiscountPriceVO [order=" + order + ", coupon=" + coupon + "]";
 	}
 	
 }

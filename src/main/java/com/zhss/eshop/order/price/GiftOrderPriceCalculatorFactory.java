@@ -44,6 +44,7 @@ public class GiftOrderPriceCalculatorFactory implements OrderPriceCalculatorFact
 	 * 创建订单总金额价格计算组件
 	 * @return 订单总金额价格计算组件
 	 */
+	@Override
 	public TotalPriceCalculator createTotalPriceCalculator() {
 		return totalPriceCalculator;
 	}
@@ -52,6 +53,7 @@ public class GiftOrderPriceCalculatorFactory implements OrderPriceCalculatorFact
 	 * 创建促销活动价格计算组件
 	 * @return 促销活动价格计算组件
 	 */
+	@Override
 	public PromotionActivityCalculator createPromotionActivityCalculator(
 			PromotionActivityDTO promotionActivity) {
 		if(promotionActivity == null) {
@@ -72,6 +74,7 @@ public class GiftOrderPriceCalculatorFactory implements OrderPriceCalculatorFact
 	 * 创建运费价格计算组件
 	 * @return 运费价格计算组件
 	 */
+	@Override
 	public FreightCalculator createFreightCalculator() {
 		return freightCalculator;
 	}

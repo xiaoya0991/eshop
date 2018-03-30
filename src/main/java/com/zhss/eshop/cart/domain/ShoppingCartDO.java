@@ -2,20 +2,15 @@ package com.zhss.eshop.cart.domain;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.zhss.eshop.common.util.BeanCopierUtils;
+import com.zhss.eshop.common.util.AbstractObject;
 
 /**
  * 购物车DO类
  * @author zhonghuashishan
  *
  */
-public class ShoppingCartDO {
+public class ShoppingCartDO extends AbstractObject {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ShoppingCartDO.class);
-
 	/**
 	 * id
 	 */
@@ -71,46 +66,51 @@ public class ShoppingCartDO {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		ShoppingCartDO other = (ShoppingCartDO) obj;
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (userAccountId == null) {
-			if (other.userAccountId != null)
+			if (other.userAccountId != null) {
 				return false;
-		} else if (!userAccountId.equals(other.userAccountId))
+			}
+		} else if (!userAccountId.equals(other.userAccountId)) {
 			return false;
+		}
 		return true;
 	}
 	
-	public <T> T clone(Class<T> clazz) {
-		T target = null;
-		try {
-			target = clazz.newInstance();
-			BeanCopierUtils.copyProperties(this, target);  
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
-		return target;
+	@Override
+	public String toString() {
+		return "ShoppingCartDO [id=" + id + ", userAccountId=" + userAccountId + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

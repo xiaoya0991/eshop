@@ -27,7 +27,8 @@ public class OrderOperateLogDAOImpl implements OrderOperateLogDAO {
 	 * 新增订单操作日志
 	 * @param log 订单操作日志
 	 */
-	public void save(OrderOperateLogDO log) {
+	@Override
+	public void save(OrderOperateLogDO log) throws Exception {
 		logMapper.save(log); 
 	}
 	
@@ -36,7 +37,8 @@ public class OrderOperateLogDAOImpl implements OrderOperateLogDAO {
 	 * @param orderInfoId 订单id
 	 * @return 订单操作日志
 	 */
-	public List<OrderOperateLogDO> listByOrderInfoId(Long orderInfoId) {
+	@Override
+	public List<OrderOperateLogDO> listByOrderInfoId(Long orderInfoId) throws Exception {
 		return logMapper.listByOrderInfoId(orderInfoId);
 	}
 	

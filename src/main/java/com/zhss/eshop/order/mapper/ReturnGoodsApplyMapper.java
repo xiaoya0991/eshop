@@ -44,8 +44,8 @@ public interface ReturnGoodsApplyMapper {
 	void save(ReturnGoodsApplyDO apply);
 	
 	/**
-	 * 根据id查询退货申请
-	 * @param id 退货申请id
+	 * 根据订单id查询退货申请
+	 * @param orderInfoId 订单id
 	 * @return 退货申请
 	 */
 	@Select("SELECT "

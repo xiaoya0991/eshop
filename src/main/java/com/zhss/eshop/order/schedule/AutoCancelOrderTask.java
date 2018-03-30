@@ -25,7 +25,7 @@ import com.zhss.eshop.order.state.LoggedOrderStateManager;
  *
  */
 @Component
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class AutoCancelOrderTask {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AutoCancelOrderTask.class);

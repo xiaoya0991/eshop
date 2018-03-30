@@ -51,10 +51,6 @@ public class ShoppingCartControllerTest {
 		query.setUserAccountId(userAccountId);
 		query.setGoodsSkuId(goodsSkuId); 
 		
-		// 模拟一下service组件的行为
-		when(shoppingCartService.addShoppingCartItem(
-				userAccountId, goodsSkuId)).thenReturn(true);
-		
 		// 调用http接口请求，以及比较返回结果
 		mockMvc.perform(post("/cart/item/add").contentType("application/json").content(JSONObject.toJSONString(query)))
 				.andExpect(content().string("true")); 

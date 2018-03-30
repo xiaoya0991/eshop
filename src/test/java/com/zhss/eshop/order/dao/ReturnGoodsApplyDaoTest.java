@@ -23,9 +23,9 @@ import com.zhss.eshop.order.domain.ReturnGoodsApplyDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
-public class ReturnGoodsApplyDAOTest {
+public class ReturnGoodsApplyDaoTest {
 
 	/**
 	 * 退货申请管理DAO组件
