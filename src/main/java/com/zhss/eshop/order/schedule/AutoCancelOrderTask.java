@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zhss.eshop.Inventory.service.InventoryService;
+import com.zhss.eshop.inventory.service.InventoryService;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.order.dao.OrderInfoDAO;
