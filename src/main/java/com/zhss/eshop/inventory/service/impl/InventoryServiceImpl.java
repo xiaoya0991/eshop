@@ -1,8 +1,8 @@
-package com.zhss.eshop.Inventory.service.impl;
+package com.zhss.eshop.inventory.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.zhss.eshop.Inventory.service.InventoryService;
+import com.zhss.eshop.inventory.service.InventoryService;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -20,6 +20,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param purchaseInputOrderDTO 采购入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPurchaseInputFinished(
 			PurchaseInputOrderDTO purchaseInputOrderDTO) {
 		return true;
@@ -30,6 +31,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informSubmitOrderEvent(OrderInfoDTO orderDTO) {
 		return true;
 	}
@@ -39,6 +41,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPayOrderEvent(OrderInfoDTO orderDTO) {
 		return true;
 	}
@@ -48,6 +51,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCancelOrderEvent(OrderInfoDTO orderDTO) {
 		return true;
 	}
@@ -57,6 +61,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param returnGoodsInputOrderDTO 退货入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsInputFinished(
 			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO) {
 		return true;
@@ -67,6 +72,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param goodsSkuId 商品sku id
 	 * @return 商品sku的库存
 	 */
+	@Override
 	public Long getSaleStockQuantity(Long goodsSkuId) {
 		return 1159L;
 	}
@@ -77,6 +83,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param saleStockQuantity 销售库存
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean setSaleStockQuantity(Long goodsSkuId, Long saleStockQuantity) {
 		return true;
 	}

@@ -37,6 +37,7 @@ public class CommodityServiceImpl implements CommodityService {
 	 * @param goodsSkuId 商品sku id
 	 * @return 商品sku DTO
 	 */
+	@Override
 	public GoodsSkuDTO getGoodsSkuById(Long goodsSkuId) {
 		try {
 			return goodsSkuService.getById(goodsSkuId);
@@ -51,6 +52,7 @@ public class CommodityServiceImpl implements CommodityService {
 	 * @param goodsId 商品id
 	 * @return 商品
 	 */
+	@Override
 	public GoodsDTO getGoodsById(Long goodsId) {
 		try {
 			return goodsService.getById(goodsId); 

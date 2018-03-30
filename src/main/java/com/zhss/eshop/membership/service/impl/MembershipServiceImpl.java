@@ -34,6 +34,7 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @param userAccountId 用户账号ID
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informFirstLoginDailyEvent(Long userAccountId) {
 		return true;
 	}
@@ -44,6 +45,7 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @param totalOrderAmount 订单总金额
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPayOrderEvent(Long userAccountId, Double totalOrderAmount) {
 		return true;
 	}
@@ -54,6 +56,7 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @param totalOrderAmount 订单总金额
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informFinishReturnGoodsEvent(Long userAccountId, Double totalOrderAmount) {
 		return true;
 	}
@@ -64,6 +67,7 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @param showPictures 是否晒图
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPublishCommentEvent(Long userAccountId, Boolean showPictures) {
 		return true;
 	}
@@ -74,6 +78,7 @@ public class MembershipServiceImpl implements MembershipService {
 	 * @param showPictures 是否晒图
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informRemoveCommentEvent(Long userAccountId, Boolean showPictures) {
 		return true;
 	}
@@ -82,6 +87,7 @@ public class MembershipServiceImpl implements MembershipService {
 	 * 查询所有的用户账户
 	 * @return
 	 */
+	@Override
 	public List<UserAccountDTO> listAllUserAccounts() {
 		List<UserAccountDTO> userAccounts = new ArrayList<UserAccountDTO>(); 
 		

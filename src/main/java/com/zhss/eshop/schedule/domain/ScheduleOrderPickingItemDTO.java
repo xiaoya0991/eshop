@@ -93,4 +93,11 @@ public class ScheduleOrderPickingItemDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "ScheduleOrderPickingItemDTO [id=" + id + ", orderInfoId=" + orderInfoId + ", orderItemId=" + orderItemId
+				+ ", goodsAllocationId=" + goodsAllocationId + ", goodsSkuId=" + goodsSkuId + ", pickingCount="
+				+ pickingCount + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

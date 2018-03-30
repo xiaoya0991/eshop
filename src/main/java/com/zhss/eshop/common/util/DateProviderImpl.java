@@ -18,6 +18,7 @@ public class DateProviderImpl implements DateProvider {
 	 * @return 当前时间
 	 * @throws Exception
 	 */
+	@Override
 	public Date getCurrentTime() throws Exception {
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return dateFormatter.parse(dateFormatter.format(new Date()));  
@@ -29,6 +30,7 @@ public class DateProviderImpl implements DateProvider {
 	 * @return 格式化日期字符串
 	 * @throws Exception
 	 */
+	@Override
 	public String formatDatetime(Date date) throws Exception {
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return dateFormatter.format(date);
@@ -40,6 +42,7 @@ public class DateProviderImpl implements DateProvider {
 	 * @return date对象
 	 * @throws Exception
 	 */
+	@Override
 	public Date parseDatetime(String datetime) throws Exception {
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return dateFormatter.parse(datetime);

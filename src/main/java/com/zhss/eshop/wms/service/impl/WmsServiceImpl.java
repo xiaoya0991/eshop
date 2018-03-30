@@ -26,7 +26,7 @@ import com.zhss.eshop.wms.stock.WmsStockUpdaterFactory;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class WmsServiceImpl implements WmsService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(WmsServiceImpl.class);
@@ -77,6 +77,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param saleDeliveryOrderDTO 销售出库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder) {
 		try {
 			saleDeliveryOrderService.save(saleDeliveryOrder); 
@@ -92,6 +93,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param returnGoodsInputOrder 退货入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean createReturnGoodsInputOrder(ReturnGoodsInputOrderDTO returnGoodsInputOrder) {
 		try {
 			returnGoodsInputOrderService.save(returnGoodsInputOrder); 
@@ -107,6 +109,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informSubmitOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
 		try {
 			WmsStockUpdater stockUpdater = stockUpdaterFactory.create(
@@ -124,6 +127,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPayOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
 		try {
 			WmsStockUpdater stockUpdater = stockUpdaterFactory.create(
@@ -141,6 +145,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCancelOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
 		try {
 			WmsStockUpdater stockUpdater = stockUpdaterFactory.create(
@@ -158,6 +163,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderId 订单id
 	 * @return 物流单号
 	 */
+	@Override
 	public String getLogisticCode(Long orderId) {
 		try {
 			SaleDeliveryOrderDTO saleDeliveryOrder = saleDeliveryOrderService.getByOrderId(orderId);
@@ -174,6 +180,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param purchaseInputOrderId 采购入库单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCreatePurchaseSettlementOrderEvent(Long purchaseInputOrderId) {
 		try {
 			PurchaseInputOrderDTO purchaseInputOrder = purchaseInputOrderService.getById(
@@ -194,6 +201,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param purchaseInputOrderId 采购入库单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseInputOrderId) {
 		try {
 			PurchaseInputOrderDTO purchaseInputOrder = purchaseInputOrderService.getById(

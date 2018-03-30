@@ -103,4 +103,12 @@ public class GoodsAllocationStockDetailVO extends AbstractObject {
 		this.lockedStockQuantity = lockedStockQuantity;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsAllocationStockDetailVO [id=" + id + ", goodsSkuId=" + goodsSkuId + ", goodsAllocationId="
+				+ goodsAllocationId + ", putOnTime=" + putOnTime + ", putOnQuantity=" + putOnQuantity
+				+ ", currentStockQuantity=" + currentStockQuantity + ", gmtCreate=" + gmtCreate + ", gmtModified="
+				+ gmtModified + "]";
+	}
+	
 }

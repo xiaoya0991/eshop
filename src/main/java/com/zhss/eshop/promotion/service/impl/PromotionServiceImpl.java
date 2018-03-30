@@ -29,6 +29,7 @@ public class PromotionServiceImpl implements PromotionService {
 	 * @param goodsId 商品id
 	 * @return 促销活动
 	 */
+	@Override
 	public List<PromotionActivityDTO> listByGoodsId(Long goodsId) {
 		List<PromotionActivityDTO> promotionActivityDTOs = new ArrayList<PromotionActivityDTO>();
 		
@@ -73,11 +74,15 @@ public class PromotionServiceImpl implements PromotionService {
 	 * @param id 促销活动id
 	 * @return 促销活动
 	 */
+	@Override
 	public PromotionActivityDTO getById(Long id) {
 		try {
-			if(id.equals(1L)) {
+			Long id1 = 1L;
+			Long id2 = 2L;
+			
+			if(id.equals(id1)) {
 				return createDiscountPromotionActivity(id);
-			} else if(id.equals(2L)) {
+			} else if(id.equals(id2)) {
 				return createGiftPromotionActivity(id);
 			} else {
 				return null;
@@ -129,6 +134,7 @@ public class PromotionServiceImpl implements PromotionService {
 	 * @param userAccountId 用户账号id
 	 * @return 有效优惠券
 	 */
+	@Override
 	public List<CouponDTO> listValidByUserAccountId(Long userAccountId) {
 		return null;
 	}
@@ -139,6 +145,7 @@ public class PromotionServiceImpl implements PromotionService {
 	 * @param userAccountId 用户账号id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean useCoupon(Long couponId, Long userAccountId) {
 		return true;
 	}

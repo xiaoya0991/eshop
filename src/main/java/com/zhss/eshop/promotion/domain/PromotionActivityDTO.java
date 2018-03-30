@@ -111,4 +111,11 @@ public class PromotionActivityDTO {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "PromotionActivityDTO [id=" + id + ", name=" + name + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", remark=" + remark + ", status=" + status + ", rule=" + rule + ", type=" + type + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }
