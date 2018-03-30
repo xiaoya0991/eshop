@@ -81,4 +81,12 @@ public class ReturnGoodsInputOrderPutOnItemDTO {
 		this.goodsSkuId = goodsSkuId;
 	}
 	
+	@Override
+	public String toString() {
+		return "ReturnGoodsInputOrderPutOnItemDTO [id=" + id + ", returnGoodsInputOrderItemId="
+				+ returnGoodsInputOrderItemId + ", goodsAllocationId=" + goodsAllocationId + ", goodsSkuId="
+				+ goodsSkuId + ", putOnShelvesCount=" + putOnShelvesCount + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

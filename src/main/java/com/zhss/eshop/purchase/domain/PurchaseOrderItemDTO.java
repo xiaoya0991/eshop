@@ -83,4 +83,11 @@ public class PurchaseOrderItemDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "PurchaseOrderItemDTO [id=" + id + ", purchaseOrderId=" + purchaseOrderId + ", goodsSkuId=" + goodsSkuId
+				+ ", purchaseCount=" + purchaseCount + ", purchasePrice=" + purchasePrice + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

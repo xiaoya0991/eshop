@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.service;
+package com.zhss.eshop.inventory.service;
 
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
