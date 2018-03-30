@@ -63,4 +63,10 @@ public class RolePriorityRelationshipDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "RolePriorityRelationshipDO [id=" + id + ", roleId=" + roleId + ", priorityId=" + priorityId
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

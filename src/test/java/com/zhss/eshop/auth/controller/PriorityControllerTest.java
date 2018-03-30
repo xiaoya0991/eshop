@@ -125,8 +125,6 @@ public class PriorityControllerTest {
 		PriorityDTO priorityDTO = createMockPriorityDTO(id, parentId);
 		PriorityVO priorityVO = convertPriorityDTO2VO(priorityDTO);
 		
-		when(priorityService.savePriority(priorityDTO)).thenReturn(true);
-		
 		mvc.perform(post("/auth/priority/").contentType("application/json").content(JSONObject.toJSONString(priorityVO)))  
 				.andExpect(content().string("true"));  
 	}
@@ -141,8 +139,6 @@ public class PriorityControllerTest {
 		Long parentId = 1L;
 		PriorityDTO priorityDTO = createMockPriorityDTO(id, parentId);
 		PriorityVO priorityVO = convertPriorityDTO2VO(priorityDTO);
-		
-		when(priorityService.updatePriority(priorityDTO)).thenReturn(true);
 		
 		mvc.perform(put("/auth/priority/{id}", id).contentType("application/json").content(JSONObject.toJSONString(priorityVO)))  
 				.andExpect(content().string("true"));   

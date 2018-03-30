@@ -49,7 +49,7 @@ public class RemovePriorityOperation implements PriorityOperation<Boolean> {
 	 * 删除权限
 	 * @param node 权限树节点
 	 */
-	private void removePriority(Priority node) {
+	private void removePriority(Priority node) throws Exception {
 		priorityDAO.removePriority(node.getId());
 	}
 

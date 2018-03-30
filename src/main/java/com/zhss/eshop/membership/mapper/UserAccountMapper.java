@@ -113,6 +113,7 @@ public interface UserAccountMapper {
 	
 	/**
 	 * 查询所有用户账号
+	 * @return 用户账号
 	 */
 	@Select("SELECT "
 				+ "id,"

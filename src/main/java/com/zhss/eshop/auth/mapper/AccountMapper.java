@@ -135,7 +135,7 @@ public interface AccountMapper {
 	
 	/**
 	 * 删除账号
-	 * @param account 账号
+	 * @param id 账号id
 	 */
 	@Delete("DELETE FROM auth_account WHERE id=#{id}")  
 	void remove(@Param("id") Long id);

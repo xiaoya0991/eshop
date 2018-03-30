@@ -28,7 +28,7 @@ import com.zhss.eshop.logistics.domain.FreightTemplateQuery;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
 public class FreightTemplateDAOTest {
 

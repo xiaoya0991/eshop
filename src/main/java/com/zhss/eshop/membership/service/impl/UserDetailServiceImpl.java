@@ -1,9 +1,8 @@
 package com.zhss.eshop.membership.service.impl;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.membership.dao.UserDetailDAO;
@@ -17,7 +16,7 @@ import com.zhss.eshop.membership.service.UserDetailService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class UserDetailServiceImpl implements UserDetailService {
 
 	/**

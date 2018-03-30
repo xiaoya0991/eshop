@@ -113,4 +113,12 @@ public class MemberLevelDetailDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "MemberLevelDetailDO [id=" + id + ", userAccountId=" + userAccountId + ", oldGrowthValue="
+				+ oldGrowthValue + ", updatedGrowthValue=" + updatedGrowthValue + ", newGrowthValue=" + newGrowthValue
+				+ ", oldMemberLevel=" + oldMemberLevel + ", newMemberLevel=" + newMemberLevel + ", updateReason="
+				+ updateReason + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

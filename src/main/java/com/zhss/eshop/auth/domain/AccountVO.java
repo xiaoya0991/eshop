@@ -104,4 +104,11 @@ public class AccountVO extends AbstractObject {
 		this.priorityRelations = priorityRelations;
 	}
 	
+	@Override
+	public String toString() {
+		return "AccountVO [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name
+				+ ", remark=" + remark + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ ", roleRelations=" + roleRelations + ", priorityRelations=" + priorityRelations + "]";
+	}
+	
 }

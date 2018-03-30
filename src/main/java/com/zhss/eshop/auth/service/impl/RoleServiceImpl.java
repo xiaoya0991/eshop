@@ -24,7 +24,7 @@ import com.zhss.eshop.common.util.ObjectUtils;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class RoleServiceImpl implements RoleService {
 
 	/**
@@ -91,7 +91,7 @@ public class RoleServiceImpl implements RoleService {
 	 * @param role 角色DO对象
 	 */
 	@Override
-	public Boolean save(RoleDTO role) throws Exception {
+	public void save(RoleDTO role) throws Exception {
 		role.setGmtCreate(dateProvider.getCurrentTime()); 
 		role.setGmtModified(dateProvider.getCurrentTime());  
 		Long roleId = roleDAO.save(role.clone(RoleDO.class));  
@@ -102,8 +102,6 @@ public class RoleServiceImpl implements RoleService {
 			relation.setGmtModified(dateProvider.getCurrentTime()); 
 			rolePriorityRelationDAO.save(relation.clone(RolePriorityRelationshipDO.class));
 		}
-		
-		return true;
 	}
 	
 	/**
@@ -111,7 +109,7 @@ public class RoleServiceImpl implements RoleService {
 	 * @param role 角色DO对象
 	 */
 	@Override
-	public Boolean update(RoleDTO role) throws Exception {
+	public void update(RoleDTO role) throws Exception {
 		role.setGmtModified(dateProvider.getCurrentTime()); 
 		roleDAO.update(role.clone(RoleDO.class));
 		
@@ -129,13 +127,12 @@ public class RoleServiceImpl implements RoleService {
 		for(Long accountId : accountIds) {
 			priorityCacheManager.remove(accountId);
 		}
-		
-		return true;
 	}
 	
 	/**
 	 * 删除角色
 	 * @param id 角色id
+	 * @return 处理结果
 	 */
 	@Override
 	public Boolean remove(Long id) throws Exception {

@@ -83,4 +83,11 @@ public class UserAccountVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "UserAccountVO [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", cellPhoneNumber=" + cellPhoneNumber + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ "]";
+	}
+	
 }

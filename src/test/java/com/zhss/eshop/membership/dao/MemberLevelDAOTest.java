@@ -24,7 +24,7 @@ import com.zhss.eshop.membership.domain.MemberLevelDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true) 
 public class MemberLevelDAOTest {
 

@@ -84,4 +84,10 @@ public class RoleDTO extends AbstractObject {
 		this.rolePriorityRelations = rolePriorityRelations;
 	}
 	
+	@Override
+	public String toString() {
+		return "RoleDTO [id=" + id + ", code=" + code + ", name=" + name + ", remark=" + remark + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + ", rolePriorityRelations=" + rolePriorityRelations + "]";
+	}
+	
 }

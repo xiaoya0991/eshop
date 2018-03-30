@@ -19,7 +19,7 @@ import com.zhss.eshop.membership.service.DeliveryAddressService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class DeliveryAddressServiceImpl implements DeliveryAddressService {
 
 	/**

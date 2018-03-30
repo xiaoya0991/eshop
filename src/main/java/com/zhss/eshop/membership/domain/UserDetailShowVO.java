@@ -29,4 +29,9 @@ public class UserDetailShowVO {
 		this.userDetail = userDetail;
 	}
 	
+	@Override
+	public String toString() {
+		return "UserDetailShowVO [userAccount=" + userAccount + ", userDetail=" + userDetail + "]";
+	}
+	
 }

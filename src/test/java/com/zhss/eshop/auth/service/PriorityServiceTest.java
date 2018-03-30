@@ -153,8 +153,6 @@ public class PriorityServiceTest {
 		PriorityDO priorityDO = createMockPriorityDO(id, parentId);
 		PriorityDTO priorityDTO = convertPriorityDO2DTO(priorityDO);
 		
-		when(priorityDAO.updatePriority(priorityDO)).thenReturn(true);
-		
 		priorityService.updatePriority(priorityDTO);
 		
 		verify(priorityDAO, times(1)).updatePriority(priorityDO);
@@ -184,9 +182,6 @@ public class PriorityServiceTest {
 		
 		when(rolePriorityRelationshipDAO.countByPriorityId(id)).thenReturn(0L); 
 		when(accountPriorityRelationshipDAO.countByPriorityId(id)).thenReturn(0L);
-		
-		when(priorityDAO.removePriority(childId)).thenReturn(true);
-		when(priorityDAO.removePriority(id)).thenReturn(true);
 		
 		// 实际执行service方法
 		Boolean removePriorityResult = priorityService.removePriority(id);

@@ -19,7 +19,7 @@ import com.zhss.eshop.logistics.service.FreightTemplateService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class FreightTemplateServiceImpl implements FreightTemplateService {
 
 	/**

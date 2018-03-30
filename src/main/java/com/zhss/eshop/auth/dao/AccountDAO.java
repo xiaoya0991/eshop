@@ -29,6 +29,7 @@ public interface AccountDAO {
 	/**
 	 * 新增账号
 	 * @param account 账号
+	 * @return 账号id
 	 */
 	Long save(AccountDO account);
 	
@@ -46,7 +47,7 @@ public interface AccountDAO {
 	
 	/**
 	 * 删除账号
-	 * @param account 账号
+	 * @param id 账号id
 	 */
 	void remove(Long id);
 	

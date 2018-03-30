@@ -18,7 +18,7 @@ import com.zhss.eshop.membership.service.UserAccountService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class UserAccountServiceImpl implements UserAccountService {
 
 	/**

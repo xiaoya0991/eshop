@@ -83,4 +83,10 @@ public class FreightTemplateVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "FreightTemplateVO [id=" + id + ", name=" + name + ", type=" + type + ", rule=" + rule + ", remark="
+				+ remark + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

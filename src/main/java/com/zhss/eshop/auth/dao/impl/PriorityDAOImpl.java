@@ -29,7 +29,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @return 根权限集合
 	 */
 	@Override
-	public List<PriorityDO> listRootPriorities() {
+	public List<PriorityDO> listRootPriorities() throws Exception {
 		return priorityMapper.listRootPriorities(); 
 	}
 	
@@ -39,7 +39,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @return 子权限
 	 */
 	@Override
-	public List<PriorityDO> listChildPriorities(Long parentId) {
+	public List<PriorityDO> listChildPriorities(Long parentId) throws Exception {
 		return priorityMapper.listChildPriorities(parentId);
 	}
 	
@@ -49,7 +49,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @return 权限
 	 */
 	@Override
-	public PriorityDO getPriorityById(Long id) {
+	public PriorityDO getPriorityById(Long id) throws Exception {
 		return priorityMapper.getPriorityById(id);
 	}
 	
@@ -60,7 +60,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 */
 	@Override
 	public List<PriorityDO> listAuthroziedByAccountId(
-			Map<String, Object> parameters) {
+			Map<String, Object> parameters) throws Exception {
 		return priorityMapper.listAuthroziedByAccountId(parameters);
 	}
 	
@@ -71,7 +71,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @return 是否有授权记录
 	 */
 	@Override
-	public Long countAuthorizedByCode(Long accountId, String code) {
+	public Long countAuthorizedByCode(Long accountId, String code) throws Exception {
 		return priorityMapper.countAuthorizedByCode(accountId, code);
 	}
 	
@@ -82,7 +82,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @return 是否有授权记录
 	 */
 	@Override
-	public Long countAuthorizedByUrl(Long accountId, String url) {
+	public Long countAuthorizedByUrl(Long accountId, String url) throws Exception {
 		return priorityMapper.countAuthorizedByUrl(accountId, url);
 	}
 	
@@ -92,7 +92,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @return 
 	 */
 	@Override
-	public List<Long> listAccountIdsByPriorityId(Long priorityId) {
+	public List<Long> listAccountIdsByPriorityId(Long priorityId) throws Exception {
 		return priorityMapper.listAccountIdsByPriorityId(priorityId);
 	}
 	
@@ -101,7 +101,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param priorityDO 权限DO对象
 	 */
 	@Override
-	public Long savePriority(PriorityDO priorityDO) {
+	public Long savePriority(PriorityDO priorityDO) throws Exception {
 		priorityMapper.savePriority(priorityDO); 
 		return priorityDO.getId();
 	}
@@ -111,9 +111,8 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param priorityDO 权限DO对象
 	 */
 	@Override
-	public Boolean updatePriority(PriorityDO priorityDO) {
+	public void updatePriority(PriorityDO priorityDO) throws Exception {
 		priorityMapper.updatePriority(priorityDO); 
-		return true;
 	}
 	
 	/**
@@ -121,9 +120,8 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param id 权限id
 	 */
 	@Override
-	public Boolean removePriority(Long id) {
+	public void removePriority(Long id) throws Exception {
 		priorityMapper.removePriority(id);
-		return true;
 	}
 
 }

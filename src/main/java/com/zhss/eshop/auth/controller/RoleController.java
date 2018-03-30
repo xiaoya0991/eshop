@@ -90,11 +90,14 @@ public class RoleController {
 	public Boolean save(@RequestBody RoleVO role) {
 		try {
 			RoleDTO targetRole = role.clone(RoleDTO.class);
+			
 			List<RolePriorityRelationshipDTO> targetRelations = ObjectUtils.convertList(
 					role.getRolePriorityRelations(), RolePriorityRelationshipDTO.class);
 			targetRole.setRolePriorityRelations(targetRelations); 
 			
-			return roleService.save(targetRole);
+			roleService.save(targetRole);
+			
+			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;
@@ -114,7 +117,9 @@ public class RoleController {
 					role.getRolePriorityRelations(), RolePriorityRelationshipDTO.class);
 			targetRole.setRolePriorityRelations(targetRelations); 
 			
-			return roleService.update(targetRole);
+			roleService.update(targetRole);
+		
+			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;

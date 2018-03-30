@@ -2,8 +2,6 @@ package com.zhss.eshop.auth.dao.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,8 +17,6 @@ import com.zhss.eshop.auth.mapper.RolePriorityRelationshipMapper;
 @Repository
 public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationshipDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(RolePriorityRelationshipDAOImpl.class);
-
 	/**
 	 * 角色和权限关系管理模块的mapper组件
 	 */
@@ -32,14 +28,8 @@ public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationship
 	 * @param accountPriorityRelationshipDO
 	 */
 	@Override
-	public Boolean save(RolePriorityRelationshipDO rolePriorityRelationshipDO) {
-		try {
-			rolePriorityRelationshipMapper.save(rolePriorityRelationshipDO); 
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
-		return true;
+	public void save(RolePriorityRelationshipDO rolePriorityRelationshipDO) throws Exception {
+		rolePriorityRelationshipMapper.save(rolePriorityRelationshipDO); 
 	}
 	
 	/**
@@ -48,13 +38,8 @@ public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationship
 	 * @return 记录数
 	 */
 	@Override
-	public Long countByPriorityId(Long priorityId) {
-		try {
-			return rolePriorityRelationshipMapper.countByPriorityId(priorityId); 
-		} catch (Exception e) {
-			logger.error("error", e); 
-		}
-		return 0L;
+	public Long countByPriorityId(Long priorityId) throws Exception {
+		return rolePriorityRelationshipMapper.countByPriorityId(priorityId); 
 	}
 	
 	/**
@@ -63,13 +48,8 @@ public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationship
 	 * @return 角色权限关系DO对象集合
 	 */
 	@Override
-	public List<RolePriorityRelationshipDO> listByRoleId(Long roleId) {
-		try {
-			return rolePriorityRelationshipMapper.listByRoleId(roleId);
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
+	public List<RolePriorityRelationshipDO> listByRoleId(Long roleId) throws Exception {
+		return rolePriorityRelationshipMapper.listByRoleId(roleId);
 	}
 	
 	/**
@@ -77,14 +57,8 @@ public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationship
 	 * @param roleId 角色id
 	 */
 	@Override
-	public Boolean removeByRoleId(Long roleId) {
-		try {
-			rolePriorityRelationshipMapper.removeByRoleId(roleId);
-			return true;
-		} catch (Exception e) {
-			logger.error("error", e);
-			return false;
-		}
+	public void removeByRoleId(Long roleId) throws Exception {
+		rolePriorityRelationshipMapper.removeByRoleId(roleId);
 	}
 
 }

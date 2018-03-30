@@ -63,4 +63,10 @@ public class MemberPointDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "MemberPointDTO [id=" + id + ", userAccountId=" + userAccountId + ", point=" + point + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

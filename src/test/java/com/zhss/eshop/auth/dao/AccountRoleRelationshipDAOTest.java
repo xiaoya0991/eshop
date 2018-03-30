@@ -27,7 +27,7 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
 public class AccountRoleRelationshipDAOTest {
 

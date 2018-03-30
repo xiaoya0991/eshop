@@ -73,4 +73,10 @@ public class MemberLevelDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "MemberLevelDTO [id=" + id + ", userAccountId=" + userAccountId + ", growthValue=" + growthValue
+				+ ", level=" + level + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

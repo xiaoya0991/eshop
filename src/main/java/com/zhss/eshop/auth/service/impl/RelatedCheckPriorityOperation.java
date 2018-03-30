@@ -67,7 +67,7 @@ public class RelatedCheckPriorityOperation implements PriorityOperation<Boolean>
 	 * @param node 权限树节点
 	 * @return 是否被任何一个角色或者是账号关联了，如果有关联则为true；如果没有关联则为false
 	 */
-	private Boolean relateCheck(Priority node) {
+	private Boolean relateCheck(Priority node) throws Exception {
 		Long roleRelatedCount = rolePriorityRelationshipDAO
 				.countByPriorityId(node.getId());
 		if(roleRelatedCount != null && roleRelatedCount > 0) {

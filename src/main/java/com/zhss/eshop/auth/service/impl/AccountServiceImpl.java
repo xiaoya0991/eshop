@@ -26,7 +26,7 @@ import com.zhss.eshop.common.util.ObjectUtils;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)  
 public class AccountServiceImpl implements AccountService {
 
 	/**

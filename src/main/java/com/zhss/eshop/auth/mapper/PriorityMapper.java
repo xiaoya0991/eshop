@@ -108,8 +108,8 @@ public interface PriorityMapper {
 	
 	/**
 	 * 查询账号被授权的根菜单
-	 * @param accountId 账号id
-	 * @return
+	 * @param parameters 查询参数
+	 * @return 菜单
 	 */
 	@Select("<script>"
 			
@@ -217,7 +217,7 @@ public interface PriorityMapper {
 	/**
 	 * 根据权限URL判断账号是否对这个权限有授权记录
 	 * @param accountId 账号id
-	 * @param code 权限编号 
+	 * @param url 权限url 
 	 * @return 是否有授权记录
 	 */
 	@Select("SELECT SUM(cnt) " 

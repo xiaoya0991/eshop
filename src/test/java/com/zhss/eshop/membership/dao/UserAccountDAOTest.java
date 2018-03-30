@@ -25,7 +25,7 @@ import com.zhss.eshop.membership.domain.UserAccountDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
 public class UserAccountDAOTest {
 	

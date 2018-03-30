@@ -93,4 +93,11 @@ public class MemberPointDetailDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "MemberPointDetailDO [id=" + id + ", userAccountId=" + userAccountId + ", oldMemberPoint="
+				+ oldMemberPoint + ", updatedMemberPoint=" + updatedMemberPoint + ", newMemberPoint=" + newMemberPoint
+				+ ", updateReason=" + updateReason + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

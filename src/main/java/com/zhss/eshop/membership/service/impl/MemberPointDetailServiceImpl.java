@@ -18,7 +18,7 @@ import com.zhss.eshop.membership.service.MemberPointDetailService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class MemberPointDetailServiceImpl implements MemberPointDetailService {
 
 	/**

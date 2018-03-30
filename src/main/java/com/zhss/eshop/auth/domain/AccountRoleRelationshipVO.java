@@ -63,4 +63,10 @@ public class AccountRoleRelationshipVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "AccountRoleRelationshipVO [id=" + id + ", accountId=" + accountId + ", roleId=" + roleId
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

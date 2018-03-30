@@ -22,7 +22,7 @@ import com.zhss.eshop.common.util.DateProvider;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class PriorityServiceImpl implements PriorityService {
 	
 	/**
@@ -187,11 +187,10 @@ public class PriorityServiceImpl implements PriorityService {
 	 * @param priorityDO 权限DO对象
 	 */
 	@Override
-	public Boolean savePriority(PriorityDTO priorityDTO) throws Exception {
+	public void savePriority(PriorityDTO priorityDTO) throws Exception {
 		priorityDTO.setGmtCreate(dateProvider.getCurrentTime()); 
 		priorityDTO.setGmtModified(dateProvider.getCurrentTime());  
 		priorityDAO.savePriority(priorityDTO.clone(PriorityDO.class));  
-		return true;
 	}
 	
 	/**
@@ -199,7 +198,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * @param priorityDO 权限DO对象
 	 */
 	@Override
-	public Boolean updatePriority(PriorityDTO priorityDTO) throws Exception {
+	public void updatePriority(PriorityDTO priorityDTO) throws Exception {
 		priorityDTO.setGmtModified(dateProvider.getCurrentTime());  
 		priorityDAO.updatePriority(priorityDTO.clone(PriorityDO.class));
 		
@@ -207,8 +206,6 @@ public class PriorityServiceImpl implements PriorityService {
 		for(Long accountId : accountIds) {
 			priorityCacheManager.remove(accountId); 
 		}
-		
-		return true;
 	}
 	
 	/**

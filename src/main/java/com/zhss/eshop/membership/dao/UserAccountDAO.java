@@ -14,6 +14,7 @@ public interface UserAccountDAO {
 	/**
 	 * 新增用户账号
 	 * @param userAccount 用户账号
+	 * @return 用户账号
 	 */
 	UserAccountDO save(UserAccountDO userAccount);
 	

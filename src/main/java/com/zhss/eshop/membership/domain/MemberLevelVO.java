@@ -73,4 +73,10 @@ public class MemberLevelVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "MemberLevelVO [id=" + id + ", userAccountId=" + userAccountId + ", growthValue=" + growthValue
+				+ ", level=" + level + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }
