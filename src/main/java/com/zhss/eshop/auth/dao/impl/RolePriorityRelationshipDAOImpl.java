@@ -31,6 +31,7 @@ public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationship
 	 * 新增账号和权限的关联关系
 	 * @param accountPriorityRelationshipDO
 	 */
+	@Override
 	public Boolean save(RolePriorityRelationshipDO rolePriorityRelationshipDO) {
 		try {
 			rolePriorityRelationshipMapper.save(rolePriorityRelationshipDO); 
@@ -46,6 +47,7 @@ public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationship
 	 * @param priorityId 权限id
 	 * @return 记录数
 	 */
+	@Override
 	public Long countByPriorityId(Long priorityId) {
 		try {
 			return rolePriorityRelationshipMapper.countByPriorityId(priorityId); 
@@ -60,6 +62,7 @@ public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationship
 	 * @param roleId 角色id
 	 * @return 角色权限关系DO对象集合
 	 */
+	@Override
 	public List<RolePriorityRelationshipDO> listByRoleId(Long roleId) {
 		try {
 			return rolePriorityRelationshipMapper.listByRoleId(roleId);
@@ -73,6 +76,7 @@ public class RolePriorityRelationshipDAOImpl implements RolePriorityRelationship
 	 * 根据角色id删除角色权限关联关系
 	 * @param roleId 角色id
 	 */
+	@Override
 	public Boolean removeByRoleId(Long roleId) {
 		try {
 			rolePriorityRelationshipMapper.removeByRoleId(roleId);

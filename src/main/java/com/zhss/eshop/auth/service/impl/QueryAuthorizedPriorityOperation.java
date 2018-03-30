@@ -35,6 +35,7 @@ public class QueryAuthorizedPriorityOperation implements PriorityOperation<Boole
 	/**
 	 * 执行这个操作
 	 */
+	@Override
 	public Boolean doExecute(Priority priority) throws Exception { 
 		List<Priority> targetChildren = new ArrayList<Priority>();
 		

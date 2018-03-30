@@ -110,54 +110,80 @@ public class PriorityDTO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		PriorityDTO other = (PriorityDTO) obj;
 		if (code == null) {
-			if (other.code != null)
+			if (other.code != null) {
 				return false;
-		} else if (!code.equals(other.code))
+			}
+		} else if (!code.equals(other.code)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (parentId == null) {
-			if (other.parentId != null)
+			if (other.parentId != null) {
 				return false;
-		} else if (!parentId.equals(other.parentId))
+			}
+		} else if (!parentId.equals(other.parentId)) {
 			return false;
+		}
 		if (priorityComment == null) {
-			if (other.priorityComment != null)
+			if (other.priorityComment != null) {
 				return false;
-		} else if (!priorityComment.equals(other.priorityComment))
+			}
+		} else if (!priorityComment.equals(other.priorityComment)) {
 			return false;
+		}
 		if (priorityType == null) {
-			if (other.priorityType != null)
+			if (other.priorityType != null) {
 				return false;
-		} else if (!priorityType.equals(other.priorityType))
+			}
+		} else if (!priorityType.equals(other.priorityType)) {
 			return false;
+		}
 		if (url == null) {
-			if (other.url != null)
+			if (other.url != null) {
 				return false;
-		} else if (!url.equals(other.url))
+			}
+		} else if (!url.equals(other.url)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "PriorityDTO [id=" + id + ", code=" + code + ", url=" + url + ", priorityComment=" + priorityComment
+				+ ", priorityType=" + priorityType + ", parentId=" + parentId + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

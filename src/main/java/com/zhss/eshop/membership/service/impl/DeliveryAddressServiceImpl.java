@@ -38,6 +38,7 @@ public class DeliveryAddressServiceImpl implements DeliveryAddressService {
 	 * @param userAccountId 用户账号id
 	 * @return 所有收货地址
 	 */
+	@Override
 	public List<DeliveryAddressDTO> listAllByUserAccountId(
 			Long userAccountId) throws Exception {
 		return ObjectUtils.convertList(deliveryAddressDAO.listAllByUserAccountId(userAccountId), 
@@ -48,6 +49,7 @@ public class DeliveryAddressServiceImpl implements DeliveryAddressService {
 	 * 新增收货地址
 	 * @param deliveryAddress 收货地址
 	 */
+	@Override
 	public void save(DeliveryAddressDTO deliveryAddress) throws Exception {
 		deliveryAddress.setGmtCreate(dateProvider.getCurrentTime()); 
 		deliveryAddress.setGmtModified(dateProvider.getCurrentTime()); 
@@ -58,6 +60,7 @@ public class DeliveryAddressServiceImpl implements DeliveryAddressService {
 	 * 更新收货地址
 	 * @param deliveryAddress 收货地址
 	 */
+	@Override
 	public void update(DeliveryAddressDTO deliveryAddress) throws Exception {
 		deliveryAddress.setGmtModified(dateProvider.getCurrentTime()); 
 		deliveryAddressDAO.update(deliveryAddress.clone(DeliveryAddressDO.class));   
@@ -67,6 +70,7 @@ public class DeliveryAddressServiceImpl implements DeliveryAddressService {
 	 * 删除收货地址
 	 * @param id 收货地址id
 	 */
+	@Override
 	public void remove(Long id) throws Exception {
 		deliveryAddressDAO.remove(id);
 	}

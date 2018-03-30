@@ -43,6 +43,7 @@ public class RelatedCheckPriorityOperation implements PriorityOperation<Boolean>
 	/**
 	 * 访问权限树节点
 	 */
+	@Override
 	public Boolean doExecute(Priority node) throws Exception {
 		List<PriorityDO> priorityDOs = priorityDAO
 				.listChildPriorities(node.getId());

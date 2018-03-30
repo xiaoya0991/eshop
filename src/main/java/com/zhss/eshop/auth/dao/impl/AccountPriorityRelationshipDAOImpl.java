@@ -28,6 +28,7 @@ public class AccountPriorityRelationshipDAOImpl implements AccountPriorityRelati
 	 * @param priorityId 权限id
 	 * @return 记录数
 	 */
+	@Override
 	public Long countByPriorityId(Long priorityId) {
 		return accountPriorityRelationshipMapper.countByPriorityId(priorityId); 
 	}
@@ -37,6 +38,7 @@ public class AccountPriorityRelationshipDAOImpl implements AccountPriorityRelati
 	 * @param accountId 账号id
 	 * @return 账号和权限的关联关系
 	 */
+	@Override
 	public List<AccountPriorityRelationshipDO> listByAccountId(Long accountId) {
 		return accountPriorityRelationshipMapper.listByAccountId(accountId);
 	}
@@ -45,6 +47,7 @@ public class AccountPriorityRelationshipDAOImpl implements AccountPriorityRelati
 	 * 新增账号和权限的关联关系
 	 * @param accountPriorityRelationshipDO
 	 */
+	@Override
 	public void save(AccountPriorityRelationshipDO accountPriorityRelationshipDO) {
 		accountPriorityRelationshipMapper.save(accountPriorityRelationshipDO); 
 	}
@@ -53,6 +56,7 @@ public class AccountPriorityRelationshipDAOImpl implements AccountPriorityRelati
 	 * 根据账号id删除账号和权限的关联关系
 	 * @param accountId 账号id
 	 */
+	@Override
 	public void removeByAccountId(Long accountId) {
 		accountPriorityRelationshipMapper.removeByAccountId(accountId);
 	}

@@ -132,64 +132,94 @@ public class DeliveryAddressDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		DeliveryAddressDO other = (DeliveryAddressDO) obj;
 		if (address == null) {
-			if (other.address != null)
+			if (other.address != null) {
 				return false;
-		} else if (!address.equals(other.address))
+			}
+		} else if (!address.equals(other.address)) {
 			return false;
+		}
 		if (city == null) {
-			if (other.city != null)
+			if (other.city != null) {
 				return false;
-		} else if (!city.equals(other.city))
+			}
+		} else if (!city.equals(other.city)) {
 			return false;
+		}
 		if (consignee == null) {
-			if (other.consignee != null)
+			if (other.consignee != null) {
 				return false;
-		} else if (!consignee.equals(other.consignee))
+			}
+		} else if (!consignee.equals(other.consignee)) {
 			return false;
+		}
 		if (district == null) {
-			if (other.district != null)
+			if (other.district != null) {
 				return false;
-		} else if (!district.equals(other.district))
+			}
+		} else if (!district.equals(other.district)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
+			if (other.phoneNumber != null) {
 				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
+			}
+		} else if (!phoneNumber.equals(other.phoneNumber)) {
 			return false;
+		}
 		if (province == null) {
-			if (other.province != null)
+			if (other.province != null) {
 				return false;
-		} else if (!province.equals(other.province))
+			}
+		} else if (!province.equals(other.province)) {
 			return false;
+		}
 		if (userAccountId == null) {
-			if (other.userAccountId != null)
+			if (other.userAccountId != null) {
 				return false;
-		} else if (!userAccountId.equals(other.userAccountId))
+			}
+		} else if (!userAccountId.equals(other.userAccountId)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "DeliveryAddressDO [id=" + id + ", userAccountId=" + userAccountId + ", province=" + province + ", city="
+				+ city + ", district=" + district + ", consignee=" + consignee + ", address=" + address
+				+ ", phoneNumber=" + phoneNumber + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

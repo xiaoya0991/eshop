@@ -28,6 +28,7 @@ public class DeliveryAddressDAOImpl implements DeliveryAddressDAO {
 	 * @param userAccountId 用户账号id
 	 * @return 所有收货地址
 	 */
+	@Override
 	public List<DeliveryAddressDO> listAllByUserAccountId(Long userAccountId) {
 		return deliveryAddressMapper.listAllByUserAccountId(userAccountId);
 	}
@@ -36,6 +37,7 @@ public class DeliveryAddressDAOImpl implements DeliveryAddressDAO {
 	 * 新增收货地址
 	 * @param deliveryAddress 收货地址
 	 */
+	@Override
 	public void save(DeliveryAddressDO deliveryAddress) {
 		deliveryAddressMapper.save(deliveryAddress); 
 	}
@@ -44,6 +46,7 @@ public class DeliveryAddressDAOImpl implements DeliveryAddressDAO {
 	 * 更新收货地址
 	 * @param deliveryAddress 收货地址
 	 */
+	@Override
 	public void update(DeliveryAddressDO deliveryAddress) {
 		deliveryAddressMapper.update(deliveryAddress);
 	}
@@ -52,6 +55,7 @@ public class DeliveryAddressDAOImpl implements DeliveryAddressDAO {
 	 * 删除收货地址
 	 * @param id 收货地址id
 	 */
+	@Override
 	public void remove(Long id) {
 		deliveryAddressMapper.remove(id);  
 	}

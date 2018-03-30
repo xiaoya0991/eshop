@@ -29,6 +29,7 @@ public class RoleDAOImpl implements RoleDAO {
 	 * @param query 查询条件
 	 * @return 角色DO对象集合
 	 */
+	@Override
 	public List<RoleDO> listByPage(RoleQuery query) {
 		return roleMapper.listByPage(query);
 	}
@@ -38,6 +39,7 @@ public class RoleDAOImpl implements RoleDAO {
 	 * @param id 角色 id 
 	 * @return 角色DO对象
 	 */
+	@Override
 	public RoleDO getById(Long id) {
 		return roleMapper.getById(id);
 	}
@@ -46,6 +48,7 @@ public class RoleDAOImpl implements RoleDAO {
 	 * 新增角色
 	 * @param role 角色DO对象
 	 */
+	@Override
 	public Long save(RoleDO role) {
 		roleMapper.save(role);
 		return role.getId();
@@ -55,6 +58,7 @@ public class RoleDAOImpl implements RoleDAO {
 	 * 更新角色
 	 * @param role 角色DO对象
 	 */
+	@Override
 	public Boolean update(RoleDO role) {
 		roleMapper.update(role); 
 		return true;
@@ -64,6 +68,7 @@ public class RoleDAOImpl implements RoleDAO {
 	 * 删除角色
 	 * @param id 角色id
 	 */
+	@Override
 	public Boolean remove(Long id) {
 		roleMapper.remove(id);
 		return true;

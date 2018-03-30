@@ -29,6 +29,7 @@ public class AccountDAOImpl implements AccountDAO {
 	 * @param query 账号查询条件
 	 * @return 账号
 	 */
+	@Override
 	public List<AccountDO> listByPage(AccountQuery query) {
 		return accountMapper.listByPage(query);
 	}
@@ -38,6 +39,7 @@ public class AccountDAOImpl implements AccountDAO {
 	 * @param id 账号id 
 	 * @return 账号
 	 */
+	@Override
 	public AccountDO getById(Long id) {
 		return accountMapper.getById(id);
 	}
@@ -46,6 +48,7 @@ public class AccountDAOImpl implements AccountDAO {
 	 * 新增账号
 	 * @param account 账号
 	 */
+	@Override
 	public Long save(AccountDO account) {
 		accountMapper.save(account);  
 		return account.getId();
@@ -55,6 +58,7 @@ public class AccountDAOImpl implements AccountDAO {
 	 * 更新账号
 	 * @param account 账号
 	 */
+	@Override
 	public void update(AccountDO account) {
 		accountMapper.update(account); 
 	}
@@ -63,6 +67,7 @@ public class AccountDAOImpl implements AccountDAO {
 	 * 更新密码
 	 * @param account 账号
 	 */
+	@Override
 	public void updatePassword(AccountDO account) {
 		accountMapper.updatePassword(account); 
 	}
@@ -71,6 +76,7 @@ public class AccountDAOImpl implements AccountDAO {
 	 * 删除账号
 	 * @param account 账号
 	 */
+	@Override
 	public void remove(Long id) {
 		accountMapper.remove(id); 
 	}

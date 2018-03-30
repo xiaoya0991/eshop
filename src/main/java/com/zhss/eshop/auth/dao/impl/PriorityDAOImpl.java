@@ -38,6 +38,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param parentId 父权限id
 	 * @return 子权限
 	 */
+	@Override
 	public List<PriorityDO> listChildPriorities(Long parentId) {
 		return priorityMapper.listChildPriorities(parentId);
 	}
@@ -47,6 +48,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param id 权限id
 	 * @return 权限
 	 */
+	@Override
 	public PriorityDO getPriorityById(Long id) {
 		return priorityMapper.getPriorityById(id);
 	}
@@ -56,6 +58,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param accountId 账号id
 	 * @return
 	 */
+	@Override
 	public List<PriorityDO> listAuthroziedByAccountId(
 			Map<String, Object> parameters) {
 		return priorityMapper.listAuthroziedByAccountId(parameters);
@@ -67,6 +70,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param code 权限编号
 	 * @return 是否有授权记录
 	 */
+	@Override
 	public Long countAuthorizedByCode(Long accountId, String code) {
 		return priorityMapper.countAuthorizedByCode(accountId, code);
 	}
@@ -77,6 +81,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param url 权限url
 	 * @return 是否有授权记录
 	 */
+	@Override
 	public Long countAuthorizedByUrl(Long accountId, String url) {
 		return priorityMapper.countAuthorizedByUrl(accountId, url);
 	}
@@ -86,6 +91,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * @param priorityId 权限id
 	 * @return 
 	 */
+	@Override
 	public List<Long> listAccountIdsByPriorityId(Long priorityId) {
 		return priorityMapper.listAccountIdsByPriorityId(priorityId);
 	}
@@ -94,6 +100,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * 新增权限
 	 * @param priorityDO 权限DO对象
 	 */
+	@Override
 	public Long savePriority(PriorityDO priorityDO) {
 		priorityMapper.savePriority(priorityDO); 
 		return priorityDO.getId();
@@ -103,6 +110,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * 更新权限
 	 * @param priorityDO 权限DO对象
 	 */
+	@Override
 	public Boolean updatePriority(PriorityDO priorityDO) {
 		priorityMapper.updatePriority(priorityDO); 
 		return true;
@@ -112,6 +120,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * 删除权限
 	 * @param id 权限id
 	 */
+	@Override
 	public Boolean removePriority(Long id) {
 		priorityMapper.removePriority(id);
 		return true;

@@ -34,6 +34,7 @@ public class FreightTemplateDAOImpl implements FreightTemplateDAO {
 	 * 新增运费模板
 	 * @param freightTemplate 运费模板
 	 */
+	@Override
 	public void save(FreightTemplateDO freightTemplate) throws Exception {
 		freightTemplate.setGmtCreate(dateProvider.getCurrentTime()); 
 		freightTemplate.setGmtModified(dateProvider.getCurrentTime()); 
@@ -45,6 +46,7 @@ public class FreightTemplateDAOImpl implements FreightTemplateDAO {
 	 * @param query 运费模板查询条件
 	 * @return 运费模板
 	 */
+	@Override
 	public List<FreightTemplateDO> listByPage(FreightTemplateQuery query) throws Exception {
 		return freightTemplateMapper.listByPage(query);
 	}
@@ -54,6 +56,7 @@ public class FreightTemplateDAOImpl implements FreightTemplateDAO {
 	 * @param query 运费模板查询条件
 	 * @return 运费模板
 	 */
+	@Override
 	public FreightTemplateDO getById(Long id) throws Exception {
 		return freightTemplateMapper.getById(id);
 	}
@@ -62,6 +65,7 @@ public class FreightTemplateDAOImpl implements FreightTemplateDAO {
 	 * 更新运费模板
 	 * @param freightTemplate 运费模板
 	 */
+	@Override
 	public void update(FreightTemplateDO freightTemplate) throws Exception {
 		freightTemplateMapper.update(freightTemplate); 
 	}

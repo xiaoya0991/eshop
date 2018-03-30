@@ -28,6 +28,7 @@ public class AccountRoleRelationshipDAOImpl implements AccountRoleRelationshipDA
 	 * @param roleId 角色id
 	 * @return 记录数
 	 */
+	@Override
 	public Long countByRoleId(Long roleId) {
 		return accountRoleRelationMapper.countByRoleId(roleId);
 	}
@@ -37,6 +38,7 @@ public class AccountRoleRelationshipDAOImpl implements AccountRoleRelationshipDA
 	 * @param accountId 账号id
 	 * @return 账号和角色关联关系
 	 */
+	@Override
 	public List<AccountRoleRelationshipDO> listByAccountId(Long accountId) {
 		return accountRoleRelationMapper.listByAccountId(accountId);
 	}
@@ -46,6 +48,7 @@ public class AccountRoleRelationshipDAOImpl implements AccountRoleRelationshipDA
 	 * @param roleId 角色id
 	 * @return 账号id集合
 	 */
+	@Override
 	public List<Long> listAccountIdsByRoleId(Long roleId) {
 		return accountRoleRelationMapper.listAccountIdsByRoleId(roleId);
 	}
@@ -54,6 +57,7 @@ public class AccountRoleRelationshipDAOImpl implements AccountRoleRelationshipDA
 	 * 新增账号和角色的关联关系
 	 * @param relation 账号和角色的关联关系
 	 */
+	@Override
 	public void save(AccountRoleRelationshipDO relation) {
 		accountRoleRelationMapper.save(relation);
 	}
@@ -62,6 +66,7 @@ public class AccountRoleRelationshipDAOImpl implements AccountRoleRelationshipDA
 	 * 根据账号id删除账号和角色的关联关系
 	 * @param accountId 账号id
 	 */
+	@Override
 	public void removeByAccountId(Long accountId) {
 		accountRoleRelationMapper.removeByAccountId(accountId); 
 	}

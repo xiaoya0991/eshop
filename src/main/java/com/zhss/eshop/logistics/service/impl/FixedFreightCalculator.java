@@ -28,6 +28,7 @@ public class FixedFreightCalculator implements FreightCalculator {
 	 * @return 运费
 	 * @throws Exception
 	 */
+	@Override
 	public Double calculate(FreightTemplateDTO freightTemplate, 
 			OrderInfoDTO order, OrderItemDTO orderItem) throws Exception {
 		JSONObject rule = JSONObject.parseObject(freightTemplate.getRule());

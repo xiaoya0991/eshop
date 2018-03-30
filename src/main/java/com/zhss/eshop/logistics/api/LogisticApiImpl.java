@@ -29,6 +29,7 @@ public class LogisticApiImpl implements LogisticApi {
 	 * @return 响应
 	 * @throws Exception
 	 */
+	@Override
 	public CreateEOrderResponse createEOrder(CreateEOrderRequest request) throws Exception {
 		// 将request转换成物流商api指定的json请求的格式
 		// 发送请求到物理商api接口
@@ -49,6 +50,7 @@ public class LogisticApiImpl implements LogisticApi {
 	 * @return 响应
 	 * @throws Exception
 	 */
+	@Override
 	public QueryProgressResponse queryProgress(QueryProgressRequest request) throws Exception {
 		// 整体情况同上
 		

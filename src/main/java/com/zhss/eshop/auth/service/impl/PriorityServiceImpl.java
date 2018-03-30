@@ -50,6 +50,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * 查询根权限
 	 * @return 根权限集合
 	 */
+	@Override
 	public List<PriorityDTO> listRootPriorities() throws Exception {
 		List<PriorityDO> priorityDOs = priorityDAO.listRootPriorities(); 
 		if(priorityDOs == null) {
@@ -69,6 +70,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * @param parentId 父权限id
 	 * @return 子权限
 	 */
+	@Override
 	public List<PriorityDTO> listChildPriorities(Long parentId) throws Exception {
 		List<PriorityDO> priorityDOs = priorityDAO.listChildPriorities(parentId);
 		if(priorityDOs == null) {
@@ -88,6 +90,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * @param id 权限id
 	 * @return 权限
 	 */
+	@Override
 	public PriorityDTO getPriorityById(Long id) throws Exception {
 		PriorityDO priorityDO = priorityDAO.getPriorityById(id);
 		if(priorityDO == null) {
@@ -103,6 +106,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * @return 权限树
 	 * @throws Exception
 	 */
+	@Override
 	public List<Priority> listAuthorizedByAccountId(
 			Long accountId) throws Exception {
 		List<Priority> authorizedTree = priorityCacheManager
@@ -141,6 +145,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * @return 是否存在授权记录
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean existAuthorizedByCode(Long accountId, 
 			String code) throws Exception {
 		Boolean authorized = priorityCacheManager.getAuthorizedByCode(accountId, code);
@@ -162,6 +167,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * @return 是否存在授权记录
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean existAuthorizedByUrl(Long accountId, 
 			String url) throws Exception {
 		Boolean authorized = priorityCacheManager.getAuthorizedByUrl(accountId, url);
@@ -180,6 +186,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * 新增权限
 	 * @param priorityDO 权限DO对象
 	 */
+	@Override
 	public Boolean savePriority(PriorityDTO priorityDTO) throws Exception {
 		priorityDTO.setGmtCreate(dateProvider.getCurrentTime()); 
 		priorityDTO.setGmtModified(dateProvider.getCurrentTime());  
@@ -191,6 +198,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * 更新权限
 	 * @param priorityDO 权限DO对象
 	 */
+	@Override
 	public Boolean updatePriority(PriorityDTO priorityDTO) throws Exception {
 		priorityDTO.setGmtModified(dateProvider.getCurrentTime());  
 		priorityDAO.updatePriority(priorityDTO.clone(PriorityDO.class));
@@ -208,6 +216,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * @param id 权限id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean removePriority(Long id) throws Exception {
 		// 根据id查询权限
 		Priority priority = priorityDAO.getPriorityById(id)

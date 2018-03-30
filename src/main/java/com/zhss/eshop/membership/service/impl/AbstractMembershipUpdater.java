@@ -38,6 +38,7 @@ public abstract class AbstractMembershipUpdater<T, K> implements MembershipUpdat
 	 * @return 返回值
 	 * @throws Exception
 	 */
+	@Override
 	public K execute(Long userAccountId, T parameter) throws Exception {
 		Map<String, Object> updateMemberLevelResult = updateMemberLevel(userAccountId, parameter); 
 		Map<String, Object> updateMemberPointResult = updateMemberPoint(userAccountId, parameter); 
@@ -53,6 +54,7 @@ public abstract class AbstractMembershipUpdater<T, K> implements MembershipUpdat
 	 * @return 返回值
 	 * @throws Exception
 	 */
+	@Override
 	public K undo(Long userAccountId, T parameter) throws Exception {
 		Map<String, Object> undoMemberLevelResult = undoUpdatedMemberLevel(userAccountId, parameter); 
 		Map<String, Object> undoMemberPointResult = undoUpdatedMemberPoint(userAccountId, parameter); 

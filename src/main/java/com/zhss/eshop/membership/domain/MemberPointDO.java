@@ -77,39 +77,58 @@ public class MemberPointDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		MemberPointDO other = (MemberPointDO) obj;
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (point == null) {
-			if (other.point != null)
+			if (other.point != null) {
 				return false;
-		} else if (!point.equals(other.point))
+			}
+		} else if (!point.equals(other.point)) {
 			return false;
+		}
 		if (userAccountId == null) {
-			if (other.userAccountId != null)
+			if (other.userAccountId != null) {
 				return false;
-		} else if (!userAccountId.equals(other.userAccountId))
+			}
+		} else if (!userAccountId.equals(other.userAccountId)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "MemberPointDO [id=" + id + ", userAccountId=" + userAccountId + ", point=" + point + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

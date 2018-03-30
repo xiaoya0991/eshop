@@ -32,6 +32,7 @@ public class FreightTemplateServiceImpl implements FreightTemplateService {
 	 * 新增运费模板
 	 * @param freightTemplate 运费模板
 	 */
+	@Override
 	public void save(FreightTemplateDTO freightTemplate) throws Exception {
 		freightTemplateDAO.save(freightTemplate.clone(FreightTemplateDO.class));   
 	}
@@ -41,6 +42,7 @@ public class FreightTemplateServiceImpl implements FreightTemplateService {
 	 * @param query 运费模板查询条件
 	 * @return 运费模板
 	 */
+	@Override
 	public List<FreightTemplateDTO> listByPage(FreightTemplateQuery query) throws Exception {
 		return ObjectUtils.convertList(
 				freightTemplateDAO.listByPage(query), 
@@ -52,6 +54,7 @@ public class FreightTemplateServiceImpl implements FreightTemplateService {
 	 * @param query 运费模板查询条件
 	 * @return 运费模板
 	 */
+	@Override
 	public FreightTemplateDTO getById(Long id) throws Exception {
 		return freightTemplateDAO.getById(id).clone(FreightTemplateDTO.class);
 	}
@@ -60,6 +63,7 @@ public class FreightTemplateServiceImpl implements FreightTemplateService {
 	 * 更新运费模板
 	 * @param freightTemplate 运费模板
 	 */ 
+	@Override
 	public void update(FreightTemplateDTO freightTemplate) throws Exception {
 		freightTemplateDAO.update(freightTemplate.clone(FreightTemplateDO.class)); 
 	}

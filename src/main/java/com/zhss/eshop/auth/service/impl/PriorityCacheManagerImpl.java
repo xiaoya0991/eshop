@@ -36,6 +36,7 @@ public class PriorityCacheManagerImpl implements PriorityCacheManager {
 	 * @param accountId 账号id
 	 * @return
 	 */
+	@Override
 	public List<Priority> getAuthorizedPriorityTree(Long accountId) {
 		return authorizedPriorityTreeCache.get(accountId);
 	}
@@ -46,6 +47,7 @@ public class PriorityCacheManagerImpl implements PriorityCacheManager {
 	 * @param authorizedPriorityTree 授权菜单树
 	 * @throws Excxeption
 	 */
+	@Override
 	public void cacheAuthorizedPriorityTree(Long accountId, 
 			List<Priority> authorizedPriorityTree) throws Exception {
 		authorizedPriorityTreeCache.put(accountId, authorizedPriorityTree);
@@ -55,6 +57,7 @@ public class PriorityCacheManagerImpl implements PriorityCacheManager {
 	 * 删除授权菜单树的缓存
 	 * @param accountId 账号id
 	 */
+	@Override
 	public void removeAuthorizedPriorityTree(Long accountId) {
 		authorizedPriorityTreeCache.remove(accountId);
 	}
@@ -65,6 +68,7 @@ public class PriorityCacheManagerImpl implements PriorityCacheManager {
 	 * @param code 权限编号
 	 * @return 是否授权
 	 */
+	@Override
 	public Boolean getAuthorizedByCode(Long accountId, String code) {
 		return authorizedByCodeCache.get(getAuthorizedByCodeCacheKey(accountId, code)); 
 	}
@@ -76,6 +80,7 @@ public class PriorityCacheManagerImpl implements PriorityCacheManager {
 	 * @param authorized 是否被授权
 	 * @throws Exception
 	 */
+	@Override
 	public void cacheAuthorizedByCode(Long accountId, 
 			String code, Boolean authorized) throws Exception { 
 		authorizedByCodeCache.put(getAuthorizedByCodeCacheKey(accountId, code), authorized);
@@ -95,6 +100,7 @@ public class PriorityCacheManagerImpl implements PriorityCacheManager {
 	 * 删除账号对指定编号的权限是否被授权的缓存
 	 * @param accountId 账号id
 	 */
+	@Override
 	public void removeAuthorizedByCode(Long accountId) {
 		Iterator<String> cacheKeyIterator = authorizedByCodeCache.keySet().iterator();
 		while(cacheKeyIterator.hasNext()) {
@@ -112,6 +118,7 @@ public class PriorityCacheManagerImpl implements PriorityCacheManager {
 	 * @param url 权限url
 	 * @return 是否授权
 	 */
+	@Override
 	public Boolean getAuthorizedByUrl(Long accountId, String url) {
 		return authorizedByUrlCache.get(getAuthorizedByCodeCacheKey(accountId, url)); 
 	}
@@ -123,6 +130,7 @@ public class PriorityCacheManagerImpl implements PriorityCacheManager {
 	 * @param authorized 是否被授权
 	 * @throws Exception
 	 */
+	@Override
 	public void cacheAuthorizedByUrl(Long accountId, 
 			String url, Boolean authorized) throws Exception {  
 		authorizedByUrlCache.put(getAuthorizedByUrlCacheKey(accountId, url), authorized);
@@ -143,6 +151,7 @@ public class PriorityCacheManagerImpl implements PriorityCacheManager {
 	 * @param accountId 账号id
 	 * @param url 权限url
 	 */
+	@Override
 	public void removeAuthorizedByUrl(Long accountId) {
 		Iterator<String> cacheKeyIterator = authorizedByUrlCache.keySet().iterator();
 		while(cacheKeyIterator.hasNext()) {
@@ -158,6 +167,7 @@ public class PriorityCacheManagerImpl implements PriorityCacheManager {
 	 * 删除账号对应的所有权限缓存数据
 	 * @param accountId
 	 */
+	@Override
 	public void remove(Long accountId) {
 		removeAuthorizedPriorityTree(accountId); 
 		removeAuthorizedByCode(accountId); 

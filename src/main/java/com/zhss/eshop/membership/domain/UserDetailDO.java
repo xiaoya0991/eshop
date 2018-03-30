@@ -121,58 +121,79 @@ public class UserDetailDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		UserDetailDO other = (UserDetailDO) obj;
 		if (address == null) {
-			if (other.address != null)
+			if (other.address != null) {
 				return false;
-		} else if (!address.equals(other.address))
+			}
+		} else if (!address.equals(other.address)) {
 			return false;
+		}
 		if (birthday == null) {
-			if (other.birthday != null)
+			if (other.birthday != null) {
 				return false;
-		} else if (!birthday.equals(other.birthday))
+			}
+		} else if (!birthday.equals(other.birthday)) {
 			return false;
+		}
 		if (gender == null) {
-			if (other.gender != null)
+			if (other.gender != null) {
 				return false;
-		} else if (!gender.equals(other.gender))
+			}
+		} else if (!gender.equals(other.gender)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (idNumber == null) {
-			if (other.idNumber != null)
+			if (other.idNumber != null) {
 				return false;
-		} else if (!idNumber.equals(other.idNumber))
+			}
+		} else if (!idNumber.equals(other.idNumber)) {
 			return false;
+		}
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null) {
 				return false;
-		} else if (!name.equals(other.name))
+			}
+		} else if (!name.equals(other.name)) {
 			return false;
+		}
 		if (userAccountId == null) {
-			if (other.userAccountId != null)
+			if (other.userAccountId != null) {
 				return false;
-		} else if (!userAccountId.equals(other.userAccountId))
+			}
+		} else if (!userAccountId.equals(other.userAccountId)) {
 			return false;
+		}
 		return true;
 	}
 	

@@ -60,6 +60,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @param query 查询条件
 	 * @return 账号
 	 */
+	@Override
 	public List<AccountDTO> listByPage(AccountQuery query) throws Exception {
 		List<AccountDO> accounts = accountDAO.listByPage(query);
 		List<AccountDTO> resultAccounts = ObjectUtils.convertList(
@@ -72,6 +73,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @param id 账号id
 	 * @return 账号
 	 */
+	@Override
 	public AccountDTO getById(Long id) throws Exception {
 		AccountDO account = accountDAO.getById(id);
 		AccountDTO resultAccount = account.clone(AccountDTO.class);
@@ -96,6 +98,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @param account 账号
 	 * @return 处理结果
 	 */
+	@Override
 	public void save(AccountDTO account) throws Exception {
 		account.setGmtCreate(dateProvider.getCurrentTime());
 		account.setGmtModified(dateProvider.getCurrentTime());
@@ -111,6 +114,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @param account 账号
 	 * @return 处理结果
 	 */
+	@Override
 	public void update(AccountDTO account) throws Exception {
 		account.setGmtModified(dateProvider.getCurrentTime());
 		accountDAO.update(account.clone(AccountDO.class));  
@@ -127,6 +131,7 @@ public class AccountServiceImpl implements AccountService {
 	 * 更新密码
 	 * @param account 账号
 	 */
+	@Override
 	public void updatePassword(AccountDTO account) throws Exception {
 		account.setGmtModified(dateProvider.getCurrentTime()); 
 		accountDAO.updatePassword(account.clone(AccountDO.class));   
@@ -158,6 +163,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @param id 账号id
 	 * @return 处理结果
 	 */
+	@Override
 	public void remove(Long id) throws Exception {
 		roleRelationDAO.removeByAccountId(id); 
 		priorityRelationDAO.removeByAccountId(id); 
