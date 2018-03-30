@@ -66,6 +66,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informGoodsDeliveryFinishedEvent(Long orderId) {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
@@ -82,6 +83,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsWorksheetRejectedEvent(Long orderId) {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
@@ -99,6 +101,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsWorsheetApprovedEvent(Long orderId) {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
@@ -116,6 +119,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsReceivedEvent(Long orderId) {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
@@ -132,6 +136,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsInputOrderApprovedEvent(Long orderId) {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
@@ -148,6 +153,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informRefundFinishedEvent(Long orderId) {
 		try {
 			OrderInfoDTO order = orderInfoService.getById(orderId);
@@ -200,6 +206,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderIds 订单id集合
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informBatchPublishCommentEvent(List<Long> orderIds) {
 		try {
 			for(Long orderId : orderIds) {
@@ -223,13 +230,14 @@ public class OrderServiceImpl implements OrderService {
 			logger.error("error", e); 
 			return null;
 		}
-	}
+	} 
 	
 	/**
 	 * 根据id查询订单
 	 * @param orderInfoId 订单id
 	 * @return 订单
 	 */
+	@Override
 	public OrderInfoDTO getOrderById(Long orderInfoId) {
 		try {
 			return orderInfoService.getById(orderInfoId); 

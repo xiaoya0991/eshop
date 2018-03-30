@@ -173,4 +173,14 @@ public class SupplierDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "SupplierDTO [id=" + id + ", name=" + name + ", companyName=" + companyName + ", companyAddress="
+				+ companyAddress + ", contactor=" + contactor + ", contactorPhoneNumber=" + contactorPhoneNumber
+				+ ", settlementPeriod=" + settlementPeriod + ", bankName=" + bankName + ", bankAccount=" + bankAccount
+				+ ", bankAccountHolder=" + bankAccountHolder + ", invoiceTitle=" + invoiceTitle + ", taxpayerId="
+				+ taxpayerId + ", businessScope=" + businessScope + ", remark=" + remark + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

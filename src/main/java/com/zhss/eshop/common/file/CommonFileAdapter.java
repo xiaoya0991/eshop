@@ -20,6 +20,7 @@ public class CommonFileAdapter implements CommonFile {
 	 * @return 是否存在
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean exists() throws Exception {
 		return file.exists();
 	}
@@ -29,6 +30,7 @@ public class CommonFileAdapter implements CommonFile {
 	 * @return 处理结果
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean createDirectories() throws Exception {
 		return file.mkdirs();
 	}
@@ -38,6 +40,7 @@ public class CommonFileAdapter implements CommonFile {
 	 * @return 绝对路径
 	 * @throws Exception
 	 */
+	@Override
 	public String getAbsolutePath() throws Exception {
 		return file.getAbsolutePath();
 	}
@@ -48,6 +51,7 @@ public class CommonFileAdapter implements CommonFile {
 	 * @return 文件名
 	 * @throws Exception
 	 */
+	@Override
 	public String getFilename() throws Exception {
 		return file.getName();
 	}
@@ -57,6 +61,7 @@ public class CommonFileAdapter implements CommonFile {
 	 * @return 处理结果
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean remove() throws Exception {
 		return file.delete();
 	}
@@ -64,6 +69,7 @@ public class CommonFileAdapter implements CommonFile {
 	/**
 	 * 获取文件路径
 	 */
+	@Override
 	public String getPath() throws Exception {
 		return file.getPath();
 	}

@@ -22,6 +22,7 @@ public class CompositeJsonExpression implements JsonExpression {
 		this.jsonNodeName = jsonNodeName;
 	}
 	
+	@Override
 	public Object interpret(JsonExpressionContext context) throws Exception {
 		JSONObject currentJsonNode = context.getCurrentJsonNode();
 		

@@ -241,5 +241,18 @@ public class ReturnGoodsInputOrderDTO {
 	public void setItems(List<ReturnGoodsInputOrderItemDTO> items) {
 		this.items = items;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "ReturnGoodsInputOrderDTO [id=" + id + ", userAccountId=" + userAccountId + ", orderId=" + orderId
+				+ ", orderNo=" + orderNo + ", status=" + status + ", consignee=" + consignee + ", deliveryAddress="
+				+ deliveryAddress + ", consigneeCellPhoneNumber=" + consigneeCellPhoneNumber + ", freight=" + freight
+				+ ", payType=" + payType + ", totalAmount=" + totalAmount + ", discountAmount=" + discountAmount
+				+ ", couponAmount=" + couponAmount + ", payableAmount=" + payableAmount + ", invoiceTitle="
+				+ invoiceTitle + ", taxpayerId=" + taxpayerId + ", orderComment=" + orderComment
+				+ ", returnGoodsReason=" + returnGoodsReason + ", returnGoodsRemark=" + returnGoodsRemark
+				+ ", arrivalTime=" + arrivalTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ ", items=" + items + "]";
+	}
+	
 }

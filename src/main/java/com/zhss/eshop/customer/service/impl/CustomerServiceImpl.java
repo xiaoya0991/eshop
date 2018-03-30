@@ -20,6 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @param returnGoodsRemark 退货备注
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean createReturnGoodsWorksheet(Long orderId, String orderNo, 
 			Integer returnGoodsReason, String returnGoodsRemark) {
 		return true;
@@ -31,6 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @param returnGoodsLogisticsCode 退货物流单号
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean syncReturnGoodsLogisticsCode(Long orderInfoId, 
 			String returnGoodsLogisticsCode) {
 		return true;
@@ -41,6 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @param returnGoodsWorksheetId 退货工单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsInputFinishedEvent(Long returnGoodsWorksheetId) {
 		return true;
 	}
@@ -50,6 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @param returnGoodsWorkwheetId 退货工单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informRefundFinishedEvent(Long returnGoodsWorkwheetId) {
 		return true;
 	}

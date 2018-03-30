@@ -21,6 +21,7 @@ public class GoodsAllocationDAOImpl implements GoodsAllocationDAO {
 	 * @param query 查询条件
 	 * @return 货位
 	 */
+	@Override
 	public List<GoodsAllocationDO> listByPage(GoodsAllocationQuery query) throws Exception {
 		return null;
 	}
@@ -29,6 +30,7 @@ public class GoodsAllocationDAOImpl implements GoodsAllocationDAO {
 	 * 新增货位
 	 * @param goodsAllocation 货位
 	 */
+	@Override
 	public void save(GoodsAllocationDO goodsAllocation) throws Exception {
 		
 	}
@@ -38,6 +40,7 @@ public class GoodsAllocationDAOImpl implements GoodsAllocationDAO {
 	 * @param id 货位id
 	 * @return 货位
 	 */
+	@Override
 	public GoodsAllocationDO getById(Long id) throws Exception {
 		return null;
 	}
@@ -46,6 +49,7 @@ public class GoodsAllocationDAOImpl implements GoodsAllocationDAO {
 	 * 更新货位
 	 * @param goodsAllocation 货位
 	 */
+	@Override
 	public void update(GoodsAllocationDO goodsAllocation) throws Exception {
 		
 	}

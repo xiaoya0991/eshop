@@ -12,10 +12,12 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class SystemInitContextListener implements ServletContextListener {
 	
+	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		System.out.println("系统启动了。。。。。。。。");   
 	}
 	
+	@Override
 	public void contextDestroyed(ServletContextEvent event) {
 		
 	}

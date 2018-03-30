@@ -113,4 +113,11 @@ public class DeliveryAddressDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "DeliveryAddressDO [id=" + id + ", userAccountId=" + userAccountId + ", province=" + province + ", city="
+				+ city + ", district=" + district + ", consignee=" + consignee + ", address=" + address
+				+ ", phoneNumber=" + phoneNumber + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

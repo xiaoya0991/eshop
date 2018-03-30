@@ -1,24 +1,28 @@
-package com.zhss.eshop.wms.domain;
+package com.zhss.eshop.schedule.domain;
 
 import java.util.Date;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 销售出库单发货明细
+ * 发货明细
  * @author zhonghuashishan
  *
  */
-public class SaleDeliveryOrderSendOutDetailDTO extends AbstractObject {
+public class ScheduleOrderSendOutDetailDTO extends AbstractObject {
 
 	/**
 	 * id
 	 */
 	private Long id;
 	/**
-	 * 销售出库单条目id
+	 * 订单id
 	 */
-	private Long saleDeliveryOrderItemId;
+	private Long orderInfoId;
+	/**
+	 * 订单条目id
+	 */
+	private Long orderItemId;
 	/**
 	 * 货位库存明细id
 	 */
@@ -42,11 +46,17 @@ public class SaleDeliveryOrderSendOutDetailDTO extends AbstractObject {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getSaleDeliveryOrderItemId() {
-		return saleDeliveryOrderItemId;
+	public Long getOrderInfoId() {
+		return orderInfoId;
 	}
-	public void setSaleDeliveryOrderItemId(Long saleDeliveryOrderItemId) {
-		this.saleDeliveryOrderItemId = saleDeliveryOrderItemId;
+	public void setOrderInfoId(Long orderInfoId) {
+		this.orderInfoId = orderInfoId;
+	}
+	public Long getOrderItemId() {
+		return orderItemId;
+	}
+	public void setOrderItemId(Long orderItemId) {
+		this.orderItemId = orderItemId;
 	}
 	public Long getGoodsAllocationStockDetailId() {
 		return goodsAllocationStockDetailId;
@@ -75,9 +85,9 @@ public class SaleDeliveryOrderSendOutDetailDTO extends AbstractObject {
 	
 	@Override
 	public String toString() {
-		return "SaleDeliveryOrderSendOutDetailDTO [id=" + id + ", saleDeliveryOrderItemId=" + saleDeliveryOrderItemId
-				+ ", goodsAllocationStockDetailId=" + goodsAllocationStockDetailId + ", sendOutCount=" + sendOutCount
-				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+		return "ScheduleOrderSendOutDetailDTO [id=" + id + ", orderInfoId=" + orderInfoId + ", orderItemId="
+				+ orderItemId + ", goodsAllocationStockDetailId=" + goodsAllocationStockDetailId + ", sendOutCount="
+				+ sendOutCount + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

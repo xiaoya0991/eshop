@@ -116,4 +116,11 @@ public class PriorityDO {
 		return null;
 	}
 	
+	@Override
+	public String toString() {
+		return "PriorityDO [id=" + id + ", code=" + code + ", url=" + url + ", priorityComment=" + priorityComment
+				+ ", priorityType=" + priorityType + ", parentId=" + parentId + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

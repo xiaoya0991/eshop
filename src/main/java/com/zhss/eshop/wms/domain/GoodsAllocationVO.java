@@ -63,4 +63,10 @@ public class GoodsAllocationVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsAllocationVO [id=" + id + ", code=" + code + ", remark=" + remark + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }
