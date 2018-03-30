@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.dao.impl;
+package com.zhss.eshop.inventory.dao.impl;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.zhss.eshop.Inventory.dao.StockUpdateMessageDAO;
-import com.zhss.eshop.Inventory.mapper.StockUpdateMessageMapper;
-import com.zhss.eshop.Inventory.domain.StockUpdateMessageDO;
+import com.zhss.eshop.inventory.dao.StockUpdateMessageDAO;
+import com.zhss.eshop.inventory.mapper.StockUpdateMessageMapper;
+import com.zhss.eshop.inventory.domain.StockUpdateMessageDO;
 
 /**
  * 库存更新消息管理模块DAO组件

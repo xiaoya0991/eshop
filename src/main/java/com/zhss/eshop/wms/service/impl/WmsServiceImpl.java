@@ -23,7 +23,7 @@ import com.zhss.eshop.wms.service.WmsService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class WmsServiceImpl implements WmsService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(WmsServiceImpl.class);
@@ -39,6 +39,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param purchaseInputOrderDTO 采购入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean createPurchaseInputOrder(PurchaseInputOrderDTO purchaseInputOrderDTO) {
 		return true;
 	}
@@ -48,6 +49,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param saleDeliveryOrderDTO 销售出库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder) {
 		return true;
 	}
@@ -57,6 +59,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param returnGoodsInputOrder 退货入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean createReturnGoodsInputOrder(ReturnGoodsInputOrderDTO returnGoodsInputOrder) {
 		return true;
 	}
@@ -66,6 +69,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informSubmitOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
 		return true;
 	}
@@ -75,6 +79,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPayOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
 		return true;
 	}
@@ -84,6 +89,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCancelOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
 		return true;
 	}
@@ -93,6 +99,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param goodsSkuId 商品sku id
 	 * @return 货位库存明细
 	 */
+	@Override
 	public List<GoodsAllocationStockDetailDTO> listStockDetailsByGoodsSkuId(Long goodsSkuId) {
 		List<GoodsAllocationStockDetailDTO> stockDetails = 
 				new ArrayList<GoodsAllocationStockDetailDTO>();
@@ -142,6 +149,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param orderId 订单id
 	 * @return 物流单号
 	 */
+	@Override
 	public String getLogisticCode(Long orderId) {
 		return null;
 	}
@@ -151,6 +159,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param purchaseInputOrderId 采购入库单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCreatePurchaseSettlementOrderEvent(Long purchaseInputOrderId) {
 		return true;
 	}
@@ -160,6 +169,7 @@ public class WmsServiceImpl implements WmsService {
 	 * @param purchaseInputOrderId 采购入库单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseInputOrderId) {
 		return true;
 	}

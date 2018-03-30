@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.zhss.eshop.Inventory.async.StockUpdateMessage;
-import com.zhss.eshop.Inventory.async.StockUpdateQueue;
-import com.zhss.eshop.Inventory.constant.GoodsStockUpdateOperation;
+import com.zhss.eshop.inventory.async.StockUpdateMessage;
+import com.zhss.eshop.inventory.async.StockUpdateQueue;
+import com.zhss.eshop.inventory.constant.GoodsStockUpdateOperation;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.schedule.service.ScheduleService;
 

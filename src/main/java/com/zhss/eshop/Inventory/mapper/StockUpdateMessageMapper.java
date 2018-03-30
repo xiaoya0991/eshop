@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.mapper;
+package com.zhss.eshop.inventory.mapper;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
-import com.zhss.eshop.Inventory.domain.StockUpdateMessageDO;
+import com.zhss.eshop.inventory.domain.StockUpdateMessageDO;
 
 /**
  * 离线存储的库存更新消息mapper组件

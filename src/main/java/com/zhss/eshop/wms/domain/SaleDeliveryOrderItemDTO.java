@@ -329,10 +329,19 @@ public class SaleDeliveryOrderItemDTO extends AbstractObject {
 		return "SaleDeliveryOrderItemDTO [id=" + id + ", saleDeliveryOrderId=" + saleDeliveryOrderId + ", goodsSkuId="
 				+ goodsSkuId + ", goodsSkuCode=" + goodsSkuCode + ", goodsName=" + goodsName + ", saleProperties="
 				+ saleProperties + ", goodsGrossWeight=" + goodsGrossWeight + ", purchaseQuantity=" + purchaseQuantity
-				+ ", purchasePrice=" + purchasePrice + ", promotionActivityId=" + promotionActivityId + ", goodsLenght="
+				+ ", purchasePrice=" + purchasePrice + ", promotionActivityId=" + promotionActivityId + ", goodsLength="
 				+ goodsLength + ", goodsWidth=" + goodsWidth + ", goodsHeight=" + goodsHeight + ", gmtCreate="
 				+ gmtCreate + ", gmtModified=" + gmtModified + ", pickingItems=" + pickingItems + ", sendOutItems="
-				+ sendOutItems + "]";
+				+ sendOutItems + ", getId()=" + getId() + ", getSaleDeliveryOrderId()=" + getSaleDeliveryOrderId()
+				+ ", getGoodsSkuId()=" + getGoodsSkuId() + ", getGoodsSkuCode()=" + getGoodsSkuCode()
+				+ ", getGoodsName()=" + getGoodsName() + ", getSaleProperties()=" + getSaleProperties()
+				+ ", getGoodsGrossWeight()=" + getGoodsGrossWeight() + ", getPurchaseQuantity()="
+				+ getPurchaseQuantity() + ", getPurchasePrice()=" + getPurchasePrice() + ", getPromotionActivityId()="
+				+ getPromotionActivityId() + ", getGoodsLength()=" + getGoodsLength() + ", getGoodsWidth()="
+				+ getGoodsWidth() + ", getGoodsHeight()=" + getGoodsHeight() + ", getGmtCreate()=" + getGmtCreate()
+				+ ", getGmtModified()=" + getGmtModified() + ", getPickingItems()=" + getPickingItems()
+				+ ", getSendOutItems()=" + getSendOutItems() + ", hashCode()=" + hashCode() + ", getClass()="
+				+ getClass() + ", toString()=" + super.toString() + "]";
 	}
 	
 }

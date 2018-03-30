@@ -268,4 +268,13 @@ public class PurchaseInputOrderDTO extends AbstractObject {
 		return true;
 	}
 	
+	public String toString() {
+		return "PurchaseInputOrderDTO [id=" + id + ", purchaseOrderId=" + purchaseOrderId + ", supplierId=" + supplierId
+				+ ", expectArrivalTime=" + expectArrivalTime + ", actualArrivalTime=" + actualArrivalTime
+				+ ", purchaseContactor=" + purchaseContactor + ", purchaseContactorPhoneNumber="
+				+ purchaseContactorPhoneNumber + ", purchaseContactorEmail=" + purchaseContactorEmail
+				+ ", purchaseOrderRemark=" + purchaseOrderRemark + ", purchaser=" + purchaser + ", status=" + status
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", items=" + items + "]";
+	}
+	
 }

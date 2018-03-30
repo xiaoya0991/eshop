@@ -21,7 +21,7 @@ import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class PayServiceImpl implements PayService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PayServiceImpl.class);
@@ -42,6 +42,7 @@ public class PayServiceImpl implements PayService {
 	 * @param order 订单
 	 * @return 支付二维码
 	 */
+	@Override
 	public String getQrCode(OrderInfoDTO order) {
 		try {
 			String qrCode = payApi.getQrCode(order.getPayType(), 
@@ -65,6 +66,7 @@ public class PayServiceImpl implements PayService {
 	 * @param returnGoodsInputOrder 退货入库单
 	 * @return 退款结果
 	 */
+	@Override
 	public Boolean refund(ReturnGoodsInputOrderDTO returnGoodsInputOrder) {
 		try {
 			PayTransactionDTO payTransaction = payTransactionService.getByOrderNo(

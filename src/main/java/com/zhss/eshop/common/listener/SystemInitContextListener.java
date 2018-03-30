@@ -23,6 +23,7 @@ public class SystemInitContextListener implements ServletContextListener {
 	@Autowired
 	private SpringApplicationContext context;
 	
+	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		System.out.println("系统启动了。。。。。。。。");  
 		
@@ -31,6 +32,7 @@ public class SystemInitContextListener implements ServletContextListener {
 		stockUpdateMessageConsumer.start();
 	}
 	
+	@Override
 	public void contextDestroyed(ServletContextEvent event) {
 		
 	}

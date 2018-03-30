@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.domain;
+package com.zhss.eshop.inventory.domain;
 
 import java.util.Date;
 

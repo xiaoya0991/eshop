@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.mapper;
+package com.zhss.eshop.inventory.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.zhss.eshop.Inventory.domain.GoodsStockDO;
+import com.zhss.eshop.inventory.domain.GoodsStockDO;
 
 /**
  * 商品sku库存管理模块的mapper组件

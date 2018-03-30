@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.constant;
+package com.zhss.eshop.inventory.constant;
 
 /**
  * 商品库存更新操作

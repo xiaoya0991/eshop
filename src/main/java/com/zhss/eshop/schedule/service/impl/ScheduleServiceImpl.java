@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zhss.eshop.Inventory.service.InventoryService;
+import com.zhss.eshop.inventory.service.InventoryService;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
@@ -93,6 +93,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param purchaseInputOrderDTO 采购入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPurchaseInputFinished(
 			PurchaseInputOrderDTO purchaseInputOrder) {
 		try {
@@ -221,6 +222,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param purchaseOrderDTO 采购单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean schedulePurchaseInput(PurchaseOrderDTO purchaseOrder) {
 		try {
 			PurchaseInputOrderDTO purchaseInputOrder = 

@@ -1,14 +1,14 @@
-package com.zhss.eshop.Inventory.stock;
+package com.zhss.eshop.inventory.stock;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.zhss.eshop.Inventory.constant.StockStatus;
-import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
+import com.zhss.eshop.inventory.constant.StockStatus;
+import com.zhss.eshop.inventory.dao.GoodsStockDAO;
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.Inventory.domain.GoodsStockDO;
+import com.zhss.eshop.inventory.domain.GoodsStockDO;
 
 /**
  * 商品库存更新命令的抽象基类

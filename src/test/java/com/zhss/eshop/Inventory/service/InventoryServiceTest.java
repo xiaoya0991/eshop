@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.service;
+package com.zhss.eshop.inventory.service;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -15,15 +15,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
+import com.zhss.eshop.inventory.dao.GoodsStockDAO;
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.Inventory.async.StockUpdateMessage;
-import com.zhss.eshop.Inventory.async.StockUpdateObservable;
-import com.zhss.eshop.Inventory.async.StockUpdateObserver;
-import com.zhss.eshop.Inventory.async.StockUpdateQueue;
-import com.zhss.eshop.Inventory.async.StockUpdateResult;
-import com.zhss.eshop.Inventory.async.StockUpdateResultManager;
-import com.zhss.eshop.Inventory.domain.GoodsStockDO;
+import com.zhss.eshop.inventory.async.StockUpdateMessage;
+import com.zhss.eshop.inventory.async.StockUpdateObservable;
+import com.zhss.eshop.inventory.async.StockUpdateObserver;
+import com.zhss.eshop.inventory.async.StockUpdateQueue;
+import com.zhss.eshop.inventory.async.StockUpdateResult;
+import com.zhss.eshop.inventory.async.StockUpdateResultManager;
+import com.zhss.eshop.inventory.domain.GoodsStockDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;

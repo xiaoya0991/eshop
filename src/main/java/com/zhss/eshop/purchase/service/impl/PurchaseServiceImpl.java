@@ -20,7 +20,7 @@ import com.zhss.eshop.purchase.service.SupplierService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class PurchaseServiceImpl implements PurchaseService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PurchaseServiceImpl.class);
@@ -86,6 +86,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param purchaseOrderId
 	 * @return
 	 */
+	@Override
 	public Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseOrderId) {
 		try {
 			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.FINISHED);
@@ -101,6 +102,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param settlementPeriod 结算周期
  	 * @return 供应商
 	 */
+	@Override
 	public List<SupplierDTO> listSuppliersBySettlementPeriod(Integer settlementPeriod) {
 		try {
 			return supplierService.listBySettlementPeriod(settlementPeriod);

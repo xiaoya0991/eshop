@@ -196,5 +196,13 @@ public class PurchaseInputOrderItemDTO extends AbstractObject {
 			return false;
 		return true;
 	}
+
+	public String toString() {
+		return "PurchaseInputOrderItemDTO [id=" + id + ", purchaseInputOrderId=" + purchaseInputOrderId
+				+ ", goodsSkuId=" + goodsSkuId + ", purchaseCount=" + purchaseCount + ", purchasePrice=" + purchasePrice
+				+ ", qualifiedCount=" + qualifiedCount + ", arrivalCount=" + arrivalCount + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + ", putOnItemDTOs=" + putOnItemDTOs + ", stockDetails=" + stockDetails
+				+ "]";
+	}
 	
 }

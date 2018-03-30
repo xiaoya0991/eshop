@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.service.impl;
+package com.zhss.eshop.inventory.service.impl;
 
 import java.util.UUID;
 
@@ -7,20 +7,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zhss.eshop.Inventory.constant.GoodsStockUpdateOperation;
-import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
-import com.zhss.eshop.Inventory.service.InventoryService;
-import com.zhss.eshop.Inventory.stock.CancelOrderStockUpdaterFactory;
-import com.zhss.eshop.Inventory.stock.PayOrderStockUpdaterFactory;
-import com.zhss.eshop.Inventory.stock.PurchaseInputStockUpdaterFactory;
-import com.zhss.eshop.Inventory.stock.ReturnGoodsInputStockUpdaterFactory;
-import com.zhss.eshop.Inventory.stock.StockUpdater;
-import com.zhss.eshop.Inventory.stock.SubmitOrderStockUpdaterFactory;
+import com.zhss.eshop.inventory.constant.GoodsStockUpdateOperation;
+import com.zhss.eshop.inventory.dao.GoodsStockDAO;
+import com.zhss.eshop.inventory.service.InventoryService;
+import com.zhss.eshop.inventory.stock.CancelOrderStockUpdaterFactory;
+import com.zhss.eshop.inventory.stock.PayOrderStockUpdaterFactory;
+import com.zhss.eshop.inventory.stock.PurchaseInputStockUpdaterFactory;
+import com.zhss.eshop.inventory.stock.ReturnGoodsInputStockUpdaterFactory;
+import com.zhss.eshop.inventory.stock.StockUpdater;
+import com.zhss.eshop.inventory.stock.SubmitOrderStockUpdaterFactory;
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.Inventory.async.StockUpdateMessage;
-import com.zhss.eshop.Inventory.async.StockUpdateQueue;
-import com.zhss.eshop.Inventory.async.StockUpdateResultManager;
-import com.zhss.eshop.Inventory.domain.GoodsStockDO;
+import com.zhss.eshop.inventory.async.StockUpdateMessage;
+import com.zhss.eshop.inventory.async.StockUpdateQueue;
+import com.zhss.eshop.inventory.async.StockUpdateResultManager;
+import com.zhss.eshop.inventory.domain.GoodsStockDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -91,6 +91,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param purchaseInputOrderDTO 采购入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPurchaseInputFinished(
 			PurchaseInputOrderDTO purchaseInputOrderDTO) {
 		try {
@@ -127,6 +128,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informSubmitOrderEvent(OrderInfoDTO orderDTO) {
 		try {
 			// 更新本地库存
@@ -156,6 +158,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPayOrderEvent(OrderInfoDTO orderDTO) {
 		try {
 			// 更新本地库存
@@ -185,6 +188,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCancelOrderEvent(OrderInfoDTO orderDTO) {
 		try {
 			// 更新本地库存
@@ -214,6 +218,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param goodsSkuId 商品sku id
 	 * @return 商品sku的库存
 	 */
+	@Override
 	public Long getSaleStockQuantity(Long goodsSkuId) {
 		try {
 			GoodsStockDO goodsStockDO = goodsStockDAO
@@ -235,6 +240,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param saleStockQuantity 销售库存
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean setSaleStockQuantity(Long goodsSkuId, Long saleStockQuantity) {
 		try {
 			GoodsStockDO goodsStock = goodsStockDAO.getGoodsStockBySkuId(goodsSkuId);

@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.async;
+package com.zhss.eshop.inventory.async;
 
 /**
  * 商品库存更新结果

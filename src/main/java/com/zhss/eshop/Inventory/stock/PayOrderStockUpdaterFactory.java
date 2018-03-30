@@ -1,4 +1,4 @@
-package com.zhss.eshop.Inventory.stock;
+package com.zhss.eshop.inventory.stock;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,9 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.zhss.eshop.Inventory.dao.GoodsStockDAO;
+import com.zhss.eshop.inventory.dao.GoodsStockDAO;
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.Inventory.domain.GoodsStockDO;
+import com.zhss.eshop.inventory.domain.GoodsStockDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 

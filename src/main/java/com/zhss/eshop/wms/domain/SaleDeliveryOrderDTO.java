@@ -408,6 +408,8 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 				+ couponAmount + ", payableAmount=" + payableAmount + ", invoiceTitle=" + invoiceTitle + ", taxpayerId="
 				+ taxpayerId + ", orderComment=" + orderComment + ", saleDeliveryOrderStatus=" + status
 				+ ", deliveryTime=" + deliveryTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ taxpayerId + ", orderComment=" + orderComment + ", status=" + status + ", deliveryTime="
+				+ deliveryTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
 				+ ", saleDeliveryOrderItems=" + saleDeliveryOrderItems + ", sendOutOrder=" + sendOutOrder
 				+ ", logisticOrder=" + logisticOrder + "]";
 	}

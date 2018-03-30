@@ -1,6 +1,6 @@
-package com.zhss.eshop.Inventory.dao;
+package com.zhss.eshop.inventory.dao;
 
-import com.zhss.eshop.Inventory.domain.GoodsStockDO;
+import com.zhss.eshop.inventory.domain.GoodsStockDO;
 
 /**
  * 商品库存管理模块的DAO组件接口

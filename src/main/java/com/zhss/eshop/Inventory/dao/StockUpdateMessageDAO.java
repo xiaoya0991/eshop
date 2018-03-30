@@ -1,8 +1,8 @@
-package com.zhss.eshop.Inventory.dao;
+package com.zhss.eshop.inventory.dao;
 
 import java.util.List;
 
-import com.zhss.eshop.Inventory.domain.StockUpdateMessageDO;
+import com.zhss.eshop.inventory.domain.StockUpdateMessageDO;
 
 /**
  * 库存更新消息管理模块DAO组件接口
