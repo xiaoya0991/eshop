@@ -63,4 +63,10 @@ public class CommentPictureDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "CommentPictureDTO [id=" + id + ", commentInfoId=" + commentInfoId + ", commentPicturePath="
+				+ commentPicturePath + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

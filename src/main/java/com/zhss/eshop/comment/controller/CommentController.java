@@ -213,8 +213,8 @@ public class CommentController {
     		comment.setId(id);
     		comment.setCommentStatus(CommentApproved.YES.equals(approved) ? 
     				CommentStatus.APPROVED : CommentStatus.APPROVE_REJECTED); 
-			Boolean result = commentInfoService.update(comment);
-			return result;
+			commentInfoService.update(comment);
+			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;
@@ -229,7 +229,8 @@ public class CommentController {
     @DeleteMapping("/{id}") 
     public Boolean remove(@PathVariable("id") Long id) {
     	try {
-			return commentInfoService.remove(id);
+			commentInfoService.remove(id);
+			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return false;

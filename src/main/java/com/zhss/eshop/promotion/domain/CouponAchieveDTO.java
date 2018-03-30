@@ -83,4 +83,10 @@ public class CouponAchieveDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "CouponAchieveDTO [id=" + id + ", couponId=" + couponId + ", userAccountId=" + userAccountId + ", used="
+				+ used + ", usedTime=" + usedTime + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

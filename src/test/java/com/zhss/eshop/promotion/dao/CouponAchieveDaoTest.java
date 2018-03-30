@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.promotion.domain.CouponAchieveDO;
 
@@ -29,9 +30,9 @@ import com.zhss.eshop.promotion.domain.CouponAchieveDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class CouponAchieveDAOTest {
+public class CouponAchieveDaoTest {
 
 	/**
 	 * 优惠券领取记录管理DAO组件
@@ -146,7 +147,7 @@ public class CouponAchieveDAOTest {
 	private Map<Long, CouponAchieveDO> createCouponAchieveMap(
 			Integer count, Long userAccountId) throws Exception {
 		Map<Long, CouponAchieveDO> couponAchieveMap = 
-				new HashMap<Long, CouponAchieveDO>();
+				new HashMap<Long, CouponAchieveDO>(CollectionSize.DEFAULT);
 		
 		List<CouponAchieveDO> couponAchieves = createCouponAchieves(
 				count, userAccountId);  

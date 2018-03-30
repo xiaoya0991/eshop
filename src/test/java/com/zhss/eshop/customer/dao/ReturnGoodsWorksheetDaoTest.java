@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.customer.constant.ReturnGoodsWorksheetStatus;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDO;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetQuery;
@@ -30,9 +31,9 @@ import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetQuery;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class ReturnGoodsWorksheetDAOTest {
+public class ReturnGoodsWorksheetDaoTest {
 
 	/**
 	 * 退货工单管理DAO组件
@@ -172,7 +173,7 @@ public class ReturnGoodsWorksheetDAOTest {
 	private Map<Long, ReturnGoodsWorksheetDO> createReturnGoodsWorksheetMap(
 			Integer count, Boolean includeRemark) throws Exception {
 		Map<Long, ReturnGoodsWorksheetDO> worksheetMap = 
-				new HashMap<Long, ReturnGoodsWorksheetDO>();
+				new HashMap<Long, ReturnGoodsWorksheetDO>(CollectionSize.DEFAULT);
 		
 		List<ReturnGoodsWorksheetDO> worksheets = createReturnGoodsWorksheets(
 				count, includeRemark);  

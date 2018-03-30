@@ -231,108 +231,149 @@ public class CommentInfoDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		CommentInfoDO other = (CommentInfoDO) obj;
 		if (commentContent == null) {
-			if (other.commentContent != null)
+			if (other.commentContent != null) {
 				return false;
-		} else if (!commentContent.equals(other.commentContent))
+			}
+		} else if (!commentContent.equals(other.commentContent)) {
 			return false;
+		}
 		if (commentStatus == null) {
-			if (other.commentStatus != null)
+			if (other.commentStatus != null) {
 				return false;
-		} else if (!commentStatus.equals(other.commentStatus))
+			}
+		} else if (!commentStatus.equals(other.commentStatus)) {
 			return false;
+		}
 		if (commentType == null) {
-			if (other.commentType != null)
+			if (other.commentType != null) {
 				return false;
-		} else if (!commentType.equals(other.commentType))
+			}
+		} else if (!commentType.equals(other.commentType)) {
 			return false;
+		}
 		if (customerServiceScore == null) {
-			if (other.customerServiceScore != null)
+			if (other.customerServiceScore != null) {
 				return false;
-		} else if (!customerServiceScore.equals(other.customerServiceScore))
+			}
+		} else if (!customerServiceScore.equals(other.customerServiceScore)) {
 			return false;
+		}
 		if (defaultComment == null) {
-			if (other.defaultComment != null)
+			if (other.defaultComment != null) {
 				return false;
-		} else if (!defaultComment.equals(other.defaultComment))
+			}
+		} else if (!defaultComment.equals(other.defaultComment)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (goodsId == null) {
-			if (other.goodsId != null)
+			if (other.goodsId != null) {
 				return false;
-		} else if (!goodsId.equals(other.goodsId))
+			}
+		} else if (!goodsId.equals(other.goodsId)) {
 			return false;
+		}
 		if (goodsScore == null) {
-			if (other.goodsScore != null)
+			if (other.goodsScore != null) {
 				return false;
-		} else if (!goodsScore.equals(other.goodsScore))
+			}
+		} else if (!goodsScore.equals(other.goodsScore)) {
 			return false;
+		}
 		if (goodsSkuId == null) {
-			if (other.goodsSkuId != null)
+			if (other.goodsSkuId != null) {
 				return false;
-		} else if (!goodsSkuId.equals(other.goodsSkuId))
+			}
+		} else if (!goodsSkuId.equals(other.goodsSkuId)) {
 			return false;
+		}
 		if (goodsSkuSaleProperties == null) {
-			if (other.goodsSkuSaleProperties != null)
+			if (other.goodsSkuSaleProperties != null) {
 				return false;
-		} else if (!goodsSkuSaleProperties.equals(other.goodsSkuSaleProperties))
+			}
+		} else if (!goodsSkuSaleProperties.equals(other.goodsSkuSaleProperties)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (logisticsScore == null) {
-			if (other.logisticsScore != null)
+			if (other.logisticsScore != null) {
 				return false;
-		} else if (!logisticsScore.equals(other.logisticsScore))
+			}
+		} else if (!logisticsScore.equals(other.logisticsScore)) {
 			return false;
+		}
 		if (orderInfoId == null) {
-			if (other.orderInfoId != null)
+			if (other.orderInfoId != null) {
 				return false;
-		} else if (!orderInfoId.equals(other.orderInfoId))
+			}
+		} else if (!orderInfoId.equals(other.orderInfoId)) {
 			return false;
+		}
 		if (orderItemId == null) {
-			if (other.orderItemId != null)
+			if (other.orderItemId != null) {
 				return false;
-		} else if (!orderItemId.equals(other.orderItemId))
+			}
+		} else if (!orderItemId.equals(other.orderItemId)) {
 			return false;
+		}
 		if (showPictures == null) {
-			if (other.showPictures != null)
+			if (other.showPictures != null) {
 				return false;
-		} else if (!showPictures.equals(other.showPictures))
+			}
+		} else if (!showPictures.equals(other.showPictures)) {
 			return false;
+		}
 		if (totalScore == null) {
-			if (other.totalScore != null)
+			if (other.totalScore != null) {
 				return false;
-		} else if (!totalScore.equals(other.totalScore))
+			}
+		} else if (!totalScore.equals(other.totalScore)) {
 			return false;
+		}
 		if (userAccountId == null) {
-			if (other.userAccountId != null)
+			if (other.userAccountId != null) {
 				return false;
-		} else if (!userAccountId.equals(other.userAccountId))
+			}
+		} else if (!userAccountId.equals(other.userAccountId)) {
 			return false;
+		}
 		if (username == null) {
-			if (other.username != null)
+			if (other.username != null) {
 				return false;
-		} else if (!username.equals(other.username))
+			}
+		} else if (!username.equals(other.username)) {
 			return false;
+		}
 		return true;
 	}
 	

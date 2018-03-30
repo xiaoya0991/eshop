@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.promotion.constant.CouponGiveOutType;
 import com.zhss.eshop.promotion.constant.CouponStatus;
@@ -33,9 +34,9 @@ import com.zhss.eshop.promotion.domain.CouponQuery;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class CouponDAOTest {
+public class CouponDaoTest {
 
 	/**
 	 * 优惠券管理DAO组件
@@ -173,7 +174,7 @@ public class CouponDAOTest {
 	private Map<Long, CouponDO> createCouponMap(
 			Integer count, Boolean includedRule) throws Exception {
 		Map<Long, CouponDO> couponMap = 
-				new HashMap<Long, CouponDO>();
+				new HashMap<Long, CouponDO>(CollectionSize.DEFAULT);
 		
 		List<CouponDO> coupons = createCoupons(
 				count, includedRule);  

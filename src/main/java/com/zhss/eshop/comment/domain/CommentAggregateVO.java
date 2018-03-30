@@ -132,64 +132,96 @@ public class CommentAggregateVO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		CommentAggregateVO other = (CommentAggregateVO) obj;
 		if (badCommentCount == null) {
-			if (other.badCommentCount != null)
+			if (other.badCommentCount != null) {
 				return false;
-		} else if (!badCommentCount.equals(other.badCommentCount))
+			}
+		} else if (!badCommentCount.equals(other.badCommentCount)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (goodCommentCount == null) {
-			if (other.goodCommentCount != null)
+			if (other.goodCommentCount != null) {
 				return false;
-		} else if (!goodCommentCount.equals(other.goodCommentCount))
+			}
+		} else if (!goodCommentCount.equals(other.goodCommentCount)) {
 			return false;
+		}
 		if (goodCommentRate == null) {
-			if (other.goodCommentRate != null)
+			if (other.goodCommentRate != null) {
 				return false;
-		} else if (!goodCommentRate.equals(other.goodCommentRate))
+			}
+		} else if (!goodCommentRate.equals(other.goodCommentRate)) {
 			return false;
+		}
 		if (goodsId == null) {
-			if (other.goodsId != null)
+			if (other.goodsId != null) {
 				return false;
-		} else if (!goodsId.equals(other.goodsId))
+			}
+		} else if (!goodsId.equals(other.goodsId)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (mediumCommentCount == null) {
-			if (other.mediumCommentCount != null)
+			if (other.mediumCommentCount != null) {
 				return false;
-		} else if (!mediumCommentCount.equals(other.mediumCommentCount))
+			}
+		} else if (!mediumCommentCount.equals(other.mediumCommentCount)) {
 			return false;
+		}
 		if (showPicturesCommentCount == null) {
-			if (other.showPicturesCommentCount != null)
+			if (other.showPicturesCommentCount != null) {
 				return false;
-		} else if (!showPicturesCommentCount.equals(other.showPicturesCommentCount))
+			}
+		} else if (!showPicturesCommentCount.equals(other.showPicturesCommentCount)) {
 			return false;
+		}
 		if (totalCommentCount == null) {
-			if (other.totalCommentCount != null)
+			if (other.totalCommentCount != null) {
 				return false;
-		} else if (!totalCommentCount.equals(other.totalCommentCount))
+			}
+		} else if (!totalCommentCount.equals(other.totalCommentCount)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "CommentAggregateVO [id=" + id + ", goodsId=" + goodsId + ", totalCommentCount=" + totalCommentCount
+				+ ", goodCommentCount=" + goodCommentCount + ", goodCommentRate=" + goodCommentRate
+				+ ", showPicturesCommentCount=" + showPicturesCommentCount + ", mediumCommentCount="
+				+ mediumCommentCount + ", badCommentCount=" + badCommentCount + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

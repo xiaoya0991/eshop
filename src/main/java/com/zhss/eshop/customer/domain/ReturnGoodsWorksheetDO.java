@@ -121,58 +121,79 @@ public class ReturnGoodsWorksheetDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		ReturnGoodsWorksheetDO other = (ReturnGoodsWorksheetDO) obj;
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (orderInfoId == null) {
-			if (other.orderInfoId != null)
+			if (other.orderInfoId != null) {
 				return false;
-		} else if (!orderInfoId.equals(other.orderInfoId))
+			}
+		} else if (!orderInfoId.equals(other.orderInfoId)) {
 			return false;
+		}
 		if (orderNo == null) {
-			if (other.orderNo != null)
+			if (other.orderNo != null) {
 				return false;
-		} else if (!orderNo.equals(other.orderNo))
+			}
+		} else if (!orderNo.equals(other.orderNo)) {
 			return false;
+		}
 		if (returnGoodsLogisticsCode == null) {
-			if (other.returnGoodsLogisticsCode != null)
+			if (other.returnGoodsLogisticsCode != null) {
 				return false;
-		} else if (!returnGoodsLogisticsCode.equals(other.returnGoodsLogisticsCode))
+			}
+		} else if (!returnGoodsLogisticsCode.equals(other.returnGoodsLogisticsCode)) {
 			return false;
+		}
 		if (returnGoodsReason == null) {
-			if (other.returnGoodsReason != null)
+			if (other.returnGoodsReason != null) {
 				return false;
-		} else if (!returnGoodsReason.equals(other.returnGoodsReason))
+			}
+		} else if (!returnGoodsReason.equals(other.returnGoodsReason)) {
 			return false;
+		}
 		if (returnGoodsRemark == null) {
-			if (other.returnGoodsRemark != null)
+			if (other.returnGoodsRemark != null) {
 				return false;
-		} else if (!returnGoodsRemark.equals(other.returnGoodsRemark))
+			}
+		} else if (!returnGoodsRemark.equals(other.returnGoodsRemark)) {
 			return false;
+		}
 		if (status == null) {
-			if (other.status != null)
+			if (other.status != null) {
 				return false;
-		} else if (!status.equals(other.status))
+			}
+		} else if (!status.equals(other.status)) {
 			return false;
+		}
 		return true;
 	}
 	

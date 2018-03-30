@@ -34,6 +34,7 @@ public class ReturnGoodsWorksheetDAOImpl implements ReturnGoodsWorksheetDAO {
 	 * 新增退货工单
 	 * @param worksheet 退货工单
 	 */
+	@Override
 	public void save(ReturnGoodsWorksheetDO worksheet) throws Exception {
 		worksheet.setGmtCreate(dateProvider.getCurrentTime()); 
 		worksheet.setGmtModified(dateProvider.getCurrentTime()); 
@@ -45,6 +46,7 @@ public class ReturnGoodsWorksheetDAOImpl implements ReturnGoodsWorksheetDAO {
 	 * @param query 查询条件
 	 * @return 退货工单
 	 */
+	@Override
 	public List<ReturnGoodsWorksheetDO> listByPage(
 			ReturnGoodsWorksheetQuery query) throws Exception {
 		return returnGoodsWorksheetMapper.listByPage(query);
@@ -55,6 +57,7 @@ public class ReturnGoodsWorksheetDAOImpl implements ReturnGoodsWorksheetDAO {
 	 * @param id 退货工单id
 	 * @return 退货工单
 	 */
+	@Override
 	public ReturnGoodsWorksheetDO getById(Long id) throws Exception {
 		return returnGoodsWorksheetMapper.getById(id);
 	}
@@ -63,6 +66,7 @@ public class ReturnGoodsWorksheetDAOImpl implements ReturnGoodsWorksheetDAO {
 	 * 更新退货工单的状态
 	 * @param worksheet 退货工单
 	 */ 
+	@Override
 	public void updateStatus(ReturnGoodsWorksheetDO worksheet) throws Exception {
 		worksheet.setGmtModified(dateProvider.getCurrentTime()); 
 		returnGoodsWorksheetMapper.updateStatus(worksheet); 
@@ -72,6 +76,7 @@ public class ReturnGoodsWorksheetDAOImpl implements ReturnGoodsWorksheetDAO {
 	 * 更新退货工单的退货物流单号
 	 * @param worksheet 退货工单
 	 */ 
+	@Override
 	public void updateReturnGoodsLogisticsCode(
 			ReturnGoodsWorksheetDO worksheet) throws Exception {
 		worksheet.setGmtModified(dateProvider.getCurrentTime()); 
@@ -83,6 +88,7 @@ public class ReturnGoodsWorksheetDAOImpl implements ReturnGoodsWorksheetDAO {
 	 * @param id 订单id
 	 * @return 退货工单
 	 */
+	@Override
 	public ReturnGoodsWorksheetDO getByOrderInfoId(Long orderInfoId) throws Exception {
 		return returnGoodsWorksheetMapper.getByOrderInfoId(orderInfoId);
 	}

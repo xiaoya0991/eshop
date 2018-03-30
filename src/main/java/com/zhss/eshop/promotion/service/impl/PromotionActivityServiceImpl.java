@@ -25,7 +25,7 @@ import com.zhss.eshop.promotion.service.PromotionActivityService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class PromotionActivityServiceImpl implements PromotionActivityService {
 	
 	/**
@@ -49,6 +49,7 @@ public class PromotionActivityServiceImpl implements PromotionActivityService {
 	 * @param query 查询条件
 	 * @return 促销活动
 	 */
+	@Override
 	public List<PromotionActivityDTO> listByPage(
 			PromotionActivityQuery query) throws Exception {
 		return ObjectUtils.convertList(promotionActivityDAO.listByPage(query), 
@@ -60,6 +61,7 @@ public class PromotionActivityServiceImpl implements PromotionActivityService {
 	 * @param id 促销活动id
 	 * @return 促销活动
 	 */
+	@Override
 	public PromotionActivityDTO getById(Long id) throws Exception {
 		PromotionActivityDTO activity = promotionActivityDAO.getById(id)
 				.clone(PromotionActivityDTO.class); 
@@ -72,6 +74,7 @@ public class PromotionActivityServiceImpl implements PromotionActivityService {
 	 * 新增促销活动
 	 * @param activity 促销活动
 	 */
+	@Override
 	public void save(PromotionActivityDTO activity) throws Exception {
 		activity.setGmtCreate(dateProvider.getCurrentTime()); 
 		activity.setGmtModified(dateProvider.getCurrentTime());  
@@ -88,6 +91,7 @@ public class PromotionActivityServiceImpl implements PromotionActivityService {
 	 * 更新促销活动
 	 * @param activity 促销活动
 	 */
+	@Override
 	public void update(PromotionActivityDTO activity) throws Exception {
 		activity.setGmtModified(dateProvider.getCurrentTime());  
 		promotionActivityDAO.update(activity.clone(PromotionActivityDO.class));  
@@ -101,6 +105,7 @@ public class PromotionActivityServiceImpl implements PromotionActivityService {
 	 * 删除促销活动
 	 * @param id 促销活动id
 	 */
+	@Override
 	public void remove(Long id) throws Exception {
 		relationDAO.removeByActivityId(id); 
 		promotionActivityDAO.remove(id); 

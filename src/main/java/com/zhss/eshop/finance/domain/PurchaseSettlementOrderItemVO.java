@@ -103,4 +103,12 @@ public class PurchaseSettlementOrderItemVO extends AbstractObject {
 		this.purchaseSettlementOrderId = purchaseSettlementOrderId;
 	}
 	
+	@Override
+	public String toString() {
+		return "PurchaseSettlementOrderItemVO [id=" + id + ", purchaseSettlementOrderId=" + purchaseSettlementOrderId
+				+ ", goodsSkuId=" + goodsSkuId + ", purchaseCount=" + purchaseCount + ", purchasePrice=" + purchasePrice
+				+ ", qualifiedCount=" + qualifiedCount + ", arrivalCount=" + arrivalCount + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

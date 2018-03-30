@@ -135,7 +135,7 @@ public interface ReturnGoodsWorksheetMapper {
 	
 	/**
 	 * 根据订单id查询退货工单
-	 * @param id 订单id
+	 * @param orderInfoId 订单id
 	 * @return 退货工单
 	 */
 	@Select("SELECT "

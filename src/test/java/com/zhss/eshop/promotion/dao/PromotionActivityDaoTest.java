@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.promotion.constant.PromotionActivityStatus;
 import com.zhss.eshop.promotion.constant.PromotionActivityType;
@@ -33,9 +34,9 @@ import com.zhss.eshop.promotion.domain.PromotionActivityQuery;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class PromotionActivityDAOTest {
+public class PromotionActivityDaoTest {
 
 	/**
 	 * 促销活动管理DAO组件
@@ -258,7 +259,7 @@ public class PromotionActivityDAOTest {
 	private Map<Long, PromotionActivityDO> createPromotionActivityMap(
 			Integer count, Boolean includedRule) throws Exception {
 		Map<Long, PromotionActivityDO> activityMap = 
-				new HashMap<Long, PromotionActivityDO>();
+				new HashMap<Long, PromotionActivityDO>(CollectionSize.DEFAULT);
 		
 		List<PromotionActivityDO> activities = createPromotionActivities(
 				count, includedRule);  

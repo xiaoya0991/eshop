@@ -121,59 +121,88 @@ public class PurchaseSettlementOrderItemDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		PurchaseSettlementOrderItemDO other = (PurchaseSettlementOrderItemDO) obj;
 		if (arrivalCount == null) {
-			if (other.arrivalCount != null)
+			if (other.arrivalCount != null) {
 				return false;
-		} else if (!arrivalCount.equals(other.arrivalCount))
+			}
+		} else if (!arrivalCount.equals(other.arrivalCount)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (goodsSkuId == null) {
-			if (other.goodsSkuId != null)
+			if (other.goodsSkuId != null) {
 				return false;
-		} else if (!goodsSkuId.equals(other.goodsSkuId))
+			}
+		} else if (!goodsSkuId.equals(other.goodsSkuId)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (purchaseCount == null) {
-			if (other.purchaseCount != null)
+			if (other.purchaseCount != null) {
 				return false;
-		} else if (!purchaseCount.equals(other.purchaseCount))
+			}
+		} else if (!purchaseCount.equals(other.purchaseCount)) {
 			return false;
+		}
 		if (purchasePrice == null) {
-			if (other.purchasePrice != null)
+			if (other.purchasePrice != null) {
 				return false;
-		} else if (!purchasePrice.equals(other.purchasePrice))
+			}
+		} else if (!purchasePrice.equals(other.purchasePrice)) {
 			return false;
+		}
 		if (purchaseSettlementOrderId == null) {
-			if (other.purchaseSettlementOrderId != null)
+			if (other.purchaseSettlementOrderId != null) {
 				return false;
-		} else if (!purchaseSettlementOrderId.equals(other.purchaseSettlementOrderId))
+			}
+		} else if (!purchaseSettlementOrderId.equals(other.purchaseSettlementOrderId)) {
 			return false;
+		}
 		if (qualifiedCount == null) {
-			if (other.qualifiedCount != null)
+			if (other.qualifiedCount != null) {
 				return false;
-		} else if (!qualifiedCount.equals(other.qualifiedCount))
+			}
+		} else if (!qualifiedCount.equals(other.qualifiedCount)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "PurchaseSettlementOrderItemDO [id=" + id + ", purchaseSettlementOrderId=" + purchaseSettlementOrderId
+				+ ", goodsSkuId=" + goodsSkuId + ", purchaseCount=" + purchaseCount + ", purchasePrice=" + purchasePrice
+				+ ", qualifiedCount=" + qualifiedCount + ", arrivalCount=" + arrivalCount + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

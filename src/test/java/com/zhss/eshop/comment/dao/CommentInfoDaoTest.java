@@ -23,6 +23,7 @@ import com.zhss.eshop.comment.constant.DefaultComment;
 import com.zhss.eshop.comment.constant.ShowPictures;
 import com.zhss.eshop.comment.domain.CommentInfoDO;
 import com.zhss.eshop.comment.domain.CommentInfoQuery;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 
 /**
@@ -32,9 +33,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class CommentInfoDAOTest {
+public class CommentInfoDaoTest {
 
 	/**
 	 * 评论信息管理模块的DAO组件
@@ -65,9 +66,11 @@ public class CommentInfoDAOTest {
 	@Test
 	public void testListByPage() throws Exception {
 		// 构造20条评论数据
-		Map<Long, CommentInfoDO> commentMap = new HashMap<Long, CommentInfoDO>();
+		Integer count = 20;
 		
-		for(int i = 0; i < 20; i++) {
+		Map<Long, CommentInfoDO> commentMap = new HashMap<Long, CommentInfoDO>(CollectionSize.DEFAULT);
+		
+		for(int i = 0; i < count; i++) {
 			CommentInfoDO comment = createCommentInfoDO();
 			commentMap.put(comment.getId(), comment);
 		}

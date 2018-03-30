@@ -63,4 +63,10 @@ public class PromotionActivityGoodsRelationDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "PromotionActivityGoodsRelationDO [id=" + id + ", promotionActivityId=" + promotionActivityId
+				+ ", goodsId=" + goodsId + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

@@ -212,8 +212,7 @@ public interface PromotionActivityMapper {
 	
 	/**
 	 * 更新促销活动的状态
-	 * @param id 促销活动id
-	 * @param status 促销活动的状态
+	 * @param activity 促销活动
 	 */
 	@Update("UPDATE promotion_activity SET "
 			+ "status=#{status},"

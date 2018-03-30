@@ -24,7 +24,7 @@ import com.zhss.eshop.schedule.service.ScheduleService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ReturnGoodsWorksheetServiceImpl implements ReturnGoodsWorksheetService {
 
 	/**
@@ -48,6 +48,7 @@ public class ReturnGoodsWorksheetServiceImpl implements ReturnGoodsWorksheetServ
 	 * @param query 查询条件
 	 * @return 退货工单
 	 */
+	@Override
 	public List<ReturnGoodsWorksheetDTO> listByPage(
 			ReturnGoodsWorksheetQuery query) throws Exception {
 		return ObjectUtils.convertList(returnGoodsWorksheetDAO.listByPage(query), 
@@ -59,6 +60,7 @@ public class ReturnGoodsWorksheetServiceImpl implements ReturnGoodsWorksheetServ
 	 * @param id 退货工单id
 	 * @return 退货工单
 	 */
+	@Override
 	public ReturnGoodsWorksheetDTO getById(Long id) throws Exception {
 		return returnGoodsWorksheetDAO.getById(id).clone(ReturnGoodsWorksheetDTO.class);
 	}
@@ -69,6 +71,7 @@ public class ReturnGoodsWorksheetServiceImpl implements ReturnGoodsWorksheetServ
 	 * @param approveResult 审核结果
 	 * @throws Exception
 	 */
+	@Override
 	public void approve(Long id, Integer approveResult) throws Exception {
 		ReturnGoodsWorksheetDO worksheet = returnGoodsWorksheetDAO.getById(id);
 		
@@ -88,6 +91,7 @@ public class ReturnGoodsWorksheetServiceImpl implements ReturnGoodsWorksheetServ
 	 * @param id 退货工单id
 	 * @throws Exception
 	 */
+	@Override
 	public void confirmReceivedReturnGoods(Long id) throws Exception {
 		ReturnGoodsWorksheetDO worksheet = returnGoodsWorksheetDAO.getById(id);
 		worksheet.setStatus(ReturnGoodsWorksheetStatus.WAIT_FOR_RETURN_GOODS_INPUT);  

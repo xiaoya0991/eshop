@@ -35,6 +35,7 @@ public class PurchaseSettlementOrderItemDAOImpl implements PurchaseSettlementOrd
 	 * @param purchaseSettlementOrderItems 采购结算单条目
 	 * @throws Exception
 	 */
+	@Override
 	public void batchSave(Long purchaseSettlementOrderId, 
 			List<PurchaseSettlementOrderItemDO> purchaseSettlementOrderItems) throws Exception {
 		for(PurchaseSettlementOrderItemDO purchaseSettlementOrderItem : purchaseSettlementOrderItems) {
@@ -50,6 +51,7 @@ public class PurchaseSettlementOrderItemDAOImpl implements PurchaseSettlementOrd
 	 * @param purchaseSettlementOrderId 采购结算单id
 	 * @return 采购结算单条目
 	 */
+	@Override
 	public List<PurchaseSettlementOrderItemDO> listByPurchaseSettlementOrderId(
 			Long purchaseSettlementOrderId) throws Exception {
 		return purchaseSettlementOrderItemMapper.listByPurchaseSettlementOrderId(

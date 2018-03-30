@@ -18,7 +18,7 @@ import com.zhss.eshop.order.service.OrderService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class CustomerServiceImpl implements CustomerService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
@@ -114,6 +114,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 * @param returnGoodsWorkwheetId 退货工单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informRefundFinishedEvent(Long returnGoodsWorksheetId) {
 		try {
 			ReturnGoodsWorksheetDO worksheet = returnGoodsWorksheetDAO

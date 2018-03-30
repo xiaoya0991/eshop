@@ -61,4 +61,10 @@ public class CommentPictureVO {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "CommentPictureVO [id=" + id + ", commentInfoId=" + commentInfoId + ", commentPicturePath="
+				+ commentPicturePath + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

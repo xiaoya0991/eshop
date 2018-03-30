@@ -19,22 +19,25 @@ public interface CommentPictureService {
 	 * @param commentInfoId 评论信息id
 	 * @param files 评论晒图
 	 * @return 处理结果
+	 * @throws Exception
 	 */
-	Boolean saveCommentPictures(String appBasePath, 
-			Long commentInfoId, MultipartFile[] files);
+	void saveCommentPictures(String appBasePath, 
+			Long commentInfoId, MultipartFile[] files) throws Exception;
 	
 	/**
 	 * 根据评论信息id查询图片
 	 * @param commentId 评论信息id
 	 * @return 评论图片
+	 * @throws Exception
 	 */
-	List<CommentPictureDTO> listByCommentId(Long commentId);
+	List<CommentPictureDTO> listByCommentId(Long commentId) throws Exception;
 	
 	/**
 	 * 根据id查询图片
 	 * @param id 评论图片id
 	 * @return 评论图片
+	 * @throws Exception
 	 */
-	CommentPictureDTO getById(Long id);
+	CommentPictureDTO getById(Long id) throws Exception;
 	
 }

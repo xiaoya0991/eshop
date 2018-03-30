@@ -28,6 +28,7 @@ public class PromotionActivityGoodsRelationDAOImpl implements PromotionActivityG
 	 * @param promotionActivityId 促销活动id
 	 * @return 促销活动与商品的关联关系
 	 */
+	@Override
 	public List<PromotionActivityGoodsRelationDO> listByActivityId(
 			Long promotionActivityId) {
 		return relationMapper.listByActivityId(promotionActivityId);
@@ -37,6 +38,7 @@ public class PromotionActivityGoodsRelationDAOImpl implements PromotionActivityG
 	 * 新增促销活动与商品的关联关系
 	 * @param relation 促销活动与商品的关联关系
 	 */
+	@Override
 	public void save(PromotionActivityGoodsRelationDO relation) {
 		relationMapper.save(relation); 
 	}
@@ -45,6 +47,7 @@ public class PromotionActivityGoodsRelationDAOImpl implements PromotionActivityG
 	 * 删除促销活动对应的与商品的关联关系
 	 * @param promotionActivityId 促销活动id
 	 */
+	@Override
 	public void removeByActivityId(Long promotionActivityId) {
 		relationMapper.removeByActivityId(promotionActivityId); 
 	}

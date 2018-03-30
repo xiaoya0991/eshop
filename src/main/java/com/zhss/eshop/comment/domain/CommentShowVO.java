@@ -41,4 +41,9 @@ public class CommentShowVO {
 		this.comments = comments;
 	}
 	
+	@Override
+	public String toString() {
+		return "CommentShowVO [goodsId=" + goodsId + ", aggregate=" + aggregate + ", comments=" + comments + "]";
+	}
+	
 }

@@ -21,9 +21,9 @@ import com.zhss.eshop.common.util.DateProvider;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class CommentPictureDAOTest {
+public class CommentPictureDaoTest {
 	
 	/**
 	 * 评论图片管理模块的DAO组件

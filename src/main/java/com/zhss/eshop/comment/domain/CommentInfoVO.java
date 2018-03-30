@@ -214,4 +214,16 @@ public class CommentInfoVO extends AbstractObject {
 		this.pictures = pictures;
 	}
 	
+	@Override
+	public String toString() {
+		return "CommentInfoVO [id=" + id + ", userAccountId=" + userAccountId + ", username=" + username
+				+ ", orderInfoId=" + orderInfoId + ", orderItemId=" + orderItemId + ", goodsId=" + goodsId
+				+ ", goodsSkuId=" + goodsSkuId + ", goodsSkuSaleProperties=" + goodsSkuSaleProperties + ", totalScore="
+				+ totalScore + ", goodsScore=" + goodsScore + ", customerServiceScore=" + customerServiceScore
+				+ ", logisticsScore=" + logisticsScore + ", commentContent=" + commentContent + ", showPictures="
+				+ showPictures + ", defaultComment=" + defaultComment + ", commentStatus=" + commentStatus
+				+ ", commentType=" + commentType + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ ", pictures=" + pictures + "]";
+	}
+	
 }

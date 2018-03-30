@@ -35,6 +35,7 @@ public class PurchaseSettlementOrderDAOImpl implements PurchaseSettlementOrderDA
 	 * 新增采购结算单
 	 * @param purchaseSettlementOrder 采购结算单
 	 */
+	@Override
 	public Long save(PurchaseSettlementOrderDO purchaseSettlementOrder) throws Exception {
 		purchaseSettlementOrder.setGmtCreate(dateProvider.getCurrentTime()); 
 		purchaseSettlementOrder.setGmtModified(dateProvider.getCurrentTime()); 
@@ -47,6 +48,7 @@ public class PurchaseSettlementOrderDAOImpl implements PurchaseSettlementOrderDA
 	 * @param query 查询条件
 	 * @return 采购结算单
 	 */
+	@Override
 	public List<PurchaseSettlementOrderDO> listByPage(
 			PurchaseSettlementOrderQuery query) throws Exception {
 		return purchaseSettlementOrderMapper.listByPage(query);
@@ -57,6 +59,7 @@ public class PurchaseSettlementOrderDAOImpl implements PurchaseSettlementOrderDA
 	 * @param id 采购结算单id
 	 * @return 采购结算单
 	 */
+	@Override
 	public PurchaseSettlementOrderDO getById(Long id) throws Exception {
 		return purchaseSettlementOrderMapper.getById(id);
 	}
@@ -65,6 +68,7 @@ public class PurchaseSettlementOrderDAOImpl implements PurchaseSettlementOrderDA
 	 * 更新采购结算单
 	 * @param purchaseSettlementOrder 采购结算单
 	 */
+	@Override
 	public void update(PurchaseSettlementOrderDO purchaseSettlementOrder) throws Exception {
 		purchaseSettlementOrder.setGmtModified(dateProvider.getCurrentTime()); 
 		purchaseSettlementOrderMapper.update(purchaseSettlementOrder); 
@@ -74,6 +78,7 @@ public class PurchaseSettlementOrderDAOImpl implements PurchaseSettlementOrderDA
 	 * 更新采购结算单状态
 	 * @param purchaseSettlementOrder 采购结算单
 	 */
+	@Override
 	public void updateStatus(PurchaseSettlementOrderDO purchaseSettlementOrder) throws Exception {
 		purchaseSettlementOrder.setGmtModified(dateProvider.getCurrentTime()); 
 		purchaseSettlementOrderMapper.updateStatus(purchaseSettlementOrder);
@@ -85,6 +90,7 @@ public class PurchaseSettlementOrderDAOImpl implements PurchaseSettlementOrderDA
 	 * @param status 采购结算单状态
 	 * @throws Exception
 	 */
+	@Override
 	public void updateStatus(Long id, Integer status) throws Exception {
 		PurchaseSettlementOrderDO purchaseSettlementOrder = getById(id);
 		purchaseSettlementOrder.setStatus(status);   
@@ -98,6 +104,7 @@ public class PurchaseSettlementOrderDAOImpl implements PurchaseSettlementOrderDA
 	 * @param endTime 结束时间
 	 * @return 采购结算单
 	 */
+	@Override
 	public List<PurchaseSettlementOrderDO> listFinishedBySettlementPeriod(
 			Long supplierId, Date startTime, Date endTime) throws Exception {
 		return purchaseSettlementOrderMapper.listFinishedBySettlementPeriod(

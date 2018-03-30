@@ -29,6 +29,7 @@ public class CouponAchieveDAOImpl implements CouponAchieveDAO {
 	 * @param userAccountId 用户账号id
 	 * @return 优惠券领取记录
 	 */
+	@Override
 	public CouponAchieveDO getByUserAccountId(Long couponId, Long userAccountId) {
 		return couponAchieveMapper.getByUserAccountId(couponId, userAccountId);
 	}
@@ -37,6 +38,7 @@ public class CouponAchieveDAOImpl implements CouponAchieveDAO {
 	 * 新增优惠券领取记录
 	 * @param couponAchieve 优惠券领取记录
 	 */
+	@Override
 	public void save(CouponAchieveDO couponAchieve) {
 		couponAchieveMapper.save(couponAchieve); 
 	}
@@ -46,6 +48,7 @@ public class CouponAchieveDAOImpl implements CouponAchieveDAO {
 	 * @param userAccountId 用户账号id
 	 * @return 优惠券领取记录
 	 */
+	@Override
 	public List<CouponAchieveDO> listUnsedByUserAccountId(Long userAccountId) {
 		return couponAchieveMapper.listUnsedByUserAccountId(userAccountId);
 	}
@@ -54,6 +57,7 @@ public class CouponAchieveDAOImpl implements CouponAchieveDAO {
 	 * 更新优惠券领取记录
 	 * @param couponAchieve 优惠券领取记录
 	 */
+	@Override
 	public void update(CouponAchieveDO couponAchieve) {
 		couponAchieveMapper.update(couponAchieve); 
 	}

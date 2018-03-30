@@ -132,64 +132,94 @@ public class PromotionActivityDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		PromotionActivityDO other = (PromotionActivityDO) obj;
 		if (endTime == null) {
-			if (other.endTime != null)
+			if (other.endTime != null) {
 				return false;
-		} else if (!endTime.equals(other.endTime))
+			}
+		} else if (!endTime.equals(other.endTime)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null) {
 				return false;
-		} else if (!name.equals(other.name))
+			}
+		} else if (!name.equals(other.name)) {
 			return false;
+		}
 		if (remark == null) {
-			if (other.remark != null)
+			if (other.remark != null) {
 				return false;
-		} else if (!remark.equals(other.remark))
+			}
+		} else if (!remark.equals(other.remark)) {
 			return false;
+		}
 		if (rule == null) {
-			if (other.rule != null)
+			if (other.rule != null) {
 				return false;
-		} else if (!rule.equals(other.rule))
+			}
+		} else if (!rule.equals(other.rule)) {
 			return false;
+		}
 		if (startTime == null) {
-			if (other.startTime != null)
+			if (other.startTime != null) {
 				return false;
-		} else if (!startTime.equals(other.startTime))
+			}
+		} else if (!startTime.equals(other.startTime)) {
 			return false;
+		}
 		if (status == null) {
-			if (other.status != null)
+			if (other.status != null) {
 				return false;
-		} else if (!status.equals(other.status))
+			}
+		} else if (!status.equals(other.status)) {
 			return false;
+		}
 		if (type == null) {
-			if (other.type != null)
+			if (other.type != null) {
 				return false;
-		} else if (!type.equals(other.type))
+			}
+		} else if (!type.equals(other.type)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "PromotionActivityDO [id=" + id + ", name=" + name + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", remark=" + remark + ", status=" + status + ", rule=" + rule + ", type=" + type + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

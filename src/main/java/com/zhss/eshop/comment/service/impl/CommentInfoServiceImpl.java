@@ -2,10 +2,9 @@ package com.zhss.eshop.comment.service.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.comment.constant.CommentContent;
 import com.zhss.eshop.comment.constant.CommentInfoScore;
@@ -29,10 +28,9 @@ import com.zhss.eshop.order.domain.OrderItemDTO;
  *
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class CommentInfoServiceImpl implements CommentInfoService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CommentInfoServiceImpl.class);
-
 	/**
 	 * 评论信息管理模块的DAO组件
 	 */
@@ -48,47 +46,42 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 	 * 新增手动发表的评论信息
 	 * @param commentInfoDTO 评论信息DTO对象
 	 */
-	public Boolean saveManualPublishedCommentInfo(CommentInfoDTO commentInfoDTO) {
-		try {
-			// 计算评论的总分数
-			Integer totalScore = Math.round((commentInfoDTO.getGoodsScore() 
-					+ commentInfoDTO.getCustomerServiceScore() 
-					+ commentInfoDTO.getLogisticsScore()) / 3); 
-			commentInfoDTO.setTotalScore(totalScore); 
-			
-			// 设置是否为默认评论
-			commentInfoDTO.setDefaultComment(DefaultComment.NO);
-			
-			// 设置评论的状态
-			commentInfoDTO.setCommentStatus(CommentStatus.APPROVING);
-			
-			// 设置评论的类型
-			Integer commentType = 0;
-			if(totalScore >= 4) {
-				commentType = CommentType.GOOD_COMMENT;
-			} else if(totalScore == 3) {
-				commentType = CommentType.MEDIUM_COMMENT;
-			} else if(totalScore > 0 && totalScore <= 2) {
-				commentType = CommentType.BAD_COMMENT;
-			}
-			
-			commentInfoDTO.setCommentType(commentType);
-			
-			// 设置创建时间和修改时间
-			commentInfoDTO.setGmtCreate(dateProvider.getCurrentTime());  
-			commentInfoDTO.setGmtModified(dateProvider.getCurrentTime());   
-			
-			// 将评论信息保存到数据库中去
-			CommentInfoDO commentInfoDO = commentInfoDTO.clone(CommentInfoDO.class);
-			commentInfoDAO.saveCommentInfo(commentInfoDO);
-			
-			// 设置评论信息的id
-			commentInfoDTO.setId(commentInfoDO.getId());  
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
+	@Override
+	public void saveManualPublishedCommentInfo(CommentInfoDTO commentInfoDTO) throws Exception {
+		// 计算评论的总分数
+		Integer totalScore = Math.round((commentInfoDTO.getGoodsScore() 
+				+ commentInfoDTO.getCustomerServiceScore() 
+				+ commentInfoDTO.getLogisticsScore()) / 3); 
+		commentInfoDTO.setTotalScore(totalScore); 
+		
+		// 设置是否为默认评论
+		commentInfoDTO.setDefaultComment(DefaultComment.NO);
+		
+		// 设置评论的状态
+		commentInfoDTO.setCommentStatus(CommentStatus.APPROVING);
+		
+		// 设置评论的类型
+		Integer commentType = 0;
+		if(totalScore >= CommentInfoScore.FOUR) {
+			commentType = CommentType.GOOD_COMMENT;
+		} else if(totalScore == CommentInfoScore.THREE) {
+			commentType = CommentType.MEDIUM_COMMENT;
+		} else if(totalScore > CommentInfoScore.ZERO && totalScore <= CommentInfoScore.TWO) {
+			commentType = CommentType.BAD_COMMENT;
 		}
-		return true;
+		
+		commentInfoDTO.setCommentType(commentType);
+		
+		// 设置创建时间和修改时间
+		commentInfoDTO.setGmtCreate(dateProvider.getCurrentTime());  
+		commentInfoDTO.setGmtModified(dateProvider.getCurrentTime());   
+		
+		// 将评论信息保存到数据库中去
+		CommentInfoDO commentInfoDO = commentInfoDTO.clone(CommentInfoDO.class);
+		commentInfoDAO.saveCommentInfo(commentInfoDO);
+		
+		// 设置评论信息的id
+		commentInfoDTO.setId(commentInfoDO.getId());  
 	}
 	
 	/**
@@ -97,18 +90,13 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 	 * @param orderItemDTO 订单条目DTO对象
 	 * @return 处理结果
 	 */
+	@Override
 	public CommentInfoDTO saveAutoPublishedCommentInfo(
-			OrderInfoDTO orderInfoDTO, OrderItemDTO orderItemDTO) {
-		CommentInfoDTO commentInfoDTO = null;
-		try {
-			commentInfoDTO = createAutoPublishedCommentInfoDTO(orderInfoDTO, orderItemDTO);
-			CommentInfoDO commentInfoDO = commentInfoDTO.clone(CommentInfoDO.class);
-			commentInfoDAO.saveCommentInfo(commentInfoDO);
-			commentInfoDTO.setId(commentInfoDO.getId());  
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
+			OrderInfoDTO orderInfoDTO, OrderItemDTO orderItemDTO) throws Exception {
+		CommentInfoDTO commentInfoDTO = createAutoPublishedCommentInfoDTO(orderInfoDTO, orderItemDTO);
+		CommentInfoDO commentInfoDO = commentInfoDTO.clone(CommentInfoDO.class);
+		commentInfoDAO.saveCommentInfo(commentInfoDO);
+		commentInfoDTO.setId(commentInfoDO.getId());  
 		return commentInfoDTO;
 	}
 	
@@ -149,16 +137,12 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 	 * @param query 评论查询条件
 	 * @return 评论信息
 	 */
-	public List<CommentInfoDTO> listByPage(CommentInfoQuery query) {
-		try {
-			List<CommentInfoDO> comments = commentInfoDAO.listByPage(query);
-			List<CommentInfoDTO> resultComments = ObjectUtils.convertList(
-					comments, CommentInfoDTO.class);
-			return resultComments;
-		} catch (Exception e) {
-			logger.error("error", e);
-			return null;
-		}
+	@Override
+	public List<CommentInfoDTO> listByPage(CommentInfoQuery query) throws Exception {
+		List<CommentInfoDO> comments = commentInfoDAO.listByPage(query);
+		List<CommentInfoDTO> resultComments = ObjectUtils.convertList(
+				comments, CommentInfoDTO.class);
+		return resultComments;
 	}
 	
 	/**
@@ -166,31 +150,22 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 	 * @param id 评论信息id
 	 * @return 评论信息
 	 */
-	public CommentInfoDTO getById(Long id) {
-		try {
-			CommentInfoDO comment = commentInfoDAO.getById(id);
-			CommentInfoDTO resultComment = comment.clone(CommentInfoDTO.class);
-			return resultComment;
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
-		}
+	@Override
+	public CommentInfoDTO getById(Long id) throws Exception {
+		CommentInfoDO comment = commentInfoDAO.getById(id);
+		CommentInfoDTO resultComment = comment.clone(CommentInfoDTO.class);
+		return resultComment;
 	}
 	
 	/**
 	 * 更新评论
 	 * @param comment 评论信息
 	 */
-	public Boolean update(CommentInfoDTO comment) {
-		try {
-			comment.setGmtModified(dateProvider.getCurrentTime()); 
-			CommentInfoDO targetComment = comment.clone(CommentInfoDO.class);
-			Boolean result = commentInfoDAO.update(targetComment);
-			return result;
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
+	@Override
+	public void update(CommentInfoDTO comment) throws Exception {
+		comment.setGmtModified(dateProvider.getCurrentTime()); 
+		CommentInfoDO targetComment = comment.clone(CommentInfoDO.class);
+		commentInfoDAO.update(targetComment);
 	}
 	
 	/**
@@ -198,13 +173,9 @@ public class CommentInfoServiceImpl implements CommentInfoService {
 	 * @param id 删除评论
 	 * @return 处理结果
 	 */
-	public Boolean remove(Long id) {
-		try {
-			return commentInfoDAO.remove(id);
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
+	@Override
+	public void remove(Long id) throws Exception {
+		commentInfoDAO.remove(id);
 	}
 
 }

@@ -76,10 +76,9 @@ public class CommentInfoServiceTest {
 		
 		when(commentInfoDAO.saveCommentInfo(commentInfoDO)).thenReturn(commentInfoId);
 		
-		Boolean result = commentInfoService.saveManualPublishedCommentInfo(partialCommentInfoDTO);
+		commentInfoService.saveManualPublishedCommentInfo(partialCommentInfoDTO);
 		
 		verify(commentInfoDAO, times(1)).saveCommentInfo(commentInfoDO);
-		assertTrue(result);
 	}
 	
 	/**

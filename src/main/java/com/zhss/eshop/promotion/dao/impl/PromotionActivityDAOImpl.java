@@ -29,6 +29,7 @@ public class PromotionActivityDAOImpl implements PromotionActivityDAO {
 	 * @param query 查询条件
 	 * @return 促销活动
 	 */
+	@Override
 	public List<PromotionActivityDO> listByPage(PromotionActivityQuery query) {
 		return promotionActivityMapper.listByPage(query);
 	}
@@ -38,6 +39,7 @@ public class PromotionActivityDAOImpl implements PromotionActivityDAO {
 	 * @param id 促销活动id
 	 * @return 促销活动
 	 */
+	@Override
 	public PromotionActivityDO getById(Long id) {
 		return promotionActivityMapper.getById(id);
 	}
@@ -46,6 +48,7 @@ public class PromotionActivityDAOImpl implements PromotionActivityDAO {
 	 * 查询全部促销活动
 	 * @return 促销活动
 	 */
+	@Override
 	public List<PromotionActivityDO> listAll() {
 		return promotionActivityMapper.listAll();
 	}
@@ -55,6 +58,7 @@ public class PromotionActivityDAOImpl implements PromotionActivityDAO {
 	 * @param goodsId 商品id
 	 * @return 促销活动
 	 */
+	@Override
 	public List<PromotionActivityDO> listEnabledByGoodsId(Long goodsId) {
 		return promotionActivityMapper.listEnabledByGoodsId(goodsId);
 	}
@@ -63,6 +67,7 @@ public class PromotionActivityDAOImpl implements PromotionActivityDAO {
 	 * 新增促销活动
 	 * @param activity 促销活动
 	 */
+	@Override
 	public Long save(PromotionActivityDO activity) {
 		promotionActivityMapper.save(activity);
 		return activity.getId();
@@ -72,6 +77,7 @@ public class PromotionActivityDAOImpl implements PromotionActivityDAO {
 	 * 更新促销活动
 	 * @param activity 促销活动
 	 */
+	@Override
 	public void update(PromotionActivityDO activity) {
 		promotionActivityMapper.update(activity); 
 	}
@@ -81,6 +87,7 @@ public class PromotionActivityDAOImpl implements PromotionActivityDAO {
 	 * @param id 促销活动id
 	 * @param status 促销活动的状态
 	 */
+	@Override
 	public void updateStatus(PromotionActivityDO activity) {
 		promotionActivityMapper.updateStatus(activity); 
 	}
@@ -89,6 +96,7 @@ public class PromotionActivityDAOImpl implements PromotionActivityDAO {
 	 * 删除促销活动
 	 * @param id 促销活动id
 	 */
+	@Override
 	public void remove(Long id) {
 		promotionActivityMapper.remove(id); 
 	}

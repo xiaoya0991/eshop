@@ -25,7 +25,7 @@ import com.zhss.eshop.wms.service.WmsService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class PurchaseSettlementOrderServiceImpl implements PurchaseSettlementOrderService {
 
 	/**
@@ -48,6 +48,7 @@ public class PurchaseSettlementOrderServiceImpl implements PurchaseSettlementOrd
 	 * 新增采购结算单
 	 * @param purchaseSettlementOrder 采购结算单
 	 */
+	@Override
 	public void save(PurchaseSettlementOrderDTO purchaseSettlementOrder) throws Exception {
 		// 新增采购结算单
 		purchaseSettlementOrder.setStatus(PurchaseSettlementOrderStatus.EDITING);
@@ -77,6 +78,7 @@ public class PurchaseSettlementOrderServiceImpl implements PurchaseSettlementOrd
 	 * @return 采购结算单
 	 * @throws Exception
 	 */
+	@Override
 	public List<PurchaseSettlementOrderDTO> listByPage(
 			PurchaseSettlementOrderQuery query) throws Exception {
 		return ObjectUtils.convertList(
@@ -89,6 +91,7 @@ public class PurchaseSettlementOrderServiceImpl implements PurchaseSettlementOrd
 	 * @return 采购结算单
 	 * @throws Exception
 	 */
+	@Override
 	public PurchaseSettlementOrderDTO getById(Long id) throws Exception {
 		PurchaseSettlementOrderDTO purchaseSettlementOrder = purchaseSettlementOrderDAO.getById(id)
 				.clone(PurchaseSettlementOrderDTO.class); 
@@ -106,6 +109,7 @@ public class PurchaseSettlementOrderServiceImpl implements PurchaseSettlementOrd
 	 * @param purchaseSettlementOrder 采购结算单
 	 * @throws Exception
 	 */
+	@Override
 	public void update(PurchaseSettlementOrderDTO purchaseSettlementOrder) throws Exception {
 		purchaseSettlementOrderDAO.update(purchaseSettlementOrder.clone(PurchaseSettlementOrderDO.class));  
 		purchaseSettlementOrderDAO.updateStatus(purchaseSettlementOrder.clone(PurchaseSettlementOrderDO.class)); 
@@ -116,6 +120,7 @@ public class PurchaseSettlementOrderServiceImpl implements PurchaseSettlementOrd
 	 * @param id 采购结算单id
 	 * @throws Exception 
 	 */
+	@Override
 	public void submitApprove(Long id) throws Exception {
 		purchaseSettlementOrderDAO.updateStatus(id, PurchaseSettlementOrderStatus.WAIT_FOR_APPROVE);  
 	}
@@ -126,6 +131,7 @@ public class PurchaseSettlementOrderServiceImpl implements PurchaseSettlementOrd
 	 * @param approveResult 审核结果
 	 * @throws Exception
 	 */
+	@Override
 	public void approve(Long id, Integer approveResult) throws Exception {
 		if(PurchaseSettlementOrderApproveResult.REJECTED.equals(approveResult)) {
 			purchaseSettlementOrderDAO.updateStatus(id, PurchaseSettlementOrderStatus.EDITING);  

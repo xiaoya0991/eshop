@@ -26,7 +26,7 @@ import com.zhss.eshop.promotion.service.CouponService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class CouponServiceImpl implements CouponService {
 	
 	/**
@@ -55,6 +55,7 @@ public class CouponServiceImpl implements CouponService {
 	 * @param query 查询条件
 	 * @return 优惠券
 	 */
+	@Override
 	public List<CouponDTO> listByPage(CouponQuery query) throws Exception {
 		return ObjectUtils.convertList(couponDAO.listByPage(query), CouponDTO.class);
 	}
@@ -63,6 +64,7 @@ public class CouponServiceImpl implements CouponService {
 	 * 新增优惠券
 	 * @param coupon 优惠券
 	 */
+	@Override
 	public void save(CouponDTO coupon) throws Exception {
 		coupon.setStatus(CouponStatus.UNSTARTED);  
 		coupon.setGmtCreate(dateProvider.getCurrentTime()); 
@@ -75,6 +77,7 @@ public class CouponServiceImpl implements CouponService {
 	 * @param id 优惠券id
 	 * @return 优惠券
 	 */
+	@Override
 	public CouponDTO getById(Long id) throws Exception {
 		return couponDAO.getById(id).clone(CouponDTO.class);
 	}
@@ -83,6 +86,7 @@ public class CouponServiceImpl implements CouponService {
 	 * 更新优惠券
 	 * @param coupon 优惠券
 	 */
+	@Override
 	public Boolean update(CouponDTO coupon) throws Exception {
 		if(coupon.getReceivedCount() > 0L) {
 			return false;
@@ -96,6 +100,7 @@ public class CouponServiceImpl implements CouponService {
 	 * 删除优惠券
 	 * @param id 优惠券id
 	 */
+	@Override
 	public Boolean remove(Long id) throws Exception {
 		CouponDO coupon = couponDAO.getById(id);
 		if(coupon.getReceivedCount() > 0L) {
@@ -112,6 +117,7 @@ public class CouponServiceImpl implements CouponService {
 	 * @return 是否领取成功
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean achieve(Long couponId, Long userAccountId) throws Exception {
 		CouponDO coupon = couponDAO.getById(couponId);
 		
@@ -169,12 +175,10 @@ public class CouponServiceImpl implements CouponService {
 	 * @throws Exception
 	 */
 	private Boolean canAchieve(CouponDO coupon) throws Exception {
-		if(CouponStatus.GIVING_OUT.equals(coupon.getStatus()) && 
-				(CouponGiveOutType.ACHIEVABLE_AND_GIVE_OUT.equals(coupon.getGiveOutType()) || 
-				 CouponGiveOutType.ONLY_ACHIEVABLE.equals(coupon.getGiveOutType()))) {
-			 return true;
-		}
-		return false;
+		Boolean isGivingOutStatus = CouponStatus.GIVING_OUT.equals(coupon.getStatus());
+		Boolean isAchievableGiveOutType = CouponGiveOutType.ACHIEVABLE_AND_GIVE_OUT.equals(coupon.getGiveOutType()) 
+				|| CouponGiveOutType.ONLY_ACHIEVABLE.equals(coupon.getGiveOutType());
+		return isGivingOutStatus && isAchievableGiveOutType;
 	}
 	
 	/**
@@ -197,6 +201,7 @@ public class CouponServiceImpl implements CouponService {
 	 * @return 是否发放成功
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean giveOut(Long couponId) throws Exception {
 		CouponDO coupon = couponDAO.getById(couponId);
 		
@@ -223,18 +228,16 @@ public class CouponServiceImpl implements CouponService {
 	}
 	
 	/**
-	 * 判断优惠券能否领取
+	 * 判断优惠券能否发放
 	 * @param coupon 优惠券
 	 * @return 能否领取
 	 * @throws Exception
 	 */
 	private Boolean canGiveOut(CouponDO coupon) throws Exception {
-		if(CouponStatus.GIVING_OUT.equals(coupon.getStatus()) && 
-				(CouponGiveOutType.ACHIEVABLE_AND_GIVE_OUT.equals(coupon.getGiveOutType()) || 
-				 CouponGiveOutType.ONLY_GIVE_OUT.equals(coupon.getGiveOutType()))) {
-			 return true;
-		}
-		return false;
+		Boolean isGivingOutStatus = CouponStatus.GIVING_OUT.equals(coupon.getStatus());
+		Boolean isGiveOutType = CouponGiveOutType.ACHIEVABLE_AND_GIVE_OUT.equals(coupon.getGiveOutType()) 
+				|| CouponGiveOutType.ONLY_GIVE_OUT.equals(coupon.getGiveOutType());
+		return isGivingOutStatus && isGiveOutType;
 	}
 	
 }

@@ -42,6 +42,7 @@ public interface PromotionActivityDAO {
 	/**
 	 * 新增促销活动
 	 * @param activity 促销活动
+	 * @return 促销活动id
 	 */
 	Long save(PromotionActivityDO activity);
 	
@@ -53,8 +54,7 @@ public interface PromotionActivityDAO {
 	
 	/**
 	 * 更新促销活动的状态
-	 * @param id 促销活动id
-	 * @param status 促销活动的状态
+	 * @param activity 促销活动
 	 */
 	void updateStatus(PromotionActivityDO activity);
 	

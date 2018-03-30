@@ -21,6 +21,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.finance.domain.PurchaseSettlementOrderItemDO;
 
@@ -31,9 +32,9 @@ import com.zhss.eshop.finance.domain.PurchaseSettlementOrderItemDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class PurchaseSettlementOrderItemDAOTest {
+public class PurchaseSettlementOrderItemDaoTest {
 
 	/**
 	 * 日期辅助组件
@@ -119,7 +120,7 @@ public class PurchaseSettlementOrderItemDAOTest {
 	private Map<Long, PurchaseSettlementOrderItemDO> createPurchaseSettlementOrderItemMap(
 			Integer count, Long purchaseSettlementOrderId) throws Exception {
 		Map<Long, PurchaseSettlementOrderItemDO> purchaseSettlementOrderItemMap = 
-				new HashMap<Long, PurchaseSettlementOrderItemDO>();
+				new HashMap<Long, PurchaseSettlementOrderItemDO>(CollectionSize.DEFAULT);
 		
 		List<PurchaseSettlementOrderItemDO> purchaseSettlementOrderItemList = 
 				createPurchaseSettlementOrderItems(count, purchaseSettlementOrderId);

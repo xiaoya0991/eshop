@@ -2,10 +2,9 @@ package com.zhss.eshop.comment.service.impl;
 
 import java.text.DecimalFormat;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zhss.eshop.comment.constant.CommentType;
 import com.zhss.eshop.comment.constant.ShowPictures;
@@ -22,10 +21,9 @@ import com.zhss.eshop.common.util.DateProvider;
  *
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class CommentAggregateServiceImpl implements CommentAggregateService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CommentAggregateServiceImpl.class);
-
 	/**
 	 * 评论统计信息管理模块的DAO组件
 	 */
@@ -42,20 +40,14 @@ public class CommentAggregateServiceImpl implements CommentAggregateService {
 	 * @param commentInfoDTO 评论信息
 	 * @return 处理结果
 	 */
-	public CommentAggregateDTO refreshCommentAggregate(
-			CommentInfoDTO commentInfoDTO) throws Exception {
-		CommentAggregateDO commentAggregateDO = null;
-		try {
-			commentAggregateDO = commentAggregateDAO.getCommentAggregateByGoodsId(
-					commentInfoDTO.getGoodsId());
-			if(commentAggregateDO == null) {
-				commentAggregateDO = saveCommentAggregate(commentInfoDTO);
-			} else {
-				updateCommentAggregate(commentInfoDTO, commentAggregateDO);
-			}
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return null;
+	@Override
+	public CommentAggregateDTO refreshCommentAggregate(CommentInfoDTO commentInfoDTO) throws Exception {
+		CommentAggregateDO commentAggregateDO = commentAggregateDAO.getCommentAggregateByGoodsId(
+				commentInfoDTO.getGoodsId());
+		if(commentAggregateDO == null) {
+			commentAggregateDO = saveCommentAggregate(commentInfoDTO);
+		} else {
+			updateCommentAggregate(commentInfoDTO, commentAggregateDO);
 		}
 		return commentAggregateDO.clone(CommentAggregateDTO.class);  
 	}
@@ -134,6 +126,7 @@ public class CommentAggregateServiceImpl implements CommentAggregateService {
 	 * @param goodsId 商品id
 	 * @return 评论统计信息
 	 */
+	@Override
 	public CommentAggregateDTO getCommentAggregateByGoodsId(
 			Long goodsId) throws Exception {
 		return commentAggregateDAO.getCommentAggregateByGoodsId(goodsId)

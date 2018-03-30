@@ -174,4 +174,15 @@ public class PurchaseSettlementOrderVO extends AbstractObject {
 		this.purchaseInputOrderId = purchaseInputOrderId;
 	}
 	
+	@Override
+	public String toString() {
+		return "PurchaseSettlementOrderVO [id=" + id + ", purchaseInputOrderId=" + purchaseInputOrderId
+				+ ", purchaseOrderId=" + purchaseOrderId + ", supplierId=" + supplierId + ", expectArrivalTime="
+				+ expectArrivalTime + ", actualArrivalTime=" + actualArrivalTime + ", purchaseContactor="
+				+ purchaseContactor + ", purchaseContactorPhoneNumber=" + purchaseContactorPhoneNumber
+				+ ", purchaseContactorEmail=" + purchaseContactorEmail + ", purchaseOrderRemark=" + purchaseOrderRemark
+				+ ", purchaser=" + purchaser + ", status=" + status + ", totalSettlementAmount=" + totalSettlementAmount
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", items=" + items + "]";
+	}
+	
 }

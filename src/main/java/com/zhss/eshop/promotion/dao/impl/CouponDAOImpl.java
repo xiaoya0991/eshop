@@ -29,6 +29,7 @@ public class CouponDAOImpl implements CouponDAO {
 	 * @param query 查询条件
 	 * @return 优惠券
 	 */
+	@Override
 	public List<CouponDO> listByPage(CouponQuery query) {
 		return couponMapper.listByPage(query);
 	}
@@ -37,6 +38,7 @@ public class CouponDAOImpl implements CouponDAO {
 	 * 新增优惠券
 	 * @param coupon 优惠券
 	 */
+	@Override
 	public void save(CouponDO coupon) {
 		couponMapper.save(coupon);
 	}
@@ -46,6 +48,7 @@ public class CouponDAOImpl implements CouponDAO {
 	 * @param id 优惠券id
 	 * @return 优惠券
 	 */
+	@Override
 	public CouponDO getById(Long id) {
 		return couponMapper.getById(id);
 	}
@@ -54,6 +57,7 @@ public class CouponDAOImpl implements CouponDAO {
 	 * 更新优惠券
 	 * @param coupon 优惠券
 	 */
+	@Override
 	public void update(CouponDO coupon) {
 		couponMapper.update(coupon); 
 	}
@@ -62,6 +66,7 @@ public class CouponDAOImpl implements CouponDAO {
 	 * 删除优惠券
 	 * @param id 优惠券id
 	 */
+	@Override
 	public void remove(Long id) {
 		couponMapper.remove(id);
 	}
@@ -70,6 +75,7 @@ public class CouponDAOImpl implements CouponDAO {
 	 * 查询所有优惠券
 	 * @return 所有优惠券
 	 */
+	@Override
 	public List<CouponDO> listAll() {
 		return couponMapper.listAll();
 	}
@@ -78,6 +84,7 @@ public class CouponDAOImpl implements CouponDAO {
 	 * 更新优惠券状态
 	 * @param coupon 优惠券
 	 */
+	@Override
 	public void updateStatus(CouponDO coupon) {
 		couponMapper.updateStatus(coupon); 
 	}

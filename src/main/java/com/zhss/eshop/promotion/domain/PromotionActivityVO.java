@@ -132,4 +132,11 @@ public class PromotionActivityVO extends AbstractObject {
 		this.relations = relations;
 	}
 	
+	@Override
+	public String toString() {
+		return "PromotionActivityVO [id=" + id + ", name=" + name + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", remark=" + remark + ", status=" + status + ", rule=" + rule + ", type=" + type + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + ", relations=" + relations + "]";
+	}
+	
 }
