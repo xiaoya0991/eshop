@@ -14,7 +14,7 @@ import com.zhss.eshop.purchase.service.PurchaseService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class PurchaseServiceImpl implements PurchaseService {
 
 	/**
@@ -22,6 +22,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param goodsSkuId 商品sku id
 	 * @return 是否有采购单关联了商品sku
 	 */
+	@Override
 	public Boolean existRelatedPurchaseOrder(Long goodsSkuId) {
 		return true;
 	}
@@ -31,6 +32,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCreatePurchaseInputOrderEvent(Long purcaseOrderId) {
 		return true;
 	}
@@ -40,6 +42,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informFinishedPurchaseInputOrderEvent(Long purcaseOrderId) {
 		return true;
 	}
@@ -49,6 +52,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCreatePurchaseSettlementOrderEvent(Long purcaseOrderId) {
 		return true;
 	}
@@ -58,6 +62,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param purchaseOrderId
 	 * @return
 	 */
+	@Override
 	public Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseOrderId) {
 		return true;
 	}
@@ -67,6 +72,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param settlementPeriod 结算周期
  	 * @return 供应商
 	 */
+	@Override
 	public List<SupplierDTO> listSuppliersBySettlementPeriod(Integer settlementPeriod) {
 		return null;
 	}
