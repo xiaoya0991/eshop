@@ -103,4 +103,12 @@ public class ReturnGoodsWorksheetVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "ReturnGoodsWorksheetVO [id=" + id + ", orderInfoId=" + orderInfoId + ", orderNo=" + orderNo
+				+ ", status=" + status + ", returnGoodsReason=" + returnGoodsReason + ", returnGoodsRemark="
+				+ returnGoodsRemark + ", returnGoodsLogisticsCode=" + returnGoodsLogisticsCode + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

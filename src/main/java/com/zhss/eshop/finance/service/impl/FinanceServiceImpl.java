@@ -15,7 +15,6 @@ import com.zhss.eshop.finance.service.FinanceService;
 import com.zhss.eshop.finance.service.PurchaseSettlementOrderService;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
-import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
 
 /**
@@ -24,7 +23,7 @@ import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class FinanceServiceImpl implements FinanceService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FinanceServiceImpl.class);
@@ -40,6 +39,7 @@ public class FinanceServiceImpl implements FinanceService {
 	 * @param purchaseInputOrderDTO 采购入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean createPurchaseSettlementOrder(PurchaseInputOrderDTO purchaseInputOrder) {
 		try {
 			// 将采购入库单的数据拷贝到采购结算中去
@@ -80,18 +80,10 @@ public class FinanceServiceImpl implements FinanceService {
 	 * @param saleDeliveryOrderDTO 销售出库单
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean payForLogisticsCompany(SaleDeliveryOrderDTO saleDeliveryOrder) {
 		// 就是将销售出库单中的运费取出来
 		// 将运费对应的款项打到物流公司的账号里面去
-		return true;
-	}
-	
-	/**
-	 * 执行退货退款操作
-	 * @param returnGoodsInputOrderDTO 退货入库单DTO
-	 * @return 处理结果
-	 */
-	public Boolean executeReturnGoodsRefund(ReturnGoodsInputOrderDTO returnGoodsInputOrder) {
 		return true;
 	}
 	

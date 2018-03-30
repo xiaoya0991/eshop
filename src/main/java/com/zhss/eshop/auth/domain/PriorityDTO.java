@@ -91,4 +91,11 @@ public class PriorityDTO {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "PriorityDTO [id=" + id + ", code=" + code + ", url=" + url + ", priorityComment=" + priorityComment
+				+ ", priorityType=" + priorityType + ", parentId=" + parentId + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

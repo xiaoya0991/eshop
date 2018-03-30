@@ -1,24 +1,28 @@
-package com.zhss.eshop.wms.domain;
+package com.zhss.eshop.schedule.domain;
 
 import java.util.Date;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 销售出库单拣货条目
+ * 拣货条目
  * @author zhonghuashishan
  *
  */
-public class SaleDeliveryOrderPickingItemDTO extends AbstractObject {
+public class ScheduleOrderPickingItemDTO extends AbstractObject {
 
 	/**
 	 * id
 	 */
 	private Long id;
 	/**
-	 * 销售出库单条目id
+	 * 订单id
 	 */
-	private Long saleDeliveryOrderItemId;
+	private Long orderInfoId;
+	/**
+	 * 订单条目id
+	 */
+	private Long orderItemId;
 	/**
 	 * 货位id
 	 */
@@ -46,17 +50,29 @@ public class SaleDeliveryOrderPickingItemDTO extends AbstractObject {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getSaleDeliveryOrderItemId() {
-		return saleDeliveryOrderItemId;
+	public Long getOrderInfoId() {
+		return orderInfoId;
 	}
-	public void setSaleDeliveryOrderItemId(Long saleDeliveryOrderItemId) {
-		this.saleDeliveryOrderItemId = saleDeliveryOrderItemId;
+	public void setOrderInfoId(Long orderInfoId) {
+		this.orderInfoId = orderInfoId;
+	}
+	public Long getOrderItemId() {
+		return orderItemId;
+	}
+	public void setOrderItemId(Long orderItemId) {
+		this.orderItemId = orderItemId;
 	}
 	public Long getGoodsAllocationId() {
 		return goodsAllocationId;
 	}
 	public void setGoodsAllocationId(Long goodsAllocationId) {
 		this.goodsAllocationId = goodsAllocationId;
+	}
+	public Long getGoodsSkuId() {
+		return goodsSkuId;
+	}
+	public void setGoodsSkuId(Long goodsSkuId) {
+		this.goodsSkuId = goodsSkuId;
 	}
 	public Long getPickingCount() {
 		return pickingCount;
@@ -76,16 +92,10 @@ public class SaleDeliveryOrderPickingItemDTO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public Long getGoodsSkuId() {
-		return goodsSkuId;
-	}
-	public void setGoodsSkuId(Long goodsSkuId) {
-		this.goodsSkuId = goodsSkuId;
-	}
 	
 	@Override
 	public String toString() {
-		return "SaleDeliveryOrderPickingItemDTO [id=" + id + ", saleDeliveryOrderItemId=" + saleDeliveryOrderItemId
+		return "ScheduleOrderPickingItemDTO [id=" + id + ", orderInfoId=" + orderInfoId + ", orderItemId=" + orderItemId
 				+ ", goodsAllocationId=" + goodsAllocationId + ", goodsSkuId=" + goodsSkuId + ", pickingCount="
 				+ pickingCount + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}

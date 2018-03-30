@@ -234,4 +234,16 @@ public class OrderInfoDTO extends AbstractObject {
 		this.orderItems = orderItems;
 	}
 	
+	@Override
+	public String toString() {
+		return "OrderInfoDTO [id=" + id + ", orderNo=" + orderNo + ", userAccountId=" + userAccountId + ", username="
+				+ username + ", orderStatus=" + orderStatus + ", consignee=" + consignee + ", deliveryAddress="
+				+ deliveryAddress + ", consigneeCellPhoneNumber=" + consigneeCellPhoneNumber + ", freight=" + freight
+				+ ", payType=" + payType + ", totalAmount=" + totalAmount + ", discountAmount=" + discountAmount
+				+ ", couponAmount=" + couponAmount + ", payableAmount=" + payableAmount + ", invoiceTitle="
+				+ invoiceTitle + ", taxpayerId=" + taxpayerId + ", orderComment=" + orderComment + ", publishedComment="
+				+ publishedComment + ", confirmReceiptTime=" + confirmReceiptTime + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + ", orderItems=" + orderItems + "]";
+	}
+	
 }

@@ -224,4 +224,11 @@ public class CouponDO extends AbstractObject {
 		return true;
 	}
 	
+	public String toString() {
+		return "CouponDO [id=" + id + ", name=" + name + ", type=" + type + ", rule=" + rule + ", validStartTime="
+				+ validStartTime + ", validEndTime=" + validEndTime + ", giveOutCount=" + giveOutCount
+				+ ", receivedCount=" + receivedCount + ", giveOutType=" + giveOutType + ", status=" + status
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

@@ -55,6 +55,7 @@ public class PromotionServiceImpl implements PromotionService {
 	 * @param goodsId 商品id
 	 * @return 促销活动
 	 */
+	@Override
 	public List<PromotionActivityDTO> listByGoodsId(Long goodsId) {
 		try {
 			return ObjectUtils.convertList(promotionActivityDAO.listEnabledByGoodsId(goodsId), 
@@ -70,6 +71,7 @@ public class PromotionServiceImpl implements PromotionService {
 	 * @param id 促销活动id
 	 * @return 促销活动
 	 */
+	@Override
 	public PromotionActivityDTO getById(Long id) {
 		try {
 			return promotionActivityDAO.getById(id).clone(PromotionActivityDTO.class); 
@@ -84,6 +86,7 @@ public class PromotionServiceImpl implements PromotionService {
 	 * @param userAccountId 用户账号id
 	 * @return 有效优惠券
 	 */
+	@Override
 	public List<CouponDTO> listValidByUserAccountId(Long userAccountId) {
 		List<CouponDTO> coupons = new ArrayList<CouponDTO>();
 		
@@ -111,6 +114,7 @@ public class PromotionServiceImpl implements PromotionService {
 	 * @param userAccountId 用户账号id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean useCoupon(Long couponId, Long userAccountId) {
 		try {
 			CouponAchieveDO couponAchieve = new CouponAchieveDO();

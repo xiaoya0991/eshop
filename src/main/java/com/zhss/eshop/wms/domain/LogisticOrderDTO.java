@@ -73,4 +73,11 @@ public class LogisticOrderDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "LogisticOrderDTO [id=" + id + ", saleDeliveryOrderId=" + saleDeliveryOrderId + ", logisticCode="
+				+ logisticCode + ", content=" + content + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ "]";
+	}
+	
 }

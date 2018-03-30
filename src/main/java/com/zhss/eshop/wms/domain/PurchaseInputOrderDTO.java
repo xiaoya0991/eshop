@@ -154,4 +154,14 @@ public class PurchaseInputOrderDTO extends AbstractObject {
 		this.purchaseOrderId = purchaseOrderId;
 	}
 	
+	@Override
+	public String toString() {
+		return "PurchaseInputOrderDTO [id=" + id + ", purchaseOrderId=" + purchaseOrderId + ", supplierId=" + supplierId
+				+ ", expectArrivalTime=" + expectArrivalTime + ", actualArrivalTime=" + actualArrivalTime
+				+ ", purchaseContactor=" + purchaseContactor + ", purchaseContactorPhoneNumber="
+				+ purchaseContactorPhoneNumber + ", purchaseContactorEmail=" + purchaseContactorEmail
+				+ ", purchaseOrderRemark=" + purchaseOrderRemark + ", purchaser=" + purchaser + ", status=" + status
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", items=" + items + "]";
+	}
+	
 }

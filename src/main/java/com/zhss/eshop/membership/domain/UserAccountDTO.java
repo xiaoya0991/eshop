@@ -83,4 +83,11 @@ public class UserAccountDTO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "UserAccountDTO [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", cellPhoneNumber=" + cellPhoneNumber + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ "]";
+	}
+	
 }

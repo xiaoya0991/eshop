@@ -151,4 +151,13 @@ public class GoodsSkuDTO {
 		this.saleProperties = saleProperties;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsSkuDTO [id=" + id + ", goodsId=" + goodsId + ", goodsName=" + goodsName + ", grossWeight="
+				+ grossWeight + ", goodsLength=" + goodsLength + ", goodsWidth=" + goodsWidth + ", goodsHeight="
+				+ goodsHeight + ", goodsSkuCode=" + goodsSkuCode + ", saleProperties=" + saleProperties
+				+ ", purchasePrice=" + purchasePrice + ", salePrice=" + salePrice + ", discountPrice=" + discountPrice
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

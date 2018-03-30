@@ -29,6 +29,7 @@ public class PriorityServiceImpl implements PriorityService {
 	 * 查询根权限
 	 * @return 根权限集合
 	 */
+	@Override
 	public List<PriorityDTO> listRootPriorities() {
 //		List<PriorityDO> priorityDOs = priorityDAO.listRootPriorities(); 
 //		

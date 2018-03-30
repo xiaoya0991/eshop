@@ -91,4 +91,11 @@ public class PriorityVO {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "PriorityVO [id=" + id + ", code=" + code + ", url=" + url + ", priorityComment=" + priorityComment
+				+ ", priorityType=" + priorityType + ", parentId=" + parentId + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }
