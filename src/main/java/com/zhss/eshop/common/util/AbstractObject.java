@@ -51,7 +51,8 @@ public class AbstractObject {
 		BeanCopierUtils.copyProperties(this, target);  
 		
 		// 完成所有List类型的深度克隆
-		Class<?> thisClazz = this.getClass(); // CategoryDTO
+		// CategoryDTO
+		Class<?> thisClazz = this.getClass(); 
 		
 		Field[] fields = thisClazz.getDeclaredFields();
 
@@ -59,27 +60,32 @@ public class AbstractObject {
 			field.setAccessible(true); 
 			
 			// 如果判断某个字段是List类型的
-			if(field.getType() != List.class) { // field = private List<Relation> relations; 
+			// field = private List<Relation> relations; 
+			if(field.getType() != List.class) { 
 				continue;
 			}
 			
 			// field.getType() List 不是 List<Relation> 
-			List<?> list = (List<?>) field.get(this); // List<RelationDTO>集合
+			// List<RelationDTO>集合
+			List<?> list = (List<?>) field.get(this); 
 			if(list == null || list.size() == 0) {
 				continue;
 			}
 			
 			// 获取List集合中的泛型类型
-			Class<?> listGenericClazz = getListGenericType(field); // RelationDTO
+			// RelationDTO
+			Class<?> listGenericClazz = getListGenericType(field); 
 			// 获取要克隆的目标类型
-			Class<?> cloneTargetClazz = getCloneTargetClazz(listGenericClazz, cloneDirection); // 假设CloneDirection是反向，此时获取到的就是RelationVO
+			// 假设CloneDirection是反向，此时获取到的就是RelationVO
 	        
+			Class<?> cloneTargetClazz = getCloneTargetClazz(listGenericClazz, cloneDirection); 
 	        // 将list集合克隆到目标list集合中去
 			List clonedList = new ArrayList();
 			cloneList(list, clonedList, cloneTargetClazz, cloneDirection); 
 			
 			// 获取设置克隆好的list的方法名称
-			Method setFieldMethod = getSetCloneListFieldMethodName(field, clazz); // setRelations
+			// setRelations
+			Method setFieldMethod = getSetCloneListFieldMethodName(field, clazz); 
 			setFieldMethod.invoke(target, clonedList); 
 			// target是CategoryVO对象，此时就是调用CategoryVO的setRelations方法，
 			// 将克隆好的List<CategoryVO>给设置进去
@@ -100,9 +106,11 @@ public class AbstractObject {
 			Class cloneTargetClazz, Integer cloneDirection) throws Exception {
 		for(Object object : sourceList) {
 			AbstractObject targetObject = (AbstractObject) object;
+			// 将集合中的RelationDTO，调用其clone()方法，将其往RelationVO去克隆
 			AbstractObject clonedObject = (AbstractObject) targetObject.clone(
-					cloneTargetClazz, cloneDirection); // 将集合中的RelationDTO，调用其clone()方法，将其往RelationVO去克隆
-			targetList.add(clonedObject); // RelationVO的集合
+					cloneTargetClazz, cloneDirection); 
+			// RelationVO的集合
+			targetList.add(clonedObject); 
 		}
 	}
 	
@@ -113,7 +121,8 @@ public class AbstractObject {
 	 * @throws Exception
 	 */
 	private Class<?> getListGenericType(Field field) throws Exception {
-		Type genericType = field.getGenericType();   // genericType = List<RelationDTO>，不是List
+		// genericType = List<RelationDTO>，不是List
+		Type genericType = field.getGenericType();  
         if(genericType instanceof ParameterizedType){     
             ParameterizedType parameterizedType = (ParameterizedType) genericType;  
             return (Class<?>)parameterizedType.getActualTypeArguments()[0];   
@@ -132,7 +141,8 @@ public class AbstractObject {
 			Integer cloneDirection) throws Exception {
 		String cloneTargetClassName = null;
 		
-		String className = clazz.getName(); // ReflectionDTO
+		// ReflectionDTO
+		String className = clazz.getName(); 
 		
 		if(cloneDirection.equals(CloneDirection.FORWARD)) {
 			if(className.endsWith(DomainType.VO)) {  

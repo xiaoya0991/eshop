@@ -28,7 +28,7 @@ import com.zhss.eshop.wms.domain.LogisticOrderDTO;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class LogisticsServiceImpl implements LogisticsService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LogisticsServiceImpl.class);
@@ -64,6 +64,7 @@ public class LogisticsServiceImpl implements LogisticsService {
 	 * @param goodsSkuDTO 商品sku DTO
 	 * @return 商品sku的运费
 	 */
+	@Override
 	public Double calculateFreight(OrderInfoDTO order, OrderItemDTO orderItem) {
 		try {
 			// 获取商品对应的运费模板
@@ -88,6 +89,7 @@ public class LogisticsServiceImpl implements LogisticsService {
 	 * @param order 订单
 	 * @return 物流单
 	 */
+	@Override
 	public LogisticOrderDTO applyLogisticOrder(OrderInfoDTO order) {
 		try {
 			CreateEOrderRequest request = CreateEOrderRequestBuilder.get()
@@ -131,6 +133,7 @@ public class LogisticsServiceImpl implements LogisticsService {
 	 * @param orderNo 订单编号
 	 * @return 签收时间
 	 */
+	@Override
 	public Date getSignedTime(Long orderId, String orderNo) {
 		try {
 			return dateProvider.getCurrentTime();

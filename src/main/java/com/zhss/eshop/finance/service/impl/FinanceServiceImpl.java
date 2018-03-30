@@ -13,7 +13,7 @@ import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class FinanceServiceImpl implements FinanceService {
 
 	/**
@@ -21,6 +21,7 @@ public class FinanceServiceImpl implements FinanceService {
 	 * @param purchaseInputOrderDTO 采购入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean createPurchaseSettlementOrder(PurchaseInputOrderDTO purchaseInputOrder) {
 		return true;
 	}
@@ -30,6 +31,7 @@ public class FinanceServiceImpl implements FinanceService {
 	 * @param saleDeliveryOrderDTO 销售出库单
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean payForLogisticsCompany(SaleDeliveryOrderDTO saleDeliveryOrder) {
 		return true;
 	}

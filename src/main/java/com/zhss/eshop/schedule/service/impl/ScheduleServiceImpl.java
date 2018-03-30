@@ -22,6 +22,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param purchaseInputOrderDTO 采购入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPurchaseInputFinished(
 			PurchaseInputOrderDTO purchaseInputOrderDTO) {
 		return true;
@@ -32,6 +33,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informSubmitOrderEvent(OrderInfoDTO orderDTO) {
 		return true;
 	}
@@ -41,6 +43,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPayOrderEvent(OrderInfoDTO orderDTO) {
 		return true;
 	}
@@ -50,6 +53,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCancelOrderEvent(OrderInfoDTO orderDTO) {
 		return true;
 	}
@@ -59,6 +63,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param returnGoodsInputOrderDTO 退货入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsInputFinished(
 			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO) {
 		return true;
@@ -69,6 +74,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param purchaseOrderDTO 采购单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean schedulePurchaseInput(PurchaseOrderDTO purchaseOrder) {
 		// 将采购单中的数据复制到采购入库单里面去
 		
@@ -80,6 +86,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean scheduleSaleDelivery(OrderInfoDTO orderDTO) {
 		return true;
 	}
@@ -90,6 +97,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param returnGoodsWorksheetDTO 退货工单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean scheduleReturnGoodsInput(OrderInfoDTO orderDTO, 
 			ReturnGoodsWorksheetDTO returnGoodsWorksheetDTO) {
 		return true;

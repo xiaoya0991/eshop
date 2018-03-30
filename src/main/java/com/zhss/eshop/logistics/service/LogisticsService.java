@@ -15,7 +15,8 @@ public interface LogisticsService {
 
 	/**
 	 * 计算商品sku的运费
-	 * @param goodsSkuDTO 商品sku DTO
+	 * @param order 订单
+	 * @param orderItem 订单条目
 	 * @return 商品sku的运费
 	 */
 	Double calculateFreight(OrderInfoDTO order, OrderItemDTO orderItem);

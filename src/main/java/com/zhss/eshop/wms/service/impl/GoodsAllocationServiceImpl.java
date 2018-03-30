@@ -19,7 +19,7 @@ import com.zhss.eshop.wms.service.GoodsAllocationService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class GoodsAllocationServiceImpl implements GoodsAllocationService {
 
 	/**
@@ -33,6 +33,7 @@ public class GoodsAllocationServiceImpl implements GoodsAllocationService {
 	 * @param query 查询条件
 	 * @return 货位
 	 */
+	@Override
 	public List<GoodsAllocationDTO> listByPage(GoodsAllocationQuery query) throws Exception {
 		return ObjectUtils.convertList(
 				goodsAllocationDAO.listByPage(query), 
@@ -43,6 +44,7 @@ public class GoodsAllocationServiceImpl implements GoodsAllocationService {
 	 * 新增货位
 	 * @param goodsAllocation 货位
 	 */
+	@Override
 	public void save(GoodsAllocationDTO goodsAllocation) throws Exception {
 		goodsAllocationDAO.save(goodsAllocation.clone(GoodsAllocationDO.class));  
 	}
@@ -52,6 +54,7 @@ public class GoodsAllocationServiceImpl implements GoodsAllocationService {
 	 * @param id 货位id
 	 * @return 货位
 	 */
+	@Override
 	public GoodsAllocationDTO getById(Long id) throws Exception {
 		return goodsAllocationDAO.getById(id).clone(GoodsAllocationDTO.class); 
 	}
@@ -60,6 +63,7 @@ public class GoodsAllocationServiceImpl implements GoodsAllocationService {
 	 * 更新货位
 	 * @param goodsAllocation 货位
 	 */
+	@Override
 	public void update(GoodsAllocationDTO goodsAllocation) throws Exception {
 		goodsAllocationDAO.update(goodsAllocation.clone(GoodsAllocationDO.class));  
 	}

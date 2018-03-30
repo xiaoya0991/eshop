@@ -21,6 +21,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informGoodsDeliveryFinishedEvent(Long orderId) {
 		return true;
 	}
@@ -30,6 +31,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsWorksheetRejectedEvent(Long orderId) {
 		return true;
 	}
@@ -39,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsWorsheetApprovedEvent(Long orderId) {
 		return true;
 	}
@@ -48,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsReceivedEvent(Long orderId) {
 		return true;
 	}
@@ -57,6 +61,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsInputOrderApprovedEvent(Long orderId) {
 		return true;
 	}
@@ -66,6 +71,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informRefundFinishedEvent(Long orderId) {
 		return true;
 	}
@@ -75,6 +81,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPublishCommentEvent(Long orderId) {
 		return true;
 	}
@@ -83,6 +90,7 @@ public class OrderServiceImpl implements OrderService {
 	 * 从订单中心获取，确认收货时间超过了7天，而且还没有发表评论的订单
 	 * @return 订单信息DTO集合
 	 */
+	@Override
 	public List<OrderInfoDTO> listNotPublishedCommentOrders() {
 		return new ArrayList<OrderInfoDTO>();
 	}
@@ -92,6 +100,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderIds 订单id集合
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informBatchPublishCommentEvent(List<Long> orderIds) {
 		return true;
 	}
@@ -101,6 +110,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderInfoId 订单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPayOrderSuccessed(Long orderInfoId) {
 		return true;
 	}
@@ -110,6 +120,7 @@ public class OrderServiceImpl implements OrderService {
 	 * @param orderInfoId 订单id
 	 * @return 订单
 	 */
+	@Override
 	public OrderInfoDTO getOrderById(Long orderInfoId) {
 		return null;
 	}

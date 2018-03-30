@@ -28,6 +28,7 @@ public class PriorityDAOImpl implements PriorityDAO {
 	 * 查询根权限
 	 * @return 根权限集合
 	 */
+	@Override
 	public List<PriorityDO> listRootPriorities() {
 		return priorityMapper.listRootPriorities(); 
 	}
