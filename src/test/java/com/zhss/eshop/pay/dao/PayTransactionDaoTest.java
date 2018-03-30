@@ -24,6 +24,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.pay.domain.PayTransactionDO;
 import com.zhss.eshop.pay.domain.PayTransactionQuery;
@@ -35,9 +36,9 @@ import com.zhss.eshop.pay.domain.PayTransactionQuery;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class)
 @Rollback(true)
-public class PayTransactionDAOTest {
+public class PayTransactionDaoTest {
 
 	/**
 	 * 支付交易流水管理DAO组件
@@ -82,7 +83,7 @@ public class PayTransactionDAOTest {
 		Integer count = 30;
 		Map<Long, PayTransactionDO> expectedPayTransactions = createPayTransactionMap(count);
 		
-		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> parameters = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		parameters.put("transactionChannel", 1);
 		parameters.put("status", 1);
 		parameters.put("orderNo", "测试订单编号"); 
@@ -125,7 +126,7 @@ public class PayTransactionDAOTest {
 		expectedPayTransaction.setUserPayAccount("测试用户账号");  
 		payTransactionDAO.update(expectedPayTransaction); 
 		
-		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> parameters = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		parameters.put("orderNo", "测试订单编号"); 
 		List<PayTransactionDO> actualPayTransactions = 
 				payTransactionDAO.listByCondition(parameters);
@@ -158,7 +159,7 @@ public class PayTransactionDAOTest {
 	 */
 	private Map<Long, PayTransactionDO> createPayTransactionMap(Integer count) throws Exception {
 		List<PayTransactionDO> payTransactions = createPayTransactions(count);
-		Map<Long, PayTransactionDO> payTransactionMap = new HashMap<Long, PayTransactionDO>();
+		Map<Long, PayTransactionDO> payTransactionMap = new HashMap<Long, PayTransactionDO>(CollectionSize.DEFAULT);
 		for(PayTransactionDO payTransaction : payTransactions) {
 			payTransactionMap.put(payTransaction.getId(), payTransaction);
 		}

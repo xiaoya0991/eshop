@@ -101,6 +101,7 @@ public class ReturnGoodsInputScheduleStockUpdater extends AbstractScheduleStockU
 	/**
 	 * 设置需要的参数
 	 */
+	@Override
 	public void setParameter(Object parameter) {
 		this.purchaseInputOrder = (PurchaseInputOrderDTO) parameter;
 	}

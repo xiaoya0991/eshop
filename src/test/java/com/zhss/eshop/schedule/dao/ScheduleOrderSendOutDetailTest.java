@@ -24,6 +24,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDO;
 
@@ -34,7 +35,7 @@ import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
 public class ScheduleOrderSendOutDetailTest {
 
@@ -152,7 +153,7 @@ public class ScheduleOrderSendOutDetailTest {
 				orderInfoId, orderItemId, goodsAllocationStockDetailId, count);
 		
 		Map<Long, ScheduleOrderSendOutDetailDO> sendOutDetailMap = 
-				new HashMap<Long, ScheduleOrderSendOutDetailDO>();
+				new HashMap<Long, ScheduleOrderSendOutDetailDO>(CollectionSize.DEFAULT);
 		
 		for(ScheduleOrderSendOutDetailDO sendOutDetail : sendOutDetails) {
 			sendOutDetailMap.put(sendOutDetail.getId(), sendOutDetail);

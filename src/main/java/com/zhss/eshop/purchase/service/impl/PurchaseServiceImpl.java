@@ -41,6 +41,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCreatePurchaseInputOrderEvent(Long purchaseOrderId) {
 		try {
 			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.WAIT_FOR_INPUT);
@@ -56,6 +57,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informFinishedPurchaseInputOrderEvent(Long purchaseOrderId) {
 		try {
 			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.FINISHED_INPUT);
@@ -71,6 +73,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @param purcaseOrderId 采购单id
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCreatePurchaseSettlementOrderEvent(Long purchaseOrderId) {
 		try {
 			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.WAIT_FOR_SETTLEMENT);

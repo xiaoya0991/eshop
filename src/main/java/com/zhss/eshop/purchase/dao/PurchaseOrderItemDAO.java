@@ -24,12 +24,14 @@ public interface PurchaseOrderItemDAO {
 	 * 根据采购单id查询采购单条目
 	 * @param purchaseOrderId 采购单id
 	 * @return 采购单条目
+	 * @throws Exception
 	 */
 	List<PurchaseOrderItemDO> listByPurchaseOrderId(Long purchaseOrderId) throws Exception;
 	
 	/**
 	 * 根据采购单id删除采购单条目
 	 * @param purchaseOrderId 采购单id
+	 * @throws Exception
 	 */
 	void removeByPurchaseOrderId(Long purchaseOrderId) throws Exception;
 	

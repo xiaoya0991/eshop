@@ -47,6 +47,7 @@ public abstract class AbstractStockUpdaterFactory<T>
 	/**
 	 * 创建库存更新命令
 	 */
+	@Override
 	public StockUpdater create(T parameter) {
 		try {
 			List<Long> goodsSkuIds = getGoodsSkuIds(parameter);
@@ -60,6 +61,7 @@ public abstract class AbstractStockUpdaterFactory<T>
 	
 	/**
 	 * 获取商品sku id集合
+	 * @param parameter 参数
 	 * @return 商品sku id集合
 	 * @throws Exception
 	 */
@@ -67,6 +69,7 @@ public abstract class AbstractStockUpdaterFactory<T>
 	
 	/**
 	 * 创建库存更新命令
+	 * @param parameter 参数
 	 * @param goodsStockDOs 商品库存DO对象集合
 	 * @return 库存更新命令
 	 * @throws Exception

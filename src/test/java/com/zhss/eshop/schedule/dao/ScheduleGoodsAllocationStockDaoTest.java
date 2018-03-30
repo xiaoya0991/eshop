@@ -30,9 +30,9 @@ import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class ScheduleGoodsAllocationStockDAOTest {
+public class ScheduleGoodsAllocationStockDaoTest {
 
 	/**
 	 * 货位库存管理DAO组件

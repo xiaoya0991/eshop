@@ -49,24 +49,36 @@ public class GoodsAllocationStockId {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		GoodsAllocationStockId other = (GoodsAllocationStockId) obj;
 		if (goodsAllocationId == null) {
-			if (other.goodsAllocationId != null)
+			if (other.goodsAllocationId != null) {
 				return false;
-		} else if (!goodsAllocationId.equals(other.goodsAllocationId))
+			}
+		} else if (!goodsAllocationId.equals(other.goodsAllocationId)) {
 			return false;
+		}
 		if (goodsSkuId == null) {
-			if (other.goodsSkuId != null)
+			if (other.goodsSkuId != null) {
 				return false;
-		} else if (!goodsSkuId.equals(other.goodsSkuId))
+			}
+		} else if (!goodsSkuId.equals(other.goodsSkuId)) {
 			return false;
+		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "GoodsAllocationStockId [goodsAllocationId=" + goodsAllocationId + ", goodsSkuId=" + goodsSkuId + "]";
 	}
 	
 }

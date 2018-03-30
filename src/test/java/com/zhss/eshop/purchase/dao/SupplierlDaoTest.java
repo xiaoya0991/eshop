@@ -24,6 +24,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.purchase.domain.SupplierDO;
 import com.zhss.eshop.purchase.domain.SupplierQuery;
@@ -35,9 +36,9 @@ import com.zhss.eshop.purchase.domain.SupplierQuery;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class SupplierlDAOTest {
+public class SupplierlDaoTest {
 
 	/**
 	 * 供应商管理DAO组件
@@ -137,7 +138,7 @@ public class SupplierlDAOTest {
 	 */
 	private Map<Long, SupplierDO> createSupplierMap(Integer count) throws Exception {
 		List<SupplierDO> suppliers = createSuppliers(count);
-		Map<Long, SupplierDO> supplierMap = new HashMap<Long, SupplierDO>();
+		Map<Long, SupplierDO> supplierMap = new HashMap<Long, SupplierDO>(CollectionSize.DEFAULT);
 		for(SupplierDO supplier : suppliers) {
 			supplierMap.put(supplier.getId(), supplier);
 		}

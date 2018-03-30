@@ -20,7 +20,7 @@ public interface SaleDeliveryScheduler {
 	
 	/**
 	 * 获取订单条目的调度结果
-	 * @param order 订单
+	 * @param orderItem 订单条目
 	 * @return 调度结果
 	 * @throws Exception
 	 */

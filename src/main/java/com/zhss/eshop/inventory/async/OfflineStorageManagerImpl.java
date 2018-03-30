@@ -40,6 +40,7 @@ public class OfflineStorageManagerImpl implements OfflineStorageManager {
 	 * @param message 库存更新消息
 	 * @throws Exception
 	 */
+	@Override
 	public void store(StockUpdateMessage message) throws Exception {
 		StockUpdateMessageDO stockUpdateMessageDO = createStockUpdateMessageDO(message);
 		stockUpdateMessageDAO.save(stockUpdateMessageDO);
@@ -66,16 +67,20 @@ public class OfflineStorageManagerImpl implements OfflineStorageManager {
 	/**
 	 * 获取离线存储标识
 	 * @return 离线存储标识
+	 * @throws Exception
 	 */
-	public Boolean getOffline() {
+	@Override
+	public Boolean getOffline() throws Exception {
 		return offline;
 	}
 	
 	/**
 	 * 设置离线存储标识
 	 * @param offline 离线存储标识
+	 * @throws Exception
 	 */
-	public void setOffline(Boolean offline) {
+	@Override
+	public void setOffline(Boolean offline) throws Exception {
 		this.offline = offline;
 	}
 	
@@ -84,6 +89,7 @@ public class OfflineStorageManagerImpl implements OfflineStorageManager {
 	 * @param stockUpdateMessages 库存更新消息
 	 * @throws Exception
 	 */
+	@Override
 	public void removeByBatch(List<StockUpdateMessage> stockUpdateMessages) throws Exception {
 		StringBuilder builder = new StringBuilder("");
 		for(int i = 0; i < stockUpdateMessages.size(); i++) {
@@ -97,7 +103,9 @@ public class OfflineStorageManagerImpl implements OfflineStorageManager {
 	
 	/**
 	 * 获取离线数据迭代器
+	 * @throws Exception
 	 */
+	@Override
 	public OfflineStorageIterator iterator() throws Exception {
 		return new OfflineStorageIteratorImpl();
 	}
@@ -112,17 +120,21 @@ public class OfflineStorageManagerImpl implements OfflineStorageManager {
 		/**
 		 * 判断是否还有下一批库存更新消息
 		 * @return 是否还有下一批库存更新消息
+		 * @throws Exception
 		 */
-		public Boolean hasNext() {
+		@Override
+		public Boolean hasNext() throws Exception {
 			return stockUpdateMessageDAO.count().equals(0L) ? false : true;
 		}
 		
 		/**
 		 * 获取下一批库存更新消息
 		 * @return 下一批库存更新消息
+		 * @throws Exception
 		 */
+		@Override
 		public List<StockUpdateMessage> next() throws Exception {
-			List<StockUpdateMessage> StockUpdateMessages = new ArrayList<StockUpdateMessage>();
+			List<StockUpdateMessage> stockUpdateMessages = new ArrayList<StockUpdateMessage>();
 			
 			List<StockUpdateMessageDO> stockUpdateMessageDOs = 
 					stockUpdateMessageDAO.listByBatch();
@@ -132,10 +144,10 @@ public class OfflineStorageManagerImpl implements OfflineStorageManager {
 				stockUpdateMessage.setOperation(stockUpdateMessageDO.getOperation()); 
 				stockUpdateMessage.setParameter(JSONObject.parseObject(stockUpdateMessageDO.getParameter(), 
 						Class.forName(stockUpdateMessageDO.getParamterClazz())));  
-				StockUpdateMessages.add(stockUpdateMessage);
+				stockUpdateMessages.add(stockUpdateMessage);
 			}
 			
-			return StockUpdateMessages;
+			return stockUpdateMessages;
 		}
 		
 	}

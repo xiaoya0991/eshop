@@ -36,6 +36,7 @@ public class ScheduleStockUpdateMessageConsumer extends Thread {
 	/**
 	 * 消费库存更新消息
 	 */
+	@Override
 	public void run() {
 		while(true) {
 			try {

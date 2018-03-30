@@ -34,6 +34,7 @@ public class PurchaseOrderDAOImpl implements PurchaseOrderDAO {
 	 * 新增采购单
 	 * @param purchaseOrder 采购单
 	 */
+	@Override
 	public Long save(PurchaseOrderDO purchaseOrder) throws Exception {
 		purchaseOrder.setGmtCreate(dateProvider.getCurrentTime()); 
 		purchaseOrder.setGmtModified(dateProvider.getCurrentTime()); 
@@ -46,6 +47,7 @@ public class PurchaseOrderDAOImpl implements PurchaseOrderDAO {
 	 * @param query 查询条件
 	 * @return 采购单
 	 */
+	@Override
 	public List<PurchaseOrderDO> listByPage(PurchaseOrderQuery query) throws Exception {
 		return purchaseOrderMapper.listByPage(query);
 	}
@@ -55,6 +57,7 @@ public class PurchaseOrderDAOImpl implements PurchaseOrderDAO {
 	 * @param id 采购单id
 	 * @return 采购单
 	 */
+	@Override
 	public PurchaseOrderDO getById(Long id) throws Exception {
 		return purchaseOrderMapper.getById(id);
 	}
@@ -63,6 +66,7 @@ public class PurchaseOrderDAOImpl implements PurchaseOrderDAO {
 	 * 更新采购单
 	 * @param purchaseOrder 采购单
 	 */
+	@Override
 	public void update(PurchaseOrderDO purchaseOrder) throws Exception {
 		purchaseOrder.setGmtModified(dateProvider.getCurrentTime()); 
 		purchaseOrderMapper.update(purchaseOrder); 
@@ -74,6 +78,7 @@ public class PurchaseOrderDAOImpl implements PurchaseOrderDAO {
 	 * @param status 采购单状态
 	 * @throws Exception
 	 */
+	@Override
 	public void updateStatus(Long id, Integer status) throws Exception {
 		PurchaseOrderDO purchaseOrder = getById(id);
 		purchaseOrder.setStatus(status); 

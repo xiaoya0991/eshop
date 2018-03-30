@@ -25,7 +25,7 @@ import com.zhss.eshop.schedule.domain.ScheduleOrderSendOutDetailDTO;
  */
 @Component
 @Scope("prototype")  
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class PayOrderScheduleStockUpdater extends AbstractScheduleStockUpdater { 
 
 	/**
@@ -103,6 +103,7 @@ public class PayOrderScheduleStockUpdater extends AbstractScheduleStockUpdater {
 	/**
 	 * 设置库存更新组件需要的参数
 	 */
+	@Override
 	public void setParameter(Object parameter) {
 		this.scheduleResult = (SaleDeliveryScheduleResult) parameter;
 	}

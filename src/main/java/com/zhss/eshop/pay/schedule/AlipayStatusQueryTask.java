@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.order.service.OrderService;
 import com.zhss.eshop.pay.api.PayApi;
 import com.zhss.eshop.pay.api.QueryPayStatusResponse;
@@ -80,7 +81,7 @@ public class AlipayStatusQueryTask {
 	 * @return 交易流水
 	 */ 
 	private List<PayTransactionDO> listUnpayedAlipayTransactions() throws Exception {
-		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> parameters = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		parameters.put("transactionChannel", PayType.ALIPAY);
 		parameters.put("status", PayTransactionStatus.UNPAYED);
 		

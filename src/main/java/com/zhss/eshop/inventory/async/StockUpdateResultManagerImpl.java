@@ -33,6 +33,7 @@ public class StockUpdateResultManagerImpl
 	 * @param result 商品库存更新结果
 	 * @param observer 商品库存更新结果的观察者
 	 */
+	@Override
 	public void observe(String messageId) {
 		StockUpdateObservable observable = new StockUpdateObservable(messageId);
 		observable.addObserver(observer);  
@@ -44,6 +45,7 @@ public class StockUpdateResultManagerImpl
 	 * @param messageId 商品库存更新消息id
 	 * @return 商品库存更新结果的观察目标
 	 */
+	@Override
 	public void inform(String messageId, Boolean result) {
 		StockUpdateObservable observable = observableMap.get(messageId);
 		observable.setResult(result); 
@@ -55,6 +57,7 @@ public class StockUpdateResultManagerImpl
 	 * @param messageId 消息id
 	 * @return
 	 */
+	@Override
 	public StockUpdateObservable getObservable(String messageId) {
 		return observableMap.get(messageId);
 	}

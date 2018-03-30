@@ -83,4 +83,11 @@ public class PurchaseOrderItemVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "PurchaseOrderItemVO [id=" + id + ", purchaseOrderId=" + purchaseOrderId + ", goodsSkuId=" + goodsSkuId
+				+ ", purchaseCount=" + purchaseCount + ", purchasePrice=" + purchasePrice + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

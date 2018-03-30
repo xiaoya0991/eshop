@@ -21,6 +21,7 @@ public class StockUpdateObserver implements Observer {
 	/**
 	 * 通知异步处理结果
 	 */
+	@Override
 	public void update(Observable o, Object arg) {
 		StockUpdateResult result = (StockUpdateResult) arg;
 		logger.info("商品库存更新消息[messageId=" + result.getMessageId() + "]" 

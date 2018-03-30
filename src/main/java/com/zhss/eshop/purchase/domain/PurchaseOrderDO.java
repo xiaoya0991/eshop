@@ -143,69 +143,102 @@ public class PurchaseOrderDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		PurchaseOrderDO other = (PurchaseOrderDO) obj;
 		if (contactor == null) {
-			if (other.contactor != null)
+			if (other.contactor != null) {
 				return false;
-		} else if (!contactor.equals(other.contactor))
+			}
+		} else if (!contactor.equals(other.contactor)) {
 			return false;
+		}
 		if (contactorEmail == null) {
-			if (other.contactorEmail != null)
+			if (other.contactorEmail != null) {
 				return false;
-		} else if (!contactorEmail.equals(other.contactorEmail))
+			}
+		} else if (!contactorEmail.equals(other.contactorEmail)) {
 			return false;
+		}
 		if (contactorPhoneNumber == null) {
-			if (other.contactorPhoneNumber != null)
+			if (other.contactorPhoneNumber != null) {
 				return false;
-		} else if (!contactorPhoneNumber.equals(other.contactorPhoneNumber))
+			}
+		} else if (!contactorPhoneNumber.equals(other.contactorPhoneNumber)) {
 			return false;
+		}
 		if (expectArrivalTime == null) {
-			if (other.expectArrivalTime != null)
+			if (other.expectArrivalTime != null) {
 				return false;
-		} else if (!expectArrivalTime.equals(other.expectArrivalTime))
+			}
+		} else if (!expectArrivalTime.equals(other.expectArrivalTime)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (purchaser == null) {
-			if (other.purchaser != null)
+			if (other.purchaser != null) {
 				return false;
-		} else if (!purchaser.equals(other.purchaser))
+			}
+		} else if (!purchaser.equals(other.purchaser)) {
 			return false;
+		}
 		if (remark == null) {
-			if (other.remark != null)
+			if (other.remark != null) {
 				return false;
-		} else if (!remark.equals(other.remark))
+			}
+		} else if (!remark.equals(other.remark)) {
 			return false;
+		}
 		if (status == null) {
-			if (other.status != null)
+			if (other.status != null) {
 				return false;
-		} else if (!status.equals(other.status))
+			}
+		} else if (!status.equals(other.status)) {
 			return false;
+		}
 		if (supplierId == null) {
-			if (other.supplierId != null)
+			if (other.supplierId != null) {
 				return false;
-		} else if (!supplierId.equals(other.supplierId))
+			}
+		} else if (!supplierId.equals(other.supplierId)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "PurchaseOrderDO [id=" + id + ", supplierId=" + supplierId + ", expectArrivalTime=" + expectArrivalTime
+				+ ", contactor=" + contactor + ", contactorPhoneNumber=" + contactorPhoneNumber + ", contactorEmail="
+				+ contactorEmail + ", remark=" + remark + ", purchaser=" + purchaser + ", status=" + status
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

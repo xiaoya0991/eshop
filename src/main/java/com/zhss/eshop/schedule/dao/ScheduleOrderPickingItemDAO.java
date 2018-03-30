@@ -13,7 +13,8 @@ public interface ScheduleOrderPickingItemDAO {
 
 	/**
 	 * 批量插入拣货条目
-	 * @param orderItem 订单条目 
+	 * @param orderInfoId 订单id
+	 * @param orderItemId 订单条目id
 	 * @param pickingItems 拣货条目
 	 * @throws Exception
 	 */
@@ -24,7 +25,8 @@ public interface ScheduleOrderPickingItemDAO {
 	 * 根据订单id和订单条目id查询拣货条目
 	 * @param orderInfoId 订单id
 	 * @param orderItemId 订单条目id
-	 * @return
+	 * @return 拣货条目
+	 * @throws Exception
 	 */
 	List<ScheduleOrderPickingItemDO> listByOrderItemId(
 			Long orderInfoId, Long orderItemId) throws Exception;
@@ -33,6 +35,7 @@ public interface ScheduleOrderPickingItemDAO {
 	 * 根据订单条目id删除拣货条目
 	 * @param orderInfoId 订单id
 	 * @param orderItemId 订单条目id
+	 * @throws Exception
 	 */
 	void removeByOrderItemId(Long orderInfoId, Long orderItemId) throws Exception;
 	

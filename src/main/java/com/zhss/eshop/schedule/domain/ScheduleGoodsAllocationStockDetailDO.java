@@ -121,59 +121,88 @@ public class ScheduleGoodsAllocationStockDetailDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		ScheduleGoodsAllocationStockDetailDO other = (ScheduleGoodsAllocationStockDetailDO) obj;
 		if (currentStockQuantity == null) {
-			if (other.currentStockQuantity != null)
+			if (other.currentStockQuantity != null) {
 				return false;
-		} else if (!currentStockQuantity.equals(other.currentStockQuantity))
+			}
+		} else if (!currentStockQuantity.equals(other.currentStockQuantity)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (goodsAllocationId == null) {
-			if (other.goodsAllocationId != null)
+			if (other.goodsAllocationId != null) {
 				return false;
-		} else if (!goodsAllocationId.equals(other.goodsAllocationId))
+			}
+		} else if (!goodsAllocationId.equals(other.goodsAllocationId)) {
 			return false;
+		}
 		if (goodsSkuId == null) {
-			if (other.goodsSkuId != null)
+			if (other.goodsSkuId != null) {
 				return false;
-		} else if (!goodsSkuId.equals(other.goodsSkuId))
+			}
+		} else if (!goodsSkuId.equals(other.goodsSkuId)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (lockedStockQuantity == null) {
-			if (other.lockedStockQuantity != null)
+			if (other.lockedStockQuantity != null) {
 				return false;
-		} else if (!lockedStockQuantity.equals(other.lockedStockQuantity))
+			}
+		} else if (!lockedStockQuantity.equals(other.lockedStockQuantity)) {
 			return false;
+		}
 		if (putOnQuantity == null) {
-			if (other.putOnQuantity != null)
+			if (other.putOnQuantity != null) {
 				return false;
-		} else if (!putOnQuantity.equals(other.putOnQuantity))
+			}
+		} else if (!putOnQuantity.equals(other.putOnQuantity)) {
 			return false;
+		}
 		if (putOnTime == null) {
-			if (other.putOnTime != null)
+			if (other.putOnTime != null) {
 				return false;
-		} else if (!putOnTime.equals(other.putOnTime))
+			}
+		} else if (!putOnTime.equals(other.putOnTime)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "ScheduleGoodsAllocationStockDetailDO [id=" + id + ", goodsSkuId=" + goodsSkuId + ", goodsAllocationId="
+				+ goodsAllocationId + ", putOnTime=" + putOnTime + ", putOnQuantity=" + putOnQuantity
+				+ ", currentStockQuantity=" + currentStockQuantity + ", lockedStockQuantity=" + lockedStockQuantity
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

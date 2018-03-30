@@ -259,11 +259,14 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((invoiceTitle == null) ? 0 : invoiceTitle.hashCode());
+		result = prime * result + ((logisticOrder == null) ? 0 : logisticOrder.hashCode());
 		result = prime * result + ((orderComment == null) ? 0 : orderComment.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 		result = prime * result + ((orderNo == null) ? 0 : orderNo.hashCode());
 		result = prime * result + ((payType == null) ? 0 : payType.hashCode());
 		result = prime * result + ((payableAmount == null) ? 0 : payableAmount.hashCode());
+		result = prime * result + ((saleDeliveryOrderItems == null) ? 0 : saleDeliveryOrderItems.hashCode());
+		result = prime * result + ((sendOutOrder == null) ? 0 : sendOutOrder.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((taxpayerId == null) ? 0 : taxpayerId.hashCode());
 		result = prime * result + ((totalAmount == null) ? 0 : totalAmount.hashCode());
@@ -273,129 +276,177 @@ public class SaleDeliveryOrderDTO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SaleDeliveryOrderDTO other = (SaleDeliveryOrderDTO) obj;
 		if (consignee == null) {
-			if (other.consignee != null)
+			if (other.consignee != null) {
 				return false;
-		} else if (!consignee.equals(other.consignee))
-			return false;
-		if (consigneeCellPhoneNumber == null) {
-			if (other.consigneeCellPhoneNumber != null)
-				return false;
-		} else if (!consigneeCellPhoneNumber.equals(other.consigneeCellPhoneNumber))
-			return false;
-		if (couponAmount == null) {
-			if (other.couponAmount != null)
-				return false;
-		} else if (!couponAmount.equals(other.couponAmount))
-			return false;
-		if (deliveryAddress == null) {
-			if (other.deliveryAddress != null)
-				return false;
-		} else if (!deliveryAddress.equals(other.deliveryAddress))
-			return false;
-		if (deliveryTime == null) {
-			if (other.deliveryTime != null)
-				return false;
-		} else if (!deliveryTime.equals(other.deliveryTime))
-			return false;
-		if (discountAmount == null) {
-			if (other.discountAmount != null)
-				return false;
-		} else if (!discountAmount.equals(other.discountAmount))
-			return false;
-		if (freight == null) {
-			if (other.freight != null)
-				return false;
-		} else if (!freight.equals(other.freight))
-			return false;
-		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
-				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
-			return false;
-		if (gmtModified == null) {
-			if (other.gmtModified != null)
-				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (invoiceTitle == null) {
-			if (other.invoiceTitle != null)
-				return false;
-		} else if (!invoiceTitle.equals(other.invoiceTitle))
-			return false;
-		if (orderComment == null) {
-			if (other.orderComment != null)
-				return false;
-		} else if (!orderComment.equals(other.orderComment))
-			return false;
-		if (orderId == null) {
-			if (other.orderId != null)
-				return false;
-		} else if (!orderId.equals(other.orderId))
-			return false;
-		if (orderNo == null) {
-			if (other.orderNo != null)
-				return false;
-		} else if (!orderNo.equals(other.orderNo))
-			return false;
-		if (payType == null) {
-			if (other.payType != null)
-				return false;
-		} else if (!payType.equals(other.payType))
-			return false;
-		if (payableAmount == null) {
-			if (other.payableAmount != null)
-				return false;
-		} else if (!payableAmount.equals(other.payableAmount))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
-		if (taxpayerId == null) {
-			if (other.taxpayerId != null)
-				return false;
-		} else if (!taxpayerId.equals(other.taxpayerId))
-			return false;
-		if (totalAmount == null) {
-			if (other.totalAmount != null)
-				return false;
-		} else if (!totalAmount.equals(other.totalAmount))
-			return false;
-		if (userAccountId == null) {
-			if (other.userAccountId != null)
-				return false;
-		} else if (!userAccountId.equals(other.userAccountId))
-			return false;
-		
-		for(SaleDeliveryOrderItemDTO saleDeliveryOrderItem : this.getSaleDeliveryOrderItems()) {
-			Boolean result = false;
-			
-			for(SaleDeliveryOrderItemDTO otherSaleDeliveryOrderItem : other.getSaleDeliveryOrderItems()) {
-				if(saleDeliveryOrderItem.equals(otherSaleDeliveryOrderItem)) {
-					result = true;
-					break;
-				}
 			}
-			
-			if(!result) {
-				return result;
-			}
+		} else if (!consignee.equals(other.consignee)) {
+			return false;
 		}
-		
+		if (consigneeCellPhoneNumber == null) {
+			if (other.consigneeCellPhoneNumber != null) {
+				return false;
+			}
+		} else if (!consigneeCellPhoneNumber.equals(other.consigneeCellPhoneNumber)) {
+			return false;
+		}
+		if (couponAmount == null) {
+			if (other.couponAmount != null) {
+				return false;
+			}
+		} else if (!couponAmount.equals(other.couponAmount)) {
+			return false;
+		}
+		if (deliveryAddress == null) {
+			if (other.deliveryAddress != null) {
+				return false;
+			}
+		} else if (!deliveryAddress.equals(other.deliveryAddress)) {
+			return false;
+		}
+		if (deliveryTime == null) {
+			if (other.deliveryTime != null) {
+				return false;
+			}
+		} else if (!deliveryTime.equals(other.deliveryTime)) {
+			return false;
+		}
+		if (discountAmount == null) {
+			if (other.discountAmount != null) {
+				return false;
+			}
+		} else if (!discountAmount.equals(other.discountAmount)) {
+			return false;
+		}
+		if (freight == null) {
+			if (other.freight != null) {
+				return false;
+			}
+		} else if (!freight.equals(other.freight)) {
+			return false;
+		}
+		if (gmtCreate == null) {
+			if (other.gmtCreate != null) {
+				return false;
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
+			return false;
+		}
+		if (gmtModified == null) {
+			if (other.gmtModified != null) {
+				return false;
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
+			return false;
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		if (invoiceTitle == null) {
+			if (other.invoiceTitle != null) {
+				return false;
+			}
+		} else if (!invoiceTitle.equals(other.invoiceTitle)) {
+			return false;
+		}
+		if (logisticOrder == null) {
+			if (other.logisticOrder != null) {
+				return false;
+			}
+		} else if (!logisticOrder.equals(other.logisticOrder)) {
+			return false;
+		}
+		if (orderComment == null) {
+			if (other.orderComment != null) {
+				return false;
+			}
+		} else if (!orderComment.equals(other.orderComment)) {
+			return false;
+		}
+		if (orderId == null) {
+			if (other.orderId != null) {
+				return false;
+			}
+		} else if (!orderId.equals(other.orderId)) {
+			return false;
+		}
+		if (orderNo == null) {
+			if (other.orderNo != null) {
+				return false;
+			}
+		} else if (!orderNo.equals(other.orderNo)) {
+			return false;
+		}
+		if (payType == null) {
+			if (other.payType != null) {
+				return false;
+			}
+		} else if (!payType.equals(other.payType)) {
+			return false;
+		}
+		if (payableAmount == null) {
+			if (other.payableAmount != null) {
+				return false;
+			}
+		} else if (!payableAmount.equals(other.payableAmount)) {
+			return false;
+		}
+		if (saleDeliveryOrderItems == null) {
+			if (other.saleDeliveryOrderItems != null) {
+				return false;
+			}
+		} else if (!saleDeliveryOrderItems.equals(other.saleDeliveryOrderItems)) {
+			return false;
+		}
+		if (sendOutOrder == null) {
+			if (other.sendOutOrder != null) {
+				return false;
+			}
+		} else if (!sendOutOrder.equals(other.sendOutOrder)) {
+			return false;
+		}
+		if (status == null) {
+			if (other.status != null) {
+				return false;
+			}
+		} else if (!status.equals(other.status)) {
+			return false;
+		}
+		if (taxpayerId == null) {
+			if (other.taxpayerId != null) {
+				return false;
+			}
+		} else if (!taxpayerId.equals(other.taxpayerId)) {
+			return false;
+		}
+		if (totalAmount == null) {
+			if (other.totalAmount != null) {
+				return false;
+			}
+		} else if (!totalAmount.equals(other.totalAmount)) {
+			return false;
+		}
+		if (userAccountId == null) {
+			if (other.userAccountId != null) {
+				return false;
+			}
+		} else if (!userAccountId.equals(other.userAccountId)) {
+			return false;
+		}
 		return true;
 	}
 	

@@ -42,7 +42,7 @@ import com.zhss.eshop.wms.service.WmsService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ScheduleServiceImpl implements ScheduleService {
 
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleServiceImpl.class);
@@ -115,6 +115,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param returnGoodsInputOrderDTO 退货入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsInputFinished(
 			ReturnGoodsInputOrderDTO returnGoodsInputOrder) {
 		try {
@@ -136,6 +137,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informSubmitOrderEvent(OrderInfoDTO order) {
 		try {
 			for(OrderItemDTO orderItem : order.getOrderItems()) {
@@ -169,6 +171,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informCancelOrderEvent(OrderInfoDTO order) {
 		try {
 			for(OrderItemDTO orderItem : order.getOrderItems()) {
@@ -197,6 +200,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informPayOrderEvent(OrderInfoDTO order) {
 		try {
 			for(OrderItemDTO orderItem : order.getOrderItems()) {
@@ -289,6 +293,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param orderDTO 订单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean scheduleSaleDelivery(OrderInfoDTO order) {
 		try {
 			SaleDeliveryOrderBuilder saleDeliveryOrderBuilder = 
@@ -318,6 +323,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 * @param returnGoodsWorksheetDTO 退货工单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean scheduleReturnGoodsInput(OrderInfoDTO order, 
 			ReturnGoodsWorksheetDTO returnGoodsWorksheet) {
 		try {

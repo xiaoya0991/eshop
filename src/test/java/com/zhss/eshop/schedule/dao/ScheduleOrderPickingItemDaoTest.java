@@ -24,6 +24,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDO;
 
@@ -34,9 +35,9 @@ import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class ScheduleOrderPickingItemDAOTest {
+public class ScheduleOrderPickingItemDaoTest {
 
 	/**
 	 * 拣货条目管理DAO组件
@@ -152,7 +153,7 @@ public class ScheduleOrderPickingItemDAOTest {
 				orderInfoId, orderItemId, goodsSkuId, count);
 		
 		Map<Long, ScheduleOrderPickingItemDO> pickingItemMap = 
-				new HashMap<Long, ScheduleOrderPickingItemDO>();
+				new HashMap<Long, ScheduleOrderPickingItemDO>(CollectionSize.DEFAULT);
 		
 		for(ScheduleOrderPickingItemDO pickingItem : pickingItems) {
 			pickingItemMap.put(pickingItem.getId(), pickingItem);

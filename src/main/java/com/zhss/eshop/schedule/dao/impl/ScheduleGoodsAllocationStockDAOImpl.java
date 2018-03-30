@@ -32,6 +32,7 @@ public class ScheduleGoodsAllocationStockDAOImpl implements ScheduleGoodsAllocat
 	 * @param goodsSkuId 商品sku id
 	 * @return 货位库存
 	 */
+	@Override
 	public ScheduleGoodsAllocationStockDO getBySkuId(
 			Long goodsAllocationId, Long goodsSkuId) throws Exception {
 		ScheduleGoodsAllocationStockDO goodsAllocationStock =
@@ -54,6 +55,7 @@ public class ScheduleGoodsAllocationStockDAOImpl implements ScheduleGoodsAllocat
 	 * 新增货位库存
 	 * @param goodsAllocationStockDO 货位库存DO对象
 	 */
+	@Override
 	public void save(ScheduleGoodsAllocationStockDO goodsAllocationStock) throws Exception {
 		goodsAllocationStock.setGmtCreate(dateProvider.getCurrentTime()); 
 		goodsAllocationStock.setGmtModified(dateProvider.getCurrentTime()); 
@@ -64,6 +66,7 @@ public class ScheduleGoodsAllocationStockDAOImpl implements ScheduleGoodsAllocat
 	 * 更新货位库存
 	 * @param goodsAllocationStockDO 货位库存DO对象
 	 */
+	@Override
 	public void update(ScheduleGoodsAllocationStockDO goodsAllocationStock) throws Exception {
 		goodsAllocationStock.setGmtModified(dateProvider.getCurrentTime()); 
 		goodsAllocationStockMapper.update(goodsAllocationStock); 

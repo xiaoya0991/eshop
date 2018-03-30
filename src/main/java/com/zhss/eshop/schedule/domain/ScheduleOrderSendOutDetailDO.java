@@ -100,49 +100,73 @@ public class ScheduleOrderSendOutDetailDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		ScheduleOrderSendOutDetailDO other = (ScheduleOrderSendOutDetailDO) obj;
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (goodsAllocationStockDetailId == null) {
-			if (other.goodsAllocationStockDetailId != null)
+			if (other.goodsAllocationStockDetailId != null) {
 				return false;
-		} else if (!goodsAllocationStockDetailId.equals(other.goodsAllocationStockDetailId))
+			}
+		} else if (!goodsAllocationStockDetailId.equals(other.goodsAllocationStockDetailId)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (orderInfoId == null) {
-			if (other.orderInfoId != null)
+			if (other.orderInfoId != null) {
 				return false;
-		} else if (!orderInfoId.equals(other.orderInfoId))
+			}
+		} else if (!orderInfoId.equals(other.orderInfoId)) {
 			return false;
+		}
 		if (orderItemId == null) {
-			if (other.orderItemId != null)
+			if (other.orderItemId != null) {
 				return false;
-		} else if (!orderItemId.equals(other.orderItemId))
+			}
+		} else if (!orderItemId.equals(other.orderItemId)) {
 			return false;
+		}
 		if (sendOutCount == null) {
-			if (other.sendOutCount != null)
+			if (other.sendOutCount != null) {
 				return false;
-		} else if (!sendOutCount.equals(other.sendOutCount))
+			}
+		} else if (!sendOutCount.equals(other.sendOutCount)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "ScheduleOrderSendOutDetailDO [id=" + id + ", orderInfoId=" + orderInfoId + ", orderItemId="
+				+ orderItemId + ", goodsAllocationStockDetailId=" + goodsAllocationStockDetailId + ", sendOutCount="
+				+ sendOutCount + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

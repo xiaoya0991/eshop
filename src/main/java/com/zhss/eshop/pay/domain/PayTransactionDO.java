@@ -165,79 +165,117 @@ public class PayTransactionDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		PayTransactionDO other = (PayTransactionDO) obj;
 		if (finishPayTime == null) {
-			if (other.finishPayTime != null)
+			if (other.finishPayTime != null) {
 				return false;
-		} else if (!finishPayTime.equals(other.finishPayTime))
+			}
+		} else if (!finishPayTime.equals(other.finishPayTime)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (orderInfoId == null) {
-			if (other.orderInfoId != null)
+			if (other.orderInfoId != null) {
 				return false;
-		} else if (!orderInfoId.equals(other.orderInfoId))
+			}
+		} else if (!orderInfoId.equals(other.orderInfoId)) {
 			return false;
+		}
 		if (orderNo == null) {
-			if (other.orderNo != null)
+			if (other.orderNo != null) {
 				return false;
-		} else if (!orderNo.equals(other.orderNo))
+			}
+		} else if (!orderNo.equals(other.orderNo)) {
 			return false;
+		}
 		if (payableAmount == null) {
-			if (other.payableAmount != null)
+			if (other.payableAmount != null) {
 				return false;
-		} else if (!payableAmount.equals(other.payableAmount))
+			}
+		} else if (!payableAmount.equals(other.payableAmount)) {
 			return false;
+		}
 		if (responseCode == null) {
-			if (other.responseCode != null)
+			if (other.responseCode != null) {
 				return false;
-		} else if (!responseCode.equals(other.responseCode))
+			}
+		} else if (!responseCode.equals(other.responseCode)) {
 			return false;
+		}
 		if (status == null) {
-			if (other.status != null)
+			if (other.status != null) {
 				return false;
-		} else if (!status.equals(other.status))
+			}
+		} else if (!status.equals(other.status)) {
 			return false;
+		}
 		if (transactionChannel == null) {
-			if (other.transactionChannel != null)
+			if (other.transactionChannel != null) {
 				return false;
-		} else if (!transactionChannel.equals(other.transactionChannel))
+			}
+		} else if (!transactionChannel.equals(other.transactionChannel)) {
 			return false;
+		}
 		if (transactionNumber == null) {
-			if (other.transactionNumber != null)
+			if (other.transactionNumber != null) {
 				return false;
-		} else if (!transactionNumber.equals(other.transactionNumber))
+			}
+		} else if (!transactionNumber.equals(other.transactionNumber)) {
 			return false;
+		}
 		if (userAccountId == null) {
-			if (other.userAccountId != null)
+			if (other.userAccountId != null) {
 				return false;
-		} else if (!userAccountId.equals(other.userAccountId))
+			}
+		} else if (!userAccountId.equals(other.userAccountId)) {
 			return false;
+		}
 		if (userPayAccount == null) {
-			if (other.userPayAccount != null)
+			if (other.userPayAccount != null) {
 				return false;
-		} else if (!userPayAccount.equals(other.userPayAccount))
+			}
+		} else if (!userPayAccount.equals(other.userPayAccount)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "PayTransactionDO [id=" + id + ", orderInfoId=" + orderInfoId + ", orderNo=" + orderNo
+				+ ", payableAmount=" + payableAmount + ", userAccountId=" + userAccountId + ", userPayAccount="
+				+ userPayAccount + ", transactionChannel=" + transactionChannel + ", transactionNumber="
+				+ transactionNumber + ", finishPayTime=" + finishPayTime + ", responseCode=" + responseCode
+				+ ", status=" + status + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }

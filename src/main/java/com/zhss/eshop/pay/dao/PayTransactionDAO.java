@@ -16,6 +16,7 @@ public interface PayTransactionDAO {
 	/**
 	 * 新增支付交易流水
 	 * @param payTransaction 支付交易流水
+	 * @throws Exception
 	 */
 	void save(PayTransactionDO payTransaction) throws Exception;
 	
@@ -30,6 +31,7 @@ public interface PayTransactionDAO {
 	/**
 	 * 更新支付交易流水
 	 * @param payTransaction 支付交易流水
+	 * @throws Exception
 	 */
 	void update(PayTransactionDO payTransaction) throws Exception;
 	
@@ -37,6 +39,7 @@ public interface PayTransactionDAO {
 	 * 分页查询支付交易流水
 	 * @param query 查询条件
 	 * @return 支付交易流水
+	 * @throws Exception
 	 */
 	List<PayTransactionDO> listByPage(PayTransactionQuery query) throws Exception; 
 	

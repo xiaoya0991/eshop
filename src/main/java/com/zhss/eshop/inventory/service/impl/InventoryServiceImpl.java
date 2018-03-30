@@ -110,6 +110,7 @@ public class InventoryServiceImpl implements InventoryService {
 	 * @param returnGoodsInputOrderDTO 退货入库单DTO
 	 * @return 处理结果
 	 */
+	@Override
 	public Boolean informReturnGoodsInputFinished(
 			ReturnGoodsInputOrderDTO returnGoodsInputOrderDTO) {
 		try {

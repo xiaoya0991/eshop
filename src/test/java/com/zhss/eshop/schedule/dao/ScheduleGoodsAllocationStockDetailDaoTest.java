@@ -24,6 +24,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDetailDO;
 
@@ -34,9 +35,9 @@ import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDetailDO;
  */
 @RunWith(SpringRunner.class) 
 @SpringBootTest
-@Transactional 
+@Transactional(rollbackFor = Exception.class) 
 @Rollback(true)
-public class ScheduleGoodsAllocationStockDetailDAOTest {
+public class ScheduleGoodsAllocationStockDetailDaoTest {
 
 	/**
 	 * 货位库存明细管理DAO组件
@@ -170,7 +171,7 @@ public class ScheduleGoodsAllocationStockDetailDAOTest {
 				createStockDetails(goodsSkuId, count);
 		
 		Map<Long, ScheduleGoodsAllocationStockDetailDO> stockDetailMap = 
-				new HashMap<Long, ScheduleGoodsAllocationStockDetailDO>();
+				new HashMap<Long, ScheduleGoodsAllocationStockDetailDO>(CollectionSize.DEFAULT);
 		
 		for(ScheduleGoodsAllocationStockDetailDO stockDetail : stockDetails) {
 			stockDetailMap.put(stockDetail.getId(), stockDetail);

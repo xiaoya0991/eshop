@@ -13,19 +13,22 @@ public interface GoodsStockDAO {
 	 * 根据商品sku id查询商品库存
 	 * @param goodsSkuId 商品sku id
 	 * @return 商品库存
+	 * @throws Exception
 	 */
-	GoodsStockDO getGoodsStockBySkuId(Long goodsSkuId);
+	GoodsStockDO getGoodsStockBySkuId(Long goodsSkuId) throws Exception;
 	
 	/**
 	 * 新增商品库存
 	 * @param goodsStockDO 商品库存DO对象
+	 * @throws Exception
 	 */
-	Boolean saveGoodsStock(GoodsStockDO goodsStockDO);
+	void saveGoodsStock(GoodsStockDO goodsStockDO) throws Exception;
 	
 	/**
 	 * 更新商品库存
 	 * @param goodsStockDO 商品库存DO对象
+	 * @throws Exception
 	 */
-	Boolean updateGoodsStock(GoodsStockDO goodsStockDO);
+	void updateGoodsStock(GoodsStockDO goodsStockDO) throws Exception;
 	
 }

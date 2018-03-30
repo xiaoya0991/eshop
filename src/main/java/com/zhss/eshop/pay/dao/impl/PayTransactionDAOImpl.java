@@ -35,6 +35,7 @@ public class PayTransactionDAOImpl implements PayTransactionDAO {
 	 * 新增支付交易流水
 	 * @param payTransaction 支付交易流水
 	 */
+	@Override
 	public void save(PayTransactionDO payTransaction) throws Exception {
 		payTransaction.setGmtCreate(dateProvider.getCurrentTime());
 		payTransaction.setGmtModified(dateProvider.getCurrentTime()); 
@@ -47,6 +48,7 @@ public class PayTransactionDAOImpl implements PayTransactionDAO {
 	 * @return 支付交易流水
 	 * @throws Exception
 	 */
+	@Override
 	public List<PayTransactionDO> listByCondition(Map<String, Object> parameters) throws Exception {
 		return payTransactionMapper.listByCondition(parameters);
 	}
@@ -55,6 +57,7 @@ public class PayTransactionDAOImpl implements PayTransactionDAO {
 	 * 更新支付交易流水
 	 * @param payTransaction 支付交易流水
 	 */
+	@Override
 	public void update(PayTransactionDO payTransaction) throws Exception {
 		payTransaction.setGmtModified(dateProvider.getCurrentTime()); 
 		payTransactionMapper.update(payTransaction); 
@@ -65,6 +68,7 @@ public class PayTransactionDAOImpl implements PayTransactionDAO {
 	 * @param query 查询条件
 	 * @return 支付交易流水
 	 */
+	@Override
 	public List<PayTransactionDO> listByPage(PayTransactionQuery query) throws Exception {
 		return payTransactionMapper.listByPage(query);
 	}

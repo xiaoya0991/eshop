@@ -247,7 +247,9 @@ public class ScheduleServiceTest {
 		order.setGmtModified(dateProvider.getCurrentTime()); 
 		order.setOrderItems(new ArrayList<OrderItemDTO>());  
 		
-		for(int i = 0; i < 2; i++) {
+		Integer orderItemCount = 2;
+		
+		for(int i = 0; i < orderItemCount; i++) {
 			order.getOrderItems().add(createOrderItem(1L, (long)i, (long)i)); 
 		}
 		
@@ -303,8 +305,10 @@ public class ScheduleServiceTest {
 		purchaseOrder.setGmtCreate(dateProvider.getCurrentTime()); 
 		purchaseOrder.setGmtModified(dateProvider.getCurrentTime()); 
 		
+		Integer purchaseOrderItemCount = 5;
+		
 		List<PurchaseOrderItemDTO> items = new ArrayList<PurchaseOrderItemDTO>();
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < purchaseOrderItemCount; i++) {
 			items.add(createPurchaseOrderItem(purchaseOrderId, (long)i, (long)i)); 
 		}
 		purchaseOrder.setItems(items);
@@ -345,8 +349,10 @@ public class ScheduleServiceTest {
 		purchaseInputOrder.setPurchaseOrderRemark("测试采购单");  
 		purchaseInputOrder.setPurchaser("李四");  
 		
+		Integer purchaseInputOrderItemCount = 5;
+		
 		List<PurchaseInputOrderItemDTO> items = new ArrayList<PurchaseInputOrderItemDTO>();
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < purchaseInputOrderItemCount; i++) {
 			items.add(createPurchaseInputOrderItem((long)i));  
 		}
 		purchaseInputOrder.setItems(items); 

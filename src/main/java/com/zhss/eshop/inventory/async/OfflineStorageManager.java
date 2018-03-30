@@ -19,14 +19,16 @@ public interface OfflineStorageManager {
 	/**
 	 * 获取离线存储标识
 	 * @return 离线存储标识
+	 * @throws Exception
 	 */
-	Boolean getOffline();
+	Boolean getOffline() throws Exception;
 	
 	/**
 	 * 设置离线存储标识
 	 * @param offline 离线存储标识
+	 * @throws Exception
 	 */
-	void setOffline(Boolean offline);
+	void setOffline(Boolean offline) throws Exception;
 	
 	/**
 	 * 所谓的迭代器模式，什么时候用？
@@ -41,6 +43,11 @@ public interface OfflineStorageManager {
 	 * 比如有的时候，我们可能还需要基于es、redis的数据，来提供业务方迭代式访问的功能，那么此时就只能我们自己
 	 * 去封装迭代器，在里面封装基于es、redis的迭代访问数据的逻辑
 	 * 
+	 */
+	/**
+	 * 获取迭代器
+	 * @return 迭代器
+	 * @throws Exception
 	 */
 	OfflineStorageIterator iterator() throws Exception;
 	

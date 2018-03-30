@@ -53,6 +53,7 @@ public abstract class AbstractStockUpdater implements StockUpdater {
 	/**
 	 * 更新商品库存
 	 */
+	@Override
 	public Boolean updateGoodsStock() {
 		try {
 			updateSaleStockQuantity();
@@ -69,16 +70,19 @@ public abstract class AbstractStockUpdater implements StockUpdater {
 	
 	/**
 	 * 更新商品的销售库存
+	 * @throws Exception
 	 */
 	protected abstract void updateSaleStockQuantity() throws Exception;
 	
 	/**
 	 * 更新商品的锁定库存
+	 * @throws Exception
 	 */
 	protected abstract void updateLockedStockQuantity() throws Exception;
 	
 	/**
 	 * 更新商品的已销售库存
+	 * @throws Exception
 	 */
 	protected abstract void updateSaledStockQuantity() throws Exception;
 	

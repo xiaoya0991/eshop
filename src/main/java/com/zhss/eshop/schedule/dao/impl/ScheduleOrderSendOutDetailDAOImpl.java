@@ -35,6 +35,7 @@ public class ScheduleOrderSendOutDetailDAOImpl implements ScheduleOrderSendOutDe
 	 * @param sendOutDetails 发货明细
 	 * @throws Exception
 	 */
+	@Override
 	public void batchSave(Long orderInfoId, Long orderItemId,
 			List<ScheduleOrderSendOutDetailDO> sendOutDetails) throws Exception {
 		for(ScheduleOrderSendOutDetailDO sendOutDetail : sendOutDetails) {
@@ -52,6 +53,7 @@ public class ScheduleOrderSendOutDetailDAOImpl implements ScheduleOrderSendOutDe
 	 * @param orderItemId 订单条目id
 	 * @return
 	 */
+	@Override
 	public List<ScheduleOrderSendOutDetailDO> listByOrderItemId(Long orderInfoId, 
 			Long orderItemId) throws Exception {
 		return sendOutDetailMapper.listByOrderItemId(orderInfoId, orderItemId);
@@ -62,6 +64,7 @@ public class ScheduleOrderSendOutDetailDAOImpl implements ScheduleOrderSendOutDe
 	 * @param orderInfoId 订单id
 	 * @param orderItemId 订单条目id
 	 */
+	@Override
 	public void removeByOrderItemId(Long orderInfoId, 
 			Long orderItemId) throws Exception {
 		sendOutDetailMapper.removeByOrderItemId(orderInfoId, orderItemId);

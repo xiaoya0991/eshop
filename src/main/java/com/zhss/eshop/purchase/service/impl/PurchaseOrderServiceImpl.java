@@ -25,7 +25,7 @@ import com.zhss.eshop.schedule.service.ScheduleService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
 	/**
@@ -48,6 +48,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	 * 新增采购单
 	 * @param purchaseOrder 采购单
 	 */
+	@Override
 	public void save(PurchaseOrderDTO purchaseOrder) throws Exception {
 		Long purchaseOrderId = purchaseOrderDAO.save(
 				purchaseOrder.clone(PurchaseOrderDO.class));  
@@ -60,6 +61,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	 * @return 采购单
 	 * @throws Exception
 	 */
+	@Override
 	public List<PurchaseOrderDTO> listByPage(
 			PurchaseOrderQuery query) throws Exception {
 		return ObjectUtils.convertList(
@@ -72,6 +74,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	 * @return 采购单
 	 * @throws Exception
 	 */
+	@Override
 	public PurchaseOrderDTO getById(Long id) throws Exception {
 		PurchaseOrderDTO purchaseOrder = purchaseOrderDAO.getById(id)
 				.clone(PurchaseOrderDTO.class); 
@@ -89,6 +92,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	 * @param purchaseOrder 采购单
 	 * @throws Exception
 	 */
+	@Override
 	public void update(PurchaseOrderDTO purchaseOrder) throws Exception {
 		purchaseOrder.setStatus(PurchaseOrderStatus.EDITING);
 		purchaseOrderDAO.update(purchaseOrder.clone(PurchaseOrderDO.class)); 
@@ -112,6 +116,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	 * @param id 采购单id
 	 * @throws Exception
 	 */
+	@Override
 	public void submitApprove(Long id) throws Exception {
 		purchaseOrderDAO.updateStatus(id, PurchaseOrderStatus.WAIT_FOR_APPROVE); 
 	}
@@ -122,6 +127,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	 * @param approveResult 审核结果
 	 * @throws Exception
 	 */
+	@Override
 	public void approve(Long id, Integer approveResult) throws Exception {
 		if(PurchaseOrderApproveResult.REJECTED.equals(approveResult)) {
 			purchaseOrderDAO.updateStatus(id, PurchaseOrderStatus.EDITING); 
@@ -138,6 +144,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	 * @param status 采购单状态
 	 * @throws Exception
 	 */
+	@Override
 	public void updateStatus(Long id, Integer status) throws Exception {
 		purchaseOrderDAO.updateStatus(id, status); 
 	}

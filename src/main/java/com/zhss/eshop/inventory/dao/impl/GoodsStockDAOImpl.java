@@ -1,7 +1,5 @@
 package com.zhss.eshop.inventory.dao.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,8 +15,6 @@ import com.zhss.eshop.inventory.domain.GoodsStockDO;
 @Repository
 public class GoodsStockDAOImpl implements GoodsStockDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(GoodsStockDAOImpl.class);
-	
 	/**
 	 * 商品库存管理模块的mapper组件
 	 */
@@ -30,41 +26,27 @@ public class GoodsStockDAOImpl implements GoodsStockDAO {
 	 * @param goodsSkuId 商品sku id
 	 * @return 商品库存
 	 */
-	public GoodsStockDO getGoodsStockBySkuId(Long goodsSkuId) {
-		try {
-			return goodsStockMapper.getGoodsStockBySkuId(goodsSkuId);
-		} catch (Exception e) {
-			logger.error("error", e); 
-		}
-		return null;
+	@Override
+	public GoodsStockDO getGoodsStockBySkuId(Long goodsSkuId) throws Exception {
+		return goodsStockMapper.getGoodsStockBySkuId(goodsSkuId);
 	}
 	
 	/**
 	 * 新增商品库存
 	 * @param goodsStockDO 商品库存DO对象
 	 */
-	public Boolean saveGoodsStock(GoodsStockDO goodsStockDO) {
-		try {
-			goodsStockMapper.saveGoodsStock(goodsStockDO);
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
-		return true;
+	@Override
+	public void saveGoodsStock(GoodsStockDO goodsStockDO) throws Exception {
+		goodsStockMapper.saveGoodsStock(goodsStockDO);
 	}
 	
 	/**
 	 * 更新商品库存
 	 * @param goodsStockDO 商品库存DO对象
 	 */
-	public Boolean updateGoodsStock(GoodsStockDO goodsStockDO) {
-		try {
-			goodsStockMapper.updateGoodsStock(goodsStockDO);
-		} catch (Exception e) {
-			logger.error("error", e); 
-			return false;
-		}
-		return true;
+	@Override
+	public void updateGoodsStock(GoodsStockDO goodsStockDO) throws Exception {
+		goodsStockMapper.updateGoodsStock(goodsStockDO);
 	}
 
 }

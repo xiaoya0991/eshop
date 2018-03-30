@@ -40,24 +40,36 @@ public class StockUpdateResult {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		StockUpdateResult other = (StockUpdateResult) obj;
 		if (messageId == null) {
-			if (other.messageId != null)
+			if (other.messageId != null) {
 				return false;
-		} else if (!messageId.equals(other.messageId))
+			}
+		} else if (!messageId.equals(other.messageId)) {
 			return false;
+		}
 		if (result == null) {
-			if (other.result != null)
+			if (other.result != null) {
 				return false;
-		} else if (!result.equals(other.result))
+			}
+		} else if (!result.equals(other.result)) {
 			return false;
+		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "StockUpdateResult [messageId=" + messageId + ", result=" + result + "]";
 	}
 	
 }

@@ -198,93 +198,128 @@ public class SupplierDO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SupplierDO other = (SupplierDO) obj;
 		if (bankAccount == null) {
-			if (other.bankAccount != null)
+			if (other.bankAccount != null) {
 				return false;
-		} else if (!bankAccount.equals(other.bankAccount))
+			}
+		} else if (!bankAccount.equals(other.bankAccount)) {
 			return false;
+		}
 		if (bankAccountHolder == null) {
-			if (other.bankAccountHolder != null)
+			if (other.bankAccountHolder != null) {
 				return false;
-		} else if (!bankAccountHolder.equals(other.bankAccountHolder))
+			}
+		} else if (!bankAccountHolder.equals(other.bankAccountHolder)) {
 			return false;
+		}
 		if (bankName == null) {
-			if (other.bankName != null)
+			if (other.bankName != null) {
 				return false;
-		} else if (!bankName.equals(other.bankName))
+			}
+		} else if (!bankName.equals(other.bankName)) {
 			return false;
+		}
 		if (businessScope == null) {
-			if (other.businessScope != null)
+			if (other.businessScope != null) {
 				return false;
-		} else if (!businessScope.equals(other.businessScope))
+			}
+		} else if (!businessScope.equals(other.businessScope)) {
 			return false;
+		}
 		if (companyAddress == null) {
-			if (other.companyAddress != null)
+			if (other.companyAddress != null) {
 				return false;
-		} else if (!companyAddress.equals(other.companyAddress))
+			}
+		} else if (!companyAddress.equals(other.companyAddress)) {
 			return false;
+		}
 		if (companyName == null) {
-			if (other.companyName != null)
+			if (other.companyName != null) {
 				return false;
-		} else if (!companyName.equals(other.companyName))
+			}
+		} else if (!companyName.equals(other.companyName)) {
 			return false;
+		}
 		if (contactor == null) {
-			if (other.contactor != null)
+			if (other.contactor != null) {
 				return false;
-		} else if (!contactor.equals(other.contactor))
+			}
+		} else if (!contactor.equals(other.contactor)) {
 			return false;
+		}
 		if (contactorPhoneNumber == null) {
-			if (other.contactorPhoneNumber != null)
+			if (other.contactorPhoneNumber != null) {
 				return false;
-		} else if (!contactorPhoneNumber.equals(other.contactorPhoneNumber))
+			}
+		} else if (!contactorPhoneNumber.equals(other.contactorPhoneNumber)) {
 			return false;
+		}
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (invoiceTitle == null) {
-			if (other.invoiceTitle != null)
+			if (other.invoiceTitle != null) {
 				return false;
-		} else if (!invoiceTitle.equals(other.invoiceTitle))
+			}
+		} else if (!invoiceTitle.equals(other.invoiceTitle)) {
 			return false;
+		}
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null) {
 				return false;
-		} else if (!name.equals(other.name))
+			}
+		} else if (!name.equals(other.name)) {
 			return false;
+		}
 		if (remark == null) {
-			if (other.remark != null)
+			if (other.remark != null) {
 				return false;
-		} else if (!remark.equals(other.remark))
+			}
+		} else if (!remark.equals(other.remark)) {
 			return false;
+		}
 		if (settlementPeriod == null) {
-			if (other.settlementPeriod != null)
+			if (other.settlementPeriod != null) {
 				return false;
-		} else if (!settlementPeriod.equals(other.settlementPeriod))
+			}
+		} else if (!settlementPeriod.equals(other.settlementPeriod)) {
 			return false;
+		}
 		if (taxpayerId == null) {
-			if (other.taxpayerId != null)
+			if (other.taxpayerId != null) {
 				return false;
-		} else if (!taxpayerId.equals(other.taxpayerId))
+			}
+		} else if (!taxpayerId.equals(other.taxpayerId)) {
 			return false;
+		}
 		return true;
 	}
 	

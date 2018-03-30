@@ -32,6 +32,7 @@ public class StockUpdateQueueImpl implements StockUpdateQueue {
 	 * @param message 消息
 	 * @throws Exception
 	 */
+	@Override
 	public void put(StockUpdateMessage message) throws Exception {
 		// 每次要往内存队列放消息之前，先检查一下离线存储标识
 		// 如果触发了离线存储，直接就往离线存储去写入，不要走后面的逻辑了
@@ -62,6 +63,7 @@ public class StockUpdateQueueImpl implements StockUpdateQueue {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public StockUpdateMessage take() throws Exception {	
 		return queue.take();
 	}
@@ -71,6 +73,7 @@ public class StockUpdateQueueImpl implements StockUpdateQueue {
 	 * @param message
 	 * @throws Exception
 	 */
+	@Override
 	public void putDirect(StockUpdateMessage message) throws Exception {
 		queue.put(message); 
 	}
@@ -80,6 +83,7 @@ public class StockUpdateQueueImpl implements StockUpdateQueue {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Integer size() throws Exception {
 		return queue.size();
 	}

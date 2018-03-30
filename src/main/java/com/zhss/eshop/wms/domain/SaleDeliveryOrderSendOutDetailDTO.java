@@ -89,43 +89,58 @@ public class SaleDeliveryOrderSendOutDetailDTO extends AbstractObject {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SaleDeliveryOrderSendOutDetailDTO other = (SaleDeliveryOrderSendOutDetailDTO) obj;
 		if (gmtCreate == null) {
-			if (other.gmtCreate != null)
+			if (other.gmtCreate != null) {
 				return false;
-		} else if (!gmtCreate.equals(other.gmtCreate))
+			}
+		} else if (!gmtCreate.equals(other.gmtCreate)) {
 			return false;
+		}
 		if (gmtModified == null) {
-			if (other.gmtModified != null)
+			if (other.gmtModified != null) {
 				return false;
-		} else if (!gmtModified.equals(other.gmtModified))
+			}
+		} else if (!gmtModified.equals(other.gmtModified)) {
 			return false;
+		}
 		if (goodsAllocationStockDetailId == null) {
-			if (other.goodsAllocationStockDetailId != null)
+			if (other.goodsAllocationStockDetailId != null) {
 				return false;
-		} else if (!goodsAllocationStockDetailId.equals(other.goodsAllocationStockDetailId))
+			}
+		} else if (!goodsAllocationStockDetailId.equals(other.goodsAllocationStockDetailId)) {
 			return false;
+		}
 		if (id == null) {
-			if (other.id != null)
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		if (saleDeliveryOrderItemId == null) {
-			if (other.saleDeliveryOrderItemId != null)
+			if (other.saleDeliveryOrderItemId != null) {
 				return false;
-		} else if (!saleDeliveryOrderItemId.equals(other.saleDeliveryOrderItemId))
+			}
+		} else if (!saleDeliveryOrderItemId.equals(other.saleDeliveryOrderItemId)) {
 			return false;
+		}
 		if (sendOutCount == null) {
-			if (other.sendOutCount != null)
+			if (other.sendOutCount != null) {
 				return false;
-		} else if (!sendOutCount.equals(other.sendOutCount))
+			}
+		} else if (!sendOutCount.equals(other.sendOutCount)) {
 			return false;
+		}
 		return true;
 	}
 	

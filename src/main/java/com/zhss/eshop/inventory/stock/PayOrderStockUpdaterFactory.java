@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.inventory.dao.GoodsStockDAO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.inventory.domain.GoodsStockDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
@@ -63,7 +64,7 @@ public class PayOrderStockUpdaterFactory<T>
 			T parameter) throws Exception {
 		OrderInfoDTO orderInfoDTO = (OrderInfoDTO) parameter;
 		
-		Map<Long, OrderItemDTO> orderItemDTOMap = new HashMap<Long, OrderItemDTO>();
+		Map<Long, OrderItemDTO> orderItemDTOMap = new HashMap<Long, OrderItemDTO>(CollectionSize.DEFAULT);
 		for(OrderItemDTO orderItemDTO : orderInfoDTO.getOrderItems()) {
 			orderItemDTOMap.put(orderItemDTO.getGoodsSkuId(), orderItemDTO);
 		}

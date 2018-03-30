@@ -69,7 +69,7 @@ public interface StockUpdateMessageMapper {
 	
 	/**
 	 * 批量删除库存更新消息
-	 * @param ids 库存更新消息id集合字符串
+	 * @param messageIds 库存更新消息id集合字符串
 	 */
 	@Delete("DELETE FROM inventory_offline_stock_update_message WHERE message_id IN (${messageIds})")  
 	void removeByBatch(@Param("messageId") String messageIds);

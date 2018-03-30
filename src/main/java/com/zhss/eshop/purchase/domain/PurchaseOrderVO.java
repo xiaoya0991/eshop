@@ -134,4 +134,12 @@ public class PurchaseOrderVO extends AbstractObject {
 		this.items = items;
 	}
 	
+	@Override
+	public String toString() {
+		return "PurchaseOrderVO [id=" + id + ", supplierId=" + supplierId + ", expectArrivalTime=" + expectArrivalTime
+				+ ", contactor=" + contactor + ", contactorPhoneNumber=" + contactorPhoneNumber + ", contactorEmail="
+				+ contactorEmail + ", remark=" + remark + ", purchaser=" + purchaser + ", status=" + status
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", items=" + items + "]";
+	}
+	
 }

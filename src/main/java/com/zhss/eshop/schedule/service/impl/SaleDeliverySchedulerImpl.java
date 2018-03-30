@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.order.domain.OrderItemDTO;
 import com.zhss.eshop.schedule.dao.ScheduleGoodsAllocationStockDetailDAO;
@@ -51,6 +52,7 @@ public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
 	 * @return 调度结果
 	 * @throws Exception
 	 */
+	@Override
 	public SaleDeliveryScheduleResult schedule(OrderItemDTO orderItem) throws Exception {
 		// 构造好需要创建的销售出库单条目
 		SaleDeliveryScheduleResult scheduleResult = new SaleDeliveryScheduleResult();
@@ -88,7 +90,7 @@ public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
 		 */
 		
 		Map<Long, ScheduleOrderPickingItemDTO> pickingItems = 
-				new HashMap<Long, ScheduleOrderPickingItemDTO>();
+				new HashMap<Long, ScheduleOrderPickingItemDTO>(CollectionSize.DEFAULT);
 		
 		/**
 		 * 
@@ -196,6 +198,7 @@ public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
 	 * @return 调度结果
 	 * @throws Exception
 	 */
+	@Override
 	public SaleDeliveryScheduleResult getScheduleResult(OrderItemDTO orderItem) throws Exception {
 		List<ScheduleOrderPickingItemDO> pickingItems = pickingItemDAO
 				.listByOrderItemId(orderItem.getOrderInfoId(), orderItem.getId());

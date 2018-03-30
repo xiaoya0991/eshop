@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.inventory.dao.GoodsStockDAO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.inventory.domain.GoodsStockDO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
@@ -74,7 +75,7 @@ public class ReturnGoodsInputStockUpdaterFactory<T>
 				returnGoodsInputOrderDTO.getItems();
 		
 		Map<Long, ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItemDTOMap = 
-				new HashMap<Long, ReturnGoodsInputOrderItemDTO>();
+				new HashMap<Long, ReturnGoodsInputOrderItemDTO>(CollectionSize.DEFAULT);
 		
 		if(returnGoodsInputOrderItemDTOs != null && returnGoodsInputOrderItemDTOs.size() > 0) {
 			for(ReturnGoodsInputOrderItemDTO returnGoodsInputOrderItemDTO : returnGoodsInputOrderItemDTOs) {

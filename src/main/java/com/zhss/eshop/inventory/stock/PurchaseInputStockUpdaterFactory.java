@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.inventory.dao.GoodsStockDAO;
+import com.zhss.eshop.common.constant.CollectionSize;
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.inventory.domain.GoodsStockDO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
@@ -74,7 +75,7 @@ public class PurchaseInputStockUpdaterFactory<T>
 				purchaseInputOrderDTO.getItems();
 		
 		Map<Long, PurchaseInputOrderItemDTO> purchaseInputOrderItemDTOMap = 
-				new HashMap<Long, PurchaseInputOrderItemDTO>();
+				new HashMap<Long, PurchaseInputOrderItemDTO>(CollectionSize.DEFAULT);
 		
 		if(purchaseInputOrderItemDTOs != null && purchaseInputOrderItemDTOs.size() > 0) {
 			for(PurchaseInputOrderItemDTO purchaseInputOrderItemDTO : purchaseInputOrderItemDTOs) {

@@ -83,4 +83,11 @@ public class GoodsStockDO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsStockDO [id=" + id + ", goodsSkuId=" + goodsSkuId + ", availableStockQuantity="
+				+ availableStockQuantity + ", lockedStockQuantity=" + lockedStockQuantity + ", outputStockQuantity="
+				+ outputStockQuantity + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

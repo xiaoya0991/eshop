@@ -30,6 +30,7 @@ public class PayApiImpl implements PayApi {
 	 * @return 支付二维码
 	 * @throws Exception
 	 */
+	@Override
 	public String getQrCode(Integer transactionChannel, 
 			String orderNo, Double totalAmount) throws Exception {
 		// 根据交易渠道自己选择调用了远程的支付宝/微信支付的接口，同时指定了二维码的有效期是30分钟
@@ -43,6 +44,7 @@ public class PayApiImpl implements PayApi {
 	 * @return 支付状态
 	 * @throws Exception
 	 */
+	@Override
 	public QueryPayStatusResponse queryPayStatus(Integer transactionChannel, 
 			String orderNo) throws Exception {
 		// 根据交易渠道选择调用支付宝或者微信支付的远程接口，根据订单号去查询支付状态
@@ -66,6 +68,7 @@ public class PayApiImpl implements PayApi {
 	 * @return 退款结果
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean refund(Integer transactionChannel, 
 			String orderNo, Double refundAmount) throws Exception {
 		// 根据交易渠道选择支付宝或者微信的api接口，去发送请求，申请退款

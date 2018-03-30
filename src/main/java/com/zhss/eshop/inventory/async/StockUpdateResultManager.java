@@ -18,6 +18,7 @@ public interface StockUpdateResultManager {
 	/**
 	 * 获取商品库存更新结果的观察目标
 	 * @param messageId 商品库存更新消息id
+	 * @param result 结果
 	 * @return 商品库存更新结果的观察目标
 	 */
 	void inform(String messageId, Boolean result);

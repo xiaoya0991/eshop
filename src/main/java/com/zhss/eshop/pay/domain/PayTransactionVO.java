@@ -143,4 +143,13 @@ public class PayTransactionVO extends AbstractObject {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "PayTransactionVO [id=" + id + ", orderInfoId=" + orderInfoId + ", orderNo=" + orderNo
+				+ ", payableAmount=" + payableAmount + ", userAccountId=" + userAccountId + ", userPayAccount="
+				+ userPayAccount + ", transactionChannel=" + transactionChannel + ", transactionNumber="
+				+ transactionNumber + ", finishPayTime=" + finishPayTime + ", responseCode=" + responseCode
+				+ ", status=" + status + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

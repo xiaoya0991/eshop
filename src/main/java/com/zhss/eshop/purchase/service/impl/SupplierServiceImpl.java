@@ -19,7 +19,7 @@ import com.zhss.eshop.purchase.service.SupplierService;
  *
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class SupplierServiceImpl implements SupplierService {
 	
 	/**
@@ -32,6 +32,7 @@ public class SupplierServiceImpl implements SupplierService {
 	 * 新增供应商
 	 * @param supplier 供应商
 	 */
+	@Override
 	public void save(SupplierDTO supplier) throws Exception {
 		supplierDAO.save(supplier.clone(SupplierDO.class));   
 	}
@@ -41,6 +42,7 @@ public class SupplierServiceImpl implements SupplierService {
 	 * @param query 供应商查询条件
 	 * @return 供应商
 	 */
+	@Override
 	public List<SupplierDTO> listByPage(SupplierQuery query) throws Exception {
 		return ObjectUtils.convertList(supplierDAO.listByPage(query), SupplierDTO.class);
 	}
@@ -50,6 +52,7 @@ public class SupplierServiceImpl implements SupplierService {
 	 * @param id 供应商id 
 	 * @return 供应商
 	 */
+	@Override
 	public SupplierDTO getById(Long id) throws Exception {
 		return supplierDAO.getById(id).clone(SupplierDTO.class);
 	}
@@ -59,6 +62,7 @@ public class SupplierServiceImpl implements SupplierService {
 	 * @param settlementPeriod 结算周期
 	 * @return 供应商
 	 */
+	@Override
 	public List<SupplierDTO> listBySettlementPeriod(Integer settlementPeriod) throws Exception {
 		return ObjectUtils.convertList(
 				supplierDAO.listBySettlementPeriod(settlementPeriod), 

@@ -10,6 +10,7 @@ public interface ScheduleStockUpdater {
 	/**
 	 * 更新商品库存
 	 * @return 处理结果
+	 * @throws Exception
 	 */
 	Boolean update() throws Exception;
 	

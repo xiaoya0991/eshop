@@ -81,4 +81,11 @@ public class StockUpdateMessageDO {
 		this.gmtModified = gmtModified;
 	}
 	
+	@Override
+	public String toString() {
+		return "StockUpdateMessageDO [id=" + id + ", messageId=" + messageId + ", operation=" + operation
+				+ ", parameter=" + parameter + ", paramterClazz=" + paramterClazz + ", gmtCreate=" + gmtCreate
+				+ ", gmtModified=" + gmtModified + "]";
+	}
+	
 }

@@ -59,6 +59,7 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 * @param order 订单
 	 * @return 销售出库单builder
 	 */
+	@Override
 	public SaleDeliveryOrderBuilder setOrderRelatedData(
 			OrderInfoDTO order) throws Exception {
 		saleDeliveryOrder.setOrderId(order.getId()); 
@@ -71,6 +72,7 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 * @param orderItems 订单条目
 	 * @return 销售出库单builder
 	 */
+	@Override
 	public SaleDeliveryOrderBuilder createSaleDeliveryOrderItems(
 			List<OrderItemDTO> orderItems) throws Exception {
 		List<SaleDeliveryOrderItemDTO> saleDeliveryOrderItems = 
@@ -104,6 +106,7 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 * @param order 订单
 	 * @return 销售出库单builder
 	 */
+	@Override
 	public SaleDeliveryOrderBuilder createSendOutOrder(
 			OrderInfoDTO order) throws Exception {
 		SendOutOrderDTO sendOutOrder = new SendOutOrderDTO();
@@ -131,6 +134,7 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 * @param order 订单
 	 * @return 销售出库单builder
 	 */
+	@Override
 	public SaleDeliveryOrderBuilder createLogisticOrder(
 			OrderInfoDTO order) throws Exception {
 		LogisticOrderDTO logisticOrder = logisticsService.applyLogisticOrder(order);
@@ -142,6 +146,7 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 * 初始化销售出库单的状态
 	 * @return 销售出库单builder
 	 */
+	@Override
 	public SaleDeliveryOrderBuilder initStatus() throws Exception {
 		saleDeliveryOrder.setStatus(SaleDeliveryOrderStatus.EDITING);  
 		return this;
@@ -151,6 +156,7 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 * 初始化时间相关的字段
 	 * @return 销售出库单builder
 	 */
+	@Override
 	public SaleDeliveryOrderBuilder initTimes() throws Exception {
 		saleDeliveryOrder.setGmtCreate(dateProvider.getCurrentTime()); 
 		saleDeliveryOrder.setGmtModified(dateProvider.getCurrentTime()); 
@@ -161,6 +167,7 @@ public class DefaultSaleDeliveryOrderBuilder implements SaleDeliveryOrderBuilder
 	 * 创建最终构造好的销售出库单
 	 * @return 销售出库单
 	 */
+	@Override
 	public SaleDeliveryOrderDTO create() throws Exception {
 		return saleDeliveryOrder;
 	}
