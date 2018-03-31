@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +45,7 @@ public class ShoppingCartDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_shopping_cart.sql"})  
 	public void testSaveShoppingCart() throws Exception {
 		Long userAccountId = 1L;
 		ShoppingCartDO shoppingCartDO = createShoppingCart(userAccountId);
@@ -57,6 +59,7 @@ public class ShoppingCartDaoTest {
 	 * 测试根据用户账号id查询购物车
 	 */
 	@Test
+	@Sql({"clean_shopping_cart.sql"})  
 	public void testGetShoppingCartByUserAccountId() throws Exception {
 		Long userAccountId = 1L;
 		ShoppingCartDO shoppingCartDO = createShoppingCart(userAccountId);
