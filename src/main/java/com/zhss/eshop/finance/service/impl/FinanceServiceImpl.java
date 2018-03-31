@@ -1,0 +1,39 @@
+package com.zhss.eshop.finance.service.impl;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.zhss.eshop.finance.service.FinanceService;
+import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
+import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
+
+/**
+ * 财务中心接口
+ * @author zhonghuashishan
+ *
+ */
+@Service
+@Transactional(rollbackFor = Exception.class)
+public class FinanceServiceImpl implements FinanceService {
+
+	/**
+	 * 创建采购结算单
+	 * @param purchaseInputOrderDTO 采购入库单DTO
+	 * @return 处理结果
+	 */
+	@Override
+	public Boolean createPurchaseSettlementOrder(PurchaseInputOrderDTO purchaseInputOrder) {
+		return true;
+	}
+	
+	/**
+	 * 给物流公司打款
+	 * @param saleDeliveryOrderDTO 销售出库单
+	 * @return 处理结果
+	 */
+	@Override
+	public Boolean payForLogisticsCompany(SaleDeliveryOrderDTO saleDeliveryOrder) {
+		return true;
+	}
+	
+}

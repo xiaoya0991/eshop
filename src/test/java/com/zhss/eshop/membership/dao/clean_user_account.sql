@@ -1,0 +1,1 @@
+DELETE FROM membership_user_account
