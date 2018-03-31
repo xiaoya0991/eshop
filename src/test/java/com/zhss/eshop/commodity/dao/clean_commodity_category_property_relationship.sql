@@ -1,0 +1,1 @@
+DELETE FROM commodity_category_property_relationship

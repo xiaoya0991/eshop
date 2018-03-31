@@ -81,12 +81,11 @@ public class SaleDeliveryOrderDaoTest {
 	@Test
 	@Sql({"clean_sale_delivery_order.sql"})    
 	public void testListByPage() throws Exception {
-		Long orderId = 1L;
 		Long userAccountId = 1L;
 		
 		Integer count = 30;
-		Map<Long, SaleDeliveryOrderDO> expectedSaleDeliveryOrders = createSaleDeliveryOrderMap(
-				count, orderId, userAccountId);
+		Map<Long, SaleDeliveryOrderDO> expectedSaleDeliveryOrders = 
+				createSaleDeliveryOrderMap(count, userAccountId);
 		processExpectedOrderForListByPage(expectedSaleDeliveryOrders); 
 		
 		Integer offset = 10;
@@ -183,13 +182,12 @@ public class SaleDeliveryOrderDaoTest {
 	 * @return 销售出库单map
 	 * @throws Exception
 	 */
-	private Map<Long, SaleDeliveryOrderDO> createSaleDeliveryOrderMap(Integer count,
-			Long orderId, Long userAccountId) throws Exception {
+	private Map<Long, SaleDeliveryOrderDO> createSaleDeliveryOrderMap(
+			Integer count, Long userAccountId) throws Exception {
 		Map<Long, SaleDeliveryOrderDO> saleDeliveryOrderMap = 
-				new HashMap<Long, SaleDeliveryOrderDO>(CollectionSize.DEFAULT);
+				new HashMap<Long, SaleDeliveryOrderDO>(CollectionSize.DEFAULT); 
 	
-		List<SaleDeliveryOrderDO> saleDeliveryOrders = createSaleDeliveryOrders(
-				count, orderId, userAccountId);
+		List<SaleDeliveryOrderDO> saleDeliveryOrders = createSaleDeliveryOrders(count, userAccountId);
 		for(SaleDeliveryOrderDO saleDeliveryOrder : saleDeliveryOrders) {
 			saleDeliveryOrderMap.put(saleDeliveryOrder.getId(), saleDeliveryOrder);
 		}
@@ -203,11 +201,11 @@ public class SaleDeliveryOrderDaoTest {
 	 * @return 销售出库单集合
 	 * @throws Exception
 	 */
-	private List<SaleDeliveryOrderDO> createSaleDeliveryOrders(Integer count, 
-			Long orderId, Long userAccountId) throws Exception {
+	private List<SaleDeliveryOrderDO> createSaleDeliveryOrders(
+			Integer count, Long userAccountId) throws Exception {
 		List<SaleDeliveryOrderDO> saleDeliveryOrders = new ArrayList<SaleDeliveryOrderDO>();
 		for(int i = 0; i < count; i++) {
-			saleDeliveryOrders.add(createSaleDeliveryOrder(orderId, userAccountId));
+			saleDeliveryOrders.add(createSaleDeliveryOrder((long)i, userAccountId));
 		}
 		return saleDeliveryOrders;
 	}

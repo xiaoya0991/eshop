@@ -1,0 +1,1 @@
+DELETE FROM commodity_property_group_relationship

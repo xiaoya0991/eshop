@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +49,7 @@ public class PropertyGroupRelationshipDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_property_group_relationship.sql"})  
 	public void testSave() throws Exception {
 		Long propertyGroupId = 1L;
 		PropertyGroupRelationshipDO relation = createRelation(propertyGroupId);
@@ -60,6 +62,7 @@ public class PropertyGroupRelationshipDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_property_group_relationship.sql"})  
 	public void testListByPropertyGroupId() throws Exception {
 		Long propertyGroupId = 1L;
 		Integer relationCount = 5;
@@ -77,6 +80,7 @@ public class PropertyGroupRelationshipDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_property_group_relationship.sql"})  
 	public void testRemoveByPropertyGroupId() throws Exception {
 		Integer relationCount = 5;
 		Long propertyGroupId = 1L;

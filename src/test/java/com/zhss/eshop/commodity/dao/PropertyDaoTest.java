@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,6 +50,7 @@ public class PropertyDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_property.sql"})
 	public void testSaveProperty() throws Exception {
 		String inputValues = "红色,蓝色,白色";
 		String propertyDesc = "手机机身的颜色";
@@ -63,6 +65,7 @@ public class PropertyDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_property.sql"})
 	public void testListPropertiesByPage() throws Exception {
 		// 模拟一个分页查询的场景
 		// 假设每页的数据是2条，我们来构造3页的数据，一共是6条，其中5条都符合一个PropertyName的查询条件
@@ -108,6 +111,7 @@ public class PropertyDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_property.sql"})
 	public void testGetPropertyById() throws Exception {
 		PropertyDO propertyDO = createPropertyDO("红色,蓝色,白色", "手机机身的颜色", "机身颜色1");
 		PropertyDO resultPropertyDO = propertyDAO.getPropertyById(propertyDO.getId());
@@ -119,6 +123,7 @@ public class PropertyDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_property.sql"})
 	public void testUpdateProperty() throws Exception {
 		PropertyDO propertyDO = createPropertyDO("红色,蓝色,白色", "手机机身的颜色", "机身颜色1");
 		
