@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +44,7 @@ public class CommentAggregateDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_comment_aggregate.sql"})
 	public void testSaveCommentAggregate() throws Exception {
 		Long goodsId = 1L;
 		CommentAggregateDO commentAggregateDO = createCommentAggregateDO(goodsId); 
@@ -55,6 +57,7 @@ public class CommentAggregateDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_comment_aggregate.sql"})
 	public void testGetCommentAggregateByGoodsId() throws Exception {
 		Long goodsId = 1L;
 		CommentAggregateDO commentAggregateDO = createCommentAggregateDO(goodsId); 
@@ -68,6 +71,7 @@ public class CommentAggregateDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_comment_aggregate.sql"})
 	public void testUpdateCommentAggregate() throws Exception {
 		Long goodsId = 1L;
 		CommentAggregateDO commentAggregateDO = createCommentAggregateDO(goodsId); 
