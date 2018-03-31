@@ -55,7 +55,7 @@ public class SaleDeliveryOrderItemDTO extends AbstractObject {
 	/**
 	 * 商品长度
 	 */
-	private Double goodsLenght;
+	private Double goodsLength;
 	/**
 	 * 商品宽度
 	 */
@@ -141,11 +141,11 @@ public class SaleDeliveryOrderItemDTO extends AbstractObject {
 	public void setPromotionActivityId(Long promotionActivityId) {
 		this.promotionActivityId = promotionActivityId;
 	}
-	public Double getGoodsLenght() {
-		return goodsLenght;
+	public Double getGoodsLength() {
+		return goodsLength;
 	}
-	public void setGoodsLenght(Double goodsLenght) {
-		this.goodsLenght = goodsLenght;
+	public void setGoodsLength(Double goodsLength) {
+		this.goodsLength = goodsLength;
 	}
 	public Double getGoodsWidth() {
 		return goodsWidth;
@@ -189,8 +189,8 @@ public class SaleDeliveryOrderItemDTO extends AbstractObject {
 		return "SaleDeliveryOrderItemDTO [id=" + id + ", saleDeliveryOrderId=" + saleDeliveryOrderId + ", goodsSkuId="
 				+ goodsSkuId + ", goodsSkuCode=" + goodsSkuCode + ", goodsName=" + goodsName + ", saleProperties="
 				+ saleProperties + ", goodsGrossWeight=" + goodsGrossWeight + ", purchaseQuantity=" + purchaseQuantity
-				+ ", purchasePrice=" + purchasePrice + ", promotionActivityId=" + promotionActivityId + ", goodsLenght="
-				+ goodsLenght + ", goodsWidth=" + goodsWidth + ", goodsHeight=" + goodsHeight + ", gmtCreate="
+				+ ", purchasePrice=" + purchasePrice + ", promotionActivityId=" + promotionActivityId + ", goodsLength="
+				+ goodsLength + ", goodsWidth=" + goodsWidth + ", goodsHeight=" + goodsHeight + ", gmtCreate="
 				+ gmtCreate + ", gmtModified=" + gmtModified + ", pickingItems=" + pickingItems + ", sendOutItems="
 				+ sendOutItems + "]";
 	}

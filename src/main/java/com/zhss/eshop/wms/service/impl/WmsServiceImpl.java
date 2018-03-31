@@ -1,21 +1,24 @@
 package com.zhss.eshop.wms.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.purchase.service.PurchaseService;
 import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
-import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
+import com.zhss.eshop.wms.constant.PurchaseInputOrderStatus;
+import com.zhss.eshop.wms.constant.WmsStockUpdateEvent;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 import com.zhss.eshop.wms.domain.SaleDeliveryOrderDTO;
+import com.zhss.eshop.wms.service.PurchaseInputOrderService;
+import com.zhss.eshop.wms.service.ReturnGoodsInputOrderService;
+import com.zhss.eshop.wms.service.SaleDeliveryOrderService;
 import com.zhss.eshop.wms.service.WmsService;
+import com.zhss.eshop.wms.stock.WmsStockUpdater;
+import com.zhss.eshop.wms.stock.WmsStockUpdaterFactory;
 
 /**
  * wms中心对外接口service组件
@@ -29,10 +32,30 @@ public class WmsServiceImpl implements WmsService {
 	private static final Logger logger = LoggerFactory.getLogger(WmsServiceImpl.class);
 	
 	/**
-	 * 日期辅助组件
+	 * 采购入库单管理service组件
 	 */
 	@Autowired
-	private DateProvider dateProvider;
+	private PurchaseInputOrderService purchaseInputOrderService;
+	/**
+	 * 销售出库单管理service组件
+	 */
+	@Autowired
+	private SaleDeliveryOrderService saleDeliveryOrderService;
+	/**
+	 * 退货入库单管理service组件
+	 */
+	@Autowired
+	private ReturnGoodsInputOrderService returnGoodsInputOrderService;
+	/**
+	 * 库存更新组件工厂
+	 */
+	@Autowired
+	private WmsStockUpdaterFactory stockUpdaterFactory;
+	/**
+	 * 采购中心
+	 */
+	@Autowired
+	private PurchaseService purchaseService;
 	
 	/**
 	 * 创建采购入库单
@@ -40,8 +63,14 @@ public class WmsServiceImpl implements WmsService {
 	 * @return 处理结果
 	 */
 	@Override
-	public Boolean createPurchaseInputOrder(PurchaseInputOrderDTO purchaseInputOrderDTO) {
-		return true;
+	public Boolean createPurchaseInputOrder(PurchaseInputOrderDTO purchaseInputOrder) {
+		try {
+			purchaseInputOrderService.save(purchaseInputOrder); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -51,7 +80,13 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Override
 	public Boolean createSaleDeliveryOrder(SaleDeliveryOrderDTO saleDeliveryOrder) {
-		return true;
+		try {
+			saleDeliveryOrderService.save(saleDeliveryOrder); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -61,7 +96,13 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Override
 	public Boolean createReturnGoodsInputOrder(ReturnGoodsInputOrderDTO returnGoodsInputOrder) {
-		return true;
+		try {
+			returnGoodsInputOrderService.save(returnGoodsInputOrder); 
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -71,7 +112,15 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Override
 	public Boolean informSubmitOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
-		return true;
+		try {
+			WmsStockUpdater stockUpdater = stockUpdaterFactory.create(
+					WmsStockUpdateEvent.SUBMIT_ORDER, scheduleResult);
+			stockUpdater.update();
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -81,7 +130,15 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Override
 	public Boolean informPayOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
-		return true;
+		try {
+			WmsStockUpdater stockUpdater = stockUpdaterFactory.create(
+					WmsStockUpdateEvent.PAY_ORDER, scheduleResult);
+			stockUpdater.update();
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -91,57 +148,15 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Override
 	public Boolean informCancelOrderEvent(SaleDeliveryScheduleResult scheduleResult) {
-		return true;
-	}
-	
-	/**
-	 * 根据商品sku id查询货位库存明细
-	 * @param goodsSkuId 商品sku id
-	 * @return 货位库存明细
-	 */
-	@Override
-	public List<GoodsAllocationStockDetailDTO> listStockDetailsByGoodsSkuId(Long goodsSkuId) {
-		List<GoodsAllocationStockDetailDTO> stockDetails = 
-				new ArrayList<GoodsAllocationStockDetailDTO>();
-		
 		try {
-			GoodsAllocationStockDetailDTO stockDetail1 = new GoodsAllocationStockDetailDTO();
-			stockDetail1.setId(1L); 
-			stockDetail1.setGoodsSkuId(goodsSkuId); 
-			stockDetail1.setGoodsAllocationId(1L); 
-			stockDetail1.setPutOnTime(dateProvider.parseDatetime("2018-01-01 10:00:00"));  
-			stockDetail1.setPutOnQuantity(40L);
-			stockDetail1.setCurrentStockQuantity(40L); 
-			stockDetail1.setGmtCreate(dateProvider.getCurrentTime()); 
-			stockDetail1.setGmtModified(dateProvider.getCurrentTime()); 
-			stockDetails.add(stockDetail1);
-			
-			GoodsAllocationStockDetailDTO stockDetail2 = new GoodsAllocationStockDetailDTO();
-			stockDetail2.setId(2L); 
-			stockDetail2.setGoodsSkuId(goodsSkuId); 
-			stockDetail2.setGoodsAllocationId(1L); 
-			stockDetail2.setPutOnTime(dateProvider.parseDatetime("2018-01-01 11:00:00"));  
-			stockDetail2.setPutOnQuantity(60L);
-			stockDetail2.setCurrentStockQuantity(60L); 
-			stockDetail2.setGmtCreate(dateProvider.getCurrentTime()); 
-			stockDetail2.setGmtModified(dateProvider.getCurrentTime()); 
-			stockDetails.add(stockDetail2);
-			
-			GoodsAllocationStockDetailDTO stockDetail3 = new GoodsAllocationStockDetailDTO();
-			stockDetail3.setId(3L); 
-			stockDetail3.setGoodsSkuId(goodsSkuId); 
-			stockDetail3.setGoodsAllocationId(2L); 
-			stockDetail3.setPutOnTime(dateProvider.parseDatetime("2018-01-01 12:00:00"));  
-			stockDetail3.setPutOnQuantity(150L);
-			stockDetail3.setCurrentStockQuantity(150L); 
-			stockDetail3.setGmtCreate(dateProvider.getCurrentTime()); 
-			stockDetail3.setGmtModified(dateProvider.getCurrentTime()); 
-			stockDetails.add(stockDetail3);
+			WmsStockUpdater stockUpdater = stockUpdaterFactory.create(
+					WmsStockUpdateEvent.CANCEL_ORDER, scheduleResult);
+			stockUpdater.update();
+			return true;
 		} catch (Exception e) {
 			logger.error("error", e); 
+			return false;
 		}
-		
-		return stockDetails;
 	}
 	
 	/**
@@ -151,7 +166,14 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Override
 	public String getLogisticCode(Long orderId) {
-		return null;
+		try {
+			SaleDeliveryOrderDTO saleDeliveryOrder = saleDeliveryOrderService.getByOrderId(orderId);
+			saleDeliveryOrder = saleDeliveryOrderService.getById(saleDeliveryOrder.getId());
+			return saleDeliveryOrder.getLogisticOrder().getLogisticCode();
+		} catch (Exception e) {
+			logger.error("error", e);
+			return null;
+		}
 	}
 	
 	/**
@@ -161,7 +183,18 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Override
 	public Boolean informCreatePurchaseSettlementOrderEvent(Long purchaseInputOrderId) {
-		return true;
+		try {
+			PurchaseInputOrderDTO purchaseInputOrder = purchaseInputOrderService.getById(
+					purchaseInputOrderId);
+			purchaseInputOrderService.updateStatus(purchaseInputOrderId, 
+					PurchaseInputOrderStatus.WAIT_FOR_SETTLEMENT);
+			purchaseService.informCreatePurchaseSettlementOrderEvent(
+					purchaseInputOrder.getPurchaseOrderId());
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -171,7 +204,18 @@ public class WmsServiceImpl implements WmsService {
 	 */
 	@Override
 	public Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseInputOrderId) {
-		return true;
+		try {
+			PurchaseInputOrderDTO purchaseInputOrder = purchaseInputOrderService.getById(
+					purchaseInputOrderId);
+			purchaseInputOrderService.updateStatus(purchaseInputOrderId, 
+					PurchaseInputOrderStatus.FINISHED);
+			purchaseService.informFinishedPurchaseSettlementOrderEvent(
+					purchaseInputOrder.getPurchaseOrderId());
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
-
+	
 }

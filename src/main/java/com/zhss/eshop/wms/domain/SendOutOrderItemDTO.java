@@ -54,7 +54,7 @@ public class SendOutOrderItemDTO extends AbstractObject {
 	/**
 	 * 商品长度
 	 */
-	private Double goodsLenght;
+	private Double goodsLength;
 	/**
 	 * 商品宽度
 	 */
@@ -120,11 +120,11 @@ public class SendOutOrderItemDTO extends AbstractObject {
 	public void setPurchasePrice(Double purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
-	public Double getGoodsLenght() {
-		return goodsLenght;
+	public Double getGoodsLength() {
+		return goodsLength;
 	}
-	public void setGoodsLenght(Double goodsLenght) {
-		this.goodsLenght = goodsLenght;
+	public void setGoodsLength(Double goodsLength) {
+		this.goodsLength = goodsLength;
 	}
 	public Double getGoodsWidth() {
 		return goodsWidth;
@@ -168,8 +168,8 @@ public class SendOutOrderItemDTO extends AbstractObject {
 		return "SendOutOrderItemDTO [id=" + id + ", sendOutOrderId=" + sendOutOrderId + ", goodsId=" + goodsId
 				+ ", goodsSkuId=" + goodsSkuId + ", goodsSkuCode=" + goodsSkuCode + ", goodsName=" + goodsName
 				+ ", saleProperties=" + saleProperties + ", goodsGrossWeight=" + goodsGrossWeight
-				+ ", purchaseQuantity=" + purchaseQuantity + ", purchasePrice=" + purchasePrice + ", goodsLenght="
-				+ goodsLenght + ", goodsWidth=" + goodsWidth + ", goodsHeight=" + goodsHeight + ", gmtCreate="
+				+ ", purchaseQuantity=" + purchaseQuantity + ", purchasePrice=" + purchasePrice + ", goodsLength="
+				+ goodsLength + ", goodsWidth=" + goodsWidth + ", goodsHeight=" + goodsHeight + ", gmtCreate="
 				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	

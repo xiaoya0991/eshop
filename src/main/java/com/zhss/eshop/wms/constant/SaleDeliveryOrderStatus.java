@@ -14,7 +14,7 @@ public class SaleDeliveryOrderStatus {
 	/**
 	 * 待审核
 	 */
-	public static final Integer APPROVING = 2;
+	public static final Integer WAIT_FOR_APPROVE = 2;
 	/**
 	 * 已完成
 	 */

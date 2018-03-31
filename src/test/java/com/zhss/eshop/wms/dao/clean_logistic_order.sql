@@ -1,0 +1,1 @@
+DELETE FROM wms_logistic_order

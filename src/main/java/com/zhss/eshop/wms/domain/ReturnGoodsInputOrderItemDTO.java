@@ -3,12 +3,14 @@ package com.zhss.eshop.wms.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.zhss.eshop.common.util.AbstractObject;
+
 /**
  * 退货入库单条目DTO
  * @author zhonghuashishan
  *
  */
-public class ReturnGoodsInputOrderItemDTO {
+public class ReturnGoodsInputOrderItemDTO extends AbstractObject {
 
 	/**
 	 * id
@@ -81,7 +83,7 @@ public class ReturnGoodsInputOrderItemDTO {
 	/**
 	 * 退货入库单商品上架条目DTO集合
 	 */
-	private List<ReturnGoodsInputOrderPutOnItemDTO> putOnItemDTO;
+	private List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems;
 	/**
 	 * 货位库存明细
 	 */
@@ -189,11 +191,11 @@ public class ReturnGoodsInputOrderItemDTO {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<ReturnGoodsInputOrderPutOnItemDTO> getPutOnItemDTO() {
-		return putOnItemDTO;
+	public List<ReturnGoodsInputOrderPutOnItemDTO> getPutOnItems() {
+		return putOnItems;
 	}
-	public void setPutOnItemDTO(List<ReturnGoodsInputOrderPutOnItemDTO> putOnItemDTO) {
-		this.putOnItemDTO = putOnItemDTO;
+	public void setPutOnItems(List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems) {
+		this.putOnItems = putOnItems;
 	}
 	public List<GoodsAllocationStockDetailDTO> getStockDetails() {
 		return stockDetails;
@@ -210,8 +212,8 @@ public class ReturnGoodsInputOrderItemDTO {
 				+ ", purchaseQuantity=" + purchaseQuantity + ", purchasePrice=" + purchasePrice
 				+ ", promotionActivityId=" + promotionActivityId + ", goodsLength=" + goodsLength + ", goodsWidth="
 				+ goodsWidth + ", goodsHeight=" + goodsHeight + ", qualifiedCount=" + qualifiedCount + ", arrivalCount="
-				+ arrivalCount + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", putOnItemDTO="
-				+ putOnItemDTO + ", stockDetails=" + stockDetails + "]";
+				+ arrivalCount + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", putOnItems="
+				+ putOnItems + ", stockDetails=" + stockDetails + "]";
 	}
 	
 }

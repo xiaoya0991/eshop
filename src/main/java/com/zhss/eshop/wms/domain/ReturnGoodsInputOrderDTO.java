@@ -3,17 +3,23 @@ package com.zhss.eshop.wms.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.zhss.eshop.common.util.AbstractObject;
+
 /**
  * 退货入库单DTO
  * @author zhonghuashishan
  *
  */
-public class ReturnGoodsInputOrderDTO {
+public class ReturnGoodsInputOrderDTO extends AbstractObject {
 
 	/**
 	 * id
 	 */
 	private Long id;
+	/**
+	 * 退货工单id
+	 */
+	private Long returnGoodsWorksheetId;
 	/**
 	 * 用户账号ID
 	 */
@@ -103,6 +109,12 @@ public class ReturnGoodsInputOrderDTO {
 	 */
 	private List<ReturnGoodsInputOrderItemDTO> items;
 	
+	public Long getReturnGoodsWorksheetId() {
+		return returnGoodsWorksheetId;
+	}
+	public void setReturnGoodsWorksheetId(Long returnGoodsWorksheetId) {
+		this.returnGoodsWorksheetId = returnGoodsWorksheetId;
+	}
 	public Long getId() {
 		return id;
 	}

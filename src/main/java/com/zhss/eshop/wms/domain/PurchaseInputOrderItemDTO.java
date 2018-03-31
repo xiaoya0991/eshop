@@ -6,7 +6,7 @@ import java.util.List;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
- * 采购入库单条目DTO类
+ * 采购入库单条目
  * @author zhonghuashishan
  *
  */

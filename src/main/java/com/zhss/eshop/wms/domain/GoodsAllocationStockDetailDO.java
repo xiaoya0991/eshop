@@ -36,6 +36,10 @@ public class GoodsAllocationStockDetailDO extends AbstractObject {
 	 */
 	private Long currentStockQuantity;
 	/**
+	 * 锁定库存
+	 */
+	private Long lockedStockQuantity;
+	/**
 	 * 创建时间
 	 */
 	private Date gmtCreate;
@@ -91,6 +95,12 @@ public class GoodsAllocationStockDetailDO extends AbstractObject {
 	}
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	public Long getLockedStockQuantity() {
+		return lockedStockQuantity;
+	}
+	public void setLockedStockQuantity(Long lockedStockQuantity) {
+		this.lockedStockQuantity = lockedStockQuantity;
 	}
 	
 	@Override
