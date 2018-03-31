@@ -467,7 +467,7 @@ public class InventoryServiceTest {
 			for(int i = 0; i < goodsSkuIds.length; i++) {
 				putOnItems.add(createReturnGoodsInputOrderPutOnItem((long)i, (long)i)); 
 			}
-			item.setPutOnItemDTO(putOnItems); 
+			item.setPutOnItems(putOnItems); 
 		}
 		
 		return returnGoodsInputOrder;
