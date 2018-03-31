@@ -33,7 +33,7 @@ public class FreightCalculatorFactory {
 	 * 默认运费计算器
 	 */
 	@Autowired
-	private DefaultFreightCalculator defaultFreightCalculator;
+	private DefaultLogisticsFreightCalculator defaultFreightCalculator;
 	
 	/**
 	 * 获取运费模板对应的运费计算器

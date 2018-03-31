@@ -12,7 +12,7 @@ import com.zhss.eshop.order.domain.OrderItemDTO;
  *
  */
 @Component
-public class DefaultFreightCalculator implements FreightCalculator {
+public class DefaultLogisticsFreightCalculator implements FreightCalculator {
 	
 	/**
 	 * 计算订单条目的运费
