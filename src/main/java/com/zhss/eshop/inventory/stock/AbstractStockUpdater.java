@@ -1,0 +1,121 @@
+package com.zhss.eshop.inventory.stock;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.zhss.eshop.inventory.constant.StockStatus;
+import com.zhss.eshop.inventory.dao.GoodsStockDAO;
+import com.zhss.eshop.common.util.DateProvider;
+import com.zhss.eshop.inventory.domain.GoodsStockDO;
+
+/**
+ * 商品库存更新命令的抽象基类
+ * @author zhonghuashishan
+ *
+ */
+public abstract class AbstractStockUpdater implements StockUpdater {
+
+	private static final Logger logger = LoggerFactory.getLogger(
+			AbstractStockUpdater.class);
+	
+	/**
+	 * 商品库存DO对象
+	 */
+	protected List<GoodsStockDO> goodsStockDOs;
+	
+	/**
+	 * 商品库存管理模块的DAD组件
+	 */
+	protected GoodsStockDAO goodsStockDAO;
+	
+	/**
+	 * 日期辅助组件
+	 */
+	protected DateProvider dateProvider;
+	
+	/**
+	 * 构造函数
+	 * @param goodsStockDO 商品库存DO对象
+	 * @param goodsStockDAO 商品库存管理模块的DAO组件
+	 * @param dateProvider 日期辅助组件
+	 */
+	public AbstractStockUpdater(
+			List<GoodsStockDO> goodsStockDOs,
+			GoodsStockDAO goodsStockDAO,
+			DateProvider dateProvider) {
+		this.goodsStockDOs = goodsStockDOs;
+		this.goodsStockDAO = goodsStockDAO;
+		this.dateProvider = dateProvider;
+	}
+	
+	/**
+	 * 更新商品库存
+	 */
+	@Override
+	public Boolean updateGoodsStock() {
+		try {
+			updateSaleStockQuantity();
+			updateLockedStockQuantity();
+			updateSaledStockQuantity();
+			updateStockStatus();
+			updateGmtModified();
+			executeUpdateGoodsStock();
+		} catch (Exception e) {
+			logger.error("error", e); 
+		}
+		return true;
+	}
+	
+	/**
+	 * 更新商品的销售库存
+	 * @throws Exception
+	 */
+	protected abstract void updateSaleStockQuantity() throws Exception;
+	
+	/**
+	 * 更新商品的锁定库存
+	 * @throws Exception
+	 */
+	protected abstract void updateLockedStockQuantity() throws Exception;
+	
+	/**
+	 * 更新商品的已销售库存
+	 * @throws Exception
+	 */
+	protected abstract void updateSaledStockQuantity() throws Exception;
+	
+	/**
+	 * 更新商品的库存状态
+	 */
+	private void updateStockStatus() throws Exception {
+		for(GoodsStockDO goodsStockDO : goodsStockDOs) {
+			if(goodsStockDO.getSaleStockQuantity() > 0L) {
+				goodsStockDO.setStockStatus(StockStatus.IN_STOCK); 
+			} else {
+				goodsStockDO.setStockStatus(StockStatus.NOT_IN_STOCK); 
+			}
+		}
+	}
+	
+	/**
+	 * 更新商品库存的修改时间
+	 */
+	private void updateGmtModified() throws Exception {
+		for(GoodsStockDO goodsStockDO : goodsStockDOs) {
+			goodsStockDO.setGmtModified(dateProvider.getCurrentTime());
+		}
+	}
+	
+	/**
+	 * 实际执行更新商品库存的操作
+	 * @throws Exception
+	 */
+	private void executeUpdateGoodsStock() throws Exception {
+		for(GoodsStockDO goodsStockDO : goodsStockDOs) {
+			goodsStockDAO.updateGoodsStock(goodsStockDO);
+		}
+	}
+	
+}

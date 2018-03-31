@@ -1,0 +1,1 @@
+DELETE FROM pay_transaction

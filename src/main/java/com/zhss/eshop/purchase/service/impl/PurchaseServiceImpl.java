@@ -2,11 +2,17 @@ package com.zhss.eshop.purchase.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zhss.eshop.purchase.constant.PurchaseOrderStatus;
 import com.zhss.eshop.purchase.domain.SupplierDTO;
+import com.zhss.eshop.purchase.service.PurchaseOrderService;
 import com.zhss.eshop.purchase.service.PurchaseService;
+import com.zhss.eshop.purchase.service.SupplierService;
 
 /**
  * 采购中心接口
@@ -16,16 +22,19 @@ import com.zhss.eshop.purchase.service.PurchaseService;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PurchaseServiceImpl implements PurchaseService {
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(PurchaseServiceImpl.class);
+	
 	/**
-	 * 判断是否有关联商品sku的采购单
-	 * @param goodsSkuId 商品sku id
-	 * @return 是否有采购单关联了商品sku
+	 * 供应商管理service组件
 	 */
-	@Override
-	public Boolean existRelatedPurchaseOrder(Long goodsSkuId) {
-		return true;
-	}
+	@Autowired
+	private SupplierService supplierService;
+	/**
+	 * 采购单管理service组件
+	 */
+	@Autowired
+	private PurchaseOrderService purchaseOrderService;
 	
 	/**
 	 * 通知采购中心，“创建采购入库单”事件发生了
@@ -33,8 +42,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @return 处理结果
 	 */
 	@Override
-	public Boolean informCreatePurchaseInputOrderEvent(Long purcaseOrderId) {
-		return true;
+	public Boolean informCreatePurchaseInputOrderEvent(Long purchaseOrderId) {
+		try {
+			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.WAIT_FOR_INPUT);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -43,8 +58,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @return 处理结果
 	 */
 	@Override
-	public Boolean informFinishedPurchaseInputOrderEvent(Long purcaseOrderId) {
-		return true;
+	public Boolean informFinishedPurchaseInputOrderEvent(Long purchaseOrderId) {
+		try {
+			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.FINISHED_INPUT);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -53,8 +74,14 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 * @return 处理结果
 	 */
 	@Override
-	public Boolean informCreatePurchaseSettlementOrderEvent(Long purcaseOrderId) {
-		return true;
+	public Boolean informCreatePurchaseSettlementOrderEvent(Long purchaseOrderId) {
+		try {
+			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.WAIT_FOR_SETTLEMENT);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -64,7 +91,13 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 */
 	@Override
 	public Boolean informFinishedPurchaseSettlementOrderEvent(Long purchaseOrderId) {
-		return true;
+		try {
+			purchaseOrderService.updateStatus(purchaseOrderId, PurchaseOrderStatus.FINISHED);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
 	}
 	
 	/**
@@ -74,7 +107,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 	 */
 	@Override
 	public List<SupplierDTO> listSuppliersBySettlementPeriod(Integer settlementPeriod) {
-		return null;
+		try {
+			return supplierService.listBySettlementPeriod(settlementPeriod);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
+		}
 	}
 	
 }
