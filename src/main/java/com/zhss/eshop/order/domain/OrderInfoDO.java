@@ -1,7 +1,6 @@
 package com.zhss.eshop.order.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import com.zhss.eshop.common.util.AbstractObject;
 
@@ -10,7 +9,7 @@ import com.zhss.eshop.common.util.AbstractObject;
  * @author zhonghuashishan
  *
  */
-public class OrderInfoDTO extends AbstractObject {
+public class OrderInfoDO extends AbstractObject {
 
 	/**
 	 * id
@@ -89,10 +88,6 @@ public class OrderInfoDTO extends AbstractObject {
 	 */
 	private Date confirmReceiptTime;
 	/**
-	 * 优惠券id
-	 */
-	private Long couponId;
-	/**
 	 * 销售出库单的创建时间
 	 */
 	private Date gmtCreate;
@@ -100,14 +95,6 @@ public class OrderInfoDTO extends AbstractObject {
 	 * 销售出库单的修改时间
 	 */
 	private Date gmtModified;
-	/**
-	 * 订单包含的订单条目
-	 */
-	private List<OrderItemDTO> orderItems;
-	/**
-	 * 订单操作日志
-	 */
-	private List<OrderOperateLogDTO> logs;
 	
 	public Long getId() {
 		return id;
@@ -235,24 +222,6 @@ public class OrderInfoDTO extends AbstractObject {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public List<OrderItemDTO> getOrderItems() {
-		return orderItems;
-	}
-	public void setOrderItems(List<OrderItemDTO> orderItems) {
-		this.orderItems = orderItems;
-	}
-	public List<OrderOperateLogDTO> getLogs() {
-		return logs;
-	}
-	public void setLogs(List<OrderOperateLogDTO> logs) {
-		this.logs = logs;
-	}
-	public Long getCouponId() {
-		return couponId;
-	}
-	public void setCouponId(Long couponId) {
-		this.couponId = couponId;
-	}
 	
 	@Override
 	public int hashCode() {
@@ -293,7 +262,7 @@ public class OrderInfoDTO extends AbstractObject {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		OrderInfoDTO other = (OrderInfoDTO) obj;
+		OrderInfoDO other = (OrderInfoDO) obj;
 		if (confirmReceiptTime == null) {
 			if (other.confirmReceiptTime != null) {
 				return false;
@@ -446,14 +415,14 @@ public class OrderInfoDTO extends AbstractObject {
 	
 	@Override
 	public String toString() {
-		return "OrderInfoDTO [id=" + id + ", orderNo=" + orderNo + ", userAccountId=" + userAccountId + ", username="
+		return "OrderInfoDO [id=" + id + ", orderNo=" + orderNo + ", userAccountId=" + userAccountId + ", username="
 				+ username + ", orderStatus=" + orderStatus + ", consignee=" + consignee + ", deliveryAddress="
 				+ deliveryAddress + ", consigneeCellPhoneNumber=" + consigneeCellPhoneNumber + ", freight=" + freight
 				+ ", payType=" + payType + ", totalAmount=" + totalAmount + ", discountAmount=" + discountAmount
 				+ ", couponAmount=" + couponAmount + ", payableAmount=" + payableAmount + ", invoiceTitle="
 				+ invoiceTitle + ", taxpayerId=" + taxpayerId + ", orderComment=" + orderComment + ", publishedComment="
 				+ publishedComment + ", confirmReceiptTime=" + confirmReceiptTime + ", gmtCreate=" + gmtCreate
-				+ ", gmtModified=" + gmtModified + ", orderItems=" + orderItems + "]";
+				+ ", gmtModified=" + gmtModified + "]";
 	}
 	
 }
