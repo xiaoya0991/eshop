@@ -2,6 +2,10 @@ package com.zhss.eshop.promotion.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.zhss.eshop.common.json.DateJsonDeserializer;
+import com.zhss.eshop.common.json.DateJsonSerializer;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
@@ -30,10 +34,14 @@ public class CouponVO extends AbstractObject {
 	/**
 	 * 有效期开始时间
 	 */
+	@JsonSerialize(using=DateJsonSerializer.class)  
+	@JsonDeserialize(using=DateJsonDeserializer.class)
 	private Date validStartTime;
 	/**
 	 * 有效期结束时间
 	 */
+	@JsonSerialize(using=DateJsonSerializer.class)  
+	@JsonDeserialize(using=DateJsonDeserializer.class)
 	private Date validEndTime;
 	/**
 	 * 发行总数量

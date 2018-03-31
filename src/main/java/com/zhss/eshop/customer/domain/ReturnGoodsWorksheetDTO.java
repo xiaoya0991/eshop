@@ -18,7 +18,7 @@ public class ReturnGoodsWorksheetDTO extends AbstractObject {
 	/**
 	 * 订单id
 	 */
-	private Long orderId;
+	private Long orderInfoId;
 	/**
 	 * 订单编号
 	 */
@@ -54,11 +54,11 @@ public class ReturnGoodsWorksheetDTO extends AbstractObject {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getOrderId() {
-		return orderId;
+	public Long getOrderInfoId() {
+		return orderInfoId;
 	}
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
+	public void setOrderInfoId(Long orderInfoId) {
+		this.orderInfoId = orderInfoId;
 	}
 	public String getOrderNo() {
 		return orderNo;
@@ -105,10 +105,10 @@ public class ReturnGoodsWorksheetDTO extends AbstractObject {
 	
 	@Override
 	public String toString() {
-		return "ReturnGoodsWorksheetDTO [id=" + id + ", orderId=" + orderId + ", orderNo=" + orderNo + ", status="
-				+ status + ", returnGoodsReason=" + returnGoodsReason + ", returnGoodsRemark=" + returnGoodsRemark
-				+ ", returnGoodsLogisticsCode=" + returnGoodsLogisticsCode + ", gmtCreate=" + gmtCreate
-				+ ", gmtModified=" + gmtModified + "]";
+		return "ReturnGoodsWorksheetDTO [id=" + id + ", orderInfoId=" + orderInfoId + ", orderNo=" + orderNo
+				+ ", status=" + status + ", returnGoodsReason=" + returnGoodsReason + ", returnGoodsRemark="
+				+ returnGoodsRemark + ", returnGoodsLogisticsCode=" + returnGoodsLogisticsCode + ", gmtCreate="
+				+ gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 	
 }
