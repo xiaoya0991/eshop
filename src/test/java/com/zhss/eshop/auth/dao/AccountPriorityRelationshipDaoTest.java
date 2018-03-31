@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,6 +50,7 @@ public class AccountPriorityRelationshipDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_account_priority_relationship.sql"})   
 	public void testSave() throws Exception {
 		Long accountId = 1L;
 		Long priorityId = 1L;
@@ -63,6 +65,7 @@ public class AccountPriorityRelationshipDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_account_priority_relationship.sql"})   
 	public void testCountByPriorityId() throws Exception {
 		Long priorityId = 1L;
 		
@@ -82,6 +85,7 @@ public class AccountPriorityRelationshipDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_account_priority_relationship.sql"})   
 	public void testListByAccountId() throws Exception {
 		Long accountId = 1L;
 		int count = 20;
@@ -99,6 +103,7 @@ public class AccountPriorityRelationshipDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_account_priority_relationship.sql"})   
 	public void testRemoveByAccountId() throws Exception {
 		Long accountId = 1L;
 		int count = 20;

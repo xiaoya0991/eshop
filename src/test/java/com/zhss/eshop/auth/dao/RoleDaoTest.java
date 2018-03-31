@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,6 +50,7 @@ public class RoleDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_role.sql"})
 	public void testSave() throws Exception {
 		RoleDO role = createRole("测试角色", "TEST_CODE"); 
 		assertNotNull(role.getId()); 
@@ -60,8 +62,10 @@ public class RoleDaoTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testListByPage(Integer count) throws Exception {
+	@Sql({"clean_role.sql"})
+	public void testListByPage() throws Exception {
 		// 准备参数
+		Integer count = 5;
 		String namePrefix = "测试角色";
 		String codePrefix = "TEST_ROLE";
 		String otherName = "别的角色";
@@ -104,6 +108,7 @@ public class RoleDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_role.sql"})
 	public void testGetById() throws Exception {
 		RoleDO role = createRole("测试角色", "TEST_CODE"); 
 		RoleDO resultRole = roleDAO.getById(role.getId());
@@ -115,6 +120,7 @@ public class RoleDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_role.sql"})
 	public void testUpdate() throws Exception {
 		RoleDO role = createRole("测试角色", "TEST_CODE"); 
 		
@@ -132,6 +138,7 @@ public class RoleDaoTest {
 	 * @throws Exception
 	 */
 	@Test
+	@Sql({"clean_role.sql"})
 	public void testRemove() throws Exception {
 		RoleDO role = createRole("测试角色", "TEST_CODE"); 
 		roleDAO.remove(role.getId());

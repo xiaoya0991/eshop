@@ -62,7 +62,9 @@ public class AccountDaoTest {
 	public void testListByPage() throws Exception {
 		int count = 30;
 		Map<Long, AccountDO> accountMap = createAccounts(count);
-	
+		for(AccountDO account : accountMap.values()) {
+			account.setPassword(null); 
+		}
 		
 		Integer offset = 20;
 		Integer size = 10;
@@ -86,6 +88,7 @@ public class AccountDaoTest {
 	@Test
 	public void testGetById() throws Exception {
 		AccountDO account = createAccount();
+		account.setPassword(null); 
 		AccountDO resultAccount = accountDAO.getById(account.getId());
 		assertEquals(account, resultAccount); 
 	}
@@ -97,27 +100,11 @@ public class AccountDaoTest {
 	@Test
 	public void testUpdate() throws Exception {
 		AccountDO account = createAccount();
+		account.setPassword(null); 
 		
 		account.setRemark("修改后的测试账号备注");  
 		account.setGmtModified(dateProvider.getCurrentTime()); 
 		accountDAO.update(account); 
-		
-		AccountDO resultAccount = accountDAO.getById(account.getId());
-		
-		assertEquals(account, resultAccount); 
-	}
-	
-	/**
-	 * 测试更新密码
-	 * @throws Exception
-	 */
-	@Test
-	public void testUpdatePassword() throws Exception {
-		AccountDO account = createAccount();
-		
-		account.setPassword("87654321");   
-		account.setGmtModified(dateProvider.getCurrentTime()); 
-		accountDAO.updatePassword(account); 
 		
 		AccountDO resultAccount = accountDAO.getById(account.getId());
 		
