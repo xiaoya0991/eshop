@@ -50,8 +50,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	 */
 	@Override
 	public void save(PurchaseOrderDTO purchaseOrder) throws Exception {
-		Long purchaseOrderId = purchaseOrderDAO.save(
-				purchaseOrder.clone(PurchaseOrderDO.class));  
+		purchaseOrder.setStatus(PurchaseOrderStatus.EDITING); 
+		Long purchaseOrderId = purchaseOrderDAO.save(purchaseOrder.clone(
+				PurchaseOrderDO.class));  
 		purchaseOrder.setId(purchaseOrderId);
 		batchSavePurchaseOrderItems(purchaseOrder); 
 	}

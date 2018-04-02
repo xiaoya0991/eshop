@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.wms.dao.PurchaseInputOrderItemDAO;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDO;
 import com.zhss.eshop.wms.mapper.PurchaseInputOrderItemMapper;
@@ -22,6 +23,11 @@ public class PurchaseInputOrderItemDAOImpl implements PurchaseInputOrderItemDAO 
 	 */
 	@Autowired
 	private PurchaseInputOrderItemMapper purchaseInputOrderItemMapper;
+	/**
+	 * 日期辅助组件
+	 */
+	@Autowired
+	private DateProvider dateProvider;
 	
 	/**
 	 * 批量新增采购入库单条目
@@ -56,6 +62,7 @@ public class PurchaseInputOrderItemDAOImpl implements PurchaseInputOrderItemDAO 
 	 */
 	@Override
 	public void update(PurchaseInputOrderItemDO purchaseInputOrderItem) throws Exception {
+		purchaseInputOrderItem.setGmtModified(dateProvider.getCurrentTime()); 
 		purchaseInputOrderItemMapper.update(purchaseInputOrderItem);
 	}
 	

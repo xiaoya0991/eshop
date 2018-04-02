@@ -3,6 +3,10 @@ package com.zhss.eshop.wms.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.zhss.eshop.common.json.DateJsonDeserializer;
+import com.zhss.eshop.common.json.DateJsonSerializer;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
@@ -23,10 +27,14 @@ public class PurchaseInputOrderVO extends AbstractObject {
 	/**
 	 * 预期到达时间
 	 */
+	@JsonSerialize(using=DateJsonSerializer.class)  
+	@JsonDeserialize(using=DateJsonDeserializer.class)
 	private Date expectArrivalTime;
 	/**
 	 * 实际到达时间
 	 */
+	@JsonSerialize(using=DateJsonSerializer.class)  
+	@JsonDeserialize(using=DateJsonDeserializer.class)
 	private Date actualArrivalTime;
 	/**
 	 * 采购联系人

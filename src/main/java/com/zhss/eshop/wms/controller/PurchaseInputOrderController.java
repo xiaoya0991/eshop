@@ -95,7 +95,7 @@ public class PurchaseInputOrderController {
 	 * @throws Exception
 	 */
 	@PutMapping("/putOnShelves/{id}")    
-	public Boolean batchSavePutOnItems(List<PurchaseInputOrderPutOnItemVO> putOnItems) {
+	public Boolean batchSavePutOnItems(@RequestBody List<PurchaseInputOrderPutOnItemVO> putOnItems) {
 		try {
 			purchaseInputOrderService.batchSavePutOnItems(ObjectUtils.convertList(
 					putOnItems, PurchaseInputOrderPutOnItemDTO.class));   
@@ -112,7 +112,7 @@ public class PurchaseInputOrderController {
 	 * @throws Exception 
 	 */
 	@PutMapping("/submitApprove/{id}") 
-	public Boolean submitApprove(Long id) throws Exception {
+	public Boolean submitApprove(@PathVariable("id") Long id) throws Exception {
 		try {
 			purchaseInputOrderService.submitApprove(id);
 			return true;

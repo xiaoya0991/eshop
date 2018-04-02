@@ -70,8 +70,7 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 				purchaseInputOrder.getItems(), PurchaseInputOrderItemDO.class);
 		purchaseInputOrderItemDAO.batchSave(purchaseInputOrderId, purchaseInputOrderItems);
 		
-		purchaseService.informCreatePurchaseInputOrderEvent(purchaseInputOrder
-				.getPurchaseOrderId());
+		purchaseService.informCreatePurchaseInputOrderEvent(purchaseInputOrder.getPurchaseOrderId());
 	}
 	
 	/**
@@ -120,6 +119,8 @@ public class PurchaseInputOrderServiceImpl implements PurchaseInputOrderService 
 	@Override
 	public void update(PurchaseInputOrderDTO purchaseInputOrder) throws Exception {
 		purchaseInputOrderDAO.update(purchaseInputOrder.clone(PurchaseInputOrderDO.class));  
+		
+		purchaseInputOrder.setStatus(PurchaseInputOrderStatus.EDITING); 
 		purchaseInputOrderDAO.updateStatus(purchaseInputOrder.clone(PurchaseInputOrderDO.class)); 
 		
 		for(PurchaseInputOrderItemDTO purchaseInputOrderItem : purchaseInputOrder.getItems()) {
