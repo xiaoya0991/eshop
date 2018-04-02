@@ -63,7 +63,7 @@ public class FileUtils {
 			String uploadDirPath) throws Exception {
 		File uploadDir = new File(uploadDirPath);
 	    if(!uploadDir.exists()) {
-	        uploadDir.mkdir();
+	        uploadDir.mkdirs();
 	    }
 	     
 	    String pathSeparator = System.getProperties().getProperty("file.separator");

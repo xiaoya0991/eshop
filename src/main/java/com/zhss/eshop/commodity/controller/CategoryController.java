@@ -93,14 +93,16 @@ public class CategoryController {
 			targetCategory.setPropertyRelations(targetPropertyRelations);  
 			
 			// 转换属性分组
-			List<PropertyGroupDTO> targetPropertyGroups = new ArrayList<PropertyGroupDTO>();
-			targetCategory.setPropertyGroups(targetPropertyGroups); 
-			
-			for(PropertyGroupVO group : category.getPropertyGroups()) {
-				PropertyGroupDTO targetGroup = group.clone(PropertyGroupDTO.class);
-				targetGroup.setRelations(ObjectUtils.convertList(
-						group.getRelations(), PropertyGroupRelationshipDTO.class)); 
-				targetPropertyGroups.add(targetGroup);
+			if(category.getPropertyGroups() != null) {
+				List<PropertyGroupDTO> targetPropertyGroups = new ArrayList<PropertyGroupDTO>();
+				targetCategory.setPropertyGroups(targetPropertyGroups); 
+				
+				for(PropertyGroupVO group : category.getPropertyGroups()) {
+					PropertyGroupDTO targetGroup = group.clone(PropertyGroupDTO.class);
+					targetGroup.setRelations(ObjectUtils.convertList(
+							group.getRelations(), PropertyGroupRelationshipDTO.class)); 
+					targetPropertyGroups.add(targetGroup);
+				}
 			}
 			
 			// 执行类目新增的操作
