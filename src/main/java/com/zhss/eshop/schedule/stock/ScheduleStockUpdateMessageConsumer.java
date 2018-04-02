@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.inventory.async.StockUpdateMessage;
 import com.zhss.eshop.inventory.async.StockUpdateQueue;
+import com.zhss.eshop.inventory.async.StockUpdateResultManager;
 import com.zhss.eshop.inventory.constant.GoodsStockUpdateOperation;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.schedule.service.ScheduleService;
@@ -32,6 +33,11 @@ public class ScheduleStockUpdateMessageConsumer extends Thread {
 	 */
 	@Autowired
 	private ScheduleService scheduleService;
+	/**
+	 * 库存中心的消息管理器
+	 */
+	@Autowired
+	private StockUpdateResultManager stockUpdateResultManager;
 	
 	/**
 	 * 消费库存更新消息
@@ -46,6 +52,7 @@ public class ScheduleStockUpdateMessageConsumer extends Thread {
 				}
 				OrderInfoDTO order = getOrderFromMessage(message);
 				processMessage(message, order);
+				stockUpdateResultManager.inform(message.getId(), true); 
 			} catch (Exception e) {
 				logger.error("error", e); 
 			}

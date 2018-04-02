@@ -270,7 +270,10 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 			orderItem.setOrderInfoId(orderInfoId); 
 			orderItem.setGmtCreate(dateProvider.getCurrentTime()); 
 			orderItem.setGmtModified(dateProvider.getCurrentTime());  
-			orderItemDAO.save(orderItem.clone(OrderItemDO.class));   
+			
+			Long orderItemId = orderItemDAO.save(orderItem.clone(OrderItemDO.class));   
+			
+			orderItem.setId(orderItemId); 
 		}
 		
 		return order;

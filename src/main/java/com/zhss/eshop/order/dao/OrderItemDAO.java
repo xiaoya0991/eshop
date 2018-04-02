@@ -16,7 +16,7 @@ public interface OrderItemDAO {
 	 * @param orderItem 订单条目
 	 * @throws Exception
 	 */
-	void save(OrderItemDO orderItem) throws Exception;
+	Long save(OrderItemDO orderItem) throws Exception;
 	
 	/**
 	 * 查询订单条目

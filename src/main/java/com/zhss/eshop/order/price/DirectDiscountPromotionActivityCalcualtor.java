@@ -1,5 +1,7 @@
 package com.zhss.eshop.order.price;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,10 +27,16 @@ public class DirectDiscountPromotionActivityCalcualtor implements PromotionActiv
 	@Override
 	public PromotionActivityResult calculate(OrderItemDTO item, 
 			PromotionActivityDTO promotionActivity) throws Exception {
-		Double totalAmount = item.getPurchaseQuantity() * item.getPurchasePrice();
+		BigDecimal totalAmount = BigDecimal.valueOf(item.getPurchaseQuantity() * item.getPurchasePrice());  
+		
 		JSONObject rule = JSONObject.parseObject(promotionActivity.getRule());
-		Double discountRate = jsonExtractor.getDouble(rule, "discountRate"); 
-		return new PromotionActivityResult(totalAmount * (1.0 - discountRate));   
+		BigDecimal discountRate = BigDecimal.valueOf(jsonExtractor.getDouble(rule, "discountRate"));   
+		 
+		BigDecimal discountAmountRate = BigDecimal.valueOf(1.0).subtract(discountRate);
+		
+		Double discountAmount = totalAmount.multiply(discountAmountRate).doubleValue();
+		
+		return new PromotionActivityResult(discountAmount);      
 	}
 	
 }

@@ -28,8 +28,9 @@ public class OrderItemDAOImpl implements OrderItemDAO {
 	 * @param orderItem
 	 */
 	@Override
-	public void save(OrderItemDO orderItem) throws Exception {
+	public Long save(OrderItemDO orderItem) throws Exception {
 		orderItemMapper.save(orderItem);
+		return orderItem.getId();
 	}
 	
 	/**
