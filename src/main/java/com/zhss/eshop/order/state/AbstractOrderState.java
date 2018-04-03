@@ -32,7 +32,9 @@ public abstract class AbstractOrderState implements OrderState {
 	 */
 	@Override
 	public void doTransition(OrderInfoDTO order) throws Exception {
-		orderInfoDAO.updateStatus(order.getId(), getOrderStatus(order));  
+		Integer orderStatus = getOrderStatus(order);
+		order.setOrderStatus(orderStatus);
+		orderInfoDAO.updateStatus(order.getId(), orderStatus);  
 	}
 	
 	/**

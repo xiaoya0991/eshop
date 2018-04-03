@@ -23,6 +23,7 @@ import com.zhss.eshop.order.domain.OrderInfoVO;
 import com.zhss.eshop.order.domain.ReturnGoodsApplyDTO;
 import com.zhss.eshop.order.domain.ReturnGoodsApplyVO;
 import com.zhss.eshop.order.service.OrderInfoService;
+import com.zhss.eshop.order.state.LoggedOrderStateManager;
 import com.zhss.eshop.promotion.domain.CouponDTO;
 import com.zhss.eshop.promotion.domain.CouponVO;
 
@@ -42,6 +43,20 @@ public class OrderInfoController {
 	 */
 	@Autowired
 	private OrderInfoService orderInfoService;
+	
+	@Autowired
+	private LoggedOrderStateManager orderStateManager;
+	
+	@PutMapping("/test/{id}")
+	public Boolean test(@PathVariable("id") Long id) {
+		try {
+			orderStateManager.confirmReceipt(orderInfoService.getById(id));  
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
 	
 	/**
 	 * 计算订单价格
@@ -162,6 +177,21 @@ public class OrderInfoController {
 		} catch (Exception e) {
 			logger.error("error", e); 
 			return null;
+		}
+	}
+	
+	/**
+	 * 手动确认收货
+	 * @param id 订单id
+	 * @throws Exception
+	 */
+	@PutMapping("/confirmReceipt/{id}")
+	public Boolean manualConfirmReceipt(@PathVariable("id") Long id) {
+		try {
+			return orderInfoService.manualConfirmReceipt(id);
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
 		}
 	}
 	

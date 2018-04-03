@@ -72,7 +72,8 @@ public class CommentPictureServiceImpl implements CommentPictureService {
 			}
 			
 			// 如果目标文件路径已经存在，则删除目标文件
-			String targetFilePath = realUploadDirPath + file.getOriginalFilename();
+			String fileSeparator = System.getProperties().getProperty("file.separator");
+			String targetFilePath = realUploadDirPath + fileSeparator + file.getOriginalFilename();
 			File targetFile = new File(targetFilePath);
 			if(targetFile.exists()) {
 				targetFile.delete();

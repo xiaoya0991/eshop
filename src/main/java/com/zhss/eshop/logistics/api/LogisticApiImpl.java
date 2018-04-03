@@ -61,31 +61,31 @@ public class LogisticApiImpl implements LogisticApi {
 				new ArrayList<QueryProgressResponse.TraceEvent>();
 		
 		traceEvents.add(new QueryProgressResponse.TraceEvent(
-				dateProvider.parseDatetime("2018/06/25 08:05:37"),
+				dateProvider.parseDatetime("2018-06-25 08:05:37"),
 				"正在派件..(派件人:张三,电话:13688617034)[上海 市]"));  
 		
 		traceEvents.add(new QueryProgressResponse.TraceEvent(
-				dateProvider.parseDatetime("2018/06/25 04:01:28"),
+				dateProvider.parseDatetime("2018-06-25 04:01:28"),
 				"快件在 上海集散中心 ,准备送往下一站 上海 [上海市]"));  
 		
 		traceEvents.add(new QueryProgressResponse.TraceEvent(
-				dateProvider.parseDatetime("2018/06/25 04:01:28"),
+				dateProvider.parseDatetime("2018-06-25 04:01:28"),
 				"快件在 上海集散中心 ,准备送往下一站 上海 [上海市]"));  
 		
 		traceEvents.add(new QueryProgressResponse.TraceEvent(
-				dateProvider.parseDatetime("2018/06/25 01:41:06"),
+				dateProvider.parseDatetime("2018-06-25 01:41:06"),
 				"快件在 上海集散中心 [上海市]")); 
 		
 		traceEvents.add(new QueryProgressResponse.TraceEvent(
-				dateProvider.parseDatetime("2018/06/24 20:18:58"),
+				dateProvider.parseDatetime("2018-06-24 20:18:58"),
 				"已收件[上海市]")); 
 		
 		traceEvents.add(new QueryProgressResponse.TraceEvent(
-				dateProvider.parseDatetime("2018/06/25 10:23:03"),
+				dateProvider.parseDatetime("2018-06-25 10:23:03"),
 				"派件已签收[上海市]")); 
 		
 		traceEvents.add(new QueryProgressResponse.TraceEvent(
-				dateProvider.parseDatetime("2018/06/25 10:23:03"),
+				dateProvider.parseDatetime("2018-06-25 10:23:03"),
 				"签收人是：王五，已签收[上海市]"));
 		
 		response.setTraceEvents(traceEvents); 

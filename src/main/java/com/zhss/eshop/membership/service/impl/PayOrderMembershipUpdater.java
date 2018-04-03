@@ -58,7 +58,7 @@ public class PayOrderMembershipUpdater extends AbstractMembershipUpdater<Object,
 	@Override
 	protected Map<String, Object> updateMemberLevel(Long userAccountId, 
 			Object parameter) throws Exception {
-		Long totalOrderAmount = (Long) parameter;
+		Double totalOrderAmount = (Double) parameter;
 		
 		Map<String, Object> result = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		
@@ -86,7 +86,7 @@ public class PayOrderMembershipUpdater extends AbstractMembershipUpdater<Object,
 	@Override
 	protected Map<String, Object> updateMemberPoint(Long userAccountId, 
 			Object parameter) throws Exception {
-		Long totalOrderAmount = (Long) parameter;
+		Double totalOrderAmount = (Double) parameter;
 		
 		Map<String, Object> result = new HashMap<String, Object>(CollectionSize.DEFAULT);
 		
