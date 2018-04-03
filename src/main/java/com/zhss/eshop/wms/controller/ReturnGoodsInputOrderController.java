@@ -121,4 +121,20 @@ public class ReturnGoodsInputOrderController {
 		}
 	}
 	
+	/**
+	 * 审核退货入库单
+	 * @param id 退货入库单id
+	 * @throws Exception
+	 */
+	@PutMapping("/approve/{id}")  
+	public Boolean approve(@PathVariable("id") Long id, Integer approveResult) {
+		try {
+			returnGoodsInputOrderService.approve(id, approveResult);
+			return true;
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return false;
+		}
+	}
+	
 }

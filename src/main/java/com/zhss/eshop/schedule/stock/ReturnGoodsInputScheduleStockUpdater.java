@@ -3,29 +3,38 @@ package com.zhss.eshop.schedule.stock;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.zhss.eshop.order.domain.OrderInfoDTO;
+import com.zhss.eshop.order.domain.OrderItemDTO;
+import com.zhss.eshop.order.service.OrderService;
 import com.zhss.eshop.schedule.dao.ScheduleGoodsAllocationStockDAO;
 import com.zhss.eshop.schedule.dao.ScheduleGoodsAllocationStockDetailDAO;
 import com.zhss.eshop.schedule.dao.ScheduleGoodsStockDAO;
+import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
 import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDO;
 import com.zhss.eshop.schedule.domain.ScheduleGoodsAllocationStockDetailDO;
 import com.zhss.eshop.schedule.domain.ScheduleGoodsStockDO;
+import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDTO;
+import com.zhss.eshop.schedule.service.SaleDeliveryScheduler;
 import com.zhss.eshop.wms.domain.GoodsAllocationStockDetailDTO;
-import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
-import com.zhss.eshop.wms.domain.PurchaseInputOrderItemDTO;
-import com.zhss.eshop.wms.domain.PurchaseInputOrderPutOnItemDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
+import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderItemDTO;
 
 /**
  * 退货入库
  * @author zhonghuashishan
  *
  */
+@Component
+@Scope("prototype")  
 public class ReturnGoodsInputScheduleStockUpdater extends AbstractScheduleStockUpdater {
 
 	/**
-	 * 采购入库单
+	 * 退货入库单
 	 */
-	private PurchaseInputOrderDTO purchaseInputOrder;
+	private ReturnGoodsInputOrderDTO returnGoodsInputOrder;
 	
 	/**
 	 * 商品库存管理的DAO组件
@@ -42,21 +51,31 @@ public class ReturnGoodsInputScheduleStockUpdater extends AbstractScheduleStockU
 	 */
 	@Autowired
 	private ScheduleGoodsAllocationStockDetailDAO stockDetailDAO;
+	/**
+	 * 销售出库调度器
+	 */
+	@Autowired
+	private SaleDeliveryScheduler saleDeliveryScheduler;
+	/**
+	 * 订单中心接口
+	 */
+	@Autowired
+	private OrderService orderService;
 	
 	/**
 	 * 更新商品库存
 	 */
 	@Override
 	protected void updateGoodsStock() throws Exception {
-		List<PurchaseInputOrderItemDTO> purchaseInputOrderItems = 
-				purchaseInputOrder.getItems();
-		for(PurchaseInputOrderItemDTO purchaseInputOrderItem : purchaseInputOrderItems) {
+		List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItems = 
+				returnGoodsInputOrder.getItems();
+		for(ReturnGoodsInputOrderItemDTO returnGoodsInputOrderItem : returnGoodsInputOrderItems) {
 			ScheduleGoodsStockDO goodsStock = goodsStockDAO.getBySkuId(
-					purchaseInputOrderItem.getGoodsSkuId());
+					returnGoodsInputOrderItem.getGoodsSkuId());
 			goodsStock.setAvailableStockQuantity(goodsStock.getAvailableStockQuantity()
-					+ purchaseInputOrderItem.getArrivalCount()); 
+					+ returnGoodsInputOrderItem.getArrivalCount()); 
 			goodsStock.setOutputStockQuantity(goodsStock.getOutputStockQuantity()
-					- purchaseInputOrderItem.getArrivalCount());
+					- returnGoodsInputOrderItem.getArrivalCount());
 			goodsStockDAO.update(goodsStock); 
 		}
 	}
@@ -66,18 +85,29 @@ public class ReturnGoodsInputScheduleStockUpdater extends AbstractScheduleStockU
 	 */
 	@Override
 	protected void updateGoodsAllocationStock() throws Exception {
-		List<PurchaseInputOrderItemDTO> items = purchaseInputOrder.getItems();
+		List<ReturnGoodsInputOrderItemDTO> items = returnGoodsInputOrder.getItems();
 		
-		for(PurchaseInputOrderItemDTO item : items) {
-			List<PurchaseInputOrderPutOnItemDTO> putOnItems = item.getPutOnItemDTOs();
+		OrderInfoDTO order = orderService.getOrderById(returnGoodsInputOrder.getOrderId());
+		
+		for(ReturnGoodsInputOrderItemDTO item : items) {
+			OrderItemDTO targetOrderItem = null;
 			
-			for(PurchaseInputOrderPutOnItemDTO putOnItem : putOnItems) {
+			for(OrderItemDTO orderItem : order.getOrderItems()) {
+				if(orderItem.getGoodsSkuId().equals(item.getGoodsSkuId())) {
+					targetOrderItem = orderItem;
+					break;
+				}
+			}
+			
+			SaleDeliveryScheduleResult scheduleResult = saleDeliveryScheduler.getScheduleResult(targetOrderItem);
+			
+			for(ScheduleOrderPickingItemDTO pickingItem : scheduleResult.getPickingItems()) {
 				ScheduleGoodsAllocationStockDO goodsAllocationStock = goodsAllocationStockDAO.getBySkuId(
-						putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId());
+						pickingItem.getGoodsAllocationId(), pickingItem.getGoodsSkuId());
 				goodsAllocationStock.setAvailableStockQuantity(goodsAllocationStock.getAvailableStockQuantity() 
-						+ putOnItem.getPutOnShelvesCount());
+						+ pickingItem.getPickingCount());
 				goodsAllocationStock.setOutputStockQuantity(goodsAllocationStock.getOutputStockQuantity()
-						- putOnItem.getPutOnShelvesCount()); 
+						- pickingItem.getPickingCount()); 
 				goodsAllocationStockDAO.update(goodsAllocationStock); 
 			}
 		}
@@ -88,9 +118,9 @@ public class ReturnGoodsInputScheduleStockUpdater extends AbstractScheduleStockU
 	 */
 	@Override
 	protected void updateGoodsAllocationStockDetail() throws Exception {
-		List<PurchaseInputOrderItemDTO> items = purchaseInputOrder.getItems();
+		List<ReturnGoodsInputOrderItemDTO> items = returnGoodsInputOrder.getItems();
 		
-		for(PurchaseInputOrderItemDTO item : items) {
+		for(ReturnGoodsInputOrderItemDTO item : items) {
 			List<GoodsAllocationStockDetailDTO> stockDetails = item.getStockDetails();
 			for(GoodsAllocationStockDetailDTO stockDetail : stockDetails) {
 				stockDetailDAO.save(stockDetail.clone(ScheduleGoodsAllocationStockDetailDO.class));  
@@ -103,7 +133,7 @@ public class ReturnGoodsInputScheduleStockUpdater extends AbstractScheduleStockU
 	 */
 	@Override
 	public void setParameter(Object parameter) {
-		this.purchaseInputOrder = (PurchaseInputOrderDTO) parameter;
+		this.returnGoodsInputOrder = (ReturnGoodsInputOrderDTO) parameter;
 	}
 	
 }

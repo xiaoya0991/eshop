@@ -3,6 +3,7 @@ package com.zhss.eshop.schedule.service;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
+import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
 import com.zhss.eshop.wms.domain.PurchaseInputOrderDTO;
 import com.zhss.eshop.wms.domain.ReturnGoodsInputOrderDTO;
 
@@ -72,5 +73,13 @@ public interface ScheduleService {
 	 */
 	Boolean scheduleReturnGoodsInput(OrderInfoDTO orderDTO, 
 			ReturnGoodsWorksheetDTO returnGoodsWorksheetDTO);
+	
+	/**
+	 * 获取调度结果
+	 * @param orderInfoId 订单id
+	 * @param goodsSkuId 商品sku id
+	 * @return 调度结果
+	 */
+	SaleDeliveryScheduleResult getScheduleResult(Long orderInfoId, Long goodsSkuId);
 	
 }

@@ -93,7 +93,7 @@ public class PurchaseSettlementOrderController {
 	 * @throws Exception 
 	 */
 	@PutMapping("/submitApprove/{id}") 
-	public Boolean submitApprove(Long id) throws Exception {
+	public Boolean submitApprove(@PathVariable("id") Long id) throws Exception {
 		try {
 			purchaseSettlementOrderService.submitApprove(id);
 			return true;

@@ -446,8 +446,10 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 		
 		ReturnGoodsApplyDO apply = returnGoodsApplyDAO.getByOrderInfoId(orderInfoId);
 		apply.setReturnGoodsLogisticCode(returnGoodsLogisticCode); 
+		returnGoodsApplyDAO.update(apply); 
 		
 		customerService.syncReturnGoodsLogisticsCode(orderInfoId, returnGoodsLogisticCode);
+		
 		orderStateManager.sendOutReturnGoods(order);  
 	}
 	

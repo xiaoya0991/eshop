@@ -3,6 +3,10 @@ package com.zhss.eshop.wms.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.zhss.eshop.common.json.DateJsonDeserializer;
+import com.zhss.eshop.common.json.DateJsonSerializer;
 import com.zhss.eshop.common.util.AbstractObject;
 
 /**
@@ -95,6 +99,8 @@ public class ReturnGoodsInputOrderVO extends AbstractObject {
 	/**
 	 * 退货的实际到货时间
 	 */
+	@JsonSerialize(using=DateJsonSerializer.class)  
+	@JsonDeserialize(using=DateJsonDeserializer.class)
 	private Date arrivalTime;
 	/**
 	 * 销售出库单的创建时间

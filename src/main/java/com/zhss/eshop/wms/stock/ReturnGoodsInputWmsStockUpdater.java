@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.common.util.ObjectUtils;
+import com.zhss.eshop.schedule.domain.SaleDeliveryScheduleResult;
+import com.zhss.eshop.schedule.domain.ScheduleOrderPickingItemDTO;
+import com.zhss.eshop.schedule.service.ScheduleService;
 import com.zhss.eshop.wms.dao.GoodsAllocationStockDetailDAO;
 import com.zhss.eshop.wms.dao.WmsGoodsAllocationStockDAO;
 import com.zhss.eshop.wms.dao.WmsGoodsStockDAO;
@@ -47,6 +50,11 @@ public class ReturnGoodsInputWmsStockUpdater extends AbstractWmsStockUpdater {
 	 */
 	@Autowired
 	private GoodsAllocationStockDetailDAO stockDetailDAO;
+	/**
+	 * 调度中心接口
+	 */
+	@Autowired
+	private ScheduleService scheduleService;
 	
 	/**
 	 * 更新商品库存
@@ -80,18 +88,19 @@ public class ReturnGoodsInputWmsStockUpdater extends AbstractWmsStockUpdater {
 		List<ReturnGoodsInputOrderItemDTO> items = returnGoodsInputOrder.getItems();
 		
 		for(ReturnGoodsInputOrderItemDTO item : items) {
-			List<ReturnGoodsInputOrderPutOnItemDTO> putOnItems = item.getPutOnItems();
+			SaleDeliveryScheduleResult scheduleResult = scheduleService.getScheduleResult(
+					returnGoodsInputOrder.getOrderId(), item.getGoodsSkuId());
 			
-			for(ReturnGoodsInputOrderPutOnItemDTO putOnItem : putOnItems) {
+			for(ScheduleOrderPickingItemDTO pickingItem : scheduleResult.getPickingItems()) {
 				WmsGoodsAllocationStockDO goodsAllocationStock = goodsAllocationStockDAO
-						.getBySkuId(putOnItem.getGoodsAllocationId(), putOnItem.getGoodsSkuId());
+						.getBySkuId(pickingItem.getGoodsAllocationId(), pickingItem.getGoodsSkuId());
 				
 				Long availableStockQuantity = goodsAllocationStock.getAvailableStockQuantity() 
-						+ putOnItem.getPutOnShelvesCount();
+						+ pickingItem.getPickingCount();
 				goodsAllocationStock.setAvailableStockQuantity(availableStockQuantity);
 				
 				Long outputStockQuantity = goodsAllocationStock.getOutputStockQuantity() 
-						- putOnItem.getPutOnShelvesCount();
+						- pickingItem.getPickingCount();
 				goodsAllocationStock.setOutputStockQuantity(outputStockQuantity); 
 				
 				goodsAllocationStockDAO.update(goodsAllocationStock); 

@@ -15,6 +15,7 @@ import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.customer.domain.ReturnGoodsWorksheetDTO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.domain.OrderItemDTO;
+import com.zhss.eshop.order.service.OrderService;
 import com.zhss.eshop.purchase.domain.PurchaseOrderDTO;
 import com.zhss.eshop.purchase.domain.PurchaseOrderItemDTO;
 import com.zhss.eshop.schedule.constant.StockUpdateEvent;
@@ -87,6 +88,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 	 */
 	@Autowired
 	private DateProvider dateProvider;
+	/**
+	 * 订单中心接口
+	 */
+	@Autowired
+	private OrderService orderService;
 	
 	/**
 	 * 通知库存中心，“采购入库完成”事件发生了
@@ -327,16 +333,22 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public Boolean scheduleReturnGoodsInput(OrderInfoDTO order, 
 			ReturnGoodsWorksheetDTO returnGoodsWorksheet) {
 		try {
-			ReturnGoodsInputOrderDTO returnGoodsInputOrder = 
-					order.clone(ReturnGoodsInputOrderDTO.class);
+			ReturnGoodsInputOrderDTO returnGoodsInputOrder = order.clone(ReturnGoodsInputOrderDTO.class);
+			returnGoodsInputOrder.setId(null); 
+			returnGoodsInputOrder.setReturnGoodsWorksheetId(returnGoodsWorksheet.getId()); 
 			returnGoodsInputOrder.setOrderId(order.getId());
-			returnGoodsInputOrder.setReturnGoodsReason(
-					returnGoodsWorksheet.getReturnGoodsReason()); 
-			returnGoodsInputOrder.setReturnGoodsRemark(
-					returnGoodsWorksheet.getReturnGoodsRemark()); 
+			returnGoodsInputOrder.setReturnGoodsReason(returnGoodsWorksheet.getReturnGoodsReason()); 
+			returnGoodsInputOrder.setReturnGoodsRemark(returnGoodsWorksheet.getReturnGoodsRemark()); 
+			returnGoodsInputOrder.setGmtCreate(dateProvider.getCurrentTime()); 
+			returnGoodsInputOrder.setGmtModified(dateProvider.getCurrentTime()); 
 			
 			List<ReturnGoodsInputOrderItemDTO> returnGoodsInputOrderItems = ObjectUtils.convertList(
 					order.getOrderItems(), ReturnGoodsInputOrderItemDTO.class);
+			for(ReturnGoodsInputOrderItemDTO returnGoodsInputOrderItem : returnGoodsInputOrderItems) {
+				returnGoodsInputOrderItem.setId(null);  
+				returnGoodsInputOrderItem.setGmtCreate(dateProvider.getCurrentTime()); 
+				returnGoodsInputOrderItem.setGmtModified(dateProvider.getCurrentTime()); 
+			}
 			returnGoodsInputOrder.setItems(returnGoodsInputOrderItems); 
 			
 			wmsService.createReturnGoodsInputOrder(returnGoodsInputOrder);
@@ -345,6 +357,32 @@ public class ScheduleServiceImpl implements ScheduleService {
 		} catch (Exception e) {
 			logger.error("error", e);  
 			return false;
+		}
+	}
+	
+	/**
+	 * 获取调度结果
+	 * @param orderInfoId 订单id
+	 * @param goodsSkuId 商品sku id
+	 * @return 调度结果
+	 */
+	@Override
+	public SaleDeliveryScheduleResult getScheduleResult(Long orderInfoId, Long goodsSkuId) {
+		try {
+			OrderInfoDTO order = orderService.getOrderById(orderInfoId);
+			OrderItemDTO targetOrderItem = null;
+			
+			for(OrderItemDTO orderItem : order.getOrderItems()) {
+				if(orderItem.getGoodsSkuId().equals(goodsSkuId)) {
+					targetOrderItem = orderItem;
+					break;
+				}
+			}
+			
+			return saleDeliveryScheduler.getScheduleResult(targetOrderItem); 
+		} catch (Exception e) {
+			logger.error("error", e); 
+			return null;
 		}
 	}
 	

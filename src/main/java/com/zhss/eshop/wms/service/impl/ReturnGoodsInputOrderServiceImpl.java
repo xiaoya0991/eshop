@@ -85,6 +85,7 @@ public class ReturnGoodsInputOrderServiceImpl implements ReturnGoodsInputOrderSe
 	 */
 	@Override
 	public void save(ReturnGoodsInputOrderDTO returnGoodsInputOrder) throws Exception {
+		returnGoodsInputOrder.setStatus(ReturnGoodsInputOrderStatus.EDITING); 
 		Long returnGoodsInputOrderId = returnGoodsInputOrderDAO.save(
 				returnGoodsInputOrder.clone(ReturnGoodsInputOrderDO.class)); 
 		
@@ -187,6 +188,7 @@ public class ReturnGoodsInputOrderServiceImpl implements ReturnGoodsInputOrderSe
 		
 		ReturnGoodsInputOrderDTO returnGoodsInputOrder = getById(id);
 		returnGoodsInputOrderDAO.updateStatus(id, ReturnGoodsInputOrderStatus.FINISHED); 
+		
 		customerService.informReturnGoodsInputFinishedEvent(returnGoodsInputOrder.getReturnGoodsWorksheetId());
 		
 		Boolean refundResult = payService.refund(returnGoodsInputOrder);

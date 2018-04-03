@@ -147,7 +147,7 @@ public interface ReturnGoodsWorksheetMapper {
 				+ "return_goods_remark,"
  				+ "return_goods_logistics_code,"
 				+ "gmt_create,"
-				+ "gmt_modifieid "
+				+ "gmt_modified "
 			+ "FROM customer_return_goods_worksheet "
 			+ "WHERE order_info_id=#{orderInfoId}")   
 	@Results({

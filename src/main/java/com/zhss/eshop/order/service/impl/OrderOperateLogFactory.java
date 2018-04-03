@@ -44,7 +44,7 @@ public class OrderOperateLogFactory {
 			operateContent = "申请退货"; 
 		} else if(OrderOperateType.RETURN_GOODS_REJECTED.equals(operateType)) {
 			operateContent = "退货申请审核不通过"; 
-		} else if(OrderOperateType.RETURN_GOODS_REJECTED.equals(operateType)) {
+		} else if(OrderOperateType.RETURN_GOODS_APPROVED.equals(operateType)) {
 			operateContent = "退货申请审核已通过"; 
 		} else if(OrderOperateType.SEND_OUT_RETURN_GOODS.equals(operateType)) {
 			operateContent = "寄送退货商品"; 
