@@ -177,5 +177,20 @@
 				</resources>
 			</build>
 		</profile>
+		<profile>
+			<id>staging</id>
+			<build>
+				<resources>
+					<resource>
+			  			<directory>src/main/profiles/staging</directory>
+			  			<includes>
+			  				<include>**/*.xml</include>
+			  				<include>**/*.properties</include>
+			  			</includes>
+			  			<filtering>true</filtering>
+			  		</resource>
+				</resources>
+			</build>
+		</profile>
 	</profiles>
 </project>
