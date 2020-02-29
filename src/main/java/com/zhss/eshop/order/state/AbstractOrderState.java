@@ -51,7 +51,7 @@ public abstract class AbstractOrderState implements OrderState {
 	 * @return 能否执行取消订单操作
 	 */
 	@Override
-	public Boolean canCancel(OrderInfoDTO order) throws Exception {
+	public Boolean canCancel(OrderInfoDTO order) {
 		return false;
 	}
 	
