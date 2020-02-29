@@ -16,6 +16,6 @@ public class PriorityType {
 	 */
 	public static final Integer OTHER = 2;
 	
-	private PriorityType() {  }
+	private PriorityType() {   }
 	
 }
