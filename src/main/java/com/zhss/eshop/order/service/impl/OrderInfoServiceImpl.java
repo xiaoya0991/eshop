@@ -366,8 +366,8 @@ public class OrderInfoServiceImpl implements OrderInfoService {
                     OrderInfoErrorCode.ORDER_INFO_DO_NOT_EXIST.getMessage());
         }
         if (!orderStateManager.canCancel(order)) {
-            throw new OrderInfoException(OrderInfoErrorCode.order_status_cannot_cancel.getCode(),
-                    OrderInfoErrorCode.order_status_cannot_cancel.getMessage());
+            throw new OrderInfoException(OrderInfoErrorCode.ORDER_STATUS_CANNOT_CANCEL.getCode(),
+                    OrderInfoErrorCode.ORDER_STATUS_CANNOT_CANCEL.getMessage());
         }
         orderStateManager.cancel(order);
         inventoryService.informCancelOrderEvent(order);
