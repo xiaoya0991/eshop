@@ -21,8 +21,15 @@ public class AbstractObject {
 	 * @return
 	 * @throws Exception
 	 */
-	public <T> T clone(Class<T> clazz) throws Exception {
-		T target = clazz.newInstance();
+	public <T> T clone(Class<T> clazz) {
+		T target = null;
+		try {
+			target = clazz.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 		BeanCopierUtils.copyProperties(this, target);  
 		return target;
 	}

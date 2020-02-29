@@ -22,7 +22,7 @@ public class CanceledOrderState extends AbstractOrderState {
 	}
 
 	@Override
-	protected Integer getOrderStatus(OrderInfoDTO order) throws Exception {
+	protected Integer getOrderStatus(OrderInfoDTO order) {
 		return OrderStatus.CANCELED;
 	}
 	

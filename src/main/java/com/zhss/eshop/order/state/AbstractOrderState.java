@@ -31,7 +31,7 @@ public abstract class AbstractOrderState implements OrderState {
 	 * @param order 订单
 	 */
 	@Override
-	public void doTransition(OrderInfoDTO order) throws Exception {
+	public void doTransition(OrderInfoDTO order){
 		Integer orderStatus = getOrderStatus(order);
 		order.setOrderStatus(orderStatus);
 		orderInfoDAO.updateStatus(order.getId(), orderStatus);  
@@ -43,7 +43,7 @@ public abstract class AbstractOrderState implements OrderState {
 	 * @return 订单状态
 	 * @throws Exception
 	 */
-	protected abstract Integer getOrderStatus(OrderInfoDTO order) throws Exception;
+	protected abstract Integer getOrderStatus(OrderInfoDTO order);
 	
 	/**
 	 * 判断当前状态下能否执行取消订单操作

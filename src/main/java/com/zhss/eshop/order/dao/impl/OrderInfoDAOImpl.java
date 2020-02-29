@@ -63,7 +63,7 @@ public class OrderInfoDAOImpl implements OrderInfoDao {
 	 * @return 订单
 	 */
 	@Override
-	public OrderInfoDO getById(Long id) throws Exception {
+	public OrderInfoDO getById(Long id) {
 		return orderInfoMapper.getById(id);
 	}
 	
@@ -92,7 +92,7 @@ public class OrderInfoDAOImpl implements OrderInfoDao {
 	 * @param order 订单
 	 */
 	@Override
-	public void updateStatus(Long id, Integer status) throws Exception {
+	public void updateStatus(Long id, Integer status){
 		OrderInfoDO order = getById(id);
 		order.setOrderStatus(status);
 		update(order);

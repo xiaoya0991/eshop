@@ -19,7 +19,7 @@ public interface OrderItemDao extends BaseMapper<OrderItemPO> {
 	 * @return 订单条目id
 	 * @throws Exception
 	 */
-	Long save(OrderItemDO orderItem) throws Exception;
+	Long save(OrderItemDO orderItem);
 	
 	/**
 	 * 查询订单条目
@@ -27,6 +27,6 @@ public interface OrderItemDao extends BaseMapper<OrderItemPO> {
 	 * @return 订单条目
 	 * @throws Exception
 	 */
-	List<OrderItemDO> listByOrderInfoId(Long orderInfoId) throws Exception;
+	List<OrderItemDO> listByOrderInfoId(Long orderInfoId);
 	
 }

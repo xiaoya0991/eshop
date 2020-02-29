@@ -86,7 +86,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @throws Exception
 	 */
 	@Override
-	public void create(OrderInfoDTO order) throws Exception {
+	public void create(OrderInfoDTO order){
 		waitForPayOrderState.doTransition(order);
 	}
 	
@@ -97,7 +97,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @throws Exception
 	 */
 	@Override
-	public Boolean canCancel(OrderInfoDTO order) throws Exception {
+	public Boolean canCancel(OrderInfoDTO order) {
 		return getOrderState(order).canCancel(order);
 	}
 	
@@ -107,7 +107,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @throws Exception
 	 */
 	@Override
-	public void cancel(OrderInfoDTO order) throws Exception {
+	public void cancel(OrderInfoDTO order){
 		canceledOrderState.doTransition(order); 
 	}
 	
@@ -250,7 +250,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @return 订单状态组件
 	 * @throws Exception
 	 */
-	private OrderState getOrderState(OrderInfoDTO order) throws Exception {
+	private OrderState getOrderState(OrderInfoDTO order){
 		if(OrderStatus.WAIT_FOR_PAY.equals(order.getOrderStatus())) {
 			return waitForPayOrderState;
 		} else if(OrderStatus.CANCELED.equals(order.getOrderStatus())) {
