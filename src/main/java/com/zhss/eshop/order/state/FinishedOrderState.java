@@ -1,6 +1,7 @@
 package com.zhss.eshop.order.state;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.common.util.DateProvider;
@@ -17,17 +18,18 @@ import com.zhss.eshop.order.domain.OrderInfoDTO;
 public class FinishedOrderState extends AbstractOrderState {
 
 	@Autowired
-	public FinishedOrderState(DateProvider dateProvider, OrderInfoDao orderInfoDAO) {
+	public FinishedOrderState(DateProvider dateProvider,
+			@Qualifier("orderInfoDAOImpl") OrderInfoDao orderInfoDAO) {
 		super(dateProvider, orderInfoDAO);
 	}
 
 	@Override
-	protected Integer getOrderStatus(OrderInfoDTO order) throws Exception {
+	protected Integer getOrderStatus(OrderInfoDTO order){
 		return OrderStatus.FINISHED;
 	}
 	
 	@Override
-	public Boolean canApplyReturnGoods(OrderInfoDTO order) throws Exception {
+	public Boolean canApplyReturnGoods(OrderInfoDTO order) {
 		return true;
 	}
 

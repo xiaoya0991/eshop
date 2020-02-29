@@ -22,17 +22,17 @@ public class WaitForPayOrderState extends AbstractOrderState {
 	}
 
 	@Override
-	protected Integer getOrderStatus(OrderInfoDTO order) throws Exception {
+	protected Integer getOrderStatus(OrderInfoDTO order)  {
 		return OrderStatus.WAIT_FOR_PAY;
 	}
 	
 	@Override
-	public Boolean canPay(OrderInfoDTO order) throws Exception {
+	public Boolean canPay(OrderInfoDTO order)  {
 		return true;
 	}
 	
 	@Override
-	public Boolean canCancel(OrderInfoDTO order) throws Exception {
+	public Boolean canCancel(OrderInfoDTO order)  {
 		return true;
 	}
 

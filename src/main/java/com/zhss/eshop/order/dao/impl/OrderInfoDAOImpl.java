@@ -42,7 +42,7 @@ public class OrderInfoDAOImpl implements OrderInfoDao {
 	 * @param order
 	 */
 	@Override
-	public Long save(OrderInfoDO order) throws Exception {
+	public Long save(OrderInfoDO order) {
 		orderInfoMapper.save(order);  
 		return order.getId();
 	}
