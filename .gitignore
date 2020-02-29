@@ -1,0 +1,13 @@
+# build
+./build/
+*.class
+# ide
+.settings/
+.project
+.classpath
+.idea/
+*.iml
+# logs
+logs/
+# dump
+dump.rdb
