@@ -69,7 +69,7 @@ public class OrderOperateLogFactory {
 	 * @throws Exception
 	 */
 	private OrderOperateLogDO create(OrderInfoDTO order ,
-			Integer operateType, String operateContent) throws Exception {
+			Integer operateType, String operateContent)  {
 		OrderOperateLogDO log = new OrderOperateLogDO();
 		
 		log.setOrderInfoId(order.getId()); 

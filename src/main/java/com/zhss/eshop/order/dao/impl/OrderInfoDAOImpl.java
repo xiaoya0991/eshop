@@ -82,7 +82,7 @@ public class OrderInfoDAOImpl implements OrderInfoDao {
 	 * @throws Exception
 	 */
 	@Override
-	public void update(OrderInfoDO order) throws Exception {
+	public void update(OrderInfoDO order) {
 		order.setGmtModified(dateProvider.getCurrentTime()); 
 		orderInfoMapper.update(order); 
 	}

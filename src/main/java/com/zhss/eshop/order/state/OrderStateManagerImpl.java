@@ -210,7 +210,7 @@ public class OrderStateManagerImpl implements OrderStateManager {
 	 * @throws Exception
 	 */
 	@Override
-	public void sendOutReturnGoods(OrderInfoDTO order) throws Exception {
+	public void sendOutReturnGoods(OrderInfoDTO order){
 		waitForReceiveReturnGoodsOrderState.doTransition(order); 
 	}
 	

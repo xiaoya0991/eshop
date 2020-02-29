@@ -22,7 +22,7 @@ public interface OrderState {
 	 * @return 能否执行取消订单操作
 	 * @throws Exception
 	 */
-	Boolean canCancel(OrderInfoDTO order) throws Exception;
+	Boolean canCancel(OrderInfoDTO order);
 	
 	/**
 	 * 判断订单能否执行支付操作
