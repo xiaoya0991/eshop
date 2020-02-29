@@ -1,5 +1,14 @@
+# build
+./build/
 *.class
-*.imi
+# ide
+.settings/
+.project
+.classpath
+.idea/
 *.iml
-.idea
-target
+# logs
+logs/
+# dump
+dump.rdb
+target/
