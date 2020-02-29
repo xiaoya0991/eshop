@@ -39,7 +39,7 @@ public class OrderInfoDaoTest {
 	 * 订单管理DAO组件
 	 */
 	@Autowired
-	private OrderInfoDAO orderInfoDAO;
+	private OrderInfoDao orderInfoDAO;
 	/**
 	 * 日期辅助组件
 	 */

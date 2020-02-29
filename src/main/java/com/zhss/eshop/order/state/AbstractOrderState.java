@@ -1,7 +1,7 @@
 package com.zhss.eshop.order.state;
 
 import com.zhss.eshop.common.util.DateProvider;
-import com.zhss.eshop.order.dao.OrderInfoDAO;
+import com.zhss.eshop.order.dao.OrderInfoDao;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 
 /**
@@ -18,10 +18,10 @@ public abstract class AbstractOrderState implements OrderState {
 	/**
 	 * 订单管理DAO组件
 	 */
-	protected OrderInfoDAO orderInfoDAO;
+	protected OrderInfoDao orderInfoDAO;
 
 	
-	public AbstractOrderState(DateProvider dateProvider, OrderInfoDAO orderInfoDAO) {
+	public AbstractOrderState(DateProvider dateProvider, OrderInfoDao orderInfoDAO) {
 		this.dateProvider = dateProvider;
 		this.orderInfoDAO = orderInfoDAO;
 	}

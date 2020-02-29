@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.logistics.service.LogisticsService;
-import com.zhss.eshop.order.dao.OrderInfoDAO;
+import com.zhss.eshop.order.dao.OrderInfoDao;
 import com.zhss.eshop.order.domain.OrderInfoDO;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 import com.zhss.eshop.order.state.LoggedOrderStateManager;
@@ -30,7 +30,7 @@ public class AutoConfirmReceiptTask {
 	 * 订单管理DAO组件
 	 */
 	@Autowired
-	private OrderInfoDAO orderInfoDAO;
+	private OrderInfoDao orderInfoDAO;
 	/**
 	 * 物流中心接口
 	 */

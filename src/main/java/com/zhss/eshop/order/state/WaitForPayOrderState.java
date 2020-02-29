@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.zhss.eshop.common.util.DateProvider;
 import com.zhss.eshop.order.constant.OrderStatus;
-import com.zhss.eshop.order.dao.OrderInfoDAO;
+import com.zhss.eshop.order.dao.OrderInfoDao;
 import com.zhss.eshop.order.domain.OrderInfoDTO;
 
 /**
@@ -17,7 +17,7 @@ import com.zhss.eshop.order.domain.OrderInfoDTO;
 public class WaitForPayOrderState extends AbstractOrderState {
 
 	@Autowired
-	public WaitForPayOrderState(DateProvider dateProvider, OrderInfoDAO orderInfoDAO) {
+	public WaitForPayOrderState(DateProvider dateProvider, OrderInfoDao orderInfoDAO) {
 		super(dateProvider, orderInfoDAO);
 	}
 

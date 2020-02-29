@@ -14,8 +14,8 @@ import com.zhss.eshop.common.util.ObjectUtils;
 import com.zhss.eshop.customer.service.CustomerService;
 import com.zhss.eshop.order.constant.OrderStatus;
 import com.zhss.eshop.order.constant.PublishedComment;
-import com.zhss.eshop.order.dao.OrderInfoDAO;
-import com.zhss.eshop.order.dao.OrderItemDAO;
+import com.zhss.eshop.order.dao.OrderInfoDao;
+import com.zhss.eshop.order.dao.OrderItemDao;
 import com.zhss.eshop.order.dao.OrderOperateLogDAO;
 import com.zhss.eshop.order.dao.ReturnGoodsApplyDAO;
 import com.zhss.eshop.order.domain.OrderInfoDO;
@@ -82,12 +82,12 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 	 * 订单管理DAO组件
 	 */
 	@Autowired
-	private OrderInfoDAO orderInfoDAO;
+	private OrderInfoDao orderInfoDAO;
 	/**
 	 * 订单条目管理DAO组件
 	 */
 	@Autowired
-	private OrderItemDAO orderItemDAO;
+	private OrderItemDao orderItemDAO;
 	/**
 	 * 日期辅助组件
 	 */

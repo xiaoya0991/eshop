@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.zhss.eshop.order.dao.OrderItemDAO;
+import com.zhss.eshop.order.dao.OrderItemDao;
 import com.zhss.eshop.order.domain.OrderItemDO;
 import com.zhss.eshop.order.mapper.OrderItemMapper;
 
@@ -15,7 +15,7 @@ import com.zhss.eshop.order.mapper.OrderItemMapper;
  *
  */
 @Repository
-public class OrderItemDAOImpl implements OrderItemDAO {
+public class OrderItemDAOImpl implements OrderItemDao {
 
 	/**
 	 * 订单条目管理mapper组件

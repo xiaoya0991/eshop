@@ -38,7 +38,7 @@ public class OrderItemDaoTest {
 	 * 订单管理DAO组件
 	 */
 	@Autowired
-	private OrderItemDAO orderItemDAO;
+	private OrderItemDao orderItemDAO;
 	/**
 	 * 日期辅助组件
 	 */
