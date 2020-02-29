@@ -33,18 +33,18 @@ public class LoggedOrderStateManager implements OrderStateManager {
 	private OrderOperateLogFactory orderOperateLogFactory;
 
 	@Override
-	public void create(OrderInfoDTO order) throws Exception {
+	public void create(OrderInfoDTO order){
 		orderStateManager.create(order); 
 		orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.CREATE_ORDER));      
 	}
 	
 	@Override
-	public Boolean canCancel(OrderInfoDTO order) throws Exception {
+	public Boolean canCancel(OrderInfoDTO order) {
 		return orderStateManager.canCancel(order);
 	}
 
 	@Override
-	public void cancel(OrderInfoDTO order) throws Exception {
+	public void cancel(OrderInfoDTO order) {
 		orderStateManager.cancel(order); 
 		orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.CANCEL_ORDER)); 
 	}
@@ -101,7 +101,7 @@ public class LoggedOrderStateManager implements OrderStateManager {
 	}
 
 	@Override
-	public void sendOutReturnGoods(OrderInfoDTO order) throws Exception {
+	public void sendOutReturnGoods(OrderInfoDTO order){
 		orderStateManager.sendOutReturnGoods(order); 
 		orderOperateLogDAO.save(orderOperateLogFactory.get(order, OrderOperateType.SEND_OUT_RETURN_GOODS));  
 	}

@@ -46,7 +46,7 @@ public class ReturnGoodsApplyDAOImpl implements ReturnGoodsApplyDAO {
 	 * @return 退货申请
 	 */
 	@Override
-	public ReturnGoodsApplyDO getByOrderInfoId(Long orderInfoId) throws Exception {
+	public ReturnGoodsApplyDO getByOrderInfoId(Long orderInfoId)  {
 		return returnGoodsApplyMapper.getByOrderInfoId(orderInfoId);
 	}
 	
@@ -55,7 +55,7 @@ public class ReturnGoodsApplyDAOImpl implements ReturnGoodsApplyDAO {
 	 * @param apply 退货申请
 	 */
 	@Override
-	public void update(ReturnGoodsApplyDO apply) throws Exception {
+	public void update(ReturnGoodsApplyDO apply){
 		apply.setGmtModified(dateProvider.getCurrentTime()); 
 		returnGoodsApplyMapper.update(apply); 
 	}

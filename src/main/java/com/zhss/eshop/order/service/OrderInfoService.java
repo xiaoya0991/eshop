@@ -1,5 +1,8 @@
 package com.zhss.eshop.order.service;
 
+import com.zhss.eshop.order.domain.bo.CancelBO;
+import com.zhss.eshop.order.domain.bo.CreateBO;
+import com.zhss.eshop.order.domain.bo.UpdateReturnGoodsLogisticCodeBO;
 import java.util.List;
 
 import com.zhss.eshop.order.domain.OrderInfoDTO;
@@ -34,11 +37,11 @@ public interface OrderInfoService {
 	
 	/**
 	 * 新增一个订单
-	 * @param order 订单
+	 * @param orderInfoDTO 订单
 	 * @return 订单
 	 * @throws Exception
 	 */
-	OrderInfoDTO save(OrderInfoDTO order) throws Exception;
+	CreateBO create(OrderInfoDTO orderInfoDTO);
 	
 	/**
 	 * 分页查询订单
@@ -62,7 +65,7 @@ public interface OrderInfoService {
 	 * @return 处理结果
 	 * @throws Exception
 	 */
-	Boolean cancel(Long id) throws Exception;
+	CancelBO cancel(Long id);
 	
 	/**
 	 * 支付订单
@@ -102,8 +105,8 @@ public interface OrderInfoService {
 	 * @param returnGoodsLogisticCode 退货物流单号
 	 * @throws Exception
 	 */
-	void updateReturnGoodsLogisticCode(Long orderInfoId, 
-			String returnGoodsLogisticCode) throws Exception;
+	UpdateReturnGoodsLogisticCodeBO updateReturnGoodsLogisticCode(Long orderInfoId,
+			String returnGoodsLogisticCode);
 	
 	/**
 	 * 更新订单

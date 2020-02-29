@@ -22,12 +22,12 @@ public class WaitForReceiveOrderState extends AbstractOrderState {
 	}
 
 	@Override
-	protected Integer getOrderStatus(OrderInfoDTO order) throws Exception {
+	protected Integer getOrderStatus(OrderInfoDTO order) {
 		return OrderStatus.WAIT_FOR_RECEIVE;
 	}
 	
 	@Override
-	public Boolean canConfirmReceipt(OrderInfoDTO order) throws Exception {
+	public Boolean canConfirmReceipt(OrderInfoDTO order) {
 		return true;
 	}
 

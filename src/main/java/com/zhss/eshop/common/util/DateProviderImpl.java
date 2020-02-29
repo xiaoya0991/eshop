@@ -1,5 +1,6 @@
 package com.zhss.eshop.common.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,9 +20,14 @@ public class DateProviderImpl implements DateProvider {
 	 * @throws Exception
 	 */
 	@Override
-	public Date getCurrentTime() throws Exception {
+	public Date getCurrentTime(){
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		return dateFormatter.parse(dateFormatter.format(new Date()));  
+		try {
+			return dateFormatter.parse(dateFormatter.format(new Date()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**

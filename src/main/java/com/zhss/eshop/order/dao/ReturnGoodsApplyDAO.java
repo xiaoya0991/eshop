@@ -22,14 +22,14 @@ public interface ReturnGoodsApplyDAO {
 	 * @return 退货申请
 	 * @throws Exception
 	 */
-	ReturnGoodsApplyDO getByOrderInfoId(Long orderInfoId) throws Exception;
+	ReturnGoodsApplyDO getByOrderInfoId(Long orderInfoId);
 	
 	/**
 	 * 更新退货申请
 	 * @param apply 退货申请
 	 * @throws Exception
 	 */
-	void update(ReturnGoodsApplyDO apply) throws Exception;
+	void update(ReturnGoodsApplyDO apply);
 	
 	/**
 	 * 更新退货申请的状态

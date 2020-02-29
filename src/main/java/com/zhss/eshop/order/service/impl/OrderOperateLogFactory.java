@@ -27,7 +27,7 @@ public class OrderOperateLogFactory {
 	 * @param operateType 订单操作类型
 	 * @return 订单操作内容
 	 */
-	public OrderOperateLogDO get(OrderInfoDTO order, Integer operateType) throws Exception {
+	public OrderOperateLogDO get(OrderInfoDTO order, Integer operateType) {
 		String operateContent = null;
 		
 		if(OrderOperateType.CREATE_ORDER.equals(operateType)) {
@@ -69,7 +69,7 @@ public class OrderOperateLogFactory {
 	 * @throws Exception
 	 */
 	private OrderOperateLogDO create(OrderInfoDTO order ,
-			Integer operateType, String operateContent) throws Exception {
+			Integer operateType, String operateContent)  {
 		OrderOperateLogDO log = new OrderOperateLogDO();
 		
 		log.setOrderInfoId(order.getId()); 

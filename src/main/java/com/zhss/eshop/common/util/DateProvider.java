@@ -14,7 +14,7 @@ public interface DateProvider {
 	 * @return 当前时间
 	 * @throws Exception
 	 */
-	Date getCurrentTime() throws Exception;
+	Date getCurrentTime();
 	
 	/**
 	 * 将Date对象格式化成：yyyy-MM-dd HH:mm:ss

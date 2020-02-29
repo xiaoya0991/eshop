@@ -16,7 +16,7 @@ public interface OrderOperateLogDAO {
 	 * @param log 订单操作日志
 	 * @throws Exception
 	 */
-	void save(OrderOperateLogDO log) throws Exception;
+	void save(OrderOperateLogDO log);
 	
 	/**
 	 * 查询订单操作日志
@@ -24,6 +24,6 @@ public interface OrderOperateLogDAO {
 	 * @return 订单操作日志
 	 * @throws Exception
 	 */
-	List<OrderOperateLogDO> listByOrderInfoId(Long orderInfoId) throws Exception;
+	List<OrderOperateLogDO> listByOrderInfoId(Long orderInfoId);
 	
 }

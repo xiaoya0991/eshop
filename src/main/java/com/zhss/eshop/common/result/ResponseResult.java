@@ -7,6 +7,9 @@ import lombok.*;
 
 import java.io.Serializable;
 
+/**
+ * @author wenliang
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

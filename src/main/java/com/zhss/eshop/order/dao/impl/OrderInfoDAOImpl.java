@@ -42,7 +42,7 @@ public class OrderInfoDAOImpl implements OrderInfoDao {
 	 * @param order
 	 */
 	@Override
-	public Long save(OrderInfoDO order) throws Exception {
+	public Long save(OrderInfoDO order) {
 		orderInfoMapper.save(order);  
 		return order.getId();
 	}
@@ -63,7 +63,7 @@ public class OrderInfoDAOImpl implements OrderInfoDao {
 	 * @return 订单
 	 */
 	@Override
-	public OrderInfoDO getById(Long id) throws Exception {
+	public OrderInfoDO getById(Long id) {
 		return orderInfoMapper.getById(id);
 	}
 	
@@ -82,7 +82,7 @@ public class OrderInfoDAOImpl implements OrderInfoDao {
 	 * @throws Exception
 	 */
 	@Override
-	public void update(OrderInfoDO order) throws Exception {
+	public void update(OrderInfoDO order) {
 		order.setGmtModified(dateProvider.getCurrentTime()); 
 		orderInfoMapper.update(order); 
 	}
@@ -92,7 +92,7 @@ public class OrderInfoDAOImpl implements OrderInfoDao {
 	 * @param order 订单
 	 */
 	@Override
-	public void updateStatus(Long id, Integer status) throws Exception {
+	public void updateStatus(Long id, Integer status){
 		OrderInfoDO order = getById(id);
 		order.setOrderStatus(status);
 		update(order);

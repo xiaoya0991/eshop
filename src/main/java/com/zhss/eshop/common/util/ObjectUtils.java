@@ -17,7 +17,7 @@ public class ObjectUtils {
 	 * @return 转换后的集合
 	 */
 	public static <T> List<T> convertList(
-			List<? extends AbstractObject> sourceList, Class<T> targetClazz) throws Exception {
+			List<? extends AbstractObject> sourceList, Class<T> targetClazz){
 		if(sourceList == null) {
 			return null;
 		}

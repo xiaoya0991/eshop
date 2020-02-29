@@ -22,7 +22,7 @@ public interface OrderInfoDao extends BaseMapper<OrderInfoPO> {
 	 * @return 订单id
 	 * @throws Exception
 	 */
-	Long save(OrderInfoDO order) throws Exception;
+	Long save(OrderInfoDO order);
 	
 	/**
 	 * 分页查询订单
@@ -38,7 +38,7 @@ public interface OrderInfoDao extends BaseMapper<OrderInfoPO> {
 	 * @return 订单
 	 * @throws Exception
 	 */
-	OrderInfoDO getById(Long id) throws Exception;
+	OrderInfoDO getById(Long id) ;
 	
 	/**
 	 * 更新订单
@@ -53,7 +53,7 @@ public interface OrderInfoDao extends BaseMapper<OrderInfoPO> {
 	 * @param status 订单状态
 	 * @throws Exception
 	 */
-	void updateStatus(Long id, Integer status) throws Exception;
+	void updateStatus(Long id, Integer status);
 	
 	/**
 	 * 查询所有未付款的订单

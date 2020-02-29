@@ -1,13 +1,12 @@
 package com.zhss.eshop.order.dao.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zhss.eshop.order.domain.po.OrderItemPO;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.zhss.eshop.order.domain.po.OrderItemPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -34,7 +33,7 @@ public class OrderItemDAOImpl implements OrderItemDao {
 	 * @param orderItem
 	 */
 	@Override
-	public Long save(OrderItemDO orderItem) throws Exception {
+	public Long save(OrderItemDO orderItem) {
 		orderItemMapper.save(orderItem);
 		return orderItem.getId();
 	}
@@ -45,7 +44,7 @@ public class OrderItemDAOImpl implements OrderItemDao {
 	 * @return 订单条目
 	 */
 	@Override
-	public List<OrderItemDO> listByOrderInfoId(Long orderInfoId) throws Exception {
+	public List<OrderItemDO> listByOrderInfoId(Long orderInfoId){
 		return orderItemMapper.listByOrderInfoId(orderInfoId);
 	}
 
